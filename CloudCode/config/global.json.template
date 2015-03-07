@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "CocoaHeadsNL": {
+            "applicationId": "PARSE_APPLICATION_ID", 
+            "masterKey": "PARSE_MASTER_KEY"
+        }, 
+        "_default": {
+            "link": "CocoaHeadsNL"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.3.5"
+    }
+}

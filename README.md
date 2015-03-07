@@ -1,0 +1,2 @@
+#Before running the CloudCode
+Copy ```global.json.template``` to ```global.json``` and replace ```PARSE_APPLICATION_ID``` and ```PARSE_MASTER_KEY``` with the corresponding values on your Parse.com account.
