@@ -17,6 +17,13 @@ Next replace the following place holders with their actual valued from Parse.com
 
 Once done with these steps, please run pod install in the directory containing the Podfile.
 
+##Parse comming-line tool
+To build this project you need to have the parse.com commandline tool installed:
+```bash
+curl -s https://www.parse.com/downloads/cloud_code/installer.sh | sudo /bin/bash
+```
+
+More info: (https://www.parse.com/docs/cloud_code_guide)[https://www.parse.com/docs/cloud_code_guide]
 
 ##Project structure
 CocoaHeadsNL contains two important components.
