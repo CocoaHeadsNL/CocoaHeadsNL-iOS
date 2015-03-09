@@ -1,3 +1,7 @@
 global.json
 CocoaHeadsNL.xcworkspace/xcuserdata
 CocoaHeadsNL/CocoaHeadsNL.xcodeproj/xcuserdata
+Acknowledgements.plist
+ParseConfig.plist
+CocoaHeadsNL/Pods
+CocoaHeadsNL/CocoaHeadsNL.xcodeproj/project.xcworkspace/xcuserdata
