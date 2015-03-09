@@ -1,7 +1,5 @@
-global.json
-CocoaHeadsNL.xcworkspace/xcuserdata
-CocoaHeadsNL/CocoaHeadsNL.xcodeproj/xcuserdata
-Acknowledgements.plist
-ParseConfig.plist
+CocoaHeadsNL/CloudCode/config/global.json
+CocoaHeadsNL/CocoaHeadsNL/Settings.bundle/Acknowledgements.plist
+CocoaHeadsNL/CocoaHeadsNL/ParseConfig.plist
 CocoaHeadsNL/Pods
-CocoaHeadsNL/CocoaHeadsNL.xcodeproj/project.xcworkspace/xcuserdata
+xcuserdata
