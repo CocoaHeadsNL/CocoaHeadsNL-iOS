@@ -27,6 +27,7 @@ More info: [https://www.parse.com/docs/cloud_code_guide](https://www.parse.com/d
 
 ##Project structure
 CocoaHeadsNL contains two important components.
+
 - The iOS app implementation
 - The Parse CloudCode related "stuff"
 
