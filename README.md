@@ -23,7 +23,7 @@ To build this project you need to have the parse.com commandline tool installed:
 curl -s https://www.parse.com/downloads/cloud_code/installer.sh | sudo /bin/bash
 ```
 
-More info: (https://www.parse.com/docs/cloud_code_guide)[https://www.parse.com/docs/cloud_code_guide]
+More info: [https://www.parse.com/docs/cloud_code_guide](https://www.parse.com/docs/cloud_code_guide)
 
 ##Project structure
 CocoaHeadsNL contains two important components.
