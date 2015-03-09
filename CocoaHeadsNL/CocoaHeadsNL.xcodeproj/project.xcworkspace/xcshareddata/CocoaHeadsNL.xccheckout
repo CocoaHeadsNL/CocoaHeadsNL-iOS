@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>9DFFBACA-A1DA-420F-B380-DCA615B39400</string>
+	<string>C5835790-E370-482D-B683-43C2E8CA66B3</string>
 	<key>IDESourceControlProjectName</key>
 	<string>CocoaHeadsNL</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,11 +14,11 @@
 		<string>ssh://bitbucket.org/cocoaheadsnl/cocoaheadsnl.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>CocoaHeadsNL.xcworkspace</string>
+	<string>CocoaHeadsNL/CocoaHeadsNL.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>51DBBF3565E407743FF3E195305ECEEB9BD05414</key>
-		<string>..</string>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://bitbucket.org/cocoaheadsnl/cocoaheadsnl.git</string>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>51DBBF3565E407743FF3E195305ECEEB9BD05414</string>
 			<key>IDESourceControlWCCName</key>
-			<string>CocoaHeadsNL</string>
+			<string>cocoaheadsnl</string>
 		</dict>
 	</array>
 </dict>

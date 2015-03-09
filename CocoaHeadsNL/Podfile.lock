@@ -1,0 +1,28 @@
+PODS:
+  - Bolts (1.1.4)
+  - Facebook-iOS-SDK (3.23.0):
+    - Bolts (~> 1.0)
+  - Parse (1.6.4):
+    - Bolts (~> 1.1)
+  - ParseCrashReporting (1.6.4):
+    - Parse (~> 1.6.4)
+  - ParseFacebookUtils (1.6.4):
+    - Facebook-iOS-SDK (~> 3.20)
+    - Parse (~> 1.6.4)
+  - ParseUI (1.1.1):
+    - Parse (~> 1.6)
+    - ParseFacebookUtils (~> 1.6)
+
+DEPENDENCIES:
+  - ParseCrashReporting
+  - ParseUI
+
+SPEC CHECKSUMS:
+  Bolts: dd9fb8433d67f5acc3b6b4d1379bbc5513d716c1
+  Facebook-iOS-SDK: 3d65f685348b789e46a9aacf92bfa85b60b63755
+  Parse: c2610f7a12ad0defc974803b819c4efe7746e6db
+  ParseCrashReporting: 8be6e6000eb8dbcde9e077674f561ecda78df6a8
+  ParseFacebookUtils: 00833ccf6fec7d6429e2403fe457496a5089358b
+  ParseUI: f7e9e0e5271f75a19c74ead8fdd95d36160e268e
+
+COCOAPODS: 0.36.0.rc.1

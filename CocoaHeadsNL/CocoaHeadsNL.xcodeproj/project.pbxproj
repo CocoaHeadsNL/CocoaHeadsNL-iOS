@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15B4D9EE4028962710AB4791 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DCDA2041B10335EFBDE05AF /* libPods.a */; };
+		4A1978C21AAD8681000E281F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A1978C11AAD8681000E281F /* Settings.bundle */; };
+		4A83A4AE1AAD8A290085416A /* ParseConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A83A4AD1AAD8A290085416A /* ParseConfig.plist */; };
+		4AF8899F1AAD908000D8DB2E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF8899E1AAD908000D8DB2E /* MainViewController.swift */; };
 		F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D171AAB50BB00585D61 /* AppDelegate.swift */; };
 		F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D1D1AAB50BB00585D61 /* Main.storyboard */; };
 		F1A46D211AAB50BB00585D61 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D201AAB50BB00585D61 /* Images.xcassets */; };
@@ -16,8 +20,6 @@
 		F1A46D3B1AAB515400585D61 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D391AAB515400585D61 /* MapViewController.swift */; };
 		F1A46D3D1AAB516300585D61 /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D3C1AAB516300585D61 /* JobsViewController.swift */; };
 		F1A46D3E1AAB516300585D61 /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D3C1AAB516300585D61 /* JobsViewController.swift */; };
-		F1A46D401AAB51EC00585D61 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D3F1AAB51EC00585D61 /* MainViewController.swift */; };
-		F1A46D411AAB51EC00585D61 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D3F1AAB51EC00585D61 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +33,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4436EC308BD555A87E5A96C1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		4A1978C11AAD8681000E281F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		4A83A4AD1AAD8A290085416A /* ParseConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ParseConfig.plist; sourceTree = "<group>"; };
+		4AF8899A1AAD8EBC00D8DB2E /* CocoaHeadsNL-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CocoaHeadsNL-Bridging-Header.h"; sourceTree = "<group>"; };
+		4AF8899E1AAD908000D8DB2E /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		4DCDA2041B10335EFBDE05AF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A46D121AAB50BB00585D61 /* CocoaHeadsNL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaHeadsNL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A46D161AAB50BB00585D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1A46D171AAB50BB00585D61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,7 +50,7 @@
 		F1A46D2F1AAB50BB00585D61 /* CocoaHeadsNLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaHeadsNLTests.swift; sourceTree = "<group>"; };
 		F1A46D391AAB515400585D61 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F1A46D3C1AAB516300585D61 /* JobsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsViewController.swift; sourceTree = "<group>"; };
-		F1A46D3F1AAB51EC00585D61 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		F6DAB6C2CE1C2A96434BAAE0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15B4D9EE4028962710AB4791 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,12 +72,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F94B32C0E46149D436AD3B3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4DCDA2041B10335EFBDE05AF /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D32210EB441EF5FCE54FC721 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F6DAB6C2CE1C2A96434BAAE0 /* Pods.debug.xcconfig */,
+				4436EC308BD555A87E5A96C1 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F1A46D091AAB50BB00585D61 = {
 			isa = PBXGroup;
 			children = (
 				F1A46D141AAB50BB00585D61 /* CocoaHeadsNL */,
 				F1A46D2C1AAB50BB00585D61 /* CocoaHeadsNLTests */,
 				F1A46D131AAB50BB00585D61 /* Products */,
+				D32210EB441EF5FCE54FC721 /* Pods */,
+				5F94B32C0E46149D436AD3B3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,12 +114,15 @@
 			children = (
 				F1A46D171AAB50BB00585D61 /* AppDelegate.swift */,
 				F1A46D1D1AAB50BB00585D61 /* Main.storyboard */,
-				F1A46D3F1AAB51EC00585D61 /* MainViewController.swift */,
+				4AF8899E1AAD908000D8DB2E /* MainViewController.swift */,
 				F1A46D3C1AAB516300585D61 /* JobsViewController.swift */,
 				F1A46D391AAB515400585D61 /* MapViewController.swift */,
 				F1A46D201AAB50BB00585D61 /* Images.xcassets */,
 				F1A46D221AAB50BB00585D61 /* LaunchScreen.xib */,
+				4A1978C11AAD8681000E281F /* Settings.bundle */,
 				F1A46D151AAB50BB00585D61 /* Supporting Files */,
+				4A83A4AD1AAD8A290085416A /* ParseConfig.plist */,
+				4AF8899A1AAD8EBC00D8DB2E /* CocoaHeadsNL-Bridging-Header.h */,
 			);
 			path = CocoaHeadsNL;
 			sourceTree = "<group>";
@@ -128,9 +159,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F1A46D331AAB50BB00585D61 /* Build configuration list for PBXNativeTarget "CocoaHeadsNL" */;
 			buildPhases = (
+				3910D079CE63A3847D51D0F8 /* Check Pods Manifest.lock */,
 				F1A46D0E1AAB50BB00585D61 /* Sources */,
 				F1A46D0F1AAB50BB00585D61 /* Frameworks */,
 				F1A46D101AAB50BB00585D61 /* Resources */,
+				727565FCCEFC1DF02A9848FC /* Copy Pods Resources */,
+				4A83A4AF1AAD8CE70085416A /* Upload Symbolication info to Parse.com */,
 			);
 			buildRules = (
 			);
@@ -201,6 +235,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A83A4AE1AAD8A290085416A /* ParseConfig.plist in Resources */,
+				4A1978C21AAD8681000E281F /* Settings.bundle in Resources */,
 				F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */,
 				F1A46D241AAB50BB00585D61 /* LaunchScreen.xib in Resources */,
 				F1A46D211AAB50BB00585D61 /* Images.xcassets in Resources */,
@@ -216,6 +252,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3910D079CE63A3847D51D0F8 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4A83A4AF1AAD8CE70085416A /* Upload Symbolication info to Parse.com */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Upload Symbolication info to Parse.com";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=/usr/local/bin:$PATH\ncd CloudCode\n\nparse symbols \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"";
+		};
+		727565FCCEFC1DF02A9848FC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F1A46D0E1AAB50BB00585D61 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -224,7 +307,7 @@
 				F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */,
 				F1A46D3A1AAB515400585D61 /* MapViewController.swift in Sources */,
 				F1A46D3D1AAB516300585D61 /* JobsViewController.swift in Sources */,
-				F1A46D401AAB51EC00585D61 /* MainViewController.swift in Sources */,
+				4AF8899F1AAD908000D8DB2E /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,7 +318,6 @@
 				F1A46D301AAB50BB00585D61 /* CocoaHeadsNLTests.swift in Sources */,
 				F1A46D3B1AAB515400585D61 /* MapViewController.swift in Sources */,
 				F1A46D3E1AAB516300585D61 /* JobsViewController.swift in Sources */,
-				F1A46D411AAB51EC00585D61 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,21 +430,28 @@
 		};
 		F1A46D341AAB50BB00585D61 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6DAB6C2CE1C2A96434BAAE0 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = CocoaHeadsNL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		F1A46D351AAB50BB00585D61 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4436EC308BD555A87E5A96C1 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = CocoaHeadsNL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -419,6 +508,7 @@
 				F1A46D351AAB50BB00585D61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F1A46D361AAB50BB00585D61 /* Build configuration list for PBXNativeTarget "CocoaHeadsNLTests" */ = {
 			isa = XCConfigurationList;
@@ -427,6 +517,7 @@
 				F1A46D381AAB50BB00585D61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

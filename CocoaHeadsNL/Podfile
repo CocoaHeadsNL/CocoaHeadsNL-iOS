@@ -1,0 +1,10 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.1'
+
+pod 'ParseUI'
+pod 'ParseCrashReporting'
+
+post_install do | installer |
+    require 'fileutils'
+    FileUtils.cp_r('Pods/Target Support Files/Pods/Pods-Acknowledgements.plist', 'CocoaHeadsNL/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+end

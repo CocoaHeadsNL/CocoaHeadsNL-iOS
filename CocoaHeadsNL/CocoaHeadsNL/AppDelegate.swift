@@ -15,7 +15,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        var parseApplicationId : String?
+        var parseClientKey : String?
+        
+        if let path = NSBundle.mainBundle().pathForResource("ParseConfig", ofType: "plist") {
+            var myDict = NSDictionary(contentsOfFile: path)
+            if let dict = myDict {
+                parseApplicationId = dict.objectForKey("applicationId") as? String
+                parseClientKey = dict.objectForKey("clientKey") as? String
+            }
+        }
+        assert(parseApplicationId != nil || parseClientKey != nil, "Parse credentials not configured. Please see README.md.")
+        
+        // Enable Crash Reporting
+        ParseCrashReporting.enable()
+        // Setup Parse
+        Parse.setApplicationId(parseApplicationId!, clientKey: parseClientKey!)
+        
         return true
     }
 
