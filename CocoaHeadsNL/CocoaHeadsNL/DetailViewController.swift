@@ -34,8 +34,8 @@ class DetailViewController : UIViewController {
         self.linkButton.titleLabel?.text = "SomeLink"
         self.descriptiveTitle.text = selectedObject?.valueForKey("name") as? String
         
-        if let meetupDescription = selectedObject?.valueForKey("meetup_description") as? String {
-            self.textView.attributedText = NSAttributedString(data: meetupDescription.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType], documentAttributes: nil, error: nil)
+        if var meetupDescription = selectedObject?.valueForKey("meetup_description") as? String {
+            self.textView.attributedText = NSAttributedString(data: meetupDescription.dataUsingEncoding(NSUTF32StringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType], documentAttributes: nil, error: nil)
         } else {
             self.textView.attributedText = nil
         }
