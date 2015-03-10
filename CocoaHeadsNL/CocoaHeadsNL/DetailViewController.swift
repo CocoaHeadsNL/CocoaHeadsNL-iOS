@@ -33,7 +33,7 @@ class DetailViewController : UIViewController {
         self.sponsorLocation.text = "Amsterdam"
         self.linkButton.titleLabel?.text = "SomeLink"
         self.descriptiveTitle.text = selectedObject?.valueForKey("name") as? String
-        self.textView.text = selectedObject?.valueForKey("description") as? String
+        self.textView.text = selectedObject?.valueForKey("meetup_description") as? String
     }
     
     func printSelectedObject()

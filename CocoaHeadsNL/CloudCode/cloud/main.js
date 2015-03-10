@@ -40,7 +40,7 @@ Parse.Cloud.job("loadEventInfo", function(request, status) {
 				}
 			}).then(function(meetupObject) {
 				meetupObject.set("name", event.name);
-				meetupObject.set("description", event.description);
+				meetupObject.set("meetup_description", event.description);
 				meetupObject.set("locationName", event.venue.name);
 				var timeValue = event.time;
 				if (timeValue !== undefined) {
