@@ -42,7 +42,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="CocoaHeadsNL" id="WP4-Ql-isp"/>
+                    <navigationItem key="navigationItem" title="CocoaHeadsNL" id="WP4-Ql-isp">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="search" id="F0c-UP-Skd">
+                            <connections>
+                                <segue destination="UVK-yH-wqA" kind="show" id="Ele-4z-LKF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="loC-JM-coI" id="WGo-aq-nOV"/>
                     </connections>
@@ -50,6 +56,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eg5-0u-f4i" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1535" y="1066"/>
+        </scene>
+        <!--LocationListViewController-->
+        <scene sceneID="f38-qE-wNH">
+            <objects>
+                <collectionViewController id="UVK-yH-wqA" userLabel="LocationListViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Ze8-RZ-GD0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6oJ-NM-xR6">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="companyCollectionViewCell" id="Kw8-bT-4bt">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <segue destination="ori-rW-Eui" kind="show" id="Mt3-pL-Di2"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="UVK-yH-wqA" id="9KI-60-q5U"/>
+                            <outlet property="delegate" destination="UVK-yH-wqA" id="Hni-Jh-VCG"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qIh-vR-M0P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2350" y="1066"/>
         </scene>
         <!--Main-->
         <scene sceneID="Rb4-4L-nsC">
@@ -199,7 +242,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qDJ-MQ-Gxq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2460" y="-380"/>
+            <point key="canvasLocation" x="2976" y="-368"/>
         </scene>
         <!--Map-->
         <scene sceneID="mz1-im-VP7">
@@ -226,6 +269,6 @@
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dRi-Qv-RS7"/>
+        <segue reference="Mt3-pL-Di2"/>
     </inferredMetricsTieBreakers>
 </document>
