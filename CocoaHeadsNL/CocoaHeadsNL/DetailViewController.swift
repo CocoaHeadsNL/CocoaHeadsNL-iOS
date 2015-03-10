@@ -14,9 +14,9 @@ class DetailViewController : UIViewController {
     
     @IBOutlet weak var sponsorTitle: UILabel!
     @IBOutlet weak var sponsorLocation: UILabel!
-    @IBOutlet weak var linkButton: UIButton!
     @IBOutlet weak var descriptiveTitle: UILabel!
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var logoView: UIImageView!
     
     override func viewDidLoad() {
         
@@ -27,17 +27,31 @@ class DetailViewController : UIViewController {
         
         //selectedObject can either be vacancy or meetup info
         //Need to make distinction for setting up UI between vacancy and meetup info.
-        //Missing logo of sponsor on meetup. Needs to be added somehow (parse?)
         
-        self.sponsorTitle.text = selectedObject?.valueForKey("locationName") as? String
+        
+        self.sponsorTitle.text = selectedObject?.valueForKey("time") as? String
         self.sponsorLocation.text = "Amsterdam"
-        self.linkButton.titleLabel?.text = "SomeLink"
         self.descriptiveTitle.text = selectedObject?.valueForKey("name") as? String
         
         if var meetupDescription = selectedObject?.valueForKey("meetup_description") as? String {
             self.textView.attributedText = NSAttributedString(data: meetupDescription.dataUsingEncoding(NSUTF32StringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType], documentAttributes: nil, error: nil)
         } else {
             self.textView.attributedText = nil
+        }
+        
+        //Missing logo of sponsor on meetup. Needs to be added somehow (atm through parse)
+        if let logoFile = selectedObject?.objectForKey("logo") as? PFFile {
+            logoFile.getDataInBackgroundWithBlock({ (imageData: NSData!, error: NSError!) -> Void in
+                let logoData = UIImage(data: imageData)
+                self.logoView.image = logoData
+            })
+        }
+        
+        if let date = selectedObject?.valueForKey("time") as? NSDate {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateStyle = .MediumStyle
+            dateFormatter.timeStyle = .ShortStyle
+            self.sponsorTitle.text = dateFormatter.stringFromDate(date)
         }
     }
     
