@@ -1,11 +1,15 @@
 {
     "applications": {
-        "CocoaHeadsNL": {
-            "applicationId": "PARSE_APPLICATION_ID", 
-            "masterKey": "PARSE_MASTER_KEY"
+        "production": {
+            "applicationId": "PARSE_APPLICATION_ID_PRODUCTION", 
+            "masterKey": "PARSE_MASTER_KEY_PRODUCTION"
+        },
+        "development": {
+            "applicationId": "PARSE_APPLICATION_ID_DEVELOPMENT", 
+            "masterKey": "PARSE_MASTER_KEY_DEVELOPMENT"
         }, 
         "_default": {
-            "link": "CocoaHeadsNL"
+            "link": "development"
         }
     }, 
     "global": {
