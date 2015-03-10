@@ -42,7 +42,11 @@ Parse.Cloud.job("loadEventInfo", function(request, status) {
 				meetupObject.set("name", event.name);
 				meetupObject.set("description", event.description);
 				meetupObject.set("locationName", event.venue.name);
-				meetupObject.set("time", event.time);
+				var timeValue = event.time;
+				if (timeValue !== undefined) {
+					timeValue = new Date(timeValue);
+				}
+				meetupObject.set("time", timeValue);
 				meetupObject.set("duration", event.duration);
 				meetupObject.set("yes_rsvp_count", event.yes_rsvp_count);
 				meetupObject.set("rsvp_limit", event.rsvp_limit);
