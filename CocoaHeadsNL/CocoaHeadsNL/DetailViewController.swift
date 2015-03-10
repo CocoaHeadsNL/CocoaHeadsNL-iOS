@@ -25,6 +25,10 @@ class DetailViewController : UIViewController {
     override func viewWillAppear(animated: Bool) {
         self.printSelectedObject()
         
+        //selectedObject can either be vacancy or meetup info
+        //Need to make distinction for setting up UI between vacancy and meetup info.
+        //Missing logo of sponsor on meetup. Needs to be added somehow (parse?)
+        
         self.sponsorTitle.text = selectedObject?.valueForKey("locationName") as? String
         self.sponsorLocation.text = "Amsterdam"
         self.linkButton.titleLabel?.text = "SomeLink"
