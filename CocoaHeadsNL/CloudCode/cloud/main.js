@@ -1,3 +1,4 @@
+"use strict";
 var Meetup = Parse.Object.extend("Meetup");
 var APIKey = Parse.Object.extend("APIKey");
 
