@@ -43,7 +43,13 @@ class MainViewController: PFQueryTableViewController
                 textLabel.text = object.objectForKey("name").description
             }
             if let detailTextLabel = cell.detailTextLabel {
-                detailTextLabel.text = object.objectForKey("locationName").description
+                if let date = object.valueForKey("time") as? NSDate {
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.dateStyle = .MediumStyle
+                    dateFormatter.timeStyle = .ShortStyle
+                    detailTextLabel.text = dateFormatter.stringFromDate(date)
+                }
+                //detailTextLabel.text = object.objectForKey("locationName").description
             }
             
             if let imageView = cell.imageView {
