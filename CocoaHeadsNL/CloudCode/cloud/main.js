@@ -23,28 +23,39 @@ Parse.Cloud.job("loadEventInfo", function(request, status) {
 			}});
 	}).then(function(httpResponse){
 		var eventsData = httpResponse.data["results"];
-		console.log(eventsData);
+		// console.log("Data received from meetup: " + eventsData);
+		
+		var promises = [];
+		
 		eventsData.forEach(function(event) {
-			var meetup = new Meetup();
-			meetup.set("meetup_id", event.id);
-			meetup.set("name", event.name);
-			meetup.set("description", event.description);
-			meetup.set("locationName", event.venue.name)
-			var geoPoint = new Parse.GeoPoint({latitude: event.venue.lat, longitude: event.venue.lon});
-			meetup.set("geoLocation", geoPoint);
-
-			meetup.save(null, {
-				success: function(event) {
-					// The object was saved successfully.
-				},
-				error: function(event, error) {
-					console.log(event);
-					console.log(error);
-					// The save failed.
-					// error is a Parse.Error with an error code and message.
+			var meetupQuery = new Parse.Query(Meetup);
+			meetupQuery.equalTo("meetup_id", event.id)
+			promises.push(meetupQuery.first().then(function(existingMeetup) {
+				if (existingMeetup === undefined) {
+					var newMeetup = new Meetup();
+					newMeetup.set("meetup_id", event.id);
+					return Parse.Promise.as(newMeetup);
+				} else {
+					return Parse.Promise.as(existingMeetup)
 				}
-			});
+			}).then(function(meetupObject) {
+				meetupObject.set("name", event.name);
+				meetupObject.set("description", event.description);
+				meetupObject.set("locationName", event.venue.name);
+				meetupObject.set("time", event.time);
+				meetupObject.set("duration", event.duration);
+				meetupObject.set("yes_rsvp_count", event.yes_rsvp_count);
+				meetupObject.set("rsvp_limit", event.rsvp_limit);
+				meetupObject.set("meetup_url", event.meetup_url);
+				var geoPoint = new Parse.GeoPoint({latitude: event.venue.lat, longitude: event.venue.lon});
+				meetupObject.set("geoLocation", geoPoint);
+				return meetupObject.save();
+			}, function(error){
+				console.log(error);
+			}));
 		});
+		return Parse.Promise.when(promises);
+	}).then(function() {
 		status.success("loadEventInfo completed successfully.");
 	}, function(error){
 		status.error('Failed ' + error);
