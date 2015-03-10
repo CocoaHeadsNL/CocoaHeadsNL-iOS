@@ -46,16 +46,18 @@ class MainViewController: PFQueryTableViewController
                 detailTextLabel.text = object.objectForKey("locationName").description
             }
             
-//            if let imageView = cell.imageView {
-//                imageView.layer.masksToBounds = true
-//                imageView.contentMode = .ScaleAspectFit
-//                if let logoFile = object.objectForKey("logo") as? PFFile {
-//                    logoFile.getDataInBackgroundWithBlock({ (imageData: NSData!, error: NSError!) -> Void in
-//                        let logoData = UIImage(data: imageData)
-//                        imageView.image = logoData
-//                    })
-//                }
-//            }
+            if let imageView = cell.imageView {
+                
+                imageView.layer.contentsGravity = kCAGravityCenter
+                imageView.contentMode = .ScaleAspectFit
+                
+                if let logoFile = object.objectForKey("logo") as? PFFile {
+                    logoFile.getDataInBackgroundWithBlock({ (imageData: NSData!, error: NSError!) -> Void in
+                        let logoData = UIImage(data: imageData)
+                        imageView.image = logoData
+                    })
+                }
+            }
         }
         
         return cell
