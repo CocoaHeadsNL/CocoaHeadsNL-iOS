@@ -24,6 +24,10 @@ class MainViewController: PFQueryTableViewController
         self.objectsPerPage = 50
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 80
+    }
+    
     //MARK - UITableViewDataSource
     
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!, object: PFObject!) -> PFTableViewCell! {
@@ -41,6 +45,17 @@ class MainViewController: PFQueryTableViewController
             if let detailTextLabel = cell.detailTextLabel {
                 detailTextLabel.text = object.objectForKey("locationName").description
             }
+            
+//            if let imageView = cell.imageView {
+//                imageView.layer.masksToBounds = true
+//                imageView.contentMode = .ScaleAspectFit
+//                if let logoFile = object.objectForKey("logo") as? PFFile {
+//                    logoFile.getDataInBackgroundWithBlock({ (imageData: NSData!, error: NSError!) -> Void in
+//                        let logoData = UIImage(data: imageData)
+//                        imageView.image = logoData
+//                    })
+//                }
+//            }
         }
         
         return cell
