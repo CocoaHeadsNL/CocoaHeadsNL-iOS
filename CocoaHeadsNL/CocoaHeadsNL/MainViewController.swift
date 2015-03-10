@@ -43,4 +43,10 @@ class MainViewController: PFQueryTableViewController
         
         return cell
     }
+
+    override func queryForTable() -> PFQuery! {
+        let query = PFQuery(className: "Meetup")
+        query.orderByDescending("time")
+        return query
+    }
 }
