@@ -18,7 +18,8 @@ Parse.Cloud.job("loadEventInfo", function(request, status) {
 				'sign' : true,
 				'photo-host' : 'public',
 				'group_urlname' : 'cocoaheadsnl',
-				'page' : 20
+				'page' : 20,
+				'status': 'upcoming,past'
 			}});
 	}).then(function(httpResponse){
 		var eventsData = httpResponse.data["results"];
