@@ -33,7 +33,12 @@ class DetailViewController : UIViewController {
         self.sponsorLocation.text = "Amsterdam"
         self.linkButton.titleLabel?.text = "SomeLink"
         self.descriptiveTitle.text = selectedObject?.valueForKey("name") as? String
-        self.textView.text = selectedObject?.valueForKey("meetup_description") as? String
+        
+        if let meetupDescription = selectedObject?.valueForKey("meetup_description") as? String {
+            self.textView.attributedText = NSAttributedString(data: meetupDescription.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType], documentAttributes: nil, error: nil)
+        } else {
+            self.textView.attributedText = nil
+        }
     }
     
     func printSelectedObject()
