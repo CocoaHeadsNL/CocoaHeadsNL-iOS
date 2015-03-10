@@ -24,6 +24,8 @@ class MainViewController: PFQueryTableViewController
         self.objectsPerPage = 50
     }
     
+    //MARK - UITableViewDataSource
+    
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!, object: PFObject!) -> PFTableViewCell! {
         let cellId = "meetupCell"
         
@@ -43,6 +45,19 @@ class MainViewController: PFQueryTableViewController
         
         return cell
     }
+    
+    //MARK - UITableViewDelegate
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let selectedObject = self.objectAtIndexPath(indexPath)
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("detailViewController") as DetailViewController
+        vc.selectedObject = selectedObject
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    //Mark - Parse PFQueryTableViewController methods
 
     override func queryForTable() -> PFQuery! {
         let query = PFQuery(className: "Meetup")
