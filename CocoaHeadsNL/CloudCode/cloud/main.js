@@ -62,6 +62,25 @@ Parse.Cloud.job("loadEventInfo", function(request, status) {
 	}).then(function() {
 		status.success("loadEventInfo completed successfully.");
 	}, function(error){
-		status.error('Failed ' + error);
+		var keyQuery = new Parse.Query(APIKey);
+		keyQuery.equalTo("serviceName", "slack");
+		return keyQuery.first().then(function(slackNotificationUrl) {
+    		return Parse.Cloud.httpRequest({
+	    		method: 'POST',
+		    	url: slackNotificationUrl.get("apiKeyString"),
+				headers: {
+					'Content-Type': 'application/json;charset=utf-8'
+				},
+			    body: '{"username": "webhookbot", "text": "Parse Job: Meetup sync failed.", "icon_emoji": ":ghost:"}' 
+	    	});
+		}).then(function (httpResponse) {
+			console.log("Post ERROR notification to slack succeeded");
+			status.error('Meetup update JOB failed');
+		}, function(slackError) {
+			console.log(slackError);
+			console.log("Post ERROR notification to slack failed ");
+			status.error('Meetup update JOB failed, slack notification failed too');
+			return Parse.Promise.error(error);
+		});
 	});
 });
