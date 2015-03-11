@@ -51,6 +51,7 @@ class DetailViewController : UIViewController {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateStyle = .MediumStyle
             dateFormatter.timeStyle = .ShortStyle
+            dateFormatter.dateFormat = "d MMMM, HH:mm a"
             self.sponsorTitle.text = dateFormatter.stringFromDate(date)
         }
     }

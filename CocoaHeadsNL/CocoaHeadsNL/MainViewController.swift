@@ -47,6 +47,7 @@ class MainViewController: PFQueryTableViewController
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.dateStyle = .MediumStyle
                     dateFormatter.timeStyle = .ShortStyle
+                    dateFormatter.dateFormat = "d MMMM, HH:mm a"
                     detailTextLabel.text = dateFormatter.stringFromDate(date)
                 }
                 //detailTextLabel.text = object.objectForKey("locationName").description
