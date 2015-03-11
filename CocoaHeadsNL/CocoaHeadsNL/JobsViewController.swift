@@ -30,7 +30,19 @@ class JobsViewController: UICollectionViewController
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
-        cell.backgroundColor = UIColor.grayColor()
+        
+        var vacancyLabel = UILabel(frame: CGRectMake(25, 60, 100, 20))
+        vacancyLabel.text = "iOS engineer"
+        cell.contentView.addSubview(vacancyLabel)
+        
+        var companyLogo = UIImageView(frame: CGRectMake(5, 5, 140, 60))
+        companyLogo.layer.contentsGravity = kCAGravityCenter
+        companyLogo.contentMode = .ScaleAspectFit
+        companyLogo.image = UIImage(named: "CocoaHeads")
+        cell.contentView.addSubview(companyLogo)
+        
+        //testing purposes otherwise cant see cell
+        cell.backgroundColor = UIColor.lightGrayColor()
         
         return cell
     }
