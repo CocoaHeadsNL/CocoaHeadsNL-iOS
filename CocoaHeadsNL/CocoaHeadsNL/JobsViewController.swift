@@ -45,7 +45,7 @@ class JobsViewController: UICollectionViewController
     
     func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
     {
-        return CGSizeMake(300, 120)
+        return CGSizeMake(150, 80)
     }
     
     
