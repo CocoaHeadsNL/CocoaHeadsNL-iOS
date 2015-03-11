@@ -29,6 +29,17 @@ class LocationListViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
+        
+        var companyLabel = UILabel(frame: CGRectMake(25, 60, 200, 20))
+        companyLabel.text = "Stichting CocoaHeadsNL"
+        cell.contentView.addSubview(companyLabel)
+        
+        var companyLogo = UIImageView(frame: CGRectMake(5, 5, 140, 50))
+        companyLogo.layer.contentsGravity = kCAGravityCenter
+        companyLogo.contentMode = .ScaleAspectFit
+        companyLogo.image = UIImage(named: "CocoaHeads")
+        cell.contentView.addSubview(companyLogo)
+        
         cell.backgroundColor = UIColor.grayColor()
         
         return cell
@@ -44,6 +55,6 @@ class LocationListViewController: UICollectionViewController {
     
     func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
     {
-        return CGSizeMake(300, 88)
+        return CGSizeMake(300, 80)
     }
 }
