@@ -14,15 +14,18 @@
 		F14335A91AAF0EAA0007D009 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14335A81AAF0EAA0007D009 /* DetailViewController.swift */; };
 		F14335AB1AAF277C0007D009 /* LocationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14335AA1AAF277C0007D009 /* LocationListViewController.swift */; };
 		F17DF6301AB0D203003663D0 /* CocoaHeads.png in Resources */ = {isa = PBXBuildFile; fileRef = F17DF62F1AB0D203003663D0 /* CocoaHeads.png */; };
+		F18A11D01AB1883100D226BD /* calendar-7.png in Resources */ = {isa = PBXBuildFile; fileRef = F18A11CF1AB1883100D226BD /* calendar-7.png */; };
+		F18A11D21AB1885D00D226BD /* file-document-7.png in Resources */ = {isa = PBXBuildFile; fileRef = F18A11D11AB1885D00D226BD /* file-document-7.png */; };
+		F18A11D41AB1889700D226BD /* note-write-7.png in Resources */ = {isa = PBXBuildFile; fileRef = F18A11D31AB1889700D226BD /* note-write-7.png */; };
+		F18A11D61AB188AF00D226BD /* paper-map-7.png in Resources */ = {isa = PBXBuildFile; fileRef = F18A11D51AB188AF00D226BD /* paper-map-7.png */; };
+		F18A11D81AB188BD00D226BD /* pin-map-7.png in Resources */ = {isa = PBXBuildFile; fileRef = F18A11D71AB188BD00D226BD /* pin-map-7.png */; };
 		F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D171AAB50BB00585D61 /* AppDelegate.swift */; };
 		F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D1D1AAB50BB00585D61 /* Main.storyboard */; };
 		F1A46D211AAB50BB00585D61 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D201AAB50BB00585D61 /* Images.xcassets */; };
 		F1A46D241AAB50BB00585D61 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D221AAB50BB00585D61 /* LaunchScreen.xib */; };
 		F1A46D301AAB50BB00585D61 /* CocoaHeadsNLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D2F1AAB50BB00585D61 /* CocoaHeadsNLTests.swift */; };
 		F1A46D3A1AAB515400585D61 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D391AAB515400585D61 /* MapViewController.swift */; };
-		F1A46D3B1AAB515400585D61 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D391AAB515400585D61 /* MapViewController.swift */; };
 		F1A46D3D1AAB516300585D61 /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D3C1AAB516300585D61 /* JobsViewController.swift */; };
-		F1A46D3E1AAB516300585D61 /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D3C1AAB516300585D61 /* JobsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,11 @@
 		F14335A81AAF0EAA0007D009 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		F14335AA1AAF277C0007D009 /* LocationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationListViewController.swift; sourceTree = "<group>"; };
 		F17DF62F1AB0D203003663D0 /* CocoaHeads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CocoaHeads.png; sourceTree = "<group>"; };
+		F18A11CF1AB1883100D226BD /* calendar-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-7.png"; sourceTree = "<group>"; };
+		F18A11D11AB1885D00D226BD /* file-document-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file-document-7.png"; sourceTree = "<group>"; };
+		F18A11D31AB1889700D226BD /* note-write-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "note-write-7.png"; sourceTree = "<group>"; };
+		F18A11D51AB188AF00D226BD /* paper-map-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paper-map-7.png"; sourceTree = "<group>"; };
+		F18A11D71AB188BD00D226BD /* pin-map-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin-map-7.png"; sourceTree = "<group>"; };
 		F1A46D121AAB50BB00585D61 /* CocoaHeadsNL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaHeadsNL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A46D161AAB50BB00585D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1A46D171AAB50BB00585D61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +103,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F18A11CC1AB186FE00D226BD /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				F18A11CF1AB1883100D226BD /* calendar-7.png */,
+				F18A11D11AB1885D00D226BD /* file-document-7.png */,
+				F18A11D31AB1889700D226BD /* note-write-7.png */,
+				F18A11D51AB188AF00D226BD /* paper-map-7.png */,
+				F18A11D71AB188BD00D226BD /* pin-map-7.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
 		F1A46D091AAB50BB00585D61 = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +161,7 @@
 		F1A46D151AAB50BB00585D61 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F18A11CC1AB186FE00D226BD /* Icons */,
 				F17DF62F1AB0D203003663D0 /* CocoaHeads.png */,
 				F1A46D161AAB50BB00585D61 /* Info.plist */,
 			);
@@ -249,11 +270,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F18A11D81AB188BD00D226BD /* pin-map-7.png in Resources */,
 				4A83A4AE1AAD8A290085416A /* ParseConfig.plist in Resources */,
 				4A1978C21AAD8681000E281F /* Settings.bundle in Resources */,
 				F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */,
 				F1A46D241AAB50BB00585D61 /* LaunchScreen.xib in Resources */,
+				F18A11D41AB1889700D226BD /* note-write-7.png in Resources */,
+				F18A11D61AB188AF00D226BD /* paper-map-7.png in Resources */,
+				F18A11D01AB1883100D226BD /* calendar-7.png in Resources */,
 				F1A46D211AAB50BB00585D61 /* Images.xcassets in Resources */,
+				F18A11D21AB1885D00D226BD /* file-document-7.png in Resources */,
 				F17DF6301AB0D203003663D0 /* CocoaHeads.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,8 +387,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1A46D301AAB50BB00585D61 /* CocoaHeadsNLTests.swift in Sources */,
-				F1A46D3B1AAB515400585D61 /* MapViewController.swift in Sources */,
-				F1A46D3E1AAB516300585D61 /* JobsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

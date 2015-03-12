@@ -83,7 +83,7 @@
                                 </view>
                                 <color key="backgroundColor" red="1" green="0.93333333330000001" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <segue destination="ori-rW-Eui" kind="show" id="Mt3-pL-Di2"/>
+                                    <segue destination="ori-rW-Eui" kind="show" identifier="showCompany" id="Mt3-pL-Di2"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -97,11 +97,11 @@
             </objects>
             <point key="canvasLocation" x="2350" y="1066"/>
         </scene>
-        <!--Main-->
+        <!--Events-->
         <scene sceneID="Rb4-4L-nsC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qKI-MW-cAT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Main" image="first" id="acW-dT-cKf" userLabel="Main"/>
+                    <tabBarItem key="tabBarItem" title="Events" image="calendar-7.png" id="acW-dT-cKf" userLabel="Main"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IH5-mr-j9S">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -154,7 +154,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Test" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u41-Gd-whD">
                                             <rect key="frame" x="114" y="48" width="32" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -162,7 +162,7 @@
                                 </view>
                                 <color key="backgroundColor" red="1" green="0.93333333330000001" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <segue destination="ori-rW-Eui" kind="show" id="dtn-6O-j6n"/>
+                                    <segue destination="ori-rW-Eui" kind="show" identifier="showJob" id="dtn-6O-j6n"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -181,7 +181,7 @@
         <scene sceneID="Uzz-Zr-J2X">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zNW-ht-Z05" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Jobs" image="second" id="cPa-gy-q4n" userLabel="Jobs"/>
+                    <tabBarItem key="tabBarItem" title="Jobs" image="file-document-7.png" id="cPa-gy-q4n" userLabel="Jobs"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="R8G-Zh-YDJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -199,7 +199,7 @@
         <!--DetailViewController-->
         <scene sceneID="t0r-dh-7AU">
             <objects>
-                <viewController storyboardIdentifier="detailViewController" id="ori-rW-Eui" userLabel="DetailViewController" customClass="DetailViewController" customModule="CocoaHeadsNL" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="detailViewController" id="ori-rW-Eui" userLabel="DetailViewController" customClass="DetailViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HxG-n3-gmf"/>
                         <viewControllerLayoutGuide type="bottom" id="ZID-rV-ax2"/>
@@ -291,7 +291,7 @@
         <scene sceneID="mz1-im-VP7">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4c9-e7-Scu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" image="second" id="ava-8M-aE2" userLabel="Map"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="paper-map-7.png" id="ava-8M-aE2" userLabel="Map"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fMs-aD-JD8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -308,8 +308,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="calendar-7.png" width="30" height="30"/>
+        <image name="file-document-7.png" width="30" height="30"/>
+        <image name="paper-map-7.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dtn-6O-j6n"/>

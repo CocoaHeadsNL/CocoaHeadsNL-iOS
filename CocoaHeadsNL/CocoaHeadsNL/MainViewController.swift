@@ -24,6 +24,14 @@ class MainViewController: PFQueryTableViewController
         self.objectsPerPage = 50
     }
     
+    override func viewDidLoad() {
+        self.loadObjects()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.tableView.reloadData()
+    }
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 80
     }
