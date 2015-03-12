@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LocationListViewController: UICollectionViewController {
+class LocationListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var cellIdentifier = "companyCollectionViewCellIdentifier"
     
@@ -62,4 +62,19 @@ class LocationListViewController: UICollectionViewController {
     {
         return CGSizeMake(300, 80)
     }
+    
+    //MARK: - UICollectionViewDelegateFlowLayout methods
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 10.0
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 10.0
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(10, 10, 10, 10)
+    }
+
 }

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class JobsViewController: UICollectionViewController
+class JobsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout
 {
     var cellIdentifier = "jobsCollectionViewCellIdentifier"
     
@@ -65,5 +65,15 @@ class JobsViewController: UICollectionViewController
         return CGSizeMake(150, 80)
     }
     
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 6.0
+    }
     
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 6.0
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(6, 6, 6, 6)
+    }
 }
