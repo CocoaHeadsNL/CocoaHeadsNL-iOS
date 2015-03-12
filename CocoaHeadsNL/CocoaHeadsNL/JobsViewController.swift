@@ -50,7 +50,12 @@ class JobsViewController: UICollectionViewController
     //MARK - UICollectionViewDelegate methods
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        println("where is the job?")
+        let selectedObject = collectionView.cellForItemAtIndexPath(indexPath)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("detailViewController") as DetailViewController
+        //vc.selectedObject = selectedObject
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     //MARK - UICollectionViewDelegateFlowLayout methods
