@@ -36,7 +36,7 @@ class MainViewController: PFQueryTableViewController
         return 80
     }
     
-    //MARK - UITableViewDataSource
+    //MARK: - UITableViewDataSource
     
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!, object: PFObject!) -> PFTableViewCell! {
         let cellId = "meetupCell"
@@ -78,7 +78,7 @@ class MainViewController: PFQueryTableViewController
         return cell
     }
     
-    //MARK - UITableViewDelegate
+    //MARK: - UITableViewDelegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedObject = self.objectAtIndexPath(indexPath)
@@ -89,7 +89,7 @@ class MainViewController: PFQueryTableViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    //Mark - Parse PFQueryTableViewController methods
+    //Mark: - Parse PFQueryTableViewController methods
 
     override func queryForTable() -> PFQuery! {
         let query = PFQuery(className: "Meetup")

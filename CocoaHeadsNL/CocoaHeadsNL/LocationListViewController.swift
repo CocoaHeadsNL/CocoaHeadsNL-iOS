@@ -20,7 +20,7 @@ class LocationListViewController: UICollectionViewController {
     }
     
     
-    //MARK - UICollectionViewDataSource methods
+    //MARK: - UICollectionViewDataSource methods
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 100
@@ -45,7 +45,7 @@ class LocationListViewController: UICollectionViewController {
         return cell
     }
     
-    //MARK - UICollectionViewDelegate methods
+    //MARK: - UICollectionViewDelegate methods
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let selectedObject = collectionView.cellForItemAtIndexPath(indexPath)
@@ -56,7 +56,7 @@ class LocationListViewController: UICollectionViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    //MARK - UICollectionViewDelegateFlowLayout methods
+    //MARK: - UICollectionViewDelegateFlowLayout methods
     
     func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
     {
