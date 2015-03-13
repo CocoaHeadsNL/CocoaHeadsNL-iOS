@@ -57,11 +57,11 @@ class LocationListViewController: UICollectionViewController, UICollectionViewDe
     //MARK: - UICollectionViewDelegate methods
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let selectedObject = collectionView.cellForItemAtIndexPath(indexPath)
+        let selectedObject = companies[indexPath.row] as PFObject
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("detailViewController") as DetailViewController
-        //vc.selectedObject = selectedObject
+        vc.selectedObject = selectedObject
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
