@@ -9,13 +9,13 @@
 import Foundation
 import UIkit
 
-class DetailViewController : UIViewController {
+class DetailViewController : UIViewController, UIWebViewDelegate {
     var selectedObject: PFObject?
     
     @IBOutlet weak var sponsorTitle: UILabel!
     @IBOutlet weak var sponsorLocation: UILabel!
     @IBOutlet weak var descriptiveTitle: UILabel!
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var logoView: UIImageView!
     
     override func viewDidLoad() {
@@ -34,13 +34,13 @@ class DetailViewController : UIViewController {
         self.descriptiveTitle.text = selectedObject?.valueForKey("name") as? String
         
         if var meetupDescription = selectedObject?.valueForKey("meetup_description") as? String {
-            self.textView.attributedText = NSAttributedString(data: meetupDescription.dataUsingEncoding(NSUTF32StringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType], documentAttributes: nil, error: nil)
+            self.webView.loadHTMLString(meetupDescription, baseURL: NSURL(string:"http://jobs.cocoaheads.nl"))
         } else if var vacancyDescription = selectedObject?.valueForKey("content") as? String {
-            self.textView.attributedText = NSAttributedString(data: vacancyDescription.dataUsingEncoding(NSUTF32StringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType], documentAttributes: nil, error: nil)
+            self.webView.loadHTMLString(vacancyDescription, baseURL: NSURL(string:"http://jobs.cocoaheads.nl"))
         } else if var companyDescription = selectedObject?.valueForKey("companyDescription") as? String {
-            self.textView.text = companyDescription
+            self.webView.loadHTMLString(companyDescription, baseURL: NSURL(string:"http://jobs.cocoaheads.nl"))
         } else {
-            self.textView.attributedText = nil
+            self.webView.loadHTMLString("", baseURL: NSURL(string:"http://jobs.cocoaheads.nl"))
         }
         
         //Missing logo of sponsor on meetup. Needs to be added somehow (atm through parse)
@@ -65,5 +65,14 @@ class DetailViewController : UIViewController {
         if let object = selectedObject {
         println(selectedObject)
         }
+    }
+    
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if navigationType == .LinkClicked {
+            UIApplication.sharedApplication().openURL(request.URL)
+            return false
+        }
+        
+        return true
     }
 }
