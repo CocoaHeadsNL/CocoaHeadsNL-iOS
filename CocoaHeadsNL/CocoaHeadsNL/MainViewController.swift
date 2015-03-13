@@ -48,6 +48,7 @@ class MainViewController: PFQueryTableViewController
         
         if let cell = cell {
             if let textLabel = cell.textLabel {
+                textLabel.adjustsFontSizeToFitWidth = true
                 textLabel.text = object.objectForKey("name").description
             }
             if let detailTextLabel = cell.detailTextLabel {
