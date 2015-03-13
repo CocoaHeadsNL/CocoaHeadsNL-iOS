@@ -62,7 +62,7 @@ class MainViewController: PFQueryTableViewController
             }
             
             if let imageView = cell.imageView {
-                
+
                 imageView.layer.contentsGravity = kCAGravityCenter
                 imageView.contentMode = .ScaleAspectFit
                 
