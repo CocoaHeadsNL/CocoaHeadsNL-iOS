@@ -94,8 +94,14 @@ class MainViewController: PFQueryTableViewController
     //Mark: - Parse PFQueryTableViewController methods
 
     override func queryForTable() -> PFQuery! {
-        let query = PFQuery(className: "Meetup")
-        query.orderByDescending("time")
-        return query
+        let historyQuery = PFQuery(className: "Meetup")
+        historyQuery.whereKey("time", lessThan: NSDate())
+        
+        let futureQuery = PFQuery(className: "Meetup")
+        futureQuery.whereKey("nextEvent", equalTo: true)
+        
+        let compoundQuery = PFQuery.orQueryWithSubqueries([historyQuery, futureQuery])
+        compoundQuery.orderByDescending("time")
+        return compoundQuery
     }
 }
