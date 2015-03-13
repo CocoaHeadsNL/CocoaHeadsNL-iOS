@@ -63,7 +63,7 @@ class MainViewController: PFQueryTableViewController
             }
             
             if let imageView = cell.imageView {
-
+                cell.imageView.image = nil
                 imageView.layer.contentsGravity = kCAGravityCenter
                 imageView.contentMode = .ScaleAspectFit
                 
@@ -71,6 +71,7 @@ class MainViewController: PFQueryTableViewController
                     logoFile.getDataInBackgroundWithBlock({ (imageData: NSData!, error: NSError!) -> Void in
                         let logoData = UIImage(data: imageData)
                         imageView.image = logoData
+                        cell.setNeedsLayout()
                     })
                 }
             }
