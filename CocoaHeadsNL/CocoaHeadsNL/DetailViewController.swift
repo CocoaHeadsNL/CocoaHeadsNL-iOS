@@ -25,7 +25,7 @@ class DetailViewController : UIViewController {
     override func viewWillAppear(animated: Bool) {
         self.printSelectedObject()
         
-        //selectedObject can either be vacancy or meetup info
+        //selectedObject can either be vacancy or meetup info or company info possibly
         //Need to make distinction for setting up UI between vacancy and meetup info.
         
         

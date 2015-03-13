@@ -12,49 +12,55 @@ import UIKit
 class JobsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout
 {
     var cellIdentifier = "jobsCollectionViewCellIdentifier"
+    var jobsModel = JobsModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView?.registerClass(NSClassFromString("UICollectionViewCell"), forCellWithReuseIdentifier: cellIdentifier)
-
     }
-    
-    
+
     //MARK: - UICollectionViewDataSource methods
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        return jobsModel.jobsArray.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
         
-        var vacancyLabel = UILabel(frame: CGRectMake(25, 60, 100, 20))
-        vacancyLabel.text = "iOS engineer"
-        cell.contentView.addSubview(vacancyLabel)
+        var job = jobsModel.jobsArray[indexPath.row] as PFObject
+        
+//        var vacancyLabel = UILabel(frame: CGRectMake(25, 60, 100, 20))
+//        vacancyLabel.text = job.valueForKey("title") as? String
+//        cell.contentView.addSubview(vacancyLabel)
         
         var companyLogo = UIImageView(frame: CGRectMake(5, 5, 140, 60))
         companyLogo.layer.contentsGravity = kCAGravityCenter
         companyLogo.contentMode = .ScaleAspectFit
-        companyLogo.image = UIImage(named: "CocoaHeads")
         cell.contentView.addSubview(companyLogo)
+        cell.contentView.layer.borderWidth = 0.5
+        cell.contentView.layer.borderColor = UIColor.grayColor().CGColor
         
-        //testing purposes otherwise cant see cell
-        cell.backgroundColor = UIColor.lightGrayColor()
-        
+        if let logoFile = job.objectForKey("logo") as? PFFile {
+            logoFile.getDataInBackgroundWithBlock({ (imageData: NSData!, error: NSError!) -> Void in
+                let logoData = UIImage(data: imageData)
+                companyLogo.image = logoData
+                cell.setNeedsLayout()
+            })
+        }
         return cell
     }
     
     //MARK: - UICollectionViewDelegate methods
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let selectedObject = collectionView.cellForItemAtIndexPath(indexPath)
+        let selectedObject = jobsModel.jobsArray[indexPath.row] as PFObject
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("detailViewController") as DetailViewController
-        //vc.selectedObject = selectedObject
+        vc.selectedObject = selectedObject
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
