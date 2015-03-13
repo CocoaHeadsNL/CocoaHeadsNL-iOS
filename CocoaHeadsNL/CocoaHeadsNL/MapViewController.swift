@@ -13,5 +13,15 @@ import MapKit
 class MapViewController: UIViewController
 {
     @IBOutlet weak var mapView: MKMapView!
+    var companyModel = CompaniesModel()
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "showLocationList"
+        {
+            let vc = segue.destinationViewController as LocationListViewController
+            vc.companies = self.companyModel.companiesArray;
+        }
+    }
     
 }

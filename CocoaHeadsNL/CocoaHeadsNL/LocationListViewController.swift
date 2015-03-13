@@ -11,6 +11,7 @@ import Foundation
 class LocationListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var cellIdentifier = "companyCollectionViewCellIdentifier"
+    var companies = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,25 +24,33 @@ class LocationListViewController: UICollectionViewController, UICollectionViewDe
     //MARK: - UICollectionViewDataSource methods
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        return companies.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
         
+        var company = companies[indexPath.row] as PFObject
+        
         var companyLabel = UILabel(frame: CGRectMake(25, 60, 200, 20))
-        companyLabel.text = "Stichting CocoaHeadsNL"
+        companyLabel.text = company.valueForKey("name") as? String
         cell.contentView.addSubview(companyLabel)
         
-        var companyLogo = UIImageView(frame: CGRectMake(5, 5, 140, 50))
+        var companyLogo = UIImageView(frame: CGRectMake(5, 5, 140, 60))
         companyLogo.layer.contentsGravity = kCAGravityCenter
         companyLogo.contentMode = .ScaleAspectFit
-        companyLogo.image = UIImage(named: "CocoaHeads")
         cell.contentView.addSubview(companyLogo)
+        cell.contentView.layer.borderWidth = 0.5
+        cell.contentView.layer.borderColor = UIColor.grayColor().CGColor
         
-        cell.backgroundColor = UIColor.grayColor()
-        
+        if let logoFile = company.objectForKey("logo") as? PFFile {
+            logoFile.getDataInBackgroundWithBlock({ (imageData: NSData!, error: NSError!) -> Void in
+                let logoData = UIImage(data: imageData)
+                companyLogo.image = logoData
+                cell.setNeedsLayout()
+            })
+        }
         return cell
     }
     
