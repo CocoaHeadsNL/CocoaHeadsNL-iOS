@@ -33,11 +33,11 @@ class LocationListViewController: UICollectionViewController, UICollectionViewDe
         
         var company = companies[indexPath.row] as PFObject
         
-        var companyLabel = UILabel(frame: CGRectMake(25, 60, 200, 20))
+        var companyLabel = UILabel(frame: CGRectMake(115, 5, 180, 20))
         companyLabel.text = company.valueForKey("name") as? String
         cell.contentView.addSubview(companyLabel)
         
-        var companyLogo = UIImageView(frame: CGRectMake(5, 5, 140, 60))
+        var companyLogo = UIImageView(frame: CGRectMake(0, 5, 120, 70))
         companyLogo.layer.contentsGravity = kCAGravityCenter
         companyLogo.contentMode = .ScaleAspectFit
         cell.contentView.addSubview(companyLogo)

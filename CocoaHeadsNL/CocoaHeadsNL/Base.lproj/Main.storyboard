@@ -226,14 +226,14 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="descriptiveTitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPC-Il-2k7">
-                                <rect key="frame" x="16" y="249" width="568" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="descriptiveTitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPC-Il-2k7">
+                                <rect key="frame" x="16" y="250" width="568" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OJ9-zM-66t">
-                                <rect key="frame" x="16" y="278" width="568" height="266"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OJ9-zM-66t">
+                                <rect key="frame" x="16" y="280" width="568" height="264"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
                                     <fragment>
@@ -265,10 +265,10 @@
                             <constraint firstItem="OJ9-zM-66t" firstAttribute="trailing" secondItem="4u5-d4-mUo" secondAttribute="trailingMargin" id="VEK-5e-gdG"/>
                             <constraint firstItem="OJ9-zM-66t" firstAttribute="leading" secondItem="4u5-d4-mUo" secondAttribute="leadingMargin" id="VqO-20-Mss"/>
                             <constraint firstItem="2Lk-B6-Z3J" firstAttribute="top" secondItem="0fV-eJ-Hgq" secondAttribute="bottom" constant="8" id="X2r-3t-M4m"/>
-                            <constraint firstItem="OJ9-zM-66t" firstAttribute="top" secondItem="ZPC-Il-2k7" secondAttribute="bottom" constant="8" id="Y6w-h5-nZA"/>
+                            <constraint firstItem="OJ9-zM-66t" firstAttribute="top" secondItem="ZPC-Il-2k7" secondAttribute="bottom" constant="9" id="Y6w-h5-nZA"/>
                             <constraint firstItem="0Ap-Zu-5X6" firstAttribute="leading" secondItem="4u5-d4-mUo" secondAttribute="leadingMargin" id="aRI-C9-jh9"/>
                             <constraint firstItem="0fV-eJ-Hgq" firstAttribute="top" secondItem="HxG-n3-gmf" secondAttribute="bottom" constant="8" id="aVO-MY-HpP"/>
-                            <constraint firstItem="ZID-rV-ax2" firstAttribute="top" secondItem="OJ9-zM-66t" secondAttribute="bottom" constant="8" id="h4P-d9-jgP"/>
+                            <constraint firstItem="ZID-rV-ax2" firstAttribute="top" secondItem="OJ9-zM-66t" secondAttribute="bottom" constant="7" id="h4P-d9-jgP"/>
                             <constraint firstItem="ZPC-Il-2k7" firstAttribute="leading" secondItem="4u5-d4-mUo" secondAttribute="leadingMargin" id="m2B-pI-YCZ"/>
                             <constraint firstItem="2Lk-B6-Z3J" firstAttribute="leading" secondItem="4u5-d4-mUo" secondAttribute="leadingMargin" id="vzr-dQ-Wt9"/>
                         </constraints>

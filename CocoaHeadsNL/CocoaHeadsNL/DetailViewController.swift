@@ -30,11 +30,15 @@ class DetailViewController : UIViewController {
         
         
         self.sponsorTitle.text = selectedObject?.valueForKey("time") as? String
-        self.sponsorLocation.text = "Amsterdam"
+        self.sponsorLocation.text = selectedObject?.valueForKey("place") as? String
         self.descriptiveTitle.text = selectedObject?.valueForKey("name") as? String
         
         if var meetupDescription = selectedObject?.valueForKey("meetup_description") as? String {
             self.textView.attributedText = NSAttributedString(data: meetupDescription.dataUsingEncoding(NSUTF32StringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType], documentAttributes: nil, error: nil)
+        } else if var vacancyDescription = selectedObject?.valueForKey("content") as? String {
+            self.textView.attributedText = NSAttributedString(data: vacancyDescription.dataUsingEncoding(NSUTF32StringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType], documentAttributes: nil, error: nil)
+        } else if var companyDescription = selectedObject?.valueForKey("companyDescription") as? String {
+            self.textView.text = companyDescription
         } else {
             self.textView.attributedText = nil
         }
