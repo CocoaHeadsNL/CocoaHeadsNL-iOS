@@ -13,6 +13,8 @@
 		4AF8899F1AAD908000D8DB2E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF8899E1AAD908000D8DB2E /* MainViewController.swift */; };
 		F11455A31AB30CEE00546D22 /* JobsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455A21AB30CEE00546D22 /* JobsModel.swift */; };
 		F11455AB1AB3260600546D22 /* CompaniesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455AA1AB3260600546D22 /* CompaniesModel.swift */; };
+		F11455B91AB4BA0600546D22 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455B81AB4BA0600546D22 /* DetailTableViewController.swift */; };
+		F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */; };
 		F14335A91AAF0EAA0007D009 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14335A81AAF0EAA0007D009 /* DetailViewController.swift */; };
 		F14335AB1AAF277C0007D009 /* LocationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14335AA1AAF277C0007D009 /* LocationListViewController.swift */; };
 		F17DF6301AB0D203003663D0 /* CocoaHeads.png in Resources */ = {isa = PBXBuildFile; fileRef = F17DF62F1AB0D203003663D0 /* CocoaHeads.png */; };
@@ -49,6 +51,8 @@
 		4DCDA2041B10335EFBDE05AF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F11455A21AB30CEE00546D22 /* JobsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsModel.swift; sourceTree = "<group>"; };
 		F11455AA1AB3260600546D22 /* CompaniesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesModel.swift; sourceTree = "<group>"; };
+		F11455B81AB4BA0600546D22 /* DetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
+		F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		F14335A81AAF0EAA0007D009 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		F14335AA1AAF277C0007D009 /* LocationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationListViewController.swift; sourceTree = "<group>"; };
 		F17DF62F1AB0D203003663D0 /* CocoaHeads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CocoaHeads.png; sourceTree = "<group>"; };
@@ -167,6 +171,8 @@
 				F1A46D171AAB50BB00585D61 /* AppDelegate.swift */,
 				F1A46D1D1AAB50BB00585D61 /* Main.storyboard */,
 				4AF8899E1AAD908000D8DB2E /* MainViewController.swift */,
+				F11455B81AB4BA0600546D22 /* DetailTableViewController.swift */,
+				F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */,
 				F14335A81AAF0EAA0007D009 /* DetailViewController.swift */,
 				F11455A91AB3257700546D22 /* Map */,
 				F11455A81AB3256C00546D22 /* Jobs */,
@@ -396,8 +402,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */,
+				F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */,
 				F11455A31AB30CEE00546D22 /* JobsModel.swift in Sources */,
 				F1A46D3A1AAB515400585D61 /* MapViewController.swift in Sources */,
+				F11455B91AB4BA0600546D22 /* DetailTableViewController.swift in Sources */,
 				F14335A91AAF0EAA0007D009 /* DetailViewController.swift in Sources */,
 				F1A46D3D1AAB516300585D61 /* JobsViewController.swift in Sources */,
 				F14335AB1AAF277C0007D009 /* LocationListViewController.swift in Sources */,
