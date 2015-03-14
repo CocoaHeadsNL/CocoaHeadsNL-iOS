@@ -50,7 +50,7 @@ class CompaniesModel: NSObject {
             } else {
                 //objects should be in array
                 self.companiesArray = NSMutableArray(array: tArray)
-                print(self.companiesArray)
+                //print(self.companiesArray)
             }
         }
         return self.companiesArray

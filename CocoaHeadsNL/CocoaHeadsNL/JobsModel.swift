@@ -50,7 +50,7 @@ class JobsModel: NSObject {
             } else {
                 //objects should be in array
                 self.jobsArray = NSMutableArray(array: tempArray)
-                print(self.jobsArray)
+                //print(self.jobsArray)
             }
         }
         return self.jobsArray
