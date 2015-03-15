@@ -125,7 +125,22 @@ Parse.Cloud.job("loadJobInfo", function(request, status) {
 					jobObject.set("title", newJobItem.title.text());
 					jobObject.set("content", newJobItem.description.text());
 					jobObject.set("date", newJobItem.pubDate.text());
-					return jobObject.save();
+
+					var logoHref = newJobItem['atom:link'].attributes()['href']
+					if (logoHref === undefined || jobObject.has("logo")) {
+						return jobObject.save();
+					} else {
+						console.log("Fetching a logo for " + jobObject.get("title"))
+						return Parse.Cloud.httpRequest({
+							url: logoHref
+						}).then(function(httpResponse) {
+							var imgFile = new Parse.File(logoHref.split('/').pop(), {base64: httpResponse.buffer.toString('base64', 0, httpResponse.buffer.length)});
+							return imgFile.save();
+						}).then(function(imageFile) {
+							jobObject.set("logo", imageFile);
+							return jobObject.save();
+						});
+					}
 				}, function(error){
 					console.log(error);
 				}));
