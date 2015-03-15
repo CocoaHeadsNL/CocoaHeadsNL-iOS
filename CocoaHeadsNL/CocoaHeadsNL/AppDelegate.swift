@@ -12,8 +12,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var splitViewController : UISplitViewController?
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         var parseApplicationId : String?
@@ -32,11 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ParseCrashReporting.enable()
         // Setup Parse
         Parse.setApplicationId(parseApplicationId!, clientKey: parseClientKey!)
-        
-        splitViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("splitViewController") as? UISplitViewController
-        splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
-        
-        window?.rootViewController = splitViewController
         
         return true
     }
