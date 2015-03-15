@@ -23,4 +23,7 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
         return collapseDetailViewController
     }
     
+    func splitViewController(splitViewController: UISplitViewController, showDetailViewController vc: UIViewController, sender: AnyObject?) -> Bool {
+        return false
+    }
 }
