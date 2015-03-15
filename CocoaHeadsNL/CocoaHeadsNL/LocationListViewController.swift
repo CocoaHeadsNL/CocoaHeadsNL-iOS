@@ -60,9 +60,10 @@ class LocationListViewController: UICollectionViewController, UICollectionViewDe
         let selectedObject = companies[indexPath.row] as PFObject
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("detailViewController") as DetailViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as DetailTableViewController
+        let nav = UINavigationController(rootViewController: vc)
         vc.selectedObject = selectedObject
-        self.navigationController?.pushViewController(vc, animated: true)
+        showDetailViewController(nav, sender: self)
     }
     
     //MARK: - UICollectionViewDelegateFlowLayout methods
