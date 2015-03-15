@@ -11,7 +11,8 @@ import Foundation
 class LocationListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var cellIdentifier = "companyCollectionViewCellIdentifier"
-    var companies = NSMutableArray()
+    var companyModel = CompaniesModel()
+    //var companies = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,14 +25,14 @@ class LocationListViewController: UICollectionViewController, UICollectionViewDe
     //MARK: - UICollectionViewDataSource methods
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return companies.count
+        return companyModel.companiesArray.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
         
-        var company = companies[indexPath.row] as PFObject
+        var company = companyModel.companiesArray[indexPath.row] as PFObject
         
         var companyLabel = UILabel(frame: CGRectMake(115, 5, 180, 20))
         companyLabel.text = company.valueForKey("name") as? String
@@ -57,7 +58,7 @@ class LocationListViewController: UICollectionViewController, UICollectionViewDe
     //MARK: - UICollectionViewDelegate methods
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let selectedObject = companies[indexPath.row] as PFObject
+        let selectedObject = companyModel.companiesArray[indexPath.row] as PFObject
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as DetailTableViewController

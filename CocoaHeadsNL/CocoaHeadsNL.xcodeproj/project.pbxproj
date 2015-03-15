@@ -124,14 +124,14 @@
 			name = Jobs;
 			sourceTree = "<group>";
 		};
-		F11455A91AB3257700546D22 /* Map */ = {
+		F11455A91AB3257700546D22 /* Companies */ = {
 			isa = PBXGroup;
 			children = (
 				F14335AA1AAF277C0007D009 /* LocationListViewController.swift */,
 				F1A46D391AAB515400585D61 /* MapViewController.swift */,
 				F11455AA1AB3260600546D22 /* CompaniesModel.swift */,
 			);
-			name = Map;
+			name = Companies;
 			sourceTree = "<group>";
 		};
 		F11455BD1AB4E8C000546D22 /* Meetups */ = {
@@ -188,7 +188,7 @@
 				F11455C21AB5079300546D22 /* DetailNavigationController.swift */,
 				F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */,
 				F11455BD1AB4E8C000546D22 /* Meetups */,
-				F11455A91AB3257700546D22 /* Map */,
+				F11455A91AB3257700546D22 /* Companies */,
 				F11455A81AB3256C00546D22 /* Jobs */,
 				F1A46D201AAB50BB00585D61 /* Images.xcassets */,
 				F1A46D221AAB50BB00585D61 /* LaunchScreen.xib */,
@@ -588,6 +588,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -602,6 +603,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

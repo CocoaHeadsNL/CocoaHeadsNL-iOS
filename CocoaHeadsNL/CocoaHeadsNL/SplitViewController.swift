@@ -10,18 +10,5 @@ import Foundation
 import UIKit
 
 class SplitViewController: UISplitViewController, UISplitViewControllerDelegate {
-    var viewController : UISplitViewController!
-    
-    func embeddedViewController(splitViewController: UISplitViewController!){
-        if splitViewController != nil{
-            viewController = splitViewController
-            
-            self.addChildViewController(viewController)
-            self.view.addSubview(viewController.view)
-            viewController.didMoveToParentViewController(self)
-            
-            //needs to be moved to UISplitViewController Delegate methods.
-            self.setOverrideTraitCollection(UITraitCollection(horizontalSizeClass: UIUserInterfaceSizeClass.Regular), forChildViewController: viewController)
-            }
-    }
+
 }

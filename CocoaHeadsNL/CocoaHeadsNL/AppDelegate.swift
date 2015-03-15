@@ -34,12 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId(parseApplicationId!, clientKey: parseClientKey!)
         
         splitViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("splitViewController") as? UISplitViewController
-        splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.Automatic
+        splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
         
-        let containerViewController : SplitViewController = SplitViewController()
-        containerViewController.embeddedViewController(splitViewController)
-        
-        window?.rootViewController = containerViewController
+        window?.rootViewController = splitViewController
         
         return true
     }

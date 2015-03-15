@@ -25,39 +25,6 @@
             </objects>
             <point key="canvasLocation" x="1122" y="-8"/>
         </scene>
-        <!--Maps-->
-        <scene sceneID="K5K-wi-BAz">
-            <objects>
-                <viewController id="f6s-o4-Bsy" userLabel="Maps" customClass="MapViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="x5o-7q-VX0"/>
-                        <viewControllerLayoutGuide type="bottom" id="6bf-Mx-JLc"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="zom-A7-jXb">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="loC-JM-coI">
-                                <rect key="frame" x="-33" y="-38" width="633" height="638"/>
-                            </mapView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="CocoaHeadsNL" id="WP4-Ql-isp">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="search" id="F0c-UP-Skd">
-                            <connections>
-                                <segue destination="UVK-yH-wqA" kind="show" identifier="showLocationList" id="Ele-4z-LKF"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="mapView" destination="loC-JM-coI" id="WGo-aq-nOV"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eg5-0u-f4i" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2838" y="836"/>
-        </scene>
         <!--LocationListViewController-->
         <scene sceneID="f38-qE-wNH">
             <objects>
@@ -92,10 +59,11 @@
                             <outlet property="delegate" destination="UVK-yH-wqA" id="Hni-Jh-VCG"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="QQc-eg-AGV"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qIh-vR-M0P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3541" y="836"/>
+            <point key="canvasLocation" x="2819" y="817"/>
         </scene>
         <!--Events-->
         <scene sceneID="Rb4-4L-nsC">
@@ -138,7 +106,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="325" height="118"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Test" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u41-Gd-whD">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u41-Gd-whD">
                                             <rect key="frame" x="114" y="48" width="32" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -148,6 +116,10 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" red="1" green="0.93333333330000001" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="u41-Gd-whD" firstAttribute="leading" secondItem="CSJ-8J-BnC" secondAttribute="leading" constant="114" id="JMd-lG-HHi"/>
+                                    <constraint firstItem="u41-Gd-whD" firstAttribute="top" secondItem="CSJ-8J-BnC" secondAttribute="topMargin" constant="40" id="KgQ-u5-eFO"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="L2c-H1-4Vt" kind="showDetail" identifier="showJobsDetail" id="wLS-FV-NQy"/>
                                 </connections>
@@ -221,7 +193,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3c1-yW-nNH">
                                                     <rect key="frame" x="5" y="11" width="315" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -247,7 +219,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTu-oo-iUK">
                                                     <rect key="frame" x="5" y="11" width="315" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -261,7 +233,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bi9-5q-8MZ">
                                                     <rect key="frame" x="5" y="11" width="315" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -324,11 +296,11 @@
             </objects>
             <point key="canvasLocation" x="1122" y="-1553"/>
         </scene>
-        <!--Map-->
+        <!--Companies-->
         <scene sceneID="mz1-im-VP7">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4c9-e7-Scu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" image="paper-map-7.png" id="ava-8M-aE2" userLabel="Map"/>
+                    <tabBarItem key="tabBarItem" title="Companies" image="paper-map-7.png" id="ava-8M-aE2" userLabel="Map"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fMs-aD-JD8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -336,7 +308,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="f6s-o4-Bsy" kind="relationship" relationship="rootViewController" id="fyE-BT-7pv"/>
+                        <segue destination="UVK-yH-wqA" kind="relationship" relationship="rootViewController" id="5TV-Tb-SWn"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="muM-Cn-t1z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -376,7 +348,7 @@
         <!--Item-->
         <scene sceneID="znU-Wg-4fo">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="L2c-H1-4Vt" customClass="DetailNavigationController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="detailNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="L2c-H1-4Vt" customClass="DetailNavigationController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="rba-ek-Jsd"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="meL-iC-aJY">
@@ -399,6 +371,6 @@
         <image name="paper-map-7.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nrg-7f-M07"/>
+        <segue reference="i4A-fg-XKV"/>
     </inferredMetricsTieBreakers>
 </document>
