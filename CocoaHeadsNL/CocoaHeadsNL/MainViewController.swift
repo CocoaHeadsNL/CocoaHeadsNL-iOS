@@ -35,7 +35,7 @@ class MainViewController: PFQueryTableViewController
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 80
     }
-    
+
     //MARK: - UITableViewDataSource
     
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!, object: PFObject!) -> PFTableViewCell! {
@@ -87,8 +87,9 @@ class MainViewController: PFQueryTableViewController
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as DetailTableViewController
+        let nav = UINavigationController(rootViewController: vc)
         vc.selectedObject = selectedObject
-        self.navigationController?.pushViewController(vc, animated: true)
+        showDetailViewController(nav, sender: self)
     }
     
     //Mark: - Parse PFQueryTableViewController methods
