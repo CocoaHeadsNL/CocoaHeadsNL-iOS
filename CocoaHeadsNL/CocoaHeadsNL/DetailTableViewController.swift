@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import MapKit
 
-class DetailTableViewController: UITableViewController, UIWebViewDelegate, UISplitViewControllerDelegate {
+class DetailTableViewController: UITableViewController, UIWebViewDelegate {
     
     var selectedObject: PFObject?
     
@@ -26,12 +26,10 @@ class DetailTableViewController: UITableViewController, UIWebViewDelegate, UISpl
     }
     
     override func viewDidLoad() {
-        self.splitViewController?.delegate = self
-        self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
         
         //Can be used to hide masterViewController and increase size of detailView if wanted
-        //self.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
-        //self.navigationItem.leftItemsSupplementBackButton = true
+        self.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
+        self.navigationItem.leftItemsSupplementBackButton = true
     }
     
     override func viewWillAppear(animated: Bool) {
