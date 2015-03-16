@@ -20,6 +20,15 @@ class DetailTableViewController: UITableViewController, UIWebViewDelegate {
     @IBOutlet weak var descriptiveTitle: UILabel!
     @IBOutlet weak var htmlWebView: UIWebView!
     @IBOutlet weak var littleMap: MKMapView!
+    
+    
+    @IBOutlet weak var logoCell: UITableViewCell!
+    @IBOutlet weak var mapViewCell: UITableViewCell!
+    @IBOutlet weak var titleCell: UITableViewCell!
+    @IBOutlet weak var descriptiveTitleCell: UITableViewCell!
+    @IBOutlet weak var dateLabelCell: UITableViewCell!
+    @IBOutlet weak var webViewCell: UITableViewCell!
+
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
