@@ -35,7 +35,84 @@ class DetailTableViewController: UITableViewController, UIWebViewDelegate {
     override func viewWillAppear(animated: Bool) {
         self.printSelectedObject()
         
-        tableView.frame = CGRect(origin: tableView.frame.origin, size: tableView.contentSize)
+        //tableView.frame = CGRect(origin: tableView.frame.origin, size: tableView.contentSize)
+        
+        if let company = selectedObject?.valueForKey("companyDescription") as? String {
+            
+            self.setupCompany()
+            
+        } else if let meetup = selectedObject?.valueForKey("meetup_description") as? String {
+            
+            self.setupMeeting()
+            
+        } else if let job = selectedObject?.valueForKey("content") as? String {
+            
+            self.setupVacancy()
+        }
+    
+        tableView.reloadData()
+    }
+    
+    func setupCompany() {
+    
+        if let logoFile = selectedObject?.objectForKey("logo") as? PFFile {
+            logoFile.getDataInBackgroundWithBlock({ (imageData: NSData!, error: NSError!) -> Void in
+                let logoData = UIImage(data: imageData)
+                self.logoImageView.image = logoData
+            })
+        }
+        
+        if let name = selectedObject?.valueForKey("name") as? String {
+            self.navigationItem.title = name
+        }
+        
+        if let email = selectedObject?.valueForKey("emailAddress") as? String {
+            self.titleLabel.text = email
+        }
+        
+        if let address = selectedObject?.valueForKey("streetAddress") as? String {
+            self.descriptiveTitle.text = address
+        }
+        
+        if let zipcode = selectedObject?.valueForKey("zipCode") as? String {
+            self.dateLabel.text = zipcode
+        }
+        
+//        if let webSite = selectedObject?.valueForKey("website") as? String {
+//            let webString = "http://\(webSite)"
+//            
+//            let url = NSURL(string: webString)
+//            let urlRequest = NSURLRequest(URL: url!)
+//            self.htmlWebView.loadRequest(urlRequest)
+//            self.htmlWebView.scrollView.scrollEnabled = true
+//            tableView.reloadData()
+//        }
+    }
+    
+    func setupVacancy() {
+        
+        if let title = selectedObject?.valueForKey("title") as? String {
+            self.navigationItem.title = title
+        }
+        
+        if let logoFile = selectedObject?.objectForKey("logo") as? PFFile {
+            logoFile.getDataInBackgroundWithBlock({ (imageData: NSData!, error: NSError!) -> Void in
+                let logoData = UIImage(data: imageData)
+                self.logoImageView.image = logoData
+            })
+        }
+        
+        if let jobTitle = selectedObject?.valueForKey("title") as? String {
+            self.titleLabel.text = jobTitle
+        }
+        
+        if let vacanyContent = selectedObject?.valueForKey("content") as? String {
+            self.htmlWebView.loadHTMLString(vacanyContent, baseURL: NSURL(string:"http://jobs.cocoaheads.nl"))
+            self.htmlWebView.scrollView.scrollEnabled = false
+        }
+    }
+    
+    func setupMeeting() {
         
         if let nameOfHost = selectedObject?.valueForKey("name") as? String {
             titleLabel.text = nameOfHost
@@ -59,7 +136,7 @@ class DetailTableViewController: UITableViewController, UIWebViewDelegate {
         }
         
         if let date = selectedObject?.valueForKey("time") as? NSDate {
-            let dateFormatter = NSDateFormatter()
+            var dateFormatter = NSDateFormatter()
             dateFormatter.dateStyle = .MediumStyle
             dateFormatter.timeStyle = .ShortStyle
             dateFormatter.dateFormat = "d MMMM, HH:mm a"
@@ -77,8 +154,7 @@ class DetailTableViewController: UITableViewController, UIWebViewDelegate {
                 self.logoImageView.image = logoData
             })
         }
-        
-        tableView.reloadData()
+
     }
     
     func printSelectedObject()
