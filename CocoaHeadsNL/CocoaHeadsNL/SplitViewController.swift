@@ -24,6 +24,15 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
     }
     
     func splitViewController(splitViewController: UISplitViewController, showDetailViewController vc: UIViewController, sender: AnyObject?) -> Bool {
+        
+        if splitViewController.collapsed {
+            var master = splitViewController.viewControllers[0] as UITabBarController
+            var masterNavigation = master.selectedViewController as UINavigationController
+            
+            masterNavigation.showViewController(vc, sender: self)
+            
+            return true
+        }
         return false
     }
 }
