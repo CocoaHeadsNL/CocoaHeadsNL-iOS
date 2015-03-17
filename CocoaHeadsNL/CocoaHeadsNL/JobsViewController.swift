@@ -60,8 +60,9 @@ class JobsViewController: UICollectionViewController, UICollectionViewDelegateFl
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as DetailTableViewController
-        let nav = UINavigationController(rootViewController: vc)
+        let nav = DetailNavigationController(rootViewController: vc)
         vc.selectedObject = selectedObject
+        nav.selectedObject = selectedObject
         showDetailViewController(nav, sender: self)
     }
     

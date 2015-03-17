@@ -87,7 +87,8 @@ class MainViewController: PFQueryTableViewController
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as DetailTableViewController
-        let nav = UINavigationController(rootViewController: vc)
+        let nav = DetailNavigationController(rootViewController: vc)
+        nav.selectedObject = selectedObject
         vc.selectedObject = selectedObject
         showDetailViewController(nav, sender: self)
     }
