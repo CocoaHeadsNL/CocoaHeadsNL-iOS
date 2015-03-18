@@ -30,15 +30,15 @@ class LocationListViewController: UICollectionViewController, UICollectionViewDe
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
         
-        var company = companyModel.companiesArray[indexPath.row] as PFObject
+        let company = companyModel.companiesArray[indexPath.row] as PFObject
         
         var companyLabel = UILabel(frame: CGRectMake(115, 5, 180, 20))
         companyLabel.text = company.valueForKey("name") as? String
         cell.contentView.addSubview(companyLabel)
         
-        var companyLogo = UIImageView(frame: CGRectMake(0, 5, 120, 70))
+        let companyLogo = UIImageView(frame: CGRect(x: 0, y: 5, width: logoWidth, height: 70))
         companyLogo.layer.contentsGravity = kCAGravityCenter
         companyLogo.contentMode = .ScaleAspectFit
         cell.contentView.addSubview(companyLogo)
@@ -72,7 +72,7 @@ class LocationListViewController: UICollectionViewController, UICollectionViewDe
     
     func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
     {
-        return CGSizeMake(310, 80)
+        return CGSize(width: self.view.bounds.width - 10, height: 80)
     }
     
     //MARK: - UICollectionViewDelegateFlowLayout methods
