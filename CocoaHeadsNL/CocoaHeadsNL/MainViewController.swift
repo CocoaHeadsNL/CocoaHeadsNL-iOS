@@ -10,6 +10,8 @@ import Foundation
 
 class MainViewController: PFQueryTableViewController
 {
+    var selectedObject: PFObject?
+    
     override init!(style: UITableViewStyle, className: String!) {
         super.init(style: style, className: className)
     }
@@ -83,7 +85,7 @@ class MainViewController: PFQueryTableViewController
     //MARK: - UITableViewDelegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let selectedObject = self.objectAtIndexPath(indexPath)
+        selectedObject = self.objectAtIndexPath(indexPath)
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as DetailTableViewController
