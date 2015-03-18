@@ -42,8 +42,6 @@ class DetailTableViewController: UITableViewController, UIWebViewDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.printSelectedObject()
-        
         //tableView.frame = CGRect(origin: tableView.frame.origin, size: tableView.contentSize)
         
         if let company = selectedObject?.valueForKey("companyDescription") as? String {
