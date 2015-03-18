@@ -34,7 +34,9 @@ class LocationListViewController: UICollectionViewController, UICollectionViewDe
         
         let company = companyModel.companiesArray[indexPath.row] as PFObject
         
-        var companyLabel = UILabel(frame: CGRectMake(115, 5, 180, 20))
+        let logoWidth: CGFloat = 120
+        let labelWidth = cell.bounds.width - logoWidth
+        let companyLabel = UILabel(frame: CGRect(x: logoWidth, y: 5, width: labelWidth, height:20))
         companyLabel.text = company.valueForKey("name") as? String
         cell.contentView.addSubview(companyLabel)
         
