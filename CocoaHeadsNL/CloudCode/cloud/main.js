@@ -1,3 +1,5 @@
+require('cloud/app.js');
+
 "use strict";
 
 var xmlreader = require('cloud/xmlreader.js');
