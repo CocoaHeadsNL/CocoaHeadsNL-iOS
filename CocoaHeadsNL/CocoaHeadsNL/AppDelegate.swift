@@ -31,6 +31,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Setup Parse
         Parse.setApplicationId(parseApplicationId!, clientKey: parseClientKey!)
         
+        PFUser.enableAutomaticUser()
+        PFUser.currentUser().saveInBackgroundWithBlock(nil)
+
+        PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
+
         return true
     }
 
