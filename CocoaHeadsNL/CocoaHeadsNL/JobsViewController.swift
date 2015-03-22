@@ -12,7 +12,7 @@ import UIKit
 class JobsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout
 {
     var cellIdentifier = "jobsCollectionViewCellIdentifier"
-    var jobsModel = JobsModel()
+    var dataModel = DataModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,14 +23,14 @@ class JobsViewController: UICollectionViewController, UICollectionViewDelegateFl
     //MARK: - UICollectionViewDataSource methods
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return jobsModel.jobsArray.count
+        return dataModel.jobsArray.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
         
-        var job = jobsModel.jobsArray[indexPath.row] as PFObject
+        var job = dataModel.jobsArray[indexPath.row] as PFObject
         
 //        var vacancyLabel = UILabel(frame: CGRectMake(25, 60, 100, 20))
 //        vacancyLabel.text = job.valueForKey("title") as? String
@@ -56,7 +56,7 @@ class JobsViewController: UICollectionViewController, UICollectionViewDelegateFl
     //MARK: - UICollectionViewDelegate methods
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let selectedObject = jobsModel.jobsArray[indexPath.row] as PFObject
+        let selectedObject = dataModel.jobsArray[indexPath.row] as PFObject
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as DetailTableViewController

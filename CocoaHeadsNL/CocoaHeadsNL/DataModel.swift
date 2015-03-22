@@ -1,26 +1,31 @@
 //
-//  CompaniesModel.swift
+//  DataModel.swift
 //  CocoaHeadsNL
 //
-//  Created by Bart Hoffman on 13/03/15.
+//  Created by Bart Hoffman on 22/03/15.
 //  Copyright (c) 2015 Stichting CocoaheadsNL. All rights reserved.
 //
 
 import Foundation
 
-class CompaniesModel: NSObject {
+
+class DataModel: NSObject {
     
     var companiesArray = NSMutableArray()
+    var jobsArray = NSMutableArray()
+    //var meetupArray = NSMutableArray()
     
     override init() {
         
         super.init()
         
-        self.parseSetupForCompaniesModel()
+        self.parseSetupForDataModel()
+        //self.fetchMeetupObjectsFromParse()
         self.fetchCompaniesObjectsFromParse()
+        self.fetchJobObjectsFromParse()
     }
     
-    func parseSetupForCompaniesModel()
+    func parseSetupForDataModel()
     {
         var parseApplicationId : String?
         var parseClientKey : String?
@@ -41,9 +46,26 @@ class CompaniesModel: NSObject {
         Parse.setApplicationId(parseApplicationId!, clientKey: parseClientKey!)
     }
     
+//    func fetchMeetupObjectsFromParse() -> NSMutableArray
+//    {
+//        let query = PFQuery(className: "Meetup")
+//        query.cachePolicy = PFCachePolicy.CacheThenNetwork
+//        query.findObjectsInBackgroundWithBlock { (tArray, error) -> Void in
+//            if (error != nil) {
+//                print(error)
+//            } else {
+//                //objects should be in array
+//                self.meetupArray = NSMutableArray(array: tArray)
+//                //print(self.companiesArray)
+//            }
+//        }
+//        return self.meetupArray
+//    }
+    
     func fetchCompaniesObjectsFromParse() -> NSMutableArray
     {
         let query = PFQuery(className: "Companies")
+        query.cachePolicy = PFCachePolicy.CacheThenNetwork
         query.findObjectsInBackgroundWithBlock { (tArray, error) -> Void in
             if (error != nil) {
                 print(error)
@@ -54,5 +76,21 @@ class CompaniesModel: NSObject {
             }
         }
         return self.companiesArray
+    }
+    
+    func fetchJobObjectsFromParse() -> NSMutableArray
+    {
+        let query = PFQuery(className: "Job")
+        query.cachePolicy = PFCachePolicy.CacheThenNetwork
+        query.findObjectsInBackgroundWithBlock { (tempArray, error) -> Void in
+            if (error != nil) {
+                print(error)
+            } else {
+                //objects should be in array
+                self.jobsArray = NSMutableArray(array: tempArray)
+                //print(self.jobsArray)
+            }
+        }
+        return self.jobsArray
     }
 }

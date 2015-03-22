@@ -11,14 +11,13 @@
 		4A1978C21AAD8681000E281F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A1978C11AAD8681000E281F /* Settings.bundle */; };
 		4A83A4AE1AAD8A290085416A /* ParseConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A83A4AD1AAD8A290085416A /* ParseConfig.plist */; };
 		4AF8899F1AAD908000D8DB2E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF8899E1AAD908000D8DB2E /* MainViewController.swift */; };
-		F11455A31AB30CEE00546D22 /* JobsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455A21AB30CEE00546D22 /* JobsModel.swift */; };
-		F11455AB1AB3260600546D22 /* CompaniesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455AA1AB3260600546D22 /* CompaniesModel.swift */; };
 		F11455B91AB4BA0600546D22 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455B81AB4BA0600546D22 /* DetailTableViewController.swift */; };
 		F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */; };
 		F11455BF1AB4E8DB00546D22 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */; };
 		F11455C11AB5024000546D22 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455C01AB5024000546D22 /* TabBarController.swift */; };
 		F11455C31AB5079300546D22 /* DetailNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455C21AB5079300546D22 /* DetailNavigationController.swift */; };
 		F14335AB1AAF277C0007D009 /* LocationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14335AA1AAF277C0007D009 /* LocationListViewController.swift */; };
+		F17A38751ABF1EE2005CFF8A /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17A38741ABF1EE2005CFF8A /* DataModel.swift */; };
 		F17DF6301AB0D203003663D0 /* CocoaHeads.png in Resources */ = {isa = PBXBuildFile; fileRef = F17DF62F1AB0D203003663D0 /* CocoaHeads.png */; };
 		F18A11D01AB1883100D226BD /* calendar-7.png in Resources */ = {isa = PBXBuildFile; fileRef = F18A11CF1AB1883100D226BD /* calendar-7.png */; };
 		F18A11D21AB1885D00D226BD /* file-document-7.png in Resources */ = {isa = PBXBuildFile; fileRef = F18A11D11AB1885D00D226BD /* file-document-7.png */; };
@@ -51,14 +50,13 @@
 		4AF8899A1AAD8EBC00D8DB2E /* CocoaHeadsNL-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CocoaHeadsNL-Bridging-Header.h"; sourceTree = "<group>"; };
 		4AF8899E1AAD908000D8DB2E /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4DCDA2041B10335EFBDE05AF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F11455A21AB30CEE00546D22 /* JobsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsModel.swift; sourceTree = "<group>"; };
-		F11455AA1AB3260600546D22 /* CompaniesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesModel.swift; sourceTree = "<group>"; };
 		F11455B81AB4BA0600546D22 /* DetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		F11455C01AB5024000546D22 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F11455C21AB5079300546D22 /* DetailNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailNavigationController.swift; sourceTree = "<group>"; };
 		F14335AA1AAF277C0007D009 /* LocationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationListViewController.swift; sourceTree = "<group>"; };
+		F17A38741ABF1EE2005CFF8A /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		F17DF62F1AB0D203003663D0 /* CocoaHeads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CocoaHeads.png; sourceTree = "<group>"; };
 		F18A11CF1AB1883100D226BD /* calendar-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-7.png"; sourceTree = "<group>"; };
 		F18A11D11AB1885D00D226BD /* file-document-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file-document-7.png"; sourceTree = "<group>"; };
@@ -119,7 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				F1A46D3C1AAB516300585D61 /* JobsViewController.swift */,
-				F11455A21AB30CEE00546D22 /* JobsModel.swift */,
 			);
 			name = Jobs;
 			sourceTree = "<group>";
@@ -129,7 +126,6 @@
 			children = (
 				F14335AA1AAF277C0007D009 /* LocationListViewController.swift */,
 				F1A46D391AAB515400585D61 /* MapViewController.swift */,
-				F11455AA1AB3260600546D22 /* CompaniesModel.swift */,
 			);
 			name = Companies;
 			sourceTree = "<group>";
@@ -187,6 +183,7 @@
 				F11455B81AB4BA0600546D22 /* DetailTableViewController.swift */,
 				F11455C21AB5079300546D22 /* DetailNavigationController.swift */,
 				F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */,
+				F17A38741ABF1EE2005CFF8A /* DataModel.swift */,
 				F11455BD1AB4E8C000546D22 /* Meetups */,
 				F11455A91AB3257700546D22 /* Companies */,
 				F11455A81AB3256C00546D22 /* Jobs */,
@@ -418,15 +415,14 @@
 				F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */,
 				F11455BF1AB4E8DB00546D22 /* SplitViewController.swift in Sources */,
 				F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */,
-				F11455A31AB30CEE00546D22 /* JobsModel.swift in Sources */,
 				F11455C31AB5079300546D22 /* DetailNavigationController.swift in Sources */,
 				F1A46D3A1AAB515400585D61 /* MapViewController.swift in Sources */,
+				F17A38751ABF1EE2005CFF8A /* DataModel.swift in Sources */,
 				F11455B91AB4BA0600546D22 /* DetailTableViewController.swift in Sources */,
 				F1A46D3D1AAB516300585D61 /* JobsViewController.swift in Sources */,
 				F14335AB1AAF277C0007D009 /* LocationListViewController.swift in Sources */,
 				F11455C11AB5024000546D22 /* TabBarController.swift in Sources */,
 				4AF8899F1AAD908000D8DB2E /* MainViewController.swift in Sources */,
-				F11455AB1AB3260600546D22 /* CompaniesModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
