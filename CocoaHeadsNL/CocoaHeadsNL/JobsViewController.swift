@@ -70,7 +70,7 @@ class JobsViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
     {
-        return CGSizeMake(150, 80)
+        return CGSizeMake((self.view.bounds.size.width - 18.0)/2.0, 80)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
