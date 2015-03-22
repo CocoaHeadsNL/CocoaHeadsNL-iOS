@@ -18,6 +18,7 @@
 		F11455C31AB5079300546D22 /* DetailNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455C21AB5079300546D22 /* DetailNavigationController.swift */; };
 		F14335AB1AAF277C0007D009 /* LocationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14335AA1AAF277C0007D009 /* LocationListViewController.swift */; };
 		F17A38751ABF1EE2005CFF8A /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17A38741ABF1EE2005CFF8A /* DataModel.swift */; };
+		F17A38771ABF3B62005CFF8A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F17A38761ABF3B62005CFF8A /* MapKit.framework */; };
 		F17DF6301AB0D203003663D0 /* CocoaHeads.png in Resources */ = {isa = PBXBuildFile; fileRef = F17DF62F1AB0D203003663D0 /* CocoaHeads.png */; };
 		F18A11D01AB1883100D226BD /* calendar-7.png in Resources */ = {isa = PBXBuildFile; fileRef = F18A11CF1AB1883100D226BD /* calendar-7.png */; };
 		F18A11D21AB1885D00D226BD /* file-document-7.png in Resources */ = {isa = PBXBuildFile; fileRef = F18A11D11AB1885D00D226BD /* file-document-7.png */; };
@@ -57,6 +58,7 @@
 		F11455C21AB5079300546D22 /* DetailNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailNavigationController.swift; sourceTree = "<group>"; };
 		F14335AA1AAF277C0007D009 /* LocationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationListViewController.swift; sourceTree = "<group>"; };
 		F17A38741ABF1EE2005CFF8A /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		F17A38761ABF3B62005CFF8A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F17DF62F1AB0D203003663D0 /* CocoaHeads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CocoaHeads.png; sourceTree = "<group>"; };
 		F18A11CF1AB1883100D226BD /* calendar-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-7.png"; sourceTree = "<group>"; };
 		F18A11D11AB1885D00D226BD /* file-document-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file-document-7.png"; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F17A38771ABF3B62005CFF8A /* MapKit.framework in Frameworks */,
 				15B4D9EE4028962710AB4791 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,6 +102,7 @@
 		5F94B32C0E46149D436AD3B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F17A38761ABF3B62005CFF8A /* MapKit.framework */,
 				4DCDA2041B10335EFBDE05AF /* libPods.a */,
 			);
 			name = Frameworks;
@@ -278,6 +282,11 @@
 				TargetAttributes = {
 					F1A46D111AAB50BB00585D61 = {
 						CreatedOnToolsVersion = 6.1.1;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					F1A46D281AAB50BB00585D61 = {
 						CreatedOnToolsVersion = 6.1.1;

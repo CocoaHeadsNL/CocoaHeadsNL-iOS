@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import MapKit
 
-class DetailTableViewController: UITableViewController, UIWebViewDelegate {
+class DetailTableViewController: UITableViewController, UIWebViewDelegate, MKMapViewDelegate {
     
     var selectedObject: PFObject?
     
@@ -39,6 +39,7 @@ class DetailTableViewController: UITableViewController, UIWebViewDelegate {
         //Can be used to hide masterViewController and increase size of detailView if wanted
         self.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
         self.navigationItem.leftItemsSupplementBackButton = true
+        littleMap.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -178,6 +179,36 @@ class DetailTableViewController: UITableViewController, UIWebViewDelegate {
         }
         
         return true
+    }
+    
+    //MARK: -MKMapViewDelegate
+    
+    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+        
+        if let geoLoc = selectedObject?.valueForKey("geoLocation") as? PFGeoPoint {
+            
+        self.openMapWithCoordinates(geoLoc.longitude, theLat: geoLoc.latitude)
+        }
+    }
+    
+    //self.openMapWithCoordinates(geoLoc.longitude, theLat: geoLoc.latitude)
+    
+    func openMapWithCoordinates(theLon:Double, theLat:Double){
+        
+        var coordinate = CLLocationCoordinate2DMake(theLat, theLon)
+        var placemark:MKPlacemark = MKPlacemark(coordinate: coordinate, addressDictionary:nil)
+        
+        var mapItem:MKMapItem = MKMapItem(placemark: placemark)
+        
+        if let nameOfLocation = selectedObject?.valueForKey("locationName") as? String {
+            mapItem.name = nameOfLocation
+        }
+        
+        let launchOptions:NSDictionary = NSDictionary(object: MKLaunchOptionsDirectionsModeDriving, forKey: MKLaunchOptionsDirectionsModeKey)
+        
+        var currentLocationMapItem:MKMapItem = MKMapItem.mapItemForCurrentLocation()
+        
+        MKMapItem.openMapsWithItems([currentLocationMapItem, mapItem], launchOptions: launchOptions)
     }
     
     
