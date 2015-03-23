@@ -14,6 +14,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        // Enable Crash Reporting
+        ParseCrashReporting.enable()
+        // Setup Parse
+        
+        PFUser.enableAutomaticUser()
+        PFUser.currentUser().saveInBackgroundWithBlock(nil)
+        
+        PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
+        
         return true
     }
 
