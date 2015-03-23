@@ -132,9 +132,6 @@ class DetailTableViewController: UITableViewController, UIWebViewDelegate, MKMap
             
             if let nameOfLocation = selectedObject?.valueForKey("locationName") as? String {
                 var annotation = MapAnnotation(coordinate: CLLocationCoordinate2DMake(geoLoc.latitude, geoLoc.longitude), title: "Here it is!", subtitle: nameOfLocation) as MapAnnotation
-                let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pinAnnotationView")
-                annotationView.backgroundColor = UIColor.whiteColor()
-                annotationView.alpha = 0.9
                 littleMap.addAnnotation(annotation)
             }
         }
@@ -182,6 +179,13 @@ class DetailTableViewController: UITableViewController, UIWebViewDelegate, MKMap
     }
     
     //MARK: -MKMapViewDelegate
+    
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pinAnnotationView")
+        annotationView.animatesDrop = true
+        
+        return annotationView
+    }
     
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
         
