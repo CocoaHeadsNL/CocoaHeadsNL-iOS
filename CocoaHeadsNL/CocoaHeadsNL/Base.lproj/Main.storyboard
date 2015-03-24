@@ -39,21 +39,7 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="companyCollectionViewCellIdentifier" id="Kw8-bT-4bt" customClass="PFCollectionViewCell">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <color key="backgroundColor" red="1" green="0.93333333330000001" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <segue destination="L2c-H1-4Vt" kind="showDetail" identifier="showCompanyDetail" id="gwb-vQ-0eO"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
+                        <cells/>
                         <connections>
                             <outlet property="dataSource" destination="UVK-yH-wqA" id="9KI-60-q5U"/>
                             <outlet property="delegate" destination="UVK-yH-wqA" id="Hni-Jh-VCG"/>
@@ -98,33 +84,7 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="jobsCollectionViewCellIdentifier" id="CSJ-8J-BnC" customClass="PFCollectionViewCell">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="325" height="118"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u41-Gd-whD">
-                                            <rect key="frame" x="114" y="48" width="32" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <color key="backgroundColor" red="1" green="0.93333333330000001" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="u41-Gd-whD" firstAttribute="leading" secondItem="CSJ-8J-BnC" secondAttribute="leading" constant="114" id="JMd-lG-HHi"/>
-                                    <constraint firstItem="u41-Gd-whD" firstAttribute="top" secondItem="CSJ-8J-BnC" secondAttribute="topMargin" constant="40" id="KgQ-u5-eFO"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="L2c-H1-4Vt" kind="showDetail" identifier="showJobsDetail" id="wLS-FV-NQy"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
+                        <cells/>
                         <connections>
                             <outlet property="dataSource" destination="p5z-Di-RAg" id="FjA-GG-Lhw"/>
                             <outlet property="delegate" destination="p5z-Di-RAg" id="DwR-uC-AUx"/>
@@ -458,7 +418,4 @@
         <image name="file-document-7.png" width="30" height="30"/>
         <image name="paper-map-7.png" width="30" height="30"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="nrg-7f-M07"/>
-    </inferredMetricsTieBreakers>
 </document>

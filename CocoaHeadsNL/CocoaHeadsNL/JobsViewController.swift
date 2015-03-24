@@ -9,54 +9,35 @@
 import Foundation
 import UIKit
 
-class JobsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout
+class JobsViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout
 {
-    var cellIdentifier = "jobsCollectionViewCellIdentifier"
-    var dataModel = DataModel()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        collectionView?.registerClass(NSClassFromString("UICollectionViewCell"), forCellWithReuseIdentifier: cellIdentifier)
+    override func queryForCollection() -> PFQuery! {
+        let query = PFQuery(className: "Job")
+        query.cachePolicy = PFCachePolicy.CacheThenNetwork
+        return query
     }
 
     //MARK: - UICollectionViewDataSource methods
-    
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataModel.jobsArray.count
-    }
-    
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
-    {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
+    override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!, object: PFObject!) -> PFCollectionViewCell! {
+        let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath, object: object)
         
-        var job = dataModel.jobsArray[indexPath.row] as PFObject
+        if let logoFile = object.objectForKey("logo") as? PFFile {
+            cell.imageView.file = logoFile
+            cell.imageView.contentMode = .ScaleAspectFit
+            cell.imageView.frame = CGRect(x:5.0, y:5.0, width:140.0, height:60.0)
+            cell.imageView.loadInBackground(nil)
+        }
         
-//        var vacancyLabel = UILabel(frame: CGRectMake(25, 60, 100, 20))
-//        vacancyLabel.text = job.valueForKey("title") as? String
-//        cell.contentView.addSubview(vacancyLabel)
-        
-        var companyLogo = UIImageView(frame: CGRectMake(5, 5, 140, 60))
-        companyLogo.layer.contentsGravity = kCAGravityCenter
-        companyLogo.contentMode = .ScaleAspectFit
-        cell.contentView.addSubview(companyLogo)
         cell.contentView.layer.borderWidth = 0.5
         cell.contentView.layer.borderColor = UIColor.grayColor().CGColor
         
-        if let logoFile = job.objectForKey("logo") as? PFFile {
-            logoFile.getDataInBackgroundWithBlock({ (imageData: NSData!, error: NSError!) -> Void in
-                let logoData = UIImage(data: imageData)
-                companyLogo.image = logoData
-                cell.setNeedsLayout()
-            })
-        }
         return cell
     }
     
     //MARK: - UICollectionViewDelegate methods
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let selectedObject = dataModel.jobsArray[indexPath.row] as PFObject
+        let selectedObject = self.objectAtIndexPath(indexPath)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as DetailTableViewController
@@ -68,20 +49,20 @@ class JobsViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     //MARK: - UICollectionViewDelegateFlowLayout methods
     
-    func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
+    override func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
     {
         return CGSizeMake((self.view.bounds.size.width - 18.0)/2.0, 80)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 6.0
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 6.0
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(6, 6, 6, 6)
     }
 }

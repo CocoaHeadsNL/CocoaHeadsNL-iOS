@@ -8,59 +8,43 @@
 
 import Foundation
 
-class LocationListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class LocationListViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var cellIdentifier = "companyCollectionViewCellIdentifier"
-    var dataModel = DataModel()
-    //var companies = NSMutableArray()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        collectionView?.registerClass(NSClassFromString("UICollectionViewCell"), forCellWithReuseIdentifier: cellIdentifier)
-        
+    override func queryForCollection() -> PFQuery! {
+        let query = PFQuery(className: "Companies")
+        query.cachePolicy = PFCachePolicy.CacheThenNetwork
+        return query
     }
-    
     
     //MARK: - UICollectionViewDataSource methods
-    
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataModel.companiesArray.count
-    }
-    
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
-    {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
-        
-        let company = dataModel.companiesArray[indexPath.row] as PFObject
-        
-        let logoWidth: CGFloat = 120
+    override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!, object: PFObject!) -> PFCollectionViewCell! {
+        let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath, object: object)
+
+        let logoWidth: CGFloat = 120.0
         let labelWidth = cell.bounds.width - logoWidth
-        let companyLabel = UILabel(frame: CGRect(x: logoWidth, y: 5, width: labelWidth, height:20))
-        companyLabel.text = company.valueForKey("name") as? String
-        cell.contentView.addSubview(companyLabel)
         
-        let companyLogo = UIImageView(frame: CGRect(x: 0, y: 5, width: logoWidth, height: 70))
-        companyLogo.layer.contentsGravity = kCAGravityCenter
-        companyLogo.contentMode = .ScaleAspectFit
-        cell.contentView.addSubview(companyLogo)
+        cell.textLabel.frame = CGRect(x: logoWidth, y: 5, width: labelWidth, height:20)
+        cell.textLabel.text = object.valueForKey("name") as? String
+        
+        if let companyLogo = object.objectForKey("logo") as? PFFile {
+            cell.imageView.file = companyLogo
+            cell.imageView.contentMode = .ScaleAspectFit
+            cell.imageView.frame = CGRect(x:0.0, y:5.0, width:logoWidth, height:70.0)
+            cell.imageView.loadInBackground(nil)
+        }
+        
         cell.contentView.layer.borderWidth = 0.5
         cell.contentView.layer.borderColor = UIColor.grayColor().CGColor
         
-        if let logoFile = company.objectForKey("logo") as? PFFile {
-            logoFile.getDataInBackgroundWithBlock({ (imageData: NSData!, error: NSError!) -> Void in
-                let logoData = UIImage(data: imageData)
-                companyLogo.image = logoData
-                cell.setNeedsLayout()
-            })
-        }
         return cell
     }
+    
     
     //MARK: - UICollectionViewDelegate methods
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let selectedObject = dataModel.companiesArray[indexPath.row] as PFObject
+        let selectedObject = self.objectAtIndexPath(indexPath)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as DetailTableViewController
@@ -72,22 +56,22 @@ class LocationListViewController: UICollectionViewController, UICollectionViewDe
     
     //MARK: - UICollectionViewDelegateFlowLayout methods
     
-    func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
+    override func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
     {
         return CGSize(width: self.view.bounds.width - 10, height: 80)
     }
     
     //MARK: - UICollectionViewDelegateFlowLayout methods
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 5.0
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 5.0
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(5, 5, 5, 5)
     }
 

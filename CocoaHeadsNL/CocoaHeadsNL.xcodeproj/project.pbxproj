@@ -17,7 +17,6 @@
 		F11455C11AB5024000546D22 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455C01AB5024000546D22 /* TabBarController.swift */; };
 		F11455C31AB5079300546D22 /* DetailNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455C21AB5079300546D22 /* DetailNavigationController.swift */; };
 		F14335AB1AAF277C0007D009 /* LocationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14335AA1AAF277C0007D009 /* LocationListViewController.swift */; };
-		F17A38751ABF1EE2005CFF8A /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17A38741ABF1EE2005CFF8A /* DataModel.swift */; };
 		F17A38771ABF3B62005CFF8A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F17A38761ABF3B62005CFF8A /* MapKit.framework */; };
 		F17DF6301AB0D203003663D0 /* CocoaHeads.png in Resources */ = {isa = PBXBuildFile; fileRef = F17DF62F1AB0D203003663D0 /* CocoaHeads.png */; };
 		F18A11D01AB1883100D226BD /* calendar-7.png in Resources */ = {isa = PBXBuildFile; fileRef = F18A11CF1AB1883100D226BD /* calendar-7.png */; };
@@ -57,7 +56,6 @@
 		F11455C01AB5024000546D22 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F11455C21AB5079300546D22 /* DetailNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailNavigationController.swift; sourceTree = "<group>"; };
 		F14335AA1AAF277C0007D009 /* LocationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationListViewController.swift; sourceTree = "<group>"; };
-		F17A38741ABF1EE2005CFF8A /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		F17A38761ABF3B62005CFF8A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F17DF62F1AB0D203003663D0 /* CocoaHeads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CocoaHeads.png; sourceTree = "<group>"; };
 		F18A11CF1AB1883100D226BD /* calendar-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-7.png"; sourceTree = "<group>"; };
@@ -187,7 +185,6 @@
 				F11455B81AB4BA0600546D22 /* DetailTableViewController.swift */,
 				F11455C21AB5079300546D22 /* DetailNavigationController.swift */,
 				F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */,
-				F17A38741ABF1EE2005CFF8A /* DataModel.swift */,
 				F11455BD1AB4E8C000546D22 /* Meetups */,
 				F11455A91AB3257700546D22 /* Companies */,
 				F11455A81AB3256C00546D22 /* Jobs */,
@@ -426,7 +423,6 @@
 				F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */,
 				F11455C31AB5079300546D22 /* DetailNavigationController.swift in Sources */,
 				F1A46D3A1AAB515400585D61 /* MapViewController.swift in Sources */,
-				F17A38751ABF1EE2005CFF8A /* DataModel.swift in Sources */,
 				F11455B91AB4BA0600546D22 /* DetailTableViewController.swift in Sources */,
 				F1A46D3D1AAB516300585D61 /* JobsViewController.swift in Sources */,
 				F14335AB1AAF277C0007D009 /* LocationListViewController.swift in Sources */,
