@@ -103,6 +103,9 @@ class MainViewController: PFQueryTableViewController
         
         let compoundQuery = PFQuery.orQueryWithSubqueries([historyQuery, futureQuery])
         compoundQuery.orderByDescending("time")
+        
+        compoundQuery.cachePolicy = PFCachePolicy.CacheThenNetwork
+
         return compoundQuery
     }
 }
