@@ -14,7 +14,7 @@ class DetailTableViewController: UITableViewController, UIWebViewDelegate, MKMap
     
     var selectedObject: PFObject?
     
-    @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var logoImageView: PFImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var descriptiveTitle: UILabel!
@@ -63,11 +63,11 @@ class DetailTableViewController: UITableViewController, UIWebViewDelegate, MKMap
     
     func setupCompany() {
     
+        self.logoImageView.image = nil
+
         if let logoFile = selectedObject?.objectForKey("logo") as? PFFile {
-            logoFile.getDataInBackgroundWithBlock({ (imageData: NSData!, error: NSError!) -> Void in
-                let logoData = UIImage(data: imageData)
-                self.logoImageView.image = logoData
-            })
+            self.logoImageView.file = logoFile
+            self.logoImageView.loadInBackground(nil)
         }
         
         if let name = selectedObject?.valueForKey("name") as? String {
@@ -103,11 +103,11 @@ class DetailTableViewController: UITableViewController, UIWebViewDelegate, MKMap
             self.navigationItem.title = title
         }
         
+        self.logoImageView.image = nil
+        
         if let logoFile = selectedObject?.objectForKey("logo") as? PFFile {
-            logoFile.getDataInBackgroundWithBlock({ (imageData: NSData!, error: NSError!) -> Void in
-                let logoData = UIImage(data: imageData)
-                self.logoImageView.image = logoData
-            })
+            self.logoImageView.file = logoFile
+            self.logoImageView.loadInBackground(nil)
         }
         
         if let jobTitle = selectedObject?.valueForKey("title") as? String {
@@ -153,11 +153,11 @@ class DetailTableViewController: UITableViewController, UIWebViewDelegate, MKMap
             self.htmlWebView.scrollView.scrollEnabled = false
         }
         
+        self.logoImageView.image = nil
+        
         if let logoFile = selectedObject?.objectForKey("logo") as? PFFile {
-            logoFile.getDataInBackgroundWithBlock({ (imageData: NSData!, error: NSError!) -> Void in
-                let logoData = UIImage(data: imageData)
-                self.logoImageView.image = logoData
-            })
+            self.logoImageView.file = logoFile
+            self.logoImageView.loadInBackground(nil)
         }
 
     }

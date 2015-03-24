@@ -70,11 +70,8 @@ class MainViewController: PFQueryTableViewController
                 imageView.contentMode = .ScaleAspectFit
                 
                 if let logoFile = object.objectForKey("logo") as? PFFile {
-                    logoFile.getDataInBackgroundWithBlock({ (imageData: NSData!, error: NSError!) -> Void in
-                        let logoData = UIImage(data: imageData)
-                        imageView.image = logoData
-                        cell.setNeedsLayout()
-                    })
+                    imageView.file = logoFile
+                    imageView.loadInBackground(nil)
                 }
             }
         }
