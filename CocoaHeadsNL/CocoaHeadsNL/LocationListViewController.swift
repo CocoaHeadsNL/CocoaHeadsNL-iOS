@@ -31,7 +31,7 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
             cell.imageView.file = companyLogo
             cell.imageView.contentMode = .ScaleAspectFit
             cell.imageView.frame = CGRect(x:0.0, y:5.0, width:logoWidth, height:70.0)
-            cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
+//TODO            cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
             cell.imageView.loadInBackground(nil)
         }
         
