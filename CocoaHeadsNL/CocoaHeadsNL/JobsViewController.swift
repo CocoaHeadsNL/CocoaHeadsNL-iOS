@@ -23,6 +23,7 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
         
         if let logoFile = object.objectForKey("logo") as? PFFile {
             cell.imageView.file = logoFile
+            cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
             cell.imageView.contentMode = .ScaleAspectFit
             cell.imageView.frame = CGRect(x:5.0, y:5.0, width:140.0, height:60.0)
             cell.imageView.loadInBackground(nil)
