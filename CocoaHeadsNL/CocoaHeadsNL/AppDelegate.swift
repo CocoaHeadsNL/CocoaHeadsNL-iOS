@@ -35,6 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFUser.enableAutomaticUser()
         PFUser.currentUser().saveInBackgroundWithBlock(nil)
         
+        PFConfig.getConfigInBackgroundWithBlock(nil)
+        
         PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
         
         return true
