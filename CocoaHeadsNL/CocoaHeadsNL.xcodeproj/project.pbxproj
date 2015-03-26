@@ -282,7 +282,7 @@
 				TargetAttributes = {
 					F1A46D111AAB50BB00585D61 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = ED83ZJR6DX;
+						DevelopmentTeam = QQLXG5W8QU;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
 								enabled = 1;
@@ -291,6 +291,7 @@
 					};
 					F1A46D281AAB50BB00585D61 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = QQLXG5W8QU;
 						TestTargetID = F1A46D111AAB50BB00585D61;
 					};
 				};
