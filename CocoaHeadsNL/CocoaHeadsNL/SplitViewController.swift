@@ -37,7 +37,7 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
         
         
         let detailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("detailTableViewController") as DetailTableViewController
-        let detailNavigation = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("detailNavigationController") as DetailNavigationController
+        let detailNavigation = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("detailNavigationController") as UINavigationController
         detailNavigation.viewControllers[0] = detailViewController
         detailViewController.selectedObject = self.selectedObject
         
@@ -48,8 +48,6 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
         var primary = splitViewController.viewControllers[0] as UITabBarController
         var primaryNavigation = primary.selectedViewController as UINavigationController
         if let last = primaryNavigation.viewControllers.last as? DetailTableViewController {
-            self.selectedObject = last.selectedObject
-        } else if let last = primaryNavigation.viewControllers.last as? DetailNavigationController {
             self.selectedObject = last.selectedObject
         } else {
             self.selectedObject = nil
