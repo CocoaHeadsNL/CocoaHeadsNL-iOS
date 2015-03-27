@@ -44,12 +44,8 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
             return detailNavigation
             
         } else {
-
-            let detailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("normalViewController") as UIViewController
-            let detailNavigation = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("normalNavigationController") as UINavigationController
-            detailNavigation.viewControllers[0] = detailViewController
             
-            return detailNavigation
+            return nil
         }
     }
     
