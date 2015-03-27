@@ -41,6 +41,8 @@ class MainViewController: PFQueryTableViewController
     //MARK: - UITableViewDataSource
     
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!, object: PFObject!) -> PFTableViewCell! {
+        let meetup = object as Meetup
+
         let cellId = "meetupCell"
         
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? PFTableViewCell
@@ -51,17 +53,17 @@ class MainViewController: PFQueryTableViewController
         if let cell = cell {
             if let textLabel = cell.textLabel {
                 textLabel.adjustsFontSizeToFitWidth = true
-                textLabel.text = object.objectForKey("name").description
+                textLabel.text = meetup.name
             }
             if let detailTextLabel = cell.detailTextLabel {
-                if let date = object.valueForKey("time") as? NSDate {
+                if let date = meetup.time {
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.dateStyle = .MediumStyle
                     dateFormatter.timeStyle = .ShortStyle
                     dateFormatter.dateFormat = "d MMMM, HH:mm a"
                     detailTextLabel.text = dateFormatter.stringFromDate(date)
                 }
-                //detailTextLabel.text = object.objectForKey("locationName").description
+                //detailTextLabel.text = meetup.locationName
             }
             
             if let imageView = cell.imageView {
@@ -69,7 +71,7 @@ class MainViewController: PFQueryTableViewController
                 imageView.layer.contentsGravity = kCAGravityCenter
                 imageView.contentMode = .ScaleAspectFit
                 
-                if let logoFile = object.objectForKey("logo") as? PFFile {
+                if let logoFile = meetup.logo {
                     imageView.file = logoFile
                     imageView.loadInBackground(nil)
                 }
@@ -95,10 +97,10 @@ class MainViewController: PFQueryTableViewController
     //Mark: - Parse PFQueryTableViewController methods
 
     override func queryForTable() -> PFQuery! {
-        let historyQuery = PFQuery(className: "Meetup")
+        let historyQuery = Meetup.query()
         historyQuery.whereKey("time", lessThan: NSDate())
         
-        let futureQuery = PFQuery(className: "Meetup")
+        let futureQuery = Meetup.query()
         futureQuery.whereKey("nextEvent", equalTo: true)
         
         let compoundQuery = PFQuery.orQueryWithSubqueries([historyQuery, futureQuery])

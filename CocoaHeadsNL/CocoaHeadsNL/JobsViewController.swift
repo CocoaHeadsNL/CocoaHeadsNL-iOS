@@ -12,16 +12,17 @@ import UIKit
 class JobsViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout
 {
     override func queryForCollection() -> PFQuery! {
-        let query = PFQuery(className: "Job")
+        let query = Job.query()
         query.cachePolicy = PFCachePolicy.CacheThenNetwork
         return query
     }
 
     //MARK: - UICollectionViewDataSource methods
     override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!, object: PFObject!) -> PFCollectionViewCell! {
+        let job = object as Job
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath, object: object)
         
-        if let logoFile = object.objectForKey("logo") as? PFFile {
+        if let logoFile = job.logo {
             cell.imageView.file = logoFile
             cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
             cell.imageView.contentMode = .ScaleAspectFit

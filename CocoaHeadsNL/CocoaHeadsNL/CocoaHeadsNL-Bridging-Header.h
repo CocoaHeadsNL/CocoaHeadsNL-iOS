@@ -5,3 +5,4 @@
 #import <Parse.h>
 #import <ParseUI/ParseUI.h>
 #import <ParseCrashReporting.h>
+#import <Parse/PFObject+Subclass.h>

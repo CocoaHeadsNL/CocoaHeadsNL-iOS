@@ -12,22 +12,24 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
     
     
     override func queryForCollection() -> PFQuery! {
-        let query = PFQuery(className: "Companies")
+        let query = Company.query()
         query.cachePolicy = PFCachePolicy.CacheThenNetwork
         return query
     }
     
     //MARK: - UICollectionViewDataSource methods
     override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!, object: PFObject!) -> PFCollectionViewCell! {
+        let company = object as Company
+
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath, object: object)
 
         let logoWidth: CGFloat = 120.0
         let labelWidth = cell.bounds.width - logoWidth
         
         cell.textLabel.frame = CGRect(x: logoWidth, y: 5, width: labelWidth, height:20)
-        cell.textLabel.text = object.valueForKey("name") as? String
+        cell.textLabel.text = company.name
         
-        if let companyLogo = object.objectForKey("logo") as? PFFile {
+        if let companyLogo = company.logo {
             cell.imageView.file = companyLogo
             cell.imageView.contentMode = .ScaleAspectFit
             cell.imageView.frame = CGRect(x:0.0, y:5.0, width:logoWidth, height:70.0)

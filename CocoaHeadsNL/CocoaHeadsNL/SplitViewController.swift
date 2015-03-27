@@ -47,7 +47,13 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
     func primaryViewControllerForExpandingSplitViewController(splitViewController: UISplitViewController) -> UIViewController? {
         var primary = splitViewController.viewControllers[0] as UITabBarController
         var primaryNavigation = primary.selectedViewController as UINavigationController
-        self.selectedObject = primaryNavigation.viewControllers.last?.selectedObject
+        if let last = primaryNavigation.viewControllers.last as? DetailTableViewController {
+            self.selectedObject = last.selectedObject
+        } else if let last = primaryNavigation.viewControllers.last as? DetailNavigationController {
+            self.selectedObject = last.selectedObject
+        } else {
+            self.selectedObject = nil
+        }
         primaryNavigation.popViewControllerAnimated(false)
         
         return primary
