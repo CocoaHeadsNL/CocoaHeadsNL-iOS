@@ -34,14 +34,23 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
         
         //if we selected an object we need to pass the current viewcontroller on screen
         // we need to pass an empty screen if no object present or no selection was made
+        if (selectedObject != nil) {
         
+            let detailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("detailTableViewController") as DetailTableViewController
+            let detailNavigation = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("detailNavigationController") as UINavigationController
+            detailNavigation.viewControllers[0] = detailViewController
+            detailViewController.selectedObject = self.selectedObject
         
-        let detailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("detailTableViewController") as DetailTableViewController
-        let detailNavigation = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("detailNavigationController") as UINavigationController
-        detailNavigation.viewControllers[0] = detailViewController
-        detailViewController.selectedObject = self.selectedObject
-        
-        return detailNavigation
+            return detailNavigation
+            
+        } else {
+
+            let detailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("normalViewController") as UIViewController
+            let detailNavigation = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("normalNavigationController") as UINavigationController
+            detailNavigation.viewControllers[0] = detailViewController
+            
+            return detailNavigation
+        }
     }
     
     func primaryViewControllerForExpandingSplitViewController(splitViewController: UISplitViewController) -> UIViewController? {
