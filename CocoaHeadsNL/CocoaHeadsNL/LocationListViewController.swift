@@ -51,9 +51,8 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as DetailTableViewController
-        let nav = UINavigationController(rootViewController: vc)
         vc.selectedObject = selectedObject
-        showDetailViewController(nav, sender: self)
+        showDetailViewController(vc, sender: self)
     }
     
     //MARK: - UICollectionViewDelegateFlowLayout methods

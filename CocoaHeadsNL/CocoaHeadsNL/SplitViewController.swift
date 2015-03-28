@@ -21,58 +21,60 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
     // MARK: - UISplitViewControllerDelegate
     
     func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController!, ontoPrimaryViewController primaryViewController: UIViewController!) -> Bool {
+        if let primaryTab = primaryViewController as? UITabBarController {
+            if let primaryNav = primaryTab.selectedViewController as? UINavigationController {
+                if let secondaryNav = secondaryViewController as? UINavigationController {
+                    for item in secondaryNav.viewControllers {
+                        if let viewController = item as? UIViewController {
+                            if let detailVC = viewController as? DetailTableViewController {
+                                primaryNav.showViewController(detailVC, sender: self)
+                            }
+                        }
+                        return true
+                    }
+                }
+            }
+        }
         return false
     }
     
     func splitViewController(splitViewController: UISplitViewController, separateSecondaryViewControllerFromPrimaryViewController primaryViewController: UIViewController!) -> UIViewController? {
-        /*
-        In this delegate method, the reverse of the collapsing procedure described above needs to be
-        carried out if a list is being displayed. The appropriate controller to display in the detail area
-        should be returned. If not, the standard behavior is obtained by returning nil.
-        */
-        //var primary = splitViewController.viewControllers[0] as UITabBarController
         
-        //if we selected an object we need to pass the current viewcontroller on screen
-        // we need to pass an empty screen if no object present or no selection was made
-        if (selectedObject != nil) {
-        
-            let detailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("detailTableViewController") as DetailTableViewController
-            let detailNavigation = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("detailNavigationController") as UINavigationController
-            detailNavigation.viewControllers[0] = detailViewController
-            detailViewController.selectedObject = self.selectedObject
-        
-            return detailNavigation
-            
-        } else {
-            
-            return nil
+        if let tabBarViewController = primaryViewController as? UITabBarController {
+            if let navigationController = tabBarViewController.selectedViewController as? UINavigationController {
+                if navigationController.childViewControllers.count > 1 {
+                    let poppedControllers = navigationController.popToRootViewControllerAnimated(false)
+                    let childNavigationController = UINavigationController()
+                    childNavigationController.viewControllers = poppedControllers
+                    
+                    return childNavigationController
+                }
+            }
         }
+        
+        return nil
     }
     
-    func primaryViewControllerForExpandingSplitViewController(splitViewController: UISplitViewController) -> UIViewController? {
-        var primary = splitViewController.viewControllers[0] as UITabBarController
-        var primaryNavigation = primary.selectedViewController as UINavigationController
-        if let last = primaryNavigation.viewControllers.last as? DetailTableViewController {
-            self.selectedObject = last.selectedObject
-        } else {
-            self.selectedObject = nil
-        }
-        primaryNavigation.popViewControllerAnimated(false)
-        
-        return primary
-    }
-
 
     func splitViewController(splitViewController: UISplitViewController, showDetailViewController vc: UIViewController, sender: AnyObject?) -> Bool {
         
         if splitViewController.collapsed {
-            var master = splitViewController.viewControllers[0] as UITabBarController
-            var masterNavigation = master.selectedViewController as UINavigationController
+            if let master = splitViewController.viewControllers[0] as? UITabBarController {
+                if let masterNavigation = master.selectedViewController as? UINavigationController {
             
-            masterNavigation.showViewController(vc, sender: self)
+                    masterNavigation.showViewController(vc, sender: self)
             
-            return true
+                    return true
+                }
+            }
+        } else {
+            if let masterNavigation = splitViewController.viewControllers[1] as? UINavigationController {
+                masterNavigation.setViewControllers([vc], animated: true)
+                
+                return true
+            }
         }
+
         return false
     }
 
