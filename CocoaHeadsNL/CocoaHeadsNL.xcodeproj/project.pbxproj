@@ -99,6 +99,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A13831E1AC7F83D00E0D41E /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				F11455B81AB4BA0600546D22 /* DetailTableViewController.swift */,
+			);
+			name = Detail;
+			sourceTree = "<group>";
+		};
 		5F94B32C0E46149D436AD3B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,11 +188,11 @@
 		F1A46D141AAB50BB00585D61 /* CocoaHeadsNL */ = {
 			isa = PBXGroup;
 			children = (
+				4A13831E1AC7F83D00E0D41E /* Detail */,
 				F1A46D171AAB50BB00585D61 /* AppDelegate.swift */,
 				F1A46D1D1AAB50BB00585D61 /* Main.storyboard */,
 				F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */,
 				F11455C01AB5024000546D22 /* TabBarController.swift */,
-				F11455B81AB4BA0600546D22 /* DetailTableViewController.swift */,
 				F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */,
 				F11455BD1AB4E8C000546D22 /* Meetups */,
 				F11455A91AB3257700546D22 /* Companies */,
@@ -282,7 +290,7 @@
 				TargetAttributes = {
 					F1A46D111AAB50BB00585D61 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = QQLXG5W8QU;
+						DevelopmentTeam = T4CMEHXPLL;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
 								enabled = 1;
@@ -291,7 +299,7 @@
 					};
 					F1A46D281AAB50BB00585D61 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = QQLXG5W8QU;
+						DevelopmentTeam = T4CMEHXPLL;
 						TestTargetID = F1A46D111AAB50BB00585D61;
 					};
 				};
