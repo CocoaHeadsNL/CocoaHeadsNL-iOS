@@ -21,6 +21,9 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
         //Can be used to hide masterViewController and increase size of detailView if wanted
         self.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
         self.navigationItem.leftItemsSupplementBackButton = true
+
+        //For some reason this triggers correct resizing behavior when rotating views.
+        self.tableView.estimatedRowHeight = 100.0
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -128,12 +131,17 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
     }
     
     override func reloadCell(cell:UITableViewCell) {
-        if cell.frame.height < 100 {
-            println("test")
-            self.tableView.reloadData()
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        for object in self.tableView.visibleCells() {
+            if let webCell = object as? WebViewCell {
+                webCell.webViewDidFinishLoad(webCell.htmlWebView)
+            }
         }
     }
-
 }
 
 class LogoCell: UITableViewCell {
@@ -150,19 +158,22 @@ class LogoCell: UITableViewCell {
             if let company = selectedObject as? Company {
                 if let logo = company.logo {
                     self.logoImageView.file = logo
-                    self.logoImageView.loadInBackground(nil)
                 }
 
             } else if let meetup = selectedObject as? Meetup {
                 if let logoFile = meetup.logo {
                     self.logoImageView.file = logoFile
-                    self.logoImageView.loadInBackground(nil)
                 }
             } else if let job = selectedObject as? Job {
                 if let logoFile = job.logo {
                     self.logoImageView.file = logoFile
-                    self.logoImageView.loadInBackground(nil)
                 }
+            }
+            
+            if (self.logoImageView.image != nil) {
+                self.logoImageView.loadInBackground({ (image, error) -> Void in
+                    self.logoImageView.contentMode = .ScaleAspectFit
+                })
             }
         }
     }
@@ -299,7 +310,7 @@ class  TitleCell: UITableViewCell {
 
 class  WebViewCell: UITableViewCell, UIWebViewDelegate {
     @IBOutlet weak var htmlWebView: UIWebView!
-
+    
     @IBOutlet weak var heighLayoutConstraint: NSLayoutConstraint!
     var selectedObject: PFObject? {
         didSet{
@@ -331,13 +342,19 @@ class  WebViewCell: UITableViewCell, UIWebViewDelegate {
         }
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
-        webView.sizeToFit()
+    func layoutWebView() {
+        let size = htmlWebView.sizeThatFits(CGSize(width:htmlWebView.frame.width, height: 10000.0))
         
-        heighLayoutConstraint.constant =  webView.frame.height
-        reloadCell(self)
+        if size.height != heighLayoutConstraint.constant {
+            heighLayoutConstraint.constant =  size.height
+            reloadCell(self)
+        }
     }
-
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+        layoutWebView()
+    }
+    
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         if navigationType == .LinkClicked {
             UIApplication.sharedApplication().openURL(request.URL)

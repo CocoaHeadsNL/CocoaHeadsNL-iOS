@@ -18,11 +18,11 @@ DEPENDENCIES:
   - ParseUI
 
 SPEC CHECKSUMS:
-  Bolts: dd9fb8433d67f5acc3b6b4d1379bbc5513d716c1
+  Bolts: f8e2f94edbf9fec7bb8de5ecaaa3aa6b7de6f64e
   Facebook-iOS-SDK: cd87f0b2f0c1d9574b44e8fa2baacc275524bac3
   Parse: 3c2d4e6ade7b59d31c0bc8106340c6b81b31bc0f
   ParseCrashReporting: 9118391db9867e693bb6a8fb45000a95fab09681
   ParseFacebookUtils: f0c954253a65e945d7cb73400c33bc661f516b85
-  ParseUI: f7e9e0e5271f75a19c74ead8fdd95d36160e268e
+  ParseUI: e38bbbc3784006ab4ffaa6ef292e23c5fa9119dc
 
 COCOAPODS: 0.36.1

@@ -10,9 +10,6 @@ import Foundation
 import UIKit
 
 class SplitViewController: UISplitViewController, UISplitViewControllerDelegate {
-    private var collapseDetailViewController = true
-    var selectedObject: PFObject?
-
     override func viewDidLoad() {
         self.delegate = self
         self.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
