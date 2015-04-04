@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D113c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="W81-50-NMJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="W81-50-NMJ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -130,15 +131,18 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z5o-Os-scA" id="b7h-2D-jQy">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4lj-eT-YQd" customClass="PFImageView">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4lj-eT-YQd" customClass="PFImageView">
                                             <rect key="frame" x="50" y="18" width="500" height="119"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="4lj-eT-YQd" secondAttribute="height" multiplier="500:119" priority="750" id="YUz-GD-5o9"/>
+                                            </constraints>
                                         </imageView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="4lj-eT-YQd" firstAttribute="trailing" secondItem="b7h-2D-jQy" secondAttribute="trailingMargin" constant="-42" id="8yx-Av-ZEl"/>
-                                        <constraint firstItem="4lj-eT-YQd" firstAttribute="leading" secondItem="b7h-2D-jQy" secondAttribute="leadingMargin" constant="42" id="QlV-fX-CO6"/>
-                                        <constraint firstItem="4lj-eT-YQd" firstAttribute="top" secondItem="b7h-2D-jQy" secondAttribute="topMargin" constant="8" id="UjX-HY-fds"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="4lj-eT-YQd" secondAttribute="bottom" constant="8" id="XWB-v7-odr"/>
+                                        <constraint firstItem="4lj-eT-YQd" firstAttribute="leading" secondItem="b7h-2D-jQy" secondAttribute="leading" constant="50" id="Aqj-5m-hCx"/>
+                                        <constraint firstItem="4lj-eT-YQd" firstAttribute="top" secondItem="b7h-2D-jQy" secondAttribute="top" constant="18" id="JtE-1S-M8D"/>
+                                        <constraint firstAttribute="bottom" secondItem="4lj-eT-YQd" secondAttribute="bottom" constant="13" id="Mw6-ln-9jL"/>
+                                        <constraint firstAttribute="trailing" secondItem="4lj-eT-YQd" secondAttribute="trailing" constant="50" id="uA2-2e-oOF"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
