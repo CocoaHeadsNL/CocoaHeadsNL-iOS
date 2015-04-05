@@ -17,6 +17,25 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
         return query
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.loadObjects()
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        
+        coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext!) -> Void in
+            self.collectionViewLayout.invalidateLayout()
+            self.loadObjects()
+            }, completion: { (context:UIViewControllerTransitionCoordinatorContext!) -> Void in
+                
+        })
+    }
+    
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        // when presented by NavigationController through SplitViewController
+        self.collectionViewLayout.invalidateLayout()
+    }
+    
     //MARK: - UICollectionViewDataSource methods
     override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!, object: PFObject!) -> PFCollectionViewCell! {
         let company = object as Company
@@ -33,7 +52,7 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
             cell.imageView.file = companyLogo
             cell.imageView.contentMode = .ScaleAspectFit
             cell.imageView.frame = CGRect(x:0.0, y:5.0, width:logoWidth, height:70.0)
-//TODO            cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
+            cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
             cell.imageView.loadInBackground(nil)
         }
         
@@ -59,21 +78,6 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
     
     override func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
     {
-        return CGSize(width: self.view.bounds.width - 10, height: 80)
+        return CGSize(width: self.view.bounds.width - 15, height: 80)
     }
-    
-    //MARK: - UICollectionViewDelegateFlowLayout methods
-    
-    override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 5.0
-    }
-    
-    override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 5.0
-    }
-    
-    override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(5, 5, 5, 5)
-    }
-
 }
