@@ -16,19 +16,41 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
         query.cachePolicy = PFCachePolicy.CacheThenNetwork
         return query
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.loadObjects()
+    }
 
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        
+        coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext!) -> Void in
+            self.collectionViewLayout.invalidateLayout()
+            self.loadObjects()
+            }, completion: { (context:UIViewControllerTransitionCoordinatorContext!) -> Void in
+            
+        })
+    }
+    
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        // when presented by NavigationController through SplitViewController
+        self.collectionViewLayout.invalidateLayout()
+    }
+    
     //MARK: - UICollectionViewDataSource methods
     override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!, object: PFObject!) -> PFCollectionViewCell! {
         let job = object as Job
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath, object: object)
         
         if let logoFile = job.logo {
+            
             cell.imageView.file = logoFile
             cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
             cell.imageView.contentMode = .ScaleAspectFit
-            cell.imageView.frame = CGRect(x:5.0, y:5.0, width:140.0, height:60.0)
+            cell.imageView.frame = CGRectInset(cell.contentView.frame, 5, 5)
+            cell.imageView.clipsToBounds = true
             cell.imageView.loadInBackground(nil)
         }
+
         
         cell.contentView.layer.borderWidth = 0.5
         cell.contentView.layer.borderColor = UIColor.grayColor().CGColor
@@ -47,22 +69,11 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
         showDetailViewController(vc, sender: self)
     }
     
-    //MARK: - UICollectionViewDelegateFlowLayout methods
     
-    override func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
-    {
-        return CGSizeMake((self.view.bounds.size.width - 18.0)/2.0, 80)
-    }
-    
-    override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 6.0
-    }
-    
-    override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 6.0
-    }
-    
-    override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(6, 6, 6, 6)
+    override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        let width = (self.view.bounds.size.width - 15) / 2.0
+        
+        return CGSizeMake(width, 80)
     }
 }
