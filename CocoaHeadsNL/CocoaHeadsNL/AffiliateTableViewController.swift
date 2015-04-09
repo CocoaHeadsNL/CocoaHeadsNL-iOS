@@ -33,7 +33,7 @@ class AffiliateTableViewController : PFQueryTableViewController {
     
     //MARK: - UITableViewDataSource
     
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!, object: PFObject!) -> PFTableViewCell! {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject!) -> PFTableViewCell {
         let cellId = "affiliateCell"
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? PFTableViewCell
         if cell == nil {
@@ -51,7 +51,7 @@ class AffiliateTableViewController : PFQueryTableViewController {
                 }
                 if let imageView = cell.imageView {
                     if let affiliateId = affiliateLink.affiliateId {
-                        cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
+                        imageView.image = UIImage(named: "CocoaHeadsNLLogo")
                         imageView.contentMode = .ScaleAspectFit
 
                         if let url = NSURL(string: "https://itunes.apple.com/lookup?id=\(affiliateId)") {
@@ -73,7 +73,7 @@ class AffiliateTableViewController : PFQueryTableViewController {
                                                                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                                                     if let cell = cell {
                                                                         let image = UIImage(data: data)
-                                                                        cell.imageView.image = image
+                                                                        imageView.image = image
                                                                         cell.setNeedsLayout()
                                                                     }
                                                                 })
@@ -92,7 +92,7 @@ class AffiliateTableViewController : PFQueryTableViewController {
             }
         }
         
-        return cell
+        return cell!
     }
     
     //MARK: - UITableViewDelegate
@@ -101,7 +101,7 @@ class AffiliateTableViewController : PFQueryTableViewController {
             if let affiliateLink = self.objectAtIndexPath(indexPath) as? AffiliateLink {
                 if let affiliateId = affiliateLink.affiliateId {
                     if let url = NSURL(string: NSString(format: "https://itunes.apple.com/app/apple-store/id%@?at=%@&ct=app", affiliateId,
-                        affiliateToken)) {
+                        affiliateToken) as String) {
                         if UIApplication.sharedApplication().canOpenURL(url) {
                             if TARGET_IPHONE_SIMULATOR == 1 {
                                 // No app store on simulator.

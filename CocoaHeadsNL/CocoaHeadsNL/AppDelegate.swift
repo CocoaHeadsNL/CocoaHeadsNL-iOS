@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId(parseApplicationId!, clientKey: parseClientKey!)
         
         PFUser.enableAutomaticUser()
-        PFUser.currentUser().saveInBackgroundWithBlock(nil)
+        PFUser.currentUser()?.saveInBackgroundWithBlock(nil)
         
         PFConfig.getConfigInBackgroundWithBlock(nil)
         

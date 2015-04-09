@@ -14,7 +14,7 @@ class AffiliateLink : PFObject, PFSubclassing {
         }
     }
 
-    class func parseClassName() -> String! {
+    class func parseClassName() -> String {
         return "affiliateLinks"
     }
 
@@ -31,7 +31,7 @@ class APIKey : PFObject, PFSubclassing {
         }
     }
 
-    class func parseClassName() -> String! {
+    class func parseClassName() -> String {
         return "APIKey"
     }
 
@@ -47,7 +47,7 @@ class Company : PFObject, PFSubclassing {
         }
     }
 
-    class func parseClassName() -> String! {
+    class func parseClassName() -> String {
         return "Companies"
     }
 
@@ -70,7 +70,7 @@ class Job : PFObject, PFSubclassing {
         }
     }
 
-    class func parseClassName() -> String! {
+    class func parseClassName() -> String {
         return "Job"
     }
 
@@ -89,7 +89,7 @@ class Meetup : PFObject, PFSubclassing {
         }
     }
 
-    class func parseClassName() -> String! {
+    class func parseClassName() -> String {
         return "Meetup"
     }
 

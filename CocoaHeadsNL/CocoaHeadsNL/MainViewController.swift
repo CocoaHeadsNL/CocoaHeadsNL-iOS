@@ -12,7 +12,7 @@ class MainViewController: PFQueryTableViewController
 {
     var selectedObject: PFObject?
     
-    override init!(style: UITableViewStyle, className: String!) {
+    override init(style: UITableViewStyle, className: String!) {
         super.init(style: style, className: className)
     }
     
@@ -40,8 +40,8 @@ class MainViewController: PFQueryTableViewController
 
     //MARK: - UITableViewDataSource
     
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!, object: PFObject!) -> PFTableViewCell! {
-        let meetup = object as Meetup
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject!) -> PFTableViewCell {
+        let meetup = object as! Meetup
 
         let cellId = "meetupCell"
         
@@ -67,7 +67,7 @@ class MainViewController: PFQueryTableViewController
             }
             
             if let imageView = cell.imageView {
-                cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
+                imageView.image = UIImage(named: "CocoaHeadsNLLogo")
                 imageView.layer.contentsGravity = kCAGravityCenter
                 imageView.contentMode = .ScaleAspectFit
                 
@@ -78,7 +78,7 @@ class MainViewController: PFQueryTableViewController
             }
         }
         
-        return cell
+        return cell!
     }
     
     //MARK: - UITableViewDelegate
@@ -87,21 +87,21 @@ class MainViewController: PFQueryTableViewController
         selectedObject = self.objectAtIndexPath(indexPath)
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as DetailTableViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as! DetailTableViewController
         vc.selectedObject = selectedObject
         showDetailViewController(vc, sender: self)
     }
     
     //Mark: - Parse PFQueryTableViewController methods
 
-    override func queryForTable() -> PFQuery! {
+    override func queryForTable() -> PFQuery {
         let historyQuery = Meetup.query()
-        historyQuery.whereKey("time", lessThan: NSDate())
+        historyQuery!.whereKey("time", lessThan: NSDate())
         
         let futureQuery = Meetup.query()
-        futureQuery.whereKey("nextEvent", equalTo: true)
+        futureQuery!.whereKey("nextEvent", equalTo: true)
         
-        let compoundQuery = PFQuery.orQueryWithSubqueries([historyQuery, futureQuery])
+        let compoundQuery = PFQuery.orQueryWithSubqueries([historyQuery!, futureQuery!])
         compoundQuery.orderByDescending("time")
         
         compoundQuery.cachePolicy = PFCachePolicy.CacheThenNetwork

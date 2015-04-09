@@ -232,7 +232,7 @@ class  MapViewCell: UITableViewCell, MKMapViewDelegate {
                 mapItem.name = nameOfLocation
             }
             
-            let launchOptions:NSDictionary = NSDictionary(object: MKLaunchOptionsDirectionsModeDriving, forKey: MKLaunchOptionsDirectionsModeKey)
+            let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
             
             var currentLocationMapItem:MKMapItem = MKMapItem.mapItemForCurrentLocation()
             
@@ -357,7 +357,7 @@ class  WebViewCell: UITableViewCell, UIWebViewDelegate {
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         if navigationType == .LinkClicked {
-            UIApplication.sharedApplication().openURL(request.URL)
+            UIApplication.sharedApplication().openURL(request.URL!)
             return false
         }
         

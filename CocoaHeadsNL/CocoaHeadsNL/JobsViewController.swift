@@ -11,10 +11,10 @@ import UIKit
 
 class JobsViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout
 {
-    override func queryForCollection() -> PFQuery! {
+    override func queryForCollection() -> PFQuery {
         let query = Job.query()
-        query.cachePolicy = PFCachePolicy.CacheThenNetwork
-        return query
+        query!.cachePolicy = PFCachePolicy.CacheThenNetwork
+        return query!
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -37,25 +37,25 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
     }
     
     //MARK: - UICollectionViewDataSource methods
-    override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!, object: PFObject!) -> PFCollectionViewCell! {
-        let job = object as Job
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell? {
+        let job = object as! Job
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath, object: object)
         
         if let logoFile = job.logo {
             
-            cell.imageView.file = logoFile
-            cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
-            cell.imageView.contentMode = .ScaleAspectFit
-            cell.imageView.frame = CGRectInset(cell.contentView.frame, 5, 5)
-            cell.imageView.clipsToBounds = true
-            cell.imageView.loadInBackground(nil)
+            cell!.imageView.file = logoFile
+            cell!.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
+            cell!.imageView.contentMode = .ScaleAspectFit
+            cell!.imageView.frame = CGRectInset(cell!.contentView.frame, 5, 5)
+            cell!.imageView.clipsToBounds = true
+            cell!.imageView.loadInBackground(nil)
         }
 
         
-        cell.contentView.layer.borderWidth = 0.5
-        cell.contentView.layer.borderColor = UIColor.grayColor().CGColor
+        cell!.contentView.layer.borderWidth = 0.5
+        cell!.contentView.layer.borderColor = UIColor.grayColor().CGColor
         
-        return cell
+        return cell!
     }
     
     //MARK: - UICollectionViewDelegate methods
@@ -64,7 +64,7 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
         let selectedObject = self.objectAtIndexPath(indexPath)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as DetailTableViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as!DetailTableViewController
         vc.selectedObject = selectedObject
         showDetailViewController(vc, sender: self)
     }

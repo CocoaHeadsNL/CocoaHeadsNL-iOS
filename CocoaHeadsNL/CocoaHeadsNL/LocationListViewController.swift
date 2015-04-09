@@ -11,10 +11,10 @@ import Foundation
 class LocationListViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     
-    override func queryForCollection() -> PFQuery! {
+    override func queryForCollection() -> PFQuery {
         let query = Company.query()
-        query.cachePolicy = PFCachePolicy.CacheThenNetwork
-        return query
+        query!.cachePolicy = PFCachePolicy.CacheThenNetwork
+        return query!
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -37,29 +37,29 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
     }
     
     //MARK: - UICollectionViewDataSource methods
-    override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!, object: PFObject!) -> PFCollectionViewCell! {
-        let company = object as Company
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject!) -> PFCollectionViewCell {
+        let company = object as! Company
 
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath, object: object)
 
         let logoWidth: CGFloat = 120.0
-        let labelWidth = cell.bounds.width - logoWidth
+        let labelWidth = cell!.bounds.width - logoWidth
         
-        cell.textLabel.frame = CGRect(x: logoWidth, y: 5, width: labelWidth, height:20)
-        cell.textLabel.text = company.name
+        cell!.textLabel.frame = CGRect(x: logoWidth, y: 5, width: labelWidth, height:20)
+        cell!.textLabel.text = company.name
         
         if let companyLogo = company.logo {
-            cell.imageView.file = companyLogo
-            cell.imageView.contentMode = .ScaleAspectFit
-            cell.imageView.frame = CGRect(x:0.0, y:5.0, width:logoWidth, height:70.0)
-            cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
-            cell.imageView.loadInBackground(nil)
+            cell!.imageView.file = companyLogo
+            cell!.imageView.contentMode = .ScaleAspectFit
+            cell!.imageView.frame = CGRect(x:0.0, y:5.0, width:logoWidth, height:70.0)
+            cell!.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
+            cell!.imageView.loadInBackground(nil)
         }
         
-        cell.contentView.layer.borderWidth = 0.5
-        cell.contentView.layer.borderColor = UIColor.grayColor().CGColor
+        cell!.contentView.layer.borderWidth = 0.5
+        cell!.contentView.layer.borderColor = UIColor.grayColor().CGColor
         
-        return cell
+        return cell!
     }
     
     
@@ -69,7 +69,7 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
         let selectedObject = self.objectAtIndexPath(indexPath)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as DetailTableViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as! DetailTableViewController
         vc.selectedObject = selectedObject
         showDetailViewController(vc, sender: self)
     }
