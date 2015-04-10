@@ -24,7 +24,6 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         
         coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext!) -> Void in
-            self.collectionViewLayout.invalidateLayout()
             self.loadObjects()
             }, completion: { (context:UIViewControllerTransitionCoordinatorContext!) -> Void in
                 
