@@ -18,7 +18,6 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.collectionViewLayout.invalidateLayout()
         self.loadObjects()
     }
 
