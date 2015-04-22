@@ -18,6 +18,7 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
     }
     
     override func viewWillAppear(animated: Bool) {
+        self.collectionViewLayout.invalidateLayout()
         self.loadObjects()
     }
     
@@ -26,6 +27,7 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
         coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext!) -> Void in
             self.loadObjects()
             }, completion: { (context:UIViewControllerTransitionCoordinatorContext!) -> Void in
+                self.collectionViewLayout.invalidateLayout()
                 
         })
     }
@@ -42,10 +44,6 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath, object: object)
 
         let logoWidth: CGFloat = 120.0
-        let labelWidth = cell!.bounds.width - logoWidth
-        
-        cell!.textLabel.frame = CGRect(x: logoWidth, y: 5, width: labelWidth, height:20)
-        cell!.textLabel.text = company.name
         
         if let companyLogo = company.logo {
             cell!.imageView.file = companyLogo
@@ -54,6 +52,13 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
             cell!.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
             cell!.imageView.loadInBackground(nil)
         }
+        
+        let whiteSpace: CGFloat = 10.0
+        let labelWidth = cell!.bounds.width - whiteSpace - logoWidth
+        
+        cell!.textLabel.numberOfLines = 2
+        cell!.textLabel.frame = CGRect(x: logoWidth + whiteSpace, y: 5, width: labelWidth, height:70)
+        cell!.textLabel.text = company.name
         
         cell!.contentView.layer.borderWidth = 0.5
         cell!.contentView.layer.borderColor = UIColor.grayColor().CGColor
