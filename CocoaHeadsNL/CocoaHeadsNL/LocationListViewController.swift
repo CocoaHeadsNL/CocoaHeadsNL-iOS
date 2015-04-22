@@ -77,6 +77,8 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
     
     override func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
     {
-        return CGSize(width: self.view.bounds.width - 15, height: 80)
+        let currentWidth = self.view.frame.size.width
+        
+        return CGSize(width: currentWidth - 15, height: 80)
     }
 }

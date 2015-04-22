@@ -71,7 +71,9 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
     
     override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        let width = (self.view.bounds.size.width - 15) / 2.0
+        let currentWidth = self.view.frame.size.width
+        
+        let width = (currentWidth - 15) / 2.0
         
         return CGSizeMake(width, 80)
     }
