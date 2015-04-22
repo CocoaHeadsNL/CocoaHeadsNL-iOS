@@ -36,7 +36,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="scrollIndicatorInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="6oJ-NM-xR6">
-                            <size key="itemSize" width="300" height="90"/>
+                            <size key="itemSize" width="490" height="80"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
@@ -45,11 +45,11 @@
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="companyCollectionViewCell" id="bAW-uF-zSq" customClass="PFCollectionViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="290" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="589" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <size key="customSize" width="290" height="80"/>
+                                <size key="customSize" width="589" height="80"/>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -64,7 +64,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qIh-vR-M0P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2579" y="-959"/>
+            <point key="canvasLocation" x="2578" y="-960"/>
         </scene>
         <!--Events-->
         <scene sceneID="Rb4-4L-nsC">
@@ -95,7 +95,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="scrollIndicatorInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="KTF-6H-c5v">
-                            <size key="itemSize" width="150" height="95"/>
+                            <size key="itemSize" width="190" height="80"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
@@ -104,27 +104,11 @@
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" reuseIdentifier="jobsCollectionViewCell" id="bO6-GG-KWb" customClass="PFCollectionViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="140" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="190" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6r0-MD-pKU" customClass="PFImageView">
-                                            <rect key="frame" x="14" y="0.0" width="112" height="80"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="80" id="S6g-7U-5Zt"/>
-                                                <constraint firstAttribute="width" secondItem="6r0-MD-pKU" secondAttribute="height" multiplier="7:5" priority="750" id="lm4-k7-UwG"/>
-                                            </constraints>
-                                        </imageView>
-                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <constraints>
-                                    <constraint firstAttribute="centerX" secondItem="6r0-MD-pKU" secondAttribute="centerX" id="6WP-m1-Znw"/>
-                                    <constraint firstAttribute="centerY" secondItem="6r0-MD-pKU" secondAttribute="centerY" id="GeW-3V-mhN"/>
-                                </constraints>
-                                <size key="customSize" width="140" height="80"/>
-                                <connections>
-                                    <outlet property="imageView" destination="6r0-MD-pKU" id="HBd-0G-xEj"/>
-                                </connections>
+                                <size key="customSize" width="190" height="80"/>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -142,7 +126,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KWX-vH-ztK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2736" y="-1784"/>
+            <point key="canvasLocation" x="2736" y="-1785"/>
         </scene>
         <!--Jobs-->
         <scene sceneID="Uzz-Zr-J2X">
