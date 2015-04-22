@@ -25,10 +25,10 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         
         coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext!) -> Void in
-            self.collectionViewLayout.invalidateLayout()
+            
             self.loadObjects()
             }, completion: { (context:UIViewControllerTransitionCoordinatorContext!) -> Void in
-            
+            self.collectionViewLayout.invalidateLayout()
         })
     }
     
@@ -39,10 +39,10 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
     
     //MARK: - UICollectionViewDataSource methods
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell? {
-        let job = object as! Job
+        let job = object as? Job
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath, object: object)
         
-        if let logoFile = job.logo {
+        if let logoFile = job?.logo {
             
             cell!.imageView.file = logoFile
             cell!.imageView.image = UIImage(named: "CocoaHeadsNLLogo")

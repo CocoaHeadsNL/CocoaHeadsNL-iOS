@@ -40,8 +40,8 @@ class MainViewController: PFQueryTableViewController
 
     //MARK: - UITableViewDataSource
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject!) -> PFTableViewCell {
-        let meetup = object as! Meetup
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
+        let meetup = object as? Meetup
 
         let cellId = "meetupCell"
         
@@ -53,10 +53,10 @@ class MainViewController: PFQueryTableViewController
         if let cell = cell {
             if let textLabel = cell.textLabel {
                 textLabel.adjustsFontSizeToFitWidth = true
-                textLabel.text = meetup.name
+                textLabel.text = meetup?.name
             }
             if let detailTextLabel = cell.detailTextLabel {
-                if let date = meetup.time {
+                if let date = meetup?.time {
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.dateStyle = .MediumStyle
                     dateFormatter.timeStyle = .ShortStyle
@@ -71,7 +71,7 @@ class MainViewController: PFQueryTableViewController
                 imageView.layer.contentsGravity = kCAGravityCenter
                 imageView.contentMode = .ScaleAspectFit
                 
-                if let logoFile = meetup.logo {
+                if let logoFile = meetup?.logo {
                     imageView.file = logoFile
                     imageView.loadInBackground(nil)
                 }

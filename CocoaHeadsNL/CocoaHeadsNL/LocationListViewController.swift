@@ -18,7 +18,6 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.collectionViewLayout.invalidateLayout()
         self.loadObjects()
     }
     
@@ -38,14 +37,14 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
     }
     
     //MARK: - UICollectionViewDataSource methods
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject!) -> PFCollectionViewCell {
-        let company = object as! Company
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell {
+        let company = object as? Company
 
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath, object: object)
 
         let logoWidth: CGFloat = 120.0
         
-        if let companyLogo = company.logo {
+        if let companyLogo = company?.logo {
             cell!.imageView.file = companyLogo
             cell!.imageView.contentMode = .ScaleAspectFit
             cell!.imageView.frame = CGRect(x:0.0, y:5.0, width:logoWidth, height:70.0)
@@ -58,7 +57,7 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
         
         cell!.textLabel.numberOfLines = 2
         cell!.textLabel.frame = CGRect(x: logoWidth + whiteSpace, y: 5, width: labelWidth, height:70)
-        cell!.textLabel.text = company.name
+        cell!.textLabel.text = company?.name
         
         cell!.contentView.layer.borderWidth = 0.5
         cell!.contentView.layer.borderColor = UIColor.grayColor().CGColor
@@ -83,7 +82,8 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
     override func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
     {
         let currentWidth = self.view.frame.size.width
+        let width = currentWidth - 10
         
-        return CGSize(width: currentWidth - 15, height: 80)
+        return CGSize(width: width, height: 80)
     }
 }
