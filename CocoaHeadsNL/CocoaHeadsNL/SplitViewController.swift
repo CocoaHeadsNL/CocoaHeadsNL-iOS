@@ -18,18 +18,10 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
     // MARK: - UISplitViewControllerDelegate
     
     func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController!, ontoPrimaryViewController primaryViewController: UIViewController!) -> Bool {
+        
         if let primaryTab = primaryViewController as? UITabBarController {
             if let primaryNav = primaryTab.selectedViewController as? UINavigationController {
-                if let secondaryNav = secondaryViewController as? UINavigationController {
-                    for item in secondaryNav.viewControllers {
-                        if let viewController = item as? UIViewController {
-                            if let detailVC = viewController as? DetailTableViewController {
-                                primaryNav.showViewController(detailVC, sender: self)
-                            }
-                        }
-                        return true
-                    }
-                }
+                return true
             }
         }
         return false
