@@ -67,6 +67,7 @@ class MainViewController: PFQueryTableViewController
             }
             
             if let imageView = cell.imageView {
+                imageView.file = nil
                 imageView.image = UIImage(named: "CocoaHeadsNLLogo")
                 imageView.layer.contentsGravity = kCAGravityCenter
                 imageView.contentMode = .ScaleAspectFit
