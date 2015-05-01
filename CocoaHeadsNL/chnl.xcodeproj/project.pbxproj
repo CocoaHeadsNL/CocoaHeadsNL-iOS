@@ -64,13 +64,13 @@
 		F18A11D31AB1889700D226BD /* note-write-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "note-write-7.png"; sourceTree = "<group>"; };
 		F18A11D51AB188AF00D226BD /* paper-map-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paper-map-7.png"; sourceTree = "<group>"; };
 		F18A11D71AB188BD00D226BD /* pin-map-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin-map-7.png"; sourceTree = "<group>"; };
-		F1A46D121AAB50BB00585D61 /* CocoaHeadsNL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaHeadsNL.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1A46D121AAB50BB00585D61 /* chnl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chnl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A46D161AAB50BB00585D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1A46D171AAB50BB00585D61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1A46D1E1AAB50BB00585D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F1A46D201AAB50BB00585D61 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F1A46D231AAB50BB00585D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		F1A46D291AAB50BB00585D61 /* CocoaHeadsNLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaHeadsNLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1A46D291AAB50BB00585D61 /* chnlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = chnlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A46D2E1AAB50BB00585D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1A46D2F1AAB50BB00585D61 /* CocoaHeadsNLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaHeadsNLTests.swift; sourceTree = "<group>"; };
 		F1A46D3C1AAB516300585D61 /* JobsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsViewController.swift; sourceTree = "<group>"; };
@@ -184,8 +184,8 @@
 		F1A46D131AAB50BB00585D61 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F1A46D121AAB50BB00585D61 /* CocoaHeadsNL.app */,
-				F1A46D291AAB50BB00585D61 /* CocoaHeadsNLTests.xctest */,
+				F1A46D121AAB50BB00585D61 /* chnl.app */,
+				F1A46D291AAB50BB00585D61 /* chnlTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -244,9 +244,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F1A46D111AAB50BB00585D61 /* CocoaHeadsNL */ = {
+		F1A46D111AAB50BB00585D61 /* chnl */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F1A46D331AAB50BB00585D61 /* Build configuration list for PBXNativeTarget "CocoaHeadsNL" */;
+			buildConfigurationList = F1A46D331AAB50BB00585D61 /* Build configuration list for PBXNativeTarget "chnl" */;
 			buildPhases = (
 				3910D079CE63A3847D51D0F8 /* Check Pods Manifest.lock */,
 				F1A46D0E1AAB50BB00585D61 /* Sources */,
@@ -261,14 +261,14 @@
 			);
 			dependencies = (
 			);
-			name = CocoaHeadsNL;
+			name = chnl;
 			productName = CocoaHeadsNL;
-			productReference = F1A46D121AAB50BB00585D61 /* CocoaHeadsNL.app */;
+			productReference = F1A46D121AAB50BB00585D61 /* chnl.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F1A46D281AAB50BB00585D61 /* CocoaHeadsNLTests */ = {
+		F1A46D281AAB50BB00585D61 /* chnlTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F1A46D361AAB50BB00585D61 /* Build configuration list for PBXNativeTarget "CocoaHeadsNLTests" */;
+			buildConfigurationList = F1A46D361AAB50BB00585D61 /* Build configuration list for PBXNativeTarget "chnlTests" */;
 			buildPhases = (
 				F1A46D251AAB50BB00585D61 /* Sources */,
 				F1A46D261AAB50BB00585D61 /* Frameworks */,
@@ -279,9 +279,9 @@
 			dependencies = (
 				F1A46D2B1AAB50BB00585D61 /* PBXTargetDependency */,
 			);
-			name = CocoaHeadsNLTests;
+			name = chnlTests;
 			productName = CocoaHeadsNLTests;
-			productReference = F1A46D291AAB50BB00585D61 /* CocoaHeadsNLTests.xctest */;
+			productReference = F1A46D291AAB50BB00585D61 /* chnlTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -307,7 +307,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F1A46D0D1AAB50BB00585D61 /* Build configuration list for PBXProject "CocoaHeadsNL" */;
+			buildConfigurationList = F1A46D0D1AAB50BB00585D61 /* Build configuration list for PBXProject "chnl" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -320,8 +320,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F1A46D111AAB50BB00585D61 /* CocoaHeadsNL */,
-				F1A46D281AAB50BB00585D61 /* CocoaHeadsNLTests */,
+				F1A46D111AAB50BB00585D61 /* chnl */,
+				F1A46D281AAB50BB00585D61 /* chnlTests */,
 			);
 		};
 /* End PBXProject section */
@@ -460,7 +460,7 @@
 /* Begin PBXTargetDependency section */
 		F1A46D2B1AAB50BB00585D61 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F1A46D111AAB50BB00585D61 /* CocoaHeadsNL */;
+			target = F1A46D111AAB50BB00585D61 /* chnl */;
 			targetProxy = F1A46D2A1AAB50BB00585D61 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -604,7 +604,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CocoaHeadsNL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = chnl;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -623,7 +623,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = CocoaHeadsNL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = chnl;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -644,7 +644,7 @@
 				);
 				INFOPLIST_FILE = CocoaHeadsNLTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = chnlTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CocoaHeadsNL.app/CocoaHeadsNL";
 			};
 			name = Debug;
@@ -659,7 +659,7 @@
 				);
 				INFOPLIST_FILE = CocoaHeadsNLTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = chnlTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CocoaHeadsNL.app/CocoaHeadsNL";
 			};
 			name = Release;
@@ -667,7 +667,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F1A46D0D1AAB50BB00585D61 /* Build configuration list for PBXProject "CocoaHeadsNL" */ = {
+		F1A46D0D1AAB50BB00585D61 /* Build configuration list for PBXProject "chnl" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F1A46D311AAB50BB00585D61 /* Debug */,
@@ -676,7 +676,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F1A46D331AAB50BB00585D61 /* Build configuration list for PBXNativeTarget "CocoaHeadsNL" */ = {
+		F1A46D331AAB50BB00585D61 /* Build configuration list for PBXNativeTarget "chnl" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F1A46D341AAB50BB00585D61 /* Debug */,
@@ -685,7 +685,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F1A46D361AAB50BB00585D61 /* Build configuration list for PBXNativeTarget "CocoaHeadsNLTests" */ = {
+		F1A46D361AAB50BB00585D61 /* Build configuration list for PBXNativeTarget "chnlTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F1A46D371AAB50BB00585D61 /* Debug */,
