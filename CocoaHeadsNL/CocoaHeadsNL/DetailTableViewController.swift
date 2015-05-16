@@ -13,6 +13,9 @@ import MapKit
 class DetailTableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
     var selectedObject: PFObject?
     
+    //Check if company has apps and fetch from parse
+    var companyApps: PFObject?
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -42,9 +45,31 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
         }
     }
     
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if let company = selectedObject as? Company {
+            if company.hasApps {
+                return 2
+            } else {
+                return 1
+            }
+        } else if let meetup = selectedObject as? Meetup {
+            return 1
+        } else if let job = selectedObject as? Job {
+            return 1
+        }
+        return 1
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let company = selectedObject as? Company {
-            return 4
+                //section 0 is company details
+            if section == 0 {
+                return 4
+            } else {
+                //section 1 = company apps
+                return 2
+                //only need default TableViewCell with image for icon and title.
+            }
             // no map
             // no web
         } else if let meetup = selectedObject as? Meetup {
@@ -63,13 +88,24 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
         var actualRow = indexPath.row
         
         if let company = selectedObject as? Company {
-            if actualRow > 0 {
-                // no map
-                actualRow++
-            }
-            if actualRow > 4 {
-                // no web
-                actualRow++
+            if tableView.indexPathForSelectedRow()?.section == 1 {
+                //section 1 = company apps
+                if let cell = tableView.dequeueReusableCellWithIdentifier("appsCell") as? AppsCell {
+                    println("should get here")
+                    cell.companyApp = companyApps
+                    cell.textLabel?.text = "test"
+                    return cell
+                }
+               
+            } else {
+                if actualRow > 0 {
+                    // no map
+                    actualRow++
+                }
+                if actualRow > 4 {
+                    // no web
+                    actualRow++
+                }
             }
 
         } else if let meetup = selectedObject as? Meetup {
@@ -130,6 +166,12 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
         return UITableViewCell()
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if tableView.indexPathForSelectedRow()?.section == 1 {
+             println("Should go to the appstore now")
+        }
+    }
+
     override func reloadCell(cell:UITableViewCell) {
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -143,6 +185,37 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
         }
     }
 }
+
+class AppsCell: UITableViewCell {
+    @IBOutlet weak var logoImageView: PFImageView!
+    
+    var companyApp: PFObject? {
+        didSet{
+            if companyApp == oldValue {
+                return
+            }
+            
+            self.logoImageView.image = nil
+            
+            if let app = companyApp as? App {
+                if let logo = app.icon {
+                    self.logoImageView.file = logo
+                }
+                if let appTitle = app.title {
+                    self.textLabel?.text = appTitle
+                }
+            }
+            
+            if (self.logoImageView.image != nil) {
+                self.logoImageView.loadInBackground({ (image, error) -> Void in
+                    self.logoImageView.contentMode = .ScaleAspectFit
+                })
+            }
+        }
+    }
+}
+
+
 
 class LogoCell: UITableViewCell {
     @IBOutlet weak var logoImageView: PFImageView!
