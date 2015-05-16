@@ -12,11 +12,10 @@ import MapKit
 
 class DetailTableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
     var selectedObject: PFObject?
-    
-    //Check if company has apps and fetch from parse
-    var companyApps: PFObject?
+    var companyApps: NSMutableArray
     
     required init(coder aDecoder: NSCoder) {
+        companyApps = NSMutableArray()
         super.init(coder: aDecoder)
     }
     
@@ -27,6 +26,38 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
 
         //For some reason this triggers correct resizing behavior when rotating views.
         self.tableView.estimatedRowHeight = 100.0
+        
+        if let company = selectedObject as? Company {
+            if company.hasApps {
+                self.fetchAffiliateLinksFromParse(company)
+            }
+        }
+    }
+    
+    func fetchAffiliateLinksFromParse(company: PFObject) {
+        if let objectID = company.objectId {
+            let affiliateQuery = PFQuery(className: "affiliateLinks")
+            affiliateQuery.whereKey("company", equalTo: PFObject(withoutDataWithClassName: "Companies", objectId: objectID))
+            
+            affiliateQuery.findObjectsInBackgroundWithBlock {
+                (objects: [AnyObject]?, error: NSError?) -> Void in
+                
+                if error == nil {
+                    // The find succeeded.
+                    println("Successfully retrieved \(objects!.count) scores.")
+                    // Do something with the found objects
+                    if let objects = objects as? [PFObject] {
+                        for object in objects {
+                            self.companyApps.addObject(object)
+                        }
+                    }
+                } else {
+                    // Log details of the failure
+                    println("Error: \(error!) \(error!.userInfo!)")
+                }
+            }
+        }
+        self.tableView.reloadData()
     }
     
     override func viewWillAppear(animated: Bool) {
