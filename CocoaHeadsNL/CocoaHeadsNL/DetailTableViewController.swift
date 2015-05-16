@@ -145,9 +145,7 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
                             textLabel.adjustsFontSizeToFitWidth = true
                             textLabel.text = affiliateLink.productName
                         }
-                        if let detailTextLabel = cell.detailTextLabel {
-                            detailTextLabel.text = affiliateLink.productCreator
-                        }
+
                         if let imageView = cell.imageView {
                             if let affiliateId = affiliateLink.affiliateId {
                                 imageView.image = UIImage(named: "CocoaHeadsNLLogo")
