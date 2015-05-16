@@ -120,13 +120,10 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
         var actualRow = indexPath.row
         
         if let company = selectedObject as? Company {
-            if tableView.indexPathForSelectedRow()?.section == 1 {
+            if indexPath.section == 1 {
                 //section 1 = company apps
-                if let cell = tableView.dequeueReusableCellWithIdentifier("appsCell") as? AppsCell {
-                    println("should get here")
-                    cell.textLabel?.text = "test"
-                    return cell
-                }
+                //need to return AffilitateCell
+
                
             } else {
                 if actualRow > 0 {
