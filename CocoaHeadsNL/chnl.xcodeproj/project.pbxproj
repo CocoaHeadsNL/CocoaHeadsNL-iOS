@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		15B4D9EE4028962710AB4791 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DCDA2041B10335EFBDE05AF /* libPods.a */; };
 		4A1978C21AAD8681000E281F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A1978C11AAD8681000E281F /* Settings.bundle */; };
-		4A306C421AC42011007E3B7B /* AffiliateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A306C411AC42011007E3B7B /* AffiliateTableViewController.swift */; };
 		4A7EEAF11AC5440C001C2827 /* ModelObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */; };
 		4A83A4AE1AAD8A290085416A /* ParseConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A83A4AD1AAD8A290085416A /* ParseConfig.plist */; };
 		4AF8899F1AAD908000D8DB2E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF8899E1AAD908000D8DB2E /* MainViewController.swift */; };
@@ -46,7 +45,6 @@
 /* Begin PBXFileReference section */
 		4436EC308BD555A87E5A96C1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4A1978C11AAD8681000E281F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		4A306C411AC42011007E3B7B /* AffiliateTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffiliateTableViewController.swift; sourceTree = "<group>"; };
 		4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelObjects.swift; sourceTree = "<group>"; };
 		4A83A4AD1AAD8A290085416A /* ParseConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ParseConfig.plist; sourceTree = "<group>"; };
 		4AF8899A1AAD8EBC00D8DB2E /* CocoaHeadsNL-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CocoaHeadsNL-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -147,14 +145,6 @@
 			name = Meetups;
 			sourceTree = "<group>";
 		};
-		F16793841AE80B1F00FD15A3 /* AffilitiateController */ = {
-			isa = PBXGroup;
-			children = (
-				4A306C411AC42011007E3B7B /* AffiliateTableViewController.swift */,
-			);
-			name = AffilitiateController;
-			sourceTree = "<group>";
-		};
 		F18A11CC1AB186FE00D226BD /* Icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,7 +192,6 @@
 				F11455BD1AB4E8C000546D22 /* Meetups */,
 				F11455A91AB3257700546D22 /* Companies */,
 				F11455A81AB3256C00546D22 /* Jobs */,
-				F16793841AE80B1F00FD15A3 /* AffilitiateController */,
 				F1A46D201AAB50BB00585D61 /* Images.xcassets */,
 				F1A46D221AAB50BB00585D61 /* LaunchScreen.xib */,
 				4A1978C11AAD8681000E281F /* Settings.bundle */,
@@ -444,7 +433,6 @@
 				F14335AB1AAF277C0007D009 /* LocationListViewController.swift in Sources */,
 				F11455C11AB5024000546D22 /* TabBarController.swift in Sources */,
 				4AF8899F1AAD908000D8DB2E /* MainViewController.swift in Sources */,
-				4A306C421AC42011007E3B7B /* AffiliateTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
