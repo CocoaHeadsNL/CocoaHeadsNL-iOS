@@ -92,6 +92,21 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
         return 1
     }
     
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 1 {
+            tableView.headerViewForSection(1)?.backgroundColor = UIColor.grayColor()
+        }
+        return tableView.headerViewForSection(section)
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 {
+            return ""
+        } else {
+            return ""
+        }
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let company = selectedObject as? Company {
                 //section 0 is company details
@@ -291,21 +306,6 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
         }
     }
 }
-
-class AppsCell: UITableViewCell {
-    @IBOutlet weak var logoImageView: PFImageView!
-    
-    var affiliateLink: PFObject? {
-        didSet{
-            if affiliateLink == oldValue {
-                return
-            }
-            
-        }
-    }
-}
-
-
 
 class LogoCell: UITableViewCell {
     @IBOutlet weak var logoImageView: PFImageView!
