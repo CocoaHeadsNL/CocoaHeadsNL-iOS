@@ -50,6 +50,7 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
                         for object in objects {
                             self.companyApps.addObject(object)
                         }
+                        self.tableView.reloadData()
                     }
                 } else {
                     // Log details of the failure
@@ -57,7 +58,7 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
                 }
             }
         }
-        self.tableView.reloadData()
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -98,7 +99,7 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
                 return 4
             } else {
                 //section 1 = company apps
-                return 2
+                return self.companyApps.count
                 //only need default TableViewCell with image for icon and title.
             }
             // no map
