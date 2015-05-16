@@ -63,27 +63,6 @@ class Company : PFObject, PFSubclassing {
     @NSManaged var hasApps: Bool
 }
 
-class App : PFObject, PFSubclassing {
-    override class func initialize() {
-        var onceToken : dispatch_once_t = 0;
-        dispatch_once(&onceToken) {
-            self.registerSubclass()
-        }
-    }
-    
-    class func parseClassName() -> String {
-        return "App"
-    }
-    
-    @NSManaged var title: String?
-    @NSManaged var companyID: String?
-    @NSManaged var appDescription: String?
-    @NSManaged var urlForAppstore: String?
-    @NSManaged var icon: PFFile?
-}
-
-
-
 class Job : PFObject, PFSubclassing {
     override class func initialize() {
         var onceToken : dispatch_once_t = 0;
