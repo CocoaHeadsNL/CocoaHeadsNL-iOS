@@ -92,7 +92,6 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
                 //section 1 = company apps
                 if let cell = tableView.dequeueReusableCellWithIdentifier("appsCell") as? AppsCell {
                     println("should get here")
-                    cell.companyApp = companyApps
                     cell.textLabel?.text = "test"
                     return cell
                 }
@@ -189,28 +188,12 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
 class AppsCell: UITableViewCell {
     @IBOutlet weak var logoImageView: PFImageView!
     
-    var companyApp: PFObject? {
+    var affiliateLink: PFObject? {
         didSet{
-            if companyApp == oldValue {
+            if affiliateLink == oldValue {
                 return
             }
             
-            self.logoImageView.image = nil
-            
-            if let app = companyApp as? App {
-                if let logo = app.icon {
-                    self.logoImageView.file = logo
-                }
-                if let appTitle = app.title {
-                    self.textLabel?.text = appTitle
-                }
-            }
-            
-            if (self.logoImageView.image != nil) {
-                self.logoImageView.loadInBackground({ (image, error) -> Void in
-                    self.logoImageView.contentMode = .ScaleAspectFit
-                })
-            }
         }
     }
 }
