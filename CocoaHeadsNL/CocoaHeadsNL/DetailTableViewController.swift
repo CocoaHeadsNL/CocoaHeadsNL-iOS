@@ -95,15 +95,10 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 1 {
             tableView.headerViewForSection(1)?.backgroundColor = UIColor.grayColor()
-        }
-        return tableView.headerViewForSection(section)
-    }
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 1 {
-            return ""
+            return tableView.headerViewForSection(1)
         } else {
-            return ""
+            let view = UIView(frame: CGRectMake(0, 0, 0, 0))
+            return view
         }
     }
     
@@ -139,9 +134,9 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
                 //section 1 = company apps
                 //need to return AffilitateCell
                 let cellId = "affiliateCell"
-                var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? PFTableViewCell
+                var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? UITableViewCell
                 if cell == nil {
-                    cell = PFTableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+                    cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
                 }
 
                 if let cell = cell {
