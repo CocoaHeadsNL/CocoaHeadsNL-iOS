@@ -60,7 +60,7 @@ class Company : PFObject, PFSubclassing {
     @NSManaged var emailAddress: String?
     @NSManaged var location: PFGeoPoint?
     @NSManaged var logo: PFFile?
-    @NSManaged var hasApps: Bool
+    @NSManaged var hasApps: Boolean
 }
 
 class Job : PFObject, PFSubclassing {

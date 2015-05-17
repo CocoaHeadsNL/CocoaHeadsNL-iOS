@@ -28,7 +28,7 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
         self.tableView.estimatedRowHeight = 100.0
         
         if let company = selectedObject as? Company {
-            if company.hasApps {
+            if let apps = company["hasApps"] as? Bool {
                 self.fetchAffiliateLinksFromParse(company)
             }
         }
@@ -79,7 +79,7 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if let company = selectedObject as? Company {
-            if company.hasApps {
+            if let apps = company["hasApps"] as? Bool {
                 return 2
             } else {
                 return 1
