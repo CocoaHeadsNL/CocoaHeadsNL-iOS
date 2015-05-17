@@ -45,12 +45,14 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
                         for object in objects {
                             self.companyApps.addObject(object)
                         }
-                        self.tableView.reloadData()
+                        
                     }
                 } else {
                     // Log details of the failure
                     println("Error: \(error!) \(error!.userInfo!)")
                 }
+
+                self.tableView.reloadData()
             }
         }
         
