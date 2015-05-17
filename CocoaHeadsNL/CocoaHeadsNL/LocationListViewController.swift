@@ -74,6 +74,12 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as! DetailTableViewController
         vc.selectedObject = selectedObject
+        
+        if let company = selectedObject as? Company {
+            if let apps = company["hasApps"] as? Bool {
+                vc.fetchAffiliateLinksFromParse(company)
+            }
+        }
         showDetailViewController(vc, sender: self)
     }
     

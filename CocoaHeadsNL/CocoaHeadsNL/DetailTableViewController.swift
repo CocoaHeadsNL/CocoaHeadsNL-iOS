@@ -27,11 +27,6 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
         //For some reason this triggers correct resizing behavior when rotating views.
         self.tableView.estimatedRowHeight = 100.0
         
-        if let company = selectedObject as? Company {
-            if let apps = company["hasApps"] as? Bool {
-                self.fetchAffiliateLinksFromParse(company)
-            }
-        }
     }
     
     func fetchAffiliateLinksFromParse(company: PFObject) {
