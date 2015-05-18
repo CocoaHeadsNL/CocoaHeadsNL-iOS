@@ -264,8 +264,8 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
             if let affiliateToken = PFConfig.currentConfig()["appleAffiliateToken"] as? String {
                 if let affiliateLink = companyApps.objectAtIndex(indexPath.row) as? AffiliateLink {
                     if let affiliateId = affiliateLink.affiliateId {
-                        if let url = NSURL(string: NSString(format: "https://itunes.apple.com/app/apple-store/id%@?at=%@&ct=app", affiliateId,
-                            affiliateToken) as String) {
+                        if let url = NSURL(string: "https://itunes.apple.com/app/apple-store/id\(affiliateId)?at=\(affiliateToken)&ct=app") {
+                                
                                 if UIApplication.sharedApplication().canOpenURL(url) {
                                     if TARGET_IPHONE_SIMULATOR == 1 {
                                         // No app store on simulator.
