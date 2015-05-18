@@ -27,7 +27,9 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
             
             self.loadObjects()
             }, completion: { (context:UIViewControllerTransitionCoordinatorContext!) -> Void in
-            self.collectionViewLayout.invalidateLayout()
+                if let layout = self.collectionViewLayout {
+                    layout.invalidateLayout()
+                }
         })
     }
     
