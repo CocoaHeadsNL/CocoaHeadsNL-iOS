@@ -267,12 +267,8 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
                         if let url = NSURL(string: "https://itunes.apple.com/app/apple-store/id\(affiliateId)?at=\(affiliateToken)&ct=app") {
                                 
                                 if UIApplication.sharedApplication().canOpenURL(url) {
-                                    if TARGET_IPHONE_SIMULATOR == 1 {
-                                        // No app store on simulator.
-                                        println("Actual device would open: \(url)")
-                                    } else {
+                                    
                                         UIApplication.sharedApplication().openURL(url)
-                                    }
                                 }
                         }
                     }
