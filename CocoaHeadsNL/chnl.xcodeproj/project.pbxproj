@@ -371,8 +371,8 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "#!/bin/bash\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n#\n# To use this script in Xcode, add the contents to a \"Run Script\" build\n# phase for your application target.\n\n# NOTE: make sure you add a new value to your Info plist called \"FullVersion\"\n#\n# NOTE: if you receive error saying 'fatal: Not a git responsitory', make sure |--git-dir| points\n# to the root dir of your repo\n#\n# NOTE: if your git repo has no tags, this would fail, so make sure you create at least one tag\n# (I usually create a tag '0.0.0' at the very first commit, you can do the same).\n\nset -o errexit\nset -o nounset\n\nINFO_PLIST=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Info\"\nINFO_PLIST_DSYM=\"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist\"\nGIT_DIR=\"${PROJECT_DIR}/../.git\"\n\n# Get git tag and hash in the FullVersion\nFULL_VERSION=$(git --git-dir=$GIT_DIR --work-tree=\"${PROJECT_DIR}/\" describe --dirty | sed -e 's/^v//' -e 's/g//')\n\n# Use the latest tag for short version (You'll have to make sure that all your tags are of the format 0.0.0,\n# this is to satisfy Apple's rule that short version be three integers separated by dots)\n# using git tag for version also encourages you to create tags that match your releases\nSHORT_VERSION=$(git --git-dir=$GIT_DIR --work-tree=\"${PROJECT_DIR}/\" describe --abbrev=0)\n\n# I'd like to use the Git commit hash for CFBundleVersion.\n# VERSION=$(git --git-dir=$GIT_DIR --work-tree=\"${PROJECT_DIR}\" rev-parse --short HEAD)\n\n# But Apple wants this value to be a monotonically increasing integer, so\n# instead use the number of commits on the master branch. If you like to\n# play fast and loose with your Git history, this may cause you problems.\n# Thanks to @amrox for pointing out the issue and fix.\nVERSION=$(git --git-dir=$GIT_DIR --work-tree=\"${PROJECT_DIR}/\" rev-list master | wc -l)\n\ndefaults write \"$INFO_PLIST\" CFBundleShortVersionString $SHORT_VERSION\ndefaults write \"$INFO_PLIST\" CFBundleVersion $VERSION\ndefaults write \"$INFO_PLIST_DSYM\" CFBundleShortVersionString $SHORT_VERSION\ndefaults write \"$INFO_PLIST_DSYM\" CFBundleVersion $VERSION\ndefaults write \"$INFO_PLIST\" FullVersion $FULL_VERSION\n\necho \"VERSION: ${VERSION}\"\necho \"SHORT VERSION: ${SHORT_VERSION}\"\necho \"FULL VERSION: ${FULL_VERSION}”\n";
+			shellPath = /bin/sh;
+			shellScript = "git=$(sh /etc/profile; which git)\ngit_release_version=$(\"$git\" describe --tags --always --abbrev=0)\nnumber_of_commits=$(\"$git\" rev-list master | wc -l | tr -d ' ')\ntarget_plist=\"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\ndsym_plist=\"$DWARF_DSYM_FOLDER_PATH/$DWARF_DSYM_FILE_NAME/Contents/Info.plist\"\n\nfor plist in \"$target_plist\" \"$dsym_plist\"; do\nif [ -f \"$plist\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $number_of_commits\" \"$plist\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${git_release_version#*v}\" \"$plist\"\nfi\ndone\n\n\n";
 		};
 		487CB34F98164857DD1383B2 /* Warn for TODO and FIXME comments */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -495,7 +495,8 @@
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Stichting CocoaheadsNL (D55PL7PU7S)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stichting CocoaheadsNL (D55PL7PU7S)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -553,7 +554,8 @@
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Stichting CocoaheadsNL (D55PL7PU7S)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stichting CocoaheadsNL (D55PL7PU7S)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
