@@ -27,15 +27,13 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
             
             self.loadObjects()
             }, completion: { (context:UIViewControllerTransitionCoordinatorContext!) -> Void in
-                if let layout = self.collectionViewLayout {
-                    layout.invalidateLayout()
-                }
+                super.collectionViewLayout.invalidateLayout()
         })
     }
     
     override func didMoveToParentViewController(parent: UIViewController?) {
         // when presented by NavigationController through SplitViewController
-        self.collectionViewLayout.invalidateLayout()
+        super.collectionViewLayout.invalidateLayout()
     }
     
     //MARK: - UICollectionViewDataSource methods
