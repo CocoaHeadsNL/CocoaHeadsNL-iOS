@@ -26,14 +26,14 @@ class LocationListViewController: PFQueryCollectionViewController, UICollectionV
         coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext!) -> Void in
             self.loadObjects()
             }, completion: { (context:UIViewControllerTransitionCoordinatorContext!) -> Void in
-                self.collectionViewLayout.invalidateLayout()
+                super.collectionViewLayout.invalidateLayout()
                 
         })
     }
     
     override func didMoveToParentViewController(parent: UIViewController?) {
         // when presented by NavigationController through SplitViewController
-        self.collectionViewLayout.invalidateLayout()
+        super.collectionViewLayout.invalidateLayout()
     }
     
     //MARK: - UICollectionViewDataSource methods

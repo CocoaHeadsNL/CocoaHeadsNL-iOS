@@ -18,4 +18,4 @@ SPEC CHECKSUMS:
   ParseCrashReporting: 61afccb3eb470e564db34ba81fd44ea77f0e3e07
   ParseUI: 1a68e9cebc3bd458eed9605ce7b33d7cc082f473
 
-COCOAPODS: 0.36.4
+COCOAPODS: 0.36.3
