@@ -27,12 +27,20 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
         //For some reason this triggers correct resizing behavior when rotating views.
         self.tableView.estimatedRowHeight = 100.0
         
+        if let company = selectedObject as? Company {
+            if let apps = company["hasApps"] as? Bool {
+                self.fetchAffiliateLinksFromParse(company)
+            }
+        }
+        
+        self.tableView.reloadData()
     }
     
     func fetchAffiliateLinksFromParse(company: PFObject) {
         if let objectID = company.objectId {
             let affiliateQuery = PFQuery(className: "affiliateLinks")
             affiliateQuery.whereKey("company", equalTo: PFObject(withoutDataWithClassName: "Companies", objectId: objectID))
+            affiliateQuery.cachePolicy = PFCachePolicy.CacheElseNetwork
             
             affiliateQuery.findObjectsInBackgroundWithBlock {
                 (objects: [AnyObject]?, error: NSError?) -> Void in
@@ -45,17 +53,17 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
                         for object in objects {
                             self.companyApps.addObject(object)
                         }
-                        
                     }
+                    
+                    self.tableView.reloadData()
+                    
+                
                 } else {
                     // Log details of the failure
                     println("Error: \(error!) \(error!.userInfo!)")
                 }
-
-                self.tableView.reloadData()
             }
         }
-        
     }
     
     override func viewWillAppear(animated: Bool) {
