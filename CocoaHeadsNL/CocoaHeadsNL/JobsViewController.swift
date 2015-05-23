@@ -20,20 +20,17 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
     override func viewWillAppear(animated: Bool) {
         self.loadObjects()
     }
-
+    
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         
         coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext!) -> Void in
             
+            super.collectionViewLayout?.invalidateLayout()
             self.loadObjects()
+            
             }, completion: { (context:UIViewControllerTransitionCoordinatorContext!) -> Void in
-                super.collectionViewLayout.invalidateLayout()
+                
         })
-    }
-    
-    override func didMoveToParentViewController(parent: UIViewController?) {
-        // when presented by NavigationController through SplitViewController
-        super.collectionViewLayout.invalidateLayout()
     }
     
     //MARK: - UICollectionViewDataSource methods
