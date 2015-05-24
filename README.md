@@ -9,12 +9,9 @@ cp CocoaHeadsNL/CocoaHeadsNL/ParseConfig-template.plist CocoaHeadsNL/CocoaHeadsN
 
 Next replace the following place holders with their actual valued from Parse.com:
 
-- PARSE_APPLICATION_ID_PRODUCTION
-- PARSE_MASTER_KEY_PRODUCTION
-- PARSE_CLIENT_KEY_PRODUCTION
-- PARSE_APPLICATION_ID_DEVELOPMENT
-- PARSE_MASTER_KEY_DEVELOPMENT
-- PARSE_CLIENT_KEY_DEVELOPMENT
+- PARSE_APPLICATION_ID
+- PARSE_MASTER_KEY
+- PARSE_CLIENT_KEY
 
 **Take special care to put the client and master key in their respective locations. Leaking the masterkey is very bad.**
 
