@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0610"
+   LastUpgradeVersion = "0630"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,23 +15,23 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F1A46D111AAB50BB00585D61"
-               BuildableName = "chnl.app"
-               BlueprintName = "chnl"
-               ReferencedContainer = "container:chnl.xcodeproj">
+               BuildableName = "CocoaHeadsNL.app"
+               BlueprintName = "CocoaHeadsNL"
+               ReferencedContainer = "container:CocoaHeadsNL.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F1A46D281AAB50BB00585D61"
-               BuildableName = "chnlTests.xctest"
-               BlueprintName = "chnlTests"
-               ReferencedContainer = "container:chnl.xcodeproj">
+               BuildableName = "CocoaHeadsNLTests.xctest"
+               BlueprintName = "CocoaHeadsNLTests"
+               ReferencedContainer = "container:CocoaHeadsNL.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F1A46D281AAB50BB00585D61"
-               BuildableName = "chnlTests.xctest"
-               BlueprintName = "chnlTests"
-               ReferencedContainer = "container:chnl.xcodeproj">
+               BuildableName = "CocoaHeadsNLTests.xctest"
+               BlueprintName = "CocoaHeadsNLTests"
+               ReferencedContainer = "container:CocoaHeadsNL.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F1A46D111AAB50BB00585D61"
-            BuildableName = "chnl.app"
-            BlueprintName = "chnl"
-            ReferencedContainer = "container:chnl.xcodeproj">
+            BuildableName = "CocoaHeadsNL.app"
+            BlueprintName = "CocoaHeadsNL"
+            ReferencedContainer = "container:CocoaHeadsNL.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F1A46D111AAB50BB00585D61"
-            BuildableName = "chnl.app"
-            BlueprintName = "chnl"
-            ReferencedContainer = "container:chnl.xcodeproj">
+            BuildableName = "CocoaHeadsNL.app"
+            BlueprintName = "CocoaHeadsNL"
+            ReferencedContainer = "container:CocoaHeadsNL.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -96,9 +96,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F1A46D111AAB50BB00585D61"
-            BuildableName = "chnl.app"
-            BlueprintName = "chnl"
-            ReferencedContainer = "container:chnl.xcodeproj">
+            BuildableName = "CocoaHeadsNL.app"
+            BlueprintName = "CocoaHeadsNL"
+            ReferencedContainer = "container:CocoaHeadsNL.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
