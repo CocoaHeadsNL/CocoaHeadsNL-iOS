@@ -15,7 +15,7 @@ Now replace the placeholders for PARSE_APPLICATION_ID and PARSE_CLIENT_KEY in th
 
 Once done with these steps, please run pod install in the directory containing the Podfile.
 
-##Parse comming-line tool
+##Parse command-line tool
 To build this project you need to have the parse.com commandline tool installed:
 ```bash
 curl -s https://www.parse.com/downloads/cloud_code/installer.sh | sudo /bin/bash
