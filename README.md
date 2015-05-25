@@ -1,3 +1,11 @@
+#About this app
+
+Why an app? We're a community of mostly mobile developers so could you imagine we wouldn't? 
+Why opensource it? We are a non-profit organisation and organise our monthly meetup to share ideas, learn from each other and meet other developers. Keeping it closed seemed out of place.
+
+How do we see this working?
+We used the opensource license to promote sharing for non-commercial use and educational purposes. In case you have any ideas, suggestions or additions, just get in contact so you can see what is happening already. We still got some things on our wishlist. Our email: foundation@cocoaheads.nl
+
 #Before running the CloudCode
 Please perform these steps:
 
