@@ -3,16 +3,14 @@ Please perform these steps:
 
 ```bash
 cp CocoaHeadsNL/CloudCode/config/global.json.template CocoaHeadsNL/CloudCode/config/global.json
-
-cp CocoaHeadsNL/CocoaHeadsNL/ParseConfig-template.plist CocoaHeadsNL/CocoaHeadsNL/ParseConfig.plist
 ```
+Now replace the placeholders for PARSE_APPLICATION_ID and PARSE_MASTER_KEY in the newly created global.json with their respective values from parse.com
 
-Next replace the following place holders with their actual valued from Parse.com:
+```bash
+cp CocoaHeadsNL/CocoaHeadsNL/ParseConfig-template.plist CocoaHeadsNL/CocoaHeadsNL/ParseConfig.plist
 
-- PARSE_APPLICATION_ID
-- PARSE_MASTER_KEY
-- PARSE_CLIENT_KEY
-
+Now replace the placeholders for PARSE_APPLICATION_ID and PARSE_CLIENT_KEY in the newly created ParseConfig.plist with their respective values from parse.com
+```
 **Take special care to put the client and master key in their respective locations. Leaking the masterkey is very bad.**
 
 Once done with these steps, please run pod install in the directory containing the Podfile.
@@ -22,6 +20,7 @@ To build this project you need to have the parse.com commandline tool installed:
 ```bash
 curl -s https://www.parse.com/downloads/cloud_code/installer.sh | sudo /bin/bash
 ```
+This will allow you to upload symbolication information to parse.com for your developer builds.
 
 More info: [https://www.parse.com/docs/cloud_code_guide](https://www.parse.com/docs/cloud_code_guide)
 
