@@ -340,7 +340,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="loadingViewEnabled" value="YES"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <segue destination="3uJ-fO-52Q" kind="show" identifier="ShowDetail" id="YXG-G2-hcg"/>
+                        <segue destination="3uJ-fO-52Q" kind="showDetail" identifier="ShowDetail" id="YXG-G2-hcg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dt8-Xg-mmb" userLabel="First Responder" sceneMemberID="firstResponder"/>
