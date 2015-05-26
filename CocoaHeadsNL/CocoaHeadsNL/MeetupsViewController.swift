@@ -21,7 +21,9 @@ class MeetupsViewController: PFQueryTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.registerClass(MeetupCell.self, forCellReuseIdentifier: MeetupCell.Identifier)
+        //self.tableView.registerClass(MeetupCell.self, forCellReuseIdentifier: MeetupCell.Identifier)
+        let nib = UINib(nibName: "MeetupCell", bundle: nil)
+        self.tableView.registerNib(nib, forCellReuseIdentifier: MeetupCell.Identifier)
 
         let backItem = UIBarButtonItem(title: "Events", style: .Plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
@@ -52,14 +54,14 @@ class MeetupsViewController: PFQueryTableViewController {
         var cell = tableView.dequeueReusableCellWithIdentifier(MeetupCell.Identifier, forIndexPath: indexPath) as! MeetupCell
 
         if let meetup = object as? Meetup {
-            cell.configureCellForMeetup(meetup)
+            cell.configureCellForMeetup(meetup, row: indexPath.row)
         }
 
         return cell
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 80
+        return 132
     }
 
     //MARK: - UITableViewDelegate

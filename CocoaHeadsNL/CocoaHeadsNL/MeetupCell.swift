@@ -12,54 +12,83 @@ class MeetupCell: PFTableViewCell {
     static let Identifier = "meetupCell"
 
     static let dateFormatter: NSDateFormatter = {
-        println("YEAY")
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = .MediumStyle
         dateFormatter.timeStyle = .ShortStyle
-        dateFormatter.dateFormat = "d MMMM, HH:mm a"
+        dateFormatter.dateFormat = "HH:mm a"
         return dateFormatter
     }()
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .Subtitle, reuseIdentifier: reuseIdentifier)
-    }
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var logoImageView: PFImageView!
+    @IBOutlet weak var separatorView: UIView!
+    @IBOutlet weak var dateContainer: UIView!
+    @IBOutlet weak var calendarImageView: UIImageView!
+    @IBOutlet weak var dayLabel: UILabel!
+    @IBOutlet weak var monthLabel: UILabel!
+    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        if let textLabel = self.textLabel {
-            textLabel.adjustsFontSizeToFitWidth = true
-            textLabel.text = ""
-        }
+        titleLabel.text = ""
+        timeLabel.text = ""
+        dayLabel.text = ""
+        monthLabel.text = ""
 
-        if let detailTextLabel = self.detailTextLabel {
-            detailTextLabel.text = ""
-        }
+        separatorView.hidden = false
+        logoImageView.file = nil
 
-        if let imageView = self.imageView {
-            imageView.file = nil
-            imageView.image = UIImage(named: "CocoaHeadsNLLogo")
-            imageView.layer.contentsGravity = kCAGravityCenter
-            imageView.contentMode = .ScaleAspectFit
+        if let image = UIImage(named: "MeetupPlaceholder") {
+            logoImageView.image = image
+            widthConstraint.constant = image.size.width
         }
     }
 
-    func configureCellForMeetup(meetup: Meetup) {
-        if let textLabel = self.textLabel {
-            textLabel.text = meetup.name
+    func configureCellForMeetup(meetup: Meetup, row: Int) {
+        titleLabel.text = meetup.name
+
+        if let date = meetup.time {
+            let timeText = MeetupCell.dateFormatter.stringFromDate(date)
+            timeLabel.text = String(format: "%@ - %@", timeText, meetup.locationName ?? "Location unknown")
+
+            let components = NSCalendar.currentCalendar().components(.CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+            dayLabel.text = String(format: "%d", components.day)
+
+            let months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"]
+            monthLabel.text = months[components.month - 1]
+
+            if date.timeIntervalSinceNow > 0 {
+                dayLabel.textColor = UIColor.blackColor()
+                calendarImageView.image = UIImage(named: "CalendarFuture")
+            } else {
+                dayLabel.textColor = UIColor(white: 0, alpha: 0.65)
+                calendarImageView.image = UIImage(named: "CalendarPast")
+            }
         }
 
-        if let detailTextLabel = self.detailTextLabel, date = meetup.time {
-            detailTextLabel.text = MeetupCell.dateFormatter.stringFromDate(date)
-        }
+        // Loading large images and resizing them is pretty inefficient.
+        // It would be better if the server already gave us a -- transparent -- 
+        // image of 44 pts high. Or we could cache these thumbnails locally.
 
-        if let imageView = self.imageView, logoFile = meetup.logo {
-            imageView.file = logoFile
-            imageView.loadInBackground(nil)
+        if let logoFile = meetup.logo {
+            logoImageView.file = logoFile
+            logoImageView.loadInBackground({ image, _ in
+                if let image = image {
+                    let resizedImage = image.resizedImageWithBounds(CGSize(width: 100, height: 44))
+                    self.logoImageView.image = resizedImage
+                    self.widthConstraint.constant = resizedImage.size.width
+                }
+            })
         }
     }
 }
