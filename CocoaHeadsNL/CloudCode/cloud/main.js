@@ -25,6 +25,7 @@ Parse.Cloud.job("loadEventInfo", function(request, status) {
 				'photo-host' : 'public',
 				'group_urlname' : 'cocoaheadsnl',
 				'page' : 20,
+				'desc' : true,
 				'status': 'upcoming,past'
 			}});
 	}).then(function(httpResponse){
