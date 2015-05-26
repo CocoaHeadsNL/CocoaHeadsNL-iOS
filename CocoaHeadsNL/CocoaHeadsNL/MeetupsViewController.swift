@@ -73,17 +73,11 @@ class MeetupsViewController: PFQueryTableViewController {
     //MARK: - Parse PFQueryTableViewController methods
 
     override func queryForTable() -> PFQuery {
-        let historyQuery = Meetup.query()
-        historyQuery!.whereKey("time", lessThan: NSDate())
+        let meetupQuery = Meetup.query()!
+        meetupQuery.orderByDescending("time")
         
-        let futureQuery = Meetup.query()
-        futureQuery!.whereKey("nextEvent", equalTo: true)
-        
-        let compoundQuery = PFQuery.orQueryWithSubqueries([historyQuery!, futureQuery!])
-        compoundQuery.orderByDescending("time")
-        
-        compoundQuery.cachePolicy = PFCachePolicy.CacheThenNetwork
+        meetupQuery.cachePolicy = PFCachePolicy.CacheThenNetwork
 
-        return compoundQuery
+        return meetupQuery
     }
 }
