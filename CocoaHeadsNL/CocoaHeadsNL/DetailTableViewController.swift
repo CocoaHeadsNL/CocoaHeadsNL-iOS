@@ -20,6 +20,7 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
     }
     
     override func viewDidLoad() {
+
         //Can be used to hide masterViewController and increase size of detailView if wanted
         self.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
         self.navigationItem.leftItemsSupplementBackButton = true
