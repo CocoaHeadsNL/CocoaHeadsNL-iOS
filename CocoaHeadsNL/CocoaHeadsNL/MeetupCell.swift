@@ -70,6 +70,9 @@ class MeetupCell: PFTableViewCell {
     func configureCellForMeetup(meetup: Meetup, isFirst: Bool) {
         titleLabel.text = meetup.name
 
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+
         if let date = meetup.time {
             let timeText = MeetupCell.dateFormatter.stringFromDate(date)
             timeLabel.text = String(format: "%@ - %@", timeText, meetup.locationName ?? "Location unknown")
@@ -93,9 +96,17 @@ class MeetupCell: PFTableViewCell {
             }
         }
 
-        trackLayer.position = CGPoint(x: 43, y: isFirst ? 43 : 0)
+        if isFirst {
+            trackLayer.position = CGPoint(x: 43, y: 43)
+            trackLayer.path = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 2, height: 132-43)).CGPath
+        } else {
+            trackLayer.position = CGPoint(x: 43, y: 0)
+            trackLayer.path = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 2, height: 132)).CGPath
+        }
 
-        // Loading large images and resizing them is pretty inefficient. 
+        CATransaction.commit()
+
+        // Loading large images and resizing them is pretty inefficient.
         // It would be better if the server already gave us a -- transparent -- 
         // image of 44 pts high. Or we could cache these thumbnails locally.
 
