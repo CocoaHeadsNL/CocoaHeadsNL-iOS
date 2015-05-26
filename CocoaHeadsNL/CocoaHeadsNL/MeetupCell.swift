@@ -25,12 +25,13 @@ class MeetupCell: PFTableViewCell {
     @IBOutlet weak var dateContainer: UIView!
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var monthLabel: UILabel!
+    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
 
     let circleLayer: CAShapeLayer = {
         let circleLayer = CAShapeLayer()
         circleLayer.contentsScale = UIScreen.mainScreen().scale
-        circleLayer.position = CGPoint(x: 16, y: 16)
-        circleLayer.path = UIBezierPath(ovalInRect: CGRect(x: 0, y: 0, width: 56, height: 56)).CGPath
+        circleLayer.position = CGPoint(x: 8, y: 12)
+        circleLayer.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 48, height: 48), cornerRadius: 6).CGPath
         circleLayer.lineWidth = 2
         return circleLayer
     }()
@@ -38,8 +39,7 @@ class MeetupCell: PFTableViewCell {
     let trackLayer: CAShapeLayer = {
         let trackLayer = CAShapeLayer()
         trackLayer.contentsScale = UIScreen.mainScreen().scale
-        trackLayer.position = CGPoint(x: 43, y: 0)
-        trackLayer.path = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 2, height: 132)).CGPath
+        trackLayer.position = CGPoint(x: 8 + 48/2 - 1, y: 0)
         trackLayer.strokeColor = UIColor.clearColor().CGColor
         trackLayer.fillColor = UIColor.blackColor().CGColor
         return trackLayer
@@ -64,10 +64,14 @@ class MeetupCell: PFTableViewCell {
         monthLabel.text = ""
 
         logoImageView.file = nil
-        logoImageView.image = UIImage(named: "MeetupPlaceholder")
+
+        if let image = UIImage(named: "MeetupPlaceholder") {
+            logoImageView.image = image
+            widthConstraint.constant = image.size.width
+        }
     }
 
-    func configureCellForMeetup(meetup: Meetup, isFirst: Bool) {
+    func configureCellForMeetup(meetup: Meetup, row: Int) {
         titleLabel.text = meetup.name
 
         CATransaction.begin()
@@ -75,7 +79,8 @@ class MeetupCell: PFTableViewCell {
 
         if let date = meetup.time {
             let timeText = MeetupCell.dateFormatter.stringFromDate(date)
-            timeLabel.text = String(format: "%@ - %@", timeText, meetup.locationName ?? "Location unknown")
+            //timeLabel.text = String(format: "%@ - %@", timeText, meetup.locationName ?? "Location unknown")
+            timeLabel.text = timeText
 
             let components = NSCalendar.currentCalendar().components(.CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
             dayLabel.text = String(format: "%d", components.day)
@@ -96,11 +101,9 @@ class MeetupCell: PFTableViewCell {
             }
         }
 
-        if isFirst {
-            trackLayer.position = CGPoint(x: 43, y: 43)
-            trackLayer.path = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 2, height: 132-43)).CGPath
+        if row == 0 {
+            trackLayer.path = UIBezierPath(rect: CGRect(x: 0, y: 20, width: 2, height: 132 - 20)).CGPath
         } else {
-            trackLayer.position = CGPoint(x: 43, y: 0)
             trackLayer.path = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 2, height: 132)).CGPath
         }
 
@@ -114,7 +117,9 @@ class MeetupCell: PFTableViewCell {
             logoImageView.file = logoFile
             logoImageView.loadInBackground({ image, _ in
                 if let image = image {
-                    self.logoImageView.image = image.resizedImageWithBounds(CGSize(width: DBL_MAX, height: 56))
+                    let resizedImage = image.resizedImageWithBounds(CGSize(width: 100, height: 44))
+                    self.logoImageView.image = resizedImage
+                    self.widthConstraint.constant = resizedImage.size.width
                 }
             })
         }

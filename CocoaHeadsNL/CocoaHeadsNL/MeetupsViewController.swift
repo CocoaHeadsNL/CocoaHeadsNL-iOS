@@ -54,7 +54,7 @@ class MeetupsViewController: PFQueryTableViewController {
         var cell = tableView.dequeueReusableCellWithIdentifier(MeetupCell.Identifier, forIndexPath: indexPath) as! MeetupCell
 
         if let meetup = object as? Meetup {
-            cell.configureCellForMeetup(meetup, isFirst: indexPath.row == 0)
+            cell.configureCellForMeetup(meetup, row: indexPath.row)
         }
 
         return cell

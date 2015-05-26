@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,69 +13,62 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time and Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yK-aX-WfD">
-                        <rect key="frame" x="88" y="98" width="221" height="16"/>
+                        <rect key="frame" x="68" y="41" width="136" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="56" placeholderIntrinsicHeight="infinite" translatesAutoresizingMaskIntoConstraints="NO" id="Lev-tK-HJm" customClass="PFImageView">
-                        <rect key="frame" x="88" y="16" width="56" height="56"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="Lev-tK-HJm" secondAttribute="height" multiplier="75:11" id="7LQ-5M-Uad"/>
-                            <constraint firstAttribute="height" constant="56" id="BTT-7t-vjR"/>
-                            <constraint firstAttribute="width" secondItem="Lev-tK-HJm" secondAttribute="height" multiplier="40:11" id="JD3-Ek-2Vl"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="7LQ-5M-Uad"/>
-                                <exclude reference="JD3-Ek-2Vl"/>
-                            </mask>
-                        </variation>
-                    </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ui-YP-aIQ" userLabel="Date Container">
-                        <rect key="frame" x="16" y="16" width="56" height="56"/>
+                        <rect key="frame" x="8" y="8" width="48" height="48"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZp-Mr-LWd">
-                                <rect key="frame" x="15" y="4" width="27" height="29"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                <rect key="frame" x="12" y="7" width="24" height="26"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JW4-SW-Aoj">
-                                <rect key="frame" x="10" y="31" width="36" height="18"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <rect key="frame" x="9" y="32" width="31" height="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="MZp-Mr-LWd" firstAttribute="top" secondItem="0ui-YP-aIQ" secondAttribute="top" constant="4" id="4h8-yU-7IL"/>
+                            <constraint firstItem="MZp-Mr-LWd" firstAttribute="top" secondItem="0ui-YP-aIQ" secondAttribute="top" constant="7" id="4h8-yU-7IL"/>
                             <constraint firstAttribute="centerX" secondItem="JW4-SW-Aoj" secondAttribute="centerX" id="9MC-72-yIh"/>
-                            <constraint firstAttribute="width" constant="56" id="WDK-iz-eEr"/>
-                            <constraint firstAttribute="height" constant="56" id="fZ7-6P-O6T"/>
-                            <constraint firstItem="JW4-SW-Aoj" firstAttribute="top" secondItem="MZp-Mr-LWd" secondAttribute="bottom" constant="-2" id="vCc-Qw-ZV6"/>
+                            <constraint firstAttribute="width" constant="48" id="WDK-iz-eEr"/>
+                            <constraint firstAttribute="height" constant="48" id="fZ7-6P-O6T"/>
+                            <constraint firstItem="JW4-SW-Aoj" firstAttribute="top" secondItem="MZp-Mr-LWd" secondAttribute="bottom" constant="-1" id="vCc-Qw-ZV6"/>
                             <constraint firstAttribute="centerX" secondItem="MZp-Mr-LWd" secondAttribute="centerX" id="xlc-zx-lS1"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FvW-QZ-rpN">
-                        <rect key="frame" x="88" y="76" width="221" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FvW-QZ-rpN">
+                        <rect key="frame" x="68" y="16" width="136" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="topRight" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lev-tK-HJm" customClass="PFImageView">
+                        <rect key="frame" x="212" y="16" width="100" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="BTT-7t-vjR"/>
+                            <constraint firstAttribute="width" constant="100" id="VdI-gF-0nB"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="FvW-QZ-rpN" firstAttribute="top" secondItem="Lev-tK-HJm" secondAttribute="bottom" constant="4" id="2D1-Xs-Ype"/>
-                    <constraint firstItem="Lev-tK-HJm" firstAttribute="top" secondItem="etl-Ja-pf7" secondAttribute="top" constant="16" id="FEx-v3-PTd"/>
-                    <constraint firstItem="0ui-YP-aIQ" firstAttribute="leading" secondItem="etl-Ja-pf7" secondAttribute="leading" constant="16" id="RVq-LB-W5J"/>
-                    <constraint firstItem="0ui-YP-aIQ" firstAttribute="top" secondItem="etl-Ja-pf7" secondAttribute="top" constant="16" id="V9U-NF-IGH"/>
+                    <constraint firstAttribute="trailing" secondItem="Lev-tK-HJm" secondAttribute="trailing" constant="8" id="36V-uz-fhw"/>
+                    <constraint firstItem="Lev-tK-HJm" firstAttribute="top" secondItem="etl-Ja-pf7" secondAttribute="top" constant="16" id="LdB-ek-dFh"/>
+                    <constraint firstItem="0ui-YP-aIQ" firstAttribute="leading" secondItem="etl-Ja-pf7" secondAttribute="leading" constant="8" id="RVq-LB-W5J"/>
+                    <constraint firstItem="Lev-tK-HJm" firstAttribute="leading" secondItem="5yK-aX-WfD" secondAttribute="trailing" constant="8" id="RnO-BI-yUd"/>
+                    <constraint firstItem="0ui-YP-aIQ" firstAttribute="top" secondItem="etl-Ja-pf7" secondAttribute="top" constant="8" id="V9U-NF-IGH"/>
                     <constraint firstItem="5yK-aX-WfD" firstAttribute="leading" secondItem="FvW-QZ-rpN" secondAttribute="leading" id="bM6-yU-1E3"/>
-                    <constraint firstItem="5yK-aX-WfD" firstAttribute="top" secondItem="FvW-QZ-rpN" secondAttribute="bottom" constant="1" id="d2k-2U-Dye"/>
-                    <constraint firstAttribute="trailing" secondItem="5yK-aX-WfD" secondAttribute="trailing" constant="11" id="heb-5N-xOC"/>
-                    <constraint firstItem="5yK-aX-WfD" firstAttribute="leading" secondItem="Lev-tK-HJm" secondAttribute="leading" id="jZK-mL-LGU"/>
-                    <constraint firstItem="Lev-tK-HJm" firstAttribute="leading" secondItem="etl-Ja-pf7" secondAttribute="leading" constant="88" id="vNm-oN-l8d"/>
-                    <constraint firstAttribute="trailing" secondItem="FvW-QZ-rpN" secondAttribute="trailing" constant="11" id="xzP-aQ-YMA"/>
+                    <constraint firstItem="5yK-aX-WfD" firstAttribute="top" secondItem="FvW-QZ-rpN" secondAttribute="bottom" constant="4" id="d2k-2U-Dye"/>
+                    <constraint firstItem="Lev-tK-HJm" firstAttribute="leading" secondItem="FvW-QZ-rpN" secondAttribute="trailing" constant="8" id="gv2-qa-LP8"/>
+                    <constraint firstItem="FvW-QZ-rpN" firstAttribute="leading" secondItem="etl-Ja-pf7" secondAttribute="leading" constant="68" id="iVv-aW-ydg"/>
+                    <constraint firstItem="FvW-QZ-rpN" firstAttribute="top" secondItem="etl-Ja-pf7" secondAttribute="top" constant="16" id="zgX-cl-Aep"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -86,6 +78,7 @@
                 <outlet property="monthLabel" destination="JW4-SW-Aoj" id="oyt-j2-PVx"/>
                 <outlet property="timeLabel" destination="5yK-aX-WfD" id="RUg-Hr-J1p"/>
                 <outlet property="titleLabel" destination="FvW-QZ-rpN" id="O65-Ma-jmA"/>
+                <outlet property="widthConstraint" destination="VdI-gF-0nB" id="7bL-p2-drX"/>
             </connections>
             <point key="canvasLocation" x="545" y="395"/>
         </tableViewCell>
