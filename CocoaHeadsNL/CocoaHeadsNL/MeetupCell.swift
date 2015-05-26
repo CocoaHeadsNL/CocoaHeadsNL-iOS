@@ -114,7 +114,7 @@ class MeetupCell: PFTableViewCell {
             logoImageView.file = logoFile
             logoImageView.loadInBackground({ image, _ in
                 if let image = image {
-                    self.logoImageView.image = image.resizedImageWithBounds(CGSize(width: DBL_MAX, height: 44))
+                    self.logoImageView.image = image.resizedImageWithBounds(CGSize(width: DBL_MAX, height: 56))
                 }
             })
         }
