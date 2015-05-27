@@ -21,10 +21,10 @@ class MeetupCell: PFTableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var logoImageView: PFImageView!
-    @IBOutlet weak var separatorView: UIView!
     @IBOutlet weak var dateContainer: UIView!
-    @IBOutlet weak var calendarImageView: UIImageView!
+    @IBOutlet weak var calendarView: UIView!
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var monthLabel: UILabel!
 
@@ -43,8 +43,8 @@ class MeetupCell: PFTableViewCell {
         timeLabel.text = ""
         dayLabel.text = ""
         monthLabel.text = ""
+        descriptionLabel.text = ""
 
-        separatorView.hidden = false
         logoImageView.file = nil
 
         if let image = UIImage(named: "MeetupPlaceholder") {
@@ -55,9 +55,13 @@ class MeetupCell: PFTableViewCell {
     func configureCellForMeetup(meetup: Meetup, row: Int) {
         titleLabel.text = meetup.name
 
+        if let description = meetup.meetup_description {
+            descriptionLabel.text = description
+        }
+
         if let date = meetup.time {
             let timeText = MeetupCell.dateFormatter.stringFromDate(date)
-            timeLabel.text = String(format: "%@ - %@", timeText, meetup.locationName ?? "Location unknown")
+            timeLabel.text = String(format: "%@ - %@", meetup.locationName ?? "Location unknown", timeText)
 
             let components = NSCalendar.currentCalendar().components(.CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
             dayLabel.text = String(format: "%d", components.day)
@@ -67,10 +71,10 @@ class MeetupCell: PFTableViewCell {
 
             if date.timeIntervalSinceNow > 0 {
                 dayLabel.textColor = UIColor.blackColor()
-                calendarImageView.image = UIImage(named: "CalendarFuture")
+                calendarView.backgroundColor = UIColorWithRGB(232, 88, 80)
             } else {
                 dayLabel.textColor = UIColor(white: 0, alpha: 0.65)
-                calendarImageView.image = UIImage(named: "CalendarPast")
+                calendarView.backgroundColor = UIColorWithRGB(169, 166, 166)
             }
         }
 
@@ -78,5 +82,10 @@ class MeetupCell: PFTableViewCell {
             logoImageView.file = logoFile
             logoImageView.loadInBackground(nil)
         }
+    }
+
+    override func setHighlighted(highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        monthLabel.textColor = highlighted ? UIColor.blackColor() : UIColor.whiteColor()
     }
 }
