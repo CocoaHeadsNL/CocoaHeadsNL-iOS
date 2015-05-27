@@ -27,7 +27,6 @@ class MeetupCell: PFTableViewCell {
     @IBOutlet weak var calendarImageView: UIImageView!
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var monthLabel: UILabel!
-    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -50,7 +49,6 @@ class MeetupCell: PFTableViewCell {
 
         if let image = UIImage(named: "MeetupPlaceholder") {
             logoImageView.image = image
-            widthConstraint.constant = image.size.width
         }
     }
 
@@ -76,19 +74,9 @@ class MeetupCell: PFTableViewCell {
             }
         }
 
-        // Loading large images and resizing them is pretty inefficient.
-        // It would be better if the server already gave us a -- transparent -- 
-        // image of 44 pts high. Or we could cache these thumbnails locally.
-
         if let logoFile = meetup.smallLogo {
             logoImageView.file = logoFile
-            logoImageView.loadInBackground({ image, _ in
-                if let image = image {
-                    let resizedImage = image.resizedImageWithBounds(CGSize(width: 44, height: 44))
-                    self.logoImageView.image = resizedImage
-                    self.widthConstraint.constant = resizedImage.size.width
-                }
-            })
+            logoImageView.loadInBackground(nil)
         }
     }
 }
