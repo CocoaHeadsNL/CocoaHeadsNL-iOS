@@ -65,9 +65,10 @@
                             </mask>
                         </variation>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="topRight" verticalHuggingPriority="251" image="MeetupPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="Lev-tK-HJm" customClass="PFImageView">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="MeetupPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="Lev-tK-HJm" customClass="PFImageView">
                         <rect key="frame" x="276" y="16" width="44" height="44"/>
                         <constraints>
+                            <constraint firstAttribute="height" constant="44" id="7aV-s8-PRd"/>
                             <constraint firstAttribute="width" constant="44" id="VdI-gF-0nB"/>
                         </constraints>
                     </imageView>
@@ -110,7 +111,6 @@
                 <outlet property="separatorView" destination="io7-08-xFQ" id="LrC-yi-z4t"/>
                 <outlet property="timeLabel" destination="5yK-aX-WfD" id="RUg-Hr-J1p"/>
                 <outlet property="titleLabel" destination="FvW-QZ-rpN" id="O65-Ma-jmA"/>
-                <outlet property="widthConstraint" destination="VdI-gF-0nB" id="7bL-p2-drX"/>
             </connections>
             <point key="canvasLocation" x="545" y="395"/>
         </tableViewCell>
