@@ -80,11 +80,11 @@ class MeetupCell: PFTableViewCell {
         // It would be better if the server already gave us a -- transparent -- 
         // image of 44 pts high. Or we could cache these thumbnails locally.
 
-        if let logoFile = meetup.logo {
+        if let logoFile = meetup.smallLogo {
             logoImageView.file = logoFile
             logoImageView.loadInBackground({ image, _ in
                 if let image = image {
-                    let resizedImage = image.resizedImageWithBounds(CGSize(width: 100, height: 44))
+                    let resizedImage = image.resizedImageWithBounds(CGSize(width: 44, height: 44))
                     self.logoImageView.image = resizedImage
                     self.widthConstraint.constant = resizedImage.size.width
                 }

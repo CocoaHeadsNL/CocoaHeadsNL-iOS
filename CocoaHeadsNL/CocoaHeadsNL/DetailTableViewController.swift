@@ -321,6 +321,8 @@ class LogoCell: UITableViewCell {
             } else if let meetup = selectedObject as? Meetup {
                 if let logoFile = meetup.logo {
                     self.logoImageView.file = logoFile
+                    self.logoImageView.loadInBackground(nil)
+                    self.logoImageView.contentMode = .ScaleAspectFit
                 }
             } else if let job = selectedObject as? Job {
                 if let logoFile = job.logo {
