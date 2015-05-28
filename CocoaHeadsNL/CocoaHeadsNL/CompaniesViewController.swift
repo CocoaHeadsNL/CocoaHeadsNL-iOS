@@ -11,6 +11,7 @@ import Foundation
 class CompaniesViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
     override func queryForCollection() -> PFQuery {
         let query = Company.query()
+        query!.cachePolicy = .CacheThenNetwork
         return query!
     }
 
