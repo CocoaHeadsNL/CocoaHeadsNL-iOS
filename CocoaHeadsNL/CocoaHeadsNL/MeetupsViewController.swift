@@ -27,8 +27,6 @@ class MeetupsViewController: PFQueryTableViewController {
 
         let backItem = UIBarButtonItem(title: "Events", style: .Plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
-
-        self.loadObjects()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -76,8 +74,6 @@ class MeetupsViewController: PFQueryTableViewController {
         let meetupQuery = Meetup.query()!
         meetupQuery.orderByDescending("time")
         
-        meetupQuery.cachePolicy = PFCachePolicy.CacheThenNetwork
-
         return meetupQuery
     }
 }
