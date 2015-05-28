@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="882" y="-1784"/>
         </scene>
-        <!--LocationListViewController-->
+        <!--Companies Navigation-->
         <scene sceneID="f38-qE-wNH">
             <objects>
-                <collectionViewController storyboardIdentifier="locationListViewController" id="UVK-yH-wqA" userLabel="LocationListViewController" customClass="CompaniesViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="UVK-yH-wqA" userLabel="Companies Navigation" customClass="CompaniesViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Ze8-RZ-GD0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -59,10 +59,10 @@
             </objects>
             <point key="canvasLocation" x="2578" y="-960"/>
         </scene>
-        <!--Events-->
+        <!--Events Navigation-->
         <scene sceneID="Rb4-4L-nsC">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qKI-MW-cAT" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qKI-MW-cAT" userLabel="Events Navigation" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Events" image="EventsTabIcon" id="acW-dT-cKf" userLabel="Main"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IH5-mr-j9S">
@@ -78,10 +78,10 @@
             </objects>
             <point key="canvasLocation" x="1734" y="-2556"/>
         </scene>
-        <!--CocoaHeadsNL-->
+        <!--Jobs-->
         <scene sceneID="L8Q-cp-McQ">
             <objects>
-                <collectionViewController storyboardIdentifier="jobsViewController" id="p5z-Di-RAg" customClass="JobsViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="p5z-Di-RAg" userLabel="Jobs" customClass="JobsViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Rjy-ez-TrW">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -114,10 +114,10 @@
             </objects>
             <point key="canvasLocation" x="2579" y="-1784"/>
         </scene>
-        <!--Jobs-->
+        <!--Jobs Navigation-->
         <scene sceneID="Uzz-Zr-J2X">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zNW-ht-Z05" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zNW-ht-Z05" userLabel="Jobs Navigation" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Jobs" image="JobsTabIcon" id="cPa-gy-q4n" userLabel="Jobs"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="R8G-Zh-YDJ">
@@ -275,17 +275,16 @@
             </objects>
             <point key="canvasLocation" x="3393" y="-1784"/>
         </scene>
-        <!--Item-->
+        <!--Split View Controller-->
         <scene sceneID="3MA-kB-sYs">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B0A-m9-fy9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <splitViewController storyboardIdentifier="splitViewController" id="W81-50-NMJ" customClass="SplitViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="calendar-7.png" id="GNL-cg-52n"/>
                     <connections>
                         <segue destination="49e-Tb-3d3" kind="relationship" relationship="masterViewController" id="Wl8-Wj-T1W"/>
                         <segue destination="2rn-Ke-6oT" kind="relationship" relationship="detailViewController" id="tYk-1V-aGk"/>
                     </connections>
                 </splitViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="B0A-m9-fy9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="882" y="-3329"/>
         </scene>
@@ -308,10 +307,10 @@
             </objects>
             <point key="canvasLocation" x="1734" y="-972"/>
         </scene>
-        <!--CocoaHeadsNL-->
+        <!--Events-->
         <scene sceneID="FD2-9x-qwk">
             <objects>
-                <tableViewController storyboardIdentifier="mainViewController" id="VPM-AS-eh9" customClass="MeetupsViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="mainViewController" id="VPM-AS-eh9" userLabel="Events" customClass="MeetupsViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="50n-PK-NSg">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -333,10 +332,10 @@
             </objects>
             <point key="canvasLocation" x="2578" y="-2556"/>
         </scene>
-        <!--View Controller-->
+        <!--Empty Detail-->
         <scene sceneID="Qop-9C-NG0">
             <objects>
-                <viewController storyboardIdentifier="normalViewController" id="Jh2-FD-apv" sceneMemberID="viewController">
+                <viewController id="Jh2-FD-apv" userLabel="Empty Detail" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ATm-h7-aLv"/>
                         <viewControllerLayoutGuide type="bottom" id="JW1-83-FKA"/>
@@ -364,10 +363,10 @@
             </objects>
             <point key="canvasLocation" x="2579" y="-3329"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Split-View Detail Navigation-->
         <scene sceneID="aIF-8q-dFu">
             <objects>
-                <navigationController storyboardIdentifier="normalNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="2rn-Ke-6oT" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="normalNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="2rn-Ke-6oT" userLabel="Split-View Detail Navigation" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qrT-if-Njc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -388,7 +387,6 @@
         <image name="CompaniesTabIconStroked" width="30" height="30"/>
         <image name="EventsTabIcon" width="30" height="30"/>
         <image name="JobsTabIcon" width="30" height="30"/>
-        <image name="calendar-7.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vXN-bc-jAa"/>
