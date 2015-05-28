@@ -13,34 +13,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
-    {
-        var parseApplicationId : String?
-        var parseClientKey : String?
-        
-        if let path = NSBundle.mainBundle().pathForResource("ParseConfig", ofType: "plist") {
-            var myDict = NSDictionary(contentsOfFile: path)
-            if let dict = myDict {
-                parseApplicationId = dict.objectForKey("applicationId") as? String
-                parseClientKey = dict.objectForKey("clientKey") as? String
-            }
-        }
-        assert(parseApplicationId != nil || parseClientKey != nil, "Parse credentials not configured. Please see README.md.")
+    struct ParseConfiguration {
+        let applicationId: String
+        let clientKey: String
+    }
 
-        // Enable Crash Reporting
+    func loadParseConfiguration() -> ParseConfiguration {
+        if let path = NSBundle.mainBundle().pathForResource("ParseConfig", ofType: "plist"),
+               dict = NSDictionary(contentsOfFile: path),
+               applicationId = dict.objectForKey("applicationId") as? String,
+               clientKey = dict.objectForKey("clientKey") as? String {
+            return ParseConfiguration(applicationId: applicationId, clientKey: clientKey)
+        }
+        fatalError("Parse credentials not configured. Please see README.md.")
+    }
+
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         ParseCrashReporting.enable()
-        // Setup Parse
-        Parse.setApplicationId(parseApplicationId!, clientKey: parseClientKey!)
+
+        let config = loadParseConfiguration()
+        Parse.setApplicationId(config.applicationId, clientKey: config.clientKey)
+
         PFUser.enableRevocableSessionInBackground()
         if let user = PFUser.currentUser() where PFAnonymousUtils.isLinkedWithUser(user) {
             PFUser.logOut()
         }
 
         PFConfig.getConfigInBackgroundWithBlock(nil)
-        
+
         PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
-        
+
         return true
     }
 }
-

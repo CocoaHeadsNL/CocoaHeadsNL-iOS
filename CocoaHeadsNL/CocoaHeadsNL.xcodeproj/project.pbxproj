@@ -15,18 +15,13 @@
 		7B6A74491B1452FD00A10762 /* MeetupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74471B1452FD00A10762 /* MeetupsViewController.swift */; };
 		7B6A744B1B1495FF00A10762 /* MeetupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6A744A1B1495FF00A10762 /* MeetupCell.xib */; };
 		7B6A744D1B149A6B00A10762 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A744C1B149A6B00A10762 /* UIImage+Resize.swift */; };
+		7B6A744F1B162F8E00A10762 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A744E1B162F8E00A10762 /* UIColor+Extensions.swift */; };
 		F11455B91AB4BA0600546D22 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455B81AB4BA0600546D22 /* DetailTableViewController.swift */; };
 		F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */; };
 		F11455BF1AB4E8DB00546D22 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */; };
 		F11455C11AB5024000546D22 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455C01AB5024000546D22 /* TabBarController.swift */; };
 		F14335AB1AAF277C0007D009 /* LocationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14335AA1AAF277C0007D009 /* LocationListViewController.swift */; };
 		F17A38771ABF3B62005CFF8A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F17A38761ABF3B62005CFF8A /* MapKit.framework */; };
-		F17DF6301AB0D203003663D0 /* CocoaHeads.png in Resources */ = {isa = PBXBuildFile; fileRef = F17DF62F1AB0D203003663D0 /* CocoaHeads.png */; };
-		F18A11D01AB1883100D226BD /* calendar-7.png in Resources */ = {isa = PBXBuildFile; fileRef = F18A11CF1AB1883100D226BD /* calendar-7.png */; };
-		F18A11D21AB1885D00D226BD /* file-document-7.png in Resources */ = {isa = PBXBuildFile; fileRef = F18A11D11AB1885D00D226BD /* file-document-7.png */; };
-		F18A11D41AB1889700D226BD /* note-write-7.png in Resources */ = {isa = PBXBuildFile; fileRef = F18A11D31AB1889700D226BD /* note-write-7.png */; };
-		F18A11D61AB188AF00D226BD /* paper-map-7.png in Resources */ = {isa = PBXBuildFile; fileRef = F18A11D51AB188AF00D226BD /* paper-map-7.png */; };
-		F18A11D81AB188BD00D226BD /* pin-map-7.png in Resources */ = {isa = PBXBuildFile; fileRef = F18A11D71AB188BD00D226BD /* pin-map-7.png */; };
 		F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D171AAB50BB00585D61 /* AppDelegate.swift */; };
 		F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D1D1AAB50BB00585D61 /* Main.storyboard */; };
 		F1A46D211AAB50BB00585D61 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D201AAB50BB00585D61 /* Images.xcassets */; };
@@ -56,18 +51,13 @@
 		7B6A74471B1452FD00A10762 /* MeetupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetupsViewController.swift; sourceTree = "<group>"; };
 		7B6A744A1B1495FF00A10762 /* MeetupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeetupCell.xib; sourceTree = "<group>"; };
 		7B6A744C1B149A6B00A10762 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		7B6A744E1B162F8E00A10762 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		F11455B81AB4BA0600546D22 /* DetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		F11455C01AB5024000546D22 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F14335AA1AAF277C0007D009 /* LocationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationListViewController.swift; sourceTree = "<group>"; };
 		F17A38761ABF3B62005CFF8A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		F17DF62F1AB0D203003663D0 /* CocoaHeads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CocoaHeads.png; sourceTree = "<group>"; };
-		F18A11CF1AB1883100D226BD /* calendar-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-7.png"; sourceTree = "<group>"; };
-		F18A11D11AB1885D00D226BD /* file-document-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file-document-7.png"; sourceTree = "<group>"; };
-		F18A11D31AB1889700D226BD /* note-write-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "note-write-7.png"; sourceTree = "<group>"; };
-		F18A11D51AB188AF00D226BD /* paper-map-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paper-map-7.png"; sourceTree = "<group>"; };
-		F18A11D71AB188BD00D226BD /* pin-map-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin-map-7.png"; sourceTree = "<group>"; };
 		F1A46D121AAB50BB00585D61 /* CocoaHeadsNL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaHeadsNL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A46D161AAB50BB00585D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1A46D171AAB50BB00585D61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,12 +91,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4A13831E1AC7F83D00E0D41E /* Detail */ = {
+		4A13831E1AC7F83D00E0D41E /* Viewing Details */ = {
 			isa = PBXGroup;
 			children = (
 				F11455B81AB4BA0600546D22 /* DetailTableViewController.swift */,
 			);
-			name = Detail;
+			name = "Viewing Details";
 			sourceTree = "<group>";
 		};
 		5F94B32C0E46149D436AD3B3 /* Frameworks */ = {
@@ -118,6 +108,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7B6A74501B176A2900A10762 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				F1A46D171AAB50BB00585D61 /* AppDelegate.swift */,
+				4AF8899A1AAD8EBC00D8DB2E /* CocoaHeadsNL-Bridging-Header.h */,
+				4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */,
+				F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */,
+				F11455C01AB5024000546D22 /* TabBarController.swift */,
+				7B6A744E1B162F8E00A10762 /* UIColor+Extensions.swift */,
+				7B6A744C1B149A6B00A10762 /* UIImage+Resize.swift */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		7B6A74511B176A4000A10762 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F1A46D201AAB50BB00585D61 /* Images.xcassets */,
+				F1A46D161AAB50BB00585D61 /* Info.plist */,
+				F1A46D221AAB50BB00585D61 /* LaunchScreen.xib */,
+				F1A46D1D1AAB50BB00585D61 /* Main.storyboard */,
+				4A83A4AD1AAD8A290085416A /* ParseConfig.plist */,
+				4A1978C11AAD8681000E281F /* Settings.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		D32210EB441EF5FCE54FC721 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,42 +144,31 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		F11455A81AB3256C00546D22 /* Jobs */ = {
+		F11455A81AB3256C00546D22 /* Open Job Postings */ = {
 			isa = PBXGroup;
 			children = (
 				F1A46D3C1AAB516300585D61 /* JobsViewController.swift */,
 			);
-			name = Jobs;
+			name = "Open Job Postings";
 			sourceTree = "<group>";
 		};
-		F11455A91AB3257700546D22 /* Companies */ = {
+		F11455A91AB3257700546D22 /* List of Sponsors */ = {
 			isa = PBXGroup;
 			children = (
 				F14335AA1AAF277C0007D009 /* LocationListViewController.swift */,
+				F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */,
 			);
-			name = Companies;
+			name = "List of Sponsors";
 			sourceTree = "<group>";
 		};
-		F11455BD1AB4E8C000546D22 /* Viewing Meetups */ = {
+		F11455BD1AB4E8C000546D22 /* List of Meetups */ = {
 			isa = PBXGroup;
 			children = (
 				7B6A74461B1452FD00A10762 /* MeetupCell.swift */,
 				7B6A744A1B1495FF00A10762 /* MeetupCell.xib */,
 				7B6A74471B1452FD00A10762 /* MeetupsViewController.swift */,
 			);
-			name = "Viewing Meetups";
-			sourceTree = "<group>";
-		};
-		F18A11CC1AB186FE00D226BD /* Icons */ = {
-			isa = PBXGroup;
-			children = (
-				F18A11CF1AB1883100D226BD /* calendar-7.png */,
-				F18A11D11AB1885D00D226BD /* file-document-7.png */,
-				F18A11D31AB1889700D226BD /* note-write-7.png */,
-				F18A11D51AB188AF00D226BD /* paper-map-7.png */,
-				F18A11D71AB188BD00D226BD /* pin-map-7.png */,
-			);
-			name = Icons;
+			name = "List of Meetups";
 			sourceTree = "<group>";
 		};
 		F1A46D091AAB50BB00585D61 = {
@@ -191,35 +197,14 @@
 		F1A46D141AAB50BB00585D61 /* CocoaHeadsNL */ = {
 			isa = PBXGroup;
 			children = (
-				4A13831E1AC7F83D00E0D41E /* Detail */,
-				F1A46D171AAB50BB00585D61 /* AppDelegate.swift */,
-				F1A46D1D1AAB50BB00585D61 /* Main.storyboard */,
-				F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */,
-				F11455C01AB5024000546D22 /* TabBarController.swift */,
-				F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */,
-				F11455BD1AB4E8C000546D22 /* Viewing Meetups */,
-				F11455A91AB3257700546D22 /* Companies */,
-				F11455A81AB3256C00546D22 /* Jobs */,
-				F1A46D201AAB50BB00585D61 /* Images.xcassets */,
-				F1A46D221AAB50BB00585D61 /* LaunchScreen.xib */,
-				4A1978C11AAD8681000E281F /* Settings.bundle */,
-				F1A46D151AAB50BB00585D61 /* Supporting Files */,
-				4A83A4AD1AAD8A290085416A /* ParseConfig.plist */,
-				4AF8899A1AAD8EBC00D8DB2E /* CocoaHeadsNL-Bridging-Header.h */,
-				4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */,
-				7B6A744C1B149A6B00A10762 /* UIImage+Resize.swift */,
+				F11455BD1AB4E8C000546D22 /* List of Meetups */,
+				F11455A81AB3256C00546D22 /* Open Job Postings */,
+				F11455A91AB3257700546D22 /* List of Sponsors */,
+				4A13831E1AC7F83D00E0D41E /* Viewing Details */,
+				7B6A74501B176A2900A10762 /* Other Sources */,
+				7B6A74511B176A4000A10762 /* Resources */,
 			);
 			path = CocoaHeadsNL;
-			sourceTree = "<group>";
-		};
-		F1A46D151AAB50BB00585D61 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F18A11CC1AB186FE00D226BD /* Icons */,
-				F17DF62F1AB0D203003663D0 /* CocoaHeads.png */,
-				F1A46D161AAB50BB00585D61 /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		F1A46D2C1AAB50BB00585D61 /* CocoaHeadsNLTests */ = {
@@ -330,18 +315,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F18A11D81AB188BD00D226BD /* pin-map-7.png in Resources */,
 				4A83A4AE1AAD8A290085416A /* ParseConfig.plist in Resources */,
 				4A1978C21AAD8681000E281F /* Settings.bundle in Resources */,
 				F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */,
 				F1A46D241AAB50BB00585D61 /* LaunchScreen.xib in Resources */,
-				F18A11D41AB1889700D226BD /* note-write-7.png in Resources */,
-				F18A11D61AB188AF00D226BD /* paper-map-7.png in Resources */,
 				7B6A744B1B1495FF00A10762 /* MeetupCell.xib in Resources */,
-				F18A11D01AB1883100D226BD /* calendar-7.png in Resources */,
 				F1A46D211AAB50BB00585D61 /* Images.xcassets in Resources */,
-				F18A11D21AB1885D00D226BD /* file-document-7.png in Resources */,
-				F17DF6301AB0D203003663D0 /* CocoaHeads.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +420,7 @@
 				7B6A744D1B149A6B00A10762 /* UIImage+Resize.swift in Sources */,
 				F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */,
 				F11455B91AB4BA0600546D22 /* DetailTableViewController.swift in Sources */,
+				7B6A744F1B162F8E00A10762 /* UIColor+Extensions.swift in Sources */,
 				7B6A74491B1452FD00A10762 /* MeetupsViewController.swift in Sources */,
 				F1A46D3D1AAB516300585D61 /* JobsViewController.swift in Sources */,
 				F14335AB1AAF277C0007D009 /* LocationListViewController.swift in Sources */,
