@@ -34,8 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config = loadParseConfiguration()
         Parse.setApplicationId(config.applicationId, clientKey: config.clientKey)
 
-        PFUser.enableAutomaticUser()
-        PFUser.currentUser()?.saveInBackgroundWithBlock(nil)
+        PFUser.enableRevocableSessionInBackground()
+        if let user = PFUser.currentUser() where PFAnonymousUtils.isLinkedWithUser(user) {
+            PFUser.logOut()
+        }
 
         PFConfig.getConfigInBackgroundWithBlock(nil)
 
