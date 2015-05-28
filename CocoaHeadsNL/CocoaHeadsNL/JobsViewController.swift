@@ -12,6 +12,7 @@ import UIKit
 class JobsViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
     override func queryForCollection() -> PFQuery {
         let query = Job.query()
+        query!.cachePolicy = .CacheThenNetwork
         return query!
     }
 
