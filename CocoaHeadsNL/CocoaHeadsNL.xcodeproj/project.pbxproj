@@ -15,6 +15,7 @@
 		7B6A74491B1452FD00A10762 /* MeetupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74471B1452FD00A10762 /* MeetupsViewController.swift */; };
 		7B6A744B1B1495FF00A10762 /* MeetupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6A744A1B1495FF00A10762 /* MeetupCell.xib */; };
 		7B6A744D1B149A6B00A10762 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A744C1B149A6B00A10762 /* UIImage+Resize.swift */; };
+		7B6A744F1B162F8E00A10762 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A744E1B162F8E00A10762 /* UIColor+Extensions.swift */; };
 		F11455B91AB4BA0600546D22 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455B81AB4BA0600546D22 /* DetailTableViewController.swift */; };
 		F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */; };
 		F11455BF1AB4E8DB00546D22 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */; };
@@ -56,6 +57,7 @@
 		7B6A74471B1452FD00A10762 /* MeetupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetupsViewController.swift; sourceTree = "<group>"; };
 		7B6A744A1B1495FF00A10762 /* MeetupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeetupCell.xib; sourceTree = "<group>"; };
 		7B6A744C1B149A6B00A10762 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		7B6A744E1B162F8E00A10762 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		F11455B81AB4BA0600546D22 /* DetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				4AF8899A1AAD8EBC00D8DB2E /* CocoaHeadsNL-Bridging-Header.h */,
 				4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */,
 				7B6A744C1B149A6B00A10762 /* UIImage+Resize.swift */,
+				7B6A744E1B162F8E00A10762 /* UIColor+Extensions.swift */,
 			);
 			path = CocoaHeadsNL;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				7B6A744D1B149A6B00A10762 /* UIImage+Resize.swift in Sources */,
 				F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */,
 				F11455B91AB4BA0600546D22 /* DetailTableViewController.swift in Sources */,
+				7B6A744F1B162F8E00A10762 /* UIColor+Extensions.swift in Sources */,
 				7B6A74491B1452FD00A10762 /* MeetupsViewController.swift in Sources */,
 				F1A46D3D1AAB516300585D61 /* JobsViewController.swift in Sources */,
 				F14335AB1AAF277C0007D009 /* LocationListViewController.swift in Sources */,
