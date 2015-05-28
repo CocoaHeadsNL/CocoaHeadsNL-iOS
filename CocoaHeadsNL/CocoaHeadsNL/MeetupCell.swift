@@ -88,4 +88,9 @@ class MeetupCell: PFTableViewCell {
         super.setHighlighted(highlighted, animated: animated)
         monthLabel.textColor = highlighted ? UIColor.blackColor() : UIColor.whiteColor()
     }
+
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        monthLabel.textColor = selected ? UIColor.blackColor() : UIColor.whiteColor()
+    }
 }

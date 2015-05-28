@@ -29,7 +29,7 @@
         <!--LocationListViewController-->
         <scene sceneID="f38-qE-wNH">
             <objects>
-                <collectionViewController storyboardIdentifier="locationListViewController" id="UVK-yH-wqA" userLabel="LocationListViewController" customClass="LocationListViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="locationListViewController" id="UVK-yH-wqA" userLabel="LocationListViewController" customClass="CompaniesViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Ze8-RZ-GD0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -41,17 +41,7 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
                         </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="companyCollectionViewCell" id="bAW-uF-zSq" customClass="PFCollectionViewCell">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="589" height="80"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <size key="customSize" width="589" height="80"/>
-                            </collectionViewCell>
-                        </cells>
+                        <cells/>
                         <connections>
                             <outlet property="dataSource" destination="UVK-yH-wqA" id="9KI-60-q5U"/>
                             <outlet property="delegate" destination="UVK-yH-wqA" id="Hni-Jh-VCG"/>
@@ -61,6 +51,9 @@
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="loadingViewEnabled" value="NO"/>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="3uJ-fO-52Q" kind="showDetail" identifier="ShowDetail" id="vXN-bc-jAa"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qIh-vR-M0P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -70,7 +63,7 @@
         <scene sceneID="Rb4-4L-nsC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qKI-MW-cAT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Events" image="calendar-7.png" id="acW-dT-cKf" userLabel="Main"/>
+                    <tabBarItem key="tabBarItem" title="Events" image="EventsTabIcon" id="acW-dT-cKf" userLabel="Main"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IH5-mr-j9S">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -83,7 +76,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cg4-4F-rKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1734" y="-2496"/>
+            <point key="canvasLocation" x="1734" y="-2556"/>
         </scene>
         <!--CocoaHeadsNL-->
         <scene sceneID="L8Q-cp-McQ">
@@ -100,17 +93,7 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
                         </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" reuseIdentifier="jobsCollectionViewCell" id="bO6-GG-KWb" customClass="PFCollectionViewCell">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="190" height="80"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <size key="customSize" width="190" height="80"/>
-                            </collectionViewCell>
-                        </cells>
+                        <cells/>
                         <connections>
                             <outlet property="dataSource" destination="p5z-Di-RAg" id="FjA-GG-Lhw"/>
                             <outlet property="delegate" destination="p5z-Di-RAg" id="DwR-uC-AUx"/>
@@ -123,10 +106,13 @@
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="loadingViewEnabled" value="NO"/>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="3uJ-fO-52Q" kind="showDetail" identifier="ShowDetail" id="GJd-Rt-qyZ"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KWX-vH-ztK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2736" y="-1785"/>
+            <point key="canvasLocation" x="2579" y="-1784"/>
         </scene>
         <!--Jobs-->
         <scene sceneID="Uzz-Zr-J2X">
@@ -287,7 +273,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qv9-fQ-CHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3689" y="-2496"/>
+            <point key="canvasLocation" x="3393" y="-1784"/>
         </scene>
         <!--Item-->
         <scene sceneID="3MA-kB-sYs">
@@ -307,7 +293,7 @@
         <scene sceneID="mz1-im-VP7">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4c9-e7-Scu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Companies" image="paper-map-7.png" id="ava-8M-aE2" userLabel="Map"/>
+                    <tabBarItem key="tabBarItem" title="Companies" image="CompaniesTabIconStroked" id="ava-8M-aE2" userLabel="Map"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fMs-aD-JD8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -345,7 +331,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dt8-Xg-mmb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2579" y="-2496"/>
+            <point key="canvasLocation" x="2578" y="-2556"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Qop-9C-NG0">
@@ -359,17 +345,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You haven't selected anything yet." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxi-Kq-FtF">
-                                <rect key="frame" x="169" y="289" width="263" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You haven’t selected anything yet." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxi-Kq-FtF">
+                                <rect key="frame" x="169" y="290" width="262" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="uxi-Kq-FtF" firstAttribute="centerX" secondItem="omf-1g-bPL" secondAttribute="centerX" id="LtX-ss-QO4"/>
-                            <constraint firstItem="uxi-Kq-FtF" firstAttribute="top" secondItem="ATm-h7-aLv" secondAttribute="bottom" constant="225" id="XZy-9d-mHv"/>
+                            <constraint firstAttribute="centerX" secondItem="uxi-Kq-FtF" secondAttribute="centerX" id="TUK-SO-Zlx"/>
+                            <constraint firstAttribute="centerY" secondItem="uxi-Kq-FtF" secondAttribute="centerY" id="j8L-Lv-yKb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="09A-sj-ebw"/>
@@ -399,8 +385,12 @@
     </scenes>
     <resources>
         <image name="CocoaHeadsNLLogo" width="300" height="300"/>
+        <image name="CompaniesTabIconStroked" width="30" height="30"/>
+        <image name="EventsTabIcon" width="30" height="30"/>
         <image name="calendar-7.png" width="30" height="30"/>
         <image name="file-document-7.png" width="30" height="30"/>
-        <image name="paper-map-7.png" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="vXN-bc-jAa"/>
+    </inferredMetricsTieBreakers>
 </document>
