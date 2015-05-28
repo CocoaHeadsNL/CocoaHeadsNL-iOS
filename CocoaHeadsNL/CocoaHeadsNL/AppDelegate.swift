@@ -31,10 +31,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ParseCrashReporting.enable()
         // Setup Parse
         Parse.setApplicationId(parseApplicationId!, clientKey: parseClientKey!)
-        
-        PFUser.enableAutomaticUser()
-        PFUser.currentUser()?.saveInBackgroundWithBlock(nil)
-        
+        PFUser.enableRevocableSessionInBackground()
+        if let user = PFUser.currentUser() where PFAnonymousUtils.isLinkedWithUser(user) {
+            PFUser.logOut()
+        }
+
         PFConfig.getConfigInBackgroundWithBlock(nil)
         
         PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
