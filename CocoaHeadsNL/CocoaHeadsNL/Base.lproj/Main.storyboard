@@ -63,7 +63,7 @@
         <scene sceneID="Rb4-4L-nsC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qKI-MW-cAT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Events" image="calendar-7.png" id="acW-dT-cKf" userLabel="Main"/>
+                    <tabBarItem key="tabBarItem" title="Events" image="EventsTabIcon" id="acW-dT-cKf" userLabel="Main"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IH5-mr-j9S">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -293,7 +293,7 @@
         <scene sceneID="mz1-im-VP7">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4c9-e7-Scu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Companies" image="paper-map-7.png" id="ava-8M-aE2" userLabel="Map"/>
+                    <tabBarItem key="tabBarItem" title="Companies" image="CompaniesTabIconStroked" id="ava-8M-aE2" userLabel="Map"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fMs-aD-JD8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -385,9 +385,10 @@
     </scenes>
     <resources>
         <image name="CocoaHeadsNLLogo" width="300" height="300"/>
+        <image name="CompaniesTabIconStroked" width="30" height="30"/>
+        <image name="EventsTabIcon" width="30" height="30"/>
         <image name="calendar-7.png" width="30" height="30"/>
         <image name="file-document-7.png" width="30" height="30"/>
-        <image name="paper-map-7.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vXN-bc-jAa"/>
