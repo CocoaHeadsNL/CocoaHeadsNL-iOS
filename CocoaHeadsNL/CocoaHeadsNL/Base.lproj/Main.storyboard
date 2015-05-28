@@ -118,7 +118,7 @@
         <scene sceneID="Uzz-Zr-J2X">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zNW-ht-Z05" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Jobs" image="file-document-7.png" id="cPa-gy-q4n" userLabel="Jobs"/>
+                    <tabBarItem key="tabBarItem" title="Jobs" image="JobsTabIcon" id="cPa-gy-q4n" userLabel="Jobs"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="R8G-Zh-YDJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -387,8 +387,8 @@
         <image name="CocoaHeadsNLLogo" width="300" height="300"/>
         <image name="CompaniesTabIconStroked" width="30" height="30"/>
         <image name="EventsTabIcon" width="30" height="30"/>
+        <image name="JobsTabIcon" width="30" height="30"/>
         <image name="calendar-7.png" width="30" height="30"/>
-        <image name="file-document-7.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vXN-bc-jAa"/>
