@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-class TabBarController: UITabBarController, UITabBarControllerDelegate
-{
+class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
 }

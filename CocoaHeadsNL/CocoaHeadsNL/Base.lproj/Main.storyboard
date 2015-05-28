@@ -359,17 +359,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You haven't selected anything yet." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxi-Kq-FtF">
-                                <rect key="frame" x="169" y="289" width="263" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You haven’t selected anything yet." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxi-Kq-FtF">
+                                <rect key="frame" x="169" y="290" width="262" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="uxi-Kq-FtF" firstAttribute="centerX" secondItem="omf-1g-bPL" secondAttribute="centerX" id="LtX-ss-QO4"/>
-                            <constraint firstItem="uxi-Kq-FtF" firstAttribute="top" secondItem="ATm-h7-aLv" secondAttribute="bottom" constant="225" id="XZy-9d-mHv"/>
+                            <constraint firstAttribute="centerX" secondItem="uxi-Kq-FtF" secondAttribute="centerX" id="TUK-SO-Zlx"/>
+                            <constraint firstAttribute="centerY" secondItem="uxi-Kq-FtF" secondAttribute="centerY" id="j8L-Lv-yKb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="09A-sj-ebw"/>
