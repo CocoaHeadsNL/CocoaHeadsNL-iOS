@@ -11,21 +11,10 @@ import Foundation
 class CompaniesViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
     override func queryForCollection() -> PFQuery {
         let query = Company.query()
-        query!.cachePolicy = PFCachePolicy.CacheThenNetwork
         return query!
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.loadObjects()
-    }
-
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        self.clear()
-
-        coordinator.animateAlongsideTransition({context in
-            self.loadObjects()
-        }, completion: nil)
     }
 
     //MARK: - UICollectionViewDataSource methods

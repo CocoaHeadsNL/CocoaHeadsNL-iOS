@@ -12,19 +12,12 @@ import UIKit
 class JobsViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
     override func queryForCollection() -> PFQuery {
         let query = Job.query()
-        query!.cachePolicy = PFCachePolicy.CacheThenNetwork
         return query!
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.loadObjects()
     }
 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animateAlongsideTransition({ _ in
             super.collectionViewLayout?.invalidateLayout()
-            self.loadObjects()
         }, completion: nil)
     }
 
