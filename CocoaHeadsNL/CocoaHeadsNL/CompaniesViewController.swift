@@ -1,17 +1,16 @@
 //
-//  JobsViewController.swift
+//  CompaniesViewController.swift
 //  CocoaHeadsNL
 //
-//  Created by Bart Hoffman on 07/03/15.
+//  Created by Bart Hoffman on 10/03/15.
 //  Copyright (c) 2015 Stichting CocoaheadsNL. All rights reserved.
 //
 
 import Foundation
-import UIKit
 
-class JobsViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
+class CompaniesViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
     override func queryForCollection() -> PFQuery {
-        let query = Job.query()
+        let query = Company.query()
         query!.cachePolicy = PFCachePolicy.CacheThenNetwork
         return query!
     }
@@ -22,29 +21,39 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
     }
 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animateAlongsideTransition({ _ in
-            super.collectionViewLayout?.invalidateLayout()
+        self.clear()
+
+        coordinator.animateAlongsideTransition({context in
             self.loadObjects()
         }, completion: nil)
     }
 
     //MARK: - UICollectionViewDataSource methods
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell? {
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell {
         if let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath, object: object) {
-            let job = object as? Job
+            let company = object as? Company
 
-            if let logoFile = job?.logo {
-                cell.imageView.file = logoFile
-                cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
+            let logoWidth: CGFloat = 120
+
+            if let companyLogo = company?.logo {
+                cell.imageView.file = companyLogo
                 cell.imageView.contentMode = .ScaleAspectFit
-                cell.imageView.frame = CGRectInset(cell.contentView.frame, 5, 5)
-                cell.imageView.clipsToBounds = true
+                cell.imageView.frame = CGRect(x: 0, y: 5, width: logoWidth, height: 70)
+                cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
                 cell.imageView.loadInBackground(nil)
             }
 
+            let whiteSpace: CGFloat = 10
+            let labelWidth = cell.bounds.width - whiteSpace - logoWidth
+
+            cell.textLabel.numberOfLines = 2
+            cell.textLabel.frame = CGRect(x: logoWidth + whiteSpace, y: 5, width: labelWidth, height: 70)
+            cell.textLabel.text = company?.name
+
             cell.contentView.layer.borderWidth = 0.5
             cell.contentView.layer.borderColor = UIColor.grayColor().CGColor
+            
             return cell
         }
         fatalError("Could not get a cell")
@@ -56,8 +65,10 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
         self.performSegueWithIdentifier("ShowDetail", sender: collectionView.cellForItemAtIndexPath(indexPath))
     }
 
-    override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: (self.view.frame.width - 15) / 2, height: 80)
+    //MARK: - UICollectionViewDelegateFlowLayout methods
+
+    override func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize {
+        return CGSize(width: self.view.frame.width - 10, height: 80)
     }
 
     //MARK: - Segue
