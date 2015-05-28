@@ -133,10 +133,10 @@
             </objects>
             <point key="canvasLocation" x="1734" y="-1784"/>
         </scene>
-        <!--Detail Table View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="cCC-DU-zZT">
             <objects>
-                <tableViewController storyboardIdentifier="detailTableViewController" id="3uJ-fO-52Q" customClass="DetailTableViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="3uJ-fO-52Q" customClass="DetailViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ndM-hw-Lr2">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

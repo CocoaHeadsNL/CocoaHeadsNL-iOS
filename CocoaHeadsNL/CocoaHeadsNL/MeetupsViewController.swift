@@ -39,7 +39,7 @@ class MeetupsViewController: PFQueryTableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
             if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
-                let detailViewController = segue.destinationViewController as! DetailTableViewController
+                let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.selectedObject = self.objectAtIndexPath(indexPath)
             }
         }

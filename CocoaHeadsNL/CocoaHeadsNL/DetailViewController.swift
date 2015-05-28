@@ -1,24 +1,27 @@
 //
-//  DetailTableViewController.swift
+//  DetailViewController.swift
 //  CocoaHeadsNL
 //
 //  Created by Bart Hoffman on 14/03/15.
 //  Copyright (c) 2015 Stichting CocoaheadsNL. All rights reserved.
 //
 
-import Foundation
 import UIKit
-import MapKit
 
-class DetailTableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+extension UIResponder {
+    func reloadCell(cell: UITableViewCell) {
+        self.nextResponder()?.reloadCell(cell)
+    }
+}
+
+class DetailViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
     var selectedObject: PFObject?
-    var companyApps: NSMutableArray
-    
+    var companyApps = NSMutableArray()
+
     required init(coder aDecoder: NSCoder) {
-        companyApps = NSMutableArray()
         super.init(coder: aDecoder)
     }
-    
+
     override func viewDidLoad() {
 
         //Can be used to hide masterViewController and increase size of detailView if wanted
@@ -27,25 +30,25 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
 
         //For some reason this triggers correct resizing behavior when rotating views.
         self.tableView.estimatedRowHeight = 100.0
-        
+
         if let company = selectedObject as? Company {
             if let apps = company["hasApps"] as? Bool {
                 self.fetchAffiliateLinksFromParse(company)
             }
         }
-        
+
         self.tableView.reloadData()
     }
-    
+
     func fetchAffiliateLinksFromParse(company: PFObject) {
         if let objectID = company.objectId {
             let affiliateQuery = PFQuery(className: "affiliateLinks")
             affiliateQuery.whereKey("company", equalTo: PFObject(withoutDataWithClassName: "Companies", objectId: objectID))
             affiliateQuery.cachePolicy = PFCachePolicy.CacheElseNetwork
-            
+
             affiliateQuery.findObjectsInBackgroundWithBlock {
                 (objects: [AnyObject]?, error: NSError?) -> Void in
-                
+
                 if error == nil {
                     // The find succeeded.
                     println("Successfully retrieved \(objects!.count) scores.")
@@ -55,10 +58,10 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
                             self.companyApps.addObject(object)
                         }
                     }
-                    
+
                     self.tableView.reloadData()
-                    
-                
+
+
                 } else {
                     // Log details of the failure
                     println("Error: \(error!) \(error!.userInfo!)")
@@ -66,7 +69,7 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
             }
         }
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         if let company = selectedObject as? Company {
             if let name = company.name {
@@ -82,7 +85,7 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
             }
         }
     }
-    
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if let company = selectedObject as? Company {
             if let apps = company["hasApps"] as? Bool {
@@ -97,7 +100,7 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
         }
         return 1
     }
-    
+
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 1 {
             tableView.headerViewForSection(1)?.backgroundColor = UIColor.grayColor()
@@ -107,10 +110,10 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
             return view
         }
     }
-    
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let company = selectedObject as? Company {
-                //section 0 is company details
+            //section 0 is company details
             if section == 0 {
                 return 4
             } else {
@@ -131,10 +134,10 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
 
         return 6
     }
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var actualRow = indexPath.row
-        
+
         if let company = selectedObject as? Company {
             if indexPath.section == 1 {
                 //section 1 = company apps
@@ -156,7 +159,7 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
                             if let affiliateId = affiliateLink.affiliateId {
                                 imageView.image = UIImage(named: "CocoaHeadsNLLogo")
                                 imageView.contentMode = .ScaleAspectFit
-                                
+
                                 if let url = NSURL(string: "https://itunes.apple.com/lookup?id=\(affiliateId)") {
                                     var request = NSURLRequest(URL: url)
                                     let dataTask = NSURLSession.sharedSession().dataTaskWithRequest(request,
@@ -194,7 +197,7 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
                         }
                     }
                 }
-                
+
                 return cell!
 
 
@@ -266,24 +269,24 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
         assertionFailure("This should not happen.")
         return UITableViewCell()
     }
-    
+
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 1 {
-            
+
             if let affiliateToken = PFConfig.currentConfig()["appleAffiliateToken"] as? String {
                 if let affiliateLink = companyApps.objectAtIndex(indexPath.row) as? AffiliateLink {
                     if let affiliateId = affiliateLink.affiliateId {
                         if let url = NSURL(string: "https://itunes.apple.com/app/apple-store/id\(affiliateId)?at=\(affiliateToken)&ct=app") {
-                                
-                                if UIApplication.sharedApplication().canOpenURL(url) {
-                                    
-                                        UIApplication.sharedApplication().openURL(url)
-                                }
+
+                            if UIApplication.sharedApplication().canOpenURL(url) {
+
+                                UIApplication.sharedApplication().openURL(url)
+                            }
                         }
                     }
                 }
             }
-            
+
             self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
     }
@@ -292,7 +295,7 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
         tableView.beginUpdates()
         tableView.endUpdates()
     }
-    
+
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
         for object in self.tableView.visibleCells() {
             if let webCell = object as? WebViewCell {
@@ -301,233 +304,3 @@ class DetailTableViewController: UITableViewController, UITableViewDataSource, U
         }
     }
 }
-
-class LogoCell: UITableViewCell {
-    @IBOutlet weak var logoImageView: PFImageView!
-
-    var selectedObject: PFObject? {
-        didSet{
-            if selectedObject == oldValue {
-                return
-            }
-            
-            self.logoImageView.image = nil
-
-            if let company = selectedObject as? Company {
-                if let logo = company.logo {
-                    self.logoImageView.file = logo
-                }
-
-            } else if let meetup = selectedObject as? Meetup {
-                if let logoFile = meetup.logo {
-                    self.logoImageView.file = logoFile
-                    self.logoImageView.loadInBackground(nil)
-                    self.logoImageView.contentMode = .ScaleAspectFit
-                }
-            } else if let job = selectedObject as? Job {
-                if let logoFile = job.logo {
-                    self.logoImageView.file = logoFile
-                }
-            }
-            
-            if (self.logoImageView.image != nil) {
-                self.logoImageView.loadInBackground({ (image, error) -> Void in
-                    self.logoImageView.contentMode = .ScaleAspectFit
-                })
-            }
-        }
-    }
-}
-
-class  MapViewCell: UITableViewCell, MKMapViewDelegate {
-    @IBOutlet weak var littleMap: MKMapView!
-    
-    var selectedObject: PFObject? {
-        didSet{
-            if selectedObject == oldValue {
-                return
-            }
-            
-            if let company = selectedObject as? Company {
-            } else if let meetup = selectedObject as? Meetup {
-                if let geoLoc = meetup.geoLocation {
-                    let mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2DMake(geoLoc.latitude, geoLoc.longitude), span: MKCoordinateSpanMake(0.01, 0.01))
-                    littleMap.region = mapRegion;
-                    
-                    if let nameOfLocation = meetup.locationName {
-                        var annotation = MapAnnotation(coordinate: CLLocationCoordinate2DMake(geoLoc.latitude, geoLoc.longitude), title: "Here it is!", subtitle: nameOfLocation) as MapAnnotation
-                        littleMap.addAnnotation(annotation)
-                    }
-                }
-            } else if let job = selectedObject as? Job {
-            }
-        }
-    }
-    
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pinAnnotationView")
-        annotationView.animatesDrop = true
-        
-        return annotationView
-    }
-    
-    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
-        if let meetup = selectedObject as? Meetup {
-            if let geoLoc = meetup.geoLocation {
-                self.openMapWithCoordinates(geoLoc.longitude, theLat: geoLoc.latitude)
-            }
-        }
-    }
-    
-    //self.openMapWithCoordinates(geoLoc.longitude, theLat: geoLoc.latitude)
-    
-    func openMapWithCoordinates(theLon:Double, theLat:Double){
-        if let meetup = selectedObject as? Meetup {
-            var coordinate = CLLocationCoordinate2DMake(theLat, theLon)
-            var placemark:MKPlacemark = MKPlacemark(coordinate: coordinate, addressDictionary:nil)
-            
-            var mapItem:MKMapItem = MKMapItem(placemark: placemark)
-            
-            if let nameOfLocation = meetup.locationName {
-                mapItem.name = nameOfLocation
-            }
-            
-            let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
-            
-            var currentLocationMapItem:MKMapItem = MKMapItem.mapItemForCurrentLocation()
-            
-            MKMapItem.openMapsWithItems([currentLocationMapItem, mapItem], launchOptions: launchOptions)
-        }
-    }
-}
-
-
-enum CellMode {
-    case Line1
-    case Line2
-    case Line3
-}
-
-class  TitleCell: UITableViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
-    
-    var cellMode = CellMode.Line1
-
-    var selectedObject: PFObject? {
-        didSet{
-            if selectedObject == oldValue {
-                return
-            }
-            
-            if let company = selectedObject as? Company {
-                switch cellMode {
-                case .Line1:
-                    if let email = company.emailAddress {
-                        self.titleLabel.text = email
-                    }
-                case .Line2:
-                    if let address = company.streetAddress {
-                        self.titleLabel.text = address
-                    }
-                case .Line3:
-                    if let zipcode = company.zipCode {
-                        self.titleLabel.text = zipcode
-                    }
-                }
-            } else if let meetup = selectedObject as? Meetup {
-                switch cellMode {
-                case .Line1:
-                    if let nameOfHost = meetup.name {
-                        titleLabel.text = nameOfHost
-                    }
-                case .Line2:
-                    titleLabel.text = String("Number of Cocoaheads: \(meetup.yes_rsvp_count)")
-                case .Line3:
-                    if let date = meetup.time {
-                        var dateFormatter = NSDateFormatter()
-                        dateFormatter.dateStyle = .MediumStyle
-                        dateFormatter.timeStyle = .ShortStyle
-                        dateFormatter.dateFormat = "d MMMM, HH:mm a"
-                        self.titleLabel.text = dateFormatter.stringFromDate(date)
-                    }
-                }
-            } else if let job = selectedObject as? Job {
-                switch cellMode {
-                case .Line1:
-                    if let jobTitle = job.title {
-                        self.titleLabel.text = jobTitle
-                    }
-                case .Line2:
-                    self.titleLabel.text = ""
-                case .Line3:
-                    self.titleLabel.text = ""
-                }
-
-            }
-        }
-    }
-}
-
-class  WebViewCell: UITableViewCell, UIWebViewDelegate {
-    @IBOutlet weak var htmlWebView: UIWebView!
-    
-    @IBOutlet weak var heighLayoutConstraint: NSLayoutConstraint!
-    var selectedObject: PFObject? {
-        didSet{
-            if selectedObject == oldValue {
-                return
-            }
-            
-            if let company = selectedObject as? Company {
-//                if let webSite = company.website {
-//                    let webString = "http://\(webSite)"
-//                    
-//                    let url = NSURL(string: webString)
-//                    let urlRequest = NSURLRequest(URL: url!)
-//                    self.htmlWebView.loadRequest(urlRequest)
-//                    self.htmlWebView.scrollView.scrollEnabled = true
-//                    tableView.reloadData()
-//                }
-            } else if let meetup = selectedObject as? Meetup {
-                if let meetupDescription = meetup.meetup_description {
-                    self.htmlWebView.loadHTMLString(meetupDescription, baseURL: NSURL(string:"http://jobs.cocoaheads.nl"))
-                    self.htmlWebView.scrollView.scrollEnabled = false
-                }
-            } else if let job = selectedObject as? Job {
-                if let vacanyContent = job.content {
-                    self.htmlWebView.loadHTMLString(vacanyContent, baseURL: NSURL(string:"http://jobs.cocoaheads.nl"))
-                    self.htmlWebView.scrollView.scrollEnabled = false
-                }
-            }
-        }
-    }
-    
-    func layoutWebView() {
-        let size = htmlWebView.sizeThatFits(CGSize(width:htmlWebView.frame.width, height: 10000.0))
-        
-        if size.height != heighLayoutConstraint.constant {
-            heighLayoutConstraint.constant =  size.height
-            reloadCell(self)
-        }
-    }
-    
-    func webViewDidFinishLoad(webView: UIWebView) {
-        layoutWebView()
-    }
-    
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        if navigationType == .LinkClicked {
-            UIApplication.sharedApplication().openURL(request.URL!)
-            return false
-        }
-        
-        return true
-    }
-}
-
-extension UIResponder {
-    func reloadCell(cell:UITableViewCell) {
-        self.nextResponder()?.reloadCell(cell)
-    }
-}
-

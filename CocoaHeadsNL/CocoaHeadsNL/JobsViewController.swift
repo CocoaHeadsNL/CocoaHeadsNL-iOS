@@ -54,12 +54,12 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
         return CGSize(width: (self.view.frame.width - 15) / 2, height: 80)
     }
 
-    //MARK: - Segue
+    //MARK: - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
             if let indexPath = self.collectionView?.indexPathForCell(sender as! UICollectionViewCell) {
-                let detailViewController = segue.destinationViewController as! DetailTableViewController
+                let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.selectedObject = self.objectAtIndexPath(indexPath)
             }
         }
