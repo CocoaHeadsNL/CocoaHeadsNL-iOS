@@ -9,70 +9,64 @@
 import Foundation
 import UIKit
 
-class JobsViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout
-{
+class JobsViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
     override func queryForCollection() -> PFQuery {
         let query = Job.query()
         query!.cachePolicy = PFCachePolicy.CacheThenNetwork
         return query!
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         self.loadObjects()
     }
-    
+
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        
-        coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext!) -> Void in
-            
+        coordinator.animateAlongsideTransition({ _ in
             super.collectionViewLayout?.invalidateLayout()
             self.loadObjects()
-            
-            }, completion: { (context:UIViewControllerTransitionCoordinatorContext!) -> Void in
-                
-        })
+        }, completion: nil)
     }
-    
-    //MARK: - UICollectionViewDataSource methods
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell? {
-        let job = object as? Job
-        let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath, object: object)
-        
-        if let logoFile = job?.logo {
-            
-            cell!.imageView.file = logoFile
-            cell!.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
-            cell!.imageView.contentMode = .ScaleAspectFit
-            cell!.imageView.frame = CGRectInset(cell!.contentView.frame, 5, 5)
-            cell!.imageView.clipsToBounds = true
-            cell!.imageView.loadInBackground(nil)
-        }
 
-        
-        cell!.contentView.layer.borderWidth = 0.5
-        cell!.contentView.layer.borderColor = UIColor.grayColor().CGColor
-        
-        return cell!
+    //MARK: - UICollectionViewDataSource methods
+
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell? {
+        if let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath, object: object) {
+            let job = object as? Job
+
+            if let logoFile = job?.logo {
+                cell.imageView.file = logoFile
+                cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
+                cell.imageView.contentMode = .ScaleAspectFit
+                cell.imageView.frame = CGRectInset(cell.contentView.frame, 5, 5)
+                cell.imageView.clipsToBounds = true
+                cell.imageView.loadInBackground(nil)
+            }
+
+            cell.contentView.layer.borderWidth = 0.5
+            cell.contentView.layer.borderColor = UIColor.grayColor().CGColor
+            return cell
+        }
+        fatalError("Should not get here!")
     }
-    
+
     //MARK: - UICollectionViewDelegate methods
-    
+
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let selectedObject = self.objectAtIndexPath(indexPath)
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("detailTableViewController") as!DetailTableViewController
-        vc.selectedObject = selectedObject
-        showDetailViewController(vc, sender: self)
+        self.performSegueWithIdentifier("ShowDetail", sender: collectionView.cellForItemAtIndexPath(indexPath))
     }
-    
-    
+
     override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        
-        let currentWidth = self.view.frame.size.width
-        
-        let width = (currentWidth - 15) / 2.0
-        
-        return CGSizeMake(width, 80)
+        return CGSize(width: (self.view.frame.width - 15) / 2, height: 80)
+    }
+
+    //MARK: - Segue
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowDetail" {
+            if let indexPath = self.collectionView?.indexPathForCell(sender as! UICollectionViewCell) {
+                let detailViewController = segue.destinationViewController as! DetailTableViewController
+                detailViewController.selectedObject = self.objectAtIndexPath(indexPath)
+            }
+        }
     }
 }

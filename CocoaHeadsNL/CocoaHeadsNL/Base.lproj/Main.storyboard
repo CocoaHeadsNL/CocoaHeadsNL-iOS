@@ -83,7 +83,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cg4-4F-rKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1734" y="-2496"/>
+            <point key="canvasLocation" x="1734" y="-2556"/>
         </scene>
         <!--CocoaHeadsNL-->
         <scene sceneID="L8Q-cp-McQ">
@@ -100,17 +100,7 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
                         </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" reuseIdentifier="jobsCollectionViewCell" id="bO6-GG-KWb" customClass="PFCollectionViewCell">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="190" height="80"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <size key="customSize" width="190" height="80"/>
-                            </collectionViewCell>
-                        </cells>
+                        <cells/>
                         <connections>
                             <outlet property="dataSource" destination="p5z-Di-RAg" id="FjA-GG-Lhw"/>
                             <outlet property="delegate" destination="p5z-Di-RAg" id="DwR-uC-AUx"/>
@@ -123,10 +113,13 @@
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="loadingViewEnabled" value="NO"/>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="3uJ-fO-52Q" kind="showDetail" identifier="ShowDetail" id="GJd-Rt-qyZ"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KWX-vH-ztK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2736" y="-1785"/>
+            <point key="canvasLocation" x="2579" y="-1784"/>
         </scene>
         <!--Jobs-->
         <scene sceneID="Uzz-Zr-J2X">
@@ -287,7 +280,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qv9-fQ-CHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3689" y="-2496"/>
+            <point key="canvasLocation" x="3393" y="-1784"/>
         </scene>
         <!--Item-->
         <scene sceneID="3MA-kB-sYs">
@@ -345,7 +338,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dt8-Xg-mmb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2579" y="-2496"/>
+            <point key="canvasLocation" x="2578" y="-2556"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Qop-9C-NG0">
@@ -403,4 +396,7 @@
         <image name="file-document-7.png" width="30" height="30"/>
         <image name="paper-map-7.png" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="YXG-G2-hcg"/>
+    </inferredMetricsTieBreakers>
 </document>
