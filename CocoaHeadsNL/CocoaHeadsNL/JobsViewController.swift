@@ -31,7 +31,6 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
             if let logoFile = job?.logo {
                 cell.imageView.file = logoFile
                 cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
-                cell.imageView.contentMode = .ScaleAspectFit
                 cell.imageView.frame = CGRectInset(cell.contentView.frame, 5, 5)
                 cell.imageView.clipsToBounds = true
                 cell.imageView.loadInBackground(nil)

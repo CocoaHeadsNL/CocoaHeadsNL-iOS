@@ -29,11 +29,6 @@ class MeetupsViewController: PFQueryTableViewController {
         self.navigationItem.backBarButtonItem = backItem
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tableView.reloadData()
-    }
-
     //MARK: - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

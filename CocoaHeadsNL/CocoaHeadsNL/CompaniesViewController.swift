@@ -28,7 +28,6 @@ class CompaniesViewController: PFQueryCollectionViewController, UICollectionView
 
             if let companyLogo = company?.logo {
                 cell.imageView.file = companyLogo
-                cell.imageView.contentMode = .ScaleAspectFit
                 cell.imageView.frame = CGRect(x: 0, y: 5, width: logoWidth, height: 70)
                 cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
                 cell.imageView.loadInBackground(nil)
