@@ -66,21 +66,12 @@ class CompaniesViewController: PFQueryCollectionViewController, UICollectionView
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
             if let indexPath = self.collectionView?.indexPathForCell(sender as! UICollectionViewCell) {
-
                 let company = self.objectAtIndexPath(indexPath) as! Company
-
-                var data = DetailData()
-
-                if let name = company.name {
-                    data.title = name
-                }
-                if let apps = company["hasApps"] as? Bool {
-                    data.numberOfSections = 2
-                }
+                let dataSource = CompanyDataSource(object: company)
+                dataSource.fetchAffiliateLinks()
 
                 let detailViewController = segue.destinationViewController as! DetailViewController
-                detailViewController.selectedObject = company
-                detailViewController.data = data
+                detailViewController.dataSource = dataSource
             }
         }
     }

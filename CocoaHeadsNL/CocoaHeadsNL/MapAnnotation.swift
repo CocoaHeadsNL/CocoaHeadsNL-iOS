@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Stichting CocoaheadsNL. All rights reserved.
 //
 
-import Foundation
 import MapKit
 
 class MapAnnotation: NSObject, MKAnnotation {

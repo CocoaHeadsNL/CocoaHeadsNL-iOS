@@ -39,18 +39,9 @@ class MeetupsViewController: PFQueryTableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
             if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
-
                 let meetup = self.objectAtIndexPath(indexPath) as! Meetup
-
-                var data = DetailData()
-
-                if let name = meetup.name {
-                    data.title = name
-                }
-
                 let detailViewController = segue.destinationViewController as! DetailViewController
-                detailViewController.selectedObject = meetup
-                detailViewController.data = data
+                detailViewController.dataSource = MeetupDataSource(object: meetup)
             }
         }
     }

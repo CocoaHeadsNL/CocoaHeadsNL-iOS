@@ -1,66 +1,56 @@
-
 import UIKit
 import MapKit
 
-class  MapViewCell: UITableViewCell, MKMapViewDelegate {
+class MapViewCell: UITableViewCell, MKMapViewDelegate {
     @IBOutlet weak var littleMap: MKMapView!
 
-    var selectedObject: PFObject? {
-        didSet{
-            if selectedObject == oldValue {
-                return
+    var geoLocation: PFGeoPoint? {
+        didSet {
+            if geoLocation != oldValue, let geoLocation = geoLocation {
+                let mapRegion = MKCoordinateRegion(center: self.coordinate, span: MKCoordinateSpanMake(0.01, 0.01))
+                littleMap.region = mapRegion
             }
+        }
+    }
 
-            if let company = selectedObject as? Company {
-            } else if let meetup = selectedObject as? Meetup {
-                if let geoLoc = meetup.geoLocation {
-                    let mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2DMake(geoLoc.latitude, geoLoc.longitude), span: MKCoordinateSpanMake(0.01, 0.01))
-                    littleMap.region = mapRegion;
-
-                    if let nameOfLocation = meetup.locationName {
-                        var annotation = MapAnnotation(coordinate: CLLocationCoordinate2DMake(geoLoc.latitude, geoLoc.longitude), title: "Here it is!", subtitle: nameOfLocation) as MapAnnotation
-                        littleMap.addAnnotation(annotation)
-                    }
-                }
-            } else if let job = selectedObject as? Job {
+    var locationName: String? {
+        didSet {
+            if locationName != oldValue, let locationName = locationName {
+                var annotation = MapAnnotation(coordinate: self.coordinate, title: "Here it is!", subtitle: locationName)
+                littleMap.addAnnotation(annotation)
             }
+        }
+    }
+
+    private var coordinate: CLLocationCoordinate2D {
+        if let geoLocation = geoLocation {
+            return CLLocationCoordinate2D(latitude: geoLocation.latitude, longitude: geoLocation.longitude)
+        } else {
+            return CLLocationCoordinate2D(latitude: 0, longitude: 0)
         }
     }
 
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
         let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pinAnnotationView")
         annotationView.animatesDrop = true
-
         return annotationView
     }
 
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
-        if let meetup = selectedObject as? Meetup {
-            if let geoLoc = meetup.geoLocation {
-                self.openMapWithCoordinates(geoLoc.longitude, theLat: geoLoc.latitude)
-            }
-        }
+        self.openMapWithCoordinate(coordinate)
     }
 
-    //self.openMapWithCoordinates(geoLoc.longitude, theLat: geoLoc.latitude)
+    private func openMapWithCoordinate(coordinate: CLLocationCoordinate2D) {
+        var placemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
+        var mapItem = MKMapItem(placemark: placemark)
 
-    func openMapWithCoordinates(theLon:Double, theLat:Double){
-        if let meetup = selectedObject as? Meetup {
-            var coordinate = CLLocationCoordinate2DMake(theLat, theLon)
-            var placemark:MKPlacemark = MKPlacemark(coordinate: coordinate, addressDictionary:nil)
-
-            var mapItem:MKMapItem = MKMapItem(placemark: placemark)
-
-            if let nameOfLocation = meetup.locationName {
-                mapItem.name = nameOfLocation
-            }
-
-            let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
-
-            var currentLocationMapItem:MKMapItem = MKMapItem.mapItemForCurrentLocation()
-
-            MKMapItem.openMapsWithItems([currentLocationMapItem, mapItem], launchOptions: launchOptions)
+        if let locationName = locationName {
+            mapItem.name = locationName
         }
+
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+        var currentLocationMapItem = MKMapItem.mapItemForCurrentLocation()
+
+        MKMapItem.openMapsWithItems([currentLocationMapItem, mapItem], launchOptions: launchOptions)
     }
 }
-
