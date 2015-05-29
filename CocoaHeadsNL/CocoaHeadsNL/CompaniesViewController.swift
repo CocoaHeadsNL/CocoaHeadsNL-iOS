@@ -10,17 +10,27 @@ import Foundation
 
 class CompaniesViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
     
+   
     override func viewDidLoad() {
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20)
+        layout.minimumInteritemSpacing = 10.0
+        
         self.collectionView?.registerClass(CompanyCollectionViewCell.self, forCellWithReuseIdentifier: "companyCollectionViewCell")
         self.loadObjects()
     }
     
-    
-    override func queryForCollection() -> PFQuery {
-        let query = Company.query()
-        return query!
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+            let bounds = UIEdgeInsetsInsetRect(view.bounds, layout.sectionInset)
+            let sideLength = min(CGRectGetWidth(bounds), CGRectGetHeight(bounds)) / 2.0 - layout.minimumInteritemSpacing
+            layout.itemSize = CGSizeMake(sideLength, sideLength)
+        }
     }
-
+    
+    
     //MARK: - UICollectionViewDataSource methods
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell {
@@ -43,7 +53,7 @@ class CompaniesViewController: PFQueryCollectionViewController, UICollectionView
     //MARK: - UICollectionViewDelegateFlowLayout methods
 
     override func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize {
-        return CGSize(width: 140, height: 100)
+        return CGSize(width: 145, height: 100)
     }
 
     //MARK: - Segues
@@ -60,4 +70,12 @@ class CompaniesViewController: PFQueryCollectionViewController, UICollectionView
             }
         }
     }
+    
+    //MARK: -Query
+    
+    override func queryForCollection() -> PFQuery {
+        let query = Company.query()
+        return query!.orderByAscending("place")
+    }
+
 }
