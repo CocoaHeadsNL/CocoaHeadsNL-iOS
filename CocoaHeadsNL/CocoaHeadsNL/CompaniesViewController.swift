@@ -10,14 +10,10 @@ import Foundation
 
 class CompaniesViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
     
-   
-    override func viewDidLoad() {
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20)
-        layout.minimumInteritemSpacing = 10.0
+    override func loadView() {
+        super.loadView()
         
         self.collectionView?.registerClass(CompanyCollectionViewCell.self, forCellWithReuseIdentifier: "companyCollectionViewCell")
-        self.loadObjects()
     }
     
     override func viewWillLayoutSubviews() {

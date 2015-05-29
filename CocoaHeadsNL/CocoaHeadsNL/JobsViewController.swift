@@ -11,15 +11,10 @@ import UIKit
 
 class JobsViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
     
-  
-    override func viewDidLoad() {
-        
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20)
-        layout.minimumInteritemSpacing = 10.0
-        
+    override func loadView() {
+        super.loadView()
+
         self.collectionView?.registerClass(JobsCollectionViewCell.self, forCellWithReuseIdentifier: "jobsCollectionViewCell")
-        self.loadObjects()
     }
     
     override func viewWillLayoutSubviews() {
