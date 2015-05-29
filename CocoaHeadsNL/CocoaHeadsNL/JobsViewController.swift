@@ -14,37 +14,22 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
         let query = Job.query()
         return query!
     }
-
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animateAlongsideTransition({ _ in
-            super.collectionViewLayout?.invalidateLayout()
-        }, completion: nil)
+    
+    override func viewDidLoad() {
+        self.collectionView?.registerClass(JobsCollectionViewCell.self, forCellWithReuseIdentifier: "jobsCollectionViewCell")
+        self.loadObjects()
     }
 
     //MARK: - UICollectionViewDataSource methods
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell? {
-        if let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath, object: object) {
-            let job = object as? Job
 
-            if let logoFile = job?.logo {
-                cell.imageView.file = logoFile
-                cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
-                cell.imageView.frame = CGRectInset(cell.contentView.frame, 5, 5)
-                cell.imageView.clipsToBounds = true
-                cell.imageView.loadInBackground({ (image, error) -> Void in
-                    if error == nil {
-                        cell.setNeedsLayout()
-                    }
-                })
-
-            }
-
-            cell.contentView.layer.borderWidth = 0.5
-            cell.contentView.layer.borderColor = UIColor.grayColor().CGColor
-            return cell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("jobsCollectionViewCell", forIndexPath: indexPath) as! JobsCollectionViewCell
+            
+        if let job = object as? Job {
+            cell.updateFromObject(job)
         }
-        fatalError("Could not get a cell")
+        return cell
     }
 
     //MARK: - UICollectionViewDelegate methods
@@ -53,8 +38,8 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
         self.performSegueWithIdentifier("ShowDetail", sender: collectionView.cellForItemAtIndexPath(indexPath))
     }
 
-    override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: (self.view.frame.width - 15) / 2, height: 80)
+    override func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize {
+        return CGSize(width: 140, height: 100)
     }
 
     //MARK: - Segues

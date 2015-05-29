@@ -88,7 +88,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="scrollIndicatorInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="KTF-6H-c5v">
-                            <size key="itemSize" width="190" height="80"/>
+                            <size key="itemSize" width="140" height="90"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
@@ -101,9 +101,6 @@
                     </collectionView>
                     <navigationItem key="navigationItem" title="CocoaHeadsNL" id="tRg-uu-nNZ"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="objectsPerPage">
-                            <integer key="value" value="10"/>
-                        </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="loadingViewEnabled" value="NO"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -281,13 +278,13 @@
         <!--Split View Controller-->
         <scene sceneID="3MA-kB-sYs">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="B0A-m9-fy9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <splitViewController storyboardIdentifier="splitViewController" id="W81-50-NMJ" customClass="SplitViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="49e-Tb-3d3" kind="relationship" relationship="masterViewController" id="Wl8-Wj-T1W"/>
                         <segue destination="2rn-Ke-6oT" kind="relationship" relationship="detailViewController" id="tYk-1V-aGk"/>
                     </connections>
                 </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B0A-m9-fy9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="882" y="-3329"/>
         </scene>
@@ -391,6 +388,6 @@
         <image name="JobsTabIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vXN-bc-jAa"/>
+        <segue reference="GJd-Rt-qyZ"/>
     </inferredMetricsTieBreakers>
 </document>

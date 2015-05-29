@@ -9,47 +9,29 @@
 import Foundation
 
 class CompaniesViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    override func viewDidLoad() {
+        self.collectionView?.registerClass(CompanyCollectionViewCell.self, forCellWithReuseIdentifier: "companyCollectionViewCell")
+        self.loadObjects()
+    }
+    
+    
     override func queryForCollection() -> PFQuery {
         let query = Company.query()
         return query!
     }
 
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-    }
-
     //MARK: - UICollectionViewDataSource methods
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell {
-        if let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath, object: object) {
-            let company = object as? Company
-
-            let logoWidth: CGFloat = 120
-
-            if let companyLogo = company?.logo {
-                cell.imageView.file = companyLogo
-                cell.imageView.frame = CGRect(x: 0, y: 5, width: logoWidth, height: 70)
-                cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
-                cell.imageView.loadInBackground({ (image, error) -> Void in
-                    if error == nil {
-                        cell.setNeedsLayout()
-                    }
-                })
-
-            }
-
-            let whiteSpace: CGFloat = 10
-            let labelWidth = cell.bounds.width - whiteSpace - logoWidth
-
-            cell.textLabel.numberOfLines = 2
-            cell.textLabel.frame = CGRect(x: logoWidth + whiteSpace, y: 5, width: labelWidth, height: 70)
-            cell.textLabel.text = company?.name
-
-            cell.contentView.layer.borderWidth = 0.5
-            cell.contentView.layer.borderColor = UIColor.grayColor().CGColor
-            
-            return cell
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("companyCollectionViewCell", forIndexPath: indexPath) as! CompanyCollectionViewCell
+        
+        if let company = object as? Company {
+            cell.updateFromObject(company)
         }
-        fatalError("Could not get a cell")
+        
+        return cell
     }
 
     //MARK: - UICollectionViewDelegate methods
@@ -61,7 +43,7 @@ class CompaniesViewController: PFQueryCollectionViewController, UICollectionView
     //MARK: - UICollectionViewDelegateFlowLayout methods
 
     override func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width - 10, height: 80)
+        return CGSize(width: 140, height: 100)
     }
 
     //MARK: - Segues
