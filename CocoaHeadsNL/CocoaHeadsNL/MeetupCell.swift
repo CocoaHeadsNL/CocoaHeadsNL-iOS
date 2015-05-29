@@ -80,9 +80,9 @@ class MeetupCell: PFTableViewCell {
 
         if let logoFile = meetup.smallLogo {
             logoImageView.file = logoFile
-            logoImageView.loadInBackground({ (image, error) -> Void in
+            logoImageView.loadInBackground({[weak self] (image, error) -> Void in
                 if error == nil {
-                    self.setNeedsLayout()
+                    self?.setNeedsLayout()
                 }
             })
         }

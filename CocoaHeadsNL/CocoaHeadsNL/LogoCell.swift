@@ -11,9 +11,9 @@ class LogoCell: UITableViewCell {
 
                 if let logoFile = logoFile {
                     self.logoImageView.file = logoFile
-                    self.logoImageView.loadInBackground({ (image, error) -> Void in
+                    self.logoImageView.loadInBackground({[weak self] (image, error) -> Void in
                         if error == nil {
-                            self.setNeedsLayout()
+                            self?.setNeedsLayout()
                         }
                     })
                 }

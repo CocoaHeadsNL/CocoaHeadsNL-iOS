@@ -19,9 +19,9 @@ class CompanyCollectionViewCell: PFCollectionViewCell {
                 imageView.frame = CGRect(x: 0, y: 5, width: 140, height: 70)
                 imageView.image = UIImage(named: "CocoaHeadsNLLogo")
                 imageView.contentMode = .ScaleAspectFit
-                imageView.loadInBackground({ (image, error) -> Void in
+                imageView.loadInBackground({[weak self] (image, error) -> Void in
                     if error == nil {
-                        self.layoutIfNeeded()
+                        self?.layoutIfNeeded()
                     }
                 })
             

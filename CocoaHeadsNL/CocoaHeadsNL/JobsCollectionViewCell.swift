@@ -25,9 +25,9 @@ class JobsCollectionViewCell: PFCollectionViewCell {
                 imageView.clipsToBounds = true
                 imageView.contentMode = .ScaleAspectFit
                 imageView.image = UIImage(named: "CocoaHeadsNLLogo")
-                imageView.loadInBackground({ (image, error) -> Void in
+                imageView.loadInBackground({[weak self] (image, error) -> Void in
                     if error == nil {
-                        self.layoutIfNeeded()
+                        self?.layoutIfNeeded()
                     }
                 })
                 
