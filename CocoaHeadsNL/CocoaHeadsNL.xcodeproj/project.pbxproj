@@ -20,6 +20,7 @@
 		7B6A74561B179B7D00A10762 /* MapViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74551B179B7D00A10762 /* MapViewCell.swift */; };
 		7B6A74581B179B9C00A10762 /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74571B179B9C00A10762 /* TitleCell.swift */; };
 		7B6A745A1B179BC000A10762 /* WebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74591B179BC000A10762 /* WebViewCell.swift */; };
+		7B6A745C1B182E9C00A10762 /* DetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A745B1B182E9C00A10762 /* DetailData.swift */; };
 		F11455B91AB4BA0600546D22 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455B81AB4BA0600546D22 /* DetailViewController.swift */; };
 		F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */; };
 		F11455BF1AB4E8DB00546D22 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */; };
@@ -60,6 +61,7 @@
 		7B6A74551B179B7D00A10762 /* MapViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewCell.swift; sourceTree = "<group>"; };
 		7B6A74571B179B9C00A10762 /* TitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		7B6A74591B179BC000A10762 /* WebViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewCell.swift; sourceTree = "<group>"; };
+		7B6A745B1B182E9C00A10762 /* DetailData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailData.swift; sourceTree = "<group>"; };
 		F11455B81AB4BA0600546D22 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 		4A13831E1AC7F83D00E0D41E /* Viewing Details */ = {
 			isa = PBXGroup;
 			children = (
+				7B6A745B1B182E9C00A10762 /* DetailData.swift */,
 				F11455B81AB4BA0600546D22 /* DetailViewController.swift */,
 				7B6A74531B179B4E00A10762 /* LogoCell.swift */,
 				F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */,
@@ -437,6 +440,7 @@
 				4A7EEAF11AC5440C001C2827 /* ModelObjects.swift in Sources */,
 				7B6A74541B179B4E00A10762 /* LogoCell.swift in Sources */,
 				F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */,
+				7B6A745C1B182E9C00A10762 /* DetailData.swift in Sources */,
 				F11455BF1AB4E8DB00546D22 /* SplitViewController.swift in Sources */,
 				7B6A745A1B179BC000A10762 /* WebViewCell.swift in Sources */,
 				7B6A744D1B149A6B00A10762 /* UIImage+Resize.swift in Sources */,

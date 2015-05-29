@@ -5,7 +5,7 @@ class LogoCell: UITableViewCell {
     @IBOutlet weak var logoImageView: PFImageView!
 
     var selectedObject: PFObject? {
-        didSet{
+        didSet {
             if selectedObject == oldValue {
                 return
             }

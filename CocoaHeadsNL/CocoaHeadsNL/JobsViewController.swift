@@ -59,8 +59,18 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
             if let indexPath = self.collectionView?.indexPathForCell(sender as! UICollectionViewCell) {
+
+                let job = self.objectAtIndexPath(indexPath) as! Job
+
+                var data = DetailData()
+
+                if let title = job.title {
+                    data.title = title
+                }
+
                 let detailViewController = segue.destinationViewController as! DetailViewController
-                detailViewController.selectedObject = self.objectAtIndexPath(indexPath)
+                detailViewController.selectedObject = job
+                detailViewController.data = data
             }
         }
     }

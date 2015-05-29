@@ -15,6 +15,9 @@ extension UIResponder {
 }
 
 class DetailViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+
+    var data: DetailData!
+
     var selectedObject: PFObject?
     var companyApps = NSMutableArray()
 
@@ -23,6 +26,7 @@ class DetailViewController: UITableViewController, UITableViewDataSource, UITabl
     }
 
     override func viewDidLoad() {
+        super.viewDidLoad()
 
         //Can be used to hide masterViewController and increase size of detailView if wanted
         self.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
@@ -71,34 +75,12 @@ class DetailViewController: UITableViewController, UITableViewDataSource, UITabl
     }
 
     override func viewWillAppear(animated: Bool) {
-        if let company = selectedObject as? Company {
-            if let name = company.name {
-                self.navigationItem.title = name
-            }
-        } else if let meetup = selectedObject as? Meetup {
-            if let title = meetup.name{
-                self.navigationItem.title = title
-            }
-        } else if let job = selectedObject as? Job {
-            if let title = job.title{
-                self.navigationItem.title = title
-            }
-        }
+        super.viewWillAppear(animated)
+        self.navigationItem.title = data.title
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if let company = selectedObject as? Company {
-            if let apps = company["hasApps"] as? Bool {
-                return 2
-            } else {
-                return 1
-            }
-        } else if let meetup = selectedObject as? Meetup {
-            return 1
-        } else if let job = selectedObject as? Job {
-            return 1
-        }
-        return 1
+        return data.numberOfSections
     }
 
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -291,7 +273,7 @@ class DetailViewController: UITableViewController, UITableViewDataSource, UITabl
         }
     }
 
-    override func reloadCell(cell:UITableViewCell) {
+    override func reloadCell(cell: UITableViewCell) {
         tableView.beginUpdates()
         tableView.endUpdates()
     }
