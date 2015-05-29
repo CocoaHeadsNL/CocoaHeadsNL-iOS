@@ -56,7 +56,10 @@ class MeetupCell: PFTableViewCell {
         titleLabel.text = meetup.name
 
         if let description = meetup.meetup_description {
-            descriptionLabel.text = description
+        
+            let str = description.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
+            
+            descriptionLabel.text = str
         }
 
         if let date = meetup.time {
