@@ -64,7 +64,7 @@ class MeetupCell: PFTableViewCell {
 
         if let date = meetup.time {
             let timeText = MeetupCell.dateFormatter.stringFromDate(date)
-            timeLabel.text = String(format: "%@ - %@", meetup.locationName ?? "Location unknown", timeText)
+            timeLabel.text = String(format: "%@ - %@", meetup.location ?? "Location unknown", timeText)
 
             let components = NSCalendar.currentCalendar().components(.CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
             dayLabel.text = String(format: "%d", components.day)
