@@ -20,7 +20,7 @@ class JobsCollectionViewCell: PFCollectionViewCell {
             
             if let logoFile = job.logo {
                 imageView.file = logoFile
-                let frameForImage = CGRectMake(0, 0, 130, 70)
+                let frameForImage = CGRect(x: 0, y: 0, width: self.contentView.frame.width, height: 70)
                 imageView.frame = CGRectInset(frameForImage, 5, 5)
                 imageView.clipsToBounds = true
                 imageView.contentMode = .ScaleAspectFit
