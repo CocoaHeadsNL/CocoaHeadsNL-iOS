@@ -10,14 +10,26 @@ import Foundation
 import UIKit
 
 class JobsViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
-    override func queryForCollection() -> PFQuery {
-        let query = Job.query()
-        return query!
-    }
     
+  
     override func viewDidLoad() {
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20)
+        layout.minimumInteritemSpacing = 10.0
+        
         self.collectionView?.registerClass(JobsCollectionViewCell.self, forCellWithReuseIdentifier: "jobsCollectionViewCell")
         self.loadObjects()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+            let bounds = UIEdgeInsetsInsetRect(view.bounds, layout.sectionInset)
+            let sideLength = min(CGRectGetWidth(bounds), CGRectGetHeight(bounds)) / 2.0 - layout.minimumInteritemSpacing
+            layout.itemSize = CGSizeMake(sideLength, sideLength)
+        }
     }
 
     //MARK: - UICollectionViewDataSource methods
@@ -39,7 +51,7 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
     }
 
     override func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize {
-        return CGSize(width: 140, height: 100)
+        return CGSize(width: 145, height: 100)
     }
 
     //MARK: - Segues
@@ -53,4 +65,12 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
             }
         }
     }
+    
+    //MARK: - Query
+    
+    override func queryForCollection() -> PFQuery {
+        let query = Job.query()
+        return query!.orderByAscending("date")
+    }
+    
 }
