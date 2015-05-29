@@ -14,16 +14,21 @@ class CompaniesViewController: PFQueryCollectionViewController, UICollectionView
         super.loadView()
         
         self.collectionView?.registerClass(CompanyCollectionViewCell.self, forCellWithReuseIdentifier: "companyCollectionViewCell")
+        
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
+
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            let bounds = UIEdgeInsetsInsetRect(view.bounds, layout.sectionInset)
-            let sideLength = min(CGRectGetWidth(bounds), CGRectGetHeight(bounds)) / 2.0 - layout.minimumInteritemSpacing
-            layout.itemSize = CGSizeMake(sideLength, sideLength)
+            layout.itemSize = CGSize(width: 145, height: 100)
+            let screenwidth = view.frame.width
+            let numberOfCells = floor(screenwidth / layout.itemSize.width)
+            let inset = floor((screenwidth - numberOfCells * layout.itemSize.width) / (numberOfCells + 1))
+            layout.sectionInset = UIEdgeInsets(top: 10.0, left: inset, bottom: 10.0, right: inset)
+            layout.minimumInteritemSpacing = inset
         }
+        
     }
     
     
@@ -44,12 +49,6 @@ class CompaniesViewController: PFQueryCollectionViewController, UICollectionView
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("ShowDetail", sender: collectionView.cellForItemAtIndexPath(indexPath))
-    }
-
-    //MARK: - UICollectionViewDelegateFlowLayout methods
-
-    override func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize {
-        return CGSize(width: 145, height: 100)
     }
 
     //MARK: - Segues
