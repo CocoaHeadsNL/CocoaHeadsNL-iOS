@@ -39,9 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             PFUser.logOut()
         }
 
-        PFConfig.getConfigInBackgroundWithBlock(nil)
+        PFConfig.getConfigInBackground()
 
-        PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
+        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
 
         return true
     }

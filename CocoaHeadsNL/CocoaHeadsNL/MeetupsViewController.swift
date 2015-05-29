@@ -69,7 +69,6 @@ class MeetupsViewController: PFQueryTableViewController {
     override func queryForTable() -> PFQuery {
         let meetupQuery = Meetup.query()!
         meetupQuery.orderByDescending("time")
-        meetupQuery.cachePolicy = .CacheThenNetwork
 
         return meetupQuery
     }

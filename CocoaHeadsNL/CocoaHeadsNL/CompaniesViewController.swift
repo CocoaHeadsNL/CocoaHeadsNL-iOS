@@ -11,7 +11,6 @@ import Foundation
 class CompaniesViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
     override func queryForCollection() -> PFQuery {
         let query = Company.query()
-        query!.cachePolicy = .CacheThenNetwork
         return query!
     }
 
@@ -30,7 +29,12 @@ class CompaniesViewController: PFQueryCollectionViewController, UICollectionView
                 cell.imageView.file = companyLogo
                 cell.imageView.frame = CGRect(x: 0, y: 5, width: logoWidth, height: 70)
                 cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
-                cell.imageView.loadInBackground(nil)
+                cell.imageView.loadInBackground({ (image, error) -> Void in
+                    if error == nil {
+                        cell.setNeedsLayout()
+                    }
+                })
+
             }
 
             let whiteSpace: CGFloat = 10

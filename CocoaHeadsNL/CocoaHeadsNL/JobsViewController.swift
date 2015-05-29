@@ -12,7 +12,6 @@ import UIKit
 class JobsViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
     override func queryForCollection() -> PFQuery {
         let query = Job.query()
-        query!.cachePolicy = .CacheThenNetwork
         return query!
     }
 
@@ -33,7 +32,12 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
                 cell.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
                 cell.imageView.frame = CGRectInset(cell.contentView.frame, 5, 5)
                 cell.imageView.clipsToBounds = true
-                cell.imageView.loadInBackground(nil)
+                cell.imageView.loadInBackground({ (image, error) -> Void in
+                    if error == nil {
+                        cell.setNeedsLayout()
+                    }
+                })
+
             }
 
             cell.contentView.layer.borderWidth = 0.5

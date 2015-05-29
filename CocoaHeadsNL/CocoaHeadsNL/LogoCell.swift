@@ -11,7 +11,11 @@ class LogoCell: UITableViewCell {
 
                 if let logoFile = logoFile {
                     self.logoImageView.file = logoFile
-                    self.logoImageView.loadInBackground(nil)
+                    self.logoImageView.loadInBackground({ (image, error) -> Void in
+                        if error == nil {
+                            self.setNeedsLayout()
+                        }
+                    })
                 }
             }
         }

@@ -78,11 +78,14 @@ class MeetupCell: PFTableViewCell {
             }
         }
 
-//TODO: this now keeps crashing the app; something with caching?
-//        if let logoFile = meetup.smallLogo {
-//            logoImageView.file = logoFile
-//            logoImageView.loadInBackground(nil)
-//        }
+        if let logoFile = meetup.smallLogo {
+            logoImageView.file = logoFile
+            logoImageView.loadInBackground({ (image, error) -> Void in
+                if error == nil {
+                    self.setNeedsLayout()
+                }
+            })
+        }
     }
 
     override func setHighlighted(highlighted: Bool, animated: Bool) {
