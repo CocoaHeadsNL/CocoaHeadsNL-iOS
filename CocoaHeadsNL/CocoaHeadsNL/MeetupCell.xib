@@ -38,16 +38,16 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FvW-QZ-rpN">
-                        <rect key="frame" x="52" y="6" width="192" height="20.5"/>
+                        <rect key="frame" x="52" y="6" width="188" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="MeetupPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="Lev-tK-HJm" customClass="PFImageView">
-                        <rect key="frame" x="244" y="8" width="68" height="68"/>
+                        <rect key="frame" x="240" y="8" width="72" height="72"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="68" id="0w7-jt-gbw"/>
-                            <constraint firstAttribute="height" constant="68" id="Pba-FY-dfL"/>
+                            <constraint firstAttribute="width" constant="72" id="0w7-jt-gbw"/>
+                            <constraint firstAttribute="height" constant="72" id="Pba-FY-dfL"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5rM-DP-vIx" userLabel="Separator">
@@ -58,15 +58,15 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yK-aX-WfD">
-                        <rect key="frame" x="52" y="27" width="29.5" height="16"/>
+                        <rect key="frame" x="52" y="28" width="30" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22 going" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MQt-r0-5KU" userLabel="rsvpLabel">
-                        <rect key="frame" x="52" y="44" width="168" height="16"/>
+                        <rect key="frame" x="52" y="46" width="180" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.45000000000000001" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -74,10 +74,9 @@
                     <constraint firstAttribute="trailing" secondItem="5rM-DP-vIx" secondAttribute="trailing" id="0ob-zE-r3Z"/>
                     <constraint firstAttribute="trailing" secondItem="Lev-tK-HJm" secondAttribute="trailing" constant="8" id="4Z4-7c-iub"/>
                     <constraint firstItem="FvW-QZ-rpN" firstAttribute="leading" secondItem="0ui-YP-aIQ" secondAttribute="trailing" constant="8" id="90v-CJ-0jA"/>
-                    <constraint firstItem="MQt-r0-5KU" firstAttribute="top" secondItem="5yK-aX-WfD" secondAttribute="bottom" constant="1" id="BGm-O6-6dg"/>
+                    <constraint firstItem="MQt-r0-5KU" firstAttribute="top" secondItem="5yK-aX-WfD" secondAttribute="bottom" constant="2" id="BGm-O6-6dg"/>
                     <constraint firstItem="5yK-aX-WfD" firstAttribute="top" secondItem="FvW-QZ-rpN" secondAttribute="bottom" constant="1" id="L5c-cn-QBS"/>
                     <constraint firstItem="5yK-aX-WfD" firstAttribute="leading" secondItem="FvW-QZ-rpN" secondAttribute="leading" id="LJZ-7W-jd8"/>
-                    <constraint firstAttribute="trailing" secondItem="FvW-QZ-rpN" secondAttribute="trailing" constant="8" id="RUt-iD-lbU"/>
                     <constraint firstItem="5rM-DP-vIx" firstAttribute="leading" secondItem="etl-Ja-pf7" secondAttribute="leading" id="T5j-xf-GOL"/>
                     <constraint firstItem="Lev-tK-HJm" firstAttribute="top" secondItem="etl-Ja-pf7" secondAttribute="top" constant="8" id="Z7Q-az-cB3"/>
                     <constraint firstAttribute="bottom" secondItem="0ui-YP-aIQ" secondAttribute="bottom" id="ZJ7-WD-Qgg"/>
@@ -86,14 +85,9 @@
                     <constraint firstItem="Lev-tK-HJm" firstAttribute="leading" secondItem="FvW-QZ-rpN" secondAttribute="trailing" id="og4-MH-t4i"/>
                     <constraint firstAttribute="bottom" secondItem="5rM-DP-vIx" secondAttribute="bottom" id="vo2-rZ-TLe"/>
                     <constraint firstItem="FvW-QZ-rpN" firstAttribute="top" secondItem="etl-Ja-pf7" secondAttribute="top" constant="6" id="yLr-Bv-JVu"/>
-                    <constraint firstItem="Lev-tK-HJm" firstAttribute="leading" secondItem="MQt-r0-5KU" secondAttribute="trailing" constant="24" id="ykx-87-XdT"/>
+                    <constraint firstItem="Lev-tK-HJm" firstAttribute="leading" secondItem="MQt-r0-5KU" secondAttribute="trailing" constant="8" id="ykx-87-XdT"/>
                     <constraint firstItem="0ui-YP-aIQ" firstAttribute="leading" secondItem="etl-Ja-pf7" secondAttribute="leading" id="zxh-qP-Kh1"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="RUt-iD-lbU"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="calendarView" destination="QMZ-ed-ONR" id="qzf-bp-lnX"/>
@@ -109,6 +103,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="MeetupPlaceholder" width="44" height="44"/>
+        <image name="MeetupPlaceholder" width="72" height="72"/>
     </resources>
 </document>

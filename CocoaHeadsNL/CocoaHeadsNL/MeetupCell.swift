@@ -39,10 +39,7 @@ class MeetupCell: PFTableViewCell {
         monthLabel.text = ""
 
         logoImageView.file = nil
-
-        if let image = UIImage(named: "MeetupPlaceholder") {
-            logoImageView.image = image
-        }
+        logoImageView.image = UIImage(named: "MeetupPlaceholder")
     }
 
     func configureCellForMeetup(meetup: Meetup, row: Int) {
