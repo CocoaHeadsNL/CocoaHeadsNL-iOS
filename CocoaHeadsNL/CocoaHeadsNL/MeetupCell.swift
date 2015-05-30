@@ -15,12 +15,12 @@ class MeetupCell: PFTableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var logoImageView: PFImageView!
     @IBOutlet weak var dateContainer: UIView!
     @IBOutlet weak var calendarView: UIView!
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var monthLabel: UILabel!
+    @IBOutlet weak var rsvpLabel: UILabel!
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -37,7 +37,6 @@ class MeetupCell: PFTableViewCell {
         timeLabel.text = ""
         dayLabel.text = ""
         monthLabel.text = ""
-        descriptionLabel.text = ""
 
         logoImageView.file = nil
 
@@ -49,10 +48,7 @@ class MeetupCell: PFTableViewCell {
     func configureCellForMeetup(meetup: Meetup, row: Int) {
         titleLabel.text = meetup.name
 
-        if let description = meetup.meetup_description {
-            let str = description.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
-            descriptionLabel.text = str
-        }
+        rsvpLabel.text = "\(meetup.yes_rsvp_count) going"
 
         if let date = meetup.time {
             dateFormatter.dateStyle = .NoStyle
