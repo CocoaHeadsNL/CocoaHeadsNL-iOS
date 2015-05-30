@@ -13,7 +13,7 @@ class CompaniesCloseCollectionViewController: PFQueryCollectionViewController, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView?.registerClass(CompanyCollectionViewCell.self, forCellWithReuseIdentifier: "companyCollectionViewCell")
+        self.collectionView?.registerClass(CompanyCloseCollectionViewCell.self, forCellWithReuseIdentifier: "companyCloseCollectionViewCell")
     }
     
     override func viewWillLayoutSubviews() {
@@ -30,7 +30,7 @@ class CompaniesCloseCollectionViewController: PFQueryCollectionViewController, U
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("companyCollectionViewCell", forIndexPath: indexPath) as! CompanyCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("companyCloseCollectionViewCell", forIndexPath: indexPath) as! CompanyCloseCollectionViewCell
         
         if let company = object as? Company {
             cell.updateFromObject(company)

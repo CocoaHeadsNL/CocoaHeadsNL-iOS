@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CompanyCollectionViewCell: PFCollectionViewCell {
+class CompanyCloseCollectionViewCell: PFCollectionViewCell {
     
     override func updateFromObject(object: PFObject?) {
         
