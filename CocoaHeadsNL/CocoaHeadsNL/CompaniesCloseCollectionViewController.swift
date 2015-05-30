@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CompaniesViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
+class CompaniesCloseCollectionViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     override func viewDidLoad() {
         super.viewDidLoad()
