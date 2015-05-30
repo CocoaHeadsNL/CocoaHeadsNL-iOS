@@ -83,10 +83,9 @@ class MeetupCell: PFTableViewCell {
 
         if let logoFile = meetup.smallLogo {
             logoImageView.file = logoFile
-            logoImageView.loadInBackground({[weak self] (image, error) -> Void in
-                if error == nil {
-                    self?.setNeedsLayout()
-                }
+            logoImageView.loadInBackground().continueWithSuccessBlock({[weak self] (task: BFTask!) -> AnyObject! in
+                self?.setNeedsLayout()
+                return nil
             })
         }
     }

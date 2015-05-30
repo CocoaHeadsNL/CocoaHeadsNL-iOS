@@ -19,12 +19,10 @@ class CompanyCollectionViewCell: PFCollectionViewCell {
                 imageView.frame = CGRect(x: 0, y: 0, width: self.contentView.frame.width, height: 70)
                 imageView.image = UIImage(named: "CocoaHeadsNLLogo")
                 imageView.contentMode = .ScaleAspectFit
-                imageView.loadInBackground({[weak self] (image, error) -> Void in
-                    if error == nil {
-                        self?.layoutIfNeeded()
-                    }
-                })
-            
+                imageView.loadInBackground().continueWithSuccessBlock({[weak self] (task: BFTask!) -> AnyObject! in
+                    self?.setNeedsLayout()
+                    return nil
+                    })
             }
             
             if let place = company.place {

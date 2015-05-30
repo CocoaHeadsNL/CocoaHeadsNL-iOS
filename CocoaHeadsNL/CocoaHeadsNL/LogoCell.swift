@@ -11,12 +11,10 @@ class LogoCell: UITableViewCell {
 
                 if let logoFile = logoFile {
                     self.logoImageView.file = logoFile
-                    self.logoImageView.loadInBackground({[weak self] (image, error) -> Void in
-                        if error == nil {
-                            self?.setNeedsLayout()
-                        }
-                    })
-                }
+                    self.logoImageView.loadInBackground().continueWithSuccessBlock({[weak self] (task: BFTask!) -> AnyObject! in
+                        self?.setNeedsLayout()
+                        return nil
+                        })                }
             }
         }
     }
