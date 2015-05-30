@@ -66,7 +66,7 @@ class MeetupCell: PFTableViewCell {
                 rsvpLabel.text = "\(meetup.yes_rsvp_count) CocoaHeads going"
         
                 if meetup.rsvp_limit > 0 {
-                    rsvpLabel.text = rsvpLabel.text! + " (\(meetup.rsvp_limit - meetup.yes_rsvp_count) seats available)"
+                    rsvpLabel.text = rsvpLabel.text! + "\n\(meetup.rsvp_limit - meetup.yes_rsvp_count) seats available"
                 }
             } else {
                 dayLabel.textColor = UIColor(white: 0, alpha: 0.65)

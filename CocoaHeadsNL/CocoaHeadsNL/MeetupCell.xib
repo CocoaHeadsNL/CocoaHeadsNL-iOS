@@ -38,7 +38,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FvW-QZ-rpN">
-                        <rect key="frame" x="52" y="6" width="260" height="20.5"/>
+                        <rect key="frame" x="52" y="6" width="192" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -63,7 +63,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22 going" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MQt-r0-5KU" userLabel="rsvpLabel">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22 going" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MQt-r0-5KU" userLabel="rsvpLabel">
                         <rect key="frame" x="52" y="44" width="168" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
@@ -83,11 +83,17 @@
                     <constraint firstAttribute="bottom" secondItem="0ui-YP-aIQ" secondAttribute="bottom" id="ZJ7-WD-Qgg"/>
                     <constraint firstItem="FvW-QZ-rpN" firstAttribute="leading" secondItem="MQt-r0-5KU" secondAttribute="leading" id="hU1-El-g7R"/>
                     <constraint firstItem="0ui-YP-aIQ" firstAttribute="top" secondItem="etl-Ja-pf7" secondAttribute="top" id="lKC-zX-2ha"/>
+                    <constraint firstItem="Lev-tK-HJm" firstAttribute="leading" secondItem="FvW-QZ-rpN" secondAttribute="trailing" id="og4-MH-t4i"/>
                     <constraint firstAttribute="bottom" secondItem="5rM-DP-vIx" secondAttribute="bottom" id="vo2-rZ-TLe"/>
                     <constraint firstItem="FvW-QZ-rpN" firstAttribute="top" secondItem="etl-Ja-pf7" secondAttribute="top" constant="6" id="yLr-Bv-JVu"/>
                     <constraint firstItem="Lev-tK-HJm" firstAttribute="leading" secondItem="MQt-r0-5KU" secondAttribute="trailing" constant="24" id="ykx-87-XdT"/>
                     <constraint firstItem="0ui-YP-aIQ" firstAttribute="leading" secondItem="etl-Ja-pf7" secondAttribute="leading" id="zxh-qP-Kh1"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="RUt-iD-lbU"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="calendarView" destination="QMZ-ed-ONR" id="qzf-bp-lnX"/>
