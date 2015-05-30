@@ -49,7 +49,7 @@ class MeetupCell: PFTableViewCell {
             dateFormatter.dateStyle = .NoStyle
             dateFormatter.timeStyle = .ShortStyle
             let timeText = dateFormatter.stringFromDate(date)
-            timeLabel.text = String(format: "%@  %@", meetup.location ?? "Location unknown", timeText)
+            timeLabel.text = String(format: "%@ %@", meetup.location ?? "Location unknown", timeText)
 
             dateFormatter.dateFormat = "dd"
             dayLabel.text = dateFormatter.stringFromDate(date)
