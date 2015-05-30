@@ -29,7 +29,6 @@ extension UIImage
         view.addSubview(calendarView)
         
         // Create the month
-        // Mask month out of the image to show in tabBar.
         
         dateFormatter.dateFormat = "MMM"
         let month = dateFormatter.stringFromDate(date).uppercaseString
@@ -53,8 +52,6 @@ extension UIImage
         view.addSubview(numberLabel)
         
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, UIScreen.mainScreen().scale)
-        // TODO: Figure out why `drawViewHierarchyInRect` result in blank image.
-//        view.drawViewHierarchyInRect(view.bounds, afterScreenUpdates: true)
         view.layer.renderInContext(UIGraphicsGetCurrentContext())
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -64,6 +61,7 @@ extension UIImage
         let maskingImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
+        // Mask month out of the image to show in tabBar.
         let resultImage = maskImage(image, maskImage:maskingImage)
         return resultImage
     }
