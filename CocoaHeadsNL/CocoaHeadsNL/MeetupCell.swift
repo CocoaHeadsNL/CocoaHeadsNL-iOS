@@ -48,8 +48,6 @@ class MeetupCell: PFTableViewCell {
     func configureCellForMeetup(meetup: Meetup, row: Int) {
         titleLabel.text = meetup.name
 
-        rsvpLabel.text = "\(meetup.yes_rsvp_count) going"
-
         if let date = meetup.time {
             dateFormatter.dateStyle = .NoStyle
             dateFormatter.timeStyle = .ShortStyle
@@ -65,9 +63,11 @@ class MeetupCell: PFTableViewCell {
             if date.timeIntervalSinceNow > 0 {
                 dayLabel.textColor = UIColor.blackColor()
                 calendarView.backgroundColor = UIColorWithRGB(232, 88, 80)
+                rsvpLabel.text = "\(meetup.yes_rsvp_count) CocoaHeads going"
             } else {
                 dayLabel.textColor = UIColor(white: 0, alpha: 0.65)
                 calendarView.backgroundColor = UIColorWithRGB(169, 166, 166)
+                rsvpLabel.text = "\(meetup.yes_rsvp_count) CocoaHeads had a blast"
             }
         }
 
