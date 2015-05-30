@@ -19,6 +19,7 @@ extension UIImage
     {
         let dateFormatter = NSDateFormatter()
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        let maskView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         
         let calendarView = UIImageView()
         calendarView.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
@@ -28,7 +29,7 @@ extension UIImage
         view.addSubview(calendarView)
         
         // Create the month
-        // TODO: Mask month out of the image to show in tabBar.
+        // Mask month out of the image to show in tabBar.
         
         dateFormatter.dateFormat = "MMM"
         let month = dateFormatter.stringFromDate(date).uppercaseString
@@ -38,7 +39,7 @@ extension UIImage
         monthLabel.font = UIFont.boldSystemFontOfSize(6)
         monthLabel.textAlignment = .Center
         monthLabel.textColor = UIColor.whiteColor()
-        view.addSubview(monthLabel)
+        maskView.addSubview(monthLabel)
         
         // Create the day number
         
@@ -56,12 +57,26 @@ extension UIImage
 //        view.drawViewHierarchyInRect(view.bounds, afterScreenUpdates: true)
         view.layer.renderInContext(UIGraphicsGetCurrentContext())
         let image = UIGraphicsGetImageFromCurrentImageContext()
-        
-        // Create a mask for the month text.
-        view.backgroundColor = UIColor.blackColor()
-        
         UIGraphicsEndImageContext()
+
+        UIGraphicsBeginImageContextWithOptions(maskView.bounds.size, false, UIScreen.mainScreen().scale)
+        maskView.layer.renderInContext(UIGraphicsGetCurrentContext())
+        let maskingImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        let resultImage = maskImage(image, maskImage:maskingImage)
+        return resultImage
+    }
+    
+    class func maskImage(image: UIImage!, maskImage: UIImage!) -> UIImage
+    {
+        let maskRef = maskImage.CGImage;
         
-        return image
+        let mask = CGImageMaskCreate(CGImageGetWidth(maskRef), CGImageGetHeight(maskRef), CGImageGetBitsPerComponent(maskRef), CGImageGetBitsPerPixel(maskRef), CGImageGetBytesPerRow(maskRef), CGImageGetDataProvider(maskRef), nil, false)
+        
+        let masked = CGImageCreateWithMask(image.CGImage, mask)
+        let maskedImage = UIImage(CGImage:masked, scale:UIScreen.mainScreen().scale, orientation:.Up)!
+        
+        return maskedImage
     }
 }
