@@ -145,6 +145,7 @@
 				F11455C01AB5024000546D22 /* TabBarController.swift */,
 				7B6A744E1B162F8E00A10762 /* UIColor+Extensions.swift */,
 				7B6A744C1B149A6B00A10762 /* UIImage+Resize.swift */,
+				239D41151B190FD000609105 /* CalendarTabImage.swift */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -265,7 +266,6 @@
 				4A13831E1AC7F83D00E0D41E /* Viewing Details */,
 				7B6A74501B176A2900A10762 /* Other Sources */,
 				7B6A74511B176A4000A10762 /* Resources */,
-				239D41151B190FD000609105 /* CalendarTabImage.swift */,
 			);
 			path = CocoaHeadsNL;
 			sourceTree = "<group>";

@@ -8,16 +8,10 @@
 
 import Foundation
 
+private let dateFormatter = NSDateFormatter()
+
 class MeetupCell: PFTableViewCell {
     static let Identifier = "meetupCell"
-
-    static let dateFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = .MediumStyle
-        dateFormatter.timeStyle = .ShortStyle
-        dateFormatter.dateFormat = "HH:mm a"
-        return dateFormatter
-    }()
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -56,21 +50,21 @@ class MeetupCell: PFTableViewCell {
         titleLabel.text = meetup.name
 
         if let description = meetup.meetup_description {
-        
             let str = description.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
-            
             descriptionLabel.text = str
         }
 
         if let date = meetup.time {
-            let timeText = MeetupCell.dateFormatter.stringFromDate(date)
-            timeLabel.text = String(format: "%@ - %@", meetup.location ?? "Location unknown", timeText)
+            dateFormatter.dateStyle = .NoStyle
+            dateFormatter.timeStyle = .ShortStyle
+            let timeText = dateFormatter.stringFromDate(date)
+            timeLabel.text = String(format: "%@  %@", meetup.location ?? "Location unknown", timeText)
 
-            let components = NSCalendar.currentCalendar().components(.CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
-            dayLabel.text = String(format: "%d", components.day)
+            dateFormatter.dateFormat = "dd"
+            dayLabel.text = dateFormatter.stringFromDate(date)
 
-            let months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"]
-            monthLabel.text = months[components.month - 1]
+            dateFormatter.dateFormat = "MMM"
+            monthLabel.text = dateFormatter.stringFromDate(date).uppercaseString
 
             if date.timeIntervalSinceNow > 0 {
                 dayLabel.textColor = UIColor.blackColor()
