@@ -28,7 +28,7 @@ Parse.Cloud.job("loadContributorInfo", function(request, status) {
 					
 					var contributorQuery = new Parse.Query(Contributor);
 					contributorQuery.equalTo("contributor_id", authorDetailData["id"])
-					contributorQuery.first().then(function(existingContributor) {
+					return contributorQuery.first().then(function(existingContributor) {
 						if (existingContributor === undefined) {
 							var newContributor = new Contributor();
 							newContributor.set("contributor_id", authorDetailData["id"]);
@@ -39,10 +39,9 @@ Parse.Cloud.job("loadContributorInfo", function(request, status) {
 					}).then(function(contributorObject) {
 						contributorObject.set("avatar_url", authorDetailData["avatar_url"]);
 						contributorObject.set("name", authorDetailData["name"]);
-						console.log("Saving " + contributorObject)
 						return contributorObject.save();
 					}, function(error){
-						console.log(error);
+						return Parse.Promise.error(error);
 					});
 				})
 			)

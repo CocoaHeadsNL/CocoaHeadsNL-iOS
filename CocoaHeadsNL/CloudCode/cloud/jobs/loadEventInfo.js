@@ -59,6 +59,7 @@ Parse.Cloud.job("loadEventInfo", function(request, status) {
 				return meetupObject.save();
 			}, function(error){
 				console.log(error);
+				return Parse.Promise.error(error);
 			}));
 		});
 		return Parse.Promise.when(promises);

@@ -50,6 +50,7 @@ Parse.Cloud.job("loadJobInfo", function(request, status) {
 					}
 				}, function(error){
 					console.log(error);
+					return Parse.Promise.error(error);
 				}));
 			});
 		});
