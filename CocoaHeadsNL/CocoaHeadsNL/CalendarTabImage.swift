@@ -62,17 +62,17 @@ extension UIImage
         UIGraphicsEndImageContext()
 
         // Mask month out of the image to show in tabBar.
-        let resultImage = maskImage(image, maskImage:maskingImage)
+        let resultImage = image.maskImage(maskingImage)
         return resultImage
     }
     
-    class func maskImage(image: UIImage!, maskImage: UIImage!) -> UIImage
+    func maskImage(maskImage: UIImage!) -> UIImage
     {
         let maskRef = maskImage.CGImage;
         
         let mask = CGImageMaskCreate(CGImageGetWidth(maskRef), CGImageGetHeight(maskRef), CGImageGetBitsPerComponent(maskRef), CGImageGetBitsPerPixel(maskRef), CGImageGetBytesPerRow(maskRef), CGImageGetDataProvider(maskRef), nil, false)
         
-        let masked = CGImageCreateWithMask(image.CGImage, mask)
+        let masked = CGImageCreateWithMask(self.CGImage, mask)
         let maskedImage = UIImage(CGImage:masked, scale:UIScreen.mainScreen().scale, orientation:.Up)!
         
         return maskedImage
