@@ -20,12 +20,7 @@ class CompaniesViewController: PFQueryCollectionViewController, UICollectionView
         super.viewWillLayoutSubviews()
 
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: 145, height: 100)
-            let screenwidth = view.frame.width
-            let numberOfCells = floor(screenwidth / layout.itemSize.width)
-            let inset = floor((screenwidth - numberOfCells * layout.itemSize.width) / (numberOfCells + 1))
-            layout.sectionInset = UIEdgeInsets(top: 10.0, left: inset, bottom: 10.0, right: inset)
-            layout.minimumInteritemSpacing = inset
+            layout.itemSize = CGSize(width: 100, height: 60)
         }
         
     }
