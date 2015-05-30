@@ -39,7 +39,7 @@ class JobsCollectionViewCell: PFCollectionViewCell {
                 textLabel.textAlignment = .Center
             }
             
-            contentView.layer.borderWidth = 1.0
+            contentView.layer.borderWidth = (2.0 / UIScreen.mainScreen().scale) / 2
             contentView.layer.borderColor = UIColor.grayColor().CGColor
         }
     }
