@@ -292,7 +292,7 @@
         <scene sceneID="mz1-im-VP7">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4c9-e7-Scu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Companies" image="CompaniesTabIconStroked" id="ava-8M-aE2" userLabel="Map"/>
+                    <tabBarItem key="tabBarItem" title="Companies" image="CompaniesTabIcon" id="ava-8M-aE2" userLabel="Map"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fMs-aD-JD8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -383,7 +383,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CompaniesTabIconStroked" width="30" height="30"/>
+        <image name="CompaniesTabIcon" width="30" height="30"/>
         <image name="EventsTabIcon" width="30" height="30"/>
         <image name="JobsTabIcon" width="30" height="30"/>
     </resources>
