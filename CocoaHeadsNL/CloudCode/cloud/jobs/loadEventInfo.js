@@ -56,6 +56,7 @@ Parse.Cloud.job("loadEventInfo", function(request, status) {
 				meetupObject.set("nextEvent", false);
 				var geoPoint = new Parse.GeoPoint({latitude: event.venue.lat, longitude: event.venue.lon});
 				meetupObject.set("geoLocation", geoPoint);
+				meetupObject.set("location", event.venue.city)
 				return meetupObject.save();
 			}, function(error){
 				console.log(error);
