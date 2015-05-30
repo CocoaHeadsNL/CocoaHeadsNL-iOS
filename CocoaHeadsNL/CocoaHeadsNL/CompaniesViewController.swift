@@ -1,44 +1,46 @@
 //
-//  JobsViewController.swift
+//  CompaniesViewController.swift
 //  CocoaHeadsNL
 //
-//  Created by Bart Hoffman on 07/03/15.
+//  Created by Bart Hoffman on 10/03/15.
 //  Copyright (c) 2015 Stichting CocoaheadsNL. All rights reserved.
 //
 
 import Foundation
-import UIKit
 
-class JobsViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
+class CompaniesViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    override func loadView() {
-        super.loadView()
-
-        self.collectionView?.registerClass(JobsCollectionViewCell.self, forCellWithReuseIdentifier: "jobsCollectionViewCell")
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.collectionView?.registerClass(CompanyCollectionViewCell.self, forCellWithReuseIdentifier: "companyCollectionViewCell")
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
+
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = CGSize(width: 145, height: 100)
             let screenwidth = view.frame.width
             let numberOfCells = floor(screenwidth / layout.itemSize.width)
             let inset = floor((screenwidth - numberOfCells * layout.itemSize.width) / (numberOfCells + 1))
             layout.sectionInset = UIEdgeInsets(top: 10.0, left: inset, bottom: 10.0, right: inset)
-                layout.minimumInteritemSpacing = inset
+            layout.minimumInteritemSpacing = inset
         }
+        
     }
-
+    
+    
     //MARK: - UICollectionViewDataSource methods
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell? {
-
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("jobsCollectionViewCell", forIndexPath: indexPath) as! JobsCollectionViewCell
-            
-        if let job = object as? Job {
-            cell.updateFromObject(job)
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("companyCollectionViewCell", forIndexPath: indexPath) as! CompanyCollectionViewCell
+        
+        if let company = object as? Company {
+            cell.updateFromObject(company)
         }
+        
         return cell
     }
 
@@ -53,18 +55,21 @@ class JobsViewController: PFQueryCollectionViewController, UICollectionViewDeleg
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
             if let indexPath = self.collectionView?.indexPathForCell(sender as! UICollectionViewCell) {
-                let job = self.objectAtIndexPath(indexPath) as! Job
+                let company = self.objectAtIndexPath(indexPath) as! Company
+                let dataSource = CompanyDataSource(object: company)
+                dataSource.fetchAffiliateLinks()
+
                 let detailViewController = segue.destinationViewController as! DetailViewController
-                detailViewController.dataSource = JobDataSource(object: job)
+                detailViewController.dataSource = dataSource
             }
         }
     }
     
-    //MARK: - Query
+    //MARK: -Query
     
     override func queryForCollection() -> PFQuery {
-        let query = Job.query()
-        return query!.orderByAscending("date")
+        let query = Company.query()
+        return query!.orderByAscending("place")
     }
-    
+
 }

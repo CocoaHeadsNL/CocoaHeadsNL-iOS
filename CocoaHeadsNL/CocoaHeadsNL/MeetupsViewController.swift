@@ -27,13 +27,10 @@ class MeetupsViewController: PFQueryTableViewController {
 
         let backItem = UIBarButtonItem(title: "Events", style: .Plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
-
-        self.loadObjects()
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tableView.reloadData()
+        
+        let calendarIcon = UIImage.calendarTabImageWithCurrentDate()
+        self.navigationController?.tabBarItem.image = calendarIcon
+        self.navigationController?.tabBarItem.selectedImage = calendarIcon
     }
 
     //MARK: - Segues
@@ -41,8 +38,9 @@ class MeetupsViewController: PFQueryTableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
             if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
-                let detailViewController = segue.destinationViewController as! DetailTableViewController
-                detailViewController.selectedObject = self.objectAtIndexPath(indexPath)
+                let meetup = self.objectAtIndexPath(indexPath) as! Meetup
+                let detailViewController = segue.destinationViewController as! DetailViewController
+                detailViewController.dataSource = MeetupDataSource(object: meetup)
             }
         }
     }
@@ -75,8 +73,6 @@ class MeetupsViewController: PFQueryTableViewController {
     override func queryForTable() -> PFQuery {
         let meetupQuery = Meetup.query()!
         meetupQuery.orderByDescending("time")
-        
-        meetupQuery.cachePolicy = PFCachePolicy.CacheThenNetwork
 
         return meetupQuery
     }

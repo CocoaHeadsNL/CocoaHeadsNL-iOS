@@ -106,5 +106,6 @@ class Meetup : PFObject, PFSubclassing {
     @NSManaged var logo: PFFile?
     @NSManaged var nextEvent: Boolean
     @NSManaged var smallLogo: PFFile?
+    @NSManaged var location: String?
 
 }
