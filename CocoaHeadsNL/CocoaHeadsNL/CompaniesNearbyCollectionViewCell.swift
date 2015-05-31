@@ -1,5 +1,5 @@
 //
-//  CompanyCollectionViewCell.swift
+//  CompaniesNearbyCollectionViewCell.swift
 //  CocoaHeadsNL
 //
 //  Created by Bart Hoffman on 29/05/15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CompanyCloseCollectionViewCell: PFCollectionViewCell {
+class CompaniesNearbyCollectionViewCell: PFCollectionViewCell {
     
     override func updateFromObject(object: PFObject?) {
         

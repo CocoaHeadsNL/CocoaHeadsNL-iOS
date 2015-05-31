@@ -1,5 +1,5 @@
 //
-//  CompaniesViewController.swift
+//  CompaniesNearbyViewController.swift
 //  CocoaHeadsNL
 //
 //  Created by Bart Hoffman on 10/03/15.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-class CompaniesCloseCollectionViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
+class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView?.registerClass(CompanyCloseCollectionViewCell.self, forCellWithReuseIdentifier: "companyCloseCollectionViewCell")
+        self.collectionView?.registerClass(CompaniesNearbyCollectionViewCell.self, forCellWithReuseIdentifier: "companiesNearbyCollectionViewCell")
     }
     
     override func viewWillLayoutSubviews() {
@@ -30,7 +30,7 @@ class CompaniesCloseCollectionViewController: PFQueryCollectionViewController, U
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("companyCloseCollectionViewCell", forIndexPath: indexPath) as! CompanyCloseCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("companiesNearbyCollectionViewCell", forIndexPath: indexPath) as! CompaniesNearbyCollectionViewCell
         
         if let company = object as? Company {
             cell.updateFromObject(company)
