@@ -10,9 +10,7 @@ devices([
 ])
 
 languages([
-  'en-US',
-  'de-DE',
-  'it-IT'
+  'en-GB'
 ])
 
 # Where should the resulting screenshots be stored?
@@ -24,7 +22,7 @@ screenshots_path "./screenshots"
 # js_file './snapshot.js'
 
 # The name of the project's scheme
-# scheme 'SchemeName'
+scheme 'CocoaHeadsNL'
 
 # Where is your project (or workspace)? Provide the full path here
 # project_path './YourProject.xcworkspace'
