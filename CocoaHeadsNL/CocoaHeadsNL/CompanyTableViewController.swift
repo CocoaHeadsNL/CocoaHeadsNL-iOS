@@ -32,12 +32,15 @@ class CompanyTableViewController: PFQueryTableViewController {
         if segue.identifier == "ShowDetail" {
             if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
                 let company = self.objectAtIndexPath(indexPath) as! Company
+                let dataSource = CompanyDataSource(object: company)
+                dataSource.fetchAffiliateLinks()
+                
                 let detailViewController = segue.destinationViewController as! DetailViewController
-                detailViewController.dataSource = CompanyDataSource(object: company)
+                detailViewController.dataSource = dataSource
             }
         }
     }
-    
+        
     //MARK: - UITableViewDataSource
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
