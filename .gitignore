@@ -4,3 +4,7 @@ CocoaHeadsNL/CocoaHeadsNL/ParseConfig.plist
 CocoaHeadsNL/Pods
 xcuserdata
 CocoaHeadsNL/parse
+
+screenshots
+report.xml
+Error*.png
