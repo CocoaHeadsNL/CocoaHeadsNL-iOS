@@ -23,6 +23,7 @@ class AffiliateLink : PFObject, PFSubclassing {
     @NSManaged var affiliateId: String?
     @NSManaged var productCreator: String?
     @NSManaged var productName: String?
+    @NSManaged var company: Company?
 }
 
 class APIKey : PFObject, PFSubclassing {
