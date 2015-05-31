@@ -63,7 +63,7 @@ class Company : PFObject, PFSubclassing {
     @NSManaged var streetAddress: String?
     @NSManaged var website: String?
     @NSManaged var zipCode: String?
-    @NSManaged var companyDiscription: String?
+    @NSManaged var companyDescription: String?
     @NSManaged var emailAddress: String?
     @NSManaged var location: PFGeoPoint?
     @NSManaged var logo: PFFile?
