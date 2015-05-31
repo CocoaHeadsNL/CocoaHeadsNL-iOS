@@ -13,10 +13,13 @@ class TitleCell: UITableViewCell {
         didSet {
             if let date = date {
                 var dateFormatter = NSDateFormatter()
-                dateFormatter.dateStyle = .MediumStyle
+                var dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMMd", options: 0, locale: NSLocale.currentLocale())
+                dateFormatter.dateFormat = dateFormat
+                
+                let dateString = dateFormatter.stringFromDate(date)
                 dateFormatter.timeStyle = .ShortStyle
-                dateFormatter.dateFormat = "d MMMM, HH:mm a"
-                self.titleLabel.text = dateFormatter.stringFromDate(date)
+                let timeString = dateFormatter.stringFromDate(date)
+                self.titleLabel.text = dateString + ", " + timeString
             } else {
                 self.titleLabel.text = "-"
             }
