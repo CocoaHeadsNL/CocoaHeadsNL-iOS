@@ -1,0 +1,5 @@
+[
+	"-workspace", "CocoaHeadsNL.xcworkspace",
+	"-scheme", "CocoaHeadsNL"
+]
+
