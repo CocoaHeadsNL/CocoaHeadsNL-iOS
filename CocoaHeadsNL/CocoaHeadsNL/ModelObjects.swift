@@ -105,7 +105,6 @@ class Meetup : PFObject, PFSubclassing {
         return "Meetup"
     }
 
-    @NSManaged var content: String?
     @NSManaged var geoLocation: PFGeoPoint?
     @NSManaged var locationName: String?
     @NSManaged var meetup_description: String?
