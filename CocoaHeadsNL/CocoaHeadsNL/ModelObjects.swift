@@ -70,6 +70,25 @@ class Company : PFObject, PFSubclassing {
     @NSManaged var hasApps: Boolean
 }
 
+class Contributor : PFObject, PFSubclassing {
+    override class func initialize() {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0;
+        }
+        dispatch_once(&Static.onceToken) {
+            self.registerSubclass()
+        }
+    }
+    
+    class func parseClassName() -> String {
+        return "Contributor"
+    }
+    
+    @NSManaged var avatar_url: String?
+    @NSManaged var contributor_id: Int
+    @NSManaged var name: String?
+}
+
 class Job : PFObject, PFSubclassing {
     override class func initialize() {
         struct Static {
