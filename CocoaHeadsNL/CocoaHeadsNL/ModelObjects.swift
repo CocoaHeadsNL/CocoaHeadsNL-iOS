@@ -8,8 +8,10 @@
 
 class AffiliateLink : PFObject, PFSubclassing {
     override class func initialize() {
-        var onceToken : dispatch_once_t = 0;
-        dispatch_once(&onceToken) {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0;
+        }
+        dispatch_once(&Static.onceToken) {
             self.registerSubclass()
         }
     }
@@ -25,8 +27,10 @@ class AffiliateLink : PFObject, PFSubclassing {
 
 class APIKey : PFObject, PFSubclassing {
     override class func initialize() {
-        var onceToken : dispatch_once_t = 0;
-        dispatch_once(&onceToken) {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0;
+        }
+        dispatch_once(&Static.onceToken) {
             self.registerSubclass()
         }
     }
@@ -41,8 +45,10 @@ class APIKey : PFObject, PFSubclassing {
 
 class Company : PFObject, PFSubclassing {
     override class func initialize() {
-        var onceToken : dispatch_once_t = 0;
-        dispatch_once(&onceToken) {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0;
+        }
+        dispatch_once(&Static.onceToken) {
             self.registerSubclass()
         }
     }
@@ -65,8 +71,10 @@ class Company : PFObject, PFSubclassing {
 
 class Job : PFObject, PFSubclassing {
     override class func initialize() {
-        var onceToken : dispatch_once_t = 0;
-        dispatch_once(&onceToken) {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0;
+        }
+        dispatch_once(&Static.onceToken) {
             self.registerSubclass()
         }
     }
@@ -84,8 +92,10 @@ class Job : PFObject, PFSubclassing {
 
 class Meetup : PFObject, PFSubclassing {
     override class func initialize() {
-        var onceToken : dispatch_once_t = 0;
-        dispatch_once(&onceToken) {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0;
+        }
+        dispatch_once(&Static.onceToken) {
             self.registerSubclass()
         }
     }
