@@ -39,16 +39,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2iW-bO-ZDx">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="89"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="Cqs-Qh-tOA"/>
+                                    <constraint firstAttribute="height" constant="89" id="Cqs-Qh-tOA"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="EK5-Tm-CvN" kind="embed" id="0L6-Qe-WOT"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apQ-cA-VHt">
-                                <rect key="frame" x="0.0" y="87" width="600" height="400"/>
+                                <rect key="frame" x="0.0" y="97" width="600" height="390"/>
                                 <connections>
                                     <segue destination="lzb-be-xbi" kind="embed" id="JEz-wz-Kup"/>
                                 </connections>
@@ -62,7 +62,7 @@
                             <constraint firstAttribute="trailing" secondItem="2iW-bO-ZDx" secondAttribute="trailing" id="l6Z-SP-zWh"/>
                             <constraint firstItem="apQ-cA-VHt" firstAttribute="leading" secondItem="1Kf-zC-Lwb" secondAttribute="leading" id="ppt-Sc-cqd"/>
                             <constraint firstItem="2iW-bO-ZDx" firstAttribute="leading" secondItem="1Kf-zC-Lwb" secondAttribute="leading" id="qMr-le-U0K"/>
-                            <constraint firstItem="apQ-cA-VHt" firstAttribute="top" secondItem="2iW-bO-ZDx" secondAttribute="bottom" constant="7" id="xQO-4e-xXh"/>
+                            <constraint firstItem="apQ-cA-VHt" firstAttribute="top" secondItem="2iW-bO-ZDx" secondAttribute="bottom" constant="8" id="xQO-4e-xXh"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -81,11 +81,11 @@
                         <viewControllerLayoutGuide type="bottom" id="rIf-yJ-YkU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bU2-d9-h3w">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="89"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tempBanner" translatesAutoresizingMaskIntoConstraints="NO" id="eN2-ms-h5Q">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="89"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -106,11 +106,11 @@
             <objects>
                 <tableViewController storyboardIdentifier="companyTableViewController" id="lzb-be-xbi" userLabel="CompanyTableViewController" customClass="CompanyTableViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="S2s-ps-EGo">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="390"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <containerView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" id="PgA-5C-8UA">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="70"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <connections>
                                 <segue destination="UVK-yH-wqA" kind="embed" id="ydj-tq-ZCj"/>
@@ -143,7 +143,7 @@
             <objects>
                 <collectionViewController storyboardIdentifier="companiesCloseCollectionViewController" id="UVK-yH-wqA" userLabel="CompaniesCloseCollectionViewController" customClass="CompaniesCloseCollectionViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" dataMode="prototypes" id="Ze8-RZ-GD0">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="70"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="scrollIndicatorInsets" minX="5" minY="5" maxX="5" maxY="5"/>
