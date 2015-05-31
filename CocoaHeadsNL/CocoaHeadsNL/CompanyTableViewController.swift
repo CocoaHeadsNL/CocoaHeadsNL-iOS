@@ -24,8 +24,6 @@ class CompanyTableViewController: PFQueryTableViewController {
         
         let backItem = UIBarButtonItem(title: "Companies", style: .Plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
-        
-        self.loadObjects()
     }
     
     //MARK: - Segues
