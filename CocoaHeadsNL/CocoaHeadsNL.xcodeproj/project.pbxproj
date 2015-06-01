@@ -224,9 +224,8 @@
 			isa = PBXGroup;
 			children = (
 				F11E362B1B1A5817000B61C0 /* Companies Close */,
+				F18BA8271B1D0E9800CB81CD /* Company HighLight */,
 				F11E36271B1A570F000B61C0 /* CompanyTableViewController.swift */,
-				F11E36291B1A572F000B61C0 /* CompanyHighLightViewController.swift */,
-				F18BA8251B1D08DF00CB81CD /* CompanyHighLightCollectionViewCell.swift */,
 			);
 			name = "List of Sponsors";
 			sourceTree = "<group>";
@@ -248,6 +247,15 @@
 				F166C3541B189E1700D6F7FD /* CompaniesNearbyCollectionViewCell.swift */,
 			);
 			name = "Companies Close";
+			sourceTree = "<group>";
+		};
+		F18BA8271B1D0E9800CB81CD /* Company HighLight */ = {
+			isa = PBXGroup;
+			children = (
+				F11E36291B1A572F000B61C0 /* CompanyHighLightViewController.swift */,
+				F18BA8251B1D08DF00CB81CD /* CompanyHighLightCollectionViewCell.swift */,
+			);
+			name = "Company HighLight";
 			sourceTree = "<group>";
 		};
 		F1A46D091AAB50BB00585D61 = {
