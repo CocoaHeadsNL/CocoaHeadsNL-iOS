@@ -15,10 +15,13 @@ Parse.Cloud.job("loadJobInfo", function(request, status) {
 	}).then(function (httpResponse) {
 		var promises = [];
 		
+		var rssKeysToBeRetained = []
+		
 		xmlreader.read(httpResponse.text, function (err, res){
 			var rssChannel = res.rss.channel;
 			rssChannel.item.each(function (i, newJobItem){
 				var jobQuery = new Parse.Query(Job);
+				rssKeysToBeRetained.push(newJobItem.link.text())
 				jobQuery.equalTo("link", newJobItem.link.text())
 				promises.push(jobQuery.first().then(function(existingJob) {
 					if (existingJob === undefined) {
@@ -53,6 +56,11 @@ Parse.Cloud.job("loadJobInfo", function(request, status) {
 					return Parse.Promise.error(error);
 				}));
 			});
+			var oldJobQuery = new Parse.Query(Job);
+			oldJobQuery.notContainedIn("link", rssKeysToBeRetained)
+			promises.push(oldJobQuery.each(function(oldJob){
+				oldJob.destroy({ wait : true });
+			}))
 		});
 		
 		return Parse.Promise.when(promises);
