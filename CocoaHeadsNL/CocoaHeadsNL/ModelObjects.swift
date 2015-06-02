@@ -8,8 +8,10 @@
 
 class AffiliateLink : PFObject, PFSubclassing {
     override class func initialize() {
-        var onceToken : dispatch_once_t = 0;
-        dispatch_once(&onceToken) {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0;
+        }
+        dispatch_once(&Static.onceToken) {
             self.registerSubclass()
         }
     }
@@ -21,12 +23,15 @@ class AffiliateLink : PFObject, PFSubclassing {
     @NSManaged var affiliateId: String?
     @NSManaged var productCreator: String?
     @NSManaged var productName: String?
+    @NSManaged var company: Company?
 }
 
 class APIKey : PFObject, PFSubclassing {
     override class func initialize() {
-        var onceToken : dispatch_once_t = 0;
-        dispatch_once(&onceToken) {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0;
+        }
+        dispatch_once(&Static.onceToken) {
             self.registerSubclass()
         }
     }
@@ -41,8 +46,10 @@ class APIKey : PFObject, PFSubclassing {
 
 class Company : PFObject, PFSubclassing {
     override class func initialize() {
-        var onceToken : dispatch_once_t = 0;
-        dispatch_once(&onceToken) {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0;
+        }
+        dispatch_once(&Static.onceToken) {
             self.registerSubclass()
         }
     }
@@ -56,17 +63,38 @@ class Company : PFObject, PFSubclassing {
     @NSManaged var streetAddress: String?
     @NSManaged var website: String?
     @NSManaged var zipCode: String?
-    @NSManaged var companyDiscription: String?
+    @NSManaged var companyDescription: String?
     @NSManaged var emailAddress: String?
     @NSManaged var location: PFGeoPoint?
     @NSManaged var logo: PFFile?
     @NSManaged var hasApps: Boolean
 }
 
+class Contributor : PFObject, PFSubclassing {
+    override class func initialize() {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0;
+        }
+        dispatch_once(&Static.onceToken) {
+            self.registerSubclass()
+        }
+    }
+    
+    class func parseClassName() -> String {
+        return "Contributor"
+    }
+    
+    @NSManaged var avatar_url: String?
+    @NSManaged var contributor_id: Int
+    @NSManaged var name: String?
+}
+
 class Job : PFObject, PFSubclassing {
     override class func initialize() {
-        var onceToken : dispatch_once_t = 0;
-        dispatch_once(&onceToken) {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0;
+        }
+        dispatch_once(&Static.onceToken) {
             self.registerSubclass()
         }
     }
@@ -84,8 +112,10 @@ class Job : PFObject, PFSubclassing {
 
 class Meetup : PFObject, PFSubclassing {
     override class func initialize() {
-        var onceToken : dispatch_once_t = 0;
-        dispatch_once(&onceToken) {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0;
+        }
+        dispatch_once(&Static.onceToken) {
             self.registerSubclass()
         }
     }
@@ -94,7 +124,7 @@ class Meetup : PFObject, PFSubclassing {
         return "Meetup"
     }
 
-    @NSManaged var content: String?
+    @NSManaged var duration: Int
     @NSManaged var geoLocation: PFGeoPoint?
     @NSManaged var locationName: String?
     @NSManaged var meetup_description: String?

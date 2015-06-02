@@ -712,7 +712,7 @@
 				INFOPLIST_FILE = CocoaHeadsNL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = CocoaHeadsNL;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "f7926840-757e-45cb-bfe9-dd3d782c7592";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
