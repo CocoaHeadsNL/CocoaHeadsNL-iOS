@@ -14,15 +14,16 @@ class CompanyHighLightCollectionViewCell: PFCollectionViewCell {
         
         if let company = object as? Company {
             
-//            if let companyLogo = company.logo {
-//                imageView.file = companyLogo
-//                imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 89)
-//                imageView.image = UIImage(named: "CocoaHeadsNLLogo")
-//                imageView.loadInBackground().continueWithSuccessBlock({[weak self] (task: BFTask!) -> AnyObject! in
-//                    self?.setNeedsLayout()
-//                    return nil
-//                    })
-//            }
+            if let companyLogo = company.logo {
+                imageView.file = companyLogo
+                imageView.frame = CGRect(x: 90, y: 0, width: 160, height: 89)
+                imageView.image = UIImage(named: "CocoaHeadsNLLogo")
+                imageView.contentMode = .ScaleAspectFit
+                imageView.loadInBackground().continueWithSuccessBlock({[weak self] (task: BFTask!) -> AnyObject! in
+                    self?.setNeedsLayout()
+                    return nil
+                    })
+            }
             
             if let place = company.place {
                 textLabel.text = place

@@ -9,20 +9,36 @@
 import Foundation
 
 class CompanyHighLightViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
+    var currentRowIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.collectionView?.registerClass(CompanyHighLightCollectionViewCell.self, forCellWithReuseIdentifier: "companyHighLightCollectionViewCell")
+        
+        var timer = NSTimer.scheduledTimerWithTimeInterval(4.0, target: self, selector: Selector("startAnimatingHighLight"), userInfo: nil, repeats: true)
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: self.view.frame.size.width, height: 60)
+            layout.itemSize = CGSize(width: self.view.frame.size.width, height: 89)
         }
         
+    }
+    
+    func startAnimatingHighLight() {
+               
+        if currentRowIndex < self.objects.count {
+            var nextItem = NSIndexPath (forRow: currentRowIndex, inSection: 0)
+            self.collectionView?.scrollToItemAtIndexPath(nextItem, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
+            currentRowIndex++
+            
+            if currentRowIndex == self.objects.count {
+                currentRowIndex = 0
+            }
+        }
     }
     
     
