@@ -9,13 +9,13 @@
 import Foundation
 
 class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.collectionView?.registerClass(CompaniesNearbyCollectionViewCell.self, forCellWithReuseIdentifier: "companiesNearbyCollectionViewCell")
     }
-    
+       
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
