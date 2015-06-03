@@ -10,7 +10,6 @@ import Foundation
 
 class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegate {
     var locationSet = Set<String>()
-    var locationArray = [String]()
     let sortedArray = NSMutableArray()
     
     required init(coder aDecoder: NSCoder) {
@@ -32,6 +31,9 @@ class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegat
     
     override func objectsDidLoad(error: NSError?) {
         super.objectsDidLoad(error)
+        
+        locationSet.removeAll(keepCapacity: false)
+        sortedArray.removeAllObjects()
         
         if error == nil {
             
