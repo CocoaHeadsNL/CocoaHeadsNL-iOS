@@ -31,10 +31,14 @@ class LocatedCompaniesViewController: UITableViewController, UITableViewDelegate
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
+            
             if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
-                let company = companiesArray.objectAtIndex(indexPath.row) as! Company
+                let company = self.companiesArray.objectAtIndex(indexPath.row) as! Company
+                let dataSource = CompanyDataSource(object: company)
+                dataSource.fetchAffiliateLinks()
+                
                 let detailViewController = segue.destinationViewController as! DetailViewController
-                detailViewController.dataSource = CompanyDataSource(object: company)
+                detailViewController.dataSource = dataSource
             }
         }
     }
