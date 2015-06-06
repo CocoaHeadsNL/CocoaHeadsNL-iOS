@@ -54,8 +54,10 @@ class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegat
                         }
                     }
                 }
+                
+                let groups = sorted(locationSet)
 
-                for String in locationSet {
+                for String in groups {
                     let companyArray = NSMutableArray()
                     var locationDict = NSMutableDictionary()
                     locationDict.setValue(String, forKey: "location")
