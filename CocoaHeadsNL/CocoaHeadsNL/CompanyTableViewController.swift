@@ -9,7 +9,7 @@
 import Foundation
 
 class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegate {
-    var locationSet = Set<String>()
+    
     let sortedArray = NSMutableArray()
     
     required init(coder aDecoder: NSCoder) {
@@ -32,16 +32,17 @@ class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegat
     override func objectsDidLoad(error: NSError?) {
         super.objectsDidLoad(error)
         
-        locationSet.removeAll(keepCapacity: false)
         sortedArray.removeAllObjects()
         
         if error == nil {
             
-            if let objectArray = self.objects {
+            if let objectArray = self.objects as? [Company] {
                 
-                for company in objectArray {
+                var locationSet = Set<String>()
+                
+                for company in objectArray  {
                     
-                    if let obj = company as? Company, let location = obj.place  {
+                    if let location = company.place  {
                         
                         if !locationSet.contains(location) {
                             locationSet.insert(location)
@@ -49,16 +50,16 @@ class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegat
                     }
                 }
                 
-                let groups = sorted(locationSet)
+                let groupedArray = sorted(locationSet)
 
-                for String in groups {
+                for String in groupedArray {
                     let companyArray = NSMutableArray()
                     var locationDict = NSMutableDictionary()
                     locationDict.setValue(String, forKey: "location")
                     
                     for company in objectArray {
                         
-                        if let comp = company as? Company, let loc = comp.place {
+                        if let loc = company.place {
                                 if loc == locationDict.valueForKey("location") as? StringLiteralType {
                                     companyArray.addObject(company)
                                 }
@@ -75,7 +76,7 @@ class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegat
         
         self.tableView.reloadData()
     }
-
+    
     
     //MARK: - Segues
     
