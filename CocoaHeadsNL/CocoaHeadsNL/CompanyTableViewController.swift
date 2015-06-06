@@ -41,16 +41,10 @@ class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegat
                 
                 for company in objectArray {
                     
-                    if let obj = company as? Company {
+                    if let obj = company as? Company, let location = obj.place  {
                         
-                        if let location = obj.place {
-                            
-                            if locationSet.contains(location) {
-                                
-                            } else {
-                                
-                                locationSet.insert(location)
-                            }
+                        if !locationSet.contains(location) {
+                            locationSet.insert(location)
                         }
                     }
                 }
@@ -63,12 +57,11 @@ class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegat
                     locationDict.setValue(String, forKey: "location")
                     
                     for company in objectArray {
-                        if let comp = company as? Company {
-                            if let loc = comp.place {
+                        
+                        if let comp = company as? Company, let loc = comp.place {
                                 if loc == locationDict.valueForKey("location") as? StringLiteralType {
                                     companyArray.addObject(company)
                                 }
-                            }
                         }
                         
                     }
@@ -82,6 +75,7 @@ class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegat
         
         self.tableView.reloadData()
     }
+
     
     //MARK: - Segues
     
