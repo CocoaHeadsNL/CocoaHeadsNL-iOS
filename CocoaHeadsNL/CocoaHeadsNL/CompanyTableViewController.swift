@@ -52,15 +52,15 @@ class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegat
                 
                 let groupedArray = sorted(locationSet)
 
-                for String in groupedArray {
+                for group in groupedArray {
                     let companyArray = NSMutableArray()
                     var locationDict = NSMutableDictionary()
-                    locationDict.setValue(String, forKey: "location")
+                    locationDict.setValue(group, forKey: "place")
                     
                     for company in objectArray {
                         
                         if let loc = company.place {
-                                if loc == locationDict.valueForKey("location") as? StringLiteralType {
+                                if loc == locationDict.valueForKey("place") as? StringLiteralType {
                                     companyArray.addObject(company)
                                 }
                         }
@@ -103,7 +103,7 @@ class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegat
         var cell = tableView.dequeueReusableCellWithIdentifier("companyTableViewCell", forIndexPath: indexPath) as! PFTableViewCell
 
             
-        cell.textLabel!.text = sortedArray.objectAtIndex(indexPath.row).valueForKey("location") as? StringLiteralType
+        cell.textLabel!.text = sortedArray.objectAtIndex(indexPath.row).valueForKey("place") as? StringLiteralType
 
         
         return cell
