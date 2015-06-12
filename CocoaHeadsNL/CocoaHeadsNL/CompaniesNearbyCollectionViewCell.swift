@@ -14,9 +14,9 @@ class CompaniesNearbyCollectionViewCell: PFCollectionViewCell {
         
         if let company = object as? Company {
             
-            if let companyLogo = company.logo {
+            if let companyLogo = company.smallLogo {
                 imageView.file = companyLogo
-                imageView.frame = CGRect(x: 0, y: 0, width: self.contentView.frame.width, height: 70)
+                imageView.frame = CGRect(x: 0, y: 0, width: 66, height: 66)
                 imageView.image = UIImage(named: "CocoaHeadsNLLogo")
                 imageView.contentMode = .ScaleAspectFit
                 imageView.loadInBackground().continueWithSuccessBlock({[weak self] (task: BFTask!) -> AnyObject! in
@@ -25,8 +25,8 @@ class CompaniesNearbyCollectionViewCell: PFCollectionViewCell {
                     })
             }
             
-            if let place = company.place {
-                textLabel.text = place
+            if let compName = company.name {
+                textLabel.text = compName
                 textLabel.font = UIFont.systemFontOfSize(8)
                 textLabel.textAlignment = .Center
             }
