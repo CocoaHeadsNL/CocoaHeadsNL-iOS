@@ -23,7 +23,7 @@ class CompanyHighLightViewController: PFQueryCollectionViewController, UICollect
         super.viewWillLayoutSubviews()
         
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: self.view.frame.size.width, height: 89)
+            layout.itemSize = CGSize(width: self.view.frame.size.width, height: 88)
         }
         
     }
