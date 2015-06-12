@@ -95,6 +95,10 @@ class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegat
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sortedArray.count
     }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "by location"
+    }
         
     //MARK: - UITableViewDataSource
     
