@@ -97,7 +97,7 @@ class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegat
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "by location"
+        return "Companies in the Netherlands"
     }
         
     //MARK: - UITableViewDataSource
