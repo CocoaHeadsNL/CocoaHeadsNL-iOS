@@ -39,16 +39,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2iW-bO-ZDx">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="89"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="89" id="Cqs-Qh-tOA"/>
+                                    <constraint firstAttribute="height" constant="88" id="Cqs-Qh-tOA"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="iFk-kc-Xzc" kind="embed" id="gdd-vF-H2h"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apQ-cA-VHt">
-                                <rect key="frame" x="0.0" y="97" width="600" height="390"/>
+                                <rect key="frame" x="0.0" y="88" width="600" height="399"/>
                                 <connections>
                                     <segue destination="lzb-be-xbi" kind="embed" id="JEz-wz-Kup"/>
                                 </connections>
@@ -62,7 +62,7 @@
                             <constraint firstAttribute="trailing" secondItem="2iW-bO-ZDx" secondAttribute="trailing" id="l6Z-SP-zWh"/>
                             <constraint firstItem="apQ-cA-VHt" firstAttribute="leading" secondItem="1Kf-zC-Lwb" secondAttribute="leading" id="ppt-Sc-cqd"/>
                             <constraint firstItem="2iW-bO-ZDx" firstAttribute="leading" secondItem="1Kf-zC-Lwb" secondAttribute="leading" id="qMr-le-U0K"/>
-                            <constraint firstItem="apQ-cA-VHt" firstAttribute="top" secondItem="2iW-bO-ZDx" secondAttribute="bottom" constant="8" id="xQO-4e-xXh"/>
+                            <constraint firstItem="apQ-cA-VHt" firstAttribute="top" secondItem="2iW-bO-ZDx" secondAttribute="bottom" id="xQO-4e-xXh"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -77,10 +77,10 @@
             <objects>
                 <collectionViewController storyboardIdentifier="companyHighLightCollectionViewController" id="iFk-kc-Xzc" customClass="CompanyHighLightViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" id="zmW-GA-BSW">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="89"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="fKr-ed-ARr">
-                            <size key="itemSize" width="300" height="89"/>
+                            <size key="itemSize" width="300" height="88"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -89,7 +89,7 @@
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="companyHighLightCollectionViewCell" id="oto-vz-EFR">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="89"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="88"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -119,40 +119,36 @@
             <objects>
                 <tableViewController storyboardIdentifier="companyTableViewController" id="lzb-be-xbi" userLabel="CompanyTableViewController" customClass="CompanyTableViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="S2s-ps-EGo">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="390"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="399"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="HDZ-AE-Uxn">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="106"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="HDZ-AE-Uxn" userLabel="Header View">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="110"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Companies near you" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gom-sq-gZ7">
-                                    <rect key="frame" x="13" y="2" width="424" height="21"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="21" id="Awz-zR-hhA"/>
-                                        <constraint firstAttribute="width" constant="424" id="bzK-s6-m0A"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Companies Near You" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gom-sq-gZ7">
+                                    <rect key="frame" x="15" y="2" width="148" height="18"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OC7-3H-VZs">
-                                    <rect key="frame" x="0.0" y="26" width="600" height="80"/>
+                                    <rect key="frame" x="0.0" y="21" width="600" height="88"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="80" id="ATA-cV-Vwb"/>
+                                        <constraint firstAttribute="height" constant="88" id="ATA-cV-Vwb"/>
                                     </constraints>
                                     <connections>
                                         <segue destination="UVK-yH-wqA" kind="embed" id="Q90-hx-Afs"/>
                                     </connections>
                                 </containerView>
                             </subviews>
-                            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstItem="Gom-sq-gZ7" firstAttribute="leading" secondItem="HDZ-AE-Uxn" secondAttribute="leading" constant="13" id="16F-cZ-n9U"/>
+                                <constraint firstItem="Gom-sq-gZ7" firstAttribute="leading" secondItem="HDZ-AE-Uxn" secondAttribute="leading" constant="15" id="16F-cZ-n9U"/>
                                 <constraint firstItem="OC7-3H-VZs" firstAttribute="leading" secondItem="HDZ-AE-Uxn" secondAttribute="leading" id="Lgf-th-ILo"/>
+                                <constraint firstItem="Gom-sq-gZ7" firstAttribute="top" secondItem="HDZ-AE-Uxn" secondAttribute="top" constant="2" id="PSd-73-gM6"/>
                                 <constraint firstAttribute="trailing" secondItem="OC7-3H-VZs" secondAttribute="trailing" id="a87-Fi-TSu"/>
-                                <constraint firstItem="Gom-sq-gZ7" firstAttribute="top" secondItem="HDZ-AE-Uxn" secondAttribute="top" constant="2" id="eGU-Na-ANr"/>
-                                <constraint firstItem="OC7-3H-VZs" firstAttribute="top" secondItem="HDZ-AE-Uxn" secondAttribute="top" constant="26" id="i26-rL-37K"/>
+                                <constraint firstItem="OC7-3H-VZs" firstAttribute="top" secondItem="HDZ-AE-Uxn" secondAttribute="top" constant="21" id="i26-rL-37K"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -182,15 +178,15 @@
             <objects>
                 <collectionViewController storyboardIdentifier="companiesNearbyCollectionViewController" id="UVK-yH-wqA" userLabel="CompaniesNearbyCollectionViewController" customClass="CompaniesNearbyCollectionViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" dataMode="prototypes" id="Ze8-RZ-GD0">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <inset key="scrollIndicatorInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6oJ-NM-xR6">
-                            <size key="itemSize" width="490" height="80"/>
+                        <color key="backgroundColor" red="1" green="0.69763989530000003" blue="0.27976293460000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <inset key="scrollIndicatorInsets" minX="5" minY="5" maxX="5" maxY="0.0"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="4" id="6oJ-NM-xR6">
+                            <size key="itemSize" width="490" height="82"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="5" minY="1" maxX="5" maxY="5"/>
+                            <inset key="sectionInset" minX="0.0" minY="1" maxX="0.0" maxY="5"/>
                         </collectionViewFlowLayout>
                         <cells/>
                         <connections>
@@ -199,7 +195,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="CocoaHeadsNL" id="QQc-eg-AGV"/>
-                    <value key="contentSizeForViewInPopover" type="size" width="600" height="80"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="600" height="88"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="loadingViewEnabled" value="NO"/>
                     </userDefinedRuntimeAttributes>
@@ -209,14 +205,14 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qIh-vR-M0P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3316" y="-1053"/>
+            <point key="canvasLocation" x="3321" y="-1066"/>
         </scene>
         <!--Located Companies View Controller-->
         <scene sceneID="T1n-9Z-zVk">
             <objects>
                 <tableViewController storyboardIdentifier="locatedCompaniesViewController" id="FUV-sa-MJr" customClass="LocatedCompaniesViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="2lw-C2-1QU">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="390"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="399"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>

@@ -97,9 +97,25 @@ class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegat
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Companies in the Netherlands"
+        return "All Companies"
     }
-        
+
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let labelRect = CGRect(x: 15, y: 2, width: 300, height: 18)
+        let label = UILabel(frame: labelRect)
+        label.font = UIFont.boldSystemFontOfSize(15)
+
+        label.text = tableView.dataSource!.tableView!(tableView, titleForHeaderInSection: section)
+
+        let viewRect = CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.sectionHeaderHeight)
+        let view = UIView(frame: viewRect)
+        view.backgroundColor = UIColor(white: 0, alpha: 0.05)
+        view.addSubview(label)
+
+        return view
+    }
+
+
     //MARK: - UITableViewDataSource
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {

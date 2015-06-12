@@ -16,7 +16,7 @@ class CompanyHighLightCollectionViewCell: PFCollectionViewCell {
             
             if let companyLogo = company.logo {
                 imageView.file = companyLogo
-                imageView.frame = CGRect(x: 0, y: 0, width: self.contentView.frame.width, height: 89)
+                imageView.frame = CGRect(x: 0, y: 0, width: self.contentView.frame.width, height: 88)
                 imageView.image = UIImage(named: "CocoaHeadsNLLogo")
                 imageView.contentMode = .ScaleAspectFit
                 imageView.loadInBackground().continueWithSuccessBlock({[weak self] (task: BFTask!) -> AnyObject! in
@@ -27,13 +27,9 @@ class CompanyHighLightCollectionViewCell: PFCollectionViewCell {
             
             if let place = company.place {
                 textLabel.text = place
-                textLabel.font = UIFont.systemFontOfSize(8)
+                textLabel.font = UIFont.systemFontOfSize(12)
                 textLabel.textAlignment = .Center
             }
-            
-            contentView.layer.borderWidth = (2.0 / UIScreen.mainScreen().scale) / 2
-            contentView.layer.borderColor = UIColor.grayColor().CGColor
         }
     }
-    
 }
