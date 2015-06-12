@@ -126,20 +126,34 @@
                             <rect key="frame" x="0.0" y="0.0" width="600" height="106"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Companies near you" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gom-sq-gZ7">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Companies near you" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gom-sq-gZ7">
                                     <rect key="frame" x="13" y="2" width="424" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="21" id="Awz-zR-hhA"/>
+                                        <constraint firstAttribute="width" constant="424" id="bzK-s6-m0A"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OC7-3H-VZs">
+                                <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OC7-3H-VZs">
                                     <rect key="frame" x="0.0" y="26" width="600" height="80"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="80" id="ATA-cV-Vwb"/>
+                                    </constraints>
                                     <connections>
                                         <segue destination="UVK-yH-wqA" kind="embed" id="Q90-hx-Afs"/>
                                     </connections>
                                 </containerView>
                             </subviews>
                             <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="Gom-sq-gZ7" firstAttribute="leading" secondItem="HDZ-AE-Uxn" secondAttribute="leading" constant="13" id="16F-cZ-n9U"/>
+                                <constraint firstItem="OC7-3H-VZs" firstAttribute="leading" secondItem="HDZ-AE-Uxn" secondAttribute="leading" id="Lgf-th-ILo"/>
+                                <constraint firstAttribute="trailing" secondItem="OC7-3H-VZs" secondAttribute="trailing" id="a87-Fi-TSu"/>
+                                <constraint firstItem="Gom-sq-gZ7" firstAttribute="top" secondItem="HDZ-AE-Uxn" secondAttribute="top" constant="2" id="eGU-Na-ANr"/>
+                                <constraint firstItem="OC7-3H-VZs" firstAttribute="top" secondItem="HDZ-AE-Uxn" secondAttribute="top" constant="26" id="i26-rL-37K"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="companyTableViewCell" id="xef-Jk-5Pe" customClass="PFTableViewCell">
