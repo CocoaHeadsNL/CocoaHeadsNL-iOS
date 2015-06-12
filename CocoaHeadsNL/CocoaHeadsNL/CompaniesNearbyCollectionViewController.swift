@@ -14,6 +14,7 @@ class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController, 
         super.viewDidLoad()
         
         self.collectionView?.registerClass(CompaniesNearbyCollectionViewCell.self, forCellWithReuseIdentifier: "companiesNearbyCollectionViewCell")
+        self.collectionView?.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerView")
     }
        
     override func viewWillLayoutSubviews() {
@@ -27,6 +28,27 @@ class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController, 
     
     
     //MARK: - UICollectionViewDataSource methods
+    
+    override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(15, -310, 5, 5)
+    }
+    
+   
+    override func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSizeMake(collectionView.bounds.width, 20)
+    }
+    
+    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "headerView", forIndexPath: indexPath) as! UICollectionReusableView
+        headerView.frame = CGRectMake(6, 0, 300, 15)
+        
+        let label = UILabel(frame: CGRectInset(headerView.frame, 0, 0))
+        label.font = UIFont(name: label.font.fontName, size: 13)
+        label.text = "Companies near you"
+        headerView.addSubview(label)
+        
+        return headerView
+    }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell {
         

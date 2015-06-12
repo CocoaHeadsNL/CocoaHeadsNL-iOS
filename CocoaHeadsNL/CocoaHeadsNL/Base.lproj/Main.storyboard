@@ -123,7 +123,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <containerView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" id="PgA-5C-8UA">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <connections>
                                 <segue destination="UVK-yH-wqA" kind="embed" id="Js5-lt-gpl"/>
@@ -156,7 +156,7 @@
             <objects>
                 <collectionViewController storyboardIdentifier="companiesNearbyCollectionViewController" id="UVK-yH-wqA" userLabel="CompaniesNearbyCollectionViewController" customClass="CompaniesNearbyCollectionViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" dataMode="prototypes" id="Ze8-RZ-GD0">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="scrollIndicatorInsets" minX="5" minY="5" maxX="5" maxY="5"/>
@@ -551,6 +551,6 @@
         <image name="JobsTabIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vXN-bc-jAa"/>
+        <segue reference="cLv-9F-UYt"/>
     </inferredMetricsTieBreakers>
 </document>
