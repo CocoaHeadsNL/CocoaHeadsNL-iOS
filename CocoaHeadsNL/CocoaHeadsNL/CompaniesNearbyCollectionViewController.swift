@@ -14,15 +14,18 @@ class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController, 
         super.viewDidLoad()
         
         self.collectionView?.registerClass(CompaniesNearbyCollectionViewCell.self, forCellWithReuseIdentifier: "companiesNearbyCollectionViewCell")
+
+        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.itemSize = CGSize(width: 100, height: 80)
+            layout.sectionInset = UIEdgeInsetsZero
+            layout.minimumInteritemSpacing = 4
+        }
     }
        
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: 100, height: 60)
-        }
-        
+
     }
     
     
@@ -60,11 +63,10 @@ class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController, 
         }
     }
     
-    //MARK: -Query
+    //MARK: - Query
     
     override func queryForCollection() -> PFQuery {
         let query = Company.query()
         return query!.orderByAscending("place")
     }
-
 }
