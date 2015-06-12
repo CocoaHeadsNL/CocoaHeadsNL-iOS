@@ -68,6 +68,7 @@ class Company : PFObject, PFSubclassing {
     @NSManaged var location: PFGeoPoint?
     @NSManaged var logo: PFFile?
     @NSManaged var hasApps: Boolean
+    @NSManaged var smallLogo: PFFile?
 }
 
 class Contributor : PFObject, PFSubclassing {
