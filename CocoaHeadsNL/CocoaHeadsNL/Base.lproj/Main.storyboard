@@ -112,7 +112,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FZK-Z5-aV5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2578" y="-1236.5"/>
+            <point key="canvasLocation" x="2579" y="-1249.5"/>
         </scene>
         <!--CompanyTableViewController-->
         <scene sceneID="G6l-Lo-9Y9">
@@ -122,13 +122,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="390"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <containerView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" id="PgA-5C-8UA">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                            <connections>
-                                <segue destination="eac-Vf-nvx" kind="embed" id="DgX-Pa-KdO"/>
-                            </connections>
-                        </containerView>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="HDZ-AE-Uxn">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="106"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Companies near you" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gom-sq-gZ7">
+                                    <rect key="frame" x="13" y="2" width="424" height="21"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OC7-3H-VZs">
+                                    <rect key="frame" x="0.0" y="26" width="600" height="80"/>
+                                    <connections>
+                                        <segue destination="UVK-yH-wqA" kind="embed" id="Q90-hx-Afs"/>
+                                    </connections>
+                                </containerView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="companyTableViewCell" id="xef-Jk-5Pe" customClass="PFTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -150,38 +162,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A1a-07-rJ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2578" y="-945"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="6Qq-47-dkE">
-            <objects>
-                <viewController id="eac-Vf-nvx" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="CDs-dh-tHW"/>
-                        <viewControllerLayoutGuide type="bottom" id="iM5-Xf-eVA"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3OR-ph-uDT">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OC7-3H-VZs">
-                                <rect key="frame" x="0.0" y="20" width="600" height="80"/>
-                                <connections>
-                                    <segue destination="UVK-yH-wqA" kind="embed" id="Q90-hx-Afs"/>
-                                </connections>
-                            </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Companies near you" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gom-sq-gZ7">
-                                <rect key="frame" x="15" y="0.0" width="424" height="21"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hpK-GP-zVC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3316" y="-1090"/>
         </scene>
         <!--CompaniesNearbyCollectionViewController-->
         <scene sceneID="f38-qE-wNH">
@@ -215,7 +195,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qIh-vR-M0P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4042" y="-1090"/>
+            <point key="canvasLocation" x="3316" y="-1053"/>
         </scene>
         <!--Located Companies View Controller-->
         <scene sceneID="T1n-9Z-zVk">
