@@ -32,7 +32,7 @@ class CompanyHighLightViewController: PFQueryCollectionViewController, UICollect
                
         if currentRowIndex < self.objects.count {
             var nextItem = NSIndexPath (forRow: currentRowIndex, inSection: 0)
-            self.collectionView?.scrollToItemAtIndexPath(nextItem, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
+            self.collectionView?.scrollToItemAtIndexPath(nextItem, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: true)
             currentRowIndex++
             
             if currentRowIndex == self.objects.count {
