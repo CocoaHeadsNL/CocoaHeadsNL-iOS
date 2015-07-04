@@ -35,14 +35,14 @@ class AffiliateCell: UITableViewCell {
     private func parseIconURL(data: NSData) -> NSURL? {
         var parseError: NSError?
         let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parseError)
-        if let root = parsedObject as? NSDictionary,
-            results = root["results"] as? NSArray,
-            result = results[0] as? NSDictionary,
-            iconUrlString = result["artworkUrl100"] as? String {
-                return NSURL(string: iconUrlString)
-        } else {
-            return nil
+        if let root = parsedObject as? NSDictionary, results = root["results"] as? NSArray where results.count > 0 {
+            if let result = results[0] as? NSDictionary,
+                iconUrlString = result["artworkUrl100"] as? String {
+                    return NSURL(string: iconUrlString)
+            }
         }
+        
+        return nil
     }
 
     private func loadIconWithURL(url: NSURL) {
