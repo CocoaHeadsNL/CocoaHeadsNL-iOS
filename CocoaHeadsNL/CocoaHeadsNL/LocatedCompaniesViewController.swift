@@ -61,8 +61,18 @@ class LocatedCompaniesViewController: UITableViewController, UITableViewDelegate
         if let company = companiesArray.objectAtIndex(indexPath.row) as? Company {
             
             cell.textLabel!.text = company.name
+            cell.imageView?.image = UIImage(named: "MeetupPlaceholder")
+            
+            if let logoFile = company.smallLogo {
+                logoFile.getDataInBackgroundWithBlock({ (imageData: NSData?, error: NSError?) -> Void in
+                    if error == nil {
+                        let image = UIImage(data: imageData!)
+                        cell.imageView?.image = image
+                    }
+                })
+                
+            }
         }
-        
         return cell
     }
     
