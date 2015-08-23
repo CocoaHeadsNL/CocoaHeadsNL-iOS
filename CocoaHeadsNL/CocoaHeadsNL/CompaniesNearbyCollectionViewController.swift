@@ -9,6 +9,8 @@
 import Foundation
 
 class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    var geoPoint:PFGeoPoint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,12 +22,21 @@ class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController, 
             layout.sectionInset = UIEdgeInsetsZero
             layout.minimumInteritemSpacing = 4
         }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "locationAvailable:", name: "LOCATION_AVAILABLE", object: nil)
     }
-       
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    
 
-
+    func locationAvailable(notification:NSNotification) -> Void {
+        
+            let userInfo = notification.userInfo as! Dictionary<String,CLLocation>
+            
+            println("CoreLocationManager:  Location available \(userInfo)")
+        
+            geoPoint = PFGeoPoint(location: userInfo["location"])
+        
+            self.loadObjects()
+            self.collectionView?.reloadData()
     }
     
     
@@ -67,6 +78,11 @@ class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController, 
     
     override func queryForCollection() -> PFQuery {
         let query = Company.query()
-        return query!.orderByAscending("place")
+        
+        if let coordinates = geoPoint {
+            return query!.whereKey("location", nearGeoPoint: coordinates, withinKilometers: 15.00)
+        } else {
+            return query!.orderByAscending("place")
+        }
     }
 }
