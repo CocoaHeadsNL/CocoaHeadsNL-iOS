@@ -83,6 +83,7 @@ class LocatedCompaniesViewController: UITableViewController, UITableViewDelegate
     //MARK: - UITableViewDelegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         self.performSegueWithIdentifier("ShowDetail", sender: tableView.cellForRowAtIndexPath(indexPath))
     }
 
