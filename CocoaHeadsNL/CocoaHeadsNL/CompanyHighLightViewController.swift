@@ -9,14 +9,13 @@
 import Foundation
 
 class CompanyHighLightViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
-    var currentRowIndex = 0
+
+    var maxIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.collectionView?.registerClass(CompanyHighLightCollectionViewCell.self, forCellWithReuseIdentifier: "companyHighLightCollectionViewCell")
-        
-        var timer = NSTimer.scheduledTimerWithTimeInterval(4.0, target: self, selector: Selector("startAnimatingHighLight"), userInfo: nil, repeats: true)
     }
     
     override func viewWillLayoutSubviews() {
@@ -25,24 +24,50 @@ class CompanyHighLightViewController: PFQueryCollectionViewController, UICollect
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = CGSize(width: self.view.frame.size.width, height: 88)
         }
+    }
+    
+    override func objectAtIndexPath(indexPath: NSIndexPath?) -> PFObject? {
         
-    }
-    
-    func startAnimatingHighLight() {
-               
-        if currentRowIndex < self.objects.count {
-            var nextItem = NSIndexPath (forRow: currentRowIndex, inSection: 0)
-            self.collectionView?.scrollToItemAtIndexPath(nextItem, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: true)
-            currentRowIndex++
+        maxIndex = (self.objects.count - 1)
+        
+        var firstItemInThirdSection = NSIndexPath(forItem: 0, inSection: 2)
+        var lastItemInFourthSection = NSIndexPath(forItem: maxIndex, inSection: 3)
+        var firstItemInFirstSection = NSIndexPath(forItem: 0, inSection: 1)
+        
+        if let ind = indexPath {
             
-            if currentRowIndex == self.objects.count {
-                currentRowIndex = 0
+            if ind.section == 0 {
+                
+                if ind.item == 0 {
+                    self.collectionView?.scrollToItemAtIndexPath(firstItemInThirdSection, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
+                }
+                
+                if ind.item == maxIndex-1 {
+                    self.collectionView?.scrollToItemAtIndexPath(lastItemInFourthSection, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
+                }
             }
+            
+            if ind.section == 4 {
+                if ind.item == 1 {
+                self.collectionView?.scrollToItemAtIndexPath(firstItemInFirstSection, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
+                }
+            }
+            
+            return self.objects[ind.row] as? PFObject
         }
+        
+        return nil
     }
-    
     
     //MARK: - UICollectionViewDataSource methods
+    
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 5
+    }
+    
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.objects.count
+    }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell {
         
@@ -58,6 +83,7 @@ class CompanyHighLightViewController: PFQueryCollectionViewController, UICollect
     //MARK: - UICollectionViewDelegate methods
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        print(indexPath)
         self.performSegueWithIdentifier("ShowDetail", sender: collectionView.cellForItemAtIndexPath(indexPath))
     }
     

@@ -106,7 +106,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <value key="contentSizeForViewInPopover" type="size" width="600" height="89"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="paginationEnabled" value="NO"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="paginationEnabled" value="YES"/>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="pullToRefreshEnabled" value="NO"/>
                     </userDefinedRuntimeAttributes>
                 </collectionViewController>
@@ -567,6 +567,6 @@
         <image name="JobsTabIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vXN-bc-jAa"/>
+        <segue reference="cLv-9F-UYt"/>
     </inferredMetricsTieBreakers>
 </document>
