@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="W81-50-NMJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="W81-50-NMJ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -20,6 +20,7 @@
                         <segue destination="qKI-MW-cAT" kind="relationship" relationship="viewControllers" id="1Jl-KE-5Ju"/>
                         <segue destination="zNW-ht-Z05" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="4c9-e7-Scu" kind="relationship" relationship="viewControllers" id="Fxa-UT-fjq"/>
+                        <segue destination="zvX-Qg-yY8" kind="relationship" relationship="viewControllers" id="5in-CR-TpD"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -58,6 +59,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qIh-vR-M0P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2578" y="-960"/>
+        </scene>
+        <!--CocoaHeadsNL-->
+        <scene sceneID="kPi-HM-eGS">
+            <objects>
+                <tableViewController id="gHH-Pc-jiz" customClass="ContributorsViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="FHf-cm-Cbc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="gHH-Pc-jiz" id="k6i-n6-uK1"/>
+                            <outlet property="delegate" destination="gHH-Pc-jiz" id="7Ys-vb-XgN"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="CocoaHeadsNL" id="xe1-J8-OVD"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j51-Tp-Rxv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2554" y="-123"/>
+        </scene>
+        <!--Contributors-->
+        <scene sceneID="8a8-g1-nu0">
+            <objects>
+                <navigationController id="zvX-Qg-yY8" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Contributors" image="JobsTabIcon" id="nff-Ie-ldv"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0lF-kr-m7A">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="gHH-Pc-jiz" kind="relationship" relationship="rootViewController" id="UAg-ve-PnS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ITA-Ki-7Pi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1734" y="-123"/>
         </scene>
         <!--Events Navigation-->
         <scene sceneID="Rb4-4L-nsC">
