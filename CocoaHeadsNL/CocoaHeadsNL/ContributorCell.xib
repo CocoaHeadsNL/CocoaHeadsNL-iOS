@@ -13,14 +13,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDW-B5-rZr">
-                        <rect key="frame" x="8" y="23" width="304" height="15"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dEf-Nx-aaC">
+                        <rect key="frame" x="0.0" y="0.0" width="43" height="43"/>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Naam" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8dX-u6-Cgx">
-                        <rect key="frame" x="8" y="3" width="304" height="21"/>
+                        <rect key="frame" x="51" y="11" width="225" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -28,8 +25,8 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="avatarView" destination="dEf-Nx-aaC" id="h6T-F3-dL5"/>
                 <outlet property="nameLabel" destination="8dX-u6-Cgx" id="HMc-UA-WkQ"/>
-                <outlet property="urlLabel" destination="MDW-B5-rZr" id="Zw1-Z5-DZ7"/>
             </connections>
         </tableViewCell>
     </objects>

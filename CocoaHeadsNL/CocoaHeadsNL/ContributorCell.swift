@@ -12,5 +12,7 @@ class ContributorCell: PFTableViewCell {
     static let Identifier = "contributorCell"
 
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var urlLabel: UILabel!
+    @IBOutlet weak var avatarView: UIImageView!
+    weak var fetchTask: NSURLSessionDataTask? = nil
+    
 }
