@@ -81,12 +81,7 @@ class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController, 
         
         if let coordinates = geoPoint {
             query!.whereKey("location", nearGeoPoint: coordinates, withinKilometers: 15.00)
-            
-            if query!.countObjects() > 0 {
                 return query!
-            } else {
-                return query!.orderByAscending("place")
-            }
         } else {
              return query!.orderByAscending("place")
         }

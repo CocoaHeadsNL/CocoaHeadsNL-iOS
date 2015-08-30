@@ -11,7 +11,8 @@ import CoreLocation
 
 class CoreLocationController : NSObject, CLLocationManagerDelegate {
     
-    var locationManager:CLLocationManager = CLLocationManager()
+    let locationManager:CLLocationManager = CLLocationManager()
+    let locationNotification = "LOCATION_AVAILABLE"
     
     override init() {
         super.init()
@@ -19,7 +20,7 @@ class CoreLocationController : NSObject, CLLocationManagerDelegate {
         self.locationManager.delegate = self
         self.locationManager.distanceFilter  = 5000
         self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
     }
     
     //MARK: - CLLocationManagerDelegate methods
@@ -34,11 +35,11 @@ class CoreLocationController : NSObject, CLLocationManagerDelegate {
             
         case .AuthorizedAlways:
             println(".Authorized")
-            self.locationManager.startUpdatingLocation()
             break
             
         case .AuthorizedWhenInUse:
             println(".AuthorizedWhenInUse")
+            self.locationManager.startUpdatingLocation()
             break
             
         case .Denied:
@@ -60,6 +61,6 @@ class CoreLocationController : NSObject, CLLocationManagerDelegate {
         
         var userInfo = [ "location" : location]
         
-        NSNotificationCenter.defaultCenter().postNotificationName("LOCATION_AVAILABLE", object: nil, userInfo: userInfo)
+        NSNotificationCenter.defaultCenter().postNotificationName(locationNotification, object: nil, userInfo: userInfo)
     }
 }
