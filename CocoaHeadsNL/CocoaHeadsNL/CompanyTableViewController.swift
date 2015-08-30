@@ -109,7 +109,7 @@ class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegat
 
         let viewRect = CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.sectionHeaderHeight)
         let view = UIView(frame: viewRect)
-        view.backgroundColor = UIColor(white: 0, alpha: 0.05)
+        view.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
         view.addSubview(label)
 
         return view
