@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "_default": {
+      "link": "cocoaheads-dev"
+    },
+    "cocoaheads-dev": {
+      "applicationId": "uxYBj06d0YH3nGeMkVdhTF5XNlDkdrrNQriarnz2"
+    }
+  }
+}
