@@ -43,7 +43,16 @@ Parse.Cloud.job("loadEventInfo", function(request, status) {
 			}).then(function(meetupObject) {
 				meetupObject.set("name", event.name);
 				meetupObject.set("meetup_description", event.description);
-				meetupObject.set("locationName", event.venue.name);
+				if (event.venue !== undefined) {
+					meetupObject.set("locationName", event.venue.name);
+					var geoPoint = new Parse.GeoPoint({latitude: event.venue.lat, longitude: event.venue.lon});
+					meetupObject.set("geoLocation", geoPoint);
+					meetupObject.set("location", event.venue.city)
+				} else {
+					meetupObject.set("locationName", undefined);
+					meetupObject.set("geoLocation", undefined);
+					meetupObject.set("location", undefined)
+				}
 				var timeValue = event.time;
 				if (timeValue !== undefined) {
 					timeValue = new Date(timeValue);
@@ -54,9 +63,6 @@ Parse.Cloud.job("loadEventInfo", function(request, status) {
 				meetupObject.set("rsvp_limit", event.rsvp_limit);
 				meetupObject.set("meetup_url", event.meetup_url);
 				meetupObject.set("nextEvent", false);
-				var geoPoint = new Parse.GeoPoint({latitude: event.venue.lat, longitude: event.venue.lon});
-				meetupObject.set("geoLocation", geoPoint);
-				meetupObject.set("location", event.venue.city)
 				return meetupObject.save();
 			}, function(error){
 				console.log(error);
