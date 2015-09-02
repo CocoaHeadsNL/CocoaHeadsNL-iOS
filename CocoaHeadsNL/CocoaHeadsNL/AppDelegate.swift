@@ -12,7 +12,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var coreLocationController:CoreLocationController?
 
     struct ParseConfiguration {
         let applicationId: String
@@ -31,8 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        self.coreLocationController = CoreLocationController()
-                
         ParseCrashReporting.enable()
 
         let config = loadParseConfiguration()
@@ -48,17 +45,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
 
         return true
-    }
-    
-    func applicationWillEnterForeground(application: UIApplication) {
-        if let locationManager = self.coreLocationController?.locationManager {
-            locationManager.startUpdatingLocation()
-        }
-    }
-    
-    func applicationDidEnterBackground(application: UIApplication) {
-        if let locationManager = self.coreLocationController?.locationManager {
-            locationManager.stopUpdatingLocation()
-        }
     }
 }

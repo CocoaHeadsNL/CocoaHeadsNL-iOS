@@ -30,10 +30,6 @@
 	<string>Your location is used to show you which companies are nearby.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location is used to show you which companies are nearby.</string>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>location</string>
-	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

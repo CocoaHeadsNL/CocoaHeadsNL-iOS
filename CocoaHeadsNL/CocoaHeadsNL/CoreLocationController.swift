@@ -61,6 +61,7 @@ class CoreLocationController : NSObject, CLLocationManagerDelegate {
         
         var userInfo = [ "location" : location]
         
-        NSNotificationCenter.defaultCenter().postNotificationName(locationNotification, object: nil, userInfo: userInfo)
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.postNotificationName(locationNotification, object: nil, userInfo: userInfo)
     }
 }

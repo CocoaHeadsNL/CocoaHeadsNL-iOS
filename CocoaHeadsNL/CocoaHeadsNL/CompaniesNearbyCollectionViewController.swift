@@ -10,6 +10,7 @@ import Foundation
 
 class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    var coreLocationController:CoreLocationController?
     var geoPoint:PFGeoPoint?
 
     override func viewDidLoad() {
@@ -23,10 +24,23 @@ class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController, 
             layout.minimumInteritemSpacing = 4
         }
         
+        self.coreLocationController = CoreLocationController()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "locationAvailable:", name: "LOCATION_AVAILABLE", object: nil)
     }
     
-
+    override func viewWillAppear(animated: Bool) {
+        if let locationManager = self.coreLocationController?.locationManager {
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        if let locationManager = self.coreLocationController?.locationManager {
+            locationManager.stopUpdatingLocation()
+        }
+    }
+    
     func locationAvailable(notification:NSNotification) -> Void {
         
             let userInfo = notification.userInfo as! Dictionary<String,CLLocation>
