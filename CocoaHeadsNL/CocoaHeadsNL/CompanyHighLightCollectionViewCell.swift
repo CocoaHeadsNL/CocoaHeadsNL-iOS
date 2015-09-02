@@ -24,12 +24,6 @@ class CompanyHighLightCollectionViewCell: PFCollectionViewCell {
                     return nil
                     })
             }
-            
-            if let place = company.place {
-                textLabel.text = place
-                textLabel.font = UIFont.systemFontOfSize(12)
-                textLabel.textAlignment = .Center
-            }
         }
     }
 }
