@@ -26,6 +26,18 @@ class CompanyHighLightViewController: PFQueryCollectionViewController, UICollect
         }
     }
     
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        
+        let indexPathForVisibleItem = self.collectionView?.indexPathsForVisibleItems()
+        let first = indexPathForVisibleItem?.first as! NSIndexPath
+        
+        coordinator.animateAlongsideTransition({ (context) -> Void in
+            // scroll to the current index
+            self.collectionView?.scrollToItemAtIndexPath(first, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
+            }, completion: nil);
+    }
+        
     override func objectAtIndexPath(indexPath: NSIndexPath?) -> PFObject? {
         
         maxIndex = (self.objects.count - 1)
