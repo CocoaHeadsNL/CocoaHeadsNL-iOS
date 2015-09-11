@@ -12,7 +12,7 @@ class CompanyDataSource: DetailDataSource {
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if let apps = company["hasApps"] as? Bool {
+        if company.hasApps != 0 {
             return 2
         } else {
             return 1
@@ -54,7 +54,7 @@ class CompanyDataSource: DetailDataSource {
     }
 
     func fetchAffiliateLinks() {
-        if let apps = company["hasApps"] as? Bool {
+        if company.hasApps != 0 {
             fetchLinks.fetchLinksForCompany(company) {
                 self.tableView.reloadData()
             }
