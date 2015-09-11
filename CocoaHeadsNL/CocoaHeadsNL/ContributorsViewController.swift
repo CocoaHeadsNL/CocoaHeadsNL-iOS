@@ -21,11 +21,11 @@ class ContributorsViewController: PFQueryTableViewController {
         let nib = UINib(nibName: "ContributorCell", bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: ContributorCell.Identifier)
     }
-
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell? {
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(ContributorCell.Identifier, forIndexPath: indexPath) as! ContributorCell
         
-        if let contributor = object as? Contributor, name = contributor.name {
+        if let contributor = self.objectAtIndexPath(indexPath) as? Contributor, name = contributor.name {
             cell.nameLabel.text = name
             cell.fetchTask?.cancel()
             if let a = contributor.avatar_url, url = NSURL(string: a) {
@@ -39,7 +39,7 @@ class ContributorsViewController: PFQueryTableViewController {
         
         return cell
     }
-    
+
     // MARK: Networking
     
     lazy var remoteSession: NSURLSession = {

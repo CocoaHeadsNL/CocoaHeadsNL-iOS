@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContributorCell: PFTableViewCell {
+class ContributorCell: UITableViewCell {
     static let Identifier = "contributorCell"
 
     @IBOutlet weak var nameLabel: UILabel!
