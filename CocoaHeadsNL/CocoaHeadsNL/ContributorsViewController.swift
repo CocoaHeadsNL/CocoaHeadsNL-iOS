@@ -50,7 +50,11 @@ class ContributorsViewController: PFQueryTableViewController {
     func fetchImageTask(url: NSURL, forImageView imageView: UIImageView) -> NSURLSessionDataTask {
         let task = remoteSession.dataTaskWithRequest(NSURLRequest(URL: url)) {
             (data, response, error) in
-            imageView.image = UIImage(data: data)
+            
+            let image = UIImage(data: data)
+            dispatch_async(dispatch_get_main_queue()) {
+                imageView.image = image
+            }
         }
         return task
     }
