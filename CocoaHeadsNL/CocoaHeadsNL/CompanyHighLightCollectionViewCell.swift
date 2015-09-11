@@ -10,16 +10,6 @@ import Foundation
 
 class CompanyHighLightCollectionViewCell: PFCollectionViewCell {
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        let imageView = self.imageView
-        
-        if imageView.frame != CGRectZero {
-            imageView.contentMode = .ScaleAspectFit
-        }
-    }
-    
     override func updateFromObject(object: PFObject?) {
         
         if let company = object as? Company {
