@@ -59,7 +59,11 @@ class MeetupsViewController: PFQueryTableViewController {
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 88
+        return UITableViewAutomaticDimension
+    }
+
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return CGFloat(88)
     }
 
     //MARK: - UITableViewDelegate
