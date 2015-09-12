@@ -67,7 +67,7 @@ class Company : PFObject, PFSubclassing {
     @NSManaged var emailAddress: String?
     @NSManaged var location: PFGeoPoint?
     @NSManaged var logo: PFFile?
-    @NSManaged var hasApps: Boolean
+    @NSManaged var hasApps: Bool
     @NSManaged var smallLogo: PFFile?
 }
 
@@ -135,7 +135,7 @@ class Meetup : PFObject, PFSubclassing {
     @NSManaged var time: NSDate?
     @NSManaged var yes_rsvp_count: Int
     @NSManaged var logo: PFFile?
-    @NSManaged var nextEvent: Boolean
+    @NSManaged var nextEvent: DarwinBoolean
     @NSManaged var smallLogo: PFFile?
     @NSManaged var location: String?
 

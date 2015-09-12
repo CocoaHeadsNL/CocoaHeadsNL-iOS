@@ -25,41 +25,41 @@ class CoreLocationController : NSObject, CLLocationManagerDelegate {
     
     //MARK: - CLLocationManagerDelegate methods
     
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        println("didChangeAuthorizationStatus")
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        print("didChangeAuthorizationStatus")
         
         switch status {
         case .NotDetermined:
-            println(".NotDetermined")
+            print(".NotDetermined")
             break
             
         case .AuthorizedAlways:
-            println(".Authorized")
+            print(".Authorized")
             break
             
         case .AuthorizedWhenInUse:
-            println(".AuthorizedWhenInUse")
+            print(".AuthorizedWhenInUse")
             self.locationManager.startUpdatingLocation()
             break
             
         case .Denied:
-            println(".Denied")
+            print(".Denied")
             break
             
         default:
-            println("Unhandled authorization status")
+            print("Unhandled authorization status")
             break
             
         }
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        let location = locations.last as! CLLocation
+        let location = locations.last!
         
-        println("didUpdateLocations:  \(location.coordinate.latitude), \(location.coordinate.longitude)")
+        print("didUpdateLocations:  \(location.coordinate.latitude), \(location.coordinate.longitude)")
         
-        var userInfo = [ "location" : location]
+        let userInfo = [ "location" : location]
         
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.postNotificationName(locationNotification, object: nil, userInfo: userInfo)

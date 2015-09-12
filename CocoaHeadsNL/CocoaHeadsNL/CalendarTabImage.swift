@@ -50,12 +50,12 @@ extension UIImage
         view.addSubview(numberLabel)
         
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, UIScreen.mainScreen().scale)
-        view.layer.renderInContext(UIGraphicsGetCurrentContext())
+        view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
         UIGraphicsBeginImageContextWithOptions(maskView.bounds.size, false, UIScreen.mainScreen().scale)
-        maskView.layer.renderInContext(UIGraphicsGetCurrentContext())
+        maskView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
         let maskingImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
@@ -70,8 +70,8 @@ extension UIImage
         
         let mask = CGImageMaskCreate(CGImageGetWidth(maskRef), CGImageGetHeight(maskRef), CGImageGetBitsPerComponent(maskRef), CGImageGetBitsPerPixel(maskRef), CGImageGetBytesPerRow(maskRef), CGImageGetDataProvider(maskRef), nil, false)
         
-        let masked = CGImageCreateWithMask(self.CGImage, mask)
-        let maskedImage = UIImage(CGImage: masked, scale: UIScreen.mainScreen().scale, orientation: .Up)!
+        let masked = CGImageCreateWithMask(self.CGImage, mask)!
+        let maskedImage = UIImage(CGImage: masked, scale: UIScreen.mainScreen().scale, orientation: .Up)
 
         return maskedImage
     }

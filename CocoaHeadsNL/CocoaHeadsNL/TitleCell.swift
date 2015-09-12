@@ -12,8 +12,8 @@ class TitleCell: UITableViewCell {
     var date: NSDate? {
         didSet {
             if let date = date {
-                var dateFormatter = NSDateFormatter()
-                var dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMMd", options: 0, locale: NSLocale.currentLocale())
+                let dateFormatter = NSDateFormatter()
+                let dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMMd", options: 0, locale: NSLocale.currentLocale())
                 dateFormatter.dateFormat = dateFormat
                 
                 let dateString = dateFormatter.stringFromDate(date)

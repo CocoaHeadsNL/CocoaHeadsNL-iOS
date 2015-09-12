@@ -367,7 +367,9 @@
 		F1A46D0A1AAB50BB00585D61 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Stichting CocoaheadsNL";
 				TargetAttributes = {
 					F1A46D111AAB50BB00585D61 = {
@@ -606,6 +608,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -702,6 +705,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CocoaHeadsNL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.cocoaheads.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CocoaHeadsNL;
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -722,6 +726,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = CocoaHeadsNL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.cocoaheads.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CocoaHeadsNL;
 				PROVISIONING_PROFILE = "f7926840-757e-45cb-bfe9-dd3d782c7592";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -744,6 +749,7 @@
 				);
 				INFOPLIST_FILE = CocoaHeadsNLTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.cocoaheads.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CocoaHeadsNLTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CocoaHeadsNL.app/CocoaHeadsNL";
 			};
@@ -759,6 +765,7 @@
 				);
 				INFOPLIST_FILE = CocoaHeadsNLTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.cocoaheads.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CocoaHeadsNLTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CocoaHeadsNL.app/CocoaHeadsNL";
 			};

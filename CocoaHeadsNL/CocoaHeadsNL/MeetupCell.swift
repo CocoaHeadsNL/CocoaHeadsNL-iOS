@@ -22,7 +22,7 @@ class MeetupCell: PFTableViewCell {
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var rsvpLabel: UILabel!
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
@@ -59,7 +59,7 @@ class MeetupCell: PFTableViewCell {
 
             if date.timeIntervalSinceNow > 0 {
                 dayLabel.textColor = UIColor.blackColor()
-                calendarView.backgroundColor = UIColorWithRGB(232, 88, 80)
+                calendarView.backgroundColor = UIColorWithRGB(232, g: 88, b: 80)
                 rsvpLabel.text = "\(meetup.yes_rsvp_count) CocoaHeads going"
         
                 if meetup.rsvp_limit > 0 {
@@ -67,7 +67,7 @@ class MeetupCell: PFTableViewCell {
                 }
             } else {
                 dayLabel.textColor = UIColor(white: 0, alpha: 0.65)
-                calendarView.backgroundColor = UIColorWithRGB(169, 166, 166)
+                calendarView.backgroundColor = UIColorWithRGB(169, g: 166, b: 166)
                 rsvpLabel.text = "\(meetup.yes_rsvp_count) CocoaHeads had a blast"
             }
         }

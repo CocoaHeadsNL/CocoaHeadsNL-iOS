@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CompanyHighLightViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
+class CompanyHighLightViewController: PFQueryCollectionViewController {
 
     var maxIndex = 0
     
@@ -30,11 +30,11 @@ class CompanyHighLightViewController: PFQueryCollectionViewController, UICollect
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         
         let indexPathForVisibleItem = self.collectionView?.indexPathsForVisibleItems()
-        let first = indexPathForVisibleItem?.first as! NSIndexPath
+        let first = indexPathForVisibleItem?.first!
         
         coordinator.animateAlongsideTransition({ (context) -> Void in
             // scroll to the current index
-            self.collectionView?.scrollToItemAtIndexPath(first, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
+            self.collectionView?.scrollToItemAtIndexPath(first!, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
             }, completion: nil);
     }
         
@@ -42,9 +42,9 @@ class CompanyHighLightViewController: PFQueryCollectionViewController, UICollect
         
         maxIndex = (self.objects.count - 1)
         
-        var firstItemInThirdSection = NSIndexPath(forItem: 0, inSection: 2)
-        var lastItemInFourthSection = NSIndexPath(forItem: maxIndex, inSection: 3)
-        var firstItemInFirstSection = NSIndexPath(forItem: 0, inSection: 1)
+        let firstItemInThirdSection = NSIndexPath(forItem: 0, inSection: 2)
+        let lastItemInFourthSection = NSIndexPath(forItem: maxIndex, inSection: 3)
+        let firstItemInFirstSection = NSIndexPath(forItem: 0, inSection: 1)
         
         if let ind = indexPath {
             
@@ -95,7 +95,7 @@ class CompanyHighLightViewController: PFQueryCollectionViewController, UICollect
     //MARK: - UICollectionViewDelegate methods
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print(indexPath)
+        print(indexPath, terminator: "")
         self.performSegueWithIdentifier("ShowDetail", sender: collectionView.cellForItemAtIndexPath(indexPath))
     }
     

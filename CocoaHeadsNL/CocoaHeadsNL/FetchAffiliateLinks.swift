@@ -11,7 +11,7 @@ class FetchAffiliateLinks {
 
             affiliateQuery.findObjectsInBackgroundWithBlock { objects, error in
                 if error != nil {
-                    println("Error: \(error!) \(error!.userInfo!)")
+                    print("Error: \(error!) \(error!.userInfo)")
                     return
                 }
 

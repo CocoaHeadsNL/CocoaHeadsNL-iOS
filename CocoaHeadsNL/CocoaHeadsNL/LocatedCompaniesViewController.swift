@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LocatedCompaniesViewController: UITableViewController, UITableViewDelegate {
+class LocatedCompaniesViewController: UITableViewController {
     
     var companiesDict = NSMutableDictionary()
     var companiesArray = NSMutableArray()
@@ -56,7 +56,7 @@ class LocatedCompaniesViewController: UITableViewController, UITableViewDelegate
     //MARK: - UITableViewDataSource
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("defaultCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("defaultCell", forIndexPath: indexPath) 
         
         if let company = companiesArray.objectAtIndex(indexPath.row) as? Company {
             

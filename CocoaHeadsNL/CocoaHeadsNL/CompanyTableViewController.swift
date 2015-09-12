@@ -8,11 +8,11 @@
 
 import Foundation
 
-class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegate {
+class CompanyTableViewController: PFQueryTableViewController {
     
     let sortedArray = NSMutableArray()
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         self.parseClassName = "Companies"
@@ -50,11 +50,11 @@ class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegat
                     }
                 }
                 
-                let groupedArray = sorted(locationSet)
+                let groupedArray = locationSet.sort()
 
                 for group in groupedArray {
                     let companyArray = NSMutableArray()
-                    var locationDict = NSMutableDictionary()
+                    let locationDict = NSMutableDictionary()
                     locationDict.setValue(group, forKey: "place")
                     
                     for company in objectArray {
@@ -71,7 +71,7 @@ class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegat
                 }
             }
         } else {
-            print(error)
+            print(error, terminator: "")
         }
         
         self.tableView.reloadData()
@@ -120,7 +120,7 @@ class CompanyTableViewController: PFQueryTableViewController, UITableViewDelegat
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("companyTableViewCell", forIndexPath: indexPath) as! PFTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("companyTableViewCell", forIndexPath: indexPath) as! PFTableViewCell
 
             
         cell.textLabel!.text = sortedArray.objectAtIndex(indexPath.row).valueForKey("place") as? StringLiteralType

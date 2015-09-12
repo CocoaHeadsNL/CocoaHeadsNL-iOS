@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
+class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController {
     
     var coreLocationController:CoreLocationController?
     var geoPoint:PFGeoPoint?
@@ -45,7 +45,7 @@ class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController, 
         
             let userInfo = notification.userInfo as! Dictionary<String,CLLocation>
             
-            println("CoreLocationManager:  Location available \(userInfo)")
+            print("CoreLocationManager:  Location available \(userInfo)")
         
             geoPoint = PFGeoPoint(location: userInfo["location"])
         
