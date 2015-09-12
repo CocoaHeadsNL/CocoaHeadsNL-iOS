@@ -60,4 +60,13 @@ class ContributorsViewController: PFQueryTableViewController {
         return task
     }
     
+    //MARK: - Parse PFQueryTableViewController methods
+    
+    override func queryForTable() -> PFQuery {
+        let contributorQuery = Contributor.query()!
+        contributorQuery.orderByAscending("name")
+        
+        return contributorQuery
+    }
+    
 }
