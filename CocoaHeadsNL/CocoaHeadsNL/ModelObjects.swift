@@ -88,6 +88,7 @@ class Contributor : PFObject, PFSubclassing {
     @NSManaged var avatar_url: String?
     @NSManaged var contributor_id: Int
     @NSManaged var name: String?
+    @NSManaged var url: String?
 }
 
 class Job : PFObject, PFSubclassing {

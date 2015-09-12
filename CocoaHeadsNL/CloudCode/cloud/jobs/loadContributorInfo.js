@@ -40,6 +40,7 @@ Parse.Cloud.job("loadContributorInfo", function(request, status) {
 						contributorObject.set("avatar_url", authorDetailData["avatar_url"]);
 						contributorObject.set("name", authorDetailData["name"]);
 						contributorObject.set("commit_count", contributorInfo["total"]);
+						contributorObject.set("url", author.html_url);
 						return contributorObject.save();
 					}, function(error){
 						return Parse.Promise.error(error);
