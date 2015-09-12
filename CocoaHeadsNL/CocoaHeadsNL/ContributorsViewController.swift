@@ -64,7 +64,7 @@ class ContributorsViewController: PFQueryTableViewController {
     
     override func queryForTable() -> PFQuery {
         let contributorQuery = Contributor.query()!
-        contributorQuery.orderByAscending("name")
+        contributorQuery.orderByDescending("commit_count")
         
         return contributorQuery
     }
