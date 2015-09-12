@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		15B4D9EE4028962710AB4791 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DCDA2041B10335EFBDE05AF /* libPods.a */; };
 		239D41161B190FD000609105 /* CalendarTabImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239D41151B190FD000609105 /* CalendarTabImage.swift */; };
+		431C3D031B8F680400B0908E /* ContributorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431C3D001B8F680400B0908E /* ContributorCell.swift */; };
+		431C3D041B8F680400B0908E /* ContributorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 431C3D011B8F680400B0908E /* ContributorCell.xib */; };
+		431C3D051B8F680400B0908E /* ContributorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431C3D021B8F680400B0908E /* ContributorsViewController.swift */; };
 		4A1978C21AAD8681000E281F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A1978C11AAD8681000E281F /* Settings.bundle */; };
 		4A7EEAF11AC5440C001C2827 /* ModelObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */; };
 		4A83A4AE1AAD8A290085416A /* ParseConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A83A4AD1AAD8A290085416A /* ParseConfig.plist */; };
@@ -60,6 +63,9 @@
 
 /* Begin PBXFileReference section */
 		239D41151B190FD000609105 /* CalendarTabImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTabImage.swift; sourceTree = "<group>"; };
+		431C3D001B8F680400B0908E /* ContributorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContributorCell.swift; sourceTree = "<group>"; };
+		431C3D011B8F680400B0908E /* ContributorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContributorCell.xib; sourceTree = "<group>"; };
+		431C3D021B8F680400B0908E /* ContributorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContributorsViewController.swift; sourceTree = "<group>"; };
 		4436EC308BD555A87E5A96C1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4A1978C11AAD8681000E281F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelObjects.swift; sourceTree = "<group>"; };
@@ -127,6 +133,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		431C3CFF1B8F675200B0908E /* List of Contributors */ = {
+			isa = PBXGroup;
+			children = (
+				431C3D001B8F680400B0908E /* ContributorCell.swift */,
+				431C3D011B8F680400B0908E /* ContributorCell.xib */,
+				431C3D021B8F680400B0908E /* ContributorsViewController.swift */,
+			);
+			name = "List of Contributors";
+			sourceTree = "<group>";
+		};
 		4A13831E1AC7F83D00E0D41E /* Viewing Details */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +310,7 @@
 				F11455BD1AB4E8C000546D22 /* List of Meetups */,
 				F11455A81AB3256C00546D22 /* Open Job Postings */,
 				F11455A91AB3257700546D22 /* List of Sponsors */,
+				431C3CFF1B8F675200B0908E /* List of Contributors */,
 				4A13831E1AC7F83D00E0D41E /* Viewing Details */,
 				7B6A74501B176A2900A10762 /* Other Sources */,
 				7B6A74511B176A4000A10762 /* Resources */,
@@ -415,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A83A4AE1AAD8A290085416A /* ParseConfig.plist in Resources */,
+				431C3D041B8F680400B0908E /* ContributorCell.xib in Resources */,
 				4A1978C21AAD8681000E281F /* Settings.bundle in Resources */,
 				F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */,
 				F1A46D241AAB50BB00585D61 /* LaunchScreen.xib in Resources */,
@@ -521,6 +539,7 @@
 				F166C3571B18A36D00D6F7FD /* JobsCollectionViewCell.swift in Sources */,
 				F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */,
 				7B6A74661B18666D00A10762 /* FetchAffiliateLinks.swift in Sources */,
+				431C3D051B8F680400B0908E /* ContributorsViewController.swift in Sources */,
 				7B6A745E1B183D7900A10762 /* MeetupDataSource.swift in Sources */,
 				7B6A745C1B182E9C00A10762 /* DetailDataSource.swift in Sources */,
 				7B6A74601B18406600A10762 /* JobDataSource.swift in Sources */,
@@ -540,6 +559,7 @@
 				F11E362A1B1A572F000B61C0 /* CompanyHighLightViewController.swift in Sources */,
 				7B6A74581B179B9C00A10762 /* TitleCell.swift in Sources */,
 				F14335AB1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift in Sources */,
+				431C3D031B8F680400B0908E /* ContributorCell.swift in Sources */,
 				F11455C11AB5024000546D22 /* TabBarController.swift in Sources */,
 				F166C3551B189E1700D6F7FD /* CompaniesNearbyCollectionViewCell.swift in Sources */,
 			);

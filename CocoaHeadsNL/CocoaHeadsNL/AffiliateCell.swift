@@ -46,7 +46,6 @@ class AffiliateCell: UITableViewCell {
                     return NSURL(string: iconUrlString)
             }
         }
-        
         return nil
     }
 
