@@ -33,23 +33,27 @@ class AffiliateCell: UITableViewCell {
     }
 
     private func parseIconURL(data: NSData) -> NSURL? {
-        var parseError: NSError?
-        let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parseError)
+        let parsedObject: AnyObject?
+        do {
+            parsedObject = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
+        } catch let error as NSError {
+            print("error \(error)")
+            parsedObject = nil
+        }
         if let root = parsedObject as? NSDictionary, results = root["results"] as? NSArray where results.count > 0 {
             if let result = results[0] as? NSDictionary,
                 iconUrlString = result["artworkUrl100"] as? String {
                     return NSURL(string: iconUrlString)
             }
         }
-        
         return nil
     }
 
     private func loadIconWithURL(url: NSURL) {
-        var request = NSURLRequest(URL: url)
+        let request = NSURLRequest(URL: url)
         let dataTask = NSURLSession.sharedSession().dataTaskWithRequest(request) { [weak self] data, response, error in
             dispatch_async(dispatch_get_main_queue()) {
-                if let s = self, imageView = s.imageView {
+                if let s = self, imageView = s.imageView, data = data {
                     imageView.image = UIImage(data: data)
                     s.setNeedsLayout()
                 }

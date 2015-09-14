@@ -9,7 +9,7 @@
 import UIKit
 
 class ContributorsViewController: PFQueryCollectionViewController {
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.parseClassName = "Contributor"
         self.paginationEnabled = false
@@ -33,6 +33,22 @@ class ContributorsViewController: PFQueryCollectionViewController {
         
         return cell
     }
+    
+    //MARK: - UITableViewDelegate
+    
+    override func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+
+        guard let contributors = objects as? [Contributor], let urlString = contributors[indexPath.row].url else {
+            return
+        }
+
+        if let url = NSURL(string: urlString) {
+            if UIApplication.sharedApplication().canOpenURL(url) {
+                UIApplication.sharedApplication().openURL(url)
+            }
+        }
+    }
 
     // MARK: Networking
     
@@ -44,13 +60,23 @@ class ContributorsViewController: PFQueryCollectionViewController {
     func fetchImageTask(url: NSURL, forImageView imageView: UIImageView) -> NSURLSessionDataTask {
         let task = remoteSession.dataTaskWithRequest(NSURLRequest(URL: url)) {
             (data, response, error) in
-            
+            if let data = data {
             let image = UIImage(data: data)
-            dispatch_async(dispatch_get_main_queue()) {
-                imageView.image = image
+                dispatch_async(dispatch_get_main_queue()) {
+                    imageView.image = image
+                }
             }
         }
         return task
+    }
+    
+    //MARK: - Parse PFQueryTableViewController methods
+    
+    override func queryForCollection() -> PFQuery {
+        let contributorQuery = Contributor.query()!
+        contributorQuery.orderByDescending("commit_count")
+        
+        return contributorQuery
     }
     
 }

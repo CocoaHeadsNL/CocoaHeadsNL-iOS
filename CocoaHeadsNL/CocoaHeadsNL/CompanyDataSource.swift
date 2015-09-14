@@ -12,7 +12,7 @@ class CompanyDataSource: DetailDataSource {
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if let apps = company["hasApps"] as? Bool {
+        if company.hasApps {
             return 2
         } else {
             return 1
@@ -54,7 +54,7 @@ class CompanyDataSource: DetailDataSource {
     }
 
     func fetchAffiliateLinks() {
-        if let apps = company["hasApps"] as? Bool {
+        if company.hasApps {
             fetchLinks.fetchLinksForCompany(company) {
                 self.tableView.reloadData()
             }
@@ -66,7 +66,7 @@ class CompanyDataSource: DetailDataSource {
             tableView.headerViewForSection(1)?.backgroundColor = UIColor.grayColor()
             return tableView.headerViewForSection(1)
         } else {
-            return UIView(frame: CGRect.zeroRect)
+            return UIView(frame: CGRect.zero)
         }
     }
 

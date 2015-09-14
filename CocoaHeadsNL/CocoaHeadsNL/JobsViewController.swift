@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class JobsViewController: PFQueryCollectionViewController, UICollectionViewDelegateFlowLayout {
+class JobsViewController: PFQueryCollectionViewController {
     
     override func loadView() {
         super.loadView()

@@ -17,7 +17,7 @@ extension UIResponder {
 class DetailViewController: UITableViewController {
     var dataSource: DetailDataSource!
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
@@ -42,7 +42,7 @@ class DetailViewController: UITableViewController {
     }
 
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        for object in self.tableView.visibleCells() {
+        for object in self.tableView.visibleCells {
             if let webCell = object as? WebViewCell {
                 webCell.webViewDidFinishLoad(webCell.htmlWebView)
             }

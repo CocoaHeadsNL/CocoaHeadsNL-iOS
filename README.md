@@ -17,18 +17,10 @@ This app uses Parse for the cloud code. Before you can run the app, you need to 
 Please perform these steps:
 
 ```bash
-cp CocoaHeadsNL/CloudCode/config/global.json.template CocoaHeadsNL/CloudCode/config/global.json
-```
-
-In the newly created file **global.json**, replace the placeholders for `PARSE_APPLICATION_ID` and `PARSE_MASTER_KEY` with their respective values from parse.com.
-
-```bash
 cp CocoaHeadsNL/CocoaHeadsNL/ParseConfig-template.plist CocoaHeadsNL/CocoaHeadsNL/ParseConfig.plist
 ```
 
 In the newly created file **ParseConfig.plist**, replace the placeholders for `PARSE_APPLICATION_ID` and `PARSE_CLIENT_KEY` with their respective values from parse.com
-
-**Take special care to put the client and master key in their respective locations. Leaking the master key is very bad.**
 
 Once done with these steps, please run `pod install` in the directory containing the Podfile.
 

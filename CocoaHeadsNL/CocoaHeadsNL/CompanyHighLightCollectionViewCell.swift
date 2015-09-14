@@ -1,14 +1,14 @@
 //
-//  CompanyCollectionViewCell.swift
+//  CompanyHighLightCollectionViewCell.swift
 //  CocoaHeadsNL
 //
-//  Created by Bart Hoffman on 29/05/15.
+//  Created by Bart Hoffman on 01/06/15.
 //  Copyright (c) 2015 Stichting CocoaheadsNL. All rights reserved.
 //
 
 import Foundation
 
-class CompanyCollectionViewCell: PFCollectionViewCell {
+class CompanyHighLightCollectionViewCell: PFCollectionViewCell {
     
     override func updateFromObject(object: PFObject?) {
         
@@ -16,7 +16,7 @@ class CompanyCollectionViewCell: PFCollectionViewCell {
             
             if let companyLogo = company.logo {
                 imageView.file = companyLogo
-                imageView.frame = CGRect(x: 0, y: 0, width: self.contentView.frame.width, height: 70)
+                imageView.frame = CGRect(x: 0, y: 0, width: self.contentView.frame.width, height: 88)
                 imageView.image = UIImage(named: "CocoaHeadsNLLogo")
                 imageView.contentMode = .ScaleAspectFit
                 imageView.loadInBackground().continueWithSuccessBlock({[weak self] (task: BFTask!) -> AnyObject! in
@@ -24,16 +24,6 @@ class CompanyCollectionViewCell: PFCollectionViewCell {
                     return nil
                     })
             }
-            
-            if let place = company.place {
-                textLabel.text = place
-                textLabel.font = UIFont.systemFontOfSize(8)
-                textLabel.textAlignment = .Center
-            }
-        
-            contentView.layer.borderWidth = (2.0 / UIScreen.mainScreen().scale) / 2
-            contentView.layer.borderColor = UIColor.grayColor().CGColor
         }
     }
-    
 }

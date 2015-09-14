@@ -17,16 +17,18 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
 
     // MARK: - UISplitViewControllerDelegate
 
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController!, ontoPrimaryViewController primaryViewController: UIViewController!) -> Bool {
-        if let primaryTab = primaryViewController as? UITabBarController, primaryNav = primaryTab.selectedViewController as? UINavigationController {
+    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool {
+        if let primaryTab = primaryViewController as? UITabBarController, _ = primaryTab.selectedViewController as? UINavigationController {
             return true
         }
         return false
     }
 
-    func splitViewController(splitViewController: UISplitViewController, separateSecondaryViewControllerFromPrimaryViewController primaryViewController: UIViewController!) -> UIViewController? {
+    func splitViewController(splitViewController: UISplitViewController, separateSecondaryViewControllerFromPrimaryViewController primaryViewController: UIViewController) -> UIViewController? {
         if let tabBarController = primaryViewController as? UITabBarController, navigationController = tabBarController.selectedViewController as? UINavigationController where navigationController.childViewControllers.count > 1 {
-            let poppedControllers = navigationController.popToRootViewControllerAnimated(false)
+            guard let poppedControllers = navigationController.popToRootViewControllerAnimated(false) else {
+                return nil
+            }
             let childNavigationController = UINavigationController()
             childNavigationController.viewControllers = poppedControllers
             return childNavigationController
