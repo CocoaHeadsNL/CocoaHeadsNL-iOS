@@ -60,25 +60,6 @@
             </objects>
             <point key="canvasLocation" x="2578" y="-960"/>
         </scene>
-        <!--CocoaHeadsNL-->
-        <scene sceneID="kPi-HM-eGS">
-            <objects>
-                <tableViewController id="gHH-Pc-jiz" customClass="ContributorsViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="FHf-cm-Cbc">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="gHH-Pc-jiz" id="k6i-n6-uK1"/>
-                            <outlet property="delegate" destination="gHH-Pc-jiz" id="7Ys-vb-XgN"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="CocoaHeadsNL" id="xe1-J8-OVD"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="j51-Tp-Rxv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2554" y="-123"/>
-        </scene>
         <!--Contributors-->
         <scene sceneID="8a8-g1-nu0">
             <objects>
@@ -89,12 +70,64 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="gHH-Pc-jiz" kind="relationship" relationship="rootViewController" id="UAg-ve-PnS"/>
+                        <segue destination="Hxa-IG-xgr" kind="relationship" relationship="rootViewController" id="frt-h8-7RG"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ITA-Ki-7Pi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1734" y="-123"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="1zF-8x-itm">
+            <objects>
+                <viewController id="Hxa-IG-xgr" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hgT-uM-ESN"/>
+                        <viewControllerLayoutGuide type="bottom" id="5MB-Sz-flp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="f8X-ju-32M">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAC-jW-ehJ">
+                                <rect key="frame" x="0.0" y="351" width="600" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="CME-ox-uq2"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="gmi-jP-iZg" kind="embed" id="CR8-YW-KlH"/>
+                                </connections>
+                            </containerView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CocoaHeadsNLLogo" translatesAutoresizingMaskIntoConstraints="NO" id="jYU-gl-xsm">
+                                <rect key="frame" x="225" y="148" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="9se-ep-exZ"/>
+                                    <constraint firstAttribute="width" constant="150" id="BDP-VZ-nHP"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aan deze app werkten mee:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBo-ZD-6Mt">
+                                <rect key="frame" x="16" y="322" width="214" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="MBo-ZD-6Mt" firstAttribute="leading" secondItem="f8X-ju-32M" secondAttribute="leading" constant="16" id="2m9-qH-SSK"/>
+                            <constraint firstItem="QAC-jW-ehJ" firstAttribute="leading" secondItem="f8X-ju-32M" secondAttribute="leading" id="Gab-FT-rqc"/>
+                            <constraint firstItem="QAC-jW-ehJ" firstAttribute="top" secondItem="MBo-ZD-6Mt" secondAttribute="bottom" constant="8" id="J9X-qS-Lxv"/>
+                            <constraint firstItem="5MB-Sz-flp" firstAttribute="top" secondItem="QAC-jW-ehJ" secondAttribute="bottom" id="RIj-uu-JfS"/>
+                            <constraint firstAttribute="trailing" secondItem="QAC-jW-ehJ" secondAttribute="trailing" id="Sqf-KD-9XJ"/>
+                            <constraint firstAttribute="centerX" secondItem="jYU-gl-xsm" secondAttribute="centerX" id="VNz-ep-uHa"/>
+                            <constraint firstItem="jYU-gl-xsm" firstAttribute="top" secondItem="hgT-uM-ESN" secondAttribute="bottom" constant="84" id="bnV-z8-K3p"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="rqX-Oq-xTb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yxh-AG-xLq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2568" y="-123"/>
         </scene>
         <!--Events Navigation-->
         <scene sceneID="Rb4-4L-nsC">
@@ -418,8 +451,60 @@
             </objects>
             <point key="canvasLocation" x="1734" y="-3329"/>
         </scene>
+        <!--Contributors View Controller-->
+        <scene sceneID="vfx-ah-M7M">
+            <objects>
+                <collectionViewController id="gmi-jP-iZg" customClass="ContributorsViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="KsM-qv-4l7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="HTb-VW-nLO">
+                            <size key="itemSize" width="100" height="100"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="contributorCell" id="XHS-0g-x88" customClass="ContributorCell" customModule="CocoaHeadsNL" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ7-22-6yW">
+                                            <rect key="frame" x="8" y="71" width="85" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O4e-Dj-chz">
+                                            <rect key="frame" x="15" y="0.0" width="70" height="70"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" red="0.40000000596046448" green="0.80000001192092896" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="avatarView" destination="O4e-Dj-chz" id="pZn-Lv-537"/>
+                                    <outlet property="nameLabel" destination="ZJ7-22-6yW" id="ZSa-qR-guT"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="gmi-jP-iZg" id="pjL-mL-JzB"/>
+                            <outlet property="delegate" destination="gmi-jP-iZg" id="ujJ-Vd-pcQ"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0s8-DF-f86" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3429" y="128"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="CocoaHeadsNLLogo" width="300" height="300"/>
         <image name="CompaniesTabIcon" width="30" height="30"/>
         <image name="EventsTabIcon" width="30" height="30"/>
         <image name="JobsTabIcon" width="30" height="30"/>

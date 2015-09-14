@@ -8,22 +8,31 @@
 
 import UIKit
 
-class ContributorsViewController: PFQueryTableViewController {
+class ContributorsViewController: PFQueryCollectionViewController {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.parseClassName = "Contributor"
         self.paginationEnabled = false
+        self.pullToRefreshEnabled = false
+    }
+    
+    override func loadView() {
+        super.loadView()
+        self.collectionView?.backgroundColor = UIColor.yellowColor()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let flowLayout = self.collectionViewLayout as? UICollectionViewFlowLayout {
+            println("t = \(flowLayout.sectionInset.top) b = \(flowLayout.sectionInset.bottom) l = \(flowLayout.sectionInset.left) r = \(flowLayout.sectionInset.right)")
+        }
         
-        let nib = UINib(nibName: "ContributorCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: ContributorCell.Identifier)
+        
+        println("\(self.collectionView!.collectionViewLayout)")
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(ContributorCell.Identifier, forIndexPath: indexPath) as! ContributorCell
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ContributorCell.Identifier, forIndexPath: indexPath) as! ContributorCell
         
         if let contributor = self.objectAtIndexPath(indexPath) as? Contributor, name = contributor.name {
             cell.nameLabel.text = name

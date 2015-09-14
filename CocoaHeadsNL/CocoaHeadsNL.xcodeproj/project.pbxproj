@@ -10,7 +10,6 @@
 		15B4D9EE4028962710AB4791 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DCDA2041B10335EFBDE05AF /* libPods.a */; };
 		239D41161B190FD000609105 /* CalendarTabImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239D41151B190FD000609105 /* CalendarTabImage.swift */; };
 		431C3D031B8F680400B0908E /* ContributorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431C3D001B8F680400B0908E /* ContributorCell.swift */; };
-		431C3D041B8F680400B0908E /* ContributorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 431C3D011B8F680400B0908E /* ContributorCell.xib */; };
 		431C3D051B8F680400B0908E /* ContributorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431C3D021B8F680400B0908E /* ContributorsViewController.swift */; };
 		4A1978C21AAD8681000E281F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A1978C11AAD8681000E281F /* Settings.bundle */; };
 		4A7EEAF11AC5440C001C2827 /* ModelObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */; };
@@ -59,7 +58,6 @@
 /* Begin PBXFileReference section */
 		239D41151B190FD000609105 /* CalendarTabImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTabImage.swift; sourceTree = "<group>"; };
 		431C3D001B8F680400B0908E /* ContributorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContributorCell.swift; sourceTree = "<group>"; };
-		431C3D011B8F680400B0908E /* ContributorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContributorCell.xib; sourceTree = "<group>"; };
 		431C3D021B8F680400B0908E /* ContributorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContributorsViewController.swift; sourceTree = "<group>"; };
 		4436EC308BD555A87E5A96C1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4A1978C11AAD8681000E281F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -127,7 +125,6 @@
 			isa = PBXGroup;
 			children = (
 				431C3D001B8F680400B0908E /* ContributorCell.swift */,
-				431C3D011B8F680400B0908E /* ContributorCell.xib */,
 				431C3D021B8F680400B0908E /* ContributorsViewController.swift */,
 			);
 			name = "List of Contributors";
@@ -396,7 +393,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A83A4AE1AAD8A290085416A /* ParseConfig.plist in Resources */,
-				431C3D041B8F680400B0908E /* ContributorCell.xib in Resources */,
 				4A1978C21AAD8681000E281F /* Settings.bundle in Resources */,
 				F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */,
 				F1A46D241AAB50BB00585D61 /* LaunchScreen.xib in Resources */,

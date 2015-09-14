@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContributorCell: UITableViewCell {
+class ContributorCell: UICollectionViewCell {
     static let Identifier = "contributorCell"
 
     @IBOutlet weak var nameLabel: UILabel!
