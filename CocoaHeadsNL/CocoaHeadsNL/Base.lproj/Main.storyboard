@@ -98,29 +98,66 @@
                                     <segue destination="gmi-jP-iZg" kind="embed" id="CR8-YW-KlH"/>
                                 </connections>
                             </containerView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CocoaHeadsNLLogo" translatesAutoresizingMaskIntoConstraints="NO" id="jYU-gl-xsm">
-                                <rect key="frame" x="225" y="148" width="150" height="150"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" image="CocoaHeadsNLLogo" translatesAutoresizingMaskIntoConstraints="NO" id="jYU-gl-xsm">
+                                <rect key="frame" x="214" y="72" width="173" height="173"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="9se-ep-exZ"/>
-                                    <constraint firstAttribute="width" constant="150" id="BDP-VZ-nHP"/>
+                                    <constraint firstAttribute="width" secondItem="jYU-gl-xsm" secondAttribute="height" multiplier="1:1" id="yxW-lN-vX4"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contributors to this app:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBo-ZD-6Mt">
-                                <rect key="frame" x="16" y="419" width="178" height="20"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <rect key="frame" x="16" y="419" width="182" height="20"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A monthly meeting of iOS and Mac developers in the Netherlands and part of the international CocoaHeads.org." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="zUi-Nd-KR4">
+                                <rect key="frame" x="16" y="269" width="572" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How does it work?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pze-P1-FQN">
+                                <rect key="frame" x="16" y="322" width="139" height="20"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cPL-ha-QVI">
+                                <rect key="frame" x="16" y="346" width="544" height="61"/>
+                                <string key="text">Every month we organize a meeting at a different venue including food and drinks sponsored by companies. Depending on the size of the location we put together a nice agenda for developers.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is Cocoaheads?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cet-SM-MQH">
+                                <rect key="frame" x="16" y="245" width="163" height="20"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="MBo-ZD-6Mt" firstAttribute="leading" secondItem="f8X-ju-32M" secondAttribute="leading" constant="16" id="2m9-qH-SSK"/>
+                            <constraint firstItem="cPL-ha-QVI" firstAttribute="leading" secondItem="zUi-Nd-KR4" secondAttribute="leading" id="2Sv-G5-RU0"/>
+                            <constraint firstItem="zUi-Nd-KR4" firstAttribute="top" secondItem="Cet-SM-MQH" secondAttribute="bottom" constant="4" id="5bm-cS-ksj"/>
+                            <constraint firstItem="cPL-ha-QVI" firstAttribute="leading" secondItem="MBo-ZD-6Mt" secondAttribute="leading" id="8ot-rX-eHY"/>
                             <constraint firstItem="QAC-jW-ehJ" firstAttribute="leading" secondItem="f8X-ju-32M" secondAttribute="leading" id="Gab-FT-rqc"/>
                             <constraint firstItem="QAC-jW-ehJ" firstAttribute="top" secondItem="MBo-ZD-6Mt" secondAttribute="bottom" constant="12" id="J9X-qS-Lxv"/>
+                            <constraint firstItem="Cet-SM-MQH" firstAttribute="top" secondItem="jYU-gl-xsm" secondAttribute="bottom" id="Pd5-CD-o6I"/>
                             <constraint firstItem="5MB-Sz-flp" firstAttribute="top" secondItem="QAC-jW-ehJ" secondAttribute="bottom" id="RIj-uu-JfS"/>
                             <constraint firstAttribute="trailing" secondItem="QAC-jW-ehJ" secondAttribute="trailing" id="Sqf-KD-9XJ"/>
+                            <constraint firstItem="Cet-SM-MQH" firstAttribute="leading" secondItem="f8X-ju-32M" secondAttribute="leading" constant="16" id="TRF-oe-fL1"/>
                             <constraint firstAttribute="centerX" secondItem="jYU-gl-xsm" secondAttribute="centerX" id="VNz-ep-uHa"/>
-                            <constraint firstItem="jYU-gl-xsm" firstAttribute="top" secondItem="hgT-uM-ESN" secondAttribute="bottom" constant="84" id="bnV-z8-K3p"/>
+                            <constraint firstItem="cPL-ha-QVI" firstAttribute="leading" secondItem="Cet-SM-MQH" secondAttribute="leading" id="W8S-UO-r8D"/>
+                            <constraint firstItem="jYU-gl-xsm" firstAttribute="top" secondItem="hgT-uM-ESN" secondAttribute="bottom" constant="8" id="bnV-z8-K3p"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zUi-Nd-KR4" secondAttribute="trailing" constant="12" id="c2b-6i-kXK"/>
+                            <constraint firstItem="cPL-ha-QVI" firstAttribute="top" secondItem="Pze-P1-FQN" secondAttribute="bottom" constant="4" id="dEf-Ov-idg"/>
+                            <constraint firstItem="cPL-ha-QVI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="f8X-ju-32M" secondAttribute="leading" id="dMv-PJ-1St"/>
+                            <constraint firstItem="cPL-ha-QVI" firstAttribute="leading" secondItem="Pze-P1-FQN" secondAttribute="leading" id="jKq-hg-054"/>
+                            <constraint firstItem="zUi-Nd-KR4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="f8X-ju-32M" secondAttribute="leading" id="neV-Fo-5xr"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cPL-ha-QVI" secondAttribute="trailing" constant="12" id="sQI-fm-yLg"/>
+                            <constraint firstItem="Pze-P1-FQN" firstAttribute="top" secondItem="zUi-Nd-KR4" secondAttribute="bottom" constant="12" id="unX-g4-LCj"/>
+                            <constraint firstItem="MBo-ZD-6Mt" firstAttribute="top" secondItem="cPL-ha-QVI" secondAttribute="bottom" constant="12" id="xQQ-KU-oC1"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="CocoaHeadsNL" id="rqX-Oq-xTb"/>
