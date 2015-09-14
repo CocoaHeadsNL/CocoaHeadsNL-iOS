@@ -16,21 +16,6 @@ class ContributorsViewController: PFQueryCollectionViewController {
         self.pullToRefreshEnabled = false
     }
     
-    override func loadView() {
-        super.loadView()
-        self.collectionView?.backgroundColor = UIColor.yellowColor()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if let flowLayout = self.collectionViewLayout as? UICollectionViewFlowLayout {
-            println("t = \(flowLayout.sectionInset.top) b = \(flowLayout.sectionInset.bottom) l = \(flowLayout.sectionInset.left) r = \(flowLayout.sectionInset.right)")
-        }
-        
-        
-        println("\(self.collectionView!.collectionViewLayout)")
-    }
-    
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ContributorCell.Identifier, forIndexPath: indexPath) as! ContributorCell
         
