@@ -36,7 +36,7 @@ class ContributorsViewController: PFQueryCollectionViewController {
     
     //MARK: - UITableViewDelegate
     
-    override func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.deselectItemAtIndexPath(indexPath, animated: true)
 
         guard let contributors = objects as? [Contributor], let urlString = contributors[indexPath.row].url else {
