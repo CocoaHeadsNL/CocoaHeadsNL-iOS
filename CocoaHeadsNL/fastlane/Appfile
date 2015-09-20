@@ -7,4 +7,4 @@ app_identifier "nl.cocoaheads.app.CocoaHeadsNL" # The bundle identifier of your 
 
 
 # you can even provide different app identifiers, Apple IDs and team names per lane:
-# https://github.com/KrauseFx/fastlane/blob/master/docs/Advanced.md#the-appfile
+# https://github.com/KrauseFx/fastlane/blob/master/docs/Appfile.md

@@ -28,3 +28,7 @@ target.frontMostApp().mainWindow().collectionViews()[0].cells()[0].tap();
 target.delay(3)
 captureLocalizedScreenshot("6-CompaniesDetail")
 
+target.frontMostApp().tabBar().buttons()["About"].tap();
+target.delay(3)
+captureLocalizedScreenshot("6-About")
+
