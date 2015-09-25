@@ -74,24 +74,18 @@ class CompanyDataSource: DetailDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 1 {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            
+
             if let vc = presenter {
                 
-                let parameters = [SKStoreProductParameterITunesItemIdentifier :
-                    NSNumber(integer: 676059878)]
-
-                vc.showStoreView(parameters)
+                let affiliateLink = fetchLinks.apps[indexPath.row]
+                if let affiliateToken = PFConfig.currentConfig()["appleAffiliateToken"] as? String, let affiliateId = affiliateLink.affiliateId {
+                    let parameters = [SKStoreProductParameterITunesItemIdentifier :
+                        affiliateId, SKStoreProductParameterAffiliateToken : affiliateToken]
+                    
+                    vc.showStoreView(parameters)
+                    
+                }
             }
-            
-//            if let affiliateToken = PFConfig.currentConfig()["appleAffiliateToken"] as? String {
-//                let affiliateLink = fetchLinks.apps[indexPath.row]
-//                if let affiliateId = affiliateLink.affiliateId,
-//                   let url = NSURL(string: "https:itunes.apple.com/app/apple-store/id\(affiliateId)?at=\(affiliateToken)&ct=app") {
-//                    if UIApplication.sharedApplication().canOpenURL(url) {
-//                        UIApplication.sharedApplication().openURL(url)
-//                    }
-//                }
-//            }
         }
     }
 }
