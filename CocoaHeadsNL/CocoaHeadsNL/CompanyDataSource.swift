@@ -2,7 +2,7 @@ import UIKit
 
 class CompanyDataSource: DetailDataSource {
     let fetchLinks = FetchAffiliateLinks()
-    var presenter: DetailViewController?
+    weak var presenter: DetailViewController?
 
     private var company: Company {
         return object as! Company
@@ -73,17 +73,15 @@ class CompanyDataSource: DetailDataSource {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 1 {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
             if let vc = presenter {
-                
-                let affiliateLink = fetchLinks.apps[indexPath.row]
-                if let affiliateToken = PFConfig.currentConfig()["appleAffiliateToken"] as? String, let affiliateId = affiliateLink.affiliateId {
-                    let parameters = [SKStoreProductParameterITunesItemIdentifier :
-                        affiliateId, SKStoreProductParameterAffiliateToken : affiliateToken]
-                    
-                    vc.showStoreView(parameters)
-                    
+
+                    let affiliateLink = self.fetchLinks.apps[indexPath.row]
+                    if let affiliateToken = PFConfig.currentConfig()["appleAffiliateToken"] as? String, let affiliateId = affiliateLink.affiliateId {
+                        let parameters = [SKStoreProductParameterITunesItemIdentifier :
+                            affiliateId, SKStoreProductParameterAffiliateToken : affiliateToken]
+                        
+                        vc.showStoreView(parameters, indexPath: indexPath)
                 }
             }
         }
