@@ -30,6 +30,11 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>files.parsetfss.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
 			<key>mzstatic.com</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
