@@ -67,4 +67,13 @@ class JobsViewController: PFQueryCollectionViewController {
         return query!.orderByAscending("date")
     }
     
+    override func objectsDidLoad(error: NSError?) {
+        super.objectsDidLoad(error)
+        
+        if let jobs = self.objects as? [Job] {
+            Job.index(jobs)
+        }
+    }
+
+    
 }

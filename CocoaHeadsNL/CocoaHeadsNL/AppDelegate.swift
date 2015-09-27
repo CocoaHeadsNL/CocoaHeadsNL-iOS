@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import CoreSpotlight
+
+let searchNotificationName = "CocoaHeadsNLSpotLightSearchOccured"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -45,5 +48,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
 
         return true
+    }
+    
+    func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
+        if #available(iOS 9.0, *) {
+            if userActivity.activityType == CSSearchableItemActionType {
+                let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as! String
+                let components = uniqueIdentifier.componentsSeparatedByString(":")
+                let type = components[0]
+                let objectId = components[1]
+                if type == "job" || type == "meetup" {
+                    //TODO open tab, select based on uniqueId
+                    NSNotificationCenter.defaultCenter().postNotificationName(searchNotificationName, object: self, userInfo: ["type" : type, "objectId": objectId])
+                    return true
+                }
+            }
+        }
+        
+        return false
     }
 }

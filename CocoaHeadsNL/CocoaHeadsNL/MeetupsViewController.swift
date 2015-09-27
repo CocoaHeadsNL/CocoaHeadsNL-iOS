@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreSpotlight
 
 class MeetupsViewController: PFQueryTableViewController {
     required init?(coder aDecoder: NSCoder) {
@@ -79,5 +80,13 @@ class MeetupsViewController: PFQueryTableViewController {
         meetupQuery.orderByDescending("time")
 
         return meetupQuery
+    }
+    
+    override func objectsDidLoad(error: NSError?) {
+        super.objectsDidLoad(error)
+        
+        if let meetups = self.objects as? [Meetup] {
+            Meetup.index(meetups)
+        }
     }
 }
