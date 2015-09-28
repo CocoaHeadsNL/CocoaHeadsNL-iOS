@@ -31,6 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         fatalError("Parse credentials not configured. Please see README.md.")
     }
+    
+    func applicationDidBecomeActive(application: UIApplication) {
+        if let pasteboard = UIPasteboard(name: "searchPasteboardName", create: false) {
+            pasteboard.string = ""
+        }
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
