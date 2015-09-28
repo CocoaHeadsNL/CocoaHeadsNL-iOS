@@ -13,6 +13,25 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
     override func viewDidLoad() {
         self.delegate = self
         self.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "searchOccured:", name: searchNotificationName, object: nil)
+    }
+    func searchOccured(notification:NSNotification) -> Void {
+        guard let userInfo = notification.userInfo as? Dictionary<String,String> else {
+            return
+        }
+        
+        let type = userInfo["type"]
+        
+        guard let tabBarController = self.viewControllers[0] as? UITabBarController else {
+            return
+        }
+        
+        if type == "meetup" {
+            tabBarController.selectedIndex = 0
+        } else if type == "job" {
+            tabBarController.selectedIndex = 1
+        }
     }
 
     // MARK: - UISplitViewControllerDelegate
