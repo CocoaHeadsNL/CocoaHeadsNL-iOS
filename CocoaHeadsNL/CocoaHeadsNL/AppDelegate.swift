@@ -10,6 +10,7 @@ import UIKit
 import CoreSpotlight
 
 let searchNotificationName = "CocoaHeadsNLSpotLightSearchOccured"
+let searchPasteboardName = "CocoaHeadsNL-searchInfo-pasteboard"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -58,7 +59,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let type = components[0]
                 let objectId = components[1]
                 if type == "job" || type == "meetup" {
-                    //TODO open tab, select based on uniqueId
+                    //post uniqueIdentifier string to paste board
+                    let pasteboard = UIPasteboard(name: "searchPasteboardName", create: true)
+                    pasteboard?.string = uniqueIdentifier
+
+                    //open tab, select based on uniqueId
                     NSNotificationCenter.defaultCenter().postNotificationName(searchNotificationName, object: self, userInfo: ["type" : type, "objectId": objectId])
                     return true
                 }

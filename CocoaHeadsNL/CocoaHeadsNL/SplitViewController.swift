@@ -14,15 +14,30 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
         self.delegate = self
         self.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "searchOccured:", name: searchNotificationName, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "searchNotification:", name: searchNotificationName, object: nil)
+        
+        //Inspect paste board for userInfo
+        if let pasteBoard = UIPasteboard(name: searchPasteboardName, create: false) {
+            let uniqueIdentifier = pasteBoard.string
+            if let components = uniqueIdentifier?.componentsSeparatedByString(":") {
+                if components.count > 0 {
+                    let type = components[0]
+                    displayTabForType(type)
+                }
+            }
+        }
     }
-    func searchOccured(notification:NSNotification) -> Void {
+    func searchNotification(notification:NSNotification) -> Void {
         guard let userInfo = notification.userInfo as? Dictionary<String,String> else {
             return
         }
         
-        let type = userInfo["type"]
-        
+        if let type = userInfo["type"] {
+            displayTabForType(type)
+        }
+    }
+    
+    func displayTabForType(type: String) {
         guard let tabBarController = self.viewControllers[0] as? UITabBarController else {
             return
         }
@@ -33,6 +48,7 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
             tabBarController.selectedIndex = 1
         }
     }
+    
 
     // MARK: - UISplitViewControllerDelegate
 

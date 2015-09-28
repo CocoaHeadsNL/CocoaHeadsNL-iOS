@@ -17,6 +17,44 @@ class JobsViewController: PFQueryCollectionViewController {
         self.collectionView?.registerClass(JobsCollectionViewCell.self, forCellWithReuseIdentifier: "jobsCollectionViewCell")
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "searchOccured:", name: searchNotificationName, object: nil)
+        
+        //Inspect paste board for userInfo
+        if let pasteBoard = UIPasteboard(name: searchPasteboardName, create: false) {
+            let uniqueIdentifier = pasteBoard.string
+            if let components = uniqueIdentifier?.componentsSeparatedByString(":") {
+                if components.count > 1 {
+                    let objectId = components[1]
+                    displayObject(objectId)
+                }
+            }
+        }
+    }
+    
+    func searchOccured(notification:NSNotification) -> Void {
+        guard let userInfo = notification.userInfo as? Dictionary<String,String> else {
+            return
+        }
+        
+        let type = userInfo["type"]
+        
+        if type != "job" {
+            //Not for me
+            return
+        }
+        if let objectId = userInfo["objectId"] {
+            displayObject(objectId)
+        }
+    }
+    
+    func displayObject(objectId: String) -> Void {
+        //TODO
+//        self.performSegueWithIdentifier("ShowDetail", sender: collectionView.cellForItemAtIndexPath(indexPath))
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         

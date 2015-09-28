@@ -32,7 +32,41 @@ class MeetupsViewController: PFQueryTableViewController {
         let calendarIcon = UIImage.calendarTabImageWithCurrentDate()
         self.navigationController?.tabBarItem.image = calendarIcon
         self.navigationController?.tabBarItem.selectedImage = calendarIcon
+        
+        //Inspect paste board for userInfo
+        if let pasteBoard = UIPasteboard(name: searchPasteboardName, create: false) {
+            let uniqueIdentifier = pasteBoard.string
+            if let components = uniqueIdentifier?.componentsSeparatedByString(":") {
+                if components.count > 1 {
+                    let objectId = components[1]
+                    displayObject(objectId)
+                }
+            }
+        }
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "searchOccured:", name: searchNotificationName, object: nil)
     }
+    
+    func searchOccured(notification:NSNotification) -> Void {
+        guard let userInfo = notification.userInfo as? Dictionary<String,String> else {
+            return
+        }
+        
+        let type = userInfo["type"]
+        
+        if type != "meetup" {
+            //Not for me
+            return
+        }
+        if let objectId = userInfo["objectId"] {
+            displayObject(objectId)
+        }
+    }
+    
+    func displayObject(objectId: String) -> Void {
+        //TODO implement
+    }
+
 
     //MARK: - Segues
 
