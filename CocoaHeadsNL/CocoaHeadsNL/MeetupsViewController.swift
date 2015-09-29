@@ -10,6 +10,9 @@ import Foundation
 import CoreSpotlight
 
 class MeetupsViewController: PFQueryTableViewController {
+    
+    var searchedObjectId : String? = nil
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -47,6 +50,15 @@ class MeetupsViewController: PFQueryTableViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "searchOccured:", name: searchNotificationName, object: nil)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let searchedObjectId = searchedObjectId {
+            self.searchedObjectId = nil
+            displayObject(searchedObjectId)
+        }
+    }
+    
     func searchOccured(notification:NSNotification) -> Void {
         guard let userInfo = notification.userInfo as? Dictionary<String,String> else {
             return
@@ -64,7 +76,29 @@ class MeetupsViewController: PFQueryTableViewController {
     }
     
     func displayObject(objectId: String) -> Void {
-        //TODO implement
+        if !loading {
+            if self.navigationController?.visibleViewController == self {
+                if let meetups = objects as? [Meetup] {
+                    if let selectedObject = meetups.filter({ (meetup :Meetup) -> Bool in
+                        return meetup.objectId == objectId
+                    }).first {
+                        if let selectedIndex = meetups.indexOf(selectedObject) {
+                            
+                            if let sender = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedIndex, inSection: 0)) {
+                                performSegueWithIdentifier("ShowDetail", sender: sender)
+                            }
+                        }
+                    }
+                }
+            } else {
+                self.navigationController?.popToRootViewControllerAnimated(false)
+                searchedObjectId = objectId
+            }
+            
+        } else {
+            //cache object
+            searchedObjectId = objectId
+        }
     }
 
 
@@ -118,6 +152,11 @@ class MeetupsViewController: PFQueryTableViewController {
     
     override func objectsDidLoad(error: NSError?) {
         super.objectsDidLoad(error)
+        
+        if let searchedObjectId = searchedObjectId {
+            self.searchedObjectId = nil
+            displayObject(searchedObjectId)
+        }
         
         if let meetups = self.objects as? [Meetup] {
             Meetup.index(meetups)

@@ -152,8 +152,10 @@ class Job : PFObject, PFSubclassing {
             indexQueue.addOperationWithBlock({ () -> Void in
                 var searchableItems = [CSSearchableItem]()
                 for job in jobs {
-                    let item = CSSearchableItem(uniqueIdentifier: "job:\(job.objectId)", domainIdentifier: "job", attributeSet: job.searchableAttributeSet)
-                    searchableItems.append(item)
+                    if let objectId = job.objectId {
+                        let item = CSSearchableItem(uniqueIdentifier: "job:\(objectId)", domainIdentifier: "job", attributeSet: job.searchableAttributeSet)
+                        searchableItems.append(item)
+                    }
                 }
                 
                 CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithDomainIdentifiers(["job"], completionHandler: { (error: NSError?) -> Void in
@@ -246,8 +248,10 @@ class Meetup : PFObject, PFSubclassing {
             indexQueue.addOperationWithBlock({ () -> Void in
                 var searchableItems = [CSSearchableItem]()
                 for meetup in meetups {
-                    let item = CSSearchableItem(uniqueIdentifier: "meetup:\(meetup.objectId)", domainIdentifier: "meetup", attributeSet: meetup.searchableAttributeSet)
-                    searchableItems.append(item)
+                    if let objectId = meetup.objectId {
+                        let item = CSSearchableItem(uniqueIdentifier: "meetup:\(objectId)", domainIdentifier: "meetup", attributeSet: meetup.searchableAttributeSet)
+                        searchableItems.append(item)
+                    }
                 }
                 
                 CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithDomainIdentifiers(["meetup"], completionHandler: { (error: NSError?) -> Void in
