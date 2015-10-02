@@ -11,6 +11,14 @@ import UIKit
 
 class JobsViewController: PFQueryCollectionViewController {
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        self.parseClassName = "Job"
+        self.pullToRefreshEnabled = true
+        self.paginationEnabled = false
+    }
+    
     override func loadView() {
         super.loadView()
 

@@ -11,6 +11,10 @@ import MobileCoreServices
 
 let indexQueue = NSOperationQueue()
 
+var jobsIndexBackgroundTaskID = UIBackgroundTaskInvalid
+var meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
+
+
 class AffiliateLink : PFObject, PFSubclassing {
     override class func initialize() {
         struct Static {
@@ -150,6 +154,16 @@ class Job : PFObject, PFSubclassing {
     class func index(jobs: [Job]) {
         if #available(iOS 9.0, *) {
             indexQueue.addOperationWithBlock({ () -> Void in
+                
+                guard jobsIndexBackgroundTaskID != UIBackgroundTaskInvalid else {
+                    return
+                }
+                
+                jobsIndexBackgroundTaskID = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({ () -> Void in
+                    UIApplication.sharedApplication().endBackgroundTask(jobsIndexBackgroundTaskID)
+                    jobsIndexBackgroundTaskID = UIBackgroundTaskInvalid
+                })
+                
                 var searchableItems = [CSSearchableItem]()
                 for job in jobs {
                     if let objectId = job.objectId {
@@ -158,11 +172,11 @@ class Job : PFObject, PFSubclassing {
                     }
                 }
                 
-                CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithDomainIdentifiers(["job"], completionHandler: { (error: NSError?) -> Void in
-                    if let error = error {
-                        print(error)
-                    }
-                })
+//                CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithDomainIdentifiers(["job"], completionHandler: { (error: NSError?) -> Void in
+//                    if let error = error {
+//                        print(error)
+//                    }
+//                })
 
                 
                 CSSearchableIndex.defaultSearchableIndex().indexSearchableItems(searchableItems, completionHandler: { (error: NSError?) -> Void in
@@ -170,6 +184,9 @@ class Job : PFObject, PFSubclassing {
                         print(error)
                     }
                 })
+                
+                UIApplication.sharedApplication().endBackgroundTask(jobsIndexBackgroundTaskID)
+                jobsIndexBackgroundTaskID = UIBackgroundTaskInvalid
             })
         }
     }
@@ -246,6 +263,16 @@ class Meetup : PFObject, PFSubclassing {
     class func index(meetups: [Meetup]) {
         if #available(iOS 9.0, *) {
             indexQueue.addOperationWithBlock({ () -> Void in
+                
+                guard meetupsIndexBackgroundTaskID != UIBackgroundTaskInvalid else {
+                    return
+                }
+
+                meetupsIndexBackgroundTaskID = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({ () -> Void in
+                    UIApplication.sharedApplication().endBackgroundTask(jobsIndexBackgroundTaskID)
+                    meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
+                })
+
                 var searchableItems = [CSSearchableItem]()
                 for meetup in meetups {
                     if let objectId = meetup.objectId {
@@ -254,17 +281,20 @@ class Meetup : PFObject, PFSubclassing {
                     }
                 }
                 
-                CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithDomainIdentifiers(["meetup"], completionHandler: { (error: NSError?) -> Void in
-                    if let error = error {
-                        print(error)
-                    }
-                })
+//                CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithDomainIdentifiers(["meetup"], completionHandler: { (error: NSError?) -> Void in
+//                    if let error = error {
+//                        print(error)
+//                    }
+//                })
                 
                 CSSearchableIndex.defaultSearchableIndex().indexSearchableItems(searchableItems, completionHandler: { (error: NSError?) -> Void in
                     if let error = error {
                         print(error)
                     }
                 })
+                
+                UIApplication.sharedApplication().endBackgroundTask(jobsIndexBackgroundTaskID)
+                meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
             })
         }
     }

@@ -18,8 +18,7 @@ class MeetupsViewController: PFQueryTableViewController {
         
         self.parseClassName = "Meetup"
         self.pullToRefreshEnabled = true
-        self.paginationEnabled = true
-        self.objectsPerPage = 50
+        self.paginationEnabled = false
     }
 
     override func viewDidLoad() {
@@ -82,12 +81,7 @@ class MeetupsViewController: PFQueryTableViewController {
                     if let selectedObject = meetups.filter({ (meetup :Meetup) -> Bool in
                         return meetup.objectId == objectId
                     }).first {
-                        if let selectedIndex = meetups.indexOf(selectedObject) {
-                            
-                            if let sender = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedIndex, inSection: 0)) {
-                                performSegueWithIdentifier("ShowDetail", sender: sender)
-                            }
-                        }
+                        performSegueWithIdentifier("ShowDetail", sender: selectedObject)
                     }
                 }
             } else {
@@ -106,7 +100,10 @@ class MeetupsViewController: PFQueryTableViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
-            if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
+            if let selectedObject = sender as? Meetup {
+                let detailViewController = segue.destinationViewController as! DetailViewController
+                detailViewController.dataSource = MeetupDataSource(object: selectedObject)
+            } else if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
                 let meetup = self.objectAtIndexPath(indexPath) as! Meetup
                 let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.dataSource = MeetupDataSource(object: meetup)
