@@ -293,7 +293,7 @@
         <scene sceneID="lLl-mH-LCd">
             <objects>
                 <tableViewController id="a2t-e3-dvm" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="o1o-bc-wds">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="o1o-bc-wds">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
@@ -322,28 +322,28 @@
                         <sections>
                             <tableViewSection id="Mql-TC-OEl">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="225" id="8Fn-fK-h6h">
-                                        <rect key="frame" x="0.0" y="209" width="600" height="225"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="279" id="8Fn-fK-h6h">
+                                        <rect key="frame" x="0.0" y="209" width="600" height="279"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Fn-fK-h6h" id="eau-IZ-2bm">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="224.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="279"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="What is Cocoaheads?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8V-hl-9JZ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is Cocoaheads?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8V-hl-9JZ">
                                                     <rect key="frame" x="14" y="8" width="574" height="20.5"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="How does it work?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GkQ-gn-r7o">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="How does it work?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GkQ-gn-r7o">
                                                     <rect key="frame" x="14" y="106" width="578" height="32.5"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" bounces="NO" scrollEnabled="NO" text="A monthly meeting of iOS and Mac developers in the Netherlands and part of the international CocoaHeads.org." translatesAutoresizingMaskIntoConstraints="NO" id="4oQ-uh-yxZ">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" text="A monthly meeting of iOS and Mac developers in the Netherlands and part of the international CocoaHeads.org." translatesAutoresizingMaskIntoConstraints="NO" id="4oQ-uh-yxZ">
                                                     <rect key="frame" x="8" y="28" width="584" height="70"/>
                                                     <animations/>
                                                     <constraints>
@@ -353,11 +353,8 @@
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6qd-dU-PTV">
-                                                    <rect key="frame" x="8" y="146.5" width="584" height="70"/>
+                                                    <rect key="frame" x="8" y="134.5" width="584" height="136"/>
                                                     <animations/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="70" id="YYj-cm-Kzg"/>
-                                                    </constraints>
                                                     <string key="text">Every month we organize a meeting at a different venue including food and drinks sponsored by companies. Depending on the size of the location we put together a nice agenda for developers.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -365,31 +362,31 @@
                                             </subviews>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstItem="6qd-dU-PTV" firstAttribute="top" secondItem="GkQ-gn-r7o" secondAttribute="bottom" constant="8" id="5dB-Cu-aPF"/>
                                                 <constraint firstItem="4oQ-uh-yxZ" firstAttribute="top" secondItem="I8V-hl-9JZ" secondAttribute="bottom" constant="-0.5" id="AAs-hW-YIN"/>
                                                 <constraint firstAttribute="trailing" secondItem="GkQ-gn-r7o" secondAttribute="trailing" constant="8" id="Bu5-bi-nNc"/>
+                                                <constraint firstItem="6qd-dU-PTV" firstAttribute="top" secondItem="GkQ-gn-r7o" secondAttribute="bottom" constant="8" id="CtQ-Fk-uA3"/>
                                                 <constraint firstItem="I8V-hl-9JZ" firstAttribute="leading" secondItem="eau-IZ-2bm" secondAttribute="leading" constant="14" id="Gv0-Xm-2x9"/>
-                                                <constraint firstAttribute="bottom" secondItem="6qd-dU-PTV" secondAttribute="bottom" constant="8" id="Lc7-gt-H7t"/>
+                                                <constraint firstAttribute="trailing" secondItem="6qd-dU-PTV" secondAttribute="trailing" constant="8" id="MDN-4P-SXp"/>
+                                                <constraint firstItem="6qd-dU-PTV" firstAttribute="leading" secondItem="eau-IZ-2bm" secondAttribute="leading" constant="8" id="Ww9-r3-BeK"/>
                                                 <constraint firstAttribute="trailing" secondItem="4oQ-uh-yxZ" secondAttribute="trailing" constant="8" id="ZBp-dv-Nce"/>
                                                 <constraint firstItem="GkQ-gn-r7o" firstAttribute="top" secondItem="4oQ-uh-yxZ" secondAttribute="bottom" constant="8" id="cyJ-00-nif"/>
                                                 <constraint firstItem="GkQ-gn-r7o" firstAttribute="leading" secondItem="eau-IZ-2bm" secondAttribute="leading" constant="14" id="kFH-Ws-8UE"/>
-                                                <constraint firstAttribute="trailing" secondItem="6qd-dU-PTV" secondAttribute="trailing" constant="8" id="kdw-Up-KDI"/>
                                                 <constraint firstAttribute="trailing" secondItem="I8V-hl-9JZ" secondAttribute="trailing" constant="12" id="kxe-St-mxt"/>
                                                 <constraint firstItem="4oQ-uh-yxZ" firstAttribute="leading" secondItem="eau-IZ-2bm" secondAttribute="leading" constant="8" id="qoJ-Te-wgh"/>
-                                                <constraint firstItem="6qd-dU-PTV" firstAttribute="leading" secondItem="eau-IZ-2bm" secondAttribute="leading" constant="8" id="s7V-iL-I2a"/>
                                                 <constraint firstItem="I8V-hl-9JZ" firstAttribute="top" secondItem="eau-IZ-2bm" secondAttribute="top" constant="8" id="vUj-Jz-wBv"/>
+                                                <constraint firstAttribute="bottom" secondItem="6qd-dU-PTV" secondAttribute="bottom" constant="8" id="yfb-b4-zXP"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="117" id="5Bj-67-JwZ">
-                                        <rect key="frame" x="0.0" y="434" width="600" height="117"/>
+                                        <rect key="frame" x="0.0" y="488" width="600" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Bj-67-JwZ" id="zCU-14-iuE">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="116.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="117"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fkt-gV-zER">
+                                                <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fkt-gV-zER">
                                                     <rect key="frame" x="0.0" y="8" width="600" height="100"/>
                                                     <animations/>
                                                     <connections>
