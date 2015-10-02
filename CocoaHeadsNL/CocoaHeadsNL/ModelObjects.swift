@@ -155,7 +155,7 @@ class Job : PFObject, PFSubclassing {
         if #available(iOS 9.0, *) {
             indexQueue.addOperationWithBlock({ () -> Void in
                 
-                guard jobsIndexBackgroundTaskID != UIBackgroundTaskInvalid else {
+                guard jobsIndexBackgroundTaskID == UIBackgroundTaskInvalid else {
                     return
                 }
                 
@@ -264,7 +264,7 @@ class Meetup : PFObject, PFSubclassing {
         if #available(iOS 9.0, *) {
             indexQueue.addOperationWithBlock({ () -> Void in
                 
-                guard meetupsIndexBackgroundTaskID != UIBackgroundTaskInvalid else {
+                guard meetupsIndexBackgroundTaskID == UIBackgroundTaskInvalid else {
                     return
                 }
 
