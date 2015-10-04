@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             pasteboard.string = ""
         }
         
-        var currentInstallation = PFInstallation.currentInstallation()
+        let currentInstallation = PFInstallation.currentInstallation()
         if (currentInstallation.badge != 0) {
             currentInstallation.badge = 0
         }
@@ -47,8 +47,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let installation = PFInstallation.currentInstallation()
         installation.setDeviceTokenFromData(deviceToken)
-        //installation.channels = ["global", "meetup", "jobs", "companies"]
+        installation.addUniqueObject("global", forKey: "channels")
         installation.addUniqueObject("meetup", forKey: "channels")
+        installation.addUniqueObject("jobs", forKey: "channels")
+        installation.addUniqueObject("company", forKey: "channels")
         installation.saveInBackground()
     }
     
