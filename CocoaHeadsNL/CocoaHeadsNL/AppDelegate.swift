@@ -36,14 +36,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let pasteboard = UIPasteboard(name: "searchPasteboardName", create: false) {
             pasteboard.string = ""
         }
+        
+        var currentInstallation = PFInstallation.currentInstallation()
+        if (currentInstallation.badge != 0) {
+            currentInstallation.badge = 0
+        }
     }
-
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        
+        let installation = PFInstallation.currentInstallation()
+        installation.setDeviceTokenFromData(deviceToken)
+        //installation.channels = ["global", "meetup", "jobs", "companies"]
+        installation.addUniqueObject("meetup", forKey: "channels")
+        installation.saveInBackground()
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        if error.code == 3010 {
+            print("Push Notifications are not supported in the simulator")
+        } else {
+            print("application didFailToRegisterForRemoteNotificationsWithError: %@",error)
+        }
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        if application.applicationState == UIApplicationState.Inactive {
+            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+        }
+        PFPush.handlePush(userInfo)
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         ParseCrashReporting.enable()
 
         let config = loadParseConfiguration()
         Parse.setApplicationId(config.applicationId, clientKey: config.clientKey)
+        
+        let notificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
+        
+        let settings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
+    
 
         PFUser.enableRevocableSessionInBackground()
         if let user = PFUser.currentUser() where PFAnonymousUtils.isLinkedWithUser(user) {

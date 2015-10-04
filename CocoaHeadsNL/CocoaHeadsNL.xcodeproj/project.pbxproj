@@ -36,6 +36,7 @@
 		F11455C11AB5024000546D22 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455C01AB5024000546D22 /* TabBarController.swift */; };
 		F11E36281B1A570F000B61C0 /* CompanyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E36271B1A570F000B61C0 /* CompanyTableViewController.swift */; };
 		F11E362A1B1A572F000B61C0 /* CompanyHighLightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E36291B1A572F000B61C0 /* CompanyHighLightViewController.swift */; };
+		F1379F6F1BC19F1900A20FDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F17A38761ABF3B62005CFF8A /* MapKit.framework */; };
 		F14335AB1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14335AA1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift */; };
 		F166C3551B189E1700D6F7FD /* CompaniesNearbyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F166C3541B189E1700D6F7FD /* CompaniesNearbyCollectionViewCell.swift */; };
 		F166C3571B18A36D00D6F7FD /* JobsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F166C3561B18A36D00D6F7FD /* JobsCollectionViewCell.swift */; };
@@ -116,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1379F6F1BC19F1900A20FDB /* MapKit.framework in Frameworks */,
 				15B4D9EE4028962710AB4791 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,6 +396,9 @@
 								enabled = 0;
 							};
 							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -744,7 +749,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.cocoaheads.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CocoaHeadsNL;
-				PROVISIONING_PROFILE = "f7926840-757e-45cb-bfe9-dd3d782c7592";
+				PROVISIONING_PROFILE = "47c3d4fe-97c6-4c79-a96c-f09fd522b8a9";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
