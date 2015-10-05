@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         installation.setDeviceTokenFromData(deviceToken)
         installation.addUniqueObject("global", forKey: "channels")
         installation.addUniqueObject("meetup", forKey: "channels")
-        installation.addUniqueObject("jobs", forKey: "channels")
+        installation.addUniqueObject("job", forKey: "channels")
         installation.addUniqueObject("company", forKey: "channels")
         installation.saveInBackground()
     }
