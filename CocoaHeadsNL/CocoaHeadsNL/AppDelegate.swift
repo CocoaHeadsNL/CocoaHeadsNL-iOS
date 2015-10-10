@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import CoreSpotlight
+
+let searchNotificationName = "CocoaHeadsNLSpotLightSearchOccured"
+let searchPasteboardName = "CocoaHeadsNL-searchInfo-pasteboard"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,13 +31,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         fatalError("Parse credentials not configured. Please see README.md.")
     }
-
+    
+    func applicationDidBecomeActive(application: UIApplication) {
+        if let pasteboard = UIPasteboard(name: "searchPasteboardName", create: false) {
+            pasteboard.string = ""
+        }
+        
+        let currentInstallation = PFInstallation.currentInstallation()
+        if (currentInstallation.badge != 0) {
+            currentInstallation.badge = 0
+        }
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        
+        let installation = PFInstallation.currentInstallation()
+        installation.setDeviceTokenFromData(deviceToken)
+        installation.addUniqueObject("global", forKey: "channels")
+        installation.addUniqueObject("meetup", forKey: "channels")
+        installation.addUniqueObject("job", forKey: "channels")
+        installation.addUniqueObject("company", forKey: "channels")
+        installation.saveInBackground()
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        if error.code == 3010 {
+            print("Push Notifications are not supported in the simulator")
+        } else {
+            print("application didFailToRegisterForRemoteNotificationsWithError: %@",error)
+        }
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        if application.applicationState == UIApplicationState.Inactive {
+            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+        }
+        PFPush.handlePush(userInfo)
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         ParseCrashReporting.enable()
 
         let config = loadParseConfiguration()
         Parse.setApplicationId(config.applicationId, clientKey: config.clientKey)
+        
+        let notificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
+        
+        let settings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
+    
 
         PFUser.enableRevocableSessionInBackground()
         if let user = PFUser.currentUser() where PFAnonymousUtils.isLinkedWithUser(user) {
@@ -45,5 +93,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
 
         return true
+    }
+    
+    func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
+        if #available(iOS 9.0, *) {
+            if userActivity.activityType == CSSearchableItemActionType {
+                let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as! String
+                let components = uniqueIdentifier.componentsSeparatedByString(":")
+                let type = components[0]
+                let objectId = components[1]
+                if type == "job" || type == "meetup" {
+                    //post uniqueIdentifier string to paste board
+                    let pasteboard = UIPasteboard(name: "searchPasteboardName", create: true)
+                    pasteboard?.string = uniqueIdentifier
+
+                    //open tab, select based on uniqueId
+                    NSNotificationCenter.defaultCenter().postNotificationName(searchNotificationName, object: self, userInfo: ["type" : type, "objectId": objectId])
+                    return true
+                }
+            }
+        }
+        
+        return false
     }
 }

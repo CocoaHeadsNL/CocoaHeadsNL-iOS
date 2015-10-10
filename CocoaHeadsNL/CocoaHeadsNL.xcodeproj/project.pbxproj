@@ -36,10 +36,10 @@
 		F11455C11AB5024000546D22 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455C01AB5024000546D22 /* TabBarController.swift */; };
 		F11E36281B1A570F000B61C0 /* CompanyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E36271B1A570F000B61C0 /* CompanyTableViewController.swift */; };
 		F11E362A1B1A572F000B61C0 /* CompanyHighLightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E36291B1A572F000B61C0 /* CompanyHighLightViewController.swift */; };
+		F1379F6F1BC19F1900A20FDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F17A38761ABF3B62005CFF8A /* MapKit.framework */; };
 		F14335AB1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14335AA1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift */; };
 		F166C3551B189E1700D6F7FD /* CompaniesNearbyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F166C3541B189E1700D6F7FD /* CompaniesNearbyCollectionViewCell.swift */; };
 		F166C3571B18A36D00D6F7FD /* JobsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F166C3561B18A36D00D6F7FD /* JobsCollectionViewCell.swift */; };
-		F17A38771ABF3B62005CFF8A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F17A38761ABF3B62005CFF8A /* MapKit.framework */; };
 		F18BA8261B1D08DF00CB81CD /* CompanyHighLightCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18BA8251B1D08DF00CB81CD /* CompanyHighLightCollectionViewCell.swift */; };
 		F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D171AAB50BB00585D61 /* AppDelegate.swift */; };
 		F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D1D1AAB50BB00585D61 /* Main.storyboard */; };
@@ -65,6 +65,7 @@
 		431C3D001B8F680400B0908E /* ContributorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContributorCell.swift; sourceTree = "<group>"; };
 		431C3D021B8F680400B0908E /* ContributorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContributorsViewController.swift; sourceTree = "<group>"; };
 		4436EC308BD555A87E5A96C1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		4A15A33C1BB82224008161BD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		4A1978C11AAD8681000E281F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelObjects.swift; sourceTree = "<group>"; };
 		4A83A4AD1AAD8A290085416A /* ParseConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ParseConfig.plist; sourceTree = "<group>"; };
@@ -116,7 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F17A38771ABF3B62005CFF8A /* MapKit.framework in Frameworks */,
+				F1379F6F1BC19F1900A20FDB /* MapKit.framework in Frameworks */,
 				15B4D9EE4028962710AB4791 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,6 +154,7 @@
 		5F94B32C0E46149D436AD3B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4A15A33C1BB82224008161BD /* MobileCoreServices.framework */,
 				F17A38761ABF3B62005CFF8A /* MapKit.framework */,
 				4DCDA2041B10335EFBDE05AF /* libPods.a */,
 			);
@@ -394,6 +396,9 @@
 								enabled = 0;
 							};
 							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};

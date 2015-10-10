@@ -7,15 +7,18 @@
 //
 
 import Foundation
+import CoreSpotlight
 
 class MeetupsViewController: PFQueryTableViewController {
+    
+    var searchedObjectId : String? = nil
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         self.parseClassName = "Meetup"
         self.pullToRefreshEnabled = true
-        self.paginationEnabled = true
-        self.objectsPerPage = 50
+        self.paginationEnabled = false
     }
 
     override func viewDidLoad() {
@@ -31,13 +34,76 @@ class MeetupsViewController: PFQueryTableViewController {
         let calendarIcon = UIImage.calendarTabImageWithCurrentDate()
         self.navigationController?.tabBarItem.image = calendarIcon
         self.navigationController?.tabBarItem.selectedImage = calendarIcon
+        
+        //Inspect paste board for userInfo
+        if let pasteBoard = UIPasteboard(name: searchPasteboardName, create: false) {
+            let uniqueIdentifier = pasteBoard.string
+            if let components = uniqueIdentifier?.componentsSeparatedByString(":") {
+                if components.count > 1 {
+                    let objectId = components[1]
+                    displayObject(objectId)
+                }
+            }
+        }
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "searchOccured:", name: searchNotificationName, object: nil)
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let searchedObjectId = searchedObjectId {
+            self.searchedObjectId = nil
+            displayObject(searchedObjectId)
+        }
+    }
+    
+    func searchOccured(notification:NSNotification) -> Void {
+        guard let userInfo = notification.userInfo as? Dictionary<String,String> else {
+            return
+        }
+        
+        let type = userInfo["type"]
+        
+        if type != "meetup" {
+            //Not for me
+            return
+        }
+        if let objectId = userInfo["objectId"] {
+            displayObject(objectId)
+        }
+    }
+    
+    func displayObject(objectId: String) -> Void {
+        if !loading {
+            if self.navigationController?.visibleViewController == self {
+                if let meetups = objects as? [Meetup] {
+                    if let selectedObject = meetups.filter({ (meetup :Meetup) -> Bool in
+                        return meetup.objectId == objectId
+                    }).first {
+                        performSegueWithIdentifier("ShowDetail", sender: selectedObject)
+                    }
+                }
+            } else {
+                self.navigationController?.popToRootViewControllerAnimated(false)
+                searchedObjectId = objectId
+            }
+            
+        } else {
+            //cache object
+            searchedObjectId = objectId
+        }
+    }
+
 
     //MARK: - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
-            if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
+            if let selectedObject = sender as? Meetup {
+                let detailViewController = segue.destinationViewController as! DetailViewController
+                detailViewController.dataSource = MeetupDataSource(object: selectedObject)
+            } else if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
                 let meetup = self.objectAtIndexPath(indexPath) as! Meetup
                 let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.dataSource = MeetupDataSource(object: meetup)
@@ -79,5 +145,18 @@ class MeetupsViewController: PFQueryTableViewController {
         meetupQuery.orderByDescending("time")
 
         return meetupQuery
+    }
+    
+    override func objectsDidLoad(error: NSError?) {
+        super.objectsDidLoad(error)
+        
+        if let searchedObjectId = searchedObjectId {
+            self.searchedObjectId = nil
+            displayObject(searchedObjectId)
+        }
+        
+        if let meetups = self.objects as? [Meetup] {
+            Meetup.index(meetups)
+        }
     }
 }

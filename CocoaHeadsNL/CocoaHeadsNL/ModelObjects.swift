@@ -6,6 +6,15 @@
 //  Copyright (c) 2015 Stichting CocoaheadsNL. All rights reserved.
 //
 
+import CoreSpotlight
+import MobileCoreServices
+
+let indexQueue = NSOperationQueue()
+
+var jobsIndexBackgroundTaskID = UIBackgroundTaskInvalid
+var meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
+
+
 class AffiliateLink : PFObject, PFSubclassing {
     override class func initialize() {
         struct Static {
@@ -110,6 +119,77 @@ class Job : PFObject, PFSubclassing {
     @NSManaged var link: String?
     @NSManaged var title: String?
     @NSManaged var logo: PFFile?
+    
+    @available(iOS 9.0, *)
+    var searchableAttributeSet: CSSearchableItemAttributeSet {
+        get {
+            let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeImage as String)
+            attributeSet.title = title
+            if let data = content?.dataUsingEncoding(NSUTF8StringEncoding) {
+                do {
+                    let jobDescriptionString = try NSAttributedString(data: data, options:[NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding], documentAttributes:nil)
+                    
+                    attributeSet.contentDescription = jobDescriptionString.string;
+                } catch {
+                    print("Stuff went crazy!")
+                }
+            }
+            attributeSet.creator = "CocoaHeadsNL";
+            do {
+                guard let imageData = try logo?.getData() else {
+                    return attributeSet
+                }
+                
+                if let smallLogoImage = UIImage(data:imageData)
+                {
+                    attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage);
+                }
+            } catch {
+                
+            }
+            return attributeSet
+        }
+    }
+    
+    class func index(jobs: [Job]) {
+        if #available(iOS 9.0, *) {
+            indexQueue.addOperationWithBlock({ () -> Void in
+                
+                guard jobsIndexBackgroundTaskID == UIBackgroundTaskInvalid else {
+                    return
+                }
+                
+                jobsIndexBackgroundTaskID = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({ () -> Void in
+                    UIApplication.sharedApplication().endBackgroundTask(jobsIndexBackgroundTaskID)
+                    jobsIndexBackgroundTaskID = UIBackgroundTaskInvalid
+                })
+                
+                var searchableItems = [CSSearchableItem]()
+                for job in jobs {
+                    if let objectId = job.objectId {
+                        let item = CSSearchableItem(uniqueIdentifier: "job:\(objectId)", domainIdentifier: "job", attributeSet: job.searchableAttributeSet)
+                        searchableItems.append(item)
+                    }
+                }
+                
+//                CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithDomainIdentifiers(["job"], completionHandler: { (error: NSError?) -> Void in
+//                    if let error = error {
+//                        print(error)
+//                    }
+//                })
+
+                
+                CSSearchableIndex.defaultSearchableIndex().indexSearchableItems(searchableItems, completionHandler: { (error: NSError?) -> Void in
+                    if let error = error {
+                        print(error)
+                    }
+                })
+                
+                UIApplication.sharedApplication().endBackgroundTask(jobsIndexBackgroundTaskID)
+                jobsIndexBackgroundTaskID = UIBackgroundTaskInvalid
+            })
+        }
+    }
 }
 
 class Meetup : PFObject, PFSubclassing {
@@ -139,5 +219,83 @@ class Meetup : PFObject, PFSubclassing {
     @NSManaged var nextEvent: DarwinBoolean
     @NSManaged var smallLogo: PFFile?
     @NSManaged var location: String?
+    
+    @available(iOS 9.0, *)
+    var searchableAttributeSet: CSSearchableItemAttributeSet {
+        get {
+            let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeImage as String)
+            attributeSet.title = name
+            if let data = meetup_description?.dataUsingEncoding(NSUTF8StringEncoding) {
+                do {
+                    let meetupDescriptionString = try NSAttributedString(data: data, options:[NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding], documentAttributes:nil)
+                    
+                    attributeSet.contentDescription = meetupDescriptionString.string;
+                } catch {
+                    print("Stuff went crazy!")
+                }
+            }
+            attributeSet.creator = "CocoaHeadsNL";
+            var keywords = ["CocoaHeadsNL"]
+            if let locationName = locationName {
+                keywords.append(locationName)
+            }
+            if let location = location {
+                keywords.append(location)
+            }
 
+            attributeSet.keywords = keywords
+            do {
+                guard let imageData = try smallLogo?.getData() else {
+                    return attributeSet
+                }
+
+                if let smallLogoImage = UIImage(data:imageData)
+                {
+                    attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage);
+                }
+            } catch {
+                
+            }
+            return attributeSet
+        }
+    }
+
+    class func index(meetups: [Meetup]) {
+        if #available(iOS 9.0, *) {
+            indexQueue.addOperationWithBlock({ () -> Void in
+                
+                guard meetupsIndexBackgroundTaskID == UIBackgroundTaskInvalid else {
+                    return
+                }
+
+                meetupsIndexBackgroundTaskID = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({ () -> Void in
+                    UIApplication.sharedApplication().endBackgroundTask(jobsIndexBackgroundTaskID)
+                    meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
+                })
+
+                var searchableItems = [CSSearchableItem]()
+                for meetup in meetups {
+                    if let objectId = meetup.objectId {
+                        let item = CSSearchableItem(uniqueIdentifier: "meetup:\(objectId)", domainIdentifier: "meetup", attributeSet: meetup.searchableAttributeSet)
+                        searchableItems.append(item)
+                    }
+                }
+                
+//                CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithDomainIdentifiers(["meetup"], completionHandler: { (error: NSError?) -> Void in
+//                    if let error = error {
+//                        print(error)
+//                    }
+//                })
+                
+                CSSearchableIndex.defaultSearchableIndex().indexSearchableItems(searchableItems, completionHandler: { (error: NSError?) -> Void in
+                    if let error = error {
+                        print(error)
+                    }
+                })
+                
+                UIApplication.sharedApplication().endBackgroundTask(jobsIndexBackgroundTaskID)
+                meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
+            })
+        }
+    }
 }
