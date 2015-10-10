@@ -82,6 +82,7 @@ class MeetupsViewController: PFQueryTableViewController, UIViewControllerPreview
             
             if let meetup = self.objectAtIndexPath(indexPath) as? Meetup {
             detailVC.dataSource = MeetupDataSource(object: meetup )
+            detailVC.presentingVC  = self
             
             previewingContext.sourceRect = cell.frame
                 
