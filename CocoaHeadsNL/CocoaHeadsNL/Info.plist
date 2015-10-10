@@ -79,5 +79,32 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeSearch</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Show companies</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>nl.cocoaheads.CocoaHeadsNL.companies</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeSearch</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Show jobs</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>nl.cocoaheads.CocoaHeadsNL.job</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeSearch</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Show meetups</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>nl.cocoaheads.CocoaHeadsNL.meetup</string>
+		</dict>
+	</array>
 </dict>
 </plist>

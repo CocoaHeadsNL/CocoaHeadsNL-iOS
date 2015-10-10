@@ -9,7 +9,7 @@
 import Foundation
 import CoreSpotlight
 
-class MeetupsViewController: PFQueryTableViewController {
+class MeetupsViewController: PFQueryTableViewController, UIViewControllerPreviewingDelegate {
     
     var searchedObjectId : String? = nil
     
@@ -47,6 +47,14 @@ class MeetupsViewController: PFQueryTableViewController {
         }
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "searchOccured:", name: searchNotificationName, object: nil)
+        
+        if #available(iOS 9.0, *) {
+            if traitCollection.forceTouchCapability == .Available {
+                registerForPreviewingWithDelegate(self, sourceView: view)
+            }
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -57,6 +65,45 @@ class MeetupsViewController: PFQueryTableViewController {
             displayObject(searchedObjectId)
         }
     }
+    
+    //MARK: - 3D Touch
+    
+    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        //quick peek
+        guard let indexPath = tableView.indexPathForRowAtPoint(location), cell = tableView.cellForRowAtIndexPath(indexPath) as? MeetupCell
+            else { return nil }
+        
+        let vcId = "detailViewController"
+        
+        guard let detailVC = storyboard?.instantiateViewControllerWithIdentifier(vcId) as? DetailViewController
+            else { return nil }
+        
+        if #available(iOS 9.0, *) {
+            
+            if let meetup = self.objectAtIndexPath(indexPath) as? Meetup {
+            detailVC.dataSource = MeetupDataSource(object: meetup )
+            
+            previewingContext.sourceRect = cell.frame
+                
+            return detailVC
+                
+            } else {
+                return nil
+            }
+            
+        } else {
+            // Fallback on earlier versions
+            return nil
+        }
+    }
+    
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        //push to detailView - pop forceTouch window
+        showViewController(viewControllerToCommit, sender: self)
+    }
+    
+    
+    //MARK: - Search
     
     func searchOccured(notification:NSNotification) -> Void {
         guard let userInfo = notification.userInfo as? Dictionary<String,String> else {

@@ -116,4 +116,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return false
     }
+    
+    @available(iOS 9.0, *)
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+            handleShortCutItem(shortcutItem)
+            completionHandler(true)
+    }
+    
+    @available(iOS 9.0, *)
+    func handleShortCutItem(shortCutItem: UIApplicationShortcutItem) {
+        
+        switch shortCutItem.type {
+        case "nl.cocoaheads.CocoaHeadsNL.meetup" :
+            presentMeetupsViewController()
+        case "nl.cocoaheads.CocoaHeadsNL.job" :
+            presentJobsViewController()
+        case "nl.cocoaheads.CocoaHeadsNL.companies" :
+            presentCompaniesViewController()
+        default: break
+        }
+    }
+    
+    func presentMeetupsViewController() {
+        //print("should open selected tab"
+
+        let splitViewController = self.window?.rootViewController as! SplitViewController
+        if let tabBar = splitViewController.viewControllers[0] as? UITabBarController {
+        tabBar.selectedIndex = 0
+        }
+
+    }
+    
+    func presentJobsViewController() {
+        let splitViewController = self.window?.rootViewController as! SplitViewController
+        if let tabBar = splitViewController.viewControllers[0] as? UITabBarController {
+        tabBar.selectedIndex = 1
+        }
+    }
+    
+    func presentCompaniesViewController() {
+        let splitViewController = self.window?.rootViewController as! SplitViewController
+        if let tabBar = splitViewController.viewControllers[0] as? UITabBarController {
+        tabBar.selectedIndex = 2
+        }
+
+    }
+    
 }
+
