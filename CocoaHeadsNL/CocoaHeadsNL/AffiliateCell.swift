@@ -42,7 +42,7 @@ class AffiliateCell: UITableViewCell {
         }
         if let root = parsedObject as? NSDictionary, results = root["results"] as? NSArray where results.count > 0 {
             if let result = results[0] as? NSDictionary,
-                iconUrlString = result["artworkUrl100"] as? String {
+                iconUrlString = result["artworkUrl60"] as? String {
                     return NSURL(string: iconUrlString)
             }
         }
