@@ -7,7 +7,7 @@ class FetchAffiliateLinks {
         if let objectID = company.objectId {
             let affiliateQuery = AffiliateLink.query()!
             affiliateQuery.whereKey("company", equalTo: PFObject(withoutDataWithClassName: Company.parseClassName(), objectId: objectID))
-            affiliateQuery.cachePolicy = PFCachePolicy.CacheElseNetwork
+            affiliateQuery.cachePolicy = PFCachePolicy.CacheThenNetwork
 
             affiliateQuery.findObjectsInBackgroundWithBlock { objects, error in
                 if error != nil {
