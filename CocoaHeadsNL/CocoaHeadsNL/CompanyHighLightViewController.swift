@@ -65,7 +65,7 @@ class CompanyHighLightViewController: PFQueryCollectionViewController {
                 }
             }
             
-            return self.objects[ind.row] as? PFObject
+            return self.objects[ind.row] //as? PFObject Always succeeds as self.objects is an array of PFObjects.
         }
         
         return nil
