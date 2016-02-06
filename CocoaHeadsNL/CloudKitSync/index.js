@@ -5,15 +5,18 @@
  Abstract:
  This node script uses a server-to-server key to make public database calls with CloudKit JS
  */
+var Promise = require('promise');
 
+var contributorsLoader = require('./jobs/loadContributorInfo');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 
 (function() {
   var fetch = require('node-fetch');
 
   var CloudKit = require('./cloudkit');
-  var containerConfig = require('./config');
+  var config = require('./config');
 
   // A utility function for printing results to the console.
   var println = function(key,value) {
@@ -28,7 +31,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
       fetch: fetch,
       logger: console
     },
-    containers: [ containerConfig ]
+    containers: [ config.containerConfig ]
   });
 
 
@@ -39,30 +42,67 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   container.setUpAuth()
     .then(function(userInfo){
       println("userInfo",userInfo);
+      
+      //Load contributors from iCloud
+      var cloudKitFetchPromise = database.performQuery({ recordType: 'Contributor' }).then(function(response) {
+        return Promise.resolve(response.records)
+      })
+      //Load contributors from Github
+      var githubFetchPromise =  contributorsLoader.load().then(function(contributors) {
+        return Promise.resolve(contributors)
+      })
+      
+      return Promise.all([cloudKitFetchPromise, githubFetchPromise])
+      
+    }).then(contributors => {
+      var cloudKitContributors = contributors[0];
+      var githubContributors = contributors[1];
+      
+      var mappedGithubRecords = githubContributors.map(function(gitHubRecord) {
+        return {recordType: 'Contributor',
+          fields: {
+            contributor_id: {value: gitHubRecord["id"]},
+            avatar_url: {value: gitHubRecord["avatar_url"]},
+            name: {value: gitHubRecord["name"]},
+            commit_count: {value: gitHubRecord["commit_count"]},
+            url: {value: gitHubRecord["html_url"]}
+          }
+        }
+      })
+      
+      // println("Github Records", githubContributors);
+      // println("Mapped Github Records", mappedGithubRecords);
+      // println("CloudKit Records", cloudKitContributors);
+      
+      for (var mappedGithubRecord of mappedGithubRecords) {
+        var contributorId = mappedGithubRecord["fields"]["contributor_id"]["value"]
+        var filteredCloudRecords = cloudKitContributors.filter(function(cloudKitRecord) {
+          var cloudKitContributorId = cloudKitRecord.fields.contributor_id
+          if (cloudKitContributorId === undefined) {return false}
+          return (contributorId === cloudKitContributorId.value)
+        })
+        // println("Matched Github Record", mappedGithubRecord);
 
-      return database.performQuery({ recordType: 'Test' });
-    })
-    .then(function(response) {
-      println("Queried Records",response.records);
-
-      return database.saveRecords({recordType: 'Test', recordName: 'hello-u'});
-    })
-    .then(function(response) {
-      var record = response.records[0];
-      println("Saved Record",record);
-
-      return database.fetchRecords(record);
-    })
-    .then(function(response) {
-      var record = response.records[0];
-      println("Fetched Record", record);
-
-      return database.deleteRecords(record);
-    })
-    .then(function(response) {
-      var record = response.records[0];
-      println("Deleted Record", record);
-
+        // println("Matched Github Record", mappedGithubRecord);
+        // println("Matched Record", filteredCloudRecords[0]);
+        for (var filteredCloudRecord of filteredCloudRecords) {
+          if(filteredCloudRecord.recordChangeTag) {
+            mappedGithubRecord.recordChangeTag = filteredCloudRecords[0].recordChangeTag;
+          }
+          console.log('.')
+          if(filteredCloudRecord.recordName) {
+            mappedGithubRecord.recordName = filteredCloudRecords[0].recordName;
+          }
+        }
+      }
+      
+      // println("Enriched Github Records", mappedGithubRecords);
+      
+      
+      
+      
+        return database.saveRecords(mappedGithubRecords);
+    }).then(function(response) {
       console.log("Done");
       process.exit();
     })

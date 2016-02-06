@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "node-fetch": "^1.3.3"
+    "node-fetch": "^1.3.3",
+    "request": "^2.67.0",
+    "promise": "^7.0.2"
   }
 }

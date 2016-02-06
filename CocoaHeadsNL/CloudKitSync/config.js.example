@@ -7,7 +7,9 @@
         Customize this for your own environment.
  */
 
-module.exports = {
+module.exports.githubAuthOptions = {'user': '<insert your github username>', 'pass': '<insert your github password or auth token>'}
+
+module.exports.containerConfig = {
   // Replace this with a container that you own.
   containerIdentifier:'iCloud.nl.cocoaheads.app.CocoaHeadsNL',
 
