@@ -12,3 +12,7 @@ Error*.png
 *.ipa
 *.itmsp
 *.mobileprovision
+config.js
+eckey.pem
+CocoaHeadsNL/CloudKitSync/node_modules
+cloudkit.js
