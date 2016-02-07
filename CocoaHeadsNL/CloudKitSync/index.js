@@ -96,11 +96,6 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
         }
       }
       
-      // println("Enriched Github Records", mappedGithubRecords);
-      
-      
-      
-      
         return database.saveRecords(mappedGithubRecords);
     }).then(function(response) {
       console.log("Done");
