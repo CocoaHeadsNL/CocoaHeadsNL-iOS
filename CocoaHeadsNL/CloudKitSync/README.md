@@ -35,6 +35,7 @@ Copy this ID and fill in the **keyID** property in `config.js`.
 - github username
 - github access token
 - Meetup API Key
+- Slack Hook URL
 - Server-2-server CloudKit key
 
 See config.js for more information.

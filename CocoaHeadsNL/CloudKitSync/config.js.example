@@ -11,6 +11,8 @@ module.exports.githubAuthOptions = {'user': '<insert your github username>', 'pa
 
 module.exports.meetupApiKey = "<insert your meetup API key>"
 
+module.exports.slackHookUrl = undefined; // <insert your Slack Hook URL here>
+
 module.exports.containerConfig = {
   // Replace this with a container that you own.
   containerIdentifier:'iCloud.nl.cocoaheads.app.CocoaHeadsNL',
