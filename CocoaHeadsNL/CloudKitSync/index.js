@@ -41,7 +41,6 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   // Sign in using the keyID and public key file.
   container.setUpAuth()
     .then(function(userInfo){
-      println("userInfo",userInfo);
       
       //Load contributors from iCloud
       var cloudKitFetchPromise = database.performQuery({ recordType: 'Contributor' }).then(function(response) {
@@ -70,10 +69,6 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
         }
       })
       
-      // println("Github Records", githubContributors);
-      // println("Mapped Github Records", mappedGithubRecords);
-      // println("CloudKit Records", cloudKitContributors);
-      
       for (var mappedGithubRecord of mappedGithubRecords) {
         var contributorId = mappedGithubRecord["fields"]["contributor_id"]["value"]
         var filteredCloudRecords = cloudKitContributors.filter(function(cloudKitRecord) {
@@ -81,22 +76,18 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
           if (cloudKitContributorId === undefined) {return false}
           return (contributorId === cloudKitContributorId.value)
         })
-        // println("Matched Github Record", mappedGithubRecord);
 
-        // println("Matched Github Record", mappedGithubRecord);
-        // println("Matched Record", filteredCloudRecords[0]);
         for (var filteredCloudRecord of filteredCloudRecords) {
           if(filteredCloudRecord.recordChangeTag) {
             mappedGithubRecord.recordChangeTag = filteredCloudRecords[0].recordChangeTag;
           }
-          console.log('.')
           if(filteredCloudRecord.recordName) {
             mappedGithubRecord.recordName = filteredCloudRecords[0].recordName;
           }
         }
       }
       
-        return database.saveRecords(mappedGithubRecords);
+      return database.saveRecords(mappedGithubRecords);
     }).then(function(response) {
       console.log("Done");
       process.exit();
@@ -105,6 +96,5 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
       console.warn(error);
       process.exit(1);
     });
-
 })();
 
