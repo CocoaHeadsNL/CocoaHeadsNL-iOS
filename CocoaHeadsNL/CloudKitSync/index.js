@@ -8,7 +8,7 @@
 var Promise = require('promise');
 
 var contributorsLoader = require('./jobs/loadContributorInfo');
-
+var eventsLoader = require('./jobs/loadEventInfo');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 
