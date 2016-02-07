@@ -49,6 +49,7 @@
 		F1A46D301AAB50BB00585D61 /* CocoaHeadsNLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D2F1AAB50BB00585D61 /* CocoaHeadsNLTests.swift */; };
 		F1A46D3D1AAB516300585D61 /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D3C1AAB516300585D61 /* JobsViewController.swift */; };
 		F1CF120F1B8A0C0600EBCABC /* CoreLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CF120E1B8A0C0600EBCABC /* CoreLocationController.swift */; };
+		F1DC2E131C665B4D006CC492 /* ContributorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DC2E121C665B4D006CC492 /* ContributorTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 		F1A46D2F1AAB50BB00585D61 /* CocoaHeadsNLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaHeadsNLTests.swift; sourceTree = "<group>"; };
 		F1A46D3C1AAB516300585D61 /* JobsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsViewController.swift; sourceTree = "<group>"; };
 		F1CF120E1B8A0C0600EBCABC /* CoreLocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocationController.swift; sourceTree = "<group>"; };
+		F1DC2E121C665B4D006CC492 /* ContributorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContributorTableViewController.swift; sourceTree = "<group>"; };
 		F6DAB6C2CE1C2A96434BAAE0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,6 +143,7 @@
 			children = (
 				431C3D001B8F680400B0908E /* ContributorCell.swift */,
 				431C3D021B8F680400B0908E /* ContributorsViewController.swift */,
+				F1DC2E121C665B4D006CC492 /* ContributorTableViewController.swift */,
 			);
 			name = "List of Contributors";
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				7B6A74491B1452FD00A10762 /* MeetupsViewController.swift in Sources */,
 				F1A46D3D1AAB516300585D61 /* JobsViewController.swift in Sources */,
 				7B6A74561B179B7D00A10762 /* MapViewCell.swift in Sources */,
+				F1DC2E131C665B4D006CC492 /* ContributorTableViewController.swift in Sources */,
 				F11E362A1B1A572F000B61C0 /* CompanyHighLightViewController.swift in Sources */,
 				7B6A74581B179B9C00A10762 /* TitleCell.swift in Sources */,
 				F14335AB1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift in Sources */,

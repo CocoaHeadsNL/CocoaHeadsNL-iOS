@@ -36,19 +36,19 @@ class ContributorsViewController: PFQueryCollectionViewController {
     
     //MARK: - UITableViewDelegate
     
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
-
-        guard let contributors = objects as? [Contributor], let urlString = contributors[indexPath.row].url else {
-            return
-        }
-
-        if let url = NSURL(string: urlString) {
-            if UIApplication.sharedApplication().canOpenURL(url) {
-                UIApplication.sharedApplication().openURL(url)
-            }
-        }
-    }
+//    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+//        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+//
+//        guard let contributors = objects as? [Contributor], let urlString = contributors[indexPath.row].url else {
+//            return
+//        }
+//
+//        if let url = NSURL(string: urlString) {
+//            if UIApplication.sharedApplication().canOpenURL(url) {
+//                UIApplication.sharedApplication().openURL(url)
+//            }
+//        }
+//    }
 
     // MARK: Networking
     
@@ -72,11 +72,11 @@ class ContributorsViewController: PFQueryCollectionViewController {
     
     //MARK: - Parse PFQueryTableViewController methods
     
-    override func queryForCollection() -> PFQuery {
-        let contributorQuery = Contributor.query()!
-        contributorQuery.orderByDescending("commit_count")
-        
-        return contributorQuery
-    }
+//    override func queryForCollection() -> PFQuery {
+//        let contributorQuery = Contributor.query()!
+//        contributorQuery.orderByDescending("commit_count")
+//        
+//        return contributorQuery
+//    }
     
 }
