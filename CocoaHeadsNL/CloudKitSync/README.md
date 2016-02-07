@@ -30,6 +30,14 @@ openssl ec -in eckey.pem -pubout
 and paste it into the *Public Key* text field of the new key. Hit *Save* and the *Key ID* attribute will get populated.
 Copy this ID and fill in the **keyID** property in `config.js`.
 
+## Make sure all placeholders in config.js are replaced with valid values.
+
+- github username
+- github access token
+- Server-2-server CloudKit key
+
+See config.js for more information.
+
 ## Run the script
 
 ```
