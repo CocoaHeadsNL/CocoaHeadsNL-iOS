@@ -75,6 +75,8 @@ class ContributorTableViewController: UITableViewController {
                 UIApplication.sharedApplication().openURL(url)
             }
         }
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     // MARK: Networking
