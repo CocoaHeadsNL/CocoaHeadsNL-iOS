@@ -1,7 +1,7 @@
 "use strict";
 
 var Promise = require('promise');
-var request = require('request'), username = "", password = "";
+var request = require('request');
 var config = require('../config');
 
 
