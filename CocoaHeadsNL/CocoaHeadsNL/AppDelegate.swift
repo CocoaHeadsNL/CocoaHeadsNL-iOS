@@ -17,41 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-//    struct ParseConfiguration {
-//        let applicationId: String
-//        let clientKey: String
-//    }
-
-//    func loadParseConfiguration() -> ParseConfiguration {
-//        if let path = NSBundle.mainBundle().pathForResource("ParseConfig", ofType: "plist"),
-//               dict = NSDictionary(contentsOfFile: path),
-//               applicationId = dict.objectForKey("applicationId") as? String,
-//               clientKey = dict.objectForKey("clientKey") as? String {
-//            return ParseConfiguration(applicationId: applicationId, clientKey: clientKey)
-//        }
-//        fatalError("Parse credentials not configured. Please see README.md.")
-//    }
-    
     func applicationDidBecomeActive(application: UIApplication) {
         if let pasteboard = UIPasteboard(name: "searchPasteboardName", create: false) {
             pasteboard.string = ""
         }
-        
-//        let currentInstallation = PFInstallation.currentInstallation()
-//        if (currentInstallation.badge != 0) {
-//            currentInstallation.badge = 0
-//        }
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         
-//        let installation = PFInstallation.currentInstallation()
-//        installation.setDeviceTokenFromData(deviceToken)
-//        installation.addUniqueObject("global", forKey: "channels")
-//        installation.addUniqueObject("meetup", forKey: "channels")
-//        installation.addUniqueObject("job", forKey: "channels")
-//        installation.addUniqueObject("company", forKey: "channels")
-//        installation.saveInBackground()
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
@@ -63,18 +36,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-//        if application.applicationState == UIApplicationState.Inactive {
-//            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-//        }
-//        PFPush.handlePush(userInfo)
+
     }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
-//        ParseCrashReporting.enable()
-//
-//        let config = loadParseConfiguration()
-//        Parse.setApplicationId(config.applicationId, clientKey: config.clientKey)
         
         let notificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
         
@@ -82,16 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
     
-
-//        PFUser.enableRevocableSessionInBackground()
-//        if let user = PFUser.currentUser() where PFAnonymousUtils.isLinkedWithUser(user) {
-//            PFUser.logOut()
-//        }
-//
-//        PFConfig.getConfigInBackground()
-//
-//        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
-
         return true
     }
     
