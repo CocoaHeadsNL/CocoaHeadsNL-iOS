@@ -7,8 +7,6 @@
  */
 var Promise = require('promise');
 
-var contributorsLoader = require('./jobs/loadContributorInfo');
-var eventsLoader = require('./jobs/loadEventInfo');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 
@@ -41,6 +39,8 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   function syncEventsPromise() {
     var syncEventsPromise = new Promise(function(resolve, reject) {
 
+      var eventsLoader = require('./jobs/loadEventInfo');
+
       eventsLoader.load().then(function(meetupData){
         console.log(".")
         console.log(meetupData)
@@ -56,6 +56,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   function syncContributorsPromise() {
     var syncContributorsPromise = new Promise(function(resolve, reject) {
 
+      var contributorsLoader = require('./jobs/loadContributorInfo');
 
       //Load contributors from iCloud
       var cloudKitFetchPromise = database.performQuery({ recordType: 'Contributor' }).then(function(response) {
