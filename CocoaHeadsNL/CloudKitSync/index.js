@@ -38,7 +38,21 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   var container = CloudKit.getDefaultContainer();
   var database = container.publicCloudDatabase; // We'll only make calls to the public database.
 
+  function syncEventsPromise() {
+    var syncEventsPromise = new Promise(function(resolve, reject) {
+
+      eventsLoader.load().then(function(meetupData){
+        console.log(".")
+        console.log(meetupData)
+        console.log(".")
+
+        resolve(meetupData)
+      })
     })
+
+    return syncEventsPromise
+  }
+
   function syncContributorsPromise() {
     var syncContributorsPromise = new Promise(function(resolve, reject) {
 
@@ -100,6 +114,8 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   container.setUpAuth()
     .then(function(userInfo){
         return syncContributorsPromise()
+    }).then(function(response) {
+        return syncEventsPromise()
     }).then(function(response) {
       console.log("Done");
       process.exit();
