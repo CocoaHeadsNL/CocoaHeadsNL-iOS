@@ -64,13 +64,12 @@ class LocatedCompaniesViewController: UITableViewController {
             cell.imageView?.image = UIImage(named: "MeetupPlaceholder")
             
             if let logoFile = company.smallLogo {
-                logoFile.getDataInBackgroundWithBlock({ (imageData: NSData?, error: NSError?) -> Void in
-                    if error == nil {
-                        let image = UIImage(data: imageData!)
-                        cell.imageView?.image = image
-                    }
-                })
-                
+//                logoFile.getDataInBackgroundWithBlock({ (imageData: NSData?, error: NSError?) -> Void in
+//                    if error == nil {
+//                        let image = UIImage(data: imageData!)
+//                        cell.imageView?.image = image
+//                    }
+//                })
             }
         }
         return cell

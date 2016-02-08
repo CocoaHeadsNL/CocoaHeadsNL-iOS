@@ -9,16 +9,17 @@
 import Foundation
 import UIKit
 
-class JobsViewController: PFQueryCollectionViewController {
+class JobsViewController: UICollectionViewController {
     
+    var jobsArray = [Job]()
     var searchedObjectId : String? = nil
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        self.parseClassName = "Job"
-        self.pullToRefreshEnabled = true
-        self.paginationEnabled = false
+//        self.parseClassName = "Job"
+//        self.pullToRefreshEnabled = true
+//        self.paginationEnabled = false
     }
     
     override func loadView() {
@@ -69,25 +70,26 @@ class JobsViewController: PFQueryCollectionViewController {
         }
     }
     
-    func displayObject(objectId: String) -> Void {
-        if !loading {
+    func displayObject(recordID: String) -> Void {
+       // if !loading {
             if self.navigationController?.visibleViewController == self {
-                if let jobs = objects as? [Job] {
-                    if let selectedObject = jobs.filter({ (job :Job) -> Bool in
-                        return job.objectId == objectId
-                    }).first {
-                        performSegueWithIdentifier("ShowDetail", sender: selectedObject)
-                    }
+                let jobs = self.jobsArray
+                
+                if let selectedObject = jobs.filter({ (job :Job) -> Bool in
+                    return job.recordID == recordID
+                }).first {
+                    performSegueWithIdentifier("ShowDetail", sender: selectedObject)
                 }
+                
             } else {
                 self.navigationController?.popToRootViewControllerAnimated(false)
-                searchedObjectId = objectId
+                searchedObjectId = recordID
             }
             
-        } else {
-            //cache object
-            searchedObjectId = objectId
-        }
+//        } else {
+//            //cache object
+//            searchedObjectId = objectId
+//        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -105,14 +107,15 @@ class JobsViewController: PFQueryCollectionViewController {
 
     //MARK: - UICollectionViewDataSource methods
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell? {
-
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("jobsCollectionViewCell", forIndexPath: indexPath) as! JobsCollectionViewCell
-            
-        if let job = object as? Job {
-            cell.updateFromObject(job)
-        }
+        
+//        if let job = object as? Job {
+//            cell.updateFromObject(job)
+//        }
         return cell
+
     }
 
     //MARK: - UICollectionViewDelegate methods
@@ -129,7 +132,7 @@ class JobsViewController: PFQueryCollectionViewController {
                 let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.dataSource = JobDataSource(object: selectedObject)
             } else if let indexPath = self.collectionView?.indexPathForCell(sender as! UICollectionViewCell) {
-                let job = self.objectAtIndexPath(indexPath) as! Job
+                let job = self.jobsArray[indexPath.row]
                 let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.dataSource = JobDataSource(object: job)
             }
@@ -138,23 +141,22 @@ class JobsViewController: PFQueryCollectionViewController {
     
     //MARK: - Query
     
-    override func queryForCollection() -> PFQuery {
-        let query = Job.query()
-        return query!.orderByAscending("date")
-    }
-    
-    override func objectsDidLoad(error: NSError?) {
-        super.objectsDidLoad(error)
-        
-        if let searchedObjectId = searchedObjectId {
-            self.searchedObjectId = nil
-            displayObject(searchedObjectId)
-        }
-        
-        if let jobs = self.objects as? [Job] {
-            Job.index(jobs)
-        }
-    }
-
+//    override func queryForCollection() -> PFQuery {
+//        let query = Job.query()
+//        return query!.orderByAscending("date")
+//    }
+//    
+//    override func objectsDidLoad(error: NSError?) {
+//        super.objectsDidLoad(error)
+//        
+//        if let searchedObjectId = searchedObjectId {
+//            self.searchedObjectId = nil
+//            displayObject(searchedObjectId)
+//        }
+//        
+//        if let jobs = self.objects as? [Job] {
+//            Job.index(jobs)
+//        }
+//    }
     
 }

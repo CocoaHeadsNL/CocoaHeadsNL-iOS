@@ -10,7 +10,7 @@ import Foundation
 
 private let dateFormatter = NSDateFormatter()
 
-class MeetupCell: PFTableViewCell {
+class MeetupCell: UITableViewCell {
     static let Identifier = "meetupCell"
 
     @IBOutlet weak var titleLabel: UILabel!
@@ -73,11 +73,11 @@ class MeetupCell: PFTableViewCell {
         }
 
         if let logoFile = meetup.smallLogo {
-            logoImageView.file = logoFile
-            logoImageView.loadInBackground().continueWithSuccessBlock({[weak self] (task: BFTask!) -> AnyObject! in
-                self?.setNeedsLayout()
-                return nil
-            })
+//            logoImageView.image = logoFile
+//            logoImageView.loadInBackground().continueWithSuccessBlock({[weak self] (task: BFTask!) -> AnyObject! in
+//                self?.setNeedsLayout()
+//                return nil
+//            })
         }
     }
 

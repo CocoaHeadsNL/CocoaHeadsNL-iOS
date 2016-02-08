@@ -8,8 +8,9 @@
 
 import Foundation
 
-class CompanyHighLightViewController: PFQueryCollectionViewController {
+class CompanyHighLightViewController: UICollectionViewController {
 
+    var companiesArray = [Company]()
     var maxIndex = 0
     
     override func viewDidLoad() {
@@ -38,9 +39,9 @@ class CompanyHighLightViewController: PFQueryCollectionViewController {
             }, completion: nil);
     }
         
-    override func objectAtIndexPath(indexPath: NSIndexPath?) -> PFObject? {
+    func objectAtIndexPath(indexPath: NSIndexPath?) -> NSObject? {
         
-        maxIndex = (self.objects.count - 1)
+        maxIndex = (self.companiesArray.count - 1)
         
         let firstItemInThirdSection = NSIndexPath(forItem: 0, inSection: 2)
         let lastItemInFourthSection = NSIndexPath(forItem: maxIndex, inSection: 3)
@@ -65,7 +66,7 @@ class CompanyHighLightViewController: PFQueryCollectionViewController {
                 }
             }
             
-            return self.objects[ind.row] //as? PFObject Always succeeds as self.objects is an array of PFObjects.
+            return self.companiesArray[ind.row]
         }
         
         return nil
@@ -78,16 +79,15 @@ class CompanyHighLightViewController: PFQueryCollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.objects.count
+        return self.companiesArray.count
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell {
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("companyHighLightCollectionViewCell", forIndexPath: indexPath) as! CompanyHighLightCollectionViewCell
         
-        if let company = object as? Company {
-            cell.updateFromObject(company)
-        }
+        let company = self.companiesArray[indexPath.row]
+        cell.updateFromObject(company)
         
         return cell
     }
@@ -104,7 +104,7 @@ class CompanyHighLightViewController: PFQueryCollectionViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
             if let indexPath = self.collectionView?.indexPathForCell(sender as! UICollectionViewCell) {
-                let company = self.objectAtIndexPath(indexPath) as! Company
+                let company = self.companiesArray[indexPath.row]
                 let dataSource = CompanyDataSource(object: company)
                 dataSource.fetchAffiliateLinks()
                 
@@ -116,9 +116,9 @@ class CompanyHighLightViewController: PFQueryCollectionViewController {
     
     //MARK: -Query
     
-    override func queryForCollection() -> PFQuery {
-        let query = Company.query()
-        return query!.orderByAscending("place")
-    }
+//    override func queryForCollection() -> PFQuery {
+//        let query = Company.query()
+//        return query!.orderByAscending("place")
+//    }
     
 }

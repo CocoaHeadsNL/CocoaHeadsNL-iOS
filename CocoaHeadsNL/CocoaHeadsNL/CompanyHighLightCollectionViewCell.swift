@@ -8,22 +8,22 @@
 
 import Foundation
 
-class CompanyHighLightCollectionViewCell: PFCollectionViewCell {
+class CompanyHighLightCollectionViewCell: UICollectionViewCell {
     
-    override func updateFromObject(object: PFObject?) {
+    func updateFromObject(object: NSObject?) {
         
-        if let company = object as? Company {
+//        if let company = object as? Company {
             
-            if let companyLogo = company.logo {
-                imageView.file = companyLogo
-                imageView.frame = CGRect(x: 0, y: 0, width: self.contentView.frame.width, height: 88)
-                imageView.image = UIImage(named: "CocoaHeadsNLLogo")
-                imageView.contentMode = .ScaleAspectFit
-                imageView.loadInBackground().continueWithSuccessBlock({[weak self] (task: BFTask!) -> AnyObject! in
-                    self?.setNeedsLayout()
-                    return nil
-                    })
-            }
-        }
+//            if let companyLogo = company.logo {
+//                imageView.file = companyLogo
+//                imageView.frame = CGRect(x: 0, y: 0, width: self.contentView.frame.width, height: 88)
+//                imageView.image = UIImage(named: "CocoaHeadsNLLogo")
+//                imageView.contentMode = .ScaleAspectFit
+//                imageView.loadInBackground().continueWithSuccessBlock({[weak self] (task: BFTask!) -> AnyObject! in
+//                    self?.setNeedsLayout()
+//                    return nil
+//                    })
+//            }
+//        }
     }
 }

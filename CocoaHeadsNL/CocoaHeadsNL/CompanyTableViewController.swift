@@ -8,17 +8,17 @@
 
 import Foundation
 
-class CompanyTableViewController: PFQueryTableViewController {
+class CompanyTableViewController: UITableViewController {
     
     let sortedArray = NSMutableArray()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        self.parseClassName = "Companies"
-        self.pullToRefreshEnabled = true
-        self.paginationEnabled = true
-        self.objectsPerPage = 50
+//        self.parseClassName = "Companies"
+//        self.pullToRefreshEnabled = true
+//        self.paginationEnabled = true
+//        self.objectsPerPage = 50
     }
     
     override func viewDidLoad() {
@@ -29,53 +29,53 @@ class CompanyTableViewController: PFQueryTableViewController {
     }
     
     
-    override func objectsDidLoad(error: NSError?) {
-        super.objectsDidLoad(error)
-        
-        sortedArray.removeAllObjects()
-        
-        if error == nil {
-            
-            if let objectArray = self.objects as? [Company] {
-                
-                var locationSet = Set<String>()
-                
-                for company in objectArray  {
-                    
-                    if let location = company.place  {
-                        
-                        if !locationSet.contains(location) {
-                            locationSet.insert(location)
-                        }
-                    }
-                }
-                
-                let groupedArray = locationSet.sort()
-
-                for group in groupedArray {
-                    let companyArray = NSMutableArray()
-                    let locationDict = NSMutableDictionary()
-                    locationDict.setValue(group, forKey: "place")
-                    
-                    for company in objectArray {
-                        
-                        if let loc = company.place {
-                                if loc == locationDict.valueForKey("place") as? StringLiteralType {
-                                    companyArray.addObject(company)
-                                }
-                        }
-                        
-                    }
-                    locationDict.setValue(companyArray, forKey: "company")
-                    sortedArray.addObject(locationDict)
-                }
-            }
-        } else {
-            print(error, terminator: "")
-        }
-        
-        self.tableView.reloadData()
-    }
+//    override func objectsDidLoad(error: NSError?) {
+//        super.objectsDidLoad(error)
+//        
+//        sortedArray.removeAllObjects()
+//        
+//        if error == nil {
+//            
+//            if let objectArray = self.objects as? [Company] {
+//                
+//                var locationSet = Set<String>()
+//                
+//                for company in objectArray  {
+//                    
+//                    if let location = company.place  {
+//                        
+//                        if !locationSet.contains(location) {
+//                            locationSet.insert(location)
+//                        }
+//                    }
+//                }
+//                
+//                let groupedArray = locationSet.sort()
+//
+//                for group in groupedArray {
+//                    let companyArray = NSMutableArray()
+//                    let locationDict = NSMutableDictionary()
+//                    locationDict.setValue(group, forKey: "place")
+//                    
+//                    for company in objectArray {
+//                        
+//                        if let loc = company.place {
+//                                if loc == locationDict.valueForKey("place") as? StringLiteralType {
+//                                    companyArray.addObject(company)
+//                                }
+//                        }
+//                        
+//                    }
+//                    locationDict.setValue(companyArray, forKey: "company")
+//                    sortedArray.addObject(locationDict)
+//                }
+//            }
+//        } else {
+//            print(error, terminator: "")
+//        }
+//        
+//        self.tableView.reloadData()
+//    }
     
     
     //MARK: - Segues
@@ -118,13 +118,14 @@ class CompanyTableViewController: PFQueryTableViewController {
 
     //MARK: - UITableViewDataSource
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("companyTableViewCell", forIndexPath: indexPath) as! PFTableViewCell
-
-            
+        let cell = tableView.dequeueReusableCellWithIdentifier("companyTableViewCell", forIndexPath: indexPath) 
+        
+        
         cell.textLabel!.text = sortedArray.objectAtIndex(indexPath.row).valueForKey("place") as? StringLiteralType
-
+        
         
         return cell
     }
@@ -139,12 +140,12 @@ class CompanyTableViewController: PFQueryTableViewController {
         self.performSegueWithIdentifier("ShowCompanies", sender: tableView.cellForRowAtIndexPath(indexPath))
     }
     
-    //MARK: - Parse PFQueryTableViewController methods
-    
-    override func queryForTable() -> PFQuery {
-        let companyQuery = Company.query()!
-        companyQuery.orderByAscending("name")
-        
-        return companyQuery
-    }
+//    //MARK: - Parse PFQueryTableViewController methods
+//    
+//    override func queryForTable() -> PFQuery {
+//        let companyQuery = Company.query()!
+//        companyQuery.orderByAscending("name")
+//        
+//        return companyQuery
+//    }
 }

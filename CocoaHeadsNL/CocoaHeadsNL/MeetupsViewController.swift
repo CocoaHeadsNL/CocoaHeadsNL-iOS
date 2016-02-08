@@ -8,17 +8,16 @@
 
 import Foundation
 import CoreSpotlight
+import CloudKit
 
-class MeetupsViewController: PFQueryTableViewController, UIViewControllerPreviewingDelegate {
+class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDelegate {
     
+    var meetupsArray = [Meetup]()
     var searchedObjectId : String? = nil
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-        self.parseClassName = "Meetup"
-        self.pullToRefreshEnabled = true
-        self.paginationEnabled = false
+
     }
 
     override func viewDidLoad() {
@@ -57,6 +56,10 @@ class MeetupsViewController: PFQueryTableViewController, UIViewControllerPreview
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.fetchMeetups()
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -80,7 +83,7 @@ class MeetupsViewController: PFQueryTableViewController, UIViewControllerPreview
         
         if #available(iOS 9.0, *) {
             
-            if let meetup = self.objectAtIndexPath(indexPath) as? Meetup {
+            let meetup = self.meetupsArray[indexPath.row]
             detailVC.dataSource = MeetupDataSource(object: meetup )
             detailVC.presentingVC  = self
             
@@ -88,10 +91,6 @@ class MeetupsViewController: PFQueryTableViewController, UIViewControllerPreview
                 
             return detailVC
                 
-            } else {
-                return nil
-            }
-            
         } else {
             // Fallback on earlier versions
             return nil
@@ -122,25 +121,26 @@ class MeetupsViewController: PFQueryTableViewController, UIViewControllerPreview
         }
     }
     
-    func displayObject(objectId: String) -> Void {
-        if !loading {
+    func displayObject(recordID: String) -> Void {
+        //if !loading {
             if self.navigationController?.visibleViewController == self {
-                if let meetups = objects as? [Meetup] {
-                    if let selectedObject = meetups.filter({ (meetup :Meetup) -> Bool in
-                        return meetup.objectId == objectId
-                    }).first {
-                        performSegueWithIdentifier("ShowDetail", sender: selectedObject)
-                    }
+                let meetups = self.meetupsArray
+                
+                if let selectedObject = meetups.filter({ (meetup :Meetup) -> Bool in
+                    return meetup.recordID == recordID
+                }).first {
+                    performSegueWithIdentifier("ShowDetail", sender: selectedObject)
                 }
+                
             } else {
                 self.navigationController?.popToRootViewControllerAnimated(false)
-                searchedObjectId = objectId
+                searchedObjectId = recordID
             }
             
-        } else {
-            //cache object
-            searchedObjectId = objectId
-        }
+//        } else {
+//            //cache object
+//            searchedObjectId = objectId
+//        }
     }
 
 
@@ -152,7 +152,7 @@ class MeetupsViewController: PFQueryTableViewController, UIViewControllerPreview
                 let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.dataSource = MeetupDataSource(object: selectedObject)
             } else if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
-                let meetup = self.objectAtIndexPath(indexPath) as! Meetup
+                let meetup = self.meetupsArray[indexPath.row]
                 let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.dataSource = MeetupDataSource(object: meetup)
             }
@@ -161,15 +161,20 @@ class MeetupsViewController: PFQueryTableViewController, UIViewControllerPreview
 
     //MARK: - UITableViewDataSource
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
-
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return self.meetupsArray.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier(MeetupCell.Identifier, forIndexPath: indexPath) as! MeetupCell
-
-        if let meetup = object as? Meetup {
-            cell.configureCellForMeetup(meetup, row: indexPath.row)
-        }
-
+        
+        let meetup = self.meetupsArray[indexPath.row]
+        cell.configureCellForMeetup(meetup, row: indexPath.row)
+        
         return cell
+
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -185,26 +190,60 @@ class MeetupsViewController: PFQueryTableViewController, UIViewControllerPreview
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("ShowDetail", sender: tableView.cellForRowAtIndexPath(indexPath))
     }
-
-    //MARK: - Parse PFQueryTableViewController methods
-
-    override func queryForTable() -> PFQuery {
-        let meetupQuery = Meetup.query()!
-        meetupQuery.orderByDescending("time")
-
-        return meetupQuery
-    }
     
-    override func objectsDidLoad(error: NSError?) {
-        super.objectsDidLoad(error)
+    //MARK: - fetching Cloudkit
+    
+    func fetchMeetups() {
         
-        if let searchedObjectId = searchedObjectId {
-            self.searchedObjectId = nil
-            displayObject(searchedObjectId)
+        let pred = NSPredicate(value: true)
+        let sort = NSSortDescriptor(key: "creationDate", ascending: false)
+        let query = CKQuery(recordType: "Meetup", predicate: pred)
+        query.sortDescriptors = [sort]
+        
+        let operation = CKQueryOperation(query: query)
+        
+        var CKMeetups = [Meetup]()
+        
+        operation.recordFetchedBlock = { (record) in
+            let meetup = Meetup()
+            
+            meetup.recordID = record.recordID as CKRecordID?
+            meetup.name = record["name"] as? String
+            meetup.meetup_id = record["meetup_id"] as? String
+            meetup.meetup_description = record["meetup_description"] as? String
+            meetup.geoLocation = record["geoLocation"] as? CLLocation
+            meetup.location = record["location"] as? String
+            meetup.locationName = record["locationName"] as? String
+            meetup.logo = record["logo"] as? CKAsset
+            meetup.smallLogo = record["smallLogo"] as? CKAsset
+            meetup.time = record["time"] as? NSDate
+            meetup.nextEvent = record["nextEvent"] as? DarwinBoolean
+            
+           // meetup.duration = record["duration"] as? Int64
+           // meetup.rsvp_limit = record["rsvp_limit"] as? Int64
+           // meetup.yes_rsvp_count = record["yes_rsvp_count"] as? Int64
+
+            CKMeetups.append(meetup)
         }
         
-        if let meetups = self.objects as? [Meetup] {
-            Meetup.index(meetups)
+        operation.queryCompletionBlock = { [unowned self] (cursor, error) in
+            dispatch_async(dispatch_get_main_queue()) {
+                if error == nil {
+                    
+                    self.meetupsArray = CKMeetups
+                    self.tableView.reloadData()
+                    
+                } else {
+                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of meetups; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(ac, animated: true, completion: nil)
+                }
+            }
         }
+        
+        CKContainer.defaultContainer().publicCloudDatabase.addOperation(operation)
+        
     }
+
+
 }

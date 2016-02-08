@@ -8,10 +8,11 @@
 
 import Foundation
 
-class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController {
+class CompaniesNearbyCollectionViewController: UICollectionViewController {
     
+    var companiesArray = [Company]()
     var coreLocationController:CoreLocationController?
-    var geoPoint:PFGeoPoint?
+    var geoPoint:CLLocation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,23 +48,24 @@ class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController {
             
             print("CoreLocationManager:  Location available \(userInfo)")
         
-            geoPoint = PFGeoPoint(location: userInfo["location"])
+            //geoPoint = PFGeoPoint(location: userInfo["location"])
         
-            self.loadObjects()
+            //self.loadObjects()
             self.collectionView?.reloadData()
     }
     
     
     //MARK: - UICollectionViewDataSource methods
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell {
+    
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("companiesNearbyCollectionViewCell", forIndexPath: indexPath) as! CompaniesNearbyCollectionViewCell
         
-        if let company = object as? Company {
-            cell.updateFromObject(company)
-        }
-        
+//        let company = object as? Company {
+//            cell.updateFromObject(company)
+//        }
+
         return cell
     }
 
@@ -78,7 +80,7 @@ class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
             if let indexPath = self.collectionView?.indexPathForCell(sender as! UICollectionViewCell) {
-                let company = self.objectAtIndexPath(indexPath) as! Company
+                let company = self.companiesArray[indexPath.row]
                 let dataSource = CompanyDataSource(object: company)
                 dataSource.fetchAffiliateLinks()
 
@@ -90,14 +92,14 @@ class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController {
     
     //MARK: - Query
     
-    override func queryForCollection() -> PFQuery {
-        let query = Company.query()
-        
-        if let coordinates = geoPoint {
-            query!.whereKey("location", nearGeoPoint: coordinates, withinKilometers: 15.00)
-                return query!
-        } else {
-             return query!.orderByAscending("place")
-        }
-    }
+//    override func queryForCollection() -> PFQuery {
+//        let query = Company.query()
+//        
+//        if let coordinates = geoPoint {
+//            query!.whereKey("location", nearGeoPoint: coordinates, withinKilometers: 15.00)
+//                return query!
+//        } else {
+//             return query!.orderByAscending("place")
+//        }
+//    }
 }

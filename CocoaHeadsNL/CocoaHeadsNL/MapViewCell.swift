@@ -4,7 +4,7 @@ import MapKit
 class MapViewCell: UITableViewCell, MKMapViewDelegate {
     @IBOutlet weak var littleMap: MKMapView!
 
-    var geoLocation: PFGeoPoint? {
+    var geoLocation: CLLocation? {
         didSet {
             if geoLocation != oldValue {
                 let mapRegion = MKCoordinateRegion(center: self.coordinate, span: MKCoordinateSpanMake(0.01, 0.01))
@@ -24,7 +24,7 @@ class MapViewCell: UITableViewCell, MKMapViewDelegate {
 
     private var coordinate: CLLocationCoordinate2D {
         if let geoLocation = geoLocation {
-            return CLLocationCoordinate2D(latitude: geoLocation.latitude, longitude: geoLocation.longitude)
+            return CLLocationCoordinate2D(latitude: geoLocation.coordinate.latitude, longitude: geoLocation.coordinate.longitude)
         } else {
             return CLLocationCoordinate2D(latitude: 0, longitude: 0)
         }
