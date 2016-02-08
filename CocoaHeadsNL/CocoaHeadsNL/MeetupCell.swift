@@ -73,11 +73,11 @@ class MeetupCell: UITableViewCell {
         }
 
         if let logoFile = meetup.smallLogo {
-//            logoImageView.image = logoFile
-//            logoImageView.loadInBackground().continueWithSuccessBlock({[weak self] (task: BFTask!) -> AnyObject! in
-//                self?.setNeedsLayout()
-//                return nil
-//            })
+            
+            if let data = NSData(contentsOfURL: logoFile.fileURL) {
+                self.logoImageView.image =  UIImage(data: data)!
+                self.setNeedsLayout()
+            }
         }
     }
 
