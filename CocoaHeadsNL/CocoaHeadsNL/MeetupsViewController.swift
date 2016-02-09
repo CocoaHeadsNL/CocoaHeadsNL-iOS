@@ -88,7 +88,6 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                     container.discoverUserInfoWithUserRecordID(recordID) { (info, fetchError) in
                         // TODO check for deprecation and save to userRecord?
                         print(info)
-                        print("\(info?.firstName) \(info?.lastName)")
                     }
                 }
             }
