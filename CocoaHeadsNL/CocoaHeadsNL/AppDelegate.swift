@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreSpotlight
+import CloudKit
 
 let searchNotificationName = "CocoaHeadsNLSpotLightSearchOccured"
 let searchPasteboardName = "CocoaHeadsNL-searchInfo-pasteboard"
@@ -21,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let pasteboard = UIPasteboard(name: "searchPasteboardName", create: false) {
             pasteboard.string = ""
         }
+        application.applicationIconBadgeNumber = 0;
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
@@ -37,6 +39,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
 
+        let ckNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String : NSObject])
+        if ckNotification.notificationType == .Query,
+            let queryNotification = ckNotification as? CKQueryNotification
+        {
+            //TODO handle the different notifications to show the correct items
+            let recordID = queryNotification.recordID
+            print(recordID)
+            //...
+            self.presentMeetupsViewController()
+        }
+        
     }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {

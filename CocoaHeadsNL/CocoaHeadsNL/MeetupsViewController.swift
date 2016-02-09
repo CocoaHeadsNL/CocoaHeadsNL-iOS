@@ -54,6 +54,9 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         } else {
             // Fallback on earlier versions
         }
+        
+        self.discover()
+        self.subscribe()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -67,6 +70,48 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
             self.searchedObjectId = nil
             displayObject(searchedObjectId)
         }
+    }
+    
+    func discover() {
+        
+        let container = CKContainer.defaultContainer()
+        
+        container.requestApplicationPermission(CKApplicationPermissions.UserDiscoverability) { (status, error) in
+            guard error == nil else { return }
+            
+            if status == CKApplicationPermissionStatus.Granted {
+                // User allowed for searching on email
+                container.fetchUserRecordIDWithCompletionHandler { (recordID, error) in
+                    guard error == nil else { return }
+                    guard let recordID = recordID else { return }
+                    
+                    container.discoverUserInfoWithUserRecordID(recordID) { (info, fetchError) in
+                        // TODO check for deprecation and save to userRecord?
+                        print(info)
+                        print("\(info?.firstName) \(info?.lastName)")
+                    }
+                }
+            }
+        }
+    }
+    
+    func subscribe() {
+        let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+        
+        let subscription = CKSubscription(
+            recordType: "Meetup",
+            predicate: NSPredicate(value: true),
+            options: .FiresOnRecordCreation
+        )
+        
+        let info = CKNotificationInfo()
+        
+        info.alertBody = "New meetup has been added!"
+        info.shouldBadge = true
+        
+        subscription.notificationInfo = info
+        
+        publicDB.saveSubscription(subscription) { record, error in }
     }
     
     //MARK: - 3D Touch
