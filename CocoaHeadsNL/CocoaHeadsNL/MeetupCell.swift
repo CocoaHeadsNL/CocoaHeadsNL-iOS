@@ -60,15 +60,24 @@ class MeetupCell: UITableViewCell {
             if date.timeIntervalSinceNow > 0 {
                 dayLabel.textColor = UIColor.blackColor()
                 calendarView.backgroundColor = UIColorWithRGB(232, g: 88, b: 80)
-                rsvpLabel.text = "\(meetup.yes_rsvp_count) CocoaHeads going"
+                
         
-                if meetup.rsvp_limit > 0 {
-                    rsvpLabel.text = rsvpLabel.text! + "\n\(meetup.rsvp_limit - meetup.yes_rsvp_count) seats available"
+                if let rsvpLimit = meetup.rsvp_limit?.intValue, let yesRsvp = meetup.yes_rsvp_count?.intValue {
+                
+                    rsvpLabel.text = "\(yesRsvp) CocoaHeads going"
+                    
+                    if rsvpLimit > 0 {
+                        rsvpLabel.text = rsvpLabel.text! + "\n\(rsvpLimit - yesRsvp) seats available"
+                    }
                 }
             } else {
                 dayLabel.textColor = UIColor(white: 0, alpha: 0.65)
                 calendarView.backgroundColor = UIColorWithRGB(169, g: 166, b: 166)
-                rsvpLabel.text = "\(meetup.yes_rsvp_count) CocoaHeads had a blast"
+                
+                if let yesRsvp = meetup.yes_rsvp_count?.intValue {
+                
+                rsvpLabel.text = "\(yesRsvp) CocoaHeads had a blast"
+                }
             }
         }
 

@@ -152,15 +152,15 @@ class Job : NSObject {
 class Meetup : NSObject {
   
     var recordID: CKRecordID?
-    var duration: Int64 = 0
+    var duration: NSNumber!
     var geoLocation: CLLocation?
     var locationName: String?
     var meetup_description: String?
     var meetup_id: String?
     var name: String?
-    var rsvp_limit: Int64 = 0
+    var rsvp_limit: NSNumber!
     var time: NSDate?
-    var yes_rsvp_count: Int64 = 0
+    var yes_rsvp_count: NSNumber!
     var logo: CKAsset?
     var nextEvent: DarwinBoolean?
     var smallLogo: CKAsset?

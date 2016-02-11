@@ -263,9 +263,9 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
             meetup.time = record["time"] as? NSDate
             meetup.nextEvent = record["nextEvent"] as? DarwinBoolean
             
-           // meetup.duration = record["duration"] as? Int64
-           // meetup.rsvp_limit = record["rsvp_limit"] as? Int64
-           // meetup.yes_rsvp_count = record["yes_rsvp_count"] as? Int64
+            meetup.duration = record.objectForKey("duration") as? NSNumber
+            meetup.rsvp_limit = record.objectForKey("rsvp_limit") as? NSNumber
+            meetup.yes_rsvp_count = record.objectForKey("yes_rsvp_count") as? NSNumber
 
             CKMeetups.append(meetup)
         }
