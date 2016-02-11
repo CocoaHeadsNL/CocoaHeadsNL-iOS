@@ -240,7 +240,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     func fetchMeetups() {
         
         let pred = NSPredicate(value: true)
-        let sort = NSSortDescriptor(key: "creationDate", ascending: false)
+        let sort = NSSortDescriptor(key: "time", ascending: false)
         let query = CKQuery(recordType: "Meetup", predicate: pred)
         query.sortDescriptors = [sort]
         
