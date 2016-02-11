@@ -92,18 +92,16 @@ class Job : NSObject {
                 }
             }
             attributeSet.creator = "CocoaHeadsNL";
-//            do {
-//                guard let imageData = try logo?.getData() else {
-//                    return attributeSet
-//                }
-//                
-//                if let smallLogoImage = UIImage(data:imageData)
-//                {
-//                    attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage);
-//                }
-//            } catch {
-//                
-//            }
+            do {
+                guard let url = logo?.fileURL else {
+                    return attributeSet
+                }
+                
+                if let smallLogoImage = UIImage(data: NSData(contentsOfURL: url)!) {
+                    attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage);
+                }
+            }
+            
             return attributeSet
         }
     }
@@ -190,18 +188,16 @@ class Meetup : NSObject {
             }
 
             attributeSet.keywords = keywords
-//            do {
-//                guard let imageData = try smallLogo?.getData() else {
-//                    return attributeSet
-//                }
-//
-//                if let smallLogoImage = UIImage(data:imageData)
-//                {
-//                    attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage);
-//                }
-//            } catch {
-//                
-//            }
+            do {
+                guard let url = smallLogo?.fileURL else {
+                    return attributeSet
+                }
+                
+                if let smallLogoImage = UIImage(data: NSData(contentsOfURL: url)!) {
+                    attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage);
+                }
+            }
+            
             return attributeSet
         }
     }
