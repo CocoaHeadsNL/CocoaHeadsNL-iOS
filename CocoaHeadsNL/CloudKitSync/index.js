@@ -1,7 +1,7 @@
 /*
  Copyright (C) 2016 Apple Inc. All Rights Reserved.
  See LICENSE.txt for this sample’s licensing information
- 
+
  Abstract:
  This node script uses a server-to-server key to make public database calls with CloudKit JS
  */
@@ -27,11 +27,10 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   CloudKit.configure({
     services: {
       fetch: fetch,
-      logger: console
+      logger: undefined
     },
     containers: [ config.containerConfig ]
   });
-
 
   var container = CloudKit.getDefaultContainer();
   var database = container.publicCloudDatabase; // We'll only make calls to the public database.
@@ -41,13 +40,71 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
       var eventsLoader = require('./jobs/loadEventInfo');
 
-      eventsLoader.load().then(function(meetupData){
-        console.log(".")
-        console.log(meetupData)
-        console.log(".")
-
-        resolve(meetupData)
+      //Load events from iCloud
+      var cloudKitFetchPromise = database.performQuery({ recordType: 'Meetup' }).then(function(response) {
+        return Promise.resolve(response.records)
       })
+      //Load events from meetup
+      var meetupFetchPromise = eventsLoader.load().then(function(meetupData){
+        return Promise.resolve(meetupData)
+      })
+
+      return Promise.all([cloudKitFetchPromise, meetupFetchPromise]).then(events => {
+        var cloudKitEvents = events[0];
+        var meetupEvents = events[1];
+
+        var mappedMeetupRecords = meetupEvents.map(function(meetupEvent) {
+          var locationName = undefined;
+          var geoLocation = undefined;
+          var location = undefined;
+          if (meetupEvent.venue !== undefined) {
+            locationName =  meetupEvent.venue.name;
+            geoLocation = {latitude: meetupEvent.venue.lat, longitude: meetupEvent.venue.lon};
+            location = meetupEvent.venue.city;
+          }
+
+          return {recordType: 'Meetup',
+            fields: {
+              meetup_id: {value: meetupEvent["id"]},
+              name: {value: escape(meetupEvent["name"])},
+              meetup_description: {value: escape(meetupEvent["description"])},
+              locationName: {value: escape(locationName) },
+              geoLocation: {value: geoLocation },
+              location: {value: escape(location) },
+              time: {value: meetupEvent.time},
+              duration: {value: meetupEvent.duration},
+              yes_rsvp_count: {value: meetupEvent.yes_rsvp_count},
+              rsvp_limit: {value: meetupEvent.rsvp_limit},
+              meetup_url: {value: meetupEvent["event_url"]},
+              nextEvent: {value: 0}
+            }
+          }
+        });
+
+        for (var mappedMeetupRecord of mappedMeetupRecords) {
+          var meetupId = mappedMeetupRecord["fields"]["meetup_id"]["value"]
+          var filteredCloudRecords = cloudKitEvents.filter(function(cloudKitRecord) {
+            var cloudKitMeetupId = cloudKitRecord.fields.meetup_id
+            if (cloudKitMeetupId === undefined) {return false}
+            return (meetupId === cloudKitMeetupId.value)
+          })
+
+          for (var filteredCloudRecord of filteredCloudRecords) {
+            if(filteredCloudRecord.recordChangeTag) {
+              mappedMeetupRecord.recordChangeTag = filteredCloudRecords[0].recordChangeTag;
+            }
+            if(filteredCloudRecord.recordName) {
+              mappedMeetupRecord.recordName = filteredCloudRecords[0].recordName;
+            }
+          }
+        }
+
+        return database.saveRecords(mappedMeetupRecords);
+      }).then(function(response) {
+        resolve(response)
+      }).catch(function(error) {
+        reject(error)
+    });
     })
 
     return syncEventsPromise
@@ -126,4 +183,3 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
       process.exit(1);
     });
 })();
-
