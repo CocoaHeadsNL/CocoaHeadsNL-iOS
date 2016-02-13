@@ -28,7 +28,7 @@ exports.load = function() {
     });
   }).then(function(body) {
     var meetupData = JSON.parse(body);
-    return Promise.resolve(meetupData)
+    return Promise.resolve(meetupData.results)
   })
   
   return loadEventInfoPromise
