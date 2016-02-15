@@ -7,18 +7,18 @@
 //
 
 import Foundation
+import CloudKit
 
 class CompanyTableViewController: UITableViewController {
     
-    let sortedArray = NSMutableArray()
+    var sortedArray = NSMutableArray()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-//        self.parseClassName = "Companies"
-//        self.pullToRefreshEnabled = true
-//        self.paginationEnabled = true
-//        self.objectsPerPage = 50
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.fetchCompanies()
     }
     
     override func viewDidLoad() {
@@ -28,56 +28,6 @@ class CompanyTableViewController: UITableViewController {
         self.navigationItem.backBarButtonItem = backItem
     }
     
-    
-//    override func objectsDidLoad(error: NSError?) {
-//        super.objectsDidLoad(error)
-//        
-//        sortedArray.removeAllObjects()
-//        
-//        if error == nil {
-//            
-//            if let objectArray = self.objects as? [Company] {
-//                
-//                var locationSet = Set<String>()
-//                
-//                for company in objectArray  {
-//                    
-//                    if let location = company.place  {
-//                        
-//                        if !locationSet.contains(location) {
-//                            locationSet.insert(location)
-//                        }
-//                    }
-//                }
-//                
-//                let groupedArray = locationSet.sort()
-//
-//                for group in groupedArray {
-//                    let companyArray = NSMutableArray()
-//                    let locationDict = NSMutableDictionary()
-//                    locationDict.setValue(group, forKey: "place")
-//                    
-//                    for company in objectArray {
-//                        
-//                        if let loc = company.place {
-//                                if loc == locationDict.valueForKey("place") as? StringLiteralType {
-//                                    companyArray.addObject(company)
-//                                }
-//                        }
-//                        
-//                    }
-//                    locationDict.setValue(companyArray, forKey: "company")
-//                    sortedArray.addObject(locationDict)
-//                }
-//            }
-//        } else {
-//            print(error, terminator: "")
-//        }
-//        
-//        self.tableView.reloadData()
-//    }
-    
-    
     //MARK: - Segues
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -85,7 +35,7 @@ class CompanyTableViewController: UITableViewController {
             if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
                 
                 let detailViewController = segue.destinationViewController as? LocatedCompaniesViewController
-                detailViewController?.companiesDict = sortedArray.objectAtIndex(indexPath.row) as! NSMutableDictionary
+                detailViewController?.companyDict = sortedArray[indexPath.row] as! NSDictionary
             }
         }
     }
@@ -124,7 +74,7 @@ class CompanyTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("companyTableViewCell", forIndexPath: indexPath) 
         
         
-        cell.textLabel!.text = sortedArray.objectAtIndex(indexPath.row).valueForKey("place") as? StringLiteralType
+        cell.textLabel!.text = sortedArray[indexPath.row].valueForKey("place") as? StringLiteralType
         
         
         return cell
@@ -140,12 +90,87 @@ class CompanyTableViewController: UITableViewController {
         self.performSegueWithIdentifier("ShowCompanies", sender: tableView.cellForRowAtIndexPath(indexPath))
     }
     
-//    //MARK: - Parse PFQueryTableViewController methods
-//    
-//    override func queryForTable() -> PFQuery {
-//        let companyQuery = Company.query()!
-//        companyQuery.orderByAscending("name")
-//        
-//        return companyQuery
-//    }
+    //MARK: - fetching Cloudkit
+    
+    func fetchCompanies() {
+        
+        let pred = NSPredicate(value: true)
+        let sort = NSSortDescriptor(key: "name", ascending: false)
+        let query = CKQuery(recordType: "Companies", predicate: pred)
+        query.sortDescriptors = [sort]
+        
+        let operation = CKQueryOperation(query: query)
+        
+        var CKCompanies = [Company]()
+        
+        operation.recordFetchedBlock = { (record) in
+            let company = Company()
+            
+            company.recordID = record.recordID as CKRecordID?
+            company.name = record["name"] as? String
+            company.place = record["place"] as? String
+            company.streetAddress = record["streetAddress"] as? String
+            company.website = record["website"] as? String
+            company.zipCode = record["zipCode"] as? String
+            company.companyDescription = record["companyDescription"] as? String
+            company.emailAddress = record["emailAddress"] as? String
+            company.location = record["location"] as? CLLocation
+            company.logo = record["logo"] as? CKAsset
+//            company.hasApps = record["hasApps"] as? Bool
+            company.smallLogo = record["smallLogo"] as? CKAsset
+            
+            CKCompanies.append(company)
+        }
+        
+        operation.queryCompletionBlock = { [unowned self] (cursor, error) in
+            dispatch_async(dispatch_get_main_queue()) {
+                if error == nil {
+                    
+                    self.sortedArray.removeAllObjects()
+                    
+                    var locationSet = Set<String>()
+                    
+                    for company in CKCompanies {
+                        
+                        if let location = company.place  {
+                            
+                            if !locationSet.contains(location) {
+                                locationSet.insert(location)
+                            }
+                        }
+                    }
+                    
+                    let groupedArray = locationSet.sort()
+                    
+                    for group in groupedArray {
+                        let companyArray = NSMutableArray()
+                        let locationDict = NSMutableDictionary()
+                        locationDict.setValue(group, forKey: "place")
+                        
+                        for company in CKCompanies {
+                            
+                            if let loc = company.place {
+                                if loc == locationDict.valueForKey("place") as? StringLiteralType {
+                                    companyArray.addObject(company)
+                                }
+                            }
+                            
+                        }
+                        locationDict.setValue(companyArray, forKey: "company")
+                        self.sortedArray.addObject(locationDict)
+                    }
+
+                    self.tableView.reloadData()
+                    
+                } else {
+                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of companies; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(ac, animated: true, completion: nil)
+                }
+            }
+        }
+        
+        CKContainer.defaultContainer().publicCloudDatabase.addOperation(operation)
+        
+    }
 }

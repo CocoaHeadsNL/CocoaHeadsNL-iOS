@@ -15,7 +15,7 @@ class MeetupCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var logoImageView: PFImageView!
+    @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var dateContainer: UIView!
     @IBOutlet weak var calendarView: UIView!
     @IBOutlet weak var dayLabel: UILabel!
@@ -38,7 +38,7 @@ class MeetupCell: UITableViewCell {
         dayLabel.text = ""
         monthLabel.text = ""
 
-        logoImageView.file = nil
+        //logoImageView.file = nil
         logoImageView.image = UIImage(named: "MeetupPlaceholder")
     }
 
