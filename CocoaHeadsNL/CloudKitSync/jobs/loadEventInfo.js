@@ -8,7 +8,7 @@ exports.load = function() {
   var loadEventInfoPromise = new Promise(function(resolve, reject) {
     
     var options = {
-      url: 'https://api.meetup.com/2/events?&sign=true&photo-host=public&group_urlname=cocoaheadsnl&page=20&desc=true&status=upcoming,past&key='+config.meetupApiKey,
+      url: 'https://api.meetup.com/2/events?&sign=true&photo-host=public&group_urlname=cocoaheadsnl&desc=true&status=upcoming,past&key='+config.meetupApiKey,
       headers: { 'User-Agent': 'CocoaHeadsNL-Cloud-Sync'},
     }
     
