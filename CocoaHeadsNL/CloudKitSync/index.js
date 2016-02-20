@@ -1,3 +1,5 @@
+"use strict";
+
 /*
  Copyright (C) 2016 Apple Inc. All Rights Reserved.
  See LICENSE.txt for this sample’s licensing information
@@ -7,7 +9,7 @@
  */
 var Promise = require('promise');
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 
 (function() {
