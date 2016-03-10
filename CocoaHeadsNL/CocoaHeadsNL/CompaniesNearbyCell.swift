@@ -31,8 +31,6 @@ class CompaniesNearbyCell: UICollectionViewCell {
                     self.imageView?.image =  UIImage(data: data)!
                     self.setNeedsLayout()
                 }
-
-
             }
             
             if let compName = company.name {
