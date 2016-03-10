@@ -37,7 +37,6 @@
 		F11E362A1B1A572F000B61C0 /* CompanyHighLightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E36291B1A572F000B61C0 /* CompanyHighLightViewController.swift */; };
 		F1379F6F1BC19F1900A20FDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F17A38761ABF3B62005CFF8A /* MapKit.framework */; };
 		F14335AB1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14335AA1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift */; };
-		F166C3551B189E1700D6F7FD /* CompaniesNearbyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F166C3541B189E1700D6F7FD /* CompaniesNearbyCollectionViewCell.swift */; };
 		F166C3571B18A36D00D6F7FD /* JobsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F166C3561B18A36D00D6F7FD /* JobsCollectionViewCell.swift */; };
 		F18BA8261B1D08DF00CB81CD /* CompanyHighLightCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18BA8251B1D08DF00CB81CD /* CompanyHighLightCollectionViewCell.swift */; };
 		F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D171AAB50BB00585D61 /* AppDelegate.swift */; };
@@ -46,6 +45,8 @@
 		F1A46D241AAB50BB00585D61 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D221AAB50BB00585D61 /* LaunchScreen.xib */; };
 		F1A46D301AAB50BB00585D61 /* CocoaHeadsNLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D2F1AAB50BB00585D61 /* CocoaHeadsNLTests.swift */; };
 		F1A46D3D1AAB516300585D61 /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D3C1AAB516300585D61 /* JobsViewController.swift */; };
+		F1BDEA6D1C91F6D7004C7DAB /* CompaniesNearbyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BDEA6B1C91F6D7004C7DAB /* CompaniesNearbyCell.swift */; };
+		F1BDEA6E1C91F6D7004C7DAB /* CompaniesNearbyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1BDEA6C1C91F6D7004C7DAB /* CompaniesNearbyCell.xib */; };
 		F1CF120F1B8A0C0600EBCABC /* CoreLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CF120E1B8A0C0600EBCABC /* CoreLocationController.swift */; };
 		F1DC2E131C665B4D006CC492 /* ContributorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DC2E121C665B4D006CC492 /* ContributorTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -94,7 +95,6 @@
 		F11E36271B1A570F000B61C0 /* CompanyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyTableViewController.swift; sourceTree = "<group>"; };
 		F11E36291B1A572F000B61C0 /* CompanyHighLightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyHighLightViewController.swift; sourceTree = "<group>"; };
 		F14335AA1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesNearbyCollectionViewController.swift; sourceTree = "<group>"; };
-		F166C3541B189E1700D6F7FD /* CompaniesNearbyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesNearbyCollectionViewCell.swift; sourceTree = "<group>"; };
 		F166C3561B18A36D00D6F7FD /* JobsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsCollectionViewCell.swift; sourceTree = "<group>"; };
 		F17A38761ABF3B62005CFF8A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F18BA8251B1D08DF00CB81CD /* CompanyHighLightCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyHighLightCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -108,6 +108,8 @@
 		F1A46D2E1AAB50BB00585D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1A46D2F1AAB50BB00585D61 /* CocoaHeadsNLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaHeadsNLTests.swift; sourceTree = "<group>"; };
 		F1A46D3C1AAB516300585D61 /* JobsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsViewController.swift; sourceTree = "<group>"; };
+		F1BDEA6B1C91F6D7004C7DAB /* CompaniesNearbyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesNearbyCell.swift; sourceTree = "<group>"; };
+		F1BDEA6C1C91F6D7004C7DAB /* CompaniesNearbyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompaniesNearbyCell.xib; sourceTree = "<group>"; };
 		F1CF120E1B8A0C0600EBCABC /* CoreLocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocationController.swift; sourceTree = "<group>"; };
 		F1DC2E121C665B4D006CC492 /* ContributorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContributorTableViewController.swift; sourceTree = "<group>"; };
 		F6DAB6C2CE1C2A96434BAAE0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -267,7 +269,8 @@
 			isa = PBXGroup;
 			children = (
 				F14335AA1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift */,
-				F166C3541B189E1700D6F7FD /* CompaniesNearbyCollectionViewCell.swift */,
+				F1BDEA6B1C91F6D7004C7DAB /* CompaniesNearbyCell.swift */,
+				F1BDEA6C1C91F6D7004C7DAB /* CompaniesNearbyCell.xib */,
 			);
 			name = "Companies Nearby";
 			sourceTree = "<group>";
@@ -446,6 +449,7 @@
 				F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */,
 				F1A46D241AAB50BB00585D61 /* LaunchScreen.xib in Resources */,
 				7B6A744B1B1495FF00A10762 /* MeetupCell.xib in Resources */,
+				F1BDEA6E1C91F6D7004C7DAB /* CompaniesNearbyCell.xib in Resources */,
 				F1A46D211AAB50BB00585D61 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -588,6 +592,7 @@
 				7B6A744D1B149A6B00A10762 /* UIImage+Resize.swift in Sources */,
 				F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */,
 				239D41161B190FD000609105 /* CalendarTabImage.swift in Sources */,
+				F1BDEA6D1C91F6D7004C7DAB /* CompaniesNearbyCell.swift in Sources */,
 				F11455B91AB4BA0600546D22 /* DetailViewController.swift in Sources */,
 				7B6A744F1B162F8E00A10762 /* UIColor+Extensions.swift in Sources */,
 				7B6A74491B1452FD00A10762 /* MeetupsViewController.swift in Sources */,
@@ -598,7 +603,6 @@
 				7B6A74581B179B9C00A10762 /* TitleCell.swift in Sources */,
 				F14335AB1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift in Sources */,
 				F11455C11AB5024000546D22 /* TabBarController.swift in Sources */,
-				F166C3551B189E1700D6F7FD /* CompaniesNearbyCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

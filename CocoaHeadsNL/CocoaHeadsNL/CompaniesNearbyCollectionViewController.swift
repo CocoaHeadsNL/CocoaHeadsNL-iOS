@@ -19,7 +19,9 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView?.registerClass(CompaniesNearbyCollectionViewCell.self, forCellWithReuseIdentifier: "companiesNearbyCollectionViewCell")
+        //self.collectionView?.registerClass(CompaniesNearbyCell.self, forCellWithReuseIdentifier: "companiesNearbyCell")
+        let nib = UINib(nibName: "CompaniesNearbyCell", bundle: nil)
+        self.collectionView?.registerNib(nib, forCellWithReuseIdentifier: "companiesNearbyCell")
 
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = CGSize(width: 100, height: 80)
@@ -72,10 +74,10 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("companiesNearbyCollectionViewCell", forIndexPath: indexPath) as! CompaniesNearbyCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("companiesNearbyCell", forIndexPath: indexPath) as! CompaniesNearbyCell
         
         let company = self.companiesArray[indexPath.item]
-        //cell.updateFromObject(company)
+        cell.updateFromObject(company)
     
         return cell
     }
