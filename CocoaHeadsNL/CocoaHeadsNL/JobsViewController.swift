@@ -8,28 +8,18 @@
 
 import Foundation
 import UIKit
+import CloudKit
 
 class JobsViewController: UICollectionViewController {
     
     var jobsArray = [Job]()
     var searchedObjectId : String? = nil
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-//        self.parseClassName = "Job"
-//        self.pullToRefreshEnabled = true
-//        self.paginationEnabled = false
-    }
-    
-    override func loadView() {
-        super.loadView()
-
-        self.collectionView?.registerClass(JobsCollectionViewCell.self, forCellWithReuseIdentifier: "jobsCollectionViewCell")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let nib = UINib(nibName: "JobsCell", bundle: nil)
+        self.collectionView?.registerNib(nib, forCellWithReuseIdentifier: "jobsCell")
         
         //Inspect paste board for userInfo
         if let pasteBoard = UIPasteboard(name: searchPasteboardName, create: false) {
@@ -43,6 +33,10 @@ class JobsViewController: UICollectionViewController {
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "searchOccured:", name: searchNotificationName, object: nil)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.fetchJobs()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -106,14 +100,22 @@ class JobsViewController: UICollectionViewController {
     }
 
     //MARK: - UICollectionViewDataSource methods
+    
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return jobsArray.count
+    }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("jobsCollectionViewCell", forIndexPath: indexPath) as! JobsCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("jobsCell", forIndexPath: indexPath) as! JobsCell
         
-//        if let job = object as? Job {
-//            cell.updateFromObject(job)
-//        }
+        let job = jobsArray[indexPath.item]
+        cell.updateFromObject(job)
+
         return cell
 
     }
@@ -138,6 +140,52 @@ class JobsViewController: UICollectionViewController {
             }
         }
     }
+    
+    //MARK: - fetching Cloudkit
+    
+    func fetchJobs() {
+        
+        let pred = NSPredicate(value: true)
+        let sort = NSSortDescriptor(key: "date", ascending: false)
+        let query = CKQuery(recordType: "Job", predicate: pred)
+        query.sortDescriptors = [sort]
+        
+        let operation = CKQueryOperation(query: query)
+        
+        var CKJob = [Job]()
+        
+        operation.recordFetchedBlock = { (record) in
+            let job = Job()
+            
+            job.recordID = record.recordID
+            job.content = record["content"] as? String
+            job.date = record["date"] as? String
+            job.link = record["link"] as? String
+            job.title = record["title"] as? String
+            job.logo = record["logo"] as? CKAsset
+            
+            CKJob.append(job)
+        }
+        
+        operation.queryCompletionBlock = { [unowned self] (cursor, error) in
+            dispatch_async(dispatch_get_main_queue()) {
+                if error == nil {
+                    
+                    self.jobsArray = CKJob
+                    self.collectionView?.reloadData()
+                    
+                } else {
+                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of jobs; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(ac, animated: true, completion: nil)
+                }
+            }
+        }
+        
+        CKContainer.defaultContainer().publicCloudDatabase.addOperation(operation)
+        
+    }
+
     
     //MARK: - Query
     

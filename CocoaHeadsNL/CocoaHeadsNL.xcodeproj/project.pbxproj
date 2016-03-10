@@ -36,7 +36,6 @@
 		F11E36281B1A570F000B61C0 /* CompanyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E36271B1A570F000B61C0 /* CompanyTableViewController.swift */; };
 		F1379F6F1BC19F1900A20FDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F17A38761ABF3B62005CFF8A /* MapKit.framework */; };
 		F14335AB1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14335AA1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift */; };
-		F166C3571B18A36D00D6F7FD /* JobsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F166C3561B18A36D00D6F7FD /* JobsCollectionViewCell.swift */; };
 		F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D171AAB50BB00585D61 /* AppDelegate.swift */; };
 		F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D1D1AAB50BB00585D61 /* Main.storyboard */; };
 		F1A46D211AAB50BB00585D61 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D201AAB50BB00585D61 /* Images.xcassets */; };
@@ -45,6 +44,8 @@
 		F1A46D3D1AAB516300585D61 /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D3C1AAB516300585D61 /* JobsViewController.swift */; };
 		F1BDEA6D1C91F6D7004C7DAB /* CompaniesNearbyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BDEA6B1C91F6D7004C7DAB /* CompaniesNearbyCell.swift */; };
 		F1BDEA6E1C91F6D7004C7DAB /* CompaniesNearbyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1BDEA6C1C91F6D7004C7DAB /* CompaniesNearbyCell.xib */; };
+		F1BDEA751C920768004C7DAB /* JobsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BDEA731C920768004C7DAB /* JobsCell.swift */; };
+		F1BDEA761C920768004C7DAB /* JobsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1BDEA741C920768004C7DAB /* JobsCell.xib */; };
 		F1CF120F1B8A0C0600EBCABC /* CoreLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CF120E1B8A0C0600EBCABC /* CoreLocationController.swift */; };
 		F1DC2E131C665B4D006CC492 /* ContributorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DC2E121C665B4D006CC492 /* ContributorTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -92,7 +93,6 @@
 		F11455C01AB5024000546D22 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F11E36271B1A570F000B61C0 /* CompanyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyTableViewController.swift; sourceTree = "<group>"; };
 		F14335AA1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesNearbyCollectionViewController.swift; sourceTree = "<group>"; };
-		F166C3561B18A36D00D6F7FD /* JobsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsCollectionViewCell.swift; sourceTree = "<group>"; };
 		F17A38761ABF3B62005CFF8A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F1A46D121AAB50BB00585D61 /* CocoaHeadsNL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaHeadsNL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A46D161AAB50BB00585D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -106,6 +106,8 @@
 		F1A46D3C1AAB516300585D61 /* JobsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsViewController.swift; sourceTree = "<group>"; };
 		F1BDEA6B1C91F6D7004C7DAB /* CompaniesNearbyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesNearbyCell.swift; sourceTree = "<group>"; };
 		F1BDEA6C1C91F6D7004C7DAB /* CompaniesNearbyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompaniesNearbyCell.xib; sourceTree = "<group>"; };
+		F1BDEA731C920768004C7DAB /* JobsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsCell.swift; sourceTree = "<group>"; };
+		F1BDEA741C920768004C7DAB /* JobsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobsCell.xib; sourceTree = "<group>"; };
 		F1CF120E1B8A0C0600EBCABC /* CoreLocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocationController.swift; sourceTree = "<group>"; };
 		F1DC2E121C665B4D006CC492 /* ContributorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContributorTableViewController.swift; sourceTree = "<group>"; };
 		F6DAB6C2CE1C2A96434BAAE0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -235,7 +237,8 @@
 			isa = PBXGroup;
 			children = (
 				F1A46D3C1AAB516300585D61 /* JobsViewController.swift */,
-				F166C3561B18A36D00D6F7FD /* JobsCollectionViewCell.swift */,
+				F1BDEA731C920768004C7DAB /* JobsCell.swift */,
+				F1BDEA741C920768004C7DAB /* JobsCell.xib */,
 			);
 			name = "Open Job Postings";
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				4A83A4AE1AAD8A290085416A /* ParseConfig.plist in Resources */,
 				4A1978C21AAD8681000E281F /* Settings.bundle in Resources */,
 				F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */,
+				F1BDEA761C920768004C7DAB /* JobsCell.xib in Resources */,
 				F1A46D241AAB50BB00585D61 /* LaunchScreen.xib in Resources */,
 				7B6A744B1B1495FF00A10762 /* MeetupCell.xib in Resources */,
 				F1BDEA6E1C91F6D7004C7DAB /* CompaniesNearbyCell.xib in Resources */,
@@ -563,7 +567,6 @@
 				7B6A74541B179B4E00A10762 /* LogoCell.swift in Sources */,
 				7B6A74681B186C4A00A10762 /* AffiliateCell.swift in Sources */,
 				F11E36281B1A570F000B61C0 /* CompanyTableViewController.swift in Sources */,
-				F166C3571B18A36D00D6F7FD /* JobsCollectionViewCell.swift in Sources */,
 				F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */,
 				7B6A74661B18666D00A10762 /* FetchAffiliateLinks.swift in Sources */,
 				7B6A745E1B183D7900A10762 /* MeetupDataSource.swift in Sources */,
@@ -585,6 +588,7 @@
 				7B6A74561B179B7D00A10762 /* MapViewCell.swift in Sources */,
 				F1DC2E131C665B4D006CC492 /* ContributorTableViewController.swift in Sources */,
 				7B6A74581B179B9C00A10762 /* TitleCell.swift in Sources */,
+				F1BDEA751C920768004C7DAB /* JobsCell.swift in Sources */,
 				F14335AB1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift in Sources */,
 				F11455C11AB5024000546D22 /* TabBarController.swift in Sources */,
 			);

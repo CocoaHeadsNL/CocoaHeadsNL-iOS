@@ -184,22 +184,13 @@
             <objects>
                 <tableViewController storyboardIdentifier="contributorTableView" id="j8n-Qh-gjC" customClass="ContributorTableViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="AcO-cP-oKq">
-                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="NTs-qC-IKD">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="431"/>
+                            <rect key="frame" x="0.0" y="64" width="600" height="400"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is Cocoaheads?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8V-hl-9JZ">
-                                    <rect key="frame" x="8" y="145" width="584" height="21"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="20.5" id="qFe-Bi-3Gb"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" text="A monthly meeting of iOS and Mac developers in the Netherlands and part of the international CocoaHeads.org." translatesAutoresizingMaskIntoConstraints="NO" id="4oQ-uh-yxZ">
                                     <rect key="frame" x="8" y="173" width="584" height="70"/>
                                     <constraints>
@@ -218,7 +209,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6qd-dU-PTV">
-                                    <rect key="frame" x="8" y="279" width="584" height="144"/>
+                                    <rect key="frame" x="8" y="279" width="584" height="101"/>
                                     <string key="text">Every month we organize a meeting at a different venue including food and drinks sponsored by companies. Depending on the size of the location we put together a nice agenda for developers.</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -230,6 +221,15 @@
                                         <constraint firstAttribute="height" constant="129" id="Qk3-I5-V31"/>
                                     </constraints>
                                 </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is Cocoaheads?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8V-hl-9JZ">
+                                    <rect key="frame" x="8" y="145" width="584" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20.5" id="qFe-Bi-3Gb"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -244,7 +244,7 @@
                                 <constraint firstItem="I8V-hl-9JZ" firstAttribute="leading" secondItem="NTs-qC-IKD" secondAttribute="leading" constant="8" id="ZZR-Bs-b0D"/>
                                 <constraint firstItem="6qd-dU-PTV" firstAttribute="top" secondItem="GkQ-gn-r7o" secondAttribute="bottom" constant="7.5" id="coW-OG-ka8"/>
                                 <constraint firstAttribute="trailing" secondItem="4oQ-uh-yxZ" secondAttribute="trailing" constant="8" id="fBM-Hj-er4"/>
-                                <constraint firstAttribute="bottom" secondItem="6qd-dU-PTV" secondAttribute="bottom" constant="8" id="i1j-rm-FMW"/>
+                                <constraint firstAttribute="bottom" secondItem="6qd-dU-PTV" secondAttribute="bottom" constant="20" id="i1j-rm-FMW"/>
                                 <constraint firstItem="6qd-dU-PTV" firstAttribute="leading" secondItem="NTs-qC-IKD" secondAttribute="leading" constant="8" id="ieZ-vl-aYT"/>
                                 <constraint firstItem="GkQ-gn-r7o" firstAttribute="leading" secondItem="NTs-qC-IKD" secondAttribute="leading" constant="8" id="lRw-Qm-7qx"/>
                                 <constraint firstAttribute="trailing" secondItem="6qd-dU-PTV" secondAttribute="trailing" constant="8" id="uA6-Df-1KD"/>
@@ -252,7 +252,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="contributorCell" textLabel="dPW-tb-iRq" imageView="JGt-LK-KrF" style="IBUITableViewCellStyleDefault" id="S3S-Kd-RHY">
-                                <rect key="frame" x="0.0" y="459" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="492" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S3S-Kd-RHY" id="ds8-gi-sEk">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -278,7 +278,6 @@
                             <outlet property="delegate" destination="j8n-Qh-gjC" id="aGb-yb-vFj"/>
                         </connections>
                     </tableView>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="About Cocoaheads" id="Uqy-IN-GUA"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pCq-sS-kzA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -613,6 +612,6 @@
         <image name="JobsTabIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vXN-bc-jAa"/>
+        <segue reference="GJd-Rt-qyZ"/>
     </inferredMetricsTieBreakers>
 </document>

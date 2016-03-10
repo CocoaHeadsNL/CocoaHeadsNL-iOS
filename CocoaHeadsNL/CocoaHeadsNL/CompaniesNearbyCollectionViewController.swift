@@ -19,7 +19,6 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.collectionView?.registerClass(CompaniesNearbyCell.self, forCellWithReuseIdentifier: "companiesNearbyCell")
         let nib = UINib(nibName: "CompaniesNearbyCell", bundle: nil)
         self.collectionView?.registerNib(nib, forCellWithReuseIdentifier: "companiesNearbyCell")
 
