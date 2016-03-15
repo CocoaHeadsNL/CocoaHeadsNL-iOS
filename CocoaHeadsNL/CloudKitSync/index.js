@@ -17,6 +17,7 @@ var Promise = require('promise');
 
   var CloudKit = require('./cloudkit');
   var config = require('./config');
+  var iconv = require('iconv-lite');
 
   // A utility function for printing results to the console.
   var println = function(key,value) {
@@ -68,11 +69,11 @@ var Promise = require('promise');
           return {recordType: 'Meetup',
             fields: {
               meetup_id: {value: meetupEvent["id"]},
-              name: {value: escape(meetupEvent["name"])},
-              meetup_description: {value: escape(meetupEvent["description"])},
-              locationName: {value: escape(locationName) },
+              name: {value: encodeURI(meetupEvent["name"])},
+              meetup_description: {value: encodeURI(meetupEvent["description"])},
+              locationName: {value: encodeURI(locationName) },
               geoLocation: {value: geoLocation },
-              location: {value: escape(location) },
+              location: {value: encodeURI(location) },
               time: {value: meetupEvent.time},
               duration: {value: meetupEvent.duration},
               yes_rsvp_count: {value: meetupEvent.yes_rsvp_count},
