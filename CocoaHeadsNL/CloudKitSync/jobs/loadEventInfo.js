@@ -9,7 +9,7 @@ exports.load = function() {
     
     var options = {
       url: 'https://api.meetup.com/2/events?&sign=true&photo-host=public&group_urlname=cocoaheadsnl&desc=true&status=upcoming,past&key='+config.meetupApiKey,
-      headers: { 'User-Agent': 'CocoaHeadsNL-Cloud-Sync'},
+      headers: { 'User-Agent': 'CocoaHeadsNL-Cloud-Sync', 'Accept-Charset': 'UTF-8'},
     }
     
     request(options, function(error, response, body){
