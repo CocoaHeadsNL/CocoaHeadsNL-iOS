@@ -1,4 +1,5 @@
 import UIKit
+import StoreKit
 
 class CompanyDataSource: DetailDataSource {
     let fetchLinks = FetchAffiliateLinks()
@@ -76,8 +77,9 @@ class CompanyDataSource: DetailDataSource {
 
             if let vc = presenter {
 
-                    let affiliateLink = self.fetchLinks.apps[indexPath.row]
-                    if let affiliateToken = PFConfig.currentConfig()["appleAffiliateToken"] as? String, let affiliateId = affiliateLink.affiliateId {
+                let affiliateLink = self.fetchLinks.apps[indexPath.row]
+                let affiliateToken = "1010l8D"
+                    if let affiliateId = affiliateLink.affiliateId {
                         let parameters = [SKStoreProductParameterITunesItemIdentifier :
                             affiliateId, SKStoreProductParameterAffiliateToken : affiliateToken]
                         

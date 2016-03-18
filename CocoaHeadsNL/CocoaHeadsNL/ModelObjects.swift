@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Stichting CocoaheadsNL. All rights reserved.
 //
 
+import UIKit
 import CoreSpotlight
 import MobileCoreServices
 import CloudKit
