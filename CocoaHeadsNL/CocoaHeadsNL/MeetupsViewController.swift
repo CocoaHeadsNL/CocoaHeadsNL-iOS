@@ -234,6 +234,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("ShowDetail", sender: tableView.cellForRowAtIndexPath(indexPath))
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     //MARK: - fetching Cloudkit
