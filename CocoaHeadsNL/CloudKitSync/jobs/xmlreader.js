@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-var sax = require('sax');
+var sax = require('./sax');
 
 exports.read = function(xmlstring, callback){
 	var saxparser = sax.parser(true);

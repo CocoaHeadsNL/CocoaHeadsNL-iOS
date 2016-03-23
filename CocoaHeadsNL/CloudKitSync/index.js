@@ -170,6 +170,26 @@ var Promise = require('promise');
     return syncContributorsPromise
   }
 
+  function syncJobsPromise() {
+    var syncJobsPromise = new Promise(function(resolve, reject) {
+      var jobsLoader = require('./jobs/loadJobInfo');
+
+      //Load contributors from iCloud
+      var cloudKitFetchPromise = database.performQuery({ recordType: 'Job' }).then(function(response) {
+        return Promise.resolve(response.records)
+      })
+      //Load contributors from Github
+      var jobFetchPromise =  jobsLoader.load().then(function(contributors) {
+        return Promise.resolve(contributors)
+      })
+
+      return Promise.all([cloudKitFetchPromise, jobFetchPromise]).then(jobs => {
+        resolve(jobs)
+      })
+    })
+
+    return syncJobsPromise
+  }
 
 // Sign in using the keyID and public key file.
   container.setUpAuth()
@@ -177,6 +197,8 @@ var Promise = require('promise');
         return syncContributorsPromise()
     }).then(function(response) {
         return syncEventsPromise()
+    }).then(function(response) {
+        return syncJobsPromise()
     }).then(function(response) {
       console.log("Done");
       process.exit();
