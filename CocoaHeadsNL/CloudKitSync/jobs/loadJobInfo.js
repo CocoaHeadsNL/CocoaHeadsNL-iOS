@@ -44,7 +44,6 @@ exports.load = function() {
         });
       });
 
-      console.log(jobPostings);
       resolve(jobPostings);
     });
   });
