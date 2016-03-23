@@ -14,7 +14,7 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
         self.delegate = self
         self.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "searchNotification:", name: searchNotificationName, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SplitViewController.searchNotification(_:)), name: searchNotificationName, object: nil)
         
         //Inspect paste board for userInfo
         if let pasteBoard = UIPasteboard(name: searchPasteboardName, create: false) {

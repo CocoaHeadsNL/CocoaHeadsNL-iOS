@@ -31,7 +31,7 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
         
         self.coreLocationController = CoreLocationController()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "locationAvailable:", name: "LOCATION_AVAILABLE", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CompaniesNearbyCollectionViewController.locationAvailable(_:)), name: "LOCATION_AVAILABLE", object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {

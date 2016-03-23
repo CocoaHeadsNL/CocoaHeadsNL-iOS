@@ -32,7 +32,7 @@ class JobsViewController: UICollectionViewController {
             }
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "searchOccured:", name: searchNotificationName, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(JobsViewController.searchOccured(_:)), name: searchNotificationName, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {

@@ -46,7 +46,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
             }
         }
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "searchOccured:", name: searchNotificationName, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MeetupsViewController.searchOccured(_:)), name: searchNotificationName, object: nil)
         
         if #available(iOS 9.0, *) {
             if traitCollection.forceTouchCapability == .Available {
