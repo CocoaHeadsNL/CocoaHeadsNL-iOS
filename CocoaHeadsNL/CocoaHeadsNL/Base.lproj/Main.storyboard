@@ -318,6 +318,11 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
                         </collectionViewFlowLayout>
+                        <activityIndicatorView key="backgroundView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="LMv-rh-AFu">
+                            <rect key="frame" x="282" y="217" width="37" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </activityIndicatorView>
                         <cells/>
                         <connections>
                             <outlet property="dataSource" destination="p5z-Di-RAg" id="FjA-GG-Lhw"/>
@@ -326,6 +331,7 @@
                     </collectionView>
                     <navigationItem key="navigationItem" title="CocoaHeadsNL" id="tRg-uu-nNZ"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="LMv-rh-AFu" id="dag-bc-clb"/>
                         <segue destination="3uJ-fO-52Q" kind="showDetail" identifier="ShowDetail" id="GJd-Rt-qyZ"/>
                     </connections>
                 </collectionViewController>
@@ -612,6 +618,6 @@
         <image name="JobsTabIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GJd-Rt-qyZ"/>
+        <segue reference="YXG-G2-hcg"/>
     </inferredMetricsTieBreakers>
 </document>

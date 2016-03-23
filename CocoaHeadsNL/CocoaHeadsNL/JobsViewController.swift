@@ -14,6 +14,7 @@ class JobsViewController: UICollectionViewController {
     
     var jobsArray = [Job]()
     var searchedObjectId : String? = nil
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,7 @@ class JobsViewController: UICollectionViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(JobsViewController.searchOccured(_:)), name: searchNotificationName, object: nil)
         self.subscribe()
+        self.activityIndicator.startAnimating()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -192,6 +194,7 @@ class JobsViewController: UICollectionViewController {
             dispatch_async(dispatch_get_main_queue()) {
                 if error == nil {
                     
+                    self.activityIndicator.stopAnimating()
                     self.jobsArray = CKJob
                     self.collectionView?.reloadData()
                     
