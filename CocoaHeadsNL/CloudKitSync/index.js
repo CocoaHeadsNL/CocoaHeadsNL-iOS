@@ -174,11 +174,11 @@ var Promise = require('promise');
     var syncJobsPromise = new Promise(function(resolve, reject) {
       var jobsLoader = require('./jobs/loadJobInfo');
 
-      //Load contributors from iCloud
+      //Load jobs from iCloud
       var cloudKitFetchPromise = database.performQuery({ recordType: 'Job' }).then(function(response) {
         return Promise.resolve(response.records)
       })
-      //Load contributors from Github
+      //Load jobs from RSS feed on jobs site
       var jobFetchPromise =  jobsLoader.load().then(function(contributors) {
         return Promise.resolve(contributors)
       })
