@@ -33,6 +33,7 @@ class JobsViewController: UICollectionViewController {
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(JobsViewController.searchOccured(_:)), name: searchNotificationName, object: nil)
+        self.subscribe()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -98,6 +99,26 @@ class JobsViewController: UICollectionViewController {
                 layout.minimumInteritemSpacing = inset
         }
     }
+    
+    func subscribe() {
+        let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+        
+        let subscription = CKSubscription(
+            recordType: "Job",
+            predicate: NSPredicate(value: true),
+            options: .FiresOnRecordCreation
+        )
+        
+        let info = CKNotificationInfo()
+        
+        info.alertBody = "A new job has been added!"
+        info.shouldBadge = true
+        
+        subscription.notificationInfo = info
+        
+        publicDB.saveSubscription(subscription) { record, error in }
+    }
+
 
     //MARK: - UICollectionViewDataSource methods
     
