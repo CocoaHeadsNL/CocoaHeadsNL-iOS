@@ -164,7 +164,9 @@ var Promise = require('promise');
         return database.saveRecords(mappedGithubRecords);
       }).then(function(response) {
         resolve(response)
-      })
+      }).catch(function(error) {
+        reject(error)
+      });
     })
 
     return syncContributorsPromise
@@ -179,16 +181,137 @@ var Promise = require('promise');
         return Promise.resolve(response.records)
       })
       //Load jobs from RSS feed on jobs site
-      var jobFetchPromise =  jobsLoader.load().then(function(contributors) {
-        return Promise.resolve(contributors)
+      var jobFetchPromise =  jobsLoader.load().then(function(jobs) {
+        return Promise.resolve(jobs)
       })
 
       return Promise.all([cloudKitFetchPromise, jobFetchPromise]).then(jobs => {
-        resolve(jobs)
-      })
+        var cloudKitJobs = jobs[0];
+        var feedJobs = jobs[1];
+        
+        var cloudkitJobsToUpdate = []
+        
+        for (var feedJob of feedJobs) {
+          var filteredCloudJobs = cloudKitJobs.filter(function(cloudKitJob) {
+            var cloudKitJobLink = cloudKitJob.fields.link
+            if (cloudKitJobLink === undefined) {return false}
+            return (feedJob.link === cloudKitJobLink.value)
+          })
+          
+          for (var filteredCloudJob of filteredCloudJobs) {
+            if(filteredCloudJob.recordChangeTag) {
+              feedJob.recordChangeTag = filteredCloudJob[0].recordChangeTag;
+            }
+            if(filteredCloudRecord.recordName) {
+              feedJob.recordName = filteredCloudJob[0].recordName;
+            }
+            cloudKitJobs.remove(filteredCloudJob)
+          }
+        }
+        
+        console.log("update " + feedJobs.length)
+        console.log("delete " + cloudKitJobs.length)
+
+        // var updateJobsPromise = database.saveRecords(feedJobs).then(function(response) {
+        // console.log("..")
+        // return Promise.resolve(response)
+        // })
+
+        // var removeJobsPromise = database.removeRecords(cloudKitJobs).then(function(response) {
+        //   console.log("...")
+        //   return Promise.resolve(response)
+        // })
+        console.log(".")
+        
+        // return Promise.all(updateJobsPromise, removeJobsPromise)
+        
+        // return Promise.all(updateJobsPromise, database.removeRecords(cloudKitJobs));
+        return database.saveRecords(feedJobs)
+      }).then(function(response) {
+        console.log("x")
+        resolve(response)
+      }).catch(function(error) {
+        console.log("y")
+        reject(error)
+      });
     })
 
     return syncJobsPromise
+    //     var rssKeysToBeRetained = []
+    //
+    //    xmlreader.read(httpResponse.text, function (err, res){
+    //       var rssChannel = res.rss.channel;
+    //       rssChannel.item.each(function (i, newJobItem){
+    //         var jobQuery = new Parse.Query(Job);
+    //         rssKeysToBeRetained.push(newJobItem.link.text())
+    //         jobQuery.equalTo("link", newJobItem.link.text())
+    //         promises.push(jobQuery.first().then(function(existingJob) {
+    //           if (existingJob === undefined) {
+    //             var newJob = new Job();
+    //             newJob.set("link", newJobItem.link.text());
+    //             return Parse.Promise.as(newJob);
+    //           } else {
+    //             return Parse.Promise.as(existingJob)
+    //           }
+    //         }).then(function(jobObject) {
+    //           jobObject.set("title", newJobItem.title.text());
+    //           jobObject.set("content", newJobItem.description.text());
+    //           jobObject.set("date", newJobItem.pubDate.text());
+    //
+    //           var logoHref = newJobItem['atom:link'].attributes()['href']
+    //           if (logoHref === undefined || jobObject.has("logo")) {
+    //             return jobObject.save();
+    //           } else {
+    //             console.log("Fetching a logo for " + jobObject.get("title"))
+    //             return Parse.Cloud.httpRequest({
+    //               url: logoHref
+    //             }).then(function(httpResponse) {
+    //               var imgFile = new Parse.File(logoHref.split('/').pop(), {base64: httpResponse.buffer.toString('base64', 0, httpResponse.buffer.length)});
+    //               return imgFile.save();
+    //             }).then(function(imageFile) {
+    //               jobObject.set("logo", imageFile);
+    //               return jobObject.save();
+    //             });
+    //           }
+    //         }, function(error){
+    //           console.log(error);
+    //           return Parse.Promise.error(error);
+    //         }));
+    //       });
+    //       var oldJobQuery = new Parse.Query(Job);
+    //       oldJobQuery.notContainedIn("link", rssKeysToBeRetained)
+    //       promises.push(oldJobQuery.each(function(oldJob){
+    //         oldJob.destroy({ wait : true });
+    //       }))
+    //     });
+    //
+    //     return Parse.Promise.when(promises);
+    //
+    //   }).then(function(){
+    //     status.success('Fetched jobs from jobs.cocoaheads.nl');
+    //   }, function (error) {
+    //     var keyQuery = new Parse.Query(APIKey);
+    //     keyQuery.equalTo("serviceName", "slack");
+    //     return keyQuery.first().then(function(slackNotificationUrl) {
+    //         return Parse.Cloud.httpRequest({
+    //           method: 'POST',
+    //           url: slackNotificationUrl.get("apiKeyString"),
+    //         headers: {
+    //           'Content-Type': 'application/json;charset=utf-8'
+    //         },
+    //           body: '{"username": "webhookbot", "text": "Parse Job: Job sync failed.", "icon_emoji": ":ghost:"}'
+    //         });
+    //     }).then(function (httpResponse) {
+    //       console.log("Post ERROR notification to slack succeeded");
+    //       status.error('Job update JOB failed');
+    //     }, function(slackError) {
+    //       console.log(slackError);
+    //       console.log("Post ERROR notification to slack failed ");
+    //       status.error('Job update JOB failed, slack notification failed too');
+    //       return Parse.Promise.error(error);
+    //     });
+    //   });
+    // });
   }
 
 // Sign in using the keyID and public key file.

@@ -32,12 +32,14 @@ exports.load = function() {
         }
         var rssChannel = res.rss.channel;
         rssChannel.item.each(function (i, newJobItem){
-          var jobPosting = {
-            link: newJobItem.link.text(),
-            title: newJobItem.title.text(),
-            content: newJobItem.description.text(),
-            date: newJobItem.pubDate.text(),
-            logo: newJobItem['atom:link'].attributes()['href']
+          var jobPosting = {recordType: 'Job',
+            fields: {
+              link: {value: newJobItem.link.text()},
+              title: {value: newJobItem.title.text()},
+              content: {value: newJobItem.description.text()},
+              dateString: {value: newJobItem.pubDate.text()},
+              logoUrl: {value: newJobItem['atom:link'].attributes()['href']}
+            }
           }
 
           jobPostings.push(jobPosting)
