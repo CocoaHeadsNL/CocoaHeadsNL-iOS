@@ -182,7 +182,7 @@ class JobsViewController: UICollectionViewController {
             
             job.recordID = record.recordID
             job.content = record["content"] as? String
-            job.date = record["date"] as? String
+            job.date = record["date"] as? NSDate
             job.link = record["link"] as? String
             job.title = record["title"] as? String
             job.logo = record["logo"] as? CKAsset

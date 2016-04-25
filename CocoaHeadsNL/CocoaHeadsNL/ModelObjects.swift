@@ -73,7 +73,7 @@ class Job : NSObject {
    
     var recordID: CKRecordID?
     var content: String?
-    var date: String?
+    var date: NSDate?
     var link: String?
     var title: String?
     var logo: CKAsset?
