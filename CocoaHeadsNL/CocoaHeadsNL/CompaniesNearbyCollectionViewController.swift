@@ -135,7 +135,7 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
             company.emailAddress = record["emailAddress"] as? String
             company.location = record["location"] as? CLLocation
             company.logo = record["logo"] as? CKAsset
-            //            company.hasApps = record["hasApps"] as? Bool
+            company.hasApps = record["hasApps"] as! Bool
             company.smallLogo = record["smallLogo"] as? CKAsset
             
             CKCompanies.append(company)

@@ -23,7 +23,7 @@ class AffiliateLink : NSObject {
     var affiliateId: String?
     var productCreator: String?
     var productName: String?
-    var company: Company?
+    var company: CKReference?
 }
 
 //class APIKey : PFObject, PFSubclassing {
