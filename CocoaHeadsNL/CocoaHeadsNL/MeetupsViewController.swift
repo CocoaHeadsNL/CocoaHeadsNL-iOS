@@ -181,7 +181,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                 self.navigationController?.popToRootViewControllerAnimated(false)
                 searchedObjectId = recordID
             }
-            
+        
 //        } else {
 //            //cache object
 //            searchedObjectId = objectId

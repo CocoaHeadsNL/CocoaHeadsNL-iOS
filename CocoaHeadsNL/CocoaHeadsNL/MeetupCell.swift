@@ -39,7 +39,6 @@ class MeetupCell: UITableViewCell {
         dayLabel.text = ""
         monthLabel.text = ""
 
-        //logoImageView.file = nil
         logoImageView.image = UIImage(named: "MeetupPlaceholder")
     }
 

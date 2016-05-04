@@ -26,24 +26,6 @@ class AffiliateLink : NSObject {
     var company: CKReference?
 }
 
-//class APIKey : PFObject, PFSubclassing {
-//    override class func initialize() {
-//        struct Static {
-//            static var onceToken : dispatch_once_t = 0;
-//        }
-//        dispatch_once(&Static.onceToken) {
-//            self.registerSubclass()
-//        }
-//    }
-//
-//    class func parseClassName() -> String {
-//        return "APIKey"
-//    }
-//
-//    @NSManaged var apiKeyString: String?
-//    @NSManaged var serviceName: String?
-//}
-
 class Company : NSObject {
     
     var recordID: CKRecordID?

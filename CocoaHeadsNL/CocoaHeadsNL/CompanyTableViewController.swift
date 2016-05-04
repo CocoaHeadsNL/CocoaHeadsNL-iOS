@@ -91,26 +91,26 @@ class CompanyTableViewController: UITableViewController {
         self.performSegueWithIdentifier("ShowCompanies", sender: tableView.cellForRowAtIndexPath(indexPath))
     }
     
-//    //MARK: - Notifications
-//    
-//    func subscribe() {
-//        let publicDB = CKContainer.defaultContainer().publicCloudDatabase
-//        
-//        let subscription = CKSubscription(
-//            recordType: "Companies",
-//            predicate: NSPredicate(value: true),
-//            options: .FiresOnRecordCreation
-//        )
-//        
-//        let info = CKNotificationInfo()
-//        
-//        info.alertBody = "A new company has been added!"
-//        info.shouldBadge = true
-//        
-//        subscription.notificationInfo = info
-//        
-//        publicDB.saveSubscription(subscription) { record, error in }
-//    }
+    //MARK: - Notifications
+    
+    func subscribe() {
+        let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+        
+        let subscription = CKSubscription(
+            recordType: "Companies",
+            predicate: NSPredicate(value: true),
+            options: .FiresOnRecordCreation
+        )
+        
+        let info = CKNotificationInfo()
+        
+        info.alertBody = "A new company has been added!"
+        info.shouldBadge = true
+        
+        subscription.notificationInfo = info
+        
+        publicDB.saveSubscription(subscription) { record, error in }
+    }
     
     //MARK: - fetching Cloudkit
     

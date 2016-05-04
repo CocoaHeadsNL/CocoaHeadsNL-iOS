@@ -6,10 +6,7 @@ class FetchAffiliateLinks {
 
     func fetchLinksForCompany(company: Company, completion: () -> Void) {
         if let recordID = company.recordID {
-            
-            //check if we get the correct string back as id
-            //print(recordID.recordName)
-            
+                        
             let reference = CKReference(recordID: recordID, action: .None)
             let pred = NSPredicate(format: "company == %@", reference)
             let refQuery = CKQuery(recordType: "AffiliateLinks", predicate: pred)

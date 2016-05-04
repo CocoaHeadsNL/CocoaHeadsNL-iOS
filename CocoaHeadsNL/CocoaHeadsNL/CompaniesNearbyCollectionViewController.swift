@@ -159,18 +159,4 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
         CKContainer.defaultContainer().publicCloudDatabase.addOperation(operation)
         
     }
-    
-    
-    //MARK: - Query
-    
-//    override func queryForCollection() -> PFQuery {
-//        let query = Company.query()
-//        
-//        if let coordinates = geoPoint {
-//            query!.whereKey("location", nearGeoPoint: coordinates, withinKilometers: 15.00)
-//                return query!
-//        } else {
-//             return query!.orderByAscending("place")
-//        }
-//    }
 }

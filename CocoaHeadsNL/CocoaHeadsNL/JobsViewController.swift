@@ -208,27 +208,5 @@ class JobsViewController: UICollectionViewController {
         
         CKContainer.defaultContainer().publicCloudDatabase.addOperation(operation)
         
-    }
-
-    
-    //MARK: - Query
-    
-//    override func queryForCollection() -> PFQuery {
-//        let query = Job.query()
-//        return query!.orderByAscending("date")
-//    }
-//    
-//    override func objectsDidLoad(error: NSError?) {
-//        super.objectsDidLoad(error)
-//        
-//        if let searchedObjectId = searchedObjectId {
-//            self.searchedObjectId = nil
-//            displayObject(searchedObjectId)
-//        }
-//        
-//        if let jobs = self.objects as? [Job] {
-//            Job.index(jobs)
-//        }
-//    }
-    
+    }    
 }
