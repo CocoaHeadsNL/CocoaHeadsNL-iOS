@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import UIKit
 
 class LocatedCompaniesViewController: UITableViewController {
     
-    var companiesDict = NSMutableDictionary()
+    var companyDict = NSDictionary()
     var companiesArray = NSMutableArray()
     
     override func viewDidLoad() {
@@ -22,8 +23,8 @@ class LocatedCompaniesViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         
-            if (companiesDict.objectForKey("company") != nil) {
-                companiesArray = companiesDict.objectForKey("company") as! NSMutableArray
+            if (companyDict.objectForKey("company") != nil) {
+                companiesArray = companyDict.objectForKey("company") as! NSMutableArray
             }
     }
     
@@ -64,13 +65,11 @@ class LocatedCompaniesViewController: UITableViewController {
             cell.imageView?.image = UIImage(named: "MeetupPlaceholder")
             
             if let logoFile = company.smallLogo {
-                logoFile.getDataInBackgroundWithBlock({ (imageData: NSData?, error: NSError?) -> Void in
-                    if error == nil {
-                        let image = UIImage(data: imageData!)
-                        cell.imageView?.image = image
-                    }
-                })
                 
+                if let data = NSData(contentsOfURL: logoFile.fileURL) {
+                    cell.imageView?.image =  UIImage(data: data)!
+                    cell.setNeedsLayout()
+                }
             }
         }
         return cell

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -19,40 +19,34 @@
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QMZ-ed-ONR" userLabel="Calendar">
                                 <rect key="frame" x="0.0" y="0.0" width="44" height="26"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.90980392156862744" green="0.34509803921568627" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MON" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JW4-SW-Aoj">
                                 <rect key="frame" x="2" y="9" width="40" height="16"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZp-Mr-LWd">
                                 <rect key="frame" x="2" y="25" width="40" height="26"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="44" id="f2f-9I-rkg"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FvW-QZ-rpN">
-                        <rect key="frame" x="52" y="6" width="188" height="20.5"/>
-                        <animations/>
+                        <rect key="frame" x="52" y="6" width="188" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="MeetupPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="Lev-tK-HJm" customClass="PFImageView">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="MeetupPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="Lev-tK-HJm">
                         <rect key="frame" x="240" y="8" width="72" height="72"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="72" id="0w7-jt-gbw"/>
                             <constraint firstAttribute="height" constant="72" id="Pba-FY-dfL"/>
@@ -60,28 +54,24 @@
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5rM-DP-vIx" userLabel="Separator">
                         <rect key="frame" x="0.0" y="86" width="320" height="1"/>
-                        <animations/>
                         <color key="backgroundColor" red="0.87279411764705883" green="0.87279411764705883" blue="0.87279411764705883" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="NXd-c6-2Ih"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yK-aX-WfD">
-                        <rect key="frame" x="52" y="27" width="30" height="16"/>
-                        <animations/>
+                        <rect key="frame" x="52" y="28" width="30" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22 going" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MQt-r0-5KU" userLabel="rsvpLabel">
-                        <rect key="frame" x="52" y="45" width="180" height="16"/>
-                        <animations/>
+                        <rect key="frame" x="52" y="46" width="180" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.45000000000000001" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <animations/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="5rM-DP-vIx" secondAttribute="trailing" id="0ob-zE-r3Z"/>
                     <constraint firstItem="5rM-DP-vIx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Lev-tK-HJm" secondAttribute="bottom" constant="6" id="2V4-E7-cf0"/>
@@ -103,7 +93,6 @@
                     <constraint firstItem="0ui-YP-aIQ" firstAttribute="leading" secondItem="etl-Ja-pf7" secondAttribute="leading" id="zxh-qP-Kh1"/>
                 </constraints>
             </tableViewCellContentView>
-            <animations/>
             <connections>
                 <outlet property="calendarView" destination="QMZ-ed-ONR" id="qzf-bp-lnX"/>
                 <outlet property="dateContainer" destination="0ui-YP-aIQ" id="pYE-zm-s3B"/>

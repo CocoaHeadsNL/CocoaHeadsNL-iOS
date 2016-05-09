@@ -1,8 +1,8 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.1'
 
-pod 'ParseUI'
-pod 'ParseCrashReporting'
+pod 'Fabric'
+pod 'Crashlytics'
 
 post_install do | installer |
     require 'fileutils'

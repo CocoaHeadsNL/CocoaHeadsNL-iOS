@@ -1,22 +1,14 @@
 PODS:
-  - Bolts/Tasks (1.6.0)
-  - Parse (1.12.0):
-    - Bolts/Tasks (~> 1.5)
-  - ParseCrashReporting (1.9.2):
-    - Bolts/Tasks (~> 1.5)
-    - Parse (~> 1.9)
-  - ParseUI (1.2.0):
-    - Bolts/Tasks (~> 1.3)
-    - Parse (~> 1.9)
+  - Crashlytics (3.7.0):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.7)
 
 DEPENDENCIES:
-  - ParseCrashReporting
-  - ParseUI
+  - Crashlytics
+  - Fabric
 
 SPEC CHECKSUMS:
-  Bolts: f52a250053bb517ca874523c3913776359ab3def
-  Parse: de2c52a9a1421b91ae7594ab8ce191afd184f19b
-  ParseCrashReporting: 33b760facc649d4fd99eef8f35dcda6a406099e5
-  ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
+  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
 
 COCOAPODS: 0.39.0

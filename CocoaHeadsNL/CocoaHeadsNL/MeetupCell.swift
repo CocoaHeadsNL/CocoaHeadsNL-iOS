@@ -7,15 +7,16 @@
 //
 
 import Foundation
+import UIKit
 
 private let dateFormatter = NSDateFormatter()
 
-class MeetupCell: PFTableViewCell {
+class MeetupCell: UITableViewCell {
     static let Identifier = "meetupCell"
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var logoImageView: PFImageView!
+    @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var dateContainer: UIView!
     @IBOutlet weak var calendarView: UIView!
     @IBOutlet weak var dayLabel: UILabel!
@@ -38,7 +39,6 @@ class MeetupCell: PFTableViewCell {
         dayLabel.text = ""
         monthLabel.text = ""
 
-        logoImageView.file = nil
         logoImageView.image = UIImage(named: "MeetupPlaceholder")
     }
 
@@ -60,24 +60,35 @@ class MeetupCell: PFTableViewCell {
             if date.timeIntervalSinceNow > 0 {
                 dayLabel.textColor = UIColor.blackColor()
                 calendarView.backgroundColor = UIColorWithRGB(232, g: 88, b: 80)
-                rsvpLabel.text = "\(meetup.yes_rsvp_count) CocoaHeads going"
+                
         
-                if meetup.rsvp_limit > 0 {
-                    rsvpLabel.text = rsvpLabel.text! + "\n\(meetup.rsvp_limit - meetup.yes_rsvp_count) seats available"
+                if let yesRsvp = meetup.yes_rsvp_count?.intValue {
+                
+                    rsvpLabel.text = "\(yesRsvp) CocoaHeads going"
+                    
+                    if let rsvpLimit = meetup.rsvp_limit?.intValue where rsvpLimit > 0{
+                        rsvpLabel.text = rsvpLabel.text! + "\n\(rsvpLimit - yesRsvp) seats available"
+                    }
+                } else {
+                    rsvpLabel.text = ""
                 }
             } else {
                 dayLabel.textColor = UIColor(white: 0, alpha: 0.65)
                 calendarView.backgroundColor = UIColorWithRGB(169, g: 166, b: 166)
-                rsvpLabel.text = "\(meetup.yes_rsvp_count) CocoaHeads had a blast"
+                
+                if let yesRsvp = meetup.yes_rsvp_count?.intValue {
+                
+                rsvpLabel.text = "\(yesRsvp) CocoaHeads had a blast"
+                }
             }
         }
 
         if let logoFile = meetup.smallLogo {
-            logoImageView.file = logoFile
-            logoImageView.loadInBackground().continueWithSuccessBlock({[weak self] (task: BFTask!) -> AnyObject! in
-                self?.setNeedsLayout()
-                return nil
-            })
+            
+            if let data = NSData(contentsOfURL: logoFile.fileURL) {
+                self.logoImageView.image =  UIImage(data: data)!
+                self.setNeedsLayout()
+            }
         }
     }
 

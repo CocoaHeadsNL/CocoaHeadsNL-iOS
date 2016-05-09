@@ -6,8 +6,10 @@
 //  Copyright (c) 2015 Stichting CocoaheadsNL. All rights reserved.
 //
 
+import UIKit
 import CoreSpotlight
 import MobileCoreServices
+import CloudKit
 
 let indexQueue = NSOperationQueue()
 
@@ -15,110 +17,48 @@ var jobsIndexBackgroundTaskID = UIBackgroundTaskInvalid
 var meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
 
 
-class AffiliateLink : PFObject, PFSubclassing {
-    override class func initialize() {
-        struct Static {
-            static var onceToken : dispatch_once_t = 0;
-        }
-        dispatch_once(&Static.onceToken) {
-            self.registerSubclass()
-        }
-    }
-
-    class func parseClassName() -> String {
-        return "affiliateLinks"
-    }
-
-    @NSManaged var affiliateId: String?
-    @NSManaged var productCreator: String?
-    @NSManaged var productName: String?
-    @NSManaged var company: Company?
-}
-
-class APIKey : PFObject, PFSubclassing {
-    override class func initialize() {
-        struct Static {
-            static var onceToken : dispatch_once_t = 0;
-        }
-        dispatch_once(&Static.onceToken) {
-            self.registerSubclass()
-        }
-    }
-
-    class func parseClassName() -> String {
-        return "APIKey"
-    }
-
-    @NSManaged var apiKeyString: String?
-    @NSManaged var serviceName: String?
-}
-
-class Company : PFObject, PFSubclassing {
-    override class func initialize() {
-        struct Static {
-            static var onceToken : dispatch_once_t = 0;
-        }
-        dispatch_once(&Static.onceToken) {
-            self.registerSubclass()
-        }
-    }
-
-    class func parseClassName() -> String {
-        return "Companies"
-    }
-
-    @NSManaged var name: String?
-    @NSManaged var place: String?
-    @NSManaged var streetAddress: String?
-    @NSManaged var website: String?
-    @NSManaged var zipCode: String?
-    @NSManaged var companyDescription: String?
-    @NSManaged var emailAddress: String?
-    @NSManaged var location: PFGeoPoint?
-    @NSManaged var logo: PFFile?
-    @NSManaged var hasApps: Bool
-    @NSManaged var smallLogo: PFFile?
-}
-
-class Contributor : PFObject, PFSubclassing {
-    override class func initialize() {
-        struct Static {
-            static var onceToken : dispatch_once_t = 0;
-        }
-        dispatch_once(&Static.onceToken) {
-            self.registerSubclass()
-        }
-    }
+class AffiliateLink : NSObject {
     
-    class func parseClassName() -> String {
-        return "Contributor"
-    }
-    
-    @NSManaged var avatar_url: String?
-    @NSManaged var contributor_id: Int
-    @NSManaged var name: String?
-    @NSManaged var url: String?
+    var recordID: CKRecordID?
+    var affiliateId: String?
+    var productCreator: String?
+    var productName: String?
+    var company: CKReference?
 }
 
-class Job : PFObject, PFSubclassing {
-    override class func initialize() {
-        struct Static {
-            static var onceToken : dispatch_once_t = 0;
-        }
-        dispatch_once(&Static.onceToken) {
-            self.registerSubclass()
-        }
-    }
+class Company : NSObject {
+    
+    var recordID: CKRecordID?
+    var name: String?
+    var place: String?
+    var streetAddress: String?
+    var website: String?
+    var zipCode: String?
+    var companyDescription: String?
+    var emailAddress: String?
+    var location: CLLocation?
+    var logo: CKAsset?
+    var hasApps: Bool = false
+    var smallLogo: CKAsset?
+}
 
-    class func parseClassName() -> String {
-        return "Job"
-    }
+class Contributor : NSObject {
+    
+    var recordID: CKRecordID?
+    var avatar_url: String?
+    var contributor_id: Int64?
+    var name: String?
+    var url: String?
+}
 
-    @NSManaged var content: String?
-    @NSManaged var date: String?
-    @NSManaged var link: String?
-    @NSManaged var title: String?
-    @NSManaged var logo: PFFile?
+class Job : NSObject {
+   
+    var recordID: CKRecordID?
+    var content: String?
+    var date: NSDate?
+    var link: String?
+    var title: String?
+    var logo: CKAsset?
     
     @available(iOS 9.0, *)
     var searchableAttributeSet: CSSearchableItemAttributeSet {
@@ -136,17 +76,15 @@ class Job : PFObject, PFSubclassing {
             }
             attributeSet.creator = "CocoaHeadsNL";
             do {
-                guard let imageData = try logo?.getData() else {
+                guard let url = logo?.fileURL else {
                     return attributeSet
                 }
                 
-                if let smallLogoImage = UIImage(data:imageData)
-                {
+                if let smallLogoImage = UIImage(data: NSData(contentsOfURL: url)!) {
                     attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage);
                 }
-            } catch {
-                
             }
+            
             return attributeSet
         }
     }
@@ -166,8 +104,8 @@ class Job : PFObject, PFSubclassing {
                 
                 var searchableItems = [CSSearchableItem]()
                 for job in jobs {
-                    if let objectId = job.objectId {
-                        let item = CSSearchableItem(uniqueIdentifier: "job:\(objectId)", domainIdentifier: "job", attributeSet: job.searchableAttributeSet)
+                    if let recordID = job.recordID {
+                        let item = CSSearchableItem(uniqueIdentifier: "job:\(recordID)", domainIdentifier: "job", attributeSet: job.searchableAttributeSet)
                         searchableItems.append(item)
                     }
                 }
@@ -192,33 +130,22 @@ class Job : PFObject, PFSubclassing {
     }
 }
 
-class Meetup : PFObject, PFSubclassing {
-    override class func initialize() {
-        struct Static {
-            static var onceToken : dispatch_once_t = 0;
-        }
-        dispatch_once(&Static.onceToken) {
-            self.registerSubclass()
-        }
-    }
-
-    class func parseClassName() -> String {
-        return "Meetup"
-    }
-
-    @NSManaged var duration: Int
-    @NSManaged var geoLocation: PFGeoPoint?
-    @NSManaged var locationName: String?
-    @NSManaged var meetup_description: String?
-    @NSManaged var meetup_id: String?
-    @NSManaged var name: String?
-    @NSManaged var rsvp_limit: Int
-    @NSManaged var time: NSDate?
-    @NSManaged var yes_rsvp_count: Int
-    @NSManaged var logo: PFFile?
-    @NSManaged var nextEvent: DarwinBoolean
-    @NSManaged var smallLogo: PFFile?
-    @NSManaged var location: String?
+class Meetup : NSObject {
+  
+    var recordID: CKRecordID?
+    var duration: NSNumber!
+    var geoLocation: CLLocation?
+    var locationName: String?
+    var meetup_description: String?
+    var meetup_id: String?
+    var name: String?
+    var rsvp_limit: NSNumber!
+    var time: NSDate?
+    var yes_rsvp_count: NSNumber!
+    var logo: CKAsset?
+    var nextEvent: DarwinBoolean?
+    var smallLogo: CKAsset?
+    var location: String?
     
     @available(iOS 9.0, *)
     var searchableAttributeSet: CSSearchableItemAttributeSet {
@@ -245,17 +172,15 @@ class Meetup : PFObject, PFSubclassing {
 
             attributeSet.keywords = keywords
             do {
-                guard let imageData = try smallLogo?.getData() else {
+                guard let url = smallLogo?.fileURL else {
                     return attributeSet
                 }
-
-                if let smallLogoImage = UIImage(data:imageData)
-                {
+                
+                if let smallLogoImage = UIImage(data: NSData(contentsOfURL: url)!) {
                     attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage);
                 }
-            } catch {
-                
             }
+            
             return attributeSet
         }
     }
@@ -275,8 +200,8 @@ class Meetup : PFObject, PFSubclassing {
 
                 var searchableItems = [CSSearchableItem]()
                 for meetup in meetups {
-                    if let objectId = meetup.objectId {
-                        let item = CSSearchableItem(uniqueIdentifier: "meetup:\(objectId)", domainIdentifier: "meetup", attributeSet: meetup.searchableAttributeSet)
+                    if let recordID = meetup.recordID {
+                        let item = CSSearchableItem(uniqueIdentifier: "meetup:\(recordID)", domainIdentifier: "meetup", attributeSet: meetup.searchableAttributeSet)
                         searchableItems.append(item)
                     }
                 }

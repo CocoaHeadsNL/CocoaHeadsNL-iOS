@@ -8,27 +8,19 @@
 
 import Foundation
 import UIKit
+import CloudKit
 
-class JobsViewController: PFQueryCollectionViewController {
+class JobsViewController: UICollectionViewController {
     
+    var jobsArray = [Job]()
     var searchedObjectId : String? = nil
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        self.parseClassName = "Job"
-        self.pullToRefreshEnabled = true
-        self.paginationEnabled = false
-    }
-    
-    override func loadView() {
-        super.loadView()
-
-        self.collectionView?.registerClass(JobsCollectionViewCell.self, forCellWithReuseIdentifier: "jobsCollectionViewCell")
-    }
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let nib = UINib(nibName: "JobsCell", bundle: nil)
+        self.collectionView?.registerNib(nib, forCellWithReuseIdentifier: "jobsCell")
         
         //Inspect paste board for userInfo
         if let pasteBoard = UIPasteboard(name: searchPasteboardName, create: false) {
@@ -41,7 +33,13 @@ class JobsViewController: PFQueryCollectionViewController {
             }
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "searchOccured:", name: searchNotificationName, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(JobsViewController.searchOccured(_:)), name: searchNotificationName, object: nil)
+        self.subscribe()
+        self.activityIndicator.startAnimating()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.fetchJobs()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -69,25 +67,26 @@ class JobsViewController: PFQueryCollectionViewController {
         }
     }
     
-    func displayObject(objectId: String) -> Void {
-        if !loading {
+    func displayObject(recordID: String) -> Void {
+       // if !loading {
             if self.navigationController?.visibleViewController == self {
-                if let jobs = objects as? [Job] {
-                    if let selectedObject = jobs.filter({ (job :Job) -> Bool in
-                        return job.objectId == objectId
-                    }).first {
-                        performSegueWithIdentifier("ShowDetail", sender: selectedObject)
-                    }
+                let jobs = self.jobsArray
+                
+                if let selectedObject = jobs.filter({ (job :Job) -> Bool in
+                    return job.recordID == recordID
+                }).first {
+                    performSegueWithIdentifier("ShowDetail", sender: selectedObject)
                 }
+                
             } else {
                 self.navigationController?.popToRootViewControllerAnimated(false)
-                searchedObjectId = objectId
+                searchedObjectId = recordID
             }
             
-        } else {
-            //cache object
-            searchedObjectId = objectId
-        }
+//        } else {
+//            //cache object
+//            searchedObjectId = objectId
+//        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -102,17 +101,46 @@ class JobsViewController: PFQueryCollectionViewController {
                 layout.minimumInteritemSpacing = inset
         }
     }
+    
+    func subscribe() {
+        let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+        
+        let subscription = CKSubscription(
+            recordType: "Job",
+            predicate: NSPredicate(value: true),
+            options: .FiresOnRecordCreation
+        )
+        
+        let info = CKNotificationInfo()
+        
+        info.alertBody = "A new job has been added!"
+        info.shouldBadge = true
+        
+        subscription.notificationInfo = info
+        
+        publicDB.saveSubscription(subscription) { record, error in }
+    }
+
 
     //MARK: - UICollectionViewDataSource methods
+    
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return jobsArray.count
+    }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell? {
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("jobsCell", forIndexPath: indexPath) as! JobsCell
+        
+        let job = jobsArray[indexPath.item]
+        cell.updateFromObject(job)
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("jobsCollectionViewCell", forIndexPath: indexPath) as! JobsCollectionViewCell
-            
-        if let job = object as? Job {
-            cell.updateFromObject(job)
-        }
         return cell
+
     }
 
     //MARK: - UICollectionViewDelegate methods
@@ -129,32 +157,56 @@ class JobsViewController: PFQueryCollectionViewController {
                 let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.dataSource = JobDataSource(object: selectedObject)
             } else if let indexPath = self.collectionView?.indexPathForCell(sender as! UICollectionViewCell) {
-                let job = self.objectAtIndexPath(indexPath) as! Job
+                let job = self.jobsArray[indexPath.row]
                 let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.dataSource = JobDataSource(object: job)
             }
         }
     }
     
-    //MARK: - Query
+    //MARK: - fetching Cloudkit
     
-    override func queryForCollection() -> PFQuery {
-        let query = Job.query()
-        return query!.orderByAscending("date")
-    }
-    
-    override func objectsDidLoad(error: NSError?) {
-        super.objectsDidLoad(error)
+    func fetchJobs() {
         
-        if let searchedObjectId = searchedObjectId {
-            self.searchedObjectId = nil
-            displayObject(searchedObjectId)
+        let pred = NSPredicate(value: true)
+        let sort = NSSortDescriptor(key: "date", ascending: false)
+        let query = CKQuery(recordType: "Job", predicate: pred)
+        query.sortDescriptors = [sort]
+        
+        let operation = CKQueryOperation(query: query)
+        
+        var CKJob = [Job]()
+        
+        operation.recordFetchedBlock = { (record) in
+            let job = Job()
+            
+            job.recordID = record.recordID
+            job.content = record["content"] as? String
+            job.date = record["date"] as? NSDate
+            job.link = record["link"] as? String
+            job.title = record["title"] as? String
+            job.logo = record["logo"] as? CKAsset
+            
+            CKJob.append(job)
         }
         
-        if let jobs = self.objects as? [Job] {
-            Job.index(jobs)
+        operation.queryCompletionBlock = { [unowned self] (cursor, error) in
+            dispatch_async(dispatch_get_main_queue()) {
+                if error == nil {
+                    
+                    self.activityIndicator.stopAnimating()
+                    self.jobsArray = CKJob
+                    self.collectionView?.reloadData()
+                    
+                } else {
+                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of jobs; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(ac, animated: true, completion: nil)
+                }
+            }
         }
-    }
-
-    
+        
+        CKContainer.defaultContainer().publicCloudDatabase.addOperation(operation)
+        
+    }    
 }

@@ -29,7 +29,7 @@ cp CocoaHeadsNL/CocoaHeadsNL/ParseConfig-template.plist CocoaHeadsNL/CocoaHeadsN
 ~~To build this project you need to have the parse.com commandline tool installed:~~
 
 ```bash
-curl -s https://www.parse.com/downloads/cloud_code/installer.sh | sudo /bin/bash
+~~curl -s https://www.parse.com/downloads/cloud_code/installer.sh | sudo /bin/bash~~
 ```
 
 ~~This will allow you to upload symbolication information to parse.com for your developer builds.~~

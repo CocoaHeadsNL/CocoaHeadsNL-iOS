@@ -7,16 +7,21 @@
 //
 
 import Foundation
+import UIKit
+import CloudKit
 
-class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController {
+class CompaniesNearbyCollectionViewController: UICollectionViewController {
     
+    var companiesArray = [Company]()
     var coreLocationController:CoreLocationController?
-    var geoPoint:PFGeoPoint?
+    var geoPoint:CLLocation?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView?.registerClass(CompaniesNearbyCollectionViewCell.self, forCellWithReuseIdentifier: "companiesNearbyCollectionViewCell")
+        let nib = UINib(nibName: "CompaniesNearbyCell", bundle: nil)
+        self.collectionView?.registerNib(nib, forCellWithReuseIdentifier: "companiesNearbyCell")
 
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = CGSize(width: 100, height: 80)
@@ -26,13 +31,15 @@ class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController {
         
         self.coreLocationController = CoreLocationController()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "locationAvailable:", name: "LOCATION_AVAILABLE", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CompaniesNearbyCollectionViewController.locationAvailable(_:)), name: "LOCATION_AVAILABLE", object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
         if let locationManager = self.coreLocationController?.locationManager {
             locationManager.startUpdatingLocation()
         }
+        
+        self.fetchCompanies()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -47,23 +54,31 @@ class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController {
             
             print("CoreLocationManager:  Location available \(userInfo)")
         
-            geoPoint = PFGeoPoint(location: userInfo["location"])
-        
-            self.loadObjects()
+        if let latitude = userInfo["location"]?.coordinate.latitude, let longitude = userInfo["location"]?.coordinate.longitude {
+            geoPoint = CLLocation(latitude: latitude, longitude: longitude)
             self.collectionView?.reloadData()
+        }
     }
     
     
     //MARK: - UICollectionViewDataSource methods
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell {
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.companiesArray.count
+    }
+    
+    
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("companiesNearbyCollectionViewCell", forIndexPath: indexPath) as! CompaniesNearbyCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("companiesNearbyCell", forIndexPath: indexPath) as! CompaniesNearbyCell
         
-        if let company = object as? Company {
-            cell.updateFromObject(company)
-        }
-        
+        let company = self.companiesArray[indexPath.item]
+        cell.updateFromObject(company)
+    
         return cell
     }
 
@@ -78,7 +93,7 @@ class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
             if let indexPath = self.collectionView?.indexPathForCell(sender as! UICollectionViewCell) {
-                let company = self.objectAtIndexPath(indexPath) as! Company
+                let company = self.companiesArray[indexPath.row]
                 let dataSource = CompanyDataSource(object: company)
                 dataSource.fetchAffiliateLinks()
 
@@ -88,16 +103,60 @@ class CompaniesNearbyCollectionViewController: PFQueryCollectionViewController {
         }
     }
     
-    //MARK: - Query
+    //MARK: - fetching Cloudkit
     
-    override func queryForCollection() -> PFQuery {
-        let query = Company.query()
+    func fetchCompanies() {
         
-        if let coordinates = geoPoint {
-            query!.whereKey("location", nearGeoPoint: coordinates, withinKilometers: 15.00)
-                return query!
+        let query = CKQuery(recordType: "Companies", predicate: NSPredicate(value: true))
+        if let location = self.geoPoint {
+            query.sortDescriptors = [
+                CKLocationSortDescriptor(key: "location", relativeLocation: location)
+            ]
         } else {
-             return query!.orderByAscending("place")
+            query.sortDescriptors = [
+                CKLocationSortDescriptor(key: "name", ascending: true)
+            ]
         }
+
+        let operation = CKQueryOperation(query: query)
+        
+        var CKCompanies = [Company]()
+        
+        operation.recordFetchedBlock = { (record) in
+            let company = Company()
+            
+            company.recordID = record.recordID as CKRecordID?
+            company.name = record["name"] as? String
+            company.place = record["place"] as? String
+            company.streetAddress = record["streetAddress"] as? String
+            company.website = record["website"] as? String
+            company.zipCode = record["zipCode"] as? String
+            company.companyDescription = record["companyDescription"] as? String
+            company.emailAddress = record["emailAddress"] as? String
+            company.location = record["location"] as? CLLocation
+            company.logo = record["logo"] as? CKAsset
+            company.hasApps = record["hasApps"] as! Bool
+            company.smallLogo = record["smallLogo"] as? CKAsset
+            
+            CKCompanies.append(company)
+        }
+        
+        operation.queryCompletionBlock = { [unowned self] (cursor, error) in
+            dispatch_async(dispatch_get_main_queue()) {
+                if error == nil {
+                    
+                    self.companiesArray = CKCompanies
+                    self.collectionView?.reloadData()
+                    
+                } else {
+                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of companies; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(ac, animated: true, completion: nil)
+                }
+            }
+        }
+        
+        CKContainer.defaultContainer().publicCloudDatabase.addOperation(operation)
+        
     }
 }
