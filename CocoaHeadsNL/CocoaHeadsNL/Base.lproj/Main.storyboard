@@ -373,7 +373,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="logoCell" rowHeight="151" id="Z5o-Os-scA" customClass="LogoCell" customModule="CocoaHeadsNL" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="66" width="600" height="151"/>
+                                <rect key="frame" x="0.0" y="86" width="600" height="151"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z5o-Os-scA" id="b7h-2D-jQy">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="150.5"/>
@@ -398,7 +398,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell tag="4" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="mapViewCell" rowHeight="133" id="TzC-Iz-Atg" customClass="MapViewCell" customModule="CocoaHeadsNL" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="217" width="600" height="133"/>
+                                <rect key="frame" x="0.0" y="237" width="600" height="133"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TzC-Iz-Atg" id="ce3-Xl-5OC">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="132.5"/>
@@ -426,7 +426,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell tag="1" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="titleCell" id="h9M-t6-ZeC" customClass="TitleCell" customModule="CocoaHeadsNL" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="350" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="370" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h9M-t6-ZeC" id="ecA-Cp-ogY">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -451,7 +451,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell tag="5" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="webViewCell" id="vVf-LB-Z4X" customClass="WebViewCell" customModule="CocoaHeadsNL" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="394" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="414" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="vVf-LB-Z4X" id="RjE-m9-k9I">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -481,7 +481,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="affiliateCell" textLabel="VfL-vM-P3f" style="IBUITableViewCellStyleDefault" id="Hja-85-Icu" customClass="AffiliateCell" customModule="CocoaHeadsNL" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="438" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="458" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hja-85-Icu" id="Yy8-2d-VoK">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -623,6 +623,6 @@
         <image name="JobsTabIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vXN-bc-jAa"/>
+        <segue reference="YXG-G2-hcg"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -16,6 +16,8 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     var meetupsArray = [Meetup]()
     var searchedObjectId : String? = nil
     
+    weak var activityIndicatorView: UIActivityIndicatorView!
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
@@ -45,6 +47,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                 }
             }
         }
+        
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MeetupsViewController.searchOccured(_:)), name: searchNotificationName, object: nil)
         
@@ -58,6 +61,12 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         
         self.discover()
         self.subscribe()
+        
+        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        tableView.backgroundView = activityIndicatorView
+        self.activityIndicatorView = activityIndicatorView
+        
+        activityIndicatorView.startAnimating()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -278,6 +287,8 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                 if error == nil {
                     
                     self.meetupsArray = CKMeetups
+                    self.activityIndicatorView.stopAnimating()
+                    self.activityIndicatorView.hidesWhenStopped = true
                     self.tableView.reloadData()
                     
                 } else {
