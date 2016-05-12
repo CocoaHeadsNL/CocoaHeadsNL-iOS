@@ -16,6 +16,8 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
     var coreLocationController:CoreLocationController?
     var geoPoint:CLLocation?
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,7 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
         self.coreLocationController = CoreLocationController()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CompaniesNearbyCollectionViewController.locationAvailable(_:)), name: "LOCATION_AVAILABLE", object: nil)
+        self.activityIndicator.startAnimating()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -147,6 +150,7 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
                 if error == nil {
                     
                     self.companiesArray = CKCompanies
+                    self.activityIndicator.stopAnimating()
                     self.collectionView?.reloadData()
                     
                 } else {
