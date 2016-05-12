@@ -174,6 +174,7 @@ class JobsViewController: UICollectionViewController {
         query.sortDescriptors = [sort]
         
         let operation = CKQueryOperation(query: query)
+        operation.qualityOfService = .UserInteractive
         
         var CKJob = [Job]()
         

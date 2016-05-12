@@ -247,6 +247,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         query.sortDescriptors = [sort]
         
         let operation = CKQueryOperation(query: query)
+        operation.qualityOfService = .UserInteractive
         
         var CKMeetups = [Meetup]()
         

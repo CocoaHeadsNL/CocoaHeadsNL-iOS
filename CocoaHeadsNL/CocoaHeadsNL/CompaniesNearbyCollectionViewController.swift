@@ -119,6 +119,7 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
         }
 
         let operation = CKQueryOperation(query: query)
+        operation.qualityOfService = .UserInteractive
         
         var CKCompanies = [Company]()
         

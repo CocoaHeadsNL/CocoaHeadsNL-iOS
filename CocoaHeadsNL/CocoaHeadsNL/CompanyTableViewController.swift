@@ -122,6 +122,7 @@ class CompanyTableViewController: UITableViewController {
         query.sortDescriptors = [sort]
         
         let operation = CKQueryOperation(query: query)
+        operation.qualityOfService = .UserInteractive
         
         var CKCompanies = [Company]()
         
