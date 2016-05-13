@@ -11,7 +11,6 @@
 		239D41161B190FD000609105 /* CalendarTabImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239D41151B190FD000609105 /* CalendarTabImage.swift */; };
 		4A1978C21AAD8681000E281F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A1978C11AAD8681000E281F /* Settings.bundle */; };
 		4A7EEAF11AC5440C001C2827 /* ModelObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */; };
-		4A83A4AE1AAD8A290085416A /* ParseConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A83A4AD1AAD8A290085416A /* ParseConfig.plist */; };
 		4AE72F941C5B44300027C5CA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE72F931C5B44300027C5CA /* CloudKit.framework */; };
 		7B6A74481B1452FD00A10762 /* MeetupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74461B1452FD00A10762 /* MeetupCell.swift */; };
 		7B6A74491B1452FD00A10762 /* MeetupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74471B1452FD00A10762 /* MeetupsViewController.swift */; };
@@ -66,7 +65,6 @@
 		4A15A33C1BB82224008161BD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		4A1978C11AAD8681000E281F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelObjects.swift; sourceTree = "<group>"; };
-		4A83A4AD1AAD8A290085416A /* ParseConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ParseConfig.plist; sourceTree = "<group>"; };
 		4AE72F921C5B44080027C5CA /* CocoaHeadsNL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CocoaHeadsNL.entitlements; sourceTree = "<group>"; };
 		4AE72F931C5B44300027C5CA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4AF8899A1AAD8EBC00D8DB2E /* CocoaHeadsNL-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CocoaHeadsNL-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 				F1A46D161AAB50BB00585D61 /* Info.plist */,
 				F1A46D221AAB50BB00585D61 /* LaunchScreen.xib */,
 				F1A46D1D1AAB50BB00585D61 /* Main.storyboard */,
-				4A83A4AD1AAD8A290085416A /* ParseConfig.plist */,
 				4A1978C11AAD8681000E281F /* Settings.bundle */,
 			);
 			name = Resources;
@@ -433,7 +430,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A83A4AE1AAD8A290085416A /* ParseConfig.plist in Resources */,
 				4A1978C21AAD8681000E281F /* Settings.bundle in Resources */,
 				F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */,
 				F1BDEA761C920768004C7DAB /* JobsCell.xib in Resources */,
