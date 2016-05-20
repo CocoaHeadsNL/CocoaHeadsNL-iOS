@@ -13,6 +13,7 @@ import CloudKit
 class CompanyTableViewController: UITableViewController {
     
     var sortedArray = NSMutableArray()
+    @IBOutlet weak var sortingLabel: UILabel!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -27,7 +28,23 @@ class CompanyTableViewController: UITableViewController {
         
         let backItem = UIBarButtonItem(title: "Companies", style: .Plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CompanyTableViewController.locationAvailable(_:)), name: "LOCATION_AVAILABLE", object: nil)
     }
+    
+    func locationAvailable(notification:NSNotification) -> Void {
+        
+        let userInfo = notification.userInfo as! Dictionary<String,CLLocation>
+        
+        print("CoreLocationManager:  Location available \(userInfo)")
+        
+        if let _ = userInfo["location"]?.coordinate.latitude, let _ = userInfo["location"]?.coordinate.longitude {
+            self.sortingLabel?.text = "Companies sorted by distance"
+        } else {
+            self.sortingLabel?.text = "Companies sorted by name"
+        }
+    }
+
     
     //MARK: - Segues
     
@@ -48,7 +65,7 @@ class CompanyTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "All Companies"
+        return "Companies sorted by place"
     }
 
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

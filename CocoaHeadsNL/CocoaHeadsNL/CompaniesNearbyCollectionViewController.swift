@@ -115,6 +115,7 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
             query.sortDescriptors = [
                 CKLocationSortDescriptor(key: "location", relativeLocation: location)
             ]
+            
         } else {
             query.sortDescriptors = [
                 CKLocationSortDescriptor(key: "name", ascending: true)
