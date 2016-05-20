@@ -104,12 +104,6 @@ class MeetupCell: UITableViewCell {
                 }
             }
             dataTask.resume()
-
-            
-            if let data = NSData(contentsOfURL: logoFile.fileURL) {
-                self.logoImageView.image =  UIImage(data: data)!
-                self.setNeedsLayout()
-            }
         }
     }
 
