@@ -1,4 +1,5 @@
 app_identifier "nl.cocoaheads.app.CocoaHeadsNL" # The bundle identifier of your app
+apple_id "jeroen.leenarts@cocoaheads.nl"
 
 # You can uncomment any of the lines below and add your own
 # team selection in case you're in multiple teams
