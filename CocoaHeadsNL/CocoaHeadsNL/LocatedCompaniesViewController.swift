@@ -66,10 +66,25 @@ class LocatedCompaniesViewController: UITableViewController {
             
             if let logoFile = company.smallLogo {
                 
-                if let data = NSData(contentsOfURL: logoFile.fileURL) {
-                    cell.imageView?.image =  UIImage(data: data)!
-                    cell.setNeedsLayout()
+                let request = NSURLRequest(URL: logoFile.fileURL)
+                let dataTask = NSURLSession.sharedSession().dataTaskWithRequest(request) { [weak cell] data, response, error in
+                    
+                    let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+                    dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                        // do task
+                        
+                        if let imgView = cell?.imageView, data = data {
+                            let logo = UIImage(data: data)
+                            
+                            dispatch_async(dispatch_get_main_queue()) {
+                                // update UI
+                                imgView.image =  logo
+                            }
+                        }
+                        
+                    }
                 }
+                dataTask.resume()
             }
         }
         return cell
