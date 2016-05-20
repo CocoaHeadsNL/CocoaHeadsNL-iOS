@@ -39,7 +39,7 @@ class MeetupCell: UITableViewCell {
         dayLabel.text = ""
         monthLabel.text = ""
 
-        logoImageView.image = UIImage(named: "MeetupPlaceholder")
+        logoImageView.image = nil
     }
 
     func configureCellForMeetup(meetup: Meetup, row: Int) {
