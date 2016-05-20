@@ -18,6 +18,11 @@ class JobsCell: UICollectionViewCell {
         // Initialization code
     }
     
+    override func prepareForReuse() {
+        self.textLabel.text = ""
+        self.imageView.image = nil
+    }
+    
     func updateFromObject(object: NSObject?)
     {
         if let job = object as? Job {
