@@ -38,8 +38,6 @@ class MeetupCell: UITableViewCell {
         timeLabel.text = ""
         dayLabel.text = ""
         monthLabel.text = ""
-
-        logoImageView.image = nil
     }
 
     func configureCellForMeetup(meetup: Meetup, row: Int) {
