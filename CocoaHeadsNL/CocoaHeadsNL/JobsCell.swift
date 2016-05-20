@@ -19,8 +19,9 @@ class JobsCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         self.textLabel.text = ""
-        self.imageView.image = nil
     }
     
     func updateFromObject(object: NSObject?)
