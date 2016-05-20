@@ -22,12 +22,6 @@ class JobsCell: UICollectionViewCell {
     {
         if let job = object as? Job {
             
-            let frameForImage = CGRect(x: 0, y: 0, width: self.contentView.frame.width, height: 70)
-            self.imageView.frame = CGRectInset(frameForImage, 5, 5)
-            self.imageView.clipsToBounds = true
-            self.imageView.contentMode = .ScaleAspectFit
-            self.imageView.image = UIImage(named: "CocoaHeadsNLLogo")
-            
             if let logoFile = job.logo {
                 
                 let request = NSURLRequest(URL: logoFile.fileURL)
