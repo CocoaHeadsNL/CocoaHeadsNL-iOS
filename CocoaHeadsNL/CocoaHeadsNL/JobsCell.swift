@@ -25,7 +25,7 @@ class JobsCell: UICollectionViewCell {
         super.prepareForReuse()
         
         self.textLabel.text = ""
-        self.imageView.image = nil
+        //self.imageView.image = nil
     }
     
     func updateFromObject(object: NSObject?)
@@ -34,16 +34,9 @@ class JobsCell: UICollectionViewCell {
 
             if let logoFile = job.logo {
                 
-                let request = NSURLRequest(URL: logoFile.fileURL)
-                let dataTask = NSURLSession.sharedSession().dataTaskWithRequest(request) { [weak self] data, response, error in
-
-                        if let imgView = self?.imageView, data = data {
-                            let logo = UIImage(data: data)
-                            imgView.image =  logo
-
-                        }
+                if let data = NSData(contentsOfURL: logoFile.fileURL) {
+                    self.imageView?.image =  UIImage(data: data)!
                 }
-                dataTask.resume()
             }
             
             if let title = job.title {

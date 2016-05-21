@@ -25,17 +25,9 @@ class CompaniesNearbyCell: UICollectionViewCell {
             
             if let companyLogo = company.smallLogo {
                 
-                let request = NSURLRequest(URL: companyLogo.fileURL)
-                let dataTask = NSURLSession.sharedSession().dataTaskWithRequest(request) { [weak self] data, response, error in
-                    
-                        if let imgView = self?.imageView, data = data {
-                            let logo = UIImage(data: data)
-                                imgView.image =  logo
-
-                        }
-                    }
-                dataTask.resume()
-
+                if let data = NSData(contentsOfURL: companyLogo.fileURL) {
+                    self.imageView?.image =  UIImage(data: data)!
+                }
             }
             
             if let compName = company.name {
