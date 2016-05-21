@@ -28,29 +28,20 @@ class CompaniesNearbyCell: UICollectionViewCell {
                 let request = NSURLRequest(URL: companyLogo.fileURL)
                 let dataTask = NSURLSession.sharedSession().dataTaskWithRequest(request) { [weak self] data, response, error in
                     
-                    let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-                    dispatch_async(dispatch_get_global_queue(priority, 0)) {
-                        // do task
-                        
                         if let imgView = self?.imageView, data = data {
                             let logo = UIImage(data: data)
-                            
-                            dispatch_async(dispatch_get_main_queue()) {
-                                // update UI
                                 imgView.image =  logo
-                            }
+
                         }
-                        
                     }
-                }
                 dataTask.resume()
 
             }
             
             if let compName = company.name {
+                
             self.textLabel.text = compName
-            self.textLabel.font = UIFont.systemFontOfSize(10)
-            self.textLabel.textAlignment = .Center
+
                 
             }
         }

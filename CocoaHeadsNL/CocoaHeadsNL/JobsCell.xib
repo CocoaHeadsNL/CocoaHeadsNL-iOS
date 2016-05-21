@@ -15,8 +15,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="145" height="100"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPm-B3-Wcy">
-                        <rect key="frame" x="0.0" y="79" width="145" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="0.0" y="78" width="145" height="22"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="8"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -36,7 +36,7 @@
                 <constraint firstItem="i8X-T9-hP5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="MXN-Zv-CpI"/>
                 <constraint firstAttribute="trailing" secondItem="qPm-B3-Wcy" secondAttribute="trailing" id="PGy-7n-v2B"/>
                 <constraint firstItem="i8X-T9-hP5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="22" id="V7L-yx-8ar"/>
-                <constraint firstItem="qPm-B3-Wcy" firstAttribute="top" secondItem="i8X-T9-hP5" secondAttribute="bottom" constant="9" id="tKM-k0-Cw0"/>
+                <constraint firstItem="qPm-B3-Wcy" firstAttribute="top" secondItem="i8X-T9-hP5" secondAttribute="bottom" constant="8" id="tKM-k0-Cw0"/>
             </constraints>
             <connections>
                 <outlet property="imageView" destination="i8X-T9-hP5" id="TxC-xH-7OZ"/>
