@@ -13,39 +13,47 @@ class JobsCell: UICollectionViewCell {
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
-    var jobItem = Job()
+    private var imageLoaded = false
     
+    var job: Job? {
+        didSet {
+            if job?.link != oldValue?.link {
+                imageView.image = UIImage(named: "CocoaHeadsNLLogo")
+                imageLoaded = false
+            }
+            
+            self.textLabel.text = job?.title
+            if  let url = job?.logo?.fileURL where !imageLoaded {
+                dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
+                    let contentsOfURL = NSData(contentsOfURL: url)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if self.job?.logo?.fileURL == url {
+                            if let imageData = contentsOfURL {
+                                self.imageLoaded = true
+                                self.imageView?.image = UIImage(data: imageData)
+                            }
+                        } else {
+                            // just so you can see in the console when this happens
+                            print("ignored data returned from url \(url)")
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         // Initialization code
-    }
+        contentView.layer.borderWidth = (2.0 / UIScreen.mainScreen().scale) / 2
+        contentView.layer.borderColor = UIColor.grayColor().CGColor
+   }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
         self.textLabel.text = ""
         //self.imageView.image = nil
-    }
-    
-    func updateFromObject(object: NSObject?)
-    {
-        if let job = object as? Job {
-
-            if let logoFile = job.logo {
-                
-                if let data = NSData(contentsOfURL: logoFile.fileURL) {
-                    self.imageView?.image =  UIImage(data: data)!
-                }
-            }
-            
-            if let title = job.title {
-                
-                self.textLabel.text = title
-            }
-            
-            contentView.layer.borderWidth = (2.0 / UIScreen.mainScreen().scale) / 2
-            contentView.layer.borderColor = UIColor.grayColor().CGColor
-        }
     }
 }

@@ -137,7 +137,7 @@ class JobsViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("jobsCell", forIndexPath: indexPath) as! JobsCell
         
         let job = jobsArray[indexPath.item]
-        cell.updateFromObject(job)
+        cell.job = job
 
         return cell
 
