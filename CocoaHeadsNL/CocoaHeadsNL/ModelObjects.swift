@@ -17,7 +17,7 @@ var jobsIndexBackgroundTaskID = UIBackgroundTaskInvalid
 var meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
 
 
-class AffiliateLink : NSObject {
+class AffiliateLink {
     
     var recordID: CKRecordID?
     var affiliateId: String?
@@ -26,7 +26,7 @@ class AffiliateLink : NSObject {
     var company: CKReference?
 }
 
-class Company : NSObject {
+class Company {
     
     var recordID: CKRecordID?
     var name: String?
@@ -42,7 +42,7 @@ class Company : NSObject {
     var smallLogo: CKAsset?
 }
 
-class Contributor : NSObject {
+class Contributor {
     
     var recordID: CKRecordID?
     var avatar_url: String?
@@ -51,7 +51,7 @@ class Contributor : NSObject {
     var url: String?
 }
 
-class Job : NSObject {
+class Job {
    
     var recordID: CKRecordID?
     var content: String?
@@ -131,7 +131,7 @@ class Job : NSObject {
     }
 }
 
-class Meetup : NSObject {
+class Meetup {
   
     var recordID: CKRecordID?
     var duration: NSNumber!
