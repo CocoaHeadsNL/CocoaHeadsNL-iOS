@@ -82,7 +82,7 @@ class CompanyDataSource: DetailDataSource {
                     if let affiliateId = affiliateLink.affiliateId {
                         let parameters = [SKStoreProductParameterITunesItemIdentifier :
                             affiliateId, SKStoreProductParameterAffiliateToken : affiliateToken]
-                        
+
                         vc.showStoreView(parameters, indexPath: indexPath)
                 }
             }

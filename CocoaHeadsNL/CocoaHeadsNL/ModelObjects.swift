@@ -18,7 +18,7 @@ var meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
 
 
 class AffiliateLink {
-    
+
     var recordID: CKRecordID?
     var affiliateId: String?
     var productCreator: String?
@@ -27,7 +27,7 @@ class AffiliateLink {
 }
 
 class Company {
-    
+
     var recordID: CKRecordID?
     var name: String?
     var place: String?
@@ -43,7 +43,7 @@ class Company {
 }
 
 class Contributor {
-    
+
     var recordID: CKRecordID?
     var avatar_url: String?
     var contributor_id: Int64?
@@ -52,7 +52,7 @@ class Contributor {
 }
 
 class Job {
-   
+
     let recordID: CKRecordID?
     let content: String?
     let date: NSDate?
@@ -60,7 +60,7 @@ class Job {
     let title: String?
     let logo: CKAsset?
     let logoImage: UIImage?
-    
+
     init(recordID: CKRecordID, content: String, date: NSDate, link: String, title: String, logo: CKAsset?, logoImage: UIImage?) {
         self.recordID = recordID
         self.content = content
@@ -70,7 +70,7 @@ class Job {
         self.logo = logo
         self.logoImage = logoImage
     }
-    
+
     @available(iOS 9.0, *)
     var searchableAttributeSet: CSSearchableItemAttributeSet {
         get {
@@ -79,40 +79,40 @@ class Job {
             if let data = content?.dataUsingEncoding(NSUTF8StringEncoding) {
                 do {
                     let jobDescriptionString = try NSAttributedString(data: data, options:[NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding], documentAttributes:nil)
-                    
-                    attributeSet.contentDescription = jobDescriptionString.string;
+
+                    attributeSet.contentDescription = jobDescriptionString.string
                 } catch {
                     print("Stuff went crazy!")
                 }
             }
-            attributeSet.creator = "CocoaHeadsNL";
+            attributeSet.creator = "CocoaHeadsNL"
             do {
                 guard let url = logo?.fileURL else {
                     return attributeSet
                 }
-                
+
                 if let smallLogoImage = UIImage(data: NSData(contentsOfURL: url)!) {
-                    attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage);
+                    attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage)
                 }
             }
-            
+
             return attributeSet
         }
     }
-    
+
     class func index(jobs: [Job]) {
         if #available(iOS 9.0, *) {
             indexQueue.addOperationWithBlock({ () -> Void in
-                
+
                 guard jobsIndexBackgroundTaskID == UIBackgroundTaskInvalid else {
                     return
                 }
-                
+
                 jobsIndexBackgroundTaskID = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({ () -> Void in
                     UIApplication.sharedApplication().endBackgroundTask(jobsIndexBackgroundTaskID)
                     jobsIndexBackgroundTaskID = UIBackgroundTaskInvalid
                 })
-                
+
                 var searchableItems = [CSSearchableItem]()
                 for job in jobs {
                     if let recordID = job.recordID {
@@ -120,20 +120,20 @@ class Job {
                         searchableItems.append(item)
                     }
                 }
-                
+
 //                CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithDomainIdentifiers(["job"], completionHandler: { (error: NSError?) -> Void in
 //                    if let error = error {
 //                        print(error)
 //                    }
 //                })
 
-                
+
                 CSSearchableIndex.defaultSearchableIndex().indexSearchableItems(searchableItems, completionHandler: { (error: NSError?) -> Void in
                     if let error = error {
                         print(error)
                     }
                 })
-                
+
                 UIApplication.sharedApplication().endBackgroundTask(jobsIndexBackgroundTaskID)
                 jobsIndexBackgroundTaskID = UIBackgroundTaskInvalid
             })
@@ -142,7 +142,7 @@ class Job {
 }
 
 class Meetup {
-  
+
     var recordID: CKRecordID?
     var duration: NSNumber!
     var geoLocation: CLLocation?
@@ -157,7 +157,7 @@ class Meetup {
     var nextEvent: DarwinBoolean?
     var smallLogo: CKAsset?
     var location: String?
-    
+
     @available(iOS 9.0, *)
     var searchableAttributeSet: CSSearchableItemAttributeSet {
         get {
@@ -166,13 +166,13 @@ class Meetup {
             if let data = meetup_description?.dataUsingEncoding(NSUTF8StringEncoding) {
                 do {
                     let meetupDescriptionString = try NSAttributedString(data: data, options:[NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding], documentAttributes:nil)
-                    
-                    attributeSet.contentDescription = meetupDescriptionString.string;
+
+                    attributeSet.contentDescription = meetupDescriptionString.string
                 } catch {
                     print("Stuff went crazy!")
                 }
             }
-            attributeSet.creator = "CocoaHeadsNL";
+            attributeSet.creator = "CocoaHeadsNL"
             var keywords = ["CocoaHeadsNL"]
             if let locationName = locationName {
                 keywords.append(locationName)
@@ -186,12 +186,12 @@ class Meetup {
                 guard let url = smallLogo?.fileURL else {
                     return attributeSet
                 }
-                
+
                 if let smallLogoImage = UIImage(data: NSData(contentsOfURL: url)!) {
-                    attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage);
+                    attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage)
                 }
             }
-            
+
             return attributeSet
         }
     }
@@ -199,7 +199,7 @@ class Meetup {
     class func index(meetups: [Meetup]) {
         if #available(iOS 9.0, *) {
             indexQueue.addOperationWithBlock({ () -> Void in
-                
+
                 guard meetupsIndexBackgroundTaskID == UIBackgroundTaskInvalid else {
                     return
                 }
@@ -216,19 +216,19 @@ class Meetup {
                         searchableItems.append(item)
                     }
                 }
-                
+
 //                CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithDomainIdentifiers(["meetup"], completionHandler: { (error: NSError?) -> Void in
 //                    if let error = error {
 //                        print(error)
 //                    }
 //                })
-                
+
                 CSSearchableIndex.defaultSearchableIndex().indexSearchableItems(searchableItems, completionHandler: { (error: NSError?) -> Void in
                     if let error = error {
                         print(error)
                     }
                 })
-                
+
                 UIApplication.sharedApplication().endBackgroundTask(jobsIndexBackgroundTaskID)
                 meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
             })

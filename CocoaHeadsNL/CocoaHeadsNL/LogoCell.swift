@@ -11,7 +11,7 @@ class LogoCell: UITableViewCell {
                 self.logoImageView.contentMode = .ScaleAspectFit
 
                 if let logoFile = logoFile {
-                    
+
                     if let data = NSData(contentsOfURL: logoFile.fileURL) {
                         self.logoImageView.image =  UIImage(data: data)!
                         self.setNeedsLayout()

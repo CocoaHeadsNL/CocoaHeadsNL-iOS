@@ -11,17 +11,17 @@ import UIKit
 import CloudKit
 
 class JobsViewController: UICollectionViewController {
-    
+
     var jobsArray = [Job]()
-    var searchedObjectId : String? = nil
+    var searchedObjectId: String? = nil
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let nib = UINib(nibName: "JobsCell", bundle: nil)
         self.collectionView?.registerNib(nib, forCellWithReuseIdentifier: "jobsCell")
-        
+
         //Inspect paste board for userInfo
         if let pasteBoard = UIPasteboard(name: searchPasteboardName, create: false) {
             let uniqueIdentifier = pasteBoard.string
@@ -32,32 +32,32 @@ class JobsViewController: UICollectionViewController {
                 }
             }
         }
-        
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(JobsViewController.searchOccured(_:)), name: searchNotificationName, object: nil)
         self.subscribe()
         self.activityIndicator.startAnimating()
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         self.fetchJobs()
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         if let searchedObjectId = searchedObjectId {
             self.searchedObjectId = nil
             displayObject(searchedObjectId)
         }
     }
-    
-    func searchOccured(notification:NSNotification) -> Void {
-        guard let userInfo = notification.userInfo as? Dictionary<String,String> else {
+
+    func searchOccured(notification: NSNotification) -> Void {
+        guard let userInfo = notification.userInfo as? Dictionary<String, String> else {
             return
         }
-        
+
         let type = userInfo["type"]
-        
+
         if type != "job" {
             //Not for me
             return
@@ -66,32 +66,32 @@ class JobsViewController: UICollectionViewController {
             displayObject(objectId)
         }
     }
-    
+
     func displayObject(recordID: String) -> Void {
        // if !loading {
             if self.navigationController?.visibleViewController == self {
                 let jobs = self.jobsArray
-                
-                if let selectedObject = jobs.filter({ (job :Job) -> Bool in
+
+                if let selectedObject = jobs.filter({ (job: Job) -> Bool in
                     return job.recordID == recordID
                 }).first {
                     performSegueWithIdentifier("ShowDetail", sender: selectedObject)
                 }
-                
+
             } else {
                 self.navigationController?.popToRootViewControllerAnimated(false)
                 searchedObjectId = recordID
             }
-            
+
 //        } else {
 //            //cache object
 //            searchedObjectId = objectId
 //        }
     }
-    
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
+
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = CGSize(width: 145, height: 100)
             let screenwidth = view.frame.width
@@ -101,41 +101,41 @@ class JobsViewController: UICollectionViewController {
                 layout.minimumInteritemSpacing = inset
         }
     }
-    
+
     func subscribe() {
         let publicDB = CKContainer.defaultContainer().publicCloudDatabase
-        
+
         let subscription = CKSubscription(
             recordType: "Job",
             predicate: NSPredicate(value: true),
             options: .FiresOnRecordCreation
         )
-        
+
         let info = CKNotificationInfo()
-        
+
         info.alertBody = "A new job has been added!"
         info.shouldBadge = true
-        
+
         subscription.notificationInfo = info
-        
+
         publicDB.saveSubscription(subscription) { record, error in }
     }
 
 
     //MARK: - UICollectionViewDataSource methods
-    
+
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
-    
+
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return jobsArray.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
+
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("jobsCell", forIndexPath: indexPath) as! JobsCell
-        
+
         let job = jobsArray[indexPath.item]
         cell.job = job
 
@@ -163,21 +163,21 @@ class JobsViewController: UICollectionViewController {
             }
         }
     }
-    
+
     //MARK: - fetching Cloudkit
-    
+
     func fetchJobs() {
-        
+
         let pred = NSPredicate(value: true)
         let sort = NSSortDescriptor(key: "date", ascending: false)
         let query = CKQuery(recordType: "Job", predicate: pred)
         query.sortDescriptors = [sort]
-        
+
         let operation = CKQueryOperation(query: query)
         operation.qualityOfService = .UserInteractive
-        
+
         var CKJob = [Job]()
-        
+
         operation.recordFetchedBlock = { (record) in
             let recordID = record.recordID
             let content = record["content"] as? String ?? ""
@@ -185,38 +185,38 @@ class JobsViewController: UICollectionViewController {
             let link = record["link"] as? String ?? ""
             let title = record["title"] as? String ?? ""
             let logo = record["logo"] as? CKAsset
-            
+
             let logoImage: UIImage
-            if let logo = logo, data = NSData(contentsOfURL: logo.fileURL){
+            if let logo = logo, data = NSData(contentsOfURL: logo.fileURL) {
                 logoImage = UIImage(data:data)!
             } else {
                 logoImage = UIImage(named: "CocoaHeadsNLLogo")!
             }
-            
+
             let job = Job(recordID: recordID, content: content, date: date, link: link, title: title, logo: logo, logoImage: logoImage)
-            
+
             CKJob.append(job)
         }
-        
+
         operation.queryCompletionBlock = { [unowned self] (cursor, error) in
             dispatch_async(dispatch_get_main_queue()) {
-                
+
                 if error != nil {
 
                     let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of jobs; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                     self.presentViewController(ac, animated: true, completion: nil)
-                    
+
                 } else {
-                    
+
                     self.activityIndicator.stopAnimating()
                     self.jobsArray = CKJob
                     self.collectionView?.reloadData()
                 }
             }
         }
-        
+
         CKContainer.defaultContainer().publicCloudDatabase.addOperation(operation)
-        
-    }    
+
+    }
 }

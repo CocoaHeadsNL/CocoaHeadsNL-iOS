@@ -19,7 +19,7 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
     var dataSource: DetailDataSource!
     weak var presentingVC: UIViewController?
     private var activityViewController: UIActivityViewController?
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -40,7 +40,7 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
             self.tableView.delegate = dataSource
             self.navigationItem.title = dataSource.title
         }
-        
+
         if let data = dataSource as? CompanyDataSource {
             data.presenter = self
         }
@@ -55,17 +55,17 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
             }
         }
     }
-        
+
     override func reloadCell(cell: UITableViewCell) {
         tableView.beginUpdates()
         tableView.endUpdates()
     }
-    
-    func showStoreView(parameters : [String : AnyObject], indexPath : NSIndexPath) {
-        
+
+    func showStoreView(parameters: [String : AnyObject], indexPath: NSIndexPath) {
+
         let storeViewController = SKStoreProductViewController()
         storeViewController.delegate = self
-        
+
         storeViewController.loadProductWithParameters(parameters,
             completionBlock: {result, error in
                 if result {
@@ -75,38 +75,37 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
                 }
         })
     }
-    
-    func productViewControllerDidFinish(viewController:
-        SKStoreProductViewController) {
+
+    func productViewControllerDidFinish(viewController: SKStoreProductViewController) {
             self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+
     @available(iOS 9.0, *)
     override func previewActionItems() -> [UIPreviewActionItem] {
         let shareAction = UIPreviewAction(title: "Share", style: .Default) { (previewAction, viewController) in
-            
+
             if let meetup = self.dataSource.object as? Meetup, let meetupId = meetup.meetup_id {
                 let string: String = "http://www.meetup.com/CocoaHeadsNL/events/\(meetupId)/"
                 let URL: NSURL = NSURL(string: string)!
-                
+
                 let acViewController = UIActivityViewController(activityItems: [string, URL], applicationActivities: nil)
-                
+
                 if let meetupVC = self.presentingVC {
                     self.activityViewController = acViewController
                     meetupVC.presentViewController(self.activityViewController!, animated: true, completion: nil)
                 }
             }
         }
-        
+
         let rsvpAction = UIPreviewAction(title: "RSVP", style: .Default) { (previewAction, viewController) in
-            
+
              if let meetup = self.dataSource.object as? Meetup, let meetupId = meetup.meetup_id {
                 if let URL = NSURL(string: "http://www.meetup.com/CocoaHeadsNL/events/\(meetupId)/") {
                     UIApplication.sharedApplication().openURL(URL)
                 }
             }
         }
-        
+
         return [rsvpAction, shareAction]
     }
 }

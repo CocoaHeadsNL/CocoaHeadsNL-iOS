@@ -15,7 +15,7 @@ class TitleCell: UITableViewCell {
                 let dateFormatter = NSDateFormatter()
                 let dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMMd", options: 0, locale: NSLocale.currentLocale())
                 dateFormatter.dateFormat = dateFormat
-                
+
                 let dateString = dateFormatter.stringFromDate(date)
                 dateFormatter.timeStyle = .ShortStyle
                 let timeString = dateFormatter.stringFromDate(date)

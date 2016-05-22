@@ -58,13 +58,13 @@ class MeetupCell: UITableViewCell {
             if date.timeIntervalSinceNow > 0 {
                 dayLabel.textColor = UIColor.blackColor()
                 calendarView.backgroundColor = UIColorWithRGB(232, g: 88, b: 80)
-                
-        
+
+
                 if let yesRsvp = meetup.yes_rsvp_count?.intValue {
-                
+
                     rsvpLabel.text = "\(yesRsvp) CocoaHeads going"
-                    
-                    if let rsvpLimit = meetup.rsvp_limit?.intValue where rsvpLimit > 0{
+
+                    if let rsvpLimit = meetup.rsvp_limit?.intValue where rsvpLimit > 0 {
                         rsvpLabel.text = rsvpLabel.text! + "\n\(rsvpLimit - yesRsvp) seats available"
                     }
                 } else {
@@ -73,16 +73,16 @@ class MeetupCell: UITableViewCell {
             } else {
                 dayLabel.textColor = UIColor(white: 0, alpha: 0.65)
                 calendarView.backgroundColor = UIColorWithRGB(169, g: 166, b: 166)
-                
+
                 if let yesRsvp = meetup.yes_rsvp_count?.intValue {
-                
+
                 rsvpLabel.text = "\(yesRsvp) CocoaHeads had a blast"
                 }
             }
         }
 
         if let logoFile = meetup.smallLogo {
-            
+
             if let data = NSData(contentsOfURL: logoFile.fileURL) {
                 self.logoImageView.image =  UIImage(data: data)!
             }

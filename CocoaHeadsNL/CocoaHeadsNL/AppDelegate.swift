@@ -25,48 +25,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let pasteboard = UIPasteboard(name: "searchPasteboardName", create: false) {
             pasteboard.string = ""
         }
-        application.applicationIconBadgeNumber = 0;
+        application.applicationIconBadgeNumber = 0
     }
-    
+
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        
+
     }
-    
+
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         if error.code == 3010 {
             print("Push Notifications are not supported in the simulator")
         } else {
-            print("application didFailToRegisterForRemoteNotificationsWithError: %@",error)
+            print("application didFailToRegisterForRemoteNotificationsWithError: %@", error)
         }
     }
-    
+
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
 
         let ckNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String : NSObject])
         if ckNotification.notificationType == .Query,
-            let queryNotification = ckNotification as? CKQueryNotification
-        {
+            let queryNotification = ckNotification as? CKQueryNotification {
             //TODO handle the different notifications to show the correct items
             let recordID = queryNotification.recordID
             print(recordID)
             //...
             self.presentMeetupsViewController()
         }
-        
+
     }
-    
+
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics.self])
-        
+
         let notificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
-        
+
         let settings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
-    
+
         return true
     }
-    
+
     func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
         if #available(iOS 9.0, *) {
             if userActivity.activityType == CSSearchableItemActionType {
@@ -85,19 +84,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-        
+
         return false
     }
-    
+
     @available(iOS 9.0, *)
     func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
             handleShortCutItem(shortcutItem)
             completionHandler(true)
     }
-    
+
     @available(iOS 9.0, *)
     func handleShortCutItem(shortCutItem: UIApplicationShortcutItem) {
-        
+
         switch shortCutItem.type {
         case "nl.cocoaheads.CocoaHeadsNL.meetup" :
             presentMeetupsViewController()
@@ -108,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         default: break
         }
     }
-    
+
     func presentMeetupsViewController() {
         //print("should open selected tab"
 
@@ -118,14 +117,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
     }
-    
+
     func presentJobsViewController() {
         let splitViewController = self.window?.rootViewController as! SplitViewController
         if let tabBar = splitViewController.viewControllers[0] as? UITabBarController {
         tabBar.selectedIndex = 1
         }
     }
-    
+
     func presentCompaniesViewController() {
         let splitViewController = self.window?.rootViewController as! SplitViewController
         if let tabBar = splitViewController.viewControllers[0] as? UITabBarController {
@@ -133,6 +132,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
     }
-    
-}
 
+}

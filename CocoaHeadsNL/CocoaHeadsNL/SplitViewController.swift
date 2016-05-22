@@ -13,9 +13,9 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
     override func viewDidLoad() {
         self.delegate = self
         self.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
-        
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SplitViewController.searchNotification(_:)), name: searchNotificationName, object: nil)
-        
+
         //Inspect paste board for userInfo
         if let pasteBoard = UIPasteboard(name: searchPasteboardName, create: false) {
             let uniqueIdentifier = pasteBoard.string
@@ -27,28 +27,28 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
             }
         }
     }
-    func searchNotification(notification:NSNotification) -> Void {
-        guard let userInfo = notification.userInfo as? Dictionary<String,String> else {
+    func searchNotification(notification: NSNotification) -> Void {
+        guard let userInfo = notification.userInfo as? Dictionary<String, String> else {
             return
         }
-        
+
         if let type = userInfo["type"] {
             displayTabForType(type)
         }
     }
-    
+
     func displayTabForType(type: String) {
         guard let tabBarController = self.viewControllers[0] as? UITabBarController else {
             return
         }
-        
+
         if type == "meetup" {
             tabBarController.selectedIndex = 0
         } else if type == "job" {
             tabBarController.selectedIndex = 1
         }
     }
-    
+
 
     // MARK: - UISplitViewControllerDelegate
 

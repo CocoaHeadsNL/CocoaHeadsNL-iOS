@@ -11,7 +11,7 @@ extension UIImage {
     drawInRect(CGRect(origin: CGPoint.zero, size: newSize))
     let newImage = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
-    
+
     return newImage
   }
 }
