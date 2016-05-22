@@ -71,12 +71,14 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
         return nil
     }
 
-    func splitViewController(splitViewController: UISplitViewController, showDetailViewController vc: UIViewController, sender: AnyObject?) -> Bool {
+    func splitViewController(splitViewController: UISplitViewController,
+                             showDetailViewController detailVc: UIViewController,
+                             sender: AnyObject?) -> Bool {
         if splitViewController.collapsed, let master = splitViewController.viewControllers[0] as? UITabBarController, masterNavigation = master.selectedViewController as? UINavigationController {
-            masterNavigation.showViewController(vc, sender: self)
+            masterNavigation.showViewController(detailVc, sender: self)
             return true
         } else if let masterNavigation = splitViewController.viewControllers[1] as? UINavigationController {
-            masterNavigation.setViewControllers([vc], animated: true)
+            masterNavigation.setViewControllers([detailVc], animated: true)
             return true
         }
         return false
