@@ -284,18 +284,18 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         operation.queryCompletionBlock = { [unowned self] (cursor, error) in
             dispatch_async(dispatch_get_main_queue()) {
-                if error == nil {
-
-                    self.meetupsArray = CKMeetups
-                    self.activityIndicatorView.stopAnimating()
-                    self.activityIndicatorView.hidesWhenStopped = true
-                    self.tableView.reloadData()
-
-                } else {
-                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of meetups; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
+                guard error == nil else {
+                    let ac = UIAlertController(
+                        title: "Fetch failed",
+                        message: "There was a problem fetching the list of meetups; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                     self.presentViewController(ac, animated: true, completion: nil)
+                    return
                 }
+                self.meetupsArray = CKMeetups
+                self.activityIndicatorView.stopAnimating()
+                self.activityIndicatorView.hidesWhenStopped = true
+                self.tableView.reloadData()
             }
         }
 
