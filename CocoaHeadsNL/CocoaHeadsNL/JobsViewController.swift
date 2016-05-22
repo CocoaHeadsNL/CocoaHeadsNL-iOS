@@ -187,6 +187,11 @@ class JobsViewController: UICollectionViewController {
             job.link = record["link"] as? String
             job.title = record["title"] as? String
             job.logo = record["logo"] as? CKAsset
+            if let url = job.logo?.fileURL, data = NSData(contentsOfURL: url){
+                job.logoImage = UIImage(data:data)
+            } else {
+                job.logoImage = UIImage(named: "CocoaHeadsNLLogo")
+            }
             
             CKJob.append(job)
         }

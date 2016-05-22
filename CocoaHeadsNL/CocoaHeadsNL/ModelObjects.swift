@@ -59,6 +59,7 @@ class Job : NSObject {
     var link: String?
     var title: String?
     var logo: CKAsset?
+    var logoImage: UIImage?
     
     @available(iOS 9.0, *)
     var searchableAttributeSet: CSSearchableItemAttributeSet {

@@ -17,28 +17,9 @@ class JobsCell: UICollectionViewCell {
     
     var job: Job? {
         didSet {
-            if job?.link != oldValue?.link {
-                imageView.image = UIImage(named: "CocoaHeadsNLLogo")
-                imageLoaded = false
-            }
+            self.imageView.image = job?.logoImage
             
             self.textLabel.text = job?.title
-            if  let url = job?.logo?.fileURL where !imageLoaded {
-                dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-                    let contentsOfURL = NSData(contentsOfURL: url)
-                    dispatch_async(dispatch_get_main_queue()) {
-                        if self.job?.logo?.fileURL == url {
-                            if let imageData = contentsOfURL {
-                                self.imageLoaded = true
-                                self.imageView?.image = UIImage(data: imageData)
-                            }
-                        } else {
-                            // just so you can see in the console when this happens
-                            print("ignored data returned from url \(url)")
-                        }
-                    }
-                }
-            }
         }
     }
 
