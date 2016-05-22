@@ -6,10 +6,10 @@ import CloudKit
  * It has convenience methods for making specific types of cells.
  */
 class DetailDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
-    let object: NSObject
+    let object: AnyObject
     var tableView: UITableView!
 
-    init(object: NSObject) {
+    init(object: AnyObject) {
         self.object = object
     }
 
