@@ -179,19 +179,21 @@ class JobsViewController: UICollectionViewController {
         var CKJob = [Job]()
         
         operation.recordFetchedBlock = { (record) in
-            let job = Job()
+            let recordID = record.recordID
+            let content = record["content"] as? String ?? ""
+            let date = record["date"] as? NSDate ?? NSDate()
+            let link = record["link"] as? String ?? ""
+            let title = record["title"] as? String ?? ""
+            let logo = record["logo"] as? CKAsset
             
-            job.recordID = record.recordID
-            job.content = record["content"] as? String
-            job.date = record["date"] as? NSDate
-            job.link = record["link"] as? String
-            job.title = record["title"] as? String
-            job.logo = record["logo"] as? CKAsset
-            if let url = job.logo?.fileURL, data = NSData(contentsOfURL: url){
-                job.logoImage = UIImage(data:data)
+            let logoImage: UIImage
+            if let logo = logo, data = NSData(contentsOfURL: logo.fileURL){
+                logoImage = UIImage(data:data)!
             } else {
-                job.logoImage = UIImage(named: "CocoaHeadsNLLogo")
+                logoImage = UIImage(named: "CocoaHeadsNLLogo")!
             }
+            
+            let job = Job(recordID: recordID, content: content, date: date, link: link, title: title, logo: logo, logoImage: logoImage)
             
             CKJob.append(job)
         }

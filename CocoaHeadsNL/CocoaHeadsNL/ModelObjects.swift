@@ -53,13 +53,23 @@ class Contributor {
 
 class Job {
    
-    var recordID: CKRecordID?
-    var content: String?
-    var date: NSDate?
-    var link: String?
-    var title: String?
-    var logo: CKAsset?
-    var logoImage: UIImage?
+    let recordID: CKRecordID?
+    let content: String?
+    let date: NSDate?
+    let link: String?
+    let title: String?
+    let logo: CKAsset?
+    let logoImage: UIImage?
+    
+    init(recordID: CKRecordID, content: String, date: NSDate, link: String, title: String, logo: CKAsset?, logoImage: UIImage?) {
+        self.recordID = recordID
+        self.content = content
+        self.date = date
+        self.link = link
+        self.title = title
+        self.logo = logo
+        self.logoImage = logoImage
+    }
     
     @available(iOS 9.0, *)
     var searchableAttributeSet: CSSearchableItemAttributeSet {
