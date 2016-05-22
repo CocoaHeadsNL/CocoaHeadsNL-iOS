@@ -183,25 +183,18 @@ class CompanyTableViewController: UITableViewController {
                     let groupedArray = locationSet.sort()
 
                     for group in groupedArray {
-                        let companyArray = NSMutableArray()
-                        let locationDict = NSMutableDictionary()
+                        let companyArray = NSMutableArray(), locationDict = NSMutableDictionary()
                         locationDict.setValue(group, forKey: "place")
 
                         for company in CKCompanies {
-
-                            if let loc = company.place {
-                                if loc == locationDict.valueForKey("place") as? StringLiteralType {
+                            if let loc = company.place where loc == locationDict.valueForKey("place") as? StringLiteralType {
                                     companyArray.addObject(company)
-                                }
                             }
-
                         }
                         locationDict.setValue(companyArray, forKey: "company")
                         self.sortedArray.addObject(locationDict)
                     }
-
                     self.tableView.reloadData()
-
                 } else {
                     let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of companies; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
@@ -211,6 +204,5 @@ class CompanyTableViewController: UITableViewController {
         }
 
         CKContainer.defaultContainer().publicCloudDatabase.addOperation(operation)
-
     }
 }
