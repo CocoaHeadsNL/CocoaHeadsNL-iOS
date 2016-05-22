@@ -57,7 +57,7 @@ class MeetupCell: UITableViewCell {
 
             if date.timeIntervalSinceNow > 0 {
                 dayLabel.textColor = UIColor.blackColor()
-                calendarView.backgroundColor = UIColorWithRGB(232, g: 88, b: 80)
+                calendarView.backgroundColor = UIColorWithRGB(232, green: 88, blue: 80)
 
 
                 if let yesRsvp = meetup.yes_rsvp_count?.intValue {
@@ -72,7 +72,7 @@ class MeetupCell: UITableViewCell {
                 }
             } else {
                 dayLabel.textColor = UIColor(white: 0, alpha: 0.65)
-                calendarView.backgroundColor = UIColorWithRGB(169, g: 166, b: 166)
+                calendarView.backgroundColor = UIColorWithRGB(169, green: 166, blue: 166)
 
                 if let yesRsvp = meetup.yes_rsvp_count?.intValue {
 
