@@ -16,7 +16,7 @@ class MeetupDataSource: DetailDataSource {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
-            return logoCellWithFile(meetup.logo, forTableView: tableView)
+            return logoCellWithFile(meetup.logoImage, forTableView: tableView)
         case 1:
             return mapViewCellWithLocation(meetup.geoLocation, name: meetup.locationName, forTableView: tableView)
         case 2:

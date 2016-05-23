@@ -81,12 +81,7 @@ class MeetupCell: UITableViewCell {
             }
         }
 
-        if let logoFile = meetup.smallLogo {
-
-            if let data = NSData(contentsOfURL: logoFile.fileURL) {
-                self.logoImageView.image =  UIImage(data: data)!
-            }
-        }
+        self.logoImageView.image =  meetup.smallLogoImage
     }
 
     override func setHighlighted(highlighted: Bool, animated: Bool) {

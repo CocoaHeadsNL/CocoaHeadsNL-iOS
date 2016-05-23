@@ -36,7 +36,7 @@ class CompanyDataSource: DetailDataSource {
 
         switch indexPath.row {
         case 0:
-            return logoCellWithFile(company.logo, forTableView: tableView)
+            return logoCellWithFile(company.logoImage, forTableView: tableView)
         case 1:
             return titleCellWithText(company.emailAddress, forTableView: tableView)
         case 2:

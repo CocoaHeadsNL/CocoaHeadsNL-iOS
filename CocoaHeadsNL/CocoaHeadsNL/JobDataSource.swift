@@ -16,7 +16,7 @@ class JobDataSource: DetailDataSource {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
-            return logoCellWithFile(job.logo, forTableView: tableView)
+            return logoCellWithFile(job.logoImage, forTableView: tableView)
         case 1:
             return titleCellWithText(job.title, forTableView: tableView)
         case 2:

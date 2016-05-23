@@ -128,20 +128,7 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
         var CKCompanies = [Company]()
 
         operation.recordFetchedBlock = { (record) in
-            let company = Company()
-
-            company.recordID = record.recordID as CKRecordID?
-            company.name = record["name"] as? String
-            company.place = record["place"] as? String
-            company.streetAddress = record["streetAddress"] as? String
-            company.website = record["website"] as? String
-            company.zipCode = record["zipCode"] as? String
-            company.companyDescription = record["companyDescription"] as? String
-            company.emailAddress = record["emailAddress"] as? String
-            company.location = record["location"] as? CLLocation
-            company.logo = record["logo"] as? CKAsset
-            company.hasApps = record["hasApps"] as! Bool
-            company.smallLogo = record["smallLogo"] as? CKAsset
+            let company = Company(record: record)
 
             CKCompanies.append(company)
         }

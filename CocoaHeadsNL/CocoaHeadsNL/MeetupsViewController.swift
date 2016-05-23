@@ -261,24 +261,9 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         var CKMeetups = [Meetup]()
 
         operation.recordFetchedBlock = { (record) in
-            let meetup = Meetup()
-
-            meetup.recordID = record.recordID as CKRecordID?
-            meetup.name = record["name"] as? String
-            meetup.meetup_id = record["meetup_id"] as? String
-            meetup.meetup_description = record["meetup_description"] as? String
-            meetup.geoLocation = record["geoLocation"] as? CLLocation
-            meetup.location = record["location"] as? String
-            meetup.locationName = record["locationName"] as? String
-            meetup.logo = record["logo"] as? CKAsset
-            meetup.smallLogo = record["smallLogo"] as? CKAsset
-            meetup.time = record["time"] as? NSDate
-            meetup.nextEvent = record["nextEvent"] as? DarwinBoolean
-
-            meetup.duration = record.objectForKey("duration") as? NSNumber
-            meetup.rsvp_limit = record.objectForKey("rsvp_limit") as? NSNumber
-            meetup.yes_rsvp_count = record.objectForKey("yes_rsvp_count") as? NSNumber
-
+            let meetup = Meetup(record: record)
+            print("Loaded \(meetup.smallLogoImage)")
+            print("Loaded \(meetup.logoImage)")
             CKMeetups.append(meetup)
         }
 

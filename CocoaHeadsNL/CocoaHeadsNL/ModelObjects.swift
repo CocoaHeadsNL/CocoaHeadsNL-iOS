@@ -28,18 +28,51 @@ class AffiliateLink {
 
 class Company {
 
-    var recordID: CKRecordID?
-    var name: String?
-    var place: String?
-    var streetAddress: String?
-    var website: String?
-    var zipCode: String?
-    var companyDescription: String?
-    var emailAddress: String?
-    var location: CLLocation?
-    var logo: CKAsset?
-    var hasApps: Bool = false
-    var smallLogo: CKAsset?
+    init(record: CKRecord) {
+        self.recordID = record.recordID as CKRecordID?
+        self.name = record["name"] as? String
+        self.place = record["place"] as? String
+        self.streetAddress = record["streetAddress"] as? String
+        self.website = record["website"] as? String
+        self.zipCode = record["zipCode"] as? String
+        self.companyDescription = record["companyDescription"] as? String
+        self.emailAddress = record["emailAddress"] as? String
+        self.location = record["location"] as? CLLocation
+        self.logo = record["logo"] as? CKAsset
+        self.hasApps = record["hasApps"] as! Bool
+        self.smallLogo = record["smallLogo"] as? CKAsset
+    }
+
+    let recordID: CKRecordID?
+    let name: String?
+    let place: String?
+    let streetAddress: String?
+    let website: String?
+    let zipCode: String?
+    let companyDescription: String?
+    let emailAddress: String?
+    let location: CLLocation?
+    let logo: CKAsset?
+    let hasApps: Bool
+    let smallLogo: CKAsset?
+
+    lazy var logoImage: UIImage = {
+        let logoImage: UIImage
+        if let logo = self.logo, data = NSData(contentsOfURL: logo.fileURL) {
+            return UIImage(data:data)!
+        } else {
+            return UIImage(named: "CocoaHeadsNLLogo")!
+        }
+    }()
+
+    lazy var smallLogoImage: UIImage = {
+        let logoImage: UIImage
+        if let logo = self.smallLogo, data = NSData(contentsOfURL: logo.fileURL) {
+            return UIImage(data:data)!
+        } else {
+            return UIImage(named: "CocoaHeadsNLLogo")!
+        }
+    }()
 }
 
 class Contributor {
@@ -59,17 +92,24 @@ class Job {
     let link: String?
     let title: String?
     let logo: CKAsset?
-    let logoImage: UIImage?
 
-    init(recordID: CKRecordID, content: String, date: NSDate, link: String, title: String, logo: CKAsset?, logoImage: UIImage?) {
+    init(recordID: CKRecordID, content: String, date: NSDate, link: String, title: String, logo: CKAsset?) {
         self.recordID = recordID
         self.content = content
         self.date = date
         self.link = link
         self.title = title
         self.logo = logo
-        self.logoImage = logoImage
     }
+
+    lazy var logoImage: UIImage = {
+        let logoImage: UIImage
+        if let logo = self.logo, data = NSData(contentsOfURL: logo.fileURL) {
+            return UIImage(data:data)!
+        } else {
+            return UIImage(named: "CocoaHeadsNLLogo")!
+        }
+    }()
 
     @available(iOS 9.0, *)
     var searchableAttributeSet: CSSearchableItemAttributeSet {
@@ -86,15 +126,7 @@ class Job {
                 }
             }
             attributeSet.creator = "CocoaHeadsNL"
-            do {
-                guard let url = logo?.fileURL else {
-                    return attributeSet
-                }
-
-                if let smallLogoImage = UIImage(data: NSData(contentsOfURL: url)!) {
-                    attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage)
-                }
-            }
+            attributeSet.thumbnailData = UIImagePNGRepresentation(logoImage)
 
             return attributeSet
         }
@@ -143,20 +175,56 @@ class Job {
 
 class Meetup {
 
-    var recordID: CKRecordID?
-    var duration: NSNumber!
-    var geoLocation: CLLocation?
-    var locationName: String?
-    var meetup_description: String?
-    var meetup_id: String?
-    var name: String?
-    var rsvp_limit: NSNumber!
-    var time: NSDate?
-    var yes_rsvp_count: NSNumber!
-    var logo: CKAsset?
-    var nextEvent: DarwinBoolean?
-    var smallLogo: CKAsset?
-    var location: String?
+    init(record: CKRecord) {
+        self.recordID = record.recordID as CKRecordID?
+        self.name = record["name"] as? String
+        self.meetup_id = record["meetup_id"] as? String
+        self.meetup_description = record["meetup_description"] as? String
+        self.geoLocation = record["geoLocation"] as? CLLocation
+        self.location = record["location"] as? String
+        self.locationName = record["locationName"] as? String
+        self.logo = record["logo"] as? CKAsset
+        self.smallLogo = record["smallLogo"] as? CKAsset
+        self.time = record["time"] as? NSDate
+        self.nextEvent = record["nextEvent"] as? DarwinBoolean
+
+        self.duration = record.objectForKey("duration") as? NSNumber
+        self.rsvp_limit = record.objectForKey("rsvp_limit") as? NSNumber
+        self.yes_rsvp_count = record.objectForKey("yes_rsvp_count") as? NSNumber
+    }
+
+    let recordID: CKRecordID?
+    let duration: NSNumber!
+    let geoLocation: CLLocation?
+    let locationName: String?
+    let meetup_description: String?
+    let meetup_id: String?
+    let name: String?
+    let rsvp_limit: NSNumber!
+    let time: NSDate?
+    let yes_rsvp_count: NSNumber!
+    let logo: CKAsset?
+    let nextEvent: DarwinBoolean?
+    let smallLogo: CKAsset?
+    let location: String?
+
+    lazy var logoImage: UIImage = {
+        let logoImage: UIImage
+        if let logo = self.logo, data = NSData(contentsOfURL: logo.fileURL) {
+            return UIImage(data:data)!
+        } else {
+            return UIImage(named: "CocoaHeadsNLLogo")!
+        }
+    }()
+
+    lazy var smallLogoImage: UIImage = {
+        let logoImage: UIImage
+        if let logo = self.smallLogo, data = NSData(contentsOfURL: logo.fileURL) {
+            return UIImage(data:data)!
+        } else {
+            return UIImage(named: "CocoaHeadsNLLogo")!
+        }
+    }()
 
     @available(iOS 9.0, *)
     var searchableAttributeSet: CSSearchableItemAttributeSet {
@@ -182,15 +250,7 @@ class Meetup {
             }
 
             attributeSet.keywords = keywords
-            do {
-                guard let url = smallLogo?.fileURL else {
-                    return attributeSet
-                }
-
-                if let smallLogoImage = UIImage(data: NSData(contentsOfURL: url)!) {
-                    attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage)
-                }
-            }
+            attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage)
 
             return attributeSet
         }

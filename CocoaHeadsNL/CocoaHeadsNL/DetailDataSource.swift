@@ -29,9 +29,9 @@ class DetailDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
         fatalError("Subclass must implement this")
     }
 
-    func logoCellWithFile(file: CKAsset?, forTableView tableView: UITableView) -> LogoCell {
+    func logoCellWithFile(logo: UIImage, forTableView tableView: UITableView) -> LogoCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("logoCell") as! LogoCell
-        cell.logoFile = file
+        cell.logoImageView.image = logo
         return cell
     }
 

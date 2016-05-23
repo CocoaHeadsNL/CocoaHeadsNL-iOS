@@ -20,13 +20,7 @@ class CompaniesNearbyCell: UICollectionViewCell {
     }
 
     func updateFromObject(company: Company) {
-
-        if let companyLogo = company.smallLogo {
-
-            if let data = NSData(contentsOfURL: companyLogo.fileURL) {
-                self.imageView?.image =  UIImage(data: data)!
-            }
-        }
+        self.imageView?.image = company.smallLogoImage
 
         if let compName = company.name {
             self.textLabel.text = compName
