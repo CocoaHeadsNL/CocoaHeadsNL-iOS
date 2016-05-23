@@ -8,6 +8,7 @@
 	<string>CocoaHeads</string>
 	<key>CFBundleDocumentTypes</key>
 	<array/>
+    <key>ITSAppUsesNonExemptEncryption</key><false/>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
