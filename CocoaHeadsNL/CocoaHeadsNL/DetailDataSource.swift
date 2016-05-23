@@ -32,6 +32,7 @@ class DetailDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
     func logoCellWithFile(logo: UIImage, forTableView tableView: UITableView) -> LogoCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("logoCell") as! LogoCell
         cell.logoImageView.image = logo
+        cell.logoImageView.contentMode = .ScaleAspectFit
         return cell
     }
 
