@@ -8,7 +8,8 @@
 	<string>CocoaHeads</string>
 	<key>CFBundleDocumentTypes</key>
 	<array/>
-    <key>ITSAppUsesNonExemptEncryption</key><false/>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -45,6 +46,11 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>jobs.cocoaheads.nl</key>
+			<dict>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
 			<key>files.parsetfss.com</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
