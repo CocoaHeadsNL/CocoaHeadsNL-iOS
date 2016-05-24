@@ -86,26 +86,30 @@ class Contributor {
 
 class Job {
 
-    let recordID: CKRecordID?
-    let content: String?
-    let date: NSDate?
-    let link: String?
-    let title: String?
-    let logo: CKAsset?
+    let recordID: CKRecordID
+    let content: String
+    let date: NSDate
+    let link: String
+    let title: String
+    let logoURL: NSURL?
 
-    init(recordID: CKRecordID, content: String, date: NSDate, link: String, title: String, logo: CKAsset?) {
+    init(recordID: CKRecordID, content: String, date: NSDate, link: String, title: String, logoURL: NSURL?) {
         self.recordID = recordID
         self.content = content
         self.date = date
         self.link = link
         self.title = title
-        self.logo = logo
+        self.logoURL = logoURL
     }
 
     lazy var logoImage: UIImage = {
         let logoImage: UIImage
-        if let logo = self.logo, data = NSData(contentsOfURL: logo.fileURL) {
-            return UIImage(data:data)!
+        if let logoURL = self.logoURL, data = NSData(contentsOfURL: logoURL) {
+            if let image = UIImage(data:data) {
+                return image
+            } else {
+                return UIImage(named: "CocoaHeadsNLLogo")!
+            }
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
         }
@@ -116,7 +120,7 @@ class Job {
         get {
             let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeImage as String)
             attributeSet.title = title
-            if let data = content?.dataUsingEncoding(NSUTF8StringEncoding) {
+            if let data = content.dataUsingEncoding(NSUTF8StringEncoding) {
                 do {
                     let jobDescriptionString = try NSAttributedString(data: data, options:[NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding], documentAttributes:nil)
 
@@ -147,10 +151,8 @@ class Job {
 
                 var searchableItems = [CSSearchableItem]()
                 for job in jobs {
-                    if let recordID = job.recordID {
-                        let item = CSSearchableItem(uniqueIdentifier: "job:\(recordID)", domainIdentifier: "job", attributeSet: job.searchableAttributeSet)
-                        searchableItems.append(item)
-                    }
+                    let item = CSSearchableItem(uniqueIdentifier: "job:\(job.recordID)", domainIdentifier: "job", attributeSet: job.searchableAttributeSet)
+                    searchableItems.append(item)
                 }
 
 //                CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithDomainIdentifiers(["job"], completionHandler: { (error: NSError?) -> Void in

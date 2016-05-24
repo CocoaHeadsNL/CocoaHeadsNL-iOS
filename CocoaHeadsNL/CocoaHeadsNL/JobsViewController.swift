@@ -184,9 +184,13 @@ class JobsViewController: UICollectionViewController {
             let date = record["date"] as? NSDate ?? NSDate()
             let link = record["link"] as? String ?? ""
             let title = record["title"] as? String ?? ""
-            let logo = record["logo"] as? CKAsset
-
-            let job = Job(recordID: recordID, content: content, date: date, link: link, title: title, logo: logo)
+            let logoURL: NSURL?
+            if let logoURLString = record["logoUrl"] as? String {
+                logoURL = NSURL(string: logoURLString)
+            } else {
+                logoURL = nil
+            }
+            let job = Job(recordID: recordID, content: content, date: date, link: link, title: title, logoURL: logoURL)
             print("Loaded \(job.logoImage)")
 
             CKJob.append(job)
