@@ -24,8 +24,8 @@ class LocatedCompaniesViewController: UITableViewController {
 
     override func viewWillAppear(animated: Bool) {
 
-            if (companyDict.objectForKey("company") != nil) {
-                companiesArray = companyDict.objectForKey("company") as! NSMutableArray
+            if let companiesArray = companyDict.objectForKey("company") as? NSMutableArray {
+                self.companiesArray = companiesArray
             }
     }
 

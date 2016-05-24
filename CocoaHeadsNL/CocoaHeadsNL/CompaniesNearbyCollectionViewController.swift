@@ -58,7 +58,7 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
 
             print("CoreLocationManager:  Location available \(userInfo)")
 
-        if let latitude = userInfo["location"]?.coordinate.latitude, let longitude = userInfo["location"]?.coordinate.longitude {
+        if let latitude = userInfo["location"]?.coordinate.latitude, longitude = userInfo["location"]?.coordinate.longitude {
             geoPoint = CLLocation(latitude: latitude, longitude: longitude)
             self.collectionView?.reloadData()
         }
