@@ -31,6 +31,8 @@ class CompanyTableViewController: UITableViewController {
         self.navigationItem.backBarButtonItem = backItem
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CompanyTableViewController.locationAvailable(_:)), name: "LOCATION_AVAILABLE", object: nil)
+        
+        self.subscribe()
     }
     
     override func viewDidAppear(animated: Bool) {
