@@ -12,8 +12,8 @@ import Crashlytics
 
 class LocatedCompaniesViewController: UITableViewController {
 
-    var companyDict = NSDictionary()
-    var companiesArray = NSMutableArray()
+    var companyDict: (place: String, companies: [Company])?
+    var companiesArray = [Company]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class LocatedCompaniesViewController: UITableViewController {
 
     override func viewWillAppear(animated: Bool) {
 
-            if let companiesArray = companyDict.objectForKey("company") as? NSMutableArray {
+            if let companiesArray = companyDict?.companies {
                 self.companiesArray = companiesArray
             }
     }
@@ -35,7 +35,7 @@ class LocatedCompaniesViewController: UITableViewController {
         if segue.identifier == "ShowDetail" {
 
             if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
-                let company = self.companiesArray.objectAtIndex(indexPath.row) as! Company
+                let company = companiesArray[indexPath.row]
                 let dataSource = CompanyDataSource(object: company)
                 dataSource.fetchAffiliateLinks()
 
@@ -46,6 +46,7 @@ class LocatedCompaniesViewController: UITableViewController {
                                                contentType: "Company",
                                                contentId: company.name!,
                                                customAttributes: nil)
+
             }
         }
     }
@@ -65,11 +66,10 @@ class LocatedCompaniesViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("defaultCell", forIndexPath: indexPath)
 
-        if let company = companiesArray.objectAtIndex(indexPath.row) as? Company {
+        let company = companiesArray[indexPath.row]
 
-            cell.textLabel!.text = company.name
-            cell.imageView?.image =  company.smallLogoImage
-        }
+        cell.textLabel!.text = company.name
+        cell.imageView?.image =  company.smallLogoImage
         return cell
     }
 

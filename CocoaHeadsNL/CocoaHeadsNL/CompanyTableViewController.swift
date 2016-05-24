@@ -13,7 +13,7 @@ import Crashlytics
 
 class CompanyTableViewController: UITableViewController {
 
-    var sortedArray = NSMutableArray()
+    var sortedArray = [(place: String, companies:[Company])]()
     @IBOutlet weak var sortingLabel: UILabel!
 
     required init?(coder aDecoder: NSCoder) {
@@ -65,11 +65,11 @@ class CompanyTableViewController: UITableViewController {
             if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
 
                 let detailViewController = segue.destinationViewController as? LocatedCompaniesViewController
-                detailViewController?.companyDict = sortedArray[indexPath.row] as! NSDictionary
+                detailViewController?.companyDict = sortedArray[indexPath.row]
 
                 Answers.logContentViewWithName("Show company location",
                                                contentType: "Company",
-                                               contentId: sortedArray[indexPath.row].valueForKey("place") as? StringLiteralType,
+                                               contentId: sortedArray[indexPath.row].place,
                                                customAttributes: nil)
             }
         }
@@ -109,7 +109,7 @@ class CompanyTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("companyTableViewCell", forIndexPath: indexPath)
 
 
-        cell.textLabel!.text = sortedArray[indexPath.row].valueForKey("place") as? StringLiteralType
+        cell.textLabel!.text = sortedArray[indexPath.row].place
 
 
         return cell
@@ -168,11 +168,11 @@ class CompanyTableViewController: UITableViewController {
             CKCompanies.append(company)
         }
 
-        operation.queryCompletionBlock = { [unowned self] (cursor, error) in
+        operation.queryCompletionBlock = { [weak self] (cursor, error) in
             dispatch_async(dispatch_get_main_queue()) {
                 if error == nil {
 
-                    self.sortedArray.removeAllObjects()
+                    self?.sortedArray.removeAll()
 
                     var locationSet = Set<String>()
 
@@ -189,22 +189,23 @@ class CompanyTableViewController: UITableViewController {
                     let groupedArray = locationSet.sort()
 
                     for group in groupedArray {
-                        let companyArray = NSMutableArray(), locationDict = NSMutableDictionary()
-                        locationDict.setValue(group, forKey: "place")
+                        var companyArray = [Company]()
 
                         for company in CKCompanies {
-                            if let loc = company.place where loc == locationDict.valueForKey("place") as? StringLiteralType {
-                                    companyArray.addObject(company)
+                            if let loc = company.place where loc == group {
+                                    companyArray.append(company)
                             }
                         }
-                        locationDict.setValue(companyArray, forKey: "company")
-                        self.sortedArray.addObject(locationDict)
+
+                        let companiesForPlace = (place: group, companies:companyArray)
+
+                        self?.sortedArray.append(companiesForPlace)
                     }
-                    self.tableView.reloadData()
+                    self?.tableView.reloadData()
                 } else {
                     let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of companies; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    self.presentViewController(ac, animated: true, completion: nil)
+                    self?.presentViewController(ac, animated: true, completion: nil)
                 }
             }
         }
