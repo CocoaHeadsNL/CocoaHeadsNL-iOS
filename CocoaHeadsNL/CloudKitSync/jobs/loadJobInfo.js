@@ -37,7 +37,7 @@ exports.load = function() {
               link: {value: newJobItem.link.text()},
               title: {value: newJobItem.title.text()},
               content: {value: newJobItem.description.text()},
-              date: {value: new Date(newJobItem.pubDate.text()).getMilliseconds()},
+              date: {value: new Date(newJobItem.pubDate.text()).getTime()},
               logoUrl: {value: newJobItem['atom:link'].attributes()['href']}
             }
           }
