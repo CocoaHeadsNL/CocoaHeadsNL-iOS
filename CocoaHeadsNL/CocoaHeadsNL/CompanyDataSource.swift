@@ -1,5 +1,6 @@
 import UIKit
 import StoreKit
+import Crashlytics
 
 class CompanyDataSource: DetailDataSource {
     let fetchLinks = FetchAffiliateLinks()
@@ -84,6 +85,11 @@ class CompanyDataSource: DetailDataSource {
                             affiliateId, SKStoreProductParameterAffiliateToken : affiliateToken]
 
                         vc.showStoreView(parameters, indexPath: indexPath)
+                        
+                        Answers.logContentViewWithName("Show appstore",
+                                                       contentType: "App",
+                                                       contentId: "\(affiliateLink.productCreator!) \(affiliateLink.productName)",
+                                                       customAttributes: nil)
                 }
             }
         }

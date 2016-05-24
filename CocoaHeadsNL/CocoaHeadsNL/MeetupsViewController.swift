@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreSpotlight
 import CloudKit
+import Crashlytics
 
 class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDelegate {
 
@@ -80,6 +81,11 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
             self.searchedObjectId = nil
             displayObject(searchedObjectId)
         }
+        
+        Answers.logContentViewWithName("Show meetups",
+                                       contentType: "Meetup",
+                                       contentId: "overview",
+                                       customAttributes: nil)
     }
 
     func discover() {
@@ -205,10 +211,19 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
             if let selectedObject = sender as? Meetup {
                 let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.dataSource = MeetupDataSource(object: selectedObject)
+                
+                Answers.logContentViewWithName("Show Meetup details",
+                                               contentType: "Meetup",
+                                               contentId: selectedObject.meetup_id!,
+                                               customAttributes: nil)
             } else if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
                 let meetup = self.meetupsArray[indexPath.row]
                 let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.dataSource = MeetupDataSource(object: meetup)
+                Answers.logContentViewWithName("Show Meetup details",
+                                               contentType: "Meetup",
+                                               contentId: meetup.meetup_id!,
+                                               customAttributes: nil)
             }
         }
     }

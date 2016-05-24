@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CloudKit
+import Crashlytics
 
 class CompaniesNearbyCollectionViewController: UICollectionViewController {
 
@@ -102,6 +103,11 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
 
                 let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.dataSource = dataSource
+                
+                Answers.logContentViewWithName("Show company details",
+                                               contentType: "Company",
+                                               contentId: company.name!,
+                                               customAttributes: nil)
             }
         }
     }

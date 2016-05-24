@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CloudKit
+import Crashlytics
 
 class CompanyTableViewController: UITableViewController {
 
@@ -30,6 +31,15 @@ class CompanyTableViewController: UITableViewController {
         self.navigationItem.backBarButtonItem = backItem
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CompanyTableViewController.locationAvailable(_:)), name: "LOCATION_AVAILABLE", object: nil)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Answers.logContentViewWithName("Show companies",
+                                       contentType: "Company",
+                                       contentId: "overview",
+                                       customAttributes: nil)
     }
 
     func locationAvailable(notification: NSNotification) -> Void {
@@ -54,6 +64,11 @@ class CompanyTableViewController: UITableViewController {
 
                 let detailViewController = segue.destinationViewController as? LocatedCompaniesViewController
                 detailViewController?.companyDict = sortedArray[indexPath.row] as! NSDictionary
+                
+                Answers.logContentViewWithName("Show company location",
+                                               contentType: "Company",
+                                               contentId: sortedArray[indexPath.row].valueForKey("place") as? StringLiteralType,
+                                               customAttributes: nil)
             }
         }
     }

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CloudKit
+import Crashlytics
 
 class JobsViewController: UICollectionViewController {
 
@@ -49,6 +50,11 @@ class JobsViewController: UICollectionViewController {
             self.searchedObjectId = nil
             displayObject(searchedObjectId)
         }
+        
+        Answers.logContentViewWithName("Show jobs",
+                                       contentType: "Job",
+                                       contentId: "overview",
+                                       customAttributes: nil)
     }
 
     func searchOccured(notification: NSNotification) -> Void {
@@ -156,10 +162,18 @@ class JobsViewController: UICollectionViewController {
             if let selectedObject = sender as? Job {
                 let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.dataSource = JobDataSource(object: selectedObject)
+                Answers.logContentViewWithName("Show Job details",
+                                               contentType: "Job",
+                                               contentId: selectedObject.link,
+                                               customAttributes: nil)
             } else if let indexPath = self.collectionView?.indexPathForCell(sender as! UICollectionViewCell) {
                 let job = self.jobsArray[indexPath.row]
                 let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.dataSource = JobDataSource(object: job)
+                Answers.logContentViewWithName("Show Job details",
+                                               contentType: "Job",
+                                               contentId: job.link,
+                                               customAttributes: nil)
             }
         }
     }
