@@ -194,25 +194,41 @@ var Promise = require('promise');
         for (var feedJob of feedJobs) {
           var filteredCloudJobs = cloudKitJobs.filter(function(cloudKitJob) {
             var cloudKitJobLink = cloudKitJob.fields.link
-            if (cloudKitJobLink === undefined) {return false}
-            return (feedJob.link === cloudKitJobLink.value)
+            if (cloudKitJobLink === undefined) {console.log("Undefined link"); return false}
+            return (feedJob.fields.link.value === cloudKitJobLink.value)
           })
           
           for (var filteredCloudJob of filteredCloudJobs) {
             if(filteredCloudJob.recordChangeTag) {
-              feedJob.recordChangeTag = filteredCloudJob[0].recordChangeTag;
+              feedJob.recordChangeTag = filteredCloudJobs[0].recordChangeTag;
             }
-            if(filteredCloudRecord.recordName) {
-              feedJob.recordName = filteredCloudJob[0].recordName;
+            if(filteredCloudJob.recordName) {
+              feedJob.recordName = filteredCloudJobs[0].recordName;
             }
-            cloudKitJobs.remove(filteredCloudJob)
+            cloudKitJobs.splice(cloudKitJobs.indexOf(filteredCloudJob), 1)
           }
         }
         
         console.log("update " + feedJobs.length)
         console.log("delete " + cloudKitJobs.length)
+        // return Promise.resolve("awesome")
+        
+        var savePromise
+        if (feedJobs.length > 0) {
+          savePromise = database.saveRecords(feedJobs)
+        } else {
+          savePromise = Promise.resolve("Nothing to save.")
+        }
 
-        return Promise.all([database.saveRecords(feedJobs), database.deleteRecords(cloudKitJobs)]);
+        var deletePromise
+        if (cloudKitJobs.length > 0) {
+          deletePromise = database.deleteRecords(cloudKitJobs)
+        } else {
+          deletePromise = Promise.resolve("Nothing to delete.")
+        }
+        
+        
+        return Promise.all([savePromise, deletePromise]);
       }).then(function(response) {
         console.log("x")
         resolve(response)
