@@ -212,7 +212,7 @@ var Promise = require('promise');
         console.log("update " + feedJobs.length)
         console.log("delete " + cloudKitJobs.length)
 
-        return Promise.all(database.saveRecords(feedJobs), database.deleteRecords(cloudKitJobs));
+        return Promise.all([database.saveRecords(feedJobs), database.deleteRecords(cloudKitJobs)]);
       }).then(function(response) {
         console.log("x")
         resolve(response)
