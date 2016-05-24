@@ -39,12 +39,12 @@ class MapViewCell: UITableViewCell, MKMapViewDelegate {
 
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         self.openMapWithCoordinate(coordinate)
-        
+
         Answers.logContentViewWithName("Show map",
                                        contentType: "Company",
                                        contentId: "\(coordinate)",
                                        customAttributes: nil)
-        
+
     }
 
     private func openMapWithCoordinate(coordinate: CLLocationCoordinate2D) {

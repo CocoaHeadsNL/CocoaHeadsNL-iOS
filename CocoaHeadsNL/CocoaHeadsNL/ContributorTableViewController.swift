@@ -74,7 +74,7 @@ class ContributorTableViewController: UITableViewController {
         guard let urlString = contributors[indexPath.row].url else {
             return
         }
-        
+
         Answers.logContentViewWithName("Show contributer details",
                                        contentType: "Contributer",
                                        contentId: urlString,
@@ -108,10 +108,10 @@ class ContributorTableViewController: UITableViewController {
         }
         return task
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         Answers.logContentViewWithName("Show contributers",
                                        contentType: "Contributer",
                                        contentId: "overview",

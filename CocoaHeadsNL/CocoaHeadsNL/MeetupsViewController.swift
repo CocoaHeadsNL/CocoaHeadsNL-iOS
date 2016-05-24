@@ -81,7 +81,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
             self.searchedObjectId = nil
             displayObject(searchedObjectId)
         }
-        
+
         Answers.logContentViewWithName("Show meetups",
                                        contentType: "Meetup",
                                        contentId: "overview",
@@ -211,7 +211,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
             if let selectedObject = sender as? Meetup {
                 let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.dataSource = MeetupDataSource(object: selectedObject)
-                
+
                 Answers.logContentViewWithName("Show Meetup details",
                                                contentType: "Meetup",
                                                contentId: selectedObject.meetup_id!,

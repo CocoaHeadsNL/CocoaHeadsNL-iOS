@@ -50,7 +50,7 @@ class JobsViewController: UICollectionViewController {
             self.searchedObjectId = nil
             displayObject(searchedObjectId)
         }
-        
+
         Answers.logContentViewWithName("Show jobs",
                                        contentType: "Job",
                                        contentId: "overview",

@@ -47,7 +47,7 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
 
         self.tableView.reloadData()
     }
-    
+
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
         for object in self.tableView.visibleCells {
             if let webCell = object as? WebViewCell {

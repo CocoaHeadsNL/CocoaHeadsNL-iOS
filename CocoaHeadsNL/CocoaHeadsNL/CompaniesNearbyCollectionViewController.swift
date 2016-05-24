@@ -103,7 +103,7 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
 
                 let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.dataSource = dataSource
-                
+
                 Answers.logContentViewWithName("Show company details",
                                                contentType: "Company",
                                                contentId: company.name!,
