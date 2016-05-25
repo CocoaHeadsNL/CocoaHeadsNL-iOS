@@ -134,14 +134,7 @@ class ContributorTableViewController: UITableViewController {
         var CKContributor = [Contributor]()
 
         operation.recordFetchedBlock = { (record) in
-            let contributor = Contributor()
-
-            contributor.recordID = record.recordID
-            contributor.name = record["name"] as? String
-            contributor.url = record["url"] as? String
-            contributor.avatar_url = record["avatar_url"] as? String
-            contributor.contributor_id = record["contributor_id"] as? Int64
-
+            let contributor = Contributor(record: record)
             CKContributor.append(contributor)
         }
 

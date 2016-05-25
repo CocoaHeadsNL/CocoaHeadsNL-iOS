@@ -86,11 +86,19 @@ class Company {
 
 class Contributor {
 
-    var recordID: CKRecordID?
-    var avatar_url: String?
-    var contributor_id: Int64?
-    var name: String?
-    var url: String?
+    let recordID: CKRecordID?
+    let avatar_url: String?
+    let contributor_id: Int64?
+    let name: String?
+    let url: String?
+    
+    init(record: CKRecord) {
+        self.recordID = record.recordID
+        self.name = record["name"] as? String
+        self.url = record["url"] as? String
+        self.avatar_url = record["avatar_url"] as? String
+        self.contributor_id = record["contributor_id"] as? Int64
+    }
 }
 
 class Job {
