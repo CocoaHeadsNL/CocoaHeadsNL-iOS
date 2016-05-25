@@ -199,13 +199,13 @@ class Job {
 class Meetup {
 
     init(record: CKRecord) {
-        self.recordID = record.recordID as CKRecordID?
-        self.name = record["name"] as? String
+        self.recordID = record.recordID
+        self.name = record["name"] as? String ?? ""
         self.meetup_id = record["meetup_id"] as? String
-        self.meetup_description = record["meetup_description"] as? String
+        self.meetup_description = record["meetup_description"] as? String ?? ""
         self.geoLocation = record["geoLocation"] as? CLLocation
-        self.location = record["location"] as? String
-        self.locationName = record["locationName"] as? String
+        self.location = record["location"] as? String ?? ""
+        self.locationName = record["locationName"] as? String ?? ""
         self.logo = record["logo"] as? CKAsset
         self.smallLogo = record["smallLogo"] as? CKAsset
         self.time = record["time"] as? NSDate
@@ -216,20 +216,20 @@ class Meetup {
         self.yes_rsvp_count = record.objectForKey("yes_rsvp_count") as? NSNumber
     }
 
-    let recordID: CKRecordID?
+    let recordID: CKRecordID
     let duration: NSNumber!
     let geoLocation: CLLocation?
-    let locationName: String?
-    let meetup_description: String?
+    let locationName: String
+    let meetup_description: String
     let meetup_id: String?
-    let name: String?
+    let name: String
     let rsvp_limit: NSNumber!
     let time: NSDate?
     let yes_rsvp_count: NSNumber!
     let logo: CKAsset?
     let nextEvent: DarwinBoolean?
     let smallLogo: CKAsset?
-    let location: String?
+    let location: String
 
     lazy var logoImage: UIImage = {
         let logoImage: UIImage
@@ -254,7 +254,7 @@ class Meetup {
         get {
             let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeImage as String)
             attributeSet.title = name
-            if let data = meetup_description?.dataUsingEncoding(NSUTF8StringEncoding) {
+            if let data = meetup_description.dataUsingEncoding(NSUTF8StringEncoding) {
                 do {
                     let meetupDescriptionString = try NSAttributedString(data: data, options:[NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding], documentAttributes:nil)
 
@@ -264,13 +264,7 @@ class Meetup {
                 }
             }
             attributeSet.creator = "CocoaHeadsNL"
-            var keywords = ["CocoaHeadsNL"]
-            if let locationName = locationName {
-                keywords.append(locationName)
-            }
-            if let location = location {
-                keywords.append(location)
-            }
+            let keywords = ["CocoaHeadsNL", locationName, location]
 
             attributeSet.keywords = keywords
             attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage)
@@ -294,10 +288,8 @@ class Meetup {
 
                 var searchableItems = [CSSearchableItem]()
                 for meetup in meetups {
-                    if let recordID = meetup.recordID {
-                        let item = CSSearchableItem(uniqueIdentifier: "meetup:\(recordID)", domainIdentifier: "meetup", attributeSet: meetup.searchableAttributeSet)
-                        searchableItems.append(item)
-                    }
+                    let item = CSSearchableItem(uniqueIdentifier: "meetup:\(meetup.recordID)", domainIdentifier: "meetup", attributeSet: meetup.searchableAttributeSet)
+                    searchableItems.append(item)
                 }
 
 //                CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithDomainIdentifiers(["meetup"], completionHandler: { (error: NSError?) -> Void in
