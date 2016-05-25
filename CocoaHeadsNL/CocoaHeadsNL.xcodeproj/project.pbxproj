@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		239D41161B190FD000609105 /* CalendarTabImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239D41151B190FD000609105 /* CalendarTabImage.swift */; };
 		4A1978C21AAD8681000E281F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A1978C11AAD8681000E281F /* Settings.bundle */; };
-		4A53950F1CEA3F0D00710B5B /* CocoaHeadsNLUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A53950E1CEA3F0D00710B5B /* CocoaHeadsNLUITests.swift */; };
-		4A5395171CEA3F4200710B5B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5395161CEA3F4200710B5B /* SnapshotHelper.swift */; };
 		4A7EEAF11AC5440C001C2827 /* ModelObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */; };
 		4AE72F941C5B44300027C5CA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE72F931C5B44300027C5CA /* CloudKit.framework */; };
 		6EE9D4462F8F8FD65C444566 /* libPods-CocoaHeadsNL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58E1FE9F54B897E49378ED7D /* libPods-CocoaHeadsNL.a */; };
@@ -41,7 +39,6 @@
 		F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D1D1AAB50BB00585D61 /* Main.storyboard */; };
 		F1A46D211AAB50BB00585D61 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D201AAB50BB00585D61 /* Images.xcassets */; };
 		F1A46D241AAB50BB00585D61 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D221AAB50BB00585D61 /* LaunchScreen.xib */; };
-		F1A46D301AAB50BB00585D61 /* CocoaHeadsNLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D2F1AAB50BB00585D61 /* CocoaHeadsNLTests.swift */; };
 		F1A46D3D1AAB516300585D61 /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D3C1AAB516300585D61 /* JobsViewController.swift */; };
 		F1BDEA6D1C91F6D7004C7DAB /* CompaniesNearbyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BDEA6B1C91F6D7004C7DAB /* CompaniesNearbyCell.swift */; };
 		F1BDEA6E1C91F6D7004C7DAB /* CompaniesNearbyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1BDEA6C1C91F6D7004C7DAB /* CompaniesNearbyCell.xib */; };
@@ -51,28 +48,10 @@
 		F1DC2E131C665B4D006CC492 /* ContributorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DC2E121C665B4D006CC492 /* ContributorTableViewController.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		4A5395111CEA3F0D00710B5B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F1A46D0A1AAB50BB00585D61 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F1A46D111AAB50BB00585D61;
-			remoteInfo = CocoaHeadsNL;
-		};
-		F1A46D2A1AAB50BB00585D61 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F1A46D0A1AAB50BB00585D61 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F1A46D111AAB50BB00585D61;
-			remoteInfo = CocoaHeadsNL;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		239D41151B190FD000609105 /* CalendarTabImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTabImage.swift; sourceTree = "<group>"; };
 		4A15A33C1BB82224008161BD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		4A1978C11AAD8681000E281F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		4A53950C1CEA3F0D00710B5B /* CocoaHeadsNLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaHeadsNLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A53950E1CEA3F0D00710B5B /* CocoaHeadsNLUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaHeadsNLUITests.swift; sourceTree = "<group>"; };
 		4A5395101CEA3F0D00710B5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A5395161CEA3F4200710B5B /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
@@ -111,7 +90,6 @@
 		F1A46D1E1AAB50BB00585D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F1A46D201AAB50BB00585D61 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F1A46D231AAB50BB00585D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		F1A46D291AAB50BB00585D61 /* CocoaHeadsNLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaHeadsNLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A46D2E1AAB50BB00585D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1A46D2F1AAB50BB00585D61 /* CocoaHeadsNLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaHeadsNLTests.swift; sourceTree = "<group>"; };
 		F1A46D3C1AAB516300585D61 /* JobsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsViewController.swift; sourceTree = "<group>"; };
@@ -125,13 +103,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4A5395091CEA3F0D00710B5B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F1A46D0F1AAB50BB00585D61 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -139,13 +110,6 @@
 				4AE72F941C5B44300027C5CA /* CloudKit.framework in Frameworks */,
 				F1379F6F1BC19F1900A20FDB /* MapKit.framework in Frameworks */,
 				6EE9D4462F8F8FD65C444566 /* libPods-CocoaHeadsNL.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F1A46D261AAB50BB00585D61 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,8 +274,6 @@
 			isa = PBXGroup;
 			children = (
 				F1A46D121AAB50BB00585D61 /* CocoaHeadsNL.app */,
-				F1A46D291AAB50BB00585D61 /* CocoaHeadsNLTests.xctest */,
-				4A53950C1CEA3F0D00710B5B /* CocoaHeadsNLUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -361,24 +323,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4A53950B1CEA3F0D00710B5B /* CocoaHeadsNLUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4A5395151CEA3F0D00710B5B /* Build configuration list for PBXNativeTarget "CocoaHeadsNLUITests" */;
-			buildPhases = (
-				4A5395081CEA3F0D00710B5B /* Sources */,
-				4A5395091CEA3F0D00710B5B /* Frameworks */,
-				4A53950A1CEA3F0D00710B5B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4A5395121CEA3F0D00710B5B /* PBXTargetDependency */,
-			);
-			name = CocoaHeadsNLUITests;
-			productName = CocoaHeadsNLUITests;
-			productReference = 4A53950C1CEA3F0D00710B5B /* CocoaHeadsNLUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		F1A46D111AAB50BB00585D61 /* CocoaHeadsNL */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F1A46D331AAB50BB00585D61 /* Build configuration list for PBXNativeTarget "CocoaHeadsNL" */;
@@ -402,24 +346,6 @@
 			productReference = F1A46D121AAB50BB00585D61 /* CocoaHeadsNL.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F1A46D281AAB50BB00585D61 /* CocoaHeadsNLTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F1A46D361AAB50BB00585D61 /* Build configuration list for PBXNativeTarget "CocoaHeadsNLTests" */;
-			buildPhases = (
-				F1A46D251AAB50BB00585D61 /* Sources */,
-				F1A46D261AAB50BB00585D61 /* Frameworks */,
-				F1A46D271AAB50BB00585D61 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F1A46D2B1AAB50BB00585D61 /* PBXTargetDependency */,
-			);
-			name = CocoaHeadsNLTests;
-			productName = CocoaHeadsNLTests;
-			productReference = F1A46D291AAB50BB00585D61 /* CocoaHeadsNLTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -431,10 +357,6 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Stichting CocoaheadsNL";
 				TargetAttributes = {
-					4A53950B1CEA3F0D00710B5B = {
-						CreatedOnToolsVersion = 7.3.1;
-						TestTargetID = F1A46D111AAB50BB00585D61;
-					};
 					F1A46D111AAB50BB00585D61 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = D55PL7PU7S;
@@ -453,10 +375,6 @@
 							};
 						};
 					};
-					F1A46D281AAB50BB00585D61 = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = F1A46D111AAB50BB00585D61;
-					};
 				};
 			};
 			buildConfigurationList = F1A46D0D1AAB50BB00585D61 /* Build configuration list for PBXProject "CocoaHeadsNL" */;
@@ -473,20 +391,11 @@
 			projectRoot = "";
 			targets = (
 				F1A46D111AAB50BB00585D61 /* CocoaHeadsNL */,
-				F1A46D281AAB50BB00585D61 /* CocoaHeadsNLTests */,
-				4A53950B1CEA3F0D00710B5B /* CocoaHeadsNLUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4A53950A1CEA3F0D00710B5B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F1A46D101AAB50BB00585D61 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -498,13 +407,6 @@
 				7B6A744B1B1495FF00A10762 /* MeetupCell.xib in Resources */,
 				F1BDEA6E1C91F6D7004C7DAB /* CompaniesNearbyCell.xib in Resources */,
 				F1A46D211AAB50BB00585D61 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F1A46D271AAB50BB00585D61 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,15 +503,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4A5395081CEA3F0D00710B5B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4A53950F1CEA3F0D00710B5B /* CocoaHeadsNLUITests.swift in Sources */,
-				4A5395171CEA3F4200710B5B /* SnapshotHelper.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F1A46D0E1AAB50BB00585D61 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -646,28 +539,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F1A46D251AAB50BB00585D61 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F1A46D301AAB50BB00585D61 /* CocoaHeadsNLTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		4A5395121CEA3F0D00710B5B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F1A46D111AAB50BB00585D61 /* CocoaHeadsNL */;
-			targetProxy = 4A5395111CEA3F0D00710B5B /* PBXContainerItemProxy */;
-		};
-		F1A46D2B1AAB50BB00585D61 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F1A46D111AAB50BB00585D61 /* CocoaHeadsNL */;
-			targetProxy = F1A46D2A1AAB50BB00585D61 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F1A46D1D1AAB50BB00585D61 /* Main.storyboard */ = {
@@ -689,41 +561,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		4A5395131CEA3F0D00710B5B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				INFOPLIST_FILE = CocoaHeadsNLUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.CocoaHeadsNLUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fa2c071a-514c-4c70-b8fa-569d6f832d66";
-				TEST_TARGET_NAME = CocoaHeadsNL;
-			};
-			name = Debug;
-		};
-		4A5395141CEA3F0D00710B5B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				INFOPLIST_FILE = CocoaHeadsNLUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.CocoaHeadsNLUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fa2c071a-514c-4c70-b8fa-569d6f832d66";
-				TEST_TARGET_NAME = CocoaHeadsNL;
-			};
-			name = Release;
-		};
 		F1A46D311AAB50BB00585D61 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -878,54 +715,9 @@
 			};
 			name = Release;
 		};
-		F1A46D371AAB50BB00585D61 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = CocoaHeadsNLTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "nl.cocoaheads.app.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = CocoaHeadsNLTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CocoaHeadsNL.app/CocoaHeadsNL";
-			};
-			name = Debug;
-		};
-		F1A46D381AAB50BB00585D61 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = CocoaHeadsNLTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "nl.cocoaheads.app.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = CocoaHeadsNLTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CocoaHeadsNL.app/CocoaHeadsNL";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4A5395151CEA3F0D00710B5B /* Build configuration list for PBXNativeTarget "CocoaHeadsNLUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4A5395131CEA3F0D00710B5B /* Debug */,
-				4A5395141CEA3F0D00710B5B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		F1A46D0D1AAB50BB00585D61 /* Build configuration list for PBXProject "CocoaHeadsNL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -940,15 +732,6 @@
 			buildConfigurations = (
 				F1A46D341AAB50BB00585D61 /* Debug */,
 				F1A46D351AAB50BB00585D61 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F1A46D361AAB50BB00585D61 /* Build configuration list for PBXNativeTarget "CocoaHeadsNLTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F1A46D371AAB50BB00585D61 /* Debug */,
-				F1A46D381AAB50BB00585D61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
