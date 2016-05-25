@@ -15,18 +15,18 @@ class FetchAffiliateLinks {
 
             let operation = CKQueryOperation(query: refQuery)
 
-            var CKAffiliateLink = [AffiliateLink]()
+            var affiliateLinks = [AffiliateLink]()
 
             operation.recordFetchedBlock = { (record) in
                 let affLink = AffiliateLink(record: record)
-                CKAffiliateLink.append(affLink)
+                affiliateLinks.append(affLink)
             }
 
             operation.queryCompletionBlock = { [unowned self] (cursor, error) in
                 dispatch_async(dispatch_get_main_queue()) {
                     if error == nil {
 
-                        self.apps = CKAffiliateLink
+                        self.apps = affiliateLinks
                         completion()
                     }
                 }
