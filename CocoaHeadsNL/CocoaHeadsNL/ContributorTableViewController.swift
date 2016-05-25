@@ -131,18 +131,18 @@ class ContributorTableViewController: UITableViewController {
         let operation = CKQueryOperation(query: query)
         operation.qualityOfService = .UserInteractive
 
-        var CKContributor = [Contributor]()
+        var contributors = [Contributor]()
 
         operation.recordFetchedBlock = { (record) in
             let contributor = Contributor(record: record)
-            CKContributor.append(contributor)
+            contributors.append(contributor)
         }
 
         operation.queryCompletionBlock = { [unowned self] (cursor, error) in
             dispatch_async(dispatch_get_main_queue()) {
                 if error == nil {
 
-                    self.contributors = CKContributor
+                    self.contributors = contributors
                     self.tableView.reloadData()
 
                 } else {
