@@ -42,9 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
 
-        let ckNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String : NSObject])
-        if ckNotification.notificationType == .Query,
-            let queryNotification = ckNotification as? CKQueryNotification {
+        let cloudKitNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String : NSObject])
+        if cloudKitNotification.notificationType == .Query,
+            let queryNotification = cloudKitNotification as? CKQueryNotification {
             //TODO handle the different notifications to show the correct items
             let recordID = queryNotification.recordID
             print(recordID)
