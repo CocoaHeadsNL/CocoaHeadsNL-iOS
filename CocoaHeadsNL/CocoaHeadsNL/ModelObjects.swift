@@ -18,15 +18,14 @@ var meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
 
 
 class AffiliateLink {
-
-    let recordID: CKRecordID?
+    let recordID: CKRecordID
     let affiliateId: String?
     let productCreator: String?
     let productName: String?
     let company: CKReference?
     
     init(record: CKRecord) {
-        self.recordID = record.recordID as CKRecordID?
+        self.recordID = record.recordID
         self.affiliateId = record["affiliateId"] as? String
         self.productName = record["productName"] as? String
         self.productCreator = record["productCreator"] as? String
@@ -86,18 +85,18 @@ class Company {
 
 class Contributor {
 
-    let recordID: CKRecordID?
-    let avatar_url: String?
-    let contributor_id: Int64?
-    let name: String?
-    let url: String?
+    let recordID: CKRecordID
+    let avatar_url: String
+    let contributor_id: Int64
+    let name: String
+    let url: String
     
     init(record: CKRecord) {
         self.recordID = record.recordID
-        self.name = record["name"] as? String
-        self.url = record["url"] as? String
-        self.avatar_url = record["avatar_url"] as? String
-        self.contributor_id = record["contributor_id"] as? Int64
+        self.name = record["name"] as? String ?? ""
+        self.url = record["url"] as? String ?? ""
+        self.avatar_url = record["avatar_url"] as? String ?? ""
+        self.contributor_id = record["contributor_id"] as? Int64 ?? 0
     }
 }
 

@@ -36,15 +36,10 @@ class ContributorTableViewController: UITableViewController {
 
         let contributor = self.contributors[indexPath.row]
 
-        if let name = contributor.name {
-            cell.textLabel?.text = name
-        }
+        cell.textLabel?.text = contributor.name
+        cell.detailTextLabel?.text = contributor.url
 
-        if let url = contributor.url {
-            cell.detailTextLabel?.text = url
-        }
-
-        if let a = contributor.avatar_url, url = NSURL(string: a) {
+        if let url = NSURL(string: contributor.avatar_url) {
             let task = fetchImageTask(url, forImageView: cell.imageView!)
             task.resume()
         }
@@ -71,9 +66,7 @@ class ContributorTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
-        guard let urlString = contributors[indexPath.row].url else {
-            return
-        }
+        let urlString = contributors[indexPath.row].url
 
         Answers.logContentViewWithName("Show contributer details",
                                        contentType: "Contributer",
