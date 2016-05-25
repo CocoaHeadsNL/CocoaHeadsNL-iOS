@@ -1,2 +1,1 @@
-- Spotlight search.
-- Push notifications on new meetup or job.
+- Backend now uses CloudKit
