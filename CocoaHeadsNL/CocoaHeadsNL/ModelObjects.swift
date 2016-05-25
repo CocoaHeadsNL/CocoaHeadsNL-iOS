@@ -110,13 +110,18 @@ class Job {
     let title: String
     let logoURL: NSURL?
 
-    init(recordID: CKRecordID, content: String, date: NSDate, link: String, title: String, logoURL: NSURL?) {
-        self.recordID = recordID
-        self.content = content
-        self.date = date
-        self.link = link
-        self.title = title
-        self.logoURL = logoURL
+    init(record: CKRecord) {
+        
+        self.recordID = record.recordID
+        self.content = record["content"] as? String ?? ""
+        self.date = record["date"] as? NSDate ?? NSDate()
+        self.link = record["link"] as? String ?? ""
+        self.title = record["title"] as? String ?? ""
+        if let logoURLString = record["logoUrl"] as? String {
+            self.logoURL = NSURL(string: logoURLString)
+        } else {
+            self.logoURL = nil
+        }
     }
 
     lazy var logoImage: UIImage = {

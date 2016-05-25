@@ -193,20 +193,8 @@ class JobsViewController: UICollectionViewController {
         var jobs = [Job]()
 
         operation.recordFetchedBlock = { (record) in
-            let recordID = record.recordID
-            let content = record["content"] as? String ?? ""
-            let date = record["date"] as? NSDate ?? NSDate()
-            let link = record["link"] as? String ?? ""
-            let title = record["title"] as? String ?? ""
-            let logoURL: NSURL?
-            if let logoURLString = record["logoUrl"] as? String {
-                logoURL = NSURL(string: logoURLString)
-            } else {
-                logoURL = nil
-            }
-            let job = Job(recordID: recordID, content: content, date: date, link: link, title: title, logoURL: logoURL)
+            let job = Job(record: record)
             print("Loaded \(job.logoImage)")
-
             jobs.append(job)
         }
 
