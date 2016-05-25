@@ -273,13 +273,13 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         let operation = CKQueryOperation(query: query)
         operation.qualityOfService = .UserInteractive
 
-        var CKMeetups = [Meetup]()
+        var meetups = [Meetup]()
 
         operation.recordFetchedBlock = { (record) in
             let meetup = Meetup(record: record)
             print("Loaded \(meetup.smallLogoImage)")
             print("Loaded \(meetup.logoImage)")
-            CKMeetups.append(meetup)
+            meetups.append(meetup)
         }
 
         operation.queryCompletionBlock = { [unowned self] (cursor, error) in
@@ -292,7 +292,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                     self.presentViewController(ac, animated: true, completion: nil)
                     return
                 }
-                self.meetupsArray = CKMeetups
+                self.meetupsArray = meetups
                 self.activityIndicatorView.stopAnimating()
                 self.activityIndicatorView.hidesWhenStopped = true
                 self.tableView.reloadData()
