@@ -1,9 +1,10 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.1'
 
-pod 'Fabric'
-pod 'Crashlytics'
 target 'CocoaHeadsNL' do
+  pod 'Fabric'
+  pod 'Crashlytics'
+  
   post_install do | installer |
       require 'fileutils'
       FileUtils.cp_r('Pods/Target Support Files/Pods-CocoaHeadsNL/Pods-CocoaHeadsNL-Acknowledgements.plist', 'CocoaHeadsNL/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
