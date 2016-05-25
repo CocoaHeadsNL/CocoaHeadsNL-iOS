@@ -103,19 +103,31 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
                     container.discoverUserInfoWithUserRecordID(recordID) { (info, fetchError) in
                         // TODO check for deprecation and save to userRecord?
+                        if let error = fetchError {
+                            print("error dicovering user info: \(error)")
+                            return
+                        }
+
+                        guard let info = info else {
+                            print("error dicovering user info, info is nil for unknown reason")
+                            return
+                        }
 
                         container.publicCloudDatabase.fetchRecordWithID(recordID, completionHandler: { (userRecord, error) in
+                            if let error = fetchError {
+                                print("error dicovering user record: \(error)")
+                                return
+                            }
 
                             if let record = userRecord {
-                                record.setValue(info?.firstName, forKey: "firstName")
-                                record.setValue(info?.lastName, forKey: "lastName")
+                                record["firstName"] = info.firstName
+                                record["lastName"] = info.lastName
 
                                 container.publicCloudDatabase.saveRecord(record, completionHandler: { (record, error) in
                                     //print(record)
                                 })
                             }
                         })
-                        
                     }
                 }
             }
