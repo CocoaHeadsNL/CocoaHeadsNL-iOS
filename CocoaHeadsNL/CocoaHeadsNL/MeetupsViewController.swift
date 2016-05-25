@@ -103,7 +103,19 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
                     container.discoverUserInfoWithUserRecordID(recordID) { (info, fetchError) in
                         // TODO check for deprecation and save to userRecord?
-                        print(info)
+
+                        container.publicCloudDatabase.fetchRecordWithID(recordID, completionHandler: { (userRecord, error) in
+
+                            if let record = userRecord {
+                                userRecord?.setValue(info?.firstName, forKey: "firstName")
+                                userRecord?.setValue(info?.lastName, forKey: "lastName")
+
+                                container.publicCloudDatabase.saveRecord(record, completionHandler: { (record, error) in
+                                    //print(record)
+                                })
+                            }
+                        })
+                        
                     }
                 }
             }
@@ -277,8 +289,8 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         operation.recordFetchedBlock = { (record) in
             let meetup = Meetup(record: record)
-            print("Loaded \(meetup.smallLogoImage)")
-            print("Loaded \(meetup.logoImage)")
+            //print("Loaded \(meetup.smallLogoImage)")
+            //print("Loaded \(meetup.logoImage)")
             meetups.append(meetup)
         }
 

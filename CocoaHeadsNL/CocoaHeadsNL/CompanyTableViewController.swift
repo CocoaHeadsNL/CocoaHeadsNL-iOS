@@ -162,8 +162,8 @@ class CompanyTableViewController: UITableViewController {
 
         operation.recordFetchedBlock = { (record) in
             let company = Company(record: record)
-            print("Loaded \(company.smallLogoImage)")
-            print("Loaded \(company.logoImage)")
+            //print("Loaded \(company.smallLogoImage)")
+            //print("Loaded \(company.logoImage)")
 
             companies.append(company)
         }
