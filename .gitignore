@@ -16,3 +16,5 @@ config.js
 eckey.pem
 CocoaHeadsNL/CloudKitSync/node_modules
 cloudkit.js
+config.js.dev
+config.js.prod
