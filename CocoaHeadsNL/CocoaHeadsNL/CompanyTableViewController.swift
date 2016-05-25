@@ -158,14 +158,14 @@ class CompanyTableViewController: UITableViewController {
         let operation = CKQueryOperation(query: query)
         operation.qualityOfService = .UserInteractive
 
-        var CKCompanies = [Company]()
+        var companies = [Company]()
 
         operation.recordFetchedBlock = { (record) in
             let company = Company(record: record)
             print("Loaded \(company.smallLogoImage)")
             print("Loaded \(company.logoImage)")
 
-            CKCompanies.append(company)
+            companies.append(company)
         }
 
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
@@ -176,7 +176,7 @@ class CompanyTableViewController: UITableViewController {
 
                     var locationSet = Set<String>()
 
-                    for company in CKCompanies {
+                    for company in companies {
 
                         if let location = company.place {
 
@@ -191,7 +191,7 @@ class CompanyTableViewController: UITableViewController {
                     for group in groupedArray {
                         var companyArray = [Company]()
 
-                        for company in CKCompanies {
+                        for company in companies {
                             if let loc = company.place where loc == group {
                                     companyArray.append(company)
                             }

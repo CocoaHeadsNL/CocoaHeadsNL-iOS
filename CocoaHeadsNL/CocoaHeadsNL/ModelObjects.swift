@@ -23,7 +23,7 @@ class AffiliateLink {
     let productCreator: String?
     let productName: String?
     let company: CKReference?
-    
+
     init(record: CKRecord) {
         self.recordID = record.recordID
         self.affiliateId = record["affiliateId"] as? String
@@ -90,7 +90,7 @@ class Contributor {
     let contributor_id: Int64
     let name: String
     let url: String
-    
+
     init(record: CKRecord) {
         self.recordID = record.recordID
         self.name = record["name"] as? String ?? ""
@@ -110,7 +110,7 @@ class Job {
     let logoURL: NSURL?
 
     init(record: CKRecord) {
-        
+
         self.recordID = record.recordID
         self.content = record["content"] as? String ?? ""
         self.date = record["date"] as? NSDate ?? NSDate()

@@ -131,19 +131,19 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
         let operation = CKQueryOperation(query: query)
         operation.qualityOfService = .UserInteractive
 
-        var CKCompanies = [Company]()
+        var companies = [Company]()
 
         operation.recordFetchedBlock = { (record) in
             let company = Company(record: record)
 
-            CKCompanies.append(company)
+            companies.append(company)
         }
 
         operation.queryCompletionBlock = { [unowned self] (cursor, error) in
             dispatch_async(dispatch_get_main_queue()) {
                 if error == nil {
 
-                    self.companiesArray = CKCompanies
+                    self.companiesArray = companies
                     self.activityIndicator.stopAnimating()
                     self.collectionView?.reloadData()
 
