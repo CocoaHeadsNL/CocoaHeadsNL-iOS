@@ -18,13 +18,7 @@ class FetchAffiliateLinks {
             var CKAffiliateLink = [AffiliateLink]()
 
             operation.recordFetchedBlock = { (record) in
-                let affLink = AffiliateLink()
-
-                affLink.affiliateId = record["affiliateId"] as? String
-                affLink.productName = record["productName"] as? String
-                affLink.productCreator = record["productCreator"] as? String
-                affLink.company = record["company"] as? CKReference
-
+                let affLink = AffiliateLink(record: record)
                 CKAffiliateLink.append(affLink)
             }
 
