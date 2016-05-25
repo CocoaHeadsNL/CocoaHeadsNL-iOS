@@ -107,8 +107,8 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                         container.publicCloudDatabase.fetchRecordWithID(recordID, completionHandler: { (userRecord, error) in
 
                             if let record = userRecord {
-                                userRecord?.setValue(info?.firstName, forKey: "firstName")
-                                userRecord?.setValue(info?.lastName, forKey: "lastName")
+                                record.setValue(info?.firstName, forKey: "firstName")
+                                record.setValue(info?.lastName, forKey: "lastName")
 
                                 container.publicCloudDatabase.saveRecord(record, completionHandler: { (record, error) in
                                     //print(record)
