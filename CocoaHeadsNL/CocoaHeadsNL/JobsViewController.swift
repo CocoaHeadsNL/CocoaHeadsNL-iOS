@@ -190,7 +190,7 @@ class JobsViewController: UICollectionViewController {
         let operation = CKQueryOperation(query: query)
         operation.qualityOfService = .UserInteractive
 
-        var CKJob = [Job]()
+        var jobs = [Job]()
 
         operation.recordFetchedBlock = { (record) in
             let recordID = record.recordID
@@ -207,7 +207,7 @@ class JobsViewController: UICollectionViewController {
             let job = Job(recordID: recordID, content: content, date: date, link: link, title: title, logoURL: logoURL)
             print("Loaded \(job.logoImage)")
 
-            CKJob.append(job)
+            jobs.append(job)
         }
 
         operation.queryCompletionBlock = { [unowned self] (cursor, error) in
@@ -222,7 +222,7 @@ class JobsViewController: UICollectionViewController {
                 } else {
 
                     self.activityIndicator.stopAnimating()
-                    self.jobsArray = CKJob
+                    self.jobsArray = jobs
                     self.collectionView?.reloadData()
                 }
             }
