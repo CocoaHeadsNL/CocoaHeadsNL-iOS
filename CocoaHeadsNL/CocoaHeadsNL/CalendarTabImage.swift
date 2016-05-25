@@ -3,7 +3,7 @@
 //  CocoaHeadsNL
 //
 //  Created by Bruno Scheele on 29/05/15.
-//  Copyright (c) 2015 Stichting CocoaheadsNL. All rights reserved.
+//  Copyright (c) 2016 Stichting CocoaheadsNL. All rights reserved.
 //
 
 import Foundation
