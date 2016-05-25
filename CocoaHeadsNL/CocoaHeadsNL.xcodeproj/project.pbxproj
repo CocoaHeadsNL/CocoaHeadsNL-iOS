@@ -11,6 +11,8 @@
 		4A1978C21AAD8681000E281F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A1978C11AAD8681000E281F /* Settings.bundle */; };
 		4A7EEAF11AC5440C001C2827 /* ModelObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */; };
 		4AE72F941C5B44300027C5CA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE72F931C5B44300027C5CA /* CloudKit.framework */; };
+		4AEDD5231CF635E50039AAE5 /* CocoaHeadsNLUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEDD5221CF635E50039AAE5 /* CocoaHeadsNLUITests.swift */; };
+		4AEDD52B1CF636430039AAE5 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEDD52A1CF636430039AAE5 /* SnapshotHelper.swift */; };
 		6EE9D4462F8F8FD65C444566 /* libPods-CocoaHeadsNL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58E1FE9F54B897E49378ED7D /* libPods-CocoaHeadsNL.a */; };
 		7B6A74481B1452FD00A10762 /* MeetupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74461B1452FD00A10762 /* MeetupCell.swift */; };
 		7B6A74491B1452FD00A10762 /* MeetupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74471B1452FD00A10762 /* MeetupsViewController.swift */; };
@@ -48,16 +50,27 @@
 		F1DC2E131C665B4D006CC492 /* ContributorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DC2E121C665B4D006CC492 /* ContributorTableViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		4AEDD5251CF635E50039AAE5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1A46D0A1AAB50BB00585D61 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1A46D111AAB50BB00585D61;
+			remoteInfo = CocoaHeadsNL;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		239D41151B190FD000609105 /* CalendarTabImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTabImage.swift; sourceTree = "<group>"; };
 		4A15A33C1BB82224008161BD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		4A1978C11AAD8681000E281F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		4A53950E1CEA3F0D00710B5B /* CocoaHeadsNLUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaHeadsNLUITests.swift; sourceTree = "<group>"; };
-		4A5395101CEA3F0D00710B5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A5395161CEA3F4200710B5B /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelObjects.swift; sourceTree = "<group>"; };
 		4AE72F921C5B44080027C5CA /* CocoaHeadsNL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CocoaHeadsNL.entitlements; sourceTree = "<group>"; };
 		4AE72F931C5B44300027C5CA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		4AEDD5201CF635E50039AAE5 /* CocoaHeadsNLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaHeadsNLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AEDD5221CF635E50039AAE5 /* CocoaHeadsNLUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaHeadsNLUITests.swift; sourceTree = "<group>"; };
+		4AEDD5241CF635E50039AAE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4AEDD52A1CF636430039AAE5 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		4AF8899A1AAD8EBC00D8DB2E /* CocoaHeadsNL-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CocoaHeadsNL-Bridging-Header.h"; sourceTree = "<group>"; };
 		58E1FE9F54B897E49378ED7D /* libPods-CocoaHeadsNL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CocoaHeadsNL.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B6A74461B1452FD00A10762 /* MeetupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetupCell.swift; sourceTree = "<group>"; };
@@ -103,6 +116,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4AEDD51D1CF635E50039AAE5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F1A46D0F1AAB50BB00585D61 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -134,12 +154,12 @@
 			name = "Viewing Details";
 			sourceTree = "<group>";
 		};
-		4A53950D1CEA3F0D00710B5B /* CocoaHeadsNLUITests */ = {
+		4AEDD5211CF635E50039AAE5 /* CocoaHeadsNLUITests */ = {
 			isa = PBXGroup;
 			children = (
-				4A5395161CEA3F4200710B5B /* SnapshotHelper.swift */,
-				4A53950E1CEA3F0D00710B5B /* CocoaHeadsNLUITests.swift */,
-				4A5395101CEA3F0D00710B5B /* Info.plist */,
+				4AEDD52A1CF636430039AAE5 /* SnapshotHelper.swift */,
+				4AEDD5221CF635E50039AAE5 /* CocoaHeadsNLUITests.swift */,
+				4AEDD5241CF635E50039AAE5 /* Info.plist */,
 			);
 			path = CocoaHeadsNLUITests;
 			sourceTree = "<group>";
@@ -260,7 +280,7 @@
 			children = (
 				F1A46D141AAB50BB00585D61 /* CocoaHeadsNL */,
 				F1A46D2C1AAB50BB00585D61 /* CocoaHeadsNLTests */,
-				4A53950D1CEA3F0D00710B5B /* CocoaHeadsNLUITests */,
+				4AEDD5211CF635E50039AAE5 /* CocoaHeadsNLUITests */,
 				F1A46D131AAB50BB00585D61 /* Products */,
 				5F94B32C0E46149D436AD3B3 /* Frameworks */,
 				F5112C38CF68F5CE0FF0FC59 /* Pods */,
@@ -274,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				F1A46D121AAB50BB00585D61 /* CocoaHeadsNL.app */,
+				4AEDD5201CF635E50039AAE5 /* CocoaHeadsNLUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -323,6 +344,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4AEDD51F1CF635E50039AAE5 /* CocoaHeadsNLUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AEDD5291CF635E50039AAE5 /* Build configuration list for PBXNativeTarget "CocoaHeadsNLUITests" */;
+			buildPhases = (
+				4AEDD51C1CF635E50039AAE5 /* Sources */,
+				4AEDD51D1CF635E50039AAE5 /* Frameworks */,
+				4AEDD51E1CF635E50039AAE5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4AEDD5261CF635E50039AAE5 /* PBXTargetDependency */,
+			);
+			name = CocoaHeadsNLUITests;
+			productName = CocoaHeadsNLUITests;
+			productReference = 4AEDD5201CF635E50039AAE5 /* CocoaHeadsNLUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		F1A46D111AAB50BB00585D61 /* CocoaHeadsNL */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F1A46D331AAB50BB00585D61 /* Build configuration list for PBXNativeTarget "CocoaHeadsNL" */;
@@ -357,6 +396,10 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Stichting CocoaheadsNL";
 				TargetAttributes = {
+					4AEDD51F1CF635E50039AAE5 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = F1A46D111AAB50BB00585D61;
+					};
 					F1A46D111AAB50BB00585D61 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = D55PL7PU7S;
@@ -391,11 +434,19 @@
 			projectRoot = "";
 			targets = (
 				F1A46D111AAB50BB00585D61 /* CocoaHeadsNL */,
+				4AEDD51F1CF635E50039AAE5 /* CocoaHeadsNLUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4AEDD51E1CF635E50039AAE5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F1A46D101AAB50BB00585D61 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -503,6 +554,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4AEDD51C1CF635E50039AAE5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AEDD5231CF635E50039AAE5 /* CocoaHeadsNLUITests.swift in Sources */,
+				4AEDD52B1CF636430039AAE5 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F1A46D0E1AAB50BB00585D61 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -541,6 +601,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		4AEDD5261CF635E50039AAE5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1A46D111AAB50BB00585D61 /* CocoaHeadsNL */;
+			targetProxy = 4AEDD5251CF635E50039AAE5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		F1A46D1D1AAB50BB00585D61 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -561,6 +629,41 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4AEDD5271CF635E50039AAE5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				INFOPLIST_FILE = CocoaHeadsNLUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNLUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "fa2c071a-514c-4c70-b8fa-569d6f832d66";
+				TEST_TARGET_NAME = CocoaHeadsNL;
+			};
+			name = Debug;
+		};
+		4AEDD5281CF635E50039AAE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				INFOPLIST_FILE = CocoaHeadsNLUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNLUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "fa2c071a-514c-4c70-b8fa-569d6f832d66";
+				TEST_TARGET_NAME = CocoaHeadsNL;
+			};
+			name = Release;
+		};
 		F1A46D311AAB50BB00585D61 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -718,6 +821,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4AEDD5291CF635E50039AAE5 /* Build configuration list for PBXNativeTarget "CocoaHeadsNLUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AEDD5271CF635E50039AAE5 /* Debug */,
+				4AEDD5281CF635E50039AAE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		F1A46D0D1AAB50BB00585D61 /* Build configuration list for PBXProject "CocoaHeadsNL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

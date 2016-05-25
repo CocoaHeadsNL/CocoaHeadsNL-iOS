@@ -26,6 +26,5 @@
 # Feel free to remove the following lines if you use fastlane
 
 app_identifier "nl.cocoaheads.app.CocoaHeadsNL" # The bundle identifier of your app
-apple_id "998188273" # This is NOT your Apple login ID, but the App ID of your app
 
 screenshots_path "./screenshots"
