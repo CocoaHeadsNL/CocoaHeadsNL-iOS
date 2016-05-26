@@ -26,7 +26,7 @@ class CocoaHeadsNLUITests: XCTestCase {
     func testApp() {
         let app = XCUIApplication()
 
-        waitForNotHittable(app.activityIndicators.elementBoundByIndex(0), waitSeconds: 10)
+        waitForHittable(app.tables.staticTexts["Amsterdam 18:00"], waitSeconds: 10)
         snapshot("01Meetups")
 
         app.tables.cells.elementBoundByIndex(0).tap()
