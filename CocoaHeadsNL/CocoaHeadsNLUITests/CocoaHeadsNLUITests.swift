@@ -36,13 +36,9 @@ class CocoaHeadsNLUITests: XCTestCase {
         waitForNotHittable(app.activityIndicators.elementBoundByIndex(0), waitSeconds: 10)
         snapshot("03Jobs")
 
-        app.tabBars.buttons["Companies"].tap()
-        waitForNotHittable(app.activityIndicators.elementBoundByIndex(0), waitSeconds: 10)
-        snapshot("04Companies")
-
         app.tabBars.buttons["About"].tap()
         waitForNotHittable(app.activityIndicators.elementBoundByIndex(0), waitSeconds: 10)
-        snapshot("06About")
+        snapshot("04About")
     }
 
 }
