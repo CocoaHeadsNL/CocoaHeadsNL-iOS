@@ -301,8 +301,8 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         operation.recordFetchedBlock = { (record) in
             let meetup = Meetup(record: record)
-            //print("Loaded \(meetup.smallLogoImage)")
-            //print("Loaded \(meetup.logoImage)")
+            let _ = meetup.smallLogoImage
+            let _ = meetup.logoImage
             meetups.append(meetup)
         }
 

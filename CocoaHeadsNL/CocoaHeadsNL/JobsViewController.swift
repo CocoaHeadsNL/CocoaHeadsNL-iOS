@@ -194,7 +194,7 @@ class JobsViewController: UICollectionViewController {
 
         operation.recordFetchedBlock = { (record) in
             let job = Job(record: record)
-            //print("Loaded \(job.logoImage)")
+            let _ = job.logoImage
             jobs.append(job)
         }
 
