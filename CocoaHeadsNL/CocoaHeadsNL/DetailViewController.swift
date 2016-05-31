@@ -47,6 +47,47 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
 
         self.tableView.reloadData()
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        var url: NSURL?
+        var title: String?
+        var activityType: String?
+        
+        if let companyDataSource = dataSource as? CompanyDataSource {
+            if let urlString = companyDataSource.company.website, titleString = companyDataSource.company.name {
+                title = titleString
+                url = NSURL(string: urlString)
+                activityType = "nl.cocoaheads.app.company"
+            }
+        } else if let jobsDataSource = dataSource as? JobDataSource {
+            title = jobsDataSource.job.title
+            url = NSURL(string: jobsDataSource.job.link)
+            activityType = "nl.cocoaheads.app.job"
+        } else if let meetupDataSource = dataSource as? MeetupDataSource, urlString = meetupDataSource.meetup.meetupUrl {
+            title = meetupDataSource.meetup.name
+            url = NSURL(string: urlString)
+            activityType = "nl.cocoaheads.app.meetup"
+        }
+        
+        if let title = title, url = url, activityType = activityType {
+            let activity = NSUserActivity(activityType: activityType)
+            activity.title = title
+            
+            activity.webpageURL = url
+            activity.becomeCurrent()
+            self.userActivity = activity
+        }
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if #available(iOS 9.0, *) {
+            self.userActivity?.resignCurrent()
+        }
+    }
 
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
         for object in self.tableView.visibleCells {

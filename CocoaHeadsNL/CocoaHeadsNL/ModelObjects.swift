@@ -214,6 +214,7 @@ class Meetup {
         self.duration = record.objectForKey("duration") as? NSNumber
         self.rsvp_limit = record.objectForKey("rsvp_limit") as? NSNumber
         self.yes_rsvp_count = record.objectForKey("yes_rsvp_count") as? NSNumber
+        self.meetupUrl = record.objectForKey("meetup_url") as? String
     }
 
     let recordID: CKRecordID
@@ -230,6 +231,7 @@ class Meetup {
     let nextEvent: DarwinBoolean?
     let smallLogo: CKAsset?
     let location: String
+    let meetupUrl: String?
 
     lazy var logoImage: UIImage = {
         let logoImage: UIImage

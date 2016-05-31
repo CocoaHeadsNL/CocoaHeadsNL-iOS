@@ -6,7 +6,7 @@ class CompanyDataSource: DetailDataSource {
     let fetchLinks = FetchAffiliateLinks()
     weak var presenter: DetailViewController?
 
-    private var company: Company {
+    var company: Company {
         return object as! Company
     }
 

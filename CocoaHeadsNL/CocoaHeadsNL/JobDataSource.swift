@@ -1,7 +1,7 @@
 import UIKit
 
 class JobDataSource: DetailDataSource {
-    private var job: Job {
+    var job: Job {
         return object as! Job
     }
 

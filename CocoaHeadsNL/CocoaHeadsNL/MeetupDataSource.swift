@@ -1,7 +1,7 @@
 import UIKit
 
 class MeetupDataSource: DetailDataSource {
-    private var meetup: Meetup {
+    var meetup: Meetup {
         return object as! Meetup
     }
 
