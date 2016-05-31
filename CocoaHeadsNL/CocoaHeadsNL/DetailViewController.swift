@@ -47,14 +47,14 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
 
         self.tableView.reloadData()
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         var url: NSURL?
         var title: String?
         var activityType: String?
-        
+
         if let companyDataSource = dataSource as? CompanyDataSource {
             if let urlString = companyDataSource.company.website, titleString = companyDataSource.company.name {
                 title = titleString
@@ -70,20 +70,32 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
             url = NSURL(string: urlString)
             activityType = "nl.cocoaheads.app.meetup"
         }
-        
+
         if let title = title, url = url, activityType = activityType {
             let activity = NSUserActivity(activityType: activityType)
             activity.title = title
-            
-            activity.webpageURL = url
+
+            guard let urlComponents = NSURLComponents(URL: url, resolvingAgainstBaseURL: false) else {
+                return
+            }
+
+            if urlComponents.scheme == nil {
+                urlComponents.scheme = "http"
+            }
+
+            guard let checkedUrl = urlComponents.URL where urlComponents.scheme == "http" || urlComponents.scheme == "https" else {
+                return
+            }
+
+            activity.webpageURL = checkedUrl
             activity.becomeCurrent()
             self.userActivity = activity
         }
     }
-    
+
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        
+
         if #available(iOS 9.0, *) {
             self.userActivity?.resignCurrent()
         }
