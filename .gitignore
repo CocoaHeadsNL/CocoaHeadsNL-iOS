@@ -4,3 +4,17 @@ CocoaHeadsNL/CocoaHeadsNL/ParseConfig.plist
 CocoaHeadsNL/Pods
 xcuserdata
 CocoaHeadsNL/parse
+
+screenshots
+report.xml
+Error*.png
+*.app.dSym.zip
+*.ipa
+*.itmsp
+*.mobileprovision
+config.js
+eckey.pem
+CocoaHeadsNL/CloudKitSync/node_modules
+cloudkit.js
+config.js.dev
+config.js.prod

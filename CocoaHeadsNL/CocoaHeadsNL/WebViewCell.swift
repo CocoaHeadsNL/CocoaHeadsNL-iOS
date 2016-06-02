@@ -11,7 +11,8 @@ class WebViewCell: UITableViewCell, UIWebViewDelegate {
             }
 
             if let html = html {
-                self.htmlWebView.loadHTMLString(html, baseURL: NSURL(string:"http://jobs.cocoaheads.nl"))
+                self.htmlWebView.loadHTMLString(html,
+                                                baseURL: NSURL(string:"http://jobs.cocoaheads.nl"))
                 self.htmlWebView.scrollView.scrollEnabled = false
             }
         }
@@ -29,7 +30,9 @@ class WebViewCell: UITableViewCell, UIWebViewDelegate {
         layoutWebView()
     }
 
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    func webView(webView: UIWebView,
+                 shouldStartLoadWithRequest request: NSURLRequest,
+                 navigationType: UIWebViewNavigationType) -> Bool {
         if navigationType == .LinkClicked {
             UIApplication.sharedApplication().openURL(request.URL!)
             return false

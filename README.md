@@ -12,46 +12,16 @@ Our email: [foundation@cocoaheads.nl](mailto:foundation@cocoaheads.nl)
 
 ## Before running the app
 
-This app uses Parse for the cloud code. Before you can run the app, you need to configure the Parse application ID and the master key.
-
-Please perform these steps:
-
-```bash
-cp CocoaHeadsNL/CloudCode/config/global.json.template CocoaHeadsNL/CloudCode/config/global.json
-```
-
-In the newly created file **global.json**, replace the placeholders for `PARSE_APPLICATION_ID` and `PARSE_MASTER_KEY` with their respective values from parse.com.
-
-```bash
-cp CocoaHeadsNL/CocoaHeadsNL/ParseConfig-template.plist CocoaHeadsNL/CocoaHeadsNL/ParseConfig.plist
-```
-
-In the newly created file **ParseConfig.plist**, replace the placeholders for `PARSE_APPLICATION_ID` and `PARSE_CLIENT_KEY` with their respective values from parse.com
-
-**Take special care to put the client and master key in their respective locations. Leaking the master key is very bad.**
-
-Once done with these steps, please run `pod install` in the directory containing the Podfile.
-
-## Parse command-line tool
-
-To build this project you need to have the parse.com commandline tool installed:
-
-```bash
-curl -s https://www.parse.com/downloads/cloud_code/installer.sh | sudo /bin/bash
-```
-
-This will allow you to upload symbolication information to parse.com for your developer builds.
-
-More info: [https://www.parse.com/docs/cloud_code_guide](https://www.parse.com/docs/cloud_code_guide)
+Please run `pod install` in the directory containing the Podfile.~~
 
 ## Project structure
 
 CocoaHeadsNL contains two important components:
 
 - The iOS app implementation
-- The Parse CloudCode related "stuff"
+- CloudKtSync code
 
-Everything cloud is in the folder **CloudCode**. This folder needs to remain there for the symbolication uploading to work. All other files and directories are related to the iOS app.
+Everything cloud is in the folder **CocoaHeadsNL/CloudKitSync/**. All other files and directories are related to the iOS app.
 
 Minimal deployment target of the app is iOS 8.1.
 

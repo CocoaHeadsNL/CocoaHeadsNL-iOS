@@ -1,14 +1,15 @@
 import UIKit
+import CloudKit
 
 /**
  * Base class for all data sources used by the Detail screen.
  * It has convenience methods for making specific types of cells.
  */
 class DetailDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
-    let object: PFObject
+    let object: AnyObject
     var tableView: UITableView!
 
-    init(object: PFObject) {
+    init(object: AnyObject) {
         self.object = object
     }
 
@@ -28,13 +29,14 @@ class DetailDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
         fatalError("Subclass must implement this")
     }
 
-    func logoCellWithFile(file: PFFile?, forTableView tableView: UITableView) -> LogoCell {
+    func logoCellWithFile(logo: UIImage, forTableView tableView: UITableView) -> LogoCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("logoCell") as! LogoCell
-        cell.logoFile = file
+        cell.logoImageView.image = logo
+        cell.logoImageView.contentMode = .ScaleAspectFit
         return cell
     }
 
-    func mapViewCellWithLocation(location: PFGeoPoint?, name: String?, forTableView tableView: UITableView) -> MapViewCell {
+    func mapViewCellWithLocation(location: CLLocation?, name: String?, forTableView tableView: UITableView) -> MapViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("mapViewCell") as! MapViewCell
         cell.geoLocation = location
         cell.locationName = name

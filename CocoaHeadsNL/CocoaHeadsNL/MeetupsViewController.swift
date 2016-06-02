@@ -3,19 +3,25 @@
 //  CocoaHeadsNL
 //
 //  Created by Jeroen Leenarts on 09-03-15.
-//  Copyright (c) 2015 Stichting CocoaheadsNL. All rights reserved.
+//  Copyright (c) 2016 Stichting CocoaheadsNL. All rights reserved.
 //
 
 import Foundation
+import UIKit
+import CoreSpotlight
+import CloudKit
+import Crashlytics
 
-class MeetupsViewController: PFQueryTableViewController {
-    required init(coder aDecoder: NSCoder) {
+class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDelegate {
+
+    var meetupsArray = [Meetup]()
+    var searchedObjectId: String? = nil
+
+    weak var activityIndicatorView: UIActivityIndicatorView!
+
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-        self.parseClassName = "Meetup"
-        self.pullToRefreshEnabled = true
-        self.paginationEnabled = true
-        self.objectsPerPage = 50
+
     }
 
     override func viewDidLoad() {
@@ -27,53 +33,299 @@ class MeetupsViewController: PFQueryTableViewController {
 
         let backItem = UIBarButtonItem(title: "Events", style: .Plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
-        
+
         let calendarIcon = UIImage.calendarTabImageWithCurrentDate()
         self.navigationController?.tabBarItem.image = calendarIcon
         self.navigationController?.tabBarItem.selectedImage = calendarIcon
+
+        //Inspect paste board for userInfo
+        if let pasteBoard = UIPasteboard(name: searchPasteboardName, create: false) {
+            let uniqueIdentifier = pasteBoard.string
+            if let components = uniqueIdentifier?.componentsSeparatedByString(":") {
+                if components.count > 1 {
+                    let objectId = components[1]
+                    displayObject(objectId)
+                }
+            }
+        }
+
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MeetupsViewController.searchOccured(_:)), name: searchNotificationName, object: nil)
+
+        if #available(iOS 9.0, *) {
+            if traitCollection.forceTouchCapability == .Available {
+                registerForPreviewingWithDelegate(self, sourceView: view)
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+
+        self.discover()
+        self.subscribe()
+
+        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        tableView.backgroundView = activityIndicatorView
+        self.activityIndicatorView = activityIndicatorView
+
+        activityIndicatorView.startAnimating()
     }
+
+    override func viewWillAppear(animated: Bool) {
+        self.fetchMeetups()
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if let searchedObjectId = searchedObjectId {
+            self.searchedObjectId = nil
+            displayObject(searchedObjectId)
+        }
+
+        Answers.logContentViewWithName("Show meetups",
+                                       contentType: "Meetup",
+                                       contentId: "overview",
+                                       customAttributes: nil)
+    }
+
+    func discover() {
+
+        let container = CKContainer.defaultContainer()
+
+        container.requestApplicationPermission(CKApplicationPermissions.UserDiscoverability) { (status, error) in
+            guard error == nil else { return }
+
+            if status == CKApplicationPermissionStatus.Granted {
+                // User allowed for searching on email
+                container.fetchUserRecordIDWithCompletionHandler { (recordID, error) in
+                    guard error == nil else { return }
+                    guard let recordID = recordID else { return }
+
+                    container.discoverUserInfoWithUserRecordID(recordID) { (info, fetchError) in
+                        // TODO check for deprecation and save to userRecord?
+                        if let error = fetchError {
+                            print("error dicovering user info: \(error)")
+                            return
+                        }
+
+                        guard let info = info else {
+                            print("error dicovering user info, info is nil for unknown reason")
+                            return
+                        }
+
+                        container.publicCloudDatabase.fetchRecordWithID(recordID, completionHandler: { (userRecord, error) in
+                            if let error = fetchError {
+                                print("error dicovering user record: \(error)")
+                                return
+                            }
+
+                            if let record = userRecord {
+                                record["firstName"] = info.firstName
+                                record["lastName"] = info.lastName
+
+                                container.publicCloudDatabase.saveRecord(record, completionHandler: { (record, error) in
+                                    //print(record)
+                                })
+                            }
+                        })
+                    }
+                }
+            }
+        }
+    }
+
+    func subscribe() {
+        let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+
+        let subscription = CKSubscription(
+            recordType: "Meetup",
+            predicate: NSPredicate(value: true),
+            options: .FiresOnRecordCreation
+        )
+
+        let info = CKNotificationInfo()
+
+        info.alertBody = "New meetup has been added!"
+        info.shouldBadge = true
+
+        subscription.notificationInfo = info
+
+        publicDB.saveSubscription(subscription) { record, error in }
+    }
+
+    //MARK: - 3D Touch
+
+    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        //quick peek
+        guard let indexPath = tableView.indexPathForRowAtPoint(location), cell = tableView.cellForRowAtIndexPath(indexPath) as? MeetupCell
+            else { return nil }
+
+        let vcId = "detailViewController"
+
+        guard let detailVC = storyboard?.instantiateViewControllerWithIdentifier(vcId) as? DetailViewController
+            else { return nil }
+
+        if #available(iOS 9.0, *) {
+
+            let meetup = self.meetupsArray[indexPath.row]
+            detailVC.dataSource = MeetupDataSource(object: meetup )
+            detailVC.presentingVC  = self
+
+            previewingContext.sourceRect = cell.frame
+
+            return detailVC
+
+        } else {
+            // Fallback on earlier versions
+            return nil
+        }
+    }
+
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        //push to detailView - pop forceTouch window
+        showViewController(viewControllerToCommit, sender: self)
+    }
+
+
+    //MARK: - Search
+
+    func searchOccured(notification: NSNotification) -> Void {
+        guard let userInfo = notification.userInfo as? Dictionary<String, String> else {
+            return
+        }
+
+        let type = userInfo["type"]
+
+        if type != "meetup" {
+            //Not for me
+            return
+        }
+        if let objectId = userInfo["objectId"] {
+            displayObject(objectId)
+        }
+    }
+
+    func displayObject(recordID: String) -> Void {
+        //if !loading {
+            if self.navigationController?.visibleViewController == self {
+                let meetups = self.meetupsArray
+
+                if let selectedObject = meetups.filter({ (meetup: Meetup) -> Bool in
+                    return meetup.recordID == recordID
+                }).first {
+                    performSegueWithIdentifier("ShowDetail", sender: selectedObject)
+                }
+
+            } else {
+                self.navigationController?.popToRootViewControllerAnimated(false)
+                searchedObjectId = recordID
+            }
+
+//        } else {
+//            //cache object
+//            searchedObjectId = objectId
+//        }
+    }
+
 
     //MARK: - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
-            if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
-                let meetup = self.objectAtIndexPath(indexPath) as! Meetup
+            if let selectedObject = sender as? Meetup {
+                let detailViewController = segue.destinationViewController as! DetailViewController
+                detailViewController.dataSource = MeetupDataSource(object: selectedObject)
+
+                Answers.logContentViewWithName("Show Meetup details",
+                                               contentType: "Meetup",
+                                               contentId: selectedObject.meetup_id!,
+                                               customAttributes: nil)
+            } else if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
+                let meetup = self.meetupsArray[indexPath.row]
                 let detailViewController = segue.destinationViewController as! DetailViewController
                 detailViewController.dataSource = MeetupDataSource(object: meetup)
+                Answers.logContentViewWithName("Show Meetup details",
+                                               contentType: "Meetup",
+                                               contentId: meetup.meetup_id!,
+                                               customAttributes: nil)
             }
         }
     }
 
     //MARK: - UITableViewDataSource
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
 
-        var cell = tableView.dequeueReusableCellWithIdentifier(MeetupCell.Identifier, forIndexPath: indexPath) as! MeetupCell
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        if let meetup = object as? Meetup {
-            cell.configureCellForMeetup(meetup, row: indexPath.row)
-        }
+        return self.meetupsArray.count
+    }
+
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+
+        let cell = tableView.dequeueReusableCellWithIdentifier(MeetupCell.Identifier, forIndexPath: indexPath) as! MeetupCell
+
+        let meetup = self.meetupsArray[indexPath.row]
+        cell.configureCellForMeetup(meetup, row: indexPath.row)
 
         return cell
+
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 88
+        return UITableViewAutomaticDimension
+    }
+
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return CGFloat(88)
     }
 
     //MARK: - UITableViewDelegate
-    
+
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("ShowDetail", sender: tableView.cellForRowAtIndexPath(indexPath))
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
-    //MARK: - Parse PFQueryTableViewController methods
+    //MARK: - fetching Cloudkit
 
-    override func queryForTable() -> PFQuery {
-        let meetupQuery = Meetup.query()!
-        meetupQuery.orderByDescending("time")
+    func fetchMeetups() {
 
-        return meetupQuery
+        let pred = NSPredicate(value: true)
+        let sort = NSSortDescriptor(key: "time", ascending: false)
+        let query = CKQuery(recordType: "Meetup", predicate: pred)
+        query.sortDescriptors = [sort]
+
+        let operation = CKQueryOperation(query: query)
+        operation.qualityOfService = .UserInteractive
+
+        var meetups = [Meetup]()
+
+        operation.recordFetchedBlock = { (record) in
+            let meetup = Meetup(record: record)
+            let _ = meetup.smallLogoImage
+            let _ = meetup.logoImage
+            meetups.append(meetup)
+        }
+
+        operation.queryCompletionBlock = { [unowned self] (cursor, error) in
+            dispatch_async(dispatch_get_main_queue()) {
+                guard error == nil else {
+                    let ac = UIAlertController(
+                        title: "Fetch failed",
+                        message: "There was a problem fetching the list of meetups; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(ac, animated: true, completion: nil)
+                    return
+                }
+                self.meetupsArray = meetups
+                self.activityIndicatorView.stopAnimating()
+                self.activityIndicatorView.hidesWhenStopped = true
+                self.tableView.reloadData()
+            }
+        }
+
+        CKContainer.defaultContainer().publicCloudDatabase.addOperation(operation)
+
     }
+
+
 }

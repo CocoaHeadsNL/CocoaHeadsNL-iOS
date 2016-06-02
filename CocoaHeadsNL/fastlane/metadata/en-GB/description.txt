@@ -1,0 +1,3 @@
+This is the CocoaheadsNL app.  CocoaHeads is a monthly meeting of iOS and Mac developers in the Netherlands and part of the international CocoaHeads.org. In case you would like to meet developers or sponsor an event contact us!
+
+How does it work? Every month we organize a meeting at a different venue including food and drinks sponsored by companies. Depending on the size of the location we put together a nice agenda for developers. Like to sponsor us? Our sponsors will be listed on our website and app including link and logo for a limited time.

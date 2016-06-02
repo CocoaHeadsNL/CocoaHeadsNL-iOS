@@ -1,9 +1,12 @@
 import UIKit
+import StoreKit
+import Crashlytics
 
 class CompanyDataSource: DetailDataSource {
     let fetchLinks = FetchAffiliateLinks()
+    weak var presenter: DetailViewController?
 
-    private var company: Company {
+    var company: Company {
         return object as! Company
     }
 
@@ -12,7 +15,7 @@ class CompanyDataSource: DetailDataSource {
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if let apps = company["hasApps"] as? Bool {
+        if company.hasApps {
             return 2
         } else {
             return 1
@@ -34,7 +37,7 @@ class CompanyDataSource: DetailDataSource {
 
         switch indexPath.row {
         case 0:
-            return logoCellWithFile(company.logo, forTableView: tableView)
+            return logoCellWithFile(company.logoImage, forTableView: tableView)
         case 1:
             return titleCellWithText(company.emailAddress, forTableView: tableView)
         case 2:
@@ -54,7 +57,7 @@ class CompanyDataSource: DetailDataSource {
     }
 
     func fetchAffiliateLinks() {
-        if let apps = company["hasApps"] as? Bool {
+        if company.hasApps {
             fetchLinks.fetchLinksForCompany(company) {
                 self.tableView.reloadData()
             }
@@ -66,21 +69,27 @@ class CompanyDataSource: DetailDataSource {
             tableView.headerViewForSection(1)?.backgroundColor = UIColor.grayColor()
             return tableView.headerViewForSection(1)
         } else {
-            return UIView(frame: CGRect.zeroRect)
+            return UIView(frame: CGRect.zero)
         }
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 1 {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
-            if let affiliateToken = PFConfig.currentConfig()["appleAffiliateToken"] as? String {
-                let affiliateLink = fetchLinks.apps[indexPath.row]
-                if let affiliateId = affiliateLink.affiliateId,
-                   let url = NSURL(string: "https:itunes.apple.com/app/apple-store/id\(affiliateId)?at=\(affiliateToken)&ct=app") {
-                    if UIApplication.sharedApplication().canOpenURL(url) {
-                        UIApplication.sharedApplication().openURL(url)
-                    }
+            if let vc = presenter {
+
+                let affiliateLink = self.fetchLinks.apps[indexPath.row]
+                let affiliateToken = "1010l8D"
+                    if let affiliateId = affiliateLink.affiliateId {
+                        let parameters = [SKStoreProductParameterITunesItemIdentifier :
+                            affiliateId, SKStoreProductParameterAffiliateToken : affiliateToken]
+
+                        vc.showStoreView(parameters, indexPath: indexPath)
+
+                        Answers.logContentViewWithName("Show appstore",
+                                                       contentType: "App",
+                                                       contentId: "\(affiliateLink.productCreator!) \(affiliateLink.productName)",
+                                                       customAttributes: nil)
                 }
             }
         }

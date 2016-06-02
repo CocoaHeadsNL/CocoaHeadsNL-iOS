@@ -1,0 +1,18 @@
+{
+  "name": "CocoaHeadsNLAppSync",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-config": "cp config.js.example config.js",
+    "install-cloudkit-js": "curl https://cdn.apple-cloudkit.com/ck/1/cloudkit.js > cloudkit.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "node-fetch": "^1.3.3",
+    "request": "^2.67.0",
+    "promise": "^7.0.2"
+  }
+}

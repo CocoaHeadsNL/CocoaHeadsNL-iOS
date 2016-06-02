@@ -1,10 +1,15 @@
-
 import UIKit
 
-public func UIColorWithRGB(r: Int, g: Int, b: Int) -> UIColor {
-    return UIColor(red: CGFloat(r)/255.0, green: CGFloat(g)/255.0, blue: CGFloat(b)/255.0, alpha: 1.0)
+public func UIColorWithRGB(red: Int, green: Int, blue: Int) -> UIColor {
+    return UIColor(red: CGFloat(red)/255.0,
+                   green: CGFloat(green)/255.0,
+                   blue: CGFloat(blue)/255.0,
+                   alpha: 1.0)
 }
 
-public func UIColorWithRGBA(r: Int, g: Int, b: Int, a: Int) -> UIColor {
-    return UIColor(red: CGFloat(r)/255.0, green: CGFloat(g)/255.0, blue: CGFloat(b)/255.0, alpha: CGFloat(a)/255.0)
+public func UIColorWithRGBA(red: Int, green: Int, blue: Int, alpha: Int) -> UIColor {
+    return UIColor(red: CGFloat(red)/255.0,
+                   green: CGFloat(green)/255.0,
+                   blue: CGFloat(blue)/255.0,
+                   alpha: CGFloat(alpha)/255.0)
 }

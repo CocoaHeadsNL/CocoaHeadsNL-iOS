@@ -9,14 +9,27 @@ class TitleCell: UITableViewCell {
         }
     }
 
+    lazy var dateFormatter: NSDateFormatter = {
+        let dateFormatter = NSDateFormatter()
+        let dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMMd",
+                                                                options: 0,
+                                                                locale: NSLocale.currentLocale())
+        dateFormatter.dateFormat = dateFormat
+        return dateFormatter
+    }()
+
+    lazy var timeFormatter: NSDateFormatter = {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeStyle = .ShortStyle
+        return dateFormatter
+    }()
+
     var date: NSDate? {
         didSet {
             if let date = date {
-                var dateFormatter = NSDateFormatter()
-                dateFormatter.dateStyle = .MediumStyle
-                dateFormatter.timeStyle = .ShortStyle
-                dateFormatter.dateFormat = "d MMMM, HH:mm a"
-                self.titleLabel.text = dateFormatter.stringFromDate(date)
+                let dateString = dateFormatter.stringFromDate(date)
+                let timeString = timeFormatter.stringFromDate(date)
+                self.titleLabel.text = dateString + ", " + timeString
             } else {
                 self.titleLabel.text = "-"
             }
