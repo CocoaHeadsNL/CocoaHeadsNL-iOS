@@ -25,7 +25,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let pasteboard = UIPasteboard(name: "searchPasteboardName", create: false) {
             pasteboard.string = ""
         }
-        application.applicationIconBadgeNumber = 0
+
+        let badgeResetOperation = CKModifyBadgeOperation(badgeValue: 0)
+        badgeResetOperation.modifyBadgeCompletionBlock = { (error) -> Void in
+            guard error == nil else {
+                print("Error resetting badge: \(error)")
+                return
+            }
+            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+        }
+        CKContainer.defaultContainer().addOperation(badgeResetOperation)
     }
 
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
