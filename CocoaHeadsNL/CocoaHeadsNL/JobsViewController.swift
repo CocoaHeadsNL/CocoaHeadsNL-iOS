@@ -99,12 +99,11 @@ class JobsViewController: UICollectionViewController {
         super.viewWillLayoutSubviews()
 
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: 145, height: 100)
             let screenwidth = view.frame.width
-            let numberOfCells = floor(screenwidth / layout.itemSize.width)
-            let inset = floor((screenwidth - numberOfCells * layout.itemSize.width) / (numberOfCells + 1))
-            layout.sectionInset = UIEdgeInsets(top: 10.0, left: inset, bottom: 10.0, right: inset)
-                layout.minimumInteritemSpacing = inset
+            layout.itemSize = CGSize(width: screenwidth/2, height: 120)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            layout.minimumInteritemSpacing = 0
+            layout.minimumLineSpacing = 0
         }
     }
 
@@ -144,6 +143,9 @@ class JobsViewController: UICollectionViewController {
 
         let job = jobsArray[indexPath.item]
         cell.job = job
+
+        // Remove the vertical separator line for a cell on the right.
+        cell.rightHandSide = (indexPath.item % 2 == 1)
 
         return cell
 
