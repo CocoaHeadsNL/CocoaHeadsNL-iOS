@@ -366,6 +366,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F1A46D331AAB50BB00585D61 /* Build configuration list for PBXNativeTarget "CocoaHeadsNL" */;
 			buildPhases = (
+				AFF298F961BC834641E04B7B /* [CP] Check Pods Manifest.lock */,
 				DFC6E9EA36C2BD8BB67804B1 /* [CP] Check Pods Manifest.lock */,
 				F1A46D0E1AAB50BB00585D61 /* Sources */,
 				F1A46D0F1AAB50BB00585D61 /* Frameworks */,
@@ -375,6 +376,8 @@
 				4ADDA16B1C832BB00098B1C2 /* Fabric */,
 				B653106EA18082D4EC97BD03 /* [CP] Embed Pods Frameworks */,
 				F1A14694A32214BAF186CBBD /* [CP] Copy Pods Resources */,
+				5802679B3CED9D15DE11E3C3 /* 📦 Embed Pods Frameworks */,
+				33635DC6975F5859AF2D9316 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -402,7 +405,7 @@
 					};
 					F1A46D111AAB50BB00585D61 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = MGCEKGP4Y4;
+						DevelopmentTeam = D55PL7PU7S;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -464,6 +467,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		33635DC6975F5859AF2D9316 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CocoaHeadsNL/Pods-CocoaHeadsNL-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		484D9C0BBDD7B737044AFDBF /* Set version number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -505,6 +523,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 3b3cf5545c3cc6e67f38400041cd8fd1d1227455 442552a42a8fd98bf7702007cc1a0f3a9362499f5b44f19f698623f9054f86a5";
+		};
+		5802679B3CED9D15DE11E3C3 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CocoaHeadsNL/Pods-CocoaHeadsNL-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AFF298F961BC834641E04B7B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		B653106EA18082D4EC97BD03 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
