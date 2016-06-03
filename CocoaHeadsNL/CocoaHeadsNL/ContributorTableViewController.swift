@@ -17,6 +17,15 @@ class ContributorTableViewController: UITableViewController {
 
     //MARK: - View LifeCycle
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        let backItem = UIBarButtonItem(title: "About", style: .Plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backItem
+
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
+    }
+
     override func viewWillAppear(animated: Bool) {
 
         self.fetchContributors()

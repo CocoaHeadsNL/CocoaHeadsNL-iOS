@@ -238,9 +238,9 @@
 		F11455A81AB3256C00546D22 /* Open Job Postings */ = {
 			isa = PBXGroup;
 			children = (
-				F1A46D3C1AAB516300585D61 /* JobsViewController.swift */,
 				F1BDEA731C920768004C7DAB /* JobsCell.swift */,
 				F1BDEA741C920768004C7DAB /* JobsCell.xib */,
+				F1A46D3C1AAB516300585D61 /* JobsViewController.swift */,
 			);
 			name = "Open Job Postings";
 			sourceTree = "<group>";
