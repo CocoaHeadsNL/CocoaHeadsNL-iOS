@@ -23,6 +23,11 @@ class JobsViewController: UICollectionViewController {
         let nib = UINib(nibName: "JobsCell", bundle: nil)
         self.collectionView?.registerNib(nib, forCellWithReuseIdentifier: "jobsCell")
 
+        let backItem = UIBarButtonItem(title: "Jobs", style: .Plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backItem
+
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
+
         //Inspect paste board for userInfo
         if let pasteBoard = UIPasteboard(name: searchPasteboardName, create: false) {
             let uniqueIdentifier = pasteBoard.string

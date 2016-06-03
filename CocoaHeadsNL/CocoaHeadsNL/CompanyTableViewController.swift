@@ -30,6 +30,8 @@ class CompanyTableViewController: UITableViewController {
         let backItem = UIBarButtonItem(title: "Companies", style: .Plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CompanyTableViewController.locationAvailable(_:)), name: "LOCATION_AVAILABLE", object: nil)
 
         self.subscribe()

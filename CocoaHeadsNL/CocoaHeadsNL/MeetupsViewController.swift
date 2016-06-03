@@ -34,6 +34,8 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         let backItem = UIBarButtonItem(title: "Events", style: .Plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
+
         let calendarIcon = UIImage.calendarTabImageWithCurrentDate()
         self.navigationController?.tabBarItem.image = calendarIcon
         self.navigationController?.tabBarItem.selectedImage = calendarIcon
