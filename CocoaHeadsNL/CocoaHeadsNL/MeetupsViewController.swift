@@ -308,20 +308,20 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
             meetups.append(meetup)
         }
 
-        operation.queryCompletionBlock = { [unowned self] (cursor, error) in
+        operation.queryCompletionBlock = { [weak self] (cursor, error) in
             dispatch_async(dispatch_get_main_queue()) {
                 guard error == nil else {
                     let ac = UIAlertController(
                         title: "Fetch failed",
                         message: "There was a problem fetching the list of meetups; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    self.presentViewController(ac, animated: true, completion: nil)
+                    self?.presentViewController(ac, animated: true, completion: nil)
                     return
                 }
-                self.meetupsArray = meetups
-                self.activityIndicatorView.stopAnimating()
-                self.activityIndicatorView.hidesWhenStopped = true
-                self.tableView.reloadData()
+                self?.meetupsArray = meetups
+                self?.activityIndicatorView.stopAnimating()
+                self?.activityIndicatorView.hidesWhenStopped = true
+                self?.tableView.reloadData()
             }
         }
 

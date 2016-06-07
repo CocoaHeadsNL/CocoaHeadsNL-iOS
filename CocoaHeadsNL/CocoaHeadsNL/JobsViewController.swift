@@ -205,20 +205,20 @@ class JobsViewController: UICollectionViewController {
             jobs.append(job)
         }
 
-        operation.queryCompletionBlock = { [unowned self] (cursor, error) in
+        operation.queryCompletionBlock = { [weak self] (cursor, error) in
             dispatch_async(dispatch_get_main_queue()) {
 
                 if error != nil {
 
                     let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of jobs; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    self.presentViewController(ac, animated: true, completion: nil)
+                    self?.presentViewController(ac, animated: true, completion: nil)
 
                 } else {
 
-                    self.activityIndicator.stopAnimating()
-                    self.jobsArray = jobs
-                    self.collectionView?.reloadData()
+                    self?.activityIndicator.stopAnimating()
+                    self?.jobsArray = jobs
+                    self?.collectionView?.reloadData()
                 }
             }
         }

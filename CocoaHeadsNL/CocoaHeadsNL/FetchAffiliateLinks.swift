@@ -22,11 +22,11 @@ class FetchAffiliateLinks {
                 affiliateLinks.append(affLink)
             }
 
-            operation.queryCompletionBlock = { [unowned self] (cursor, error) in
+            operation.queryCompletionBlock = { [weak self] (cursor, error) in
                 dispatch_async(dispatch_get_main_queue()) {
                     if error == nil {
 
-                        self.apps = affiliateLinks
+                        self?.apps = affiliateLinks
                         completion()
                     }
                 }
