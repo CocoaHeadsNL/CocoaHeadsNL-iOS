@@ -65,16 +65,16 @@ class Company {
     let smallLogo: CKAsset?
 
     lazy var logoImage: UIImage = {
-        if let logo = self.logo, data = NSData(contentsOfURL: logo.fileURL) {
-            return UIImage(data:data)!
+        if let logo = self.logo, data = NSData(contentsOfURL: logo.fileURL), image = UIImage(data:data) {
+            return image
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
         }
     }()
 
     lazy var smallLogoImage: UIImage = {
-        if let logo = self.smallLogo, data = NSData(contentsOfURL: logo.fileURL) {
-            return UIImage(data:data)!
+        if let logo = self.smallLogo, data = NSData(contentsOfURL: logo.fileURL), image = UIImage(data:data) {
+            return image
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
         }
