@@ -65,7 +65,6 @@ class Company {
     let smallLogo: CKAsset?
 
     lazy var logoImage: UIImage = {
-        let logoImage: UIImage
         if let logo = self.logo, data = NSData(contentsOfURL: logo.fileURL) {
             return UIImage(data:data)!
         } else {
@@ -74,7 +73,6 @@ class Company {
     }()
 
     lazy var smallLogoImage: UIImage = {
-        let smallLogoImage: UIImage
         if let logo = self.smallLogo, data = NSData(contentsOfURL: logo.fileURL) {
             return UIImage(data:data)!
         } else {
