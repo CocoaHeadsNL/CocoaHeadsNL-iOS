@@ -47,7 +47,7 @@ class Company {
         self.emailAddress = record["emailAddress"] as? String
         self.location = record["location"] as? CLLocation
         self.logo = record["logo"] as? CKAsset
-        self.hasApps = record["hasApps"] as! Bool
+        self.hasApps = record["hasApps"] as? Bool ?? false
         self.smallLogo = record["smallLogo"] as? CKAsset
     }
 
