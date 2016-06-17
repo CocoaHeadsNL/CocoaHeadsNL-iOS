@@ -74,7 +74,7 @@ class Company {
     }()
 
     lazy var smallLogoImage: UIImage = {
-        let logoImage: UIImage
+        let smallLogoImage: UIImage
         if let logo = self.smallLogo, data = NSData(contentsOfURL: logo.fileURL) {
             return UIImage(data:data)!
         } else {
