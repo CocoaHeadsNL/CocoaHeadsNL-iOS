@@ -6,7 +6,8 @@ podfile: CocoaHeadsNL/Podfile
 before_install:
   - brew update
   - brew outdated xctool || brew upgrade xctool
-  - gem install cocoapods
+  - gem install --no-rdoc --no-ri cocoapods
+  - pod install --project-directory=CocoaHeadsNL
   - cd CocoaHeadsNL
 script:
   - xctool -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
