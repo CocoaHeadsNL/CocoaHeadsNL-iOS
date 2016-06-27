@@ -1,0 +1,4 @@
+language: objective-c
+script:
+  - cd CocoaHeadsNL
+  - xctool -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
