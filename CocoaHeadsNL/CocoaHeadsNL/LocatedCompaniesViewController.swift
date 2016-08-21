@@ -23,6 +23,7 @@ class LocatedCompaniesViewController: UITableViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
+            super.viewWillAppear(animated)
 
             if let companiesArray = companyDict?.companies {
                 self.companiesArray = companiesArray

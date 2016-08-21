@@ -21,6 +21,8 @@ class CompanyTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
         self.fetchCompanies()
     }
 

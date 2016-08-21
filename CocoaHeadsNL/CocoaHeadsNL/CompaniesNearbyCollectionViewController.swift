@@ -39,6 +39,7 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         if let locationManager = self.coreLocationController?.locationManager {
             locationManager.startUpdatingLocation()
         }

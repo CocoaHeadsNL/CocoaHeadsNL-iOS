@@ -73,6 +73,8 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     }
 
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
         self.fetchMeetups()
     }
 
