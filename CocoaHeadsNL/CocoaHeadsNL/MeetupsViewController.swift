@@ -99,7 +99,9 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         tableView.backgroundView = activityIndicatorView
         self.activityIndicatorView = activityIndicatorView
 
-        activityIndicatorView.startAnimating()
+        if meetupsArray.count == 0 {
+            activityIndicatorView.startAnimating()
+        }
     }
 
     override func viewWillAppear(animated: Bool) {

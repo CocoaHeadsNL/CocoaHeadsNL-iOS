@@ -39,7 +39,9 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
         self.coreLocationController = CoreLocationController()
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CompaniesNearbyCollectionViewController.locationAvailable(_:)), name: "LOCATION_AVAILABLE", object: nil)
-        self.activityIndicator.startAnimating()
+        if companiesArray.count == 0 {
+            self.activityIndicator.startAnimating()
+        }
         
         // Set results notification block
         self.notificationToken = companiesArray.addNotificationBlock { (changes: RealmCollectionChange) in

@@ -44,8 +44,10 @@ class JobsViewController: UICollectionViewController {
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(JobsViewController.searchOccured(_:)), name: searchNotificationName, object: nil)
         self.subscribe()
-        self.activityIndicator.startAnimating()
-        
+        if jobsArray.count == 0 {
+            self.activityIndicator.startAnimating()
+        }
+    
         // Set results notification block
         self.notificationToken = jobsArray.addNotificationBlock { (changes: RealmCollectionChange) in
             switch changes {
