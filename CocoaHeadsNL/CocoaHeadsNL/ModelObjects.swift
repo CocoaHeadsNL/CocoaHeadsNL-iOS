@@ -233,8 +233,8 @@ class Meetup: Object {
         meetup.name = record["name"] as? String ?? ""
         meetup.meetup_id = record["meetup_id"] as? String
         meetup.meetup_description = record["meetup_description"] as? String ?? ""
-        meetup.latitude = (record["location"] as? CLLocation)?.coordinate.latitude ?? 0.0
-        meetup.longitude = (record["location"] as? CLLocation)?.coordinate.longitude ?? 0.0
+        meetup.latitude = (record["geoLocation"] as? CLLocation)?.coordinate.latitude ?? 0.0
+        meetup.longitude = (record["geoLocation"] as? CLLocation)?.coordinate.longitude ?? 0.0
         meetup.location = record["location"] as? String ?? ""
         meetup.locationName = record["locationName"] as? String ?? ""
         meetup.time = record["time"] as? NSDate
