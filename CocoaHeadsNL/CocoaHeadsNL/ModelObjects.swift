@@ -124,37 +124,42 @@ class Contributor: Object {
     dynamic var url: String?
 }
 
-class Job {
-
-    let recordID: CKRecordID
-    let content: String
-    let date: NSDate
-    let link: String
-    let title: String
-    let logoURL: NSURL?
-
-    init(record: CKRecord) {
-
-        self.recordID = record.recordID
-        self.content = record["content"] as? String ?? ""
-        self.date = record["date"] as? NSDate ?? NSDate()
-        self.link = record["link"] as? String ?? ""
-        self.title = record["title"] as? String ?? ""
-        if let logoURLString = record["logoUrl"] as? String {
-            self.logoURL = NSURL(string: logoURLString)
-        } else {
-            self.logoURL = nil
+class Job: Object {
+    static func job(forRecord record: CKRecord) -> Job {
+        let job = Job()
+        
+        job.recordName = record.recordID.recordName
+        job.content = record["content"] as? String ?? ""
+        job.date = record["date"] as? NSDate ?? NSDate()
+        job.link = record["link"] as? String ?? ""
+        job.title = record["title"] as? String ?? ""
+        job.logoUrlString = record["logoUrl"] as? String
+        
+        if let logoURLString = job.logoUrlString, let logoURL = NSURL(string: logoURLString), data = NSData(contentsOfURL: logoURL) {
+            job.logo = data
         }
+        return job
     }
 
+    override static func primaryKey() -> String? {
+        return "recordName"
+    }
+    
+    dynamic var recordName: String?
+    dynamic var content: String = ""
+    dynamic var date: NSDate?
+    dynamic var link: String = ""
+    dynamic var title: String = ""
+    dynamic var logoUrlString: String?
+    dynamic var logo: NSData?
+
+    override static func ignoredProperties() -> [String] {
+        return ["logoImage"]
+    }
+    
     lazy var logoImage: UIImage = {
-        let logoImage: UIImage
-        if let logoURL = self.logoURL, data = NSData(contentsOfURL: logoURL) {
-            if let image = UIImage(data:data) {
-                return image
-            } else {
-                return UIImage(named: "CocoaHeadsNLLogo")!
-            }
+        if let logo = self.logo, image = UIImage(data:logo) {
+            return image
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
         }
@@ -196,7 +201,7 @@ class Job {
 
                 var searchableItems = [CSSearchableItem]()
                 for job in jobs {
-                    let item = CSSearchableItem(uniqueIdentifier: "job:\(job.recordID)", domainIdentifier: "job", attributeSet: job.searchableAttributeSet)
+                    let item = CSSearchableItem(uniqueIdentifier: "job:\(job.recordName)", domainIdentifier: "job", attributeSet: job.searchableAttributeSet)
                     searchableItems.append(item)
                 }
 

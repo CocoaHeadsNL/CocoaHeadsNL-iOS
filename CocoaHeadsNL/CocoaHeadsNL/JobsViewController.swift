@@ -10,12 +10,15 @@ import Foundation
 import UIKit
 import CloudKit
 import Crashlytics
+import RealmSwift
 
 class JobsViewController: UICollectionViewController {
+    let realm = try! Realm()
 
-    var jobsArray = [Job]()
+    var jobsArray = try! Realm().objects(Job.self).sorted("date", ascending: false)
     var searchedObjectId: String? = nil
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    var notificationToken: NotificationToken?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +45,28 @@ class JobsViewController: UICollectionViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(JobsViewController.searchOccured(_:)), name: searchNotificationName, object: nil)
         self.subscribe()
         self.activityIndicator.startAnimating()
+        
+        // Set results notification block
+        self.notificationToken = jobsArray.addNotificationBlock { (changes: RealmCollectionChange) in
+            switch changes {
+            case .Initial:
+                // Results are now populated and can be accessed without blocking the UI
+                self.collectionView?.reloadData()
+                break
+            case .Update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the TableView
+                self.collectionView?.performBatchUpdates({
+                    self.collectionView?.insertItemsAtIndexPaths(insertions.map { NSIndexPath(forRow: $0, inSection: 0) })
+                    self.collectionView?.deleteItemsAtIndexPaths(deletions.map { NSIndexPath(forRow: $0, inSection: 0) })
+                    self.collectionView?.reloadItemsAtIndexPaths(modifications.map { NSIndexPath(forRow: $0, inSection: 0) })
+                    }, completion: nil)
+                break
+            case .Error(let err):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(err)")
+                break
+            }
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -80,20 +105,20 @@ class JobsViewController: UICollectionViewController {
         }
     }
 
-    func displayObject(recordID: String) -> Void {
+    func displayObject(recordName: String) -> Void {
        // if !loading {
             if self.navigationController?.visibleViewController == self {
                 let jobs = self.jobsArray
 
                 if let selectedObject = jobs.filter({ (job: Job) -> Bool in
-                    return job.recordID == recordID
+                    return job.recordName == recordName
                 }).first {
                     performSegueWithIdentifier("ShowDetail", sender: selectedObject)
                 }
 
             } else {
                 self.navigationController?.popToRootViewControllerAnimated(false)
-                searchedObjectId = recordID
+                searchedObjectId = recordName
             }
 
 //        } else {
@@ -202,7 +227,7 @@ class JobsViewController: UICollectionViewController {
         var jobs = [Job]()
 
         operation.recordFetchedBlock = { (record) in
-            let job = Job(record: record)
+            let job = Job.job(forRecord: record)
             let _ = job.logoImage
             jobs.append(job)
         }
@@ -217,10 +242,11 @@ class JobsViewController: UICollectionViewController {
                     self?.presentViewController(ac, animated: true, completion: nil)
 
                 } else {
+                    self?.realm.beginWrite()
+                    self?.realm.add(jobs, update: true)
+                    try! self?.realm.commitWrite()
 
                     self?.activityIndicator.stopAnimating()
-                    self?.jobsArray = jobs
-                    self?.collectionView?.reloadData()
                 }
             }
         }
