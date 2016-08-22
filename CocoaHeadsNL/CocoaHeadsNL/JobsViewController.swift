@@ -242,8 +242,16 @@ class JobsViewController: UICollectionViewController {
                     self?.presentViewController(ac, animated: true, completion: nil)
 
                 } else {
+                    let jobRecordNames = jobs.flatMap({ (job) -> String? in
+                        return job.recordName
+                    })
+                    let predicate = NSPredicate(format: "NOT recordName IN %@", jobRecordNames)
+                    let obsoleteJobs = self?.realm.objects(Job).filter(predicate)
                     self?.realm.beginWrite()
                     self?.realm.add(jobs, update: true)
+                    if let obsoleteJobs = obsoleteJobs {
+                        self?.realm.delete(obsoleteJobs)
+                    }
                     try! self?.realm.commitWrite()
 
                     self?.activityIndicator.stopAnimating()
