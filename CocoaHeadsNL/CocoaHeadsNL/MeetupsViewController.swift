@@ -11,11 +11,16 @@ import UIKit
 import CoreSpotlight
 import CloudKit
 import Crashlytics
+import RealmSwift
 
 class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDelegate {
 
-    var meetupsArray = [Meetup]()
+    let realm = try! Realm()
+
+    var meetupsArray = try! Realm().objects(Meetup.self).sorted("time", ascending: false)
     var searchedObjectId: String? = nil
+    var notificationToken: NotificationToken?
+
 
     weak var activityIndicatorView: UIActivityIndicatorView!
 
@@ -53,6 +58,31 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MeetupsViewController.searchOccured(_:)), name: searchNotificationName, object: nil)
+        
+        // Set results notification block
+        self.notificationToken = meetupsArray.addNotificationBlock { (changes: RealmCollectionChange) in
+            switch changes {
+            case .Initial:
+                // Results are now populated and can be accessed without blocking the UI
+                self.tableView.reloadData()
+                break
+            case .Update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the TableView
+                self.tableView.beginUpdates()
+                self.tableView.insertRowsAtIndexPaths(insertions.map { NSIndexPath(forRow: $0, inSection: 0) },
+                    withRowAnimation: .Automatic)
+                self.tableView.deleteRowsAtIndexPaths(deletions.map { NSIndexPath(forRow: $0, inSection: 0) },
+                    withRowAnimation: .Automatic)
+                self.tableView.reloadRowsAtIndexPaths(modifications.map { NSIndexPath(forRow: $0, inSection: 0) },
+                    withRowAnimation: .Automatic)
+                self.tableView.endUpdates()
+                break
+            case .Error(let err):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(err)")
+                break
+            }
+        }
 
         if #available(iOS 9.0, *) {
             if traitCollection.forceTouchCapability == .Available {
@@ -209,20 +239,20 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         }
     }
 
-    func displayObject(recordID: String) -> Void {
+    func displayObject(recordName: String) -> Void {
         //if !loading {
             if self.navigationController?.visibleViewController == self {
                 let meetups = self.meetupsArray
 
                 if let selectedObject = meetups.filter({ (meetup: Meetup) -> Bool in
-                    return meetup.recordID == recordID
+                    return meetup.recordName == recordName
                 }).first {
                     performSegueWithIdentifier("ShowDetail", sender: selectedObject)
                 }
 
             } else {
                 self.navigationController?.popToRootViewControllerAnimated(false)
-                searchedObjectId = recordID
+                searchedObjectId = recordName
             }
 
 //        } else {
@@ -304,7 +334,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         var meetups = [Meetup]()
 
         operation.recordFetchedBlock = { (record) in
-            let meetup = Meetup(record: record)
+            let meetup = Meetup.meetup(forRecord: record)
             let _ = meetup.smallLogoImage
             let _ = meetup.logoImage
             meetups.append(meetup)
@@ -320,10 +350,13 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                     self?.presentViewController(ac, animated: true, completion: nil)
                     return
                 }
-                self?.meetupsArray = meetups
+                
+                self?.realm.beginWrite()
+                self?.realm.add(meetups, update: true)
+                try! self?.realm.commitWrite()
+                
                 self?.activityIndicatorView.stopAnimating()
                 self?.activityIndicatorView.hidesWhenStopped = true
-                self?.tableView.reloadData()
             }
         }
 

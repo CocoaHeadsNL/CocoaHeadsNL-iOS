@@ -165,7 +165,7 @@ class CompanyTableViewController: UITableViewController {
         var companies = [Company]()
 
         operation.recordFetchedBlock = { (record) in
-            let company = Company(record: record)
+            let company = Company.company(forRecord: record)
             let _ = company.smallLogoImage
             let _ = company.logoImage
 

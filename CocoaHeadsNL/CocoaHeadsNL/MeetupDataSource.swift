@@ -1,4 +1,5 @@
 import UIKit
+import MapKit
 
 class MeetupDataSource: DetailDataSource {
     var meetup: Meetup {
@@ -18,7 +19,8 @@ class MeetupDataSource: DetailDataSource {
         case 0:
             return logoCellWithFile(meetup.logoImage, forTableView: tableView)
         case 1:
-            return mapViewCellWithLocation(meetup.geoLocation, name: meetup.locationName, forTableView: tableView)
+            let geoLocation = CLLocation(latitude: meetup.latitude, longitude: meetup.longitude)
+            return mapViewCellWithLocation(geoLocation, name: meetup.locationName, forTableView: tableView)
         case 2:
             return titleCellWithText(meetup.name, forTableView: tableView)
         case 3:

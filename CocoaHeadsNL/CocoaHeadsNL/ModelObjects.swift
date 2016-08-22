@@ -10,6 +10,7 @@ import UIKit
 import CoreSpotlight
 import MobileCoreServices
 import CloudKit
+import RealmSwift
 
 let indexQueue = NSOperationQueue()
 
@@ -34,38 +35,56 @@ class AffiliateLink {
     }
 }
 
-class Company {
+class Company: Object {
 
-    init(record: CKRecord) {
-        self.recordID = record.recordID as CKRecordID?
-        self.name = record["name"] as? String
-        self.place = record["place"] as? String
-        self.streetAddress = record["streetAddress"] as? String
-        self.website = record["website"] as? String
-        self.zipCode = record["zipCode"] as? String
-        self.companyDescription = record["companyDescription"] as? String
-        self.emailAddress = record["emailAddress"] as? String
-        self.location = record["location"] as? CLLocation
-        self.logo = record["logo"] as? CKAsset
-        self.hasApps = record["hasApps"] as? Bool ?? false
-        self.smallLogo = record["smallLogo"] as? CKAsset
+    static func company(forRecord record: CKRecord) -> Company {
+        let newCompany = Company()
+        newCompany.recordName = (record.recordID as CKRecordID?)?.recordName
+        newCompany.name = record["name"] as? String
+        newCompany.place = record["place"] as? String
+        newCompany.streetAddress = record["streetAddress"] as? String
+        newCompany.website = record["website"] as? String
+        newCompany.zipCode = record["zipCode"] as? String
+        newCompany.companyDescription = record["companyDescription"] as? String
+        newCompany.emailAddress = record["emailAddress"] as? String
+        newCompany.latitude = (record["location"] as? CLLocation)?.coordinate.latitude ?? 0.0
+        newCompany.longitude = (record["location"] as? CLLocation)?.coordinate.longitude ?? 0.0
+        newCompany.hasApps = record["hasApps"] as? Bool ?? false
+
+        if let logoAsset = record["logo"] as? CKAsset {
+            newCompany.logo = NSData(contentsOfURL: logoAsset.fileURL)
+        }
+        if let logoAsset = record["smallLogo"] as? CKAsset {
+            newCompany.smallLogo = NSData(contentsOfURL: logoAsset.fileURL)
+        }
+
+        return newCompany
+    }
+    
+    override static func primaryKey() -> String? {
+        return "recordName"
     }
 
-    let recordID: CKRecordID?
-    let name: String?
-    let place: String?
-    let streetAddress: String?
-    let website: String?
-    let zipCode: String?
-    let companyDescription: String?
-    let emailAddress: String?
-    let location: CLLocation?
-    let logo: CKAsset?
-    let hasApps: Bool
-    let smallLogo: CKAsset?
+    dynamic var recordName: String?
+    dynamic var name: String?
+    dynamic var place: String?
+    dynamic var streetAddress: String?
+    dynamic var website: String?
+    dynamic var zipCode: String?
+    dynamic var companyDescription: String?
+    dynamic var emailAddress: String?
+    dynamic var latitude: CLLocationDegrees = 0.0
+    dynamic var longitude: CLLocationDegrees = 0.0
+    dynamic var logo: NSData?
+    dynamic var hasApps: Bool = false
+    dynamic var smallLogo: NSData?
+    
+    override static func ignoredProperties() -> [String] {
+        return ["logoImage", "smallLogoImage"]
+    }
 
     lazy var logoImage: UIImage = {
-        if let logo = self.logo, data = NSData(contentsOfURL: logo.fileURL), image = UIImage(data:data) {
+        if let logo = self.logo, image = UIImage(data:logo) {
             return image
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
@@ -73,7 +92,7 @@ class Company {
     }()
 
     lazy var smallLogoImage: UIImage = {
-        if let logo = self.smallLogo, data = NSData(contentsOfURL: logo.fileURL), image = UIImage(data:data) {
+        if let logo = self.smallLogo, image = UIImage(data:logo) {
             return image
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
@@ -194,56 +213,72 @@ class Job {
     }
 }
 
-class Meetup {
+class Meetup: Object {
 
-    init(record: CKRecord) {
-        self.recordID = record.recordID
-        self.name = record["name"] as? String ?? ""
-        self.meetup_id = record["meetup_id"] as? String
-        self.meetup_description = record["meetup_description"] as? String ?? ""
-        self.geoLocation = record["geoLocation"] as? CLLocation
-        self.location = record["location"] as? String ?? ""
-        self.locationName = record["locationName"] as? String ?? ""
-        self.logo = record["logo"] as? CKAsset
-        self.smallLogo = record["smallLogo"] as? CKAsset
-        self.time = record["time"] as? NSDate
-        self.nextEvent = record["nextEvent"] as? DarwinBoolean
+    static func meetup(forRecord record: CKRecord) -> Meetup {
+        let meetup = Meetup()
+        meetup.recordName = (record.recordID as CKRecordID?)?.recordName
+        meetup.name = record["name"] as? String ?? ""
+        meetup.meetup_id = record["meetup_id"] as? String
+        meetup.meetup_description = record["meetup_description"] as? String ?? ""
+        meetup.latitude = (record["location"] as? CLLocation)?.coordinate.latitude ?? 0.0
+        meetup.longitude = (record["location"] as? CLLocation)?.coordinate.longitude ?? 0.0
+        meetup.location = record["location"] as? String ?? ""
+        meetup.locationName = record["locationName"] as? String ?? ""
+        meetup.time = record["time"] as? NSDate
+        meetup.nextEvent = record["nextEvent"] as? Bool ?? false
 
-        self.duration = record.objectForKey("duration") as? NSNumber
-        self.rsvp_limit = record.objectForKey("rsvp_limit") as? NSNumber
-        self.yes_rsvp_count = record.objectForKey("yes_rsvp_count") as? NSNumber
-        self.meetupUrl = record.objectForKey("meetup_url") as? String
+        meetup.duration = record.objectForKey("duration") as? NSNumber ?? 0
+        meetup.rsvp_limit = record.objectForKey("rsvp_limit") as? NSNumber ?? 0
+        meetup.yes_rsvp_count = record.objectForKey("yes_rsvp_count") as? NSNumber ?? 0
+        meetup.meetupUrl = record.objectForKey("meetup_url") as? String
+        
+        if let logoAsset = record["logo"] as? CKAsset {
+            meetup.logo = NSData(contentsOfURL: logoAsset.fileURL)
+        }
+        if let logoAsset = record["smallLogo"] as? CKAsset {
+            meetup.smallLogo = NSData(contentsOfURL: logoAsset.fileURL)
+        }
+        
+        return meetup
     }
 
-    let recordID: CKRecordID
-    let duration: NSNumber!
-    let geoLocation: CLLocation?
-    let locationName: String
-    let meetup_description: String
-    let meetup_id: String?
-    let name: String
-    let rsvp_limit: NSNumber!
-    let time: NSDate?
-    let yes_rsvp_count: NSNumber!
-    let logo: CKAsset?
-    let nextEvent: DarwinBoolean?
-    let smallLogo: CKAsset?
-    let location: String
-    let meetupUrl: String?
+    override static func primaryKey() -> String? {
+        return "recordName"
+    }
+
+    dynamic var recordName: String?
+    dynamic var duration: NSNumber = 0
+    dynamic var latitude: CLLocationDegrees = 0.0
+    dynamic var longitude: CLLocationDegrees = 0.0
+    dynamic var locationName: String?
+    dynamic var meetup_description: String?
+    dynamic var meetup_id: String?
+    dynamic var name: String?
+    dynamic var rsvp_limit: NSNumber = 0
+    dynamic var time: NSDate?
+    dynamic var yes_rsvp_count: NSNumber = 0
+    dynamic var logo: NSData?
+    dynamic var nextEvent: Bool = false
+    dynamic var smallLogo: NSData?
+    dynamic var location: String?
+    dynamic var meetupUrl: String?
+    
+    override static func ignoredProperties() -> [String] {
+        return ["logoImage", "smallLogoImage", "searchableAttributeSet"]
+    }
 
     lazy var logoImage: UIImage = {
-        let logoImage: UIImage
-        if let logo = self.logo, data = NSData(contentsOfURL: logo.fileURL) {
-            return UIImage(data:data)!
+        if let logo = self.logo, image = UIImage(data:logo) {
+            return image
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
         }
     }()
-
+    
     lazy var smallLogoImage: UIImage = {
-        let logoImage: UIImage
-        if let logo = self.smallLogo, data = NSData(contentsOfURL: logo.fileURL) {
-            return UIImage(data:data)!
+        if let logo = self.smallLogo, image = UIImage(data:logo) {
+            return image
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
         }
@@ -254,7 +289,7 @@ class Meetup {
         get {
             let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeImage as String)
             attributeSet.title = name
-            if let data = meetup_description.dataUsingEncoding(NSUTF8StringEncoding) {
+            if let data = meetup_description?.dataUsingEncoding(NSUTF8StringEncoding) {
                 do {
                     let meetupDescriptionString = try NSAttributedString(data: data, options:[NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding], documentAttributes:nil)
 
@@ -264,7 +299,14 @@ class Meetup {
                 }
             }
             attributeSet.creator = "CocoaHeadsNL"
-            let keywords = ["CocoaHeadsNL", locationName, location]
+            var keywords = ["CocoaHeadsNL"]
+            if let locationName = locationName {
+               keywords.append(locationName)
+            }
+            
+            if let location = location {
+                keywords.append(location)
+            }
 
             attributeSet.keywords = keywords
             attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage)
@@ -288,7 +330,7 @@ class Meetup {
 
                 var searchableItems = [CSSearchableItem]()
                 for meetup in meetups {
-                    let item = CSSearchableItem(uniqueIdentifier: "meetup:\(meetup.recordID)", domainIdentifier: "meetup", attributeSet: meetup.searchableAttributeSet)
+                    let item = CSSearchableItem(uniqueIdentifier: "meetup:\(meetup.recordName)", domainIdentifier: "meetup", attributeSet: meetup.searchableAttributeSet)
                     searchableItems.append(item)
                 }
 

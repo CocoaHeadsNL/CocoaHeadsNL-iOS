@@ -1,9 +1,11 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.1'
+use_frameworks!
 
 target 'CocoaHeadsNL' do
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'RealmSwift'
   
   post_install do | installer |
       require 'fileutils'

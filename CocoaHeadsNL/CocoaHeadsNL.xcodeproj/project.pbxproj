@@ -13,7 +13,6 @@
 		4AE72F941C5B44300027C5CA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE72F931C5B44300027C5CA /* CloudKit.framework */; };
 		4AEDD5231CF635E50039AAE5 /* CocoaHeadsNLUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEDD5221CF635E50039AAE5 /* CocoaHeadsNLUITests.swift */; };
 		4AEDD52B1CF636430039AAE5 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEDD52A1CF636430039AAE5 /* SnapshotHelper.swift */; };
-		6EE9D4462F8F8FD65C444566 /* libPods-CocoaHeadsNL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58E1FE9F54B897E49378ED7D /* libPods-CocoaHeadsNL.a */; };
 		7B6A74481B1452FD00A10762 /* MeetupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74461B1452FD00A10762 /* MeetupCell.swift */; };
 		7B6A74491B1452FD00A10762 /* MeetupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74471B1452FD00A10762 /* MeetupsViewController.swift */; };
 		7B6A744B1B1495FF00A10762 /* MeetupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6A744A1B1495FF00A10762 /* MeetupCell.xib */; };
@@ -29,6 +28,7 @@
 		7B6A74621B18424800A10762 /* CompanyDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74611B18424800A10762 /* CompanyDataSource.swift */; };
 		7B6A74661B18666D00A10762 /* FetchAffiliateLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74651B18666D00A10762 /* FetchAffiliateLinks.swift */; };
 		7B6A74681B186C4A00A10762 /* AffiliateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74671B186C4A00A10762 /* AffiliateCell.swift */; };
+		A4E479A57FEB4D205DA0437F /* Pods_CocoaHeadsNL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEA121BE27F3866EAB04FC4 /* Pods_CocoaHeadsNL.framework */; };
 		F1108BAA1B1F618700C2164C /* LocatedCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1108BA91B1F618700C2164C /* LocatedCompaniesViewController.swift */; };
 		F11455B91AB4BA0600546D22 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455B81AB4BA0600546D22 /* DetailViewController.swift */; };
 		F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */; };
@@ -72,7 +72,6 @@
 		4AEDD5241CF635E50039AAE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4AEDD52A1CF636430039AAE5 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		4AF8899A1AAD8EBC00D8DB2E /* CocoaHeadsNL-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CocoaHeadsNL-Bridging-Header.h"; sourceTree = "<group>"; };
-		58E1FE9F54B897E49378ED7D /* libPods-CocoaHeadsNL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CocoaHeadsNL.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B6A74461B1452FD00A10762 /* MeetupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetupCell.swift; sourceTree = "<group>"; };
 		7B6A74471B1452FD00A10762 /* MeetupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetupsViewController.swift; sourceTree = "<group>"; };
 		7B6A744A1B1495FF00A10762 /* MeetupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeetupCell.xib; sourceTree = "<group>"; };
@@ -89,6 +88,7 @@
 		7B6A74651B18666D00A10762 /* FetchAffiliateLinks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAffiliateLinks.swift; sourceTree = "<group>"; };
 		7B6A74671B186C4A00A10762 /* AffiliateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffiliateCell.swift; sourceTree = "<group>"; };
 		C9D96571D157E179851D4220 /* Pods-CocoaHeadsNL.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocoaHeadsNL.release.xcconfig"; path = "Pods/Target Support Files/Pods-CocoaHeadsNL/Pods-CocoaHeadsNL.release.xcconfig"; sourceTree = "<group>"; };
+		DFEA121BE27F3866EAB04FC4 /* Pods_CocoaHeadsNL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CocoaHeadsNL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1108BA91B1F618700C2164C /* LocatedCompaniesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocatedCompaniesViewController.swift; sourceTree = "<group>"; };
 		F11455B81AB4BA0600546D22 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 			files = (
 				4AE72F941C5B44300027C5CA /* CloudKit.framework in Frameworks */,
 				F1379F6F1BC19F1900A20FDB /* MapKit.framework in Frameworks */,
-				6EE9D4462F8F8FD65C444566 /* libPods-CocoaHeadsNL.a in Frameworks */,
+				A4E479A57FEB4D205DA0437F /* Pods_CocoaHeadsNL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,7 +170,7 @@
 				4AE72F931C5B44300027C5CA /* CloudKit.framework */,
 				4A15A33C1BB82224008161BD /* MobileCoreServices.framework */,
 				F17A38761ABF3B62005CFF8A /* MapKit.framework */,
-				58E1FE9F54B897E49378ED7D /* libPods-CocoaHeadsNL.a */,
+				DFEA121BE27F3866EAB04FC4 /* Pods_CocoaHeadsNL.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
