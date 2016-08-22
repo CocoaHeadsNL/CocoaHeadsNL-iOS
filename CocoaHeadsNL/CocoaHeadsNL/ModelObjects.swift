@@ -100,21 +100,28 @@ class Company: Object {
     }()
 }
 
-class Contributor {
-
-    let recordID: CKRecordID
-    let avatar_url: String
-    let contributor_id: Int64
-    let name: String
-    let url: String
-
-    init(record: CKRecord) {
-        self.recordID = record.recordID
-        self.name = record["name"] as? String ?? ""
-        self.url = record["url"] as? String ?? ""
-        self.avatar_url = record["avatar_url"] as? String ?? ""
-        self.contributor_id = record["contributor_id"] as? Int64 ?? 0
+class Contributor: Object {
+    static func contributor(forRecord record: CKRecord) -> Contributor {
+        let contributor = Contributor()
+        contributor.recordName = record.recordID.recordName
+        contributor.name = record["name"] as? String ?? ""
+        contributor.url = record["url"] as? String ?? ""
+        contributor.avatar_url = record["avatar_url"] as? String ?? ""
+        contributor.contributor_id = record["contributor_id"] as? Int64 ?? 0
+        contributor.commit_count = record["commit_count"] as? Int ?? 0
+        return contributor
     }
+
+    override static func primaryKey() -> String? {
+        return "recordName"
+    }
+
+    dynamic var recordName: String?
+    dynamic var avatar_url: String?
+    dynamic var contributor_id: Int64 = 0
+    dynamic var commit_count: Int = 0
+    dynamic var name: String?
+    dynamic var url: String?
 }
 
 class Job {

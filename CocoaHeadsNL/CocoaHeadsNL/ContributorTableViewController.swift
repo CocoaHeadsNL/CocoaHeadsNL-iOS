@@ -10,10 +10,14 @@ import Foundation
 import UIKit
 import CloudKit
 import Crashlytics
+import RealmSwift
 
 class ContributorTableViewController: UITableViewController {
 
-    var contributors = [Contributor]()
+    let realm = try! Realm()
+
+    var contributors = try! Realm().objects(Contributor.self).sorted("commit_count", ascending: false)
+    var notificationToken: NotificationToken?
 
     //MARK: - View LifeCycle
 
@@ -24,6 +28,31 @@ class ContributorTableViewController: UITableViewController {
         self.navigationItem.backBarButtonItem = backItem
 
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
+
+        // Set results notification block
+        self.notificationToken = contributors.addNotificationBlock { (changes: RealmCollectionChange) in
+            switch changes {
+            case .Initial:
+                // Results are now populated and can be accessed without blocking the UI
+                self.tableView.reloadData()
+                break
+            case .Update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the TableView
+                self.tableView.beginUpdates()
+                self.tableView.insertRowsAtIndexPaths(insertions.map { NSIndexPath(forRow: $0, inSection: 0) },
+                    withRowAnimation: .Automatic)
+                self.tableView.deleteRowsAtIndexPaths(deletions.map { NSIndexPath(forRow: $0, inSection: 0) },
+                    withRowAnimation: .Automatic)
+                self.tableView.reloadRowsAtIndexPaths(modifications.map { NSIndexPath(forRow: $0, inSection: 0) },
+                    withRowAnimation: .Automatic)
+                self.tableView.endUpdates()
+                break
+            case .Error(let err):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(err)")
+                break
+            }
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -49,7 +78,7 @@ class ContributorTableViewController: UITableViewController {
         cell.textLabel?.text = contributor.name
         cell.detailTextLabel?.text = contributor.url
 
-        if let url = NSURL(string: contributor.avatar_url) {
+        if let avatar_url = contributor.avatar_url, url = NSURL(string: avatar_url) {
             let task = fetchImageTask(url, forImageView: cell.imageView!)
             task.resume()
         }
@@ -83,7 +112,7 @@ class ContributorTableViewController: UITableViewController {
                                        contentId: urlString,
                                        customAttributes: nil)
 
-        if let url = NSURL(string: urlString) {
+        if let urlString = urlString, url = NSURL(string: urlString) {
             if UIApplication.sharedApplication().canOpenURL(url) {
                 UIApplication.sharedApplication().openURL(url)
             }
@@ -127,26 +156,25 @@ class ContributorTableViewController: UITableViewController {
     func fetchContributors() {
 
         let pred = NSPredicate(value: true)
-        let sort = NSSortDescriptor(key: "commit_count", ascending: false)
         let query = CKQuery(recordType: "Contributor", predicate: pred)
-        query.sortDescriptors = [sort]
 
         let operation = CKQueryOperation(query: query)
         operation.qualityOfService = .UserInteractive
 
-        var contributors = [Contributor]()
+        var cloudContributors = [Contributor]()
 
         operation.recordFetchedBlock = { (record) in
-            let contributor = Contributor(record: record)
-            contributors.append(contributor)
+            let contributor = Contributor.contributor(forRecord: record)
+            cloudContributors.append(contributor)
         }
 
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
             dispatch_async(dispatch_get_main_queue()) {
                 if error == nil {
 
-                    self?.contributors = contributors
-                    self?.tableView.reloadData()
+                    self?.realm.beginWrite()
+                    self?.realm.add(cloudContributors, update: true)
+                    try! self?.realm.commitWrite()
 
                 } else {
                     let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of contributors; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
