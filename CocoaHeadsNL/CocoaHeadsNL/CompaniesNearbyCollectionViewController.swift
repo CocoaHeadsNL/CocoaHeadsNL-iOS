@@ -17,8 +17,8 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
     let realm = try! Realm()
 
     var companiesArray = try! Realm().objects(Company.self).sorted("name")
-    var coreLocationController: CoreLocationController?
-    var geoPoint: CLLocation?
+//    var coreLocationController: CoreLocationController?
+//    var geoPoint: CLLocation?
     var notificationToken: NotificationToken?
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -36,9 +36,9 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
             layout.minimumInteritemSpacing = 4
         }
 
-        self.coreLocationController = CoreLocationController()
+//        self.coreLocationController = CoreLocationController()
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CompaniesNearbyCollectionViewController.locationAvailable(_:)), name: "LOCATION_AVAILABLE", object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CompaniesNearbyCollectionViewController.locationAvailable(_:)), name: "LOCATION_AVAILABLE", object: nil)
         if companiesArray.count == 0 {
             self.activityIndicator.startAnimating()
         }
@@ -68,30 +68,31 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if let locationManager = self.coreLocationController?.locationManager {
-            locationManager.startUpdatingLocation()
-        }
+//        if let locationManager = self.coreLocationController?.locationManager {
+//            locationManager.startUpdatingLocation()
+//        }
 
         self.fetchCompanies()
     }
 
-    override func viewWillDisappear(animated: Bool) {
-        if let locationManager = self.coreLocationController?.locationManager {
-            locationManager.stopUpdatingLocation()
-        }
-    }
+//    override func viewWillDisappear(animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        if let locationManager = self.coreLocationController?.locationManager {
+//            locationManager.stopUpdatingLocation()
+//        }
+//    }
 
-    func locationAvailable(notification: NSNotification) -> Void {
-
-            let userInfo = notification.userInfo as! Dictionary<String, CLLocation>
-
-            print("CoreLocationManager:  Location available \(userInfo)")
-
-        if let latitude = userInfo["location"]?.coordinate.latitude, longitude = userInfo["location"]?.coordinate.longitude {
-            geoPoint = CLLocation(latitude: latitude, longitude: longitude)
-            self.collectionView?.reloadData()
-        }
-    }
+//    func locationAvailable(notification: NSNotification) -> Void {
+//
+//            let userInfo = notification.userInfo as! Dictionary<String, CLLocation>
+//
+//            print("CoreLocationManager:  Location available \(userInfo)")
+//
+//        if let latitude = userInfo["location"]?.coordinate.latitude, longitude = userInfo["location"]?.coordinate.longitude {
+//            geoPoint = CLLocation(latitude: latitude, longitude: longitude)
+//            self.collectionView?.reloadData()
+//        }
+//    }
 
 
     //MARK: - UICollectionViewDataSource methods
@@ -146,17 +147,6 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
     func fetchCompanies() {
 
         let query = CKQuery(recordType: "Companies", predicate: NSPredicate(value: true))
-        if let location = self.geoPoint {
-            query.sortDescriptors = [
-                CKLocationSortDescriptor(key: "location", relativeLocation: location)
-            ]
-
-        } else {
-            query.sortDescriptors = [
-                CKLocationSortDescriptor(key: "name", ascending: true)
-            ]
-        }
-
         let operation = CKQueryOperation(query: query)
         operation.qualityOfService = .UserInteractive
 

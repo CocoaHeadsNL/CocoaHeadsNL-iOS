@@ -54,11 +54,11 @@ class CompanyTableViewController: UITableViewController {
 
         print("CoreLocationManager:  Location available \(userInfo)")
 
-        if let _ = userInfo["location"]?.coordinate.latitude, _ = userInfo["location"]?.coordinate.longitude {
-            self.sortingLabel?.text = "Companies sorted by distance"
-        } else {
+//        if let _ = userInfo["location"]?.coordinate.latitude, _ = userInfo["location"]?.coordinate.longitude {
+//            self.sortingLabel?.text = "Companies sorted by distance"
+//        } else {
             self.sortingLabel?.text = "Companies sorted by name"
-        }
+//        }
     }
 
 
@@ -190,6 +190,7 @@ class CompanyTableViewController: UITableViewController {
                         }
                     }
 
+                    //TODO:
                     let groupedArray = locationSet.sort()
 
                     for group in groupedArray {
