@@ -10,20 +10,29 @@ import Foundation
 import UIKit
 import CloudKit
 import Crashlytics
+import RealmSwift
 
 class CompanyTableViewController: UITableViewController {
 
-    var sortedArray = [(place: String, companies:[Company])]()
+    let realm = try! Realm()
+    
+    var companiesArray = try! Realm().objects(Company.self).sorted("name")
+    
+    var placesArray: [String] {
+        get {
+            var places = Set<String>()
+            places.unionInPlace(companiesArray.flatMap { $0.place })
+            return places.map{ $0 }.sort()
+        }
+    }
+
+//    var sortedArray = [(place: String, companies:[Company])]()
+    var notificationToken: NotificationToken?
+
     @IBOutlet weak var sortingLabel: UILabel!
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
-        self.fetchCompanies()
     }
 
     override func viewDidLoad() {
@@ -37,6 +46,23 @@ class CompanyTableViewController: UITableViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CompanyTableViewController.locationAvailable(_:)), name: "LOCATION_AVAILABLE", object: nil)
 
         self.subscribe()
+        
+        // Set results notification block
+        self.notificationToken = companiesArray.addNotificationBlock { (changes: RealmCollectionChange) in
+            switch changes {
+            case .Initial:
+                // Results are now populated and can be accessed without blocking the UI
+                self.tableView.reloadData()
+                break
+            case .Update(_, _, _, _):
+                self.tableView.reloadData()
+                break
+            case .Error(let err):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(err)")
+                break
+            }
+        }
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -69,11 +95,14 @@ class CompanyTableViewController: UITableViewController {
             if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
 
                 let detailViewController = segue.destinationViewController as? LocatedCompaniesViewController
-                detailViewController?.companyDict = sortedArray[indexPath.row]
+                
+                let place = placesArray[indexPath.row]
+                
+                detailViewController?.companiesArray = companiesArray.filter({ $0.place == place })
 
                 Answers.logContentViewWithName("Show company location",
                                                contentType: "Company",
-                                               contentId: sortedArray[indexPath.row].place,
+                                               contentId: placesArray[indexPath.row],
                                                customAttributes: nil)
             }
         }
@@ -82,7 +111,7 @@ class CompanyTableViewController: UITableViewController {
     //MARK: - UITablewViewDelegate
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sortedArray.count
+        return placesArray.count
     }
 
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -113,7 +142,7 @@ class CompanyTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("companyTableViewCell", forIndexPath: indexPath)
 
 
-        cell.textLabel!.text = sortedArray[indexPath.row].place
+        cell.textLabel!.text = placesArray[indexPath.row]
 
 
         return cell
@@ -148,73 +177,5 @@ class CompanyTableViewController: UITableViewController {
         subscription.notificationInfo = info
 
         publicDB.saveSubscription(subscription) { record, error in }
-    }
-
-    //MARK: - fetching Cloudkit
-
-    func fetchCompanies() {
-
-        let pred = NSPredicate(value: true)
-        let sort = NSSortDescriptor(key: "name", ascending: false)
-        let query = CKQuery(recordType: "Companies", predicate: pred)
-        query.sortDescriptors = [sort]
-
-        let operation = CKQueryOperation(query: query)
-        operation.qualityOfService = .UserInteractive
-
-        var companies = [Company]()
-
-        operation.recordFetchedBlock = { (record) in
-            let company = Company.company(forRecord: record)
-            let _ = company.smallLogoImage
-            let _ = company.logoImage
-
-            companies.append(company)
-        }
-
-        operation.queryCompletionBlock = { [weak self] (cursor, error) in
-            dispatch_async(dispatch_get_main_queue()) {
-                if error == nil {
-
-                    self?.sortedArray.removeAll()
-
-                    var locationSet = Set<String>()
-
-                    for company in companies {
-
-                        if let location = company.place {
-
-                            if !locationSet.contains(location) {
-                                locationSet.insert(location)
-                            }
-                        }
-                    }
-
-                    //TODO:
-                    let groupedArray = locationSet.sort()
-
-                    for group in groupedArray {
-                        var companyArray = [Company]()
-
-                        for company in companies {
-                            if let loc = company.place where loc == group {
-                                    companyArray.append(company)
-                            }
-                        }
-
-                        let companiesForPlace = (place: group, companies:companyArray)
-
-                        self?.sortedArray.append(companiesForPlace)
-                    }
-                    self?.tableView.reloadData()
-                } else {
-                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of companies; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    self?.presentViewController(ac, animated: true, completion: nil)
-                }
-            }
-        }
-
-        CKContainer.defaultContainer().publicCloudDatabase.addOperation(operation)
     }
 }

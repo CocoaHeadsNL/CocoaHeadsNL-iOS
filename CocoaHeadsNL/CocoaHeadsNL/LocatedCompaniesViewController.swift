@@ -12,7 +12,6 @@ import Crashlytics
 
 class LocatedCompaniesViewController: UITableViewController {
 
-    var companyDict: (place: String, companies: [Company])?
     var companiesArray = [Company]()
 
     override func viewDidLoad() {
@@ -20,14 +19,6 @@ class LocatedCompaniesViewController: UITableViewController {
 
         let backItem = UIBarButtonItem(title: "Companies", style: .Plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
-    }
-
-    override func viewWillAppear(animated: Bool) {
-            super.viewWillAppear(animated)
-
-            if let companiesArray = companyDict?.companies {
-                self.companiesArray = companiesArray
-            }
     }
 
     //MARK: - Segues
