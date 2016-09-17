@@ -19,7 +19,7 @@ class CompaniesNearbyCell: UICollectionViewCell {
         self.imageView?.image = UIImage(named: "MeetupPlaceholder")
     }
 
-    func updateFromObject(company: Company) {
+    func updateFromObject(_ company: Company) {
         self.imageView?.image = company.smallLogoImage
 
         if let compName = company.name {

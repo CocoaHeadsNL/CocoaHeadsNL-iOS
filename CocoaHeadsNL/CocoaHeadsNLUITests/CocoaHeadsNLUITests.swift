@@ -29,55 +29,55 @@ class CocoaHeadsNLUITests: XCTestCase {
         waitForHittable(app.tables.staticTexts["Amsterdam 18:00"], waitSeconds: 10)
         snapshot("01Meetups")
 
-        app.tables.cells.elementBoundByIndex(0).tap()
+        app.tables.cells.element(boundBy: 0).tap()
         snapshot("02Meetup-details")
 
         app.tabBars.buttons["Jobs"].tap()
-        waitForNotHittable(app.activityIndicators.elementBoundByIndex(0), waitSeconds: 10)
+        waitForNotHittable(app.activityIndicators.element(boundBy: 0), waitSeconds: 10)
         snapshot("03Jobs")
 
         app.tabBars.buttons["About"].tap()
-        waitForNotHittable(app.activityIndicators.elementBoundByIndex(0), waitSeconds: 10)
+        waitForNotHittable(app.activityIndicators.element(boundBy: 0), waitSeconds: 10)
         snapshot("04About")
     }
 
 }
 
 extension XCTestCase {
-    func waitForHittable(element: XCUIElement, waitSeconds: Double, file: String = #file, line: UInt = #line) {
+    func waitForHittable(_ element: XCUIElement, waitSeconds: Double, file: String = #file, line: UInt = #line) {
         let existsPredicate = NSPredicate(format: "hittable == true")
-        expectationForPredicate(existsPredicate, evaluatedWithObject: element, handler: nil)
+        expectation(for: existsPredicate, evaluatedWith: element, handler: nil)
 
-        waitForExpectationsWithTimeout(waitSeconds) { (error) -> Void in
+        waitForExpectations(timeout: waitSeconds) { (error) -> Void in
             if (error != nil) {
                 let message = "Failed to find \(element) after \(waitSeconds) seconds."
-                self.recordFailureWithDescription(message,
+                self.recordFailure(withDescription: message,
                                                   inFile: file, atLine: line, expected: true)
             }
         }
     }
 
-    func waitForNotHittable(element: XCUIElement, waitSeconds: Double, file: String = #file, line: UInt = #line) {
+    func waitForNotHittable(_ element: XCUIElement, waitSeconds: Double, file: String = #file, line: UInt = #line) {
         let existsPredicate = NSPredicate(format: "hittable == false")
-        expectationForPredicate(existsPredicate, evaluatedWithObject: element, handler: nil)
+        expectation(for: existsPredicate, evaluatedWith: element, handler: nil)
 
-        waitForExpectationsWithTimeout(waitSeconds) { (error) -> Void in
+        waitForExpectations(timeout: waitSeconds) { (error) -> Void in
             if (error != nil) {
                 let message = "Failed to find \(element) after \(waitSeconds) seconds."
-                self.recordFailureWithDescription(message,
+                self.recordFailure(withDescription: message,
                                                   inFile: file, atLine: line, expected: true)
             }
         }
     }
 
-    func waitForExists(element: XCUIElement, waitSeconds: Double, file: String = #file, line: UInt = #line) {
+    func waitForExists(_ element: XCUIElement, waitSeconds: Double, file: String = #file, line: UInt = #line) {
         let existsPredicate = NSPredicate(format: "exists == true")
-        expectationForPredicate(existsPredicate, evaluatedWithObject: element, handler: nil)
+        expectation(for: existsPredicate, evaluatedWith: element, handler: nil)
 
-        waitForExpectationsWithTimeout(waitSeconds) { (error) -> Void in
+        waitForExpectations(timeout: waitSeconds) { (error) -> Void in
             if (error != nil) {
                 let message = "Failed to find \(element) after \(waitSeconds) seconds."
-                self.recordFailureWithDescription(message,
+                self.recordFailure(withDescription: message,
                                                   inFile: file, atLine: line, expected: true)
             }
         }

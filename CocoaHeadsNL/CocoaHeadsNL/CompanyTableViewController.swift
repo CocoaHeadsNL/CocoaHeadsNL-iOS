@@ -16,13 +16,13 @@ class CompanyTableViewController: UITableViewController {
 
     let realm = try! Realm()
     
-    var companiesArray = try! Realm().objects(Company.self).sorted("name")
+    var companiesArray = try! Realm().objects(Company.self).sorted(byProperty: "name")
     
     var placesArray: [String] {
         get {
             var places = Set<String>()
-            places.unionInPlace(companiesArray.flatMap { $0.place })
-            return places.map{ $0 }.sort()
+            places.formUnion(companiesArray.flatMap { $0.place })
+            return places.map{ $0 }.sorted()
         }
     }
 
@@ -38,26 +38,26 @@ class CompanyTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let backItem = UIBarButtonItem(title: "Companies", style: .Plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "Companies", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CompanyTableViewController.locationAvailable(_:)), name: "LOCATION_AVAILABLE", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CompanyTableViewController.locationAvailable(_:)), name: NSNotification.Name(rawValue: "LOCATION_AVAILABLE"), object: nil)
 
         self.subscribe()
         
         // Set results notification block
         self.notificationToken = companiesArray.addNotificationBlock { (changes: RealmCollectionChange) in
             switch changes {
-            case .Initial:
+            case .initial:
                 // Results are now populated and can be accessed without blocking the UI
                 self.tableView.reloadData()
                 break
-            case .Update(_, _, _, _):
+            case .update(_, _, _, _):
                 self.tableView.reloadData()
                 break
-            case .Error(let err):
+            case .error(let err):
                 // An error occurred while opening the Realm file on the background worker thread
                 fatalError("\(err)")
                 break
@@ -65,18 +65,18 @@ class CompanyTableViewController: UITableViewController {
         }
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        Answers.logContentViewWithName("Show companies",
+        Answers.logContentView(withName: "Show companies",
                                        contentType: "Company",
                                        contentId: "overview",
                                        customAttributes: nil)
     }
 
-    func locationAvailable(notification: NSNotification) -> Void {
+    func locationAvailable(_ notification: Notification) -> Void {
 
-        let userInfo = notification.userInfo as! Dictionary<String, CLLocation>
+        let userInfo = (notification as NSNotification).userInfo as! Dictionary<String, CLLocation>
 
         print("CoreLocationManager:  Location available \(userInfo)")
 
@@ -90,19 +90,19 @@ class CompanyTableViewController: UITableViewController {
 
     //MARK: - Segues
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowCompanies" {
-            if let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell) {
+            if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
 
-                let detailViewController = segue.destinationViewController as? LocatedCompaniesViewController
+                let detailViewController = segue.destination as? LocatedCompaniesViewController
                 
-                let place = placesArray[indexPath.row]
+                let place = placesArray[(indexPath as NSIndexPath).row]
                 
                 detailViewController?.companiesArray = companiesArray.filter({ $0.place == place })
 
-                Answers.logContentViewWithName("Show company location",
+                Answers.logContentView(withName: "Show company location",
                                                contentType: "Company",
-                                               contentId: placesArray[indexPath.row],
+                                               contentId: placesArray[(indexPath as NSIndexPath).row],
                                                customAttributes: nil)
             }
         }
@@ -110,18 +110,18 @@ class CompanyTableViewController: UITableViewController {
 
     //MARK: - UITablewViewDelegate
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return placesArray.count
     }
 
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Companies sorted by place"
     }
 
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let labelRect = CGRect(x: 15, y: 2, width: 300, height: 18)
         let label = UILabel(frame: labelRect)
-        label.font = UIFont.boldSystemFontOfSize(15)
+        label.font = UIFont.boldSystemFont(ofSize: 15)
 
         label.text = tableView.dataSource!.tableView!(tableView, titleForHeaderInSection: section)
 
@@ -137,36 +137,36 @@ class CompanyTableViewController: UITableViewController {
     //MARK: - UITableViewDataSource
 
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("companyTableViewCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "companyTableViewCell", for: indexPath)
 
 
-        cell.textLabel!.text = placesArray[indexPath.row]
+        cell.textLabel!.text = placesArray[(indexPath as NSIndexPath).row]
 
 
         return cell
     }
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
 
     //MARK: - UITableViewDelegate
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("ShowCompanies", sender: tableView.cellForRowAtIndexPath(indexPath))
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "ShowCompanies", sender: tableView.cellForRow(at: indexPath))
     }
 
     //MARK: - Notifications
 
     func subscribe() {
-        let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+        let publicDB = CKContainer.default().publicCloudDatabase
 
         let subscription = CKSubscription(
             recordType: "Companies",
             predicate: NSPredicate(value: true),
-            options: .FiresOnRecordCreation
+            options: .firesOnRecordCreation
         )
 
         let info = CKNotificationInfo()
@@ -176,6 +176,6 @@ class CompanyTableViewController: UITableViewController {
 
         subscription.notificationInfo = info
 
-        publicDB.saveSubscription(subscription) { record, error in }
+        publicDB.save(subscription, completionHandler: { record, error in }) 
     }
 }

@@ -4,11 +4,11 @@ import CloudKit
 class FetchAffiliateLinks {
     var apps = [AffiliateLink]()
 
-    func fetchLinksForCompany(company: Company, completion: () -> Void) {
+    func fetchLinksForCompany(_ company: Company, completion: @escaping () -> Void) {
         if let recordName = company.recordName {
 
             let recordID = CKRecordID(recordName: recordName)
-            let reference = CKReference(recordID: recordID, action: .None)
+            let reference = CKReference(recordID: recordID, action: .none)
             let pred = NSPredicate(format: "company == %@", reference)
             let refQuery = CKQuery(recordType: "AffiliateLinks", predicate: pred)
             let sort = NSSortDescriptor(key: "productName", ascending: false)
@@ -24,7 +24,7 @@ class FetchAffiliateLinks {
             }
 
             operation.queryCompletionBlock = { [weak self] (cursor, error) in
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     if error == nil {
 
                         self?.apps = affiliateLinks
@@ -33,7 +33,7 @@ class FetchAffiliateLinks {
                 }
             }
 
-            CKContainer.defaultContainer().publicCloudDatabase.addOperation(operation)
+            CKContainer.default().publicCloudDatabase.add(operation)
         }
     }
 }

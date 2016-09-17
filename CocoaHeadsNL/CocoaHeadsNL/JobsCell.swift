@@ -14,7 +14,7 @@ class JobsCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var separator: UIView!
 
-    private var imageLoaded = false
+    fileprivate var imageLoaded = false
 
     var job: Job? {
         didSet {
@@ -25,7 +25,7 @@ class JobsCell: UICollectionViewCell {
 
     var rightHandSide = false {
         didSet {
-            self.separator.hidden = rightHandSide
+            self.separator.isHidden = rightHandSide
         }
     }
 

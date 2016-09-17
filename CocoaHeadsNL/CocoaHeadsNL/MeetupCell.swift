@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-private let dateFormatter = NSDateFormatter()
+private let dateFormatter = DateFormatter()
 
 class MeetupCell: UITableViewCell {
     static let Identifier = "meetupCell"
@@ -40,32 +40,32 @@ class MeetupCell: UITableViewCell {
         monthLabel.text = ""
     }
 
-    func configureCellForMeetup(meetup: Meetup, row: Int) {
+    func configureCellForMeetup(_ meetup: Meetup, row: Int) {
         titleLabel.text = meetup.name
 
         if let date = meetup.time {
-            dateFormatter.dateStyle = .NoStyle
-            dateFormatter.timeStyle = .ShortStyle
-            let timeText = dateFormatter.stringFromDate(date)
+            dateFormatter.dateStyle = .none
+            dateFormatter.timeStyle = .short
+            let timeText = dateFormatter.string(from: date as Date)
             timeLabel.text = String(format: "%@ %@", meetup.location ?? "Location unknown", timeText)
 
             dateFormatter.dateFormat = "dd"
-            dayLabel.text = dateFormatter.stringFromDate(date)
+            dayLabel.text = dateFormatter.string(from: date as Date)
 
             dateFormatter.dateFormat = "MMM"
-            monthLabel.text = dateFormatter.stringFromDate(date).uppercaseString
+            monthLabel.text = dateFormatter.string(from: date as Date).uppercased()
 
             if date.timeIntervalSinceNow > 0 {
-                dayLabel.textColor = UIColor.blackColor()
+                dayLabel.textColor = UIColor.black
                 calendarView.backgroundColor = UIColorWithRGB(232, green: 88, blue: 80)
 
 
-                if meetup.yes_rsvp_count.intValue > 0{
+                if meetup.yes_rsvp_count.int32Value > 0{
 
-                    rsvpLabel.text = "\(meetup.yes_rsvp_count.intValue) CocoaHeads going"
+                    rsvpLabel.text = "\(meetup.yes_rsvp_count.int32Value) CocoaHeads going"
 
-                    if meetup.rsvp_limit.intValue > 0 {
-                        rsvpLabel.text = rsvpLabel.text! + "\n\(meetup.rsvp_limit.intValue - meetup.yes_rsvp_count.intValue) seats available"
+                    if meetup.rsvp_limit.int32Value > 0 {
+                        rsvpLabel.text = rsvpLabel.text! + "\n\(meetup.rsvp_limit.int32Value - meetup.yes_rsvp_count.int32Value) seats available"
                     }
                 } else {
                     rsvpLabel.text = ""
@@ -74,20 +74,20 @@ class MeetupCell: UITableViewCell {
                 dayLabel.textColor = UIColor(white: 0, alpha: 0.65)
                 calendarView.backgroundColor = UIColorWithRGB(169, green: 166, blue: 166)
 
-                rsvpLabel.text = "\(meetup.yes_rsvp_count.intValue) CocoaHeads had a blast"
+                rsvpLabel.text = "\(meetup.yes_rsvp_count.int32Value) CocoaHeads had a blast"
             }
         }
 
         self.logoImageView.image =  meetup.smallLogoImage
     }
 
-    override func setHighlighted(highlighted: Bool, animated: Bool) {
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-        monthLabel.textColor = highlighted ? UIColor.blackColor() : UIColor.whiteColor()
+        monthLabel.textColor = highlighted ? UIColor.black : UIColor.white
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        monthLabel.textColor = selected ? UIColor.blackColor() : UIColor.whiteColor()
+        monthLabel.textColor = selected ? UIColor.black : UIColor.white
     }
 }

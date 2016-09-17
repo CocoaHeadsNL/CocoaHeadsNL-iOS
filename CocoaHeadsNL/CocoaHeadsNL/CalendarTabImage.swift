@@ -11,11 +11,11 @@ import UIKit
 
 extension UIImage {
     class func calendarTabImageWithCurrentDate() -> UIImage {
-        return calendarTabImageWithDate(NSDate())
+        return calendarTabImageWithDate(Date())
     }
 
-    class func calendarTabImageWithDate(date: NSDate) -> UIImage {
-        let dateFormatter = NSDateFormatter()
+    class func calendarTabImageWithDate(_ date: Date) -> UIImage {
+        let dateFormatter = DateFormatter()
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         let maskView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
 
@@ -27,48 +27,48 @@ extension UIImage {
         // Create the month
 
         dateFormatter.dateFormat = "MMM"
-        let month = dateFormatter.stringFromDate(date).uppercaseString
+        let month = dateFormatter.string(from: date).uppercased()
 
         let monthLabel = UILabel(frame: CGRect(x: 0, y: 4, width: 30, height: 6))
         monthLabel.text = month
-        monthLabel.font = UIFont.boldSystemFontOfSize(6)
-        monthLabel.textAlignment = .Center
-        monthLabel.textColor = UIColor.whiteColor()
+        monthLabel.font = UIFont.boldSystemFont(ofSize: 6)
+        monthLabel.textAlignment = .center
+        monthLabel.textColor = UIColor.white
         maskView.addSubview(monthLabel)
 
         // Create the day number
 
         dateFormatter.dateFormat = "dd"
-        let day = dateFormatter.stringFromDate(date)
+        let day = dateFormatter.string(from: date)
 
         let numberLabel = UILabel(frame: CGRect(x: 0, y: 10, width: 30, height: 17))
         numberLabel.text = day
-        numberLabel.font = UIFont.boldSystemFontOfSize(14)
-        numberLabel.textAlignment = .Center
+        numberLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        numberLabel.textAlignment = .center
         view.addSubview(numberLabel)
 
-        UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, UIScreen.mainScreen().scale)
-        view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, UIScreen.main.scale)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
-        UIGraphicsBeginImageContextWithOptions(maskView.bounds.size, false, UIScreen.mainScreen().scale)
-        maskView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        UIGraphicsBeginImageContextWithOptions(maskView.bounds.size, false, UIScreen.main.scale)
+        maskView.layer.render(in: UIGraphicsGetCurrentContext()!)
         let maskingImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
         // Mask month out of the image to show in tabBar.
-        let resultImage = image.maskImage(maskingImage)
-        return resultImage
+        let resultImage = image?.maskImage(maskingImage!)
+        return resultImage!
     }
 
-    func maskImage(maskImage: UIImage) -> UIImage {
-        let maskRef = maskImage.CGImage
+    func maskImage(_ maskImage: UIImage) -> UIImage {
+        let maskRef = maskImage.cgImage
 
-        let mask = CGImageMaskCreate(CGImageGetWidth(maskRef), CGImageGetHeight(maskRef), CGImageGetBitsPerComponent(maskRef), CGImageGetBitsPerPixel(maskRef), CGImageGetBytesPerRow(maskRef), CGImageGetDataProvider(maskRef), nil, false)
+        let mask = CGImage(maskWidth: (maskRef?.width)!, height: (maskRef?.height)!, bitsPerComponent: (maskRef?.bitsPerComponent)!, bitsPerPixel: (maskRef?.bitsPerPixel)!, bytesPerRow: (maskRef?.bytesPerRow)!, provider: (maskRef?.dataProvider!)!, decode: nil, shouldInterpolate: false)
 
-        let masked = CGImageCreateWithMask(self.CGImage, mask)!
-        let maskedImage = UIImage(CGImage: masked, scale: UIScreen.mainScreen().scale, orientation: .Up)
+        let masked = self.cgImage?.masking(mask!)!
+        let maskedImage = UIImage(cgImage: masked!, scale: UIScreen.main.scale, orientation: .up)
 
         return maskedImage
     }

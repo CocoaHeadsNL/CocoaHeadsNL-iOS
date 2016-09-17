@@ -17,46 +17,46 @@ class DetailDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
         return ""
     }
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         fatalError("Subclass must implement this")
     }
 
-    func logoCellWithFile(logo: UIImage, forTableView tableView: UITableView) -> LogoCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("logoCell") as! LogoCell
+    func logoCellWithFile(_ logo: UIImage, forTableView tableView: UITableView) -> LogoCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "logoCell") as! LogoCell
         cell.logoImageView.image = logo
-        cell.logoImageView.contentMode = .ScaleAspectFit
+        cell.logoImageView.contentMode = .scaleAspectFit
         return cell
     }
 
-    func mapViewCellWithLocation(location: CLLocation?, name: String?, forTableView tableView: UITableView) -> MapViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("mapViewCell") as! MapViewCell
+    func mapViewCellWithLocation(_ location: CLLocation?, name: String?, forTableView tableView: UITableView) -> MapViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "mapViewCell") as! MapViewCell
         cell.geoLocation = location
         cell.locationName = name
         return cell
     }
 
-    func titleCellWithText(text: String?, forTableView tableView: UITableView) -> TitleCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("titleCell") as! TitleCell
+    func titleCellWithText(_ text: String?, forTableView tableView: UITableView) -> TitleCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "titleCell") as! TitleCell
         cell.content = text
         return cell
     }
 
-    func titleCellWithDate(date: NSDate?, forTableView tableView: UITableView) -> TitleCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("titleCell") as! TitleCell
+    func titleCellWithDate(_ date: Date?, forTableView tableView: UITableView) -> TitleCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "titleCell") as! TitleCell
         cell.date = date
         return cell
     }
 
-    func webViewCellWithHTML(html: String?, forTableView tableView: UITableView) -> WebViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("webViewCell") as! WebViewCell
+    func webViewCellWithHTML(_ html: String?, forTableView tableView: UITableView) -> WebViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "webViewCell") as! WebViewCell
         cell.html = html
         return cell
     }

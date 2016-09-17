@@ -12,13 +12,13 @@ class WebViewCell: UITableViewCell, UIWebViewDelegate {
 
             if let html = html {
                 self.htmlWebView.loadHTMLString(html,
-                                                baseURL: NSURL(string:"http://jobs.cocoaheads.nl"))
-                self.htmlWebView.scrollView.scrollEnabled = false
+                                                baseURL: URL(string:"http://jobs.cocoaheads.nl"))
+                self.htmlWebView.scrollView.isScrollEnabled = false
             }
         }
     }
 
-    private func layoutWebView() {
+    fileprivate func layoutWebView() {
         let size = htmlWebView.sizeThatFits(CGSize(width:htmlWebView.frame.width, height: 10000))
         if size.height != heighLayoutConstraint.constant {
             heighLayoutConstraint.constant = size.height
@@ -26,15 +26,15 @@ class WebViewCell: UITableViewCell, UIWebViewDelegate {
         }
     }
 
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
         layoutWebView()
     }
 
-    func webView(webView: UIWebView,
-                 shouldStartLoadWithRequest request: NSURLRequest,
+    func webView(_ webView: UIWebView,
+                 shouldStartLoadWith request: URLRequest,
                  navigationType: UIWebViewNavigationType) -> Bool {
-        if navigationType == .LinkClicked {
-            UIApplication.sharedApplication().openURL(request.URL!)
+        if navigationType == .linkClicked {
+            UIApplication.shared.openURL(request.url!)
             return false
         } else {
             return true

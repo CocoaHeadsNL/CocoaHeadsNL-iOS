@@ -9,26 +9,26 @@ class TitleCell: UITableViewCell {
         }
     }
 
-    lazy var dateFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
-        let dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMMd",
+    lazy var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        let dateFormat = DateFormatter.dateFormat(fromTemplate: "MMMMd",
                                                                 options: 0,
-                                                                locale: NSLocale.currentLocale())
+                                                                locale: Locale.current)
         dateFormatter.dateFormat = dateFormat
         return dateFormatter
     }()
 
-    lazy var timeFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeStyle = .ShortStyle
+    lazy var timeFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
         return dateFormatter
     }()
 
-    var date: NSDate? {
+    var date: Date? {
         didSet {
             if let date = date {
-                let dateString = dateFormatter.stringFromDate(date)
-                let timeString = timeFormatter.stringFromDate(date)
+                let dateString = dateFormatter.string(from: date)
+                let timeString = timeFormatter.string(from: date)
                 self.titleLabel.text = dateString + ", " + timeString
             } else {
                 self.titleLabel.text = "-"

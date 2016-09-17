@@ -15,7 +15,7 @@ import RealmSwift
 class JobsViewController: UICollectionViewController {
     let realm = try! Realm()
 
-    var jobsArray = try! Realm().objects(Job.self).sorted("date", ascending: false)
+    var jobsArray = try! Realm().objects(Job.self).sorted(byProperty: "date", ascending: false)
     var searchedObjectId: String? = nil
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var notificationToken: NotificationToken?
@@ -24,17 +24,17 @@ class JobsViewController: UICollectionViewController {
         super.viewDidLoad()
 
         let nib = UINib(nibName: "JobsCell", bundle: nil)
-        self.collectionView?.registerNib(nib, forCellWithReuseIdentifier: "jobsCell")
+        self.collectionView?.register(nib, forCellWithReuseIdentifier: "jobsCell")
 
-        let backItem = UIBarButtonItem(title: "Jobs", style: .Plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "Jobs", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
 
         //Inspect paste board for userInfo
-        if let pasteBoard = UIPasteboard(name: searchPasteboardName, create: false) {
+        if let pasteBoard = UIPasteboard(name: UIPasteboardName(rawValue: searchPasteboardName), create: false) {
             let uniqueIdentifier = pasteBoard.string
-            if let components = uniqueIdentifier?.componentsSeparatedByString(":") {
+            if let components = uniqueIdentifier?.components(separatedBy: ":") {
                 if components.count > 1 && components[0] == "job"{
                     let objectId = components[1]
                     displayObject(objectId)
@@ -42,7 +42,7 @@ class JobsViewController: UICollectionViewController {
             }
         }
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(JobsViewController.searchOccured(_:)), name: searchNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(JobsViewController.searchOccured(_:)), name: NSNotification.Name(rawValue: searchNotificationName), object: nil)
         self.subscribe()
         if jobsArray.count == 0 {
             self.activityIndicator.startAnimating()
@@ -51,19 +51,19 @@ class JobsViewController: UICollectionViewController {
         // Set results notification block
         self.notificationToken = jobsArray.addNotificationBlock { (changes: RealmCollectionChange) in
             switch changes {
-            case .Initial:
+            case .initial:
                 // Results are now populated and can be accessed without blocking the UI
                 self.collectionView?.reloadData()
                 break
-            case .Update(_, let deletions, let insertions, let modifications):
+            case .update(_, let deletions, let insertions, let modifications):
                 // Query results have changed, so apply them to the TableView
                 self.collectionView?.performBatchUpdates({
-                    self.collectionView?.insertItemsAtIndexPaths(insertions.map { NSIndexPath(forRow: $0, inSection: 0) })
-                    self.collectionView?.deleteItemsAtIndexPaths(deletions.map { NSIndexPath(forRow: $0, inSection: 0) })
-                    self.collectionView?.reloadItemsAtIndexPaths(modifications.map { NSIndexPath(forRow: $0, inSection: 0) })
+                    self.collectionView?.insertItems(at: insertions.map { (NSIndexPath(row: $0, section: 0) as IndexPath) })
+                    self.collectionView?.deleteItems(at: deletions.map { (NSIndexPath(row: $0, section: 0) as IndexPath) })
+                    self.collectionView?.reloadItems(at: modifications.map { (NSIndexPath(row: $0, section: 0) as IndexPath) })
                     }, completion: nil)
                 break
-            case .Error(let err):
+            case .error(let err):
                 // An error occurred while opening the Realm file on the background worker thread
                 fatalError("\(err)")
                 break
@@ -71,13 +71,13 @@ class JobsViewController: UICollectionViewController {
         }
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         self.fetchJobs()
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         if let searchedObjectId = searchedObjectId {
@@ -85,14 +85,14 @@ class JobsViewController: UICollectionViewController {
             displayObject(searchedObjectId)
         }
 
-        Answers.logContentViewWithName("Show jobs",
+        Answers.logContentView(withName: "Show jobs",
                                        contentType: "Job",
                                        contentId: "overview",
                                        customAttributes: nil)
     }
 
-    func searchOccured(notification: NSNotification) -> Void {
-        guard let userInfo = notification.userInfo as? Dictionary<String, String> else {
+    func searchOccured(_ notification: Notification) -> Void {
+        guard let userInfo = (notification as NSNotification).userInfo as? Dictionary<String, String> else {
             return
         }
 
@@ -107,7 +107,7 @@ class JobsViewController: UICollectionViewController {
         }
     }
 
-    func displayObject(recordName: String) -> Void {
+    func displayObject(_ recordName: String) -> Void {
        // if !loading {
             if self.navigationController?.visibleViewController == self {
                 let jobs = self.jobsArray
@@ -115,11 +115,11 @@ class JobsViewController: UICollectionViewController {
                 if let selectedObject = jobs.filter({ (job: Job) -> Bool in
                     return job.recordName == recordName
                 }).first {
-                    performSegueWithIdentifier("ShowDetail", sender: selectedObject)
+                    performSegue(withIdentifier: "ShowDetail", sender: selectedObject)
                 }
 
             } else {
-                self.navigationController?.popToRootViewControllerAnimated(false)
+                self.navigationController?.popToRootViewController(animated: false)
                 searchedObjectId = recordName
             }
 
@@ -142,12 +142,12 @@ class JobsViewController: UICollectionViewController {
     }
 
     func subscribe() {
-        let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+        let publicDB = CKContainer.default().publicCloudDatabase
 
         let subscription = CKSubscription(
             recordType: "Job",
             predicate: NSPredicate(value: true),
-            options: .FiresOnRecordCreation
+            options: .firesOnRecordCreation
         )
 
         let info = CKNotificationInfo()
@@ -157,29 +157,29 @@ class JobsViewController: UICollectionViewController {
 
         subscription.notificationInfo = info
 
-        publicDB.saveSubscription(subscription) { record, error in }
+        publicDB.save(subscription, completionHandler: { record, error in }) 
     }
 
 
     //MARK: - UICollectionViewDataSource methods
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return jobsArray.count
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("jobsCell", forIndexPath: indexPath) as! JobsCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "jobsCell", for: indexPath) as! JobsCell
 
         let job = jobsArray[indexPath.item]
         cell.job = job
 
         // Remove the vertical separator line for a cell on the right.
-        cell.rightHandSide = (indexPath.item % 2 == 1)
+        cell.rightHandSide = ((indexPath as NSIndexPath).item % 2 == 1)
 
         return cell
 
@@ -187,26 +187,26 @@ class JobsViewController: UICollectionViewController {
 
     //MARK: - UICollectionViewDelegate methods
 
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("ShowDetail", sender: collectionView.cellForItemAtIndexPath(indexPath))
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "ShowDetail", sender: collectionView.cellForItem(at: indexPath))
     }
 
     //MARK: - Segues
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDetail" {
             if let selectedObject = sender as? Job {
-                let detailViewController = segue.destinationViewController as! DetailViewController
+                let detailViewController = segue.destination as! DetailViewController
                 detailViewController.dataSource = JobDataSource(object: selectedObject)
-                Answers.logContentViewWithName("Show Job details",
+                Answers.logContentView(withName: "Show Job details",
                                                contentType: "Job",
                                                contentId: selectedObject.link,
                                                customAttributes: nil)
-            } else if let indexPath = self.collectionView?.indexPathForCell(sender as! UICollectionViewCell) {
+            } else if let indexPath = self.collectionView?.indexPath(for: sender as! UICollectionViewCell) {
                 let job = self.jobsArray[indexPath.row]
-                let detailViewController = segue.destinationViewController as! DetailViewController
+                let detailViewController = segue.destination as! DetailViewController
                 detailViewController.dataSource = JobDataSource(object: job)
-                Answers.logContentViewWithName("Show Job details",
+                Answers.logContentView(withName: "Show Job details",
                                                contentType: "Job",
                                                contentId: job.link,
                                                customAttributes: nil)
@@ -224,7 +224,7 @@ class JobsViewController: UICollectionViewController {
         query.sortDescriptors = [sort]
 
         let operation = CKQueryOperation(query: query)
-        operation.qualityOfService = .UserInteractive
+        operation.qualityOfService = .userInteractive
 
         var jobs = [Job]()
 
@@ -235,13 +235,13 @@ class JobsViewController: UICollectionViewController {
         }
 
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
 
                 if error != nil {
 
-                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of jobs; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    self?.presentViewController(ac, animated: true, completion: nil)
+                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of jobs; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self?.present(ac, animated: true, completion: nil)
 
                 } else {
                     let jobRecordNames = jobs.flatMap({ (job) -> String? in
@@ -261,7 +261,7 @@ class JobsViewController: UICollectionViewController {
             }
         }
 
-        CKContainer.defaultContainer().publicCloudDatabase.addOperation(operation)
+        CKContainer.default().publicCloudDatabase.add(operation)
 
     }
 }

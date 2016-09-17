@@ -25,24 +25,24 @@ class CoreLocationController: NSObject, CLLocationManagerDelegate {
 
     //MARK: - CLLocationManagerDelegate methods
 
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         print("didChangeAuthorizationStatus")
 
         switch status {
-        case .NotDetermined:
+        case .notDetermined:
             print(".NotDetermined")
             break
 
-        case .AuthorizedAlways:
+        case .authorizedAlways:
             print(".Authorized")
             break
 
-        case .AuthorizedWhenInUse:
+        case .authorizedWhenInUse:
             print(".AuthorizedWhenInUse")
             self.locationManager.startUpdatingLocation()
             break
 
-        case .Denied:
+        case .denied:
             print(".Denied")
             break
 
@@ -53,7 +53,7 @@ class CoreLocationController: NSObject, CLLocationManagerDelegate {
         }
     }
 
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
         let location = locations.last!
 
@@ -61,7 +61,7 @@ class CoreLocationController: NSObject, CLLocationManagerDelegate {
 
         let userInfo = [ "location" : location]
 
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.postNotificationName(locationNotification, object: nil, userInfo: userInfo)
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.post(name: Notification.Name(rawValue: locationNotification), object: nil, userInfo: userInfo)
     }
 }

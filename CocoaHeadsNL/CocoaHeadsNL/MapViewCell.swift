@@ -16,14 +16,14 @@ class MapViewCell: UITableViewCell, MKMapViewDelegate {
 
     var locationName: String? {
         didSet {
-            if let locationName = locationName where locationName != oldValue {
+            if let locationName = locationName , locationName != oldValue {
                 let annotation = MapAnnotation(coordinate: self.coordinate, title: "Here it is!", subtitle: locationName)
                 littleMap.addAnnotation(annotation)
             }
         }
     }
 
-    private var coordinate: CLLocationCoordinate2D {
+    fileprivate var coordinate: CLLocationCoordinate2D {
         if let geoLocation = geoLocation {
             return CLLocationCoordinate2D(latitude: geoLocation.coordinate.latitude, longitude: geoLocation.coordinate.longitude)
         } else {
@@ -31,23 +31,23 @@ class MapViewCell: UITableViewCell, MKMapViewDelegate {
         }
     }
 
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pinAnnotationView")
         annotationView.animatesDrop = true
         return annotationView
     }
 
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         self.openMapWithCoordinate(coordinate)
 
-        Answers.logContentViewWithName("Show map",
+        Answers.logContentView(withName: "Show map",
                                        contentType: "Company",
                                        contentId: "\(coordinate)",
                                        customAttributes: nil)
 
     }
 
-    private func openMapWithCoordinate(coordinate: CLLocationCoordinate2D) {
+    fileprivate func openMapWithCoordinate(_ coordinate: CLLocationCoordinate2D) {
         let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placemark)
 
@@ -56,8 +56,8 @@ class MapViewCell: UITableViewCell, MKMapViewDelegate {
         }
 
         let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
-        let currentLocationMapItem = MKMapItem.mapItemForCurrentLocation()
+        let currentLocationMapItem = MKMapItem.forCurrentLocation()
 
-        MKMapItem.openMapsWithItems([currentLocationMapItem, mapItem], launchOptions: launchOptions)
+        MKMapItem.openMaps(with: [currentLocationMapItem, mapItem], launchOptions: launchOptions)
     }
 }

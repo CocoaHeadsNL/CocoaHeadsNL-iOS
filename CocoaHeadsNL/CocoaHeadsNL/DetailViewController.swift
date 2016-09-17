@@ -10,15 +10,15 @@ import UIKit
 import StoreKit
 
 extension UIResponder {
-    func reloadCell(cell: UITableViewCell) {
-        self.nextResponder()?.reloadCell(cell)
+    func reloadCell(_ cell: UITableViewCell) {
+        self.next?.reloadCell(cell)
     }
 }
 
 class DetailViewController: UITableViewController, SKStoreProductViewControllerDelegate {
     var dataSource: DetailDataSource!
     weak var presentingVC: UIViewController?
-    private var activityViewController: UIActivityViewController?
+    fileprivate var activityViewController: UIActivityViewController?
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -28,7 +28,7 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
         super.viewDidLoad()
 
         //Can be used to hide masterViewController and increase size of detailView if wanted
-        self.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
+        self.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         self.navigationItem.leftItemsSupplementBackButton = true
 
         //For some reason this triggers correct resizing behavior when rotating views.
@@ -48,34 +48,34 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
         self.tableView.reloadData()
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        var url: NSURL?
+        var url: URL?
         var title: String?
         var activityType: String?
 
         if let companyDataSource = dataSource as? CompanyDataSource {
-            if let urlString = companyDataSource.company.website, titleString = companyDataSource.company.name {
+            if let urlString = companyDataSource.company.website, let titleString = companyDataSource.company.name {
                 title = titleString
-                url = NSURL(string: urlString)
+                url = URL(string: urlString)
                 activityType = "nl.cocoaheads.app.company"
             }
         } else if let jobsDataSource = dataSource as? JobDataSource {
             title = jobsDataSource.job.title
-            url = NSURL(string: jobsDataSource.job.link)
+            url = URL(string: jobsDataSource.job.link)
             activityType = "nl.cocoaheads.app.job"
-        } else if let meetupDataSource = dataSource as? MeetupDataSource, urlString = meetupDataSource.meetup.meetupUrl {
+        } else if let meetupDataSource = dataSource as? MeetupDataSource, let urlString = meetupDataSource.meetup.meetupUrl {
             title = meetupDataSource.meetup.name
-            url = NSURL(string: urlString)
+            url = URL(string: urlString)
             activityType = "nl.cocoaheads.app.meetup"
         }
 
-        if let title = title, url = url, activityType = activityType {
+        if let title = title, let url = url, let activityType = activityType {
             let activity = NSUserActivity(activityType: activityType)
             activity.title = title
 
-            guard let urlComponents = NSURLComponents(URL: url, resolvingAgainstBaseURL: false) else {
+            guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
                 return
             }
 
@@ -83,7 +83,7 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
                 urlComponents.scheme = "http"
             }
 
-            guard let checkedUrl = urlComponents.URL where urlComponents.scheme == "http" || urlComponents.scheme == "https" else {
+            guard let checkedUrl = urlComponents.url , urlComponents.scheme == "http" || urlComponents.scheme == "https" else {
                 return
             }
 
@@ -93,7 +93,7 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
         }
     }
 
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
         if #available(iOS 9.0, *) {
@@ -101,7 +101,7 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
         }
     }
 
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         for object in self.tableView.visibleCells {
             if let webCell = object as? WebViewCell {
                 webCell.webViewDidFinishLoad(webCell.htmlWebView)
@@ -109,52 +109,52 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
         }
     }
 
-    override func reloadCell(cell: UITableViewCell) {
+    override func reloadCell(_ cell: UITableViewCell) {
         tableView.beginUpdates()
         tableView.endUpdates()
     }
 
-    func showStoreView(parameters: [String : AnyObject], indexPath: NSIndexPath) {
+    func showStoreView(_ parameters: [String : AnyObject], indexPath: IndexPath) {
 
         let storeViewController = SKStoreProductViewController()
         storeViewController.delegate = self
 
-        storeViewController.loadProductWithParameters(parameters,
+        storeViewController.loadProduct(withParameters: parameters,
             completionBlock: {result, error in
                 if result {
-                    self.presentViewController(storeViewController,
+                    self.present(storeViewController,
                         animated: true, completion: nil)
-                    self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                    self.tableView.deselectRow(at: indexPath, animated: true)
                 }
         })
     }
 
-    func productViewControllerDidFinish(viewController: SKStoreProductViewController) {
-            self.dismissViewControllerAnimated(true, completion: nil)
+    func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
+            self.dismiss(animated: true, completion: nil)
     }
 
     @available(iOS 9.0, *)
-    override func previewActionItems() -> [UIPreviewActionItem] {
-        let shareAction = UIPreviewAction(title: "Share", style: .Default) { (previewAction, viewController) in
+    override var previewActionItems : [UIPreviewActionItem] {
+        let shareAction = UIPreviewAction(title: "Share", style: .default) { (previewAction, viewController) in
 
-            if let meetup = self.dataSource.object as? Meetup, meetupId = meetup.meetup_id {
+            if let meetup = self.dataSource.object as? Meetup, let meetupId = meetup.meetup_id {
                 let string: String = "http://www.meetup.com/CocoaHeadsNL/events/\(meetupId)/"
-                let URL: NSURL = NSURL(string: string)!
+                let URL: Foundation.URL = Foundation.URL(string: string)!
 
                 let acViewController = UIActivityViewController(activityItems: [string, URL], applicationActivities: nil)
 
                 if let meetupVC = self.presentingVC {
                     self.activityViewController = acViewController
-                    meetupVC.presentViewController(self.activityViewController!, animated: true, completion: nil)
+                    meetupVC.present(self.activityViewController!, animated: true, completion: nil)
                 }
             }
         }
 
-        let rsvpAction = UIPreviewAction(title: "RSVP", style: .Default) { (previewAction, viewController) in
+        let rsvpAction = UIPreviewAction(title: "RSVP", style: .default) { (previewAction, viewController) in
 
-             if let meetup = self.dataSource.object as? Meetup, meetupId = meetup.meetup_id {
-                if let URL = NSURL(string: "http://www.meetup.com/CocoaHeadsNL/events/\(meetupId)/") {
-                    UIApplication.sharedApplication().openURL(URL)
+             if let meetup = self.dataSource.object as? Meetup, let meetupId = meetup.meetup_id {
+                if let URL = URL(string: "http://www.meetup.com/CocoaHeadsNL/events/\(meetupId)/") {
+                    UIApplication.shared.openURL(URL)
                 }
             }
         }

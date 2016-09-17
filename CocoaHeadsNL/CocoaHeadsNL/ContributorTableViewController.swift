@@ -16,7 +16,7 @@ class ContributorTableViewController: UITableViewController {
 
     let realm = try! Realm()
 
-    var contributors = try! Realm().objects(Contributor.self).sorted("commit_count", ascending: false)
+    var contributors = try! Realm().objects(Contributor.self).sorted(byProperty: "commit_count", ascending: false)
     var notificationToken: NotificationToken?
 
     //MARK: - View LifeCycle
@@ -24,7 +24,7 @@ class ContributorTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let backItem = UIBarButtonItem(title: "About", style: .Plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "About", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
@@ -32,22 +32,22 @@ class ContributorTableViewController: UITableViewController {
         // Set results notification block
         self.notificationToken = contributors.addNotificationBlock { (changes: RealmCollectionChange) in
             switch changes {
-            case .Initial:
+            case .initial:
                 // Results are now populated and can be accessed without blocking the UI
                 self.tableView.reloadData()
                 break
-            case .Update(_, let deletions, let insertions, let modifications):
+            case .update(_, let deletions, let insertions, let modifications):
                 // Query results have changed, so apply them to the TableView
                 self.tableView.beginUpdates()
-                self.tableView.insertRowsAtIndexPaths(insertions.map { NSIndexPath(forRow: $0, inSection: 0) },
-                    withRowAnimation: .Automatic)
-                self.tableView.deleteRowsAtIndexPaths(deletions.map { NSIndexPath(forRow: $0, inSection: 0) },
-                    withRowAnimation: .Automatic)
-                self.tableView.reloadRowsAtIndexPaths(modifications.map { NSIndexPath(forRow: $0, inSection: 0) },
-                    withRowAnimation: .Automatic)
+                self.tableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) },
+                                          with: .automatic)
+                self.tableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) },
+                                          with: .automatic)
+                self.tableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) },
+                                          with: .automatic)
                 self.tableView.endUpdates()
                 break
-            case .Error(let err):
+            case .error(let err):
                 // An error occurred while opening the Realm file on the background worker thread
                 fatalError("\(err)")
                 break
@@ -55,7 +55,7 @@ class ContributorTableViewController: UITableViewController {
         }
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         self.fetchContributors()
@@ -63,22 +63,22 @@ class ContributorTableViewController: UITableViewController {
 
     //MARK: - UITableViewDataSource
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return self.contributors.count
 
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("contributorCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "contributorCell", for: indexPath)
 
         let contributor = self.contributors[indexPath.row]
 
         cell.textLabel?.text = contributor.name
         cell.detailTextLabel?.text = contributor.url
 
-        if let avatar_url = contributor.avatar_url, url = NSURL(string: avatar_url) {
+        if let avatar_url = contributor.avatar_url, let url = URL(string: avatar_url) {
             let task = fetchImageTask(url, forImageView: cell.imageView!)
             task.resume()
         }
@@ -89,62 +89,62 @@ class ContributorTableViewController: UITableViewController {
     }
 
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
 
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(88)
     }
 
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Contributors to this app"
     }
 
     //MARK: - UITableViewDelegate
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let urlString = contributors[indexPath.row].url
 
-        Answers.logContentViewWithName("Show contributer details",
+        Answers.logContentView(withName: "Show contributer details",
                                        contentType: "Contributer",
                                        contentId: urlString,
                                        customAttributes: nil)
 
-        if let urlString = urlString, url = NSURL(string: urlString) {
-            if UIApplication.sharedApplication().canOpenURL(url) {
-                UIApplication.sharedApplication().openURL(url)
+        if let urlString = urlString, let url = URL(string: urlString) {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.openURL(url)
             }
         }
 
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     // MARK: Networking
 
-    lazy var remoteSession: NSURLSession = {
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        return NSURLSession(configuration: config)
+    lazy var remoteSession: URLSession = {
+        let config = URLSessionConfiguration.default
+        return URLSession(configuration: config)
     }()
 
-    func fetchImageTask(url: NSURL, forImageView imageView: UIImageView) -> NSURLSessionDataTask {
-        let task = remoteSession.dataTaskWithRequest(NSURLRequest(URL: url)) {
+    func fetchImageTask(_ url: URL, forImageView imageView: UIImageView) -> URLSessionDataTask {
+        let task = remoteSession.dataTask(with: URLRequest(url: url), completionHandler: {
             (data, response, error) in
             if let data = data {
                 let image = UIImage(data: data)
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     imageView.image = image
                 }
             }
-        }
+        }) 
         return task
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        Answers.logContentViewWithName("Show contributers",
+        Answers.logContentView(withName: "Show contributers",
                                        contentType: "Contributer",
                                        contentId: "overview",
                                        customAttributes: nil)
@@ -159,7 +159,7 @@ class ContributorTableViewController: UITableViewController {
         let query = CKQuery(recordType: "Contributor", predicate: pred)
 
         let operation = CKQueryOperation(query: query)
-        operation.qualityOfService = .UserInteractive
+        operation.qualityOfService = .userInteractive
 
         var cloudContributors = [Contributor]()
 
@@ -169,7 +169,7 @@ class ContributorTableViewController: UITableViewController {
         }
 
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 if error == nil {
 
                     self?.realm.beginWrite()
@@ -177,14 +177,14 @@ class ContributorTableViewController: UITableViewController {
                     try! self?.realm.commitWrite()
 
                 } else {
-                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of contributors; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    self?.presentViewController(ac, animated: true, completion: nil)
+                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of contributors; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self?.present(ac, animated: true, completion: nil)
                 }
             }
         }
 
-        CKContainer.defaultContainer().publicCloudDatabase.addOperation(operation)
+        CKContainer.default().publicCloudDatabase.add(operation)
 
     }
 

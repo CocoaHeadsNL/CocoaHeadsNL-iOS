@@ -14,7 +14,7 @@ class CompanyDataSource: DetailDataSource {
         return company.name
     }
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         if company.hasApps {
             return 2
         } else {
@@ -22,7 +22,7 @@ class CompanyDataSource: DetailDataSource {
         }
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 4
         } else {
@@ -30,12 +30,12 @@ class CompanyDataSource: DetailDataSource {
         }
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.section == 1 {
-            return affiliateCellWithLink(fetchLinks.apps[indexPath.row], forTableView: tableView)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if (indexPath as NSIndexPath).section == 1 {
+            return affiliateCellWithLink(fetchLinks.apps[(indexPath as NSIndexPath).row], forTableView: tableView)
         }
 
-        switch indexPath.row {
+        switch (indexPath as NSIndexPath).row {
         case 0:
             return logoCellWithFile(company.logoImage, forTableView: tableView)
         case 1:
@@ -49,8 +49,8 @@ class CompanyDataSource: DetailDataSource {
         }
     }
 
-    private func affiliateCellWithLink(affiliateLink: AffiliateLink, forTableView tableView: UITableView) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("affiliateCell") as! AffiliateCell
+    fileprivate func affiliateCellWithLink(_ affiliateLink: AffiliateLink, forTableView tableView: UITableView) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "affiliateCell") as! AffiliateCell
         cell.productName = affiliateLink.productName
         cell.affiliateId = affiliateLink.affiliateId
         return cell
@@ -64,29 +64,29 @@ class CompanyDataSource: DetailDataSource {
         }
     }
 
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 1 {
-            tableView.headerViewForSection(1)?.backgroundColor = UIColor.grayColor()
-            return tableView.headerViewForSection(1)
+            tableView.headerView(forSection: 1)?.backgroundColor = UIColor.gray
+            return tableView.headerView(forSection: 1)
         } else {
             return UIView(frame: CGRect.zero)
         }
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 1 {
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).section == 1 {
 
             if let vc = presenter {
 
-                let affiliateLink = self.fetchLinks.apps[indexPath.row]
+                let affiliateLink = self.fetchLinks.apps[(indexPath as NSIndexPath).row]
                 let affiliateToken = "1010l8D"
                     if let affiliateId = affiliateLink.affiliateId {
                         let parameters = [SKStoreProductParameterITunesItemIdentifier :
                             affiliateId, SKStoreProductParameterAffiliateToken : affiliateToken]
 
-                        vc.showStoreView(parameters, indexPath: indexPath)
+                        vc.showStoreView(parameters as [String : AnyObject], indexPath: indexPath)
 
-                        Answers.logContentViewWithName("Show appstore",
+                        Answers.logContentView(withName: "Show appstore",
                                                        contentType: "App",
                                                        contentId: "\(affiliateLink.productCreator!) \(affiliateLink.productName)",
                                                        customAttributes: nil)

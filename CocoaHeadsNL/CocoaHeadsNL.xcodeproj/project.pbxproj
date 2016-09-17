@@ -73,7 +73,7 @@
 		4AEDD52A1CF636430039AAE5 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		4AF8899A1AAD8EBC00D8DB2E /* CocoaHeadsNL-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CocoaHeadsNL-Bridging-Header.h"; sourceTree = "<group>"; };
 		7B6A74461B1452FD00A10762 /* MeetupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetupCell.swift; sourceTree = "<group>"; };
-		7B6A74471B1452FD00A10762 /* MeetupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetupsViewController.swift; sourceTree = "<group>"; };
+		7B6A74471B1452FD00A10762 /* MeetupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MeetupsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		7B6A744A1B1495FF00A10762 /* MeetupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeetupCell.xib; sourceTree = "<group>"; };
 		7B6A744C1B149A6B00A10762 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		7B6A744E1B162F8E00A10762 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -94,8 +94,8 @@
 		F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		F11455C01AB5024000546D22 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		F11E36271B1A570F000B61C0 /* CompanyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyTableViewController.swift; sourceTree = "<group>"; };
-		F14335AA1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesNearbyCollectionViewController.swift; sourceTree = "<group>"; };
+		F11E36271B1A570F000B61C0 /* CompanyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CompanyTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F14335AA1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CompaniesNearbyCollectionViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F17A38761ABF3B62005CFF8A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F1A46D121AAB50BB00585D61 /* CocoaHeadsNL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaHeadsNL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A46D161AAB50BB00585D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -105,14 +105,14 @@
 		F1A46D231AAB50BB00585D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		F1A46D2E1AAB50BB00585D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1A46D2F1AAB50BB00585D61 /* CocoaHeadsNLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaHeadsNLTests.swift; sourceTree = "<group>"; };
-		F1A46D3C1AAB516300585D61 /* JobsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsViewController.swift; sourceTree = "<group>"; };
+		F1A46D3C1AAB516300585D61 /* JobsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = JobsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F1BDEA6B1C91F6D7004C7DAB /* CompaniesNearbyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesNearbyCell.swift; sourceTree = "<group>"; };
 		F1BDEA6C1C91F6D7004C7DAB /* CompaniesNearbyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompaniesNearbyCell.xib; sourceTree = "<group>"; };
 		F1BDEA731C920768004C7DAB /* JobsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsCell.swift; sourceTree = "<group>"; };
 		F1BDEA741C920768004C7DAB /* JobsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobsCell.xib; sourceTree = "<group>"; };
 		F1CF120E1B8A0C0600EBCABC /* CoreLocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocationController.swift; sourceTree = "<group>"; };
 		F1DB2379E5772EF04B49E6E3 /* Pods-CocoaHeadsNL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocoaHeadsNL.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CocoaHeadsNL/Pods-CocoaHeadsNL.debug.xcconfig"; sourceTree = "<group>"; };
-		F1DC2E121C665B4D006CC492 /* ContributorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContributorTableViewController.swift; sourceTree = "<group>"; };
+		F1DC2E121C665B4D006CC492 /* ContributorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ContributorTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -401,11 +401,13 @@
 				TargetAttributes = {
 					4AEDD51F1CF635E50039AAE5 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = F1A46D111AAB50BB00585D61;
 					};
 					F1A46D111AAB50BB00585D61 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = D55PL7PU7S;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -551,7 +553,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B653106EA18082D4EC97BD03 /* [CP] Embed Pods Frameworks */ = {
@@ -690,6 +692,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNLUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "fa2c071a-514c-4c70-b8fa-569d6f832d66";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = CocoaHeadsNL;
 			};
 			name = Debug;
@@ -708,6 +711,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNLUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "fa2c071a-514c-4c70-b8fa-569d6f832d66";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = CocoaHeadsNL;
 			};
 			name = Release;
@@ -841,6 +845,7 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -862,6 +867,7 @@
 				PROVISIONING_PROFILE = "fa2c071a-514c-4c70-b8fa-569d6f832d66";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

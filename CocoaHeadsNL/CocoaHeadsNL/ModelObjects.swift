@@ -12,7 +12,7 @@ import MobileCoreServices
 import CloudKit
 import RealmSwift
 
-let indexQueue = NSOperationQueue()
+let indexQueue = OperationQueue()
 
 var jobsIndexBackgroundTaskID = UIBackgroundTaskInvalid
 var meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
@@ -52,10 +52,10 @@ class Company: Object {
         newCompany.hasApps = record["hasApps"] as? Bool ?? false
 
         if let logoAsset = record["logo"] as? CKAsset {
-            newCompany.logo = NSData(contentsOfURL: logoAsset.fileURL)
+            newCompany.logo = try? Data(contentsOf: logoAsset.fileURL)
         }
         if let logoAsset = record["smallLogo"] as? CKAsset {
-            newCompany.smallLogo = NSData(contentsOfURL: logoAsset.fileURL)
+            newCompany.smallLogo = try? Data(contentsOf: logoAsset.fileURL)
         }
 
         return newCompany
@@ -75,16 +75,16 @@ class Company: Object {
     dynamic var emailAddress: String?
     dynamic var latitude: CLLocationDegrees = 0.0
     dynamic var longitude: CLLocationDegrees = 0.0
-    dynamic var logo: NSData?
+    dynamic var logo: Data?
     dynamic var hasApps: Bool = false
-    dynamic var smallLogo: NSData?
+    dynamic var smallLogo: Data?
     
     override static func ignoredProperties() -> [String] {
         return ["logoImage", "smallLogoImage"]
     }
 
     lazy var logoImage: UIImage = {
-        if let logo = self.logo, image = UIImage(data:logo) {
+        if let logo = self.logo, let image = UIImage(data:logo) {
             return image
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
@@ -92,7 +92,7 @@ class Company: Object {
     }()
 
     lazy var smallLogoImage: UIImage = {
-        if let logo = self.smallLogo, image = UIImage(data:logo) {
+        if let logo = self.smallLogo, let image = UIImage(data:logo) {
             return image
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
@@ -130,12 +130,12 @@ class Job: Object {
         
         job.recordName = record.recordID.recordName
         job.content = record["content"] as? String ?? ""
-        job.date = record["date"] as? NSDate ?? NSDate()
+        job.date = record["date"] as? Date ?? Date()
         job.link = record["link"] as? String ?? ""
         job.title = record["title"] as? String ?? ""
         job.logoUrlString = record["logoUrl"] as? String
         
-        if let logoURLString = job.logoUrlString, let logoURL = NSURL(string: logoURLString), data = NSData(contentsOfURL: logoURL) {
+        if let logoURLString = job.logoUrlString, let logoURL = URL(string: logoURLString), let data = try? Data(contentsOf: logoURL) {
             job.logo = data
         }
         return job
@@ -147,18 +147,18 @@ class Job: Object {
     
     dynamic var recordName: String?
     dynamic var content: String = ""
-    dynamic var date: NSDate?
+    dynamic var date: Date?
     dynamic var link: String = ""
     dynamic var title: String = ""
     dynamic var logoUrlString: String?
-    dynamic var logo: NSData?
+    dynamic var logo: Data?
 
     override static func ignoredProperties() -> [String] {
         return ["logoImage"]
     }
     
     lazy var logoImage: UIImage = {
-        if let logo = self.logo, image = UIImage(data:logo) {
+        if let logo = self.logo, let image = UIImage(data:logo) {
             return image
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
@@ -170,9 +170,9 @@ class Job: Object {
         get {
             let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeImage as String)
             attributeSet.title = title
-            if let data = content.dataUsingEncoding(NSUTF8StringEncoding) {
+            if let data = content.data(using: String.Encoding.utf8) {
                 do {
-                    let jobDescriptionString = try NSAttributedString(data: data, options:[NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding], documentAttributes:nil)
+                    let jobDescriptionString = try NSAttributedString(data: data, options:[NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8], documentAttributes:nil)
 
                     attributeSet.contentDescription = jobDescriptionString.string
                 } catch {
@@ -186,16 +186,16 @@ class Job: Object {
         }
     }
 
-    class func index(jobs: [Job]) {
+    class func index(_ jobs: [Job]) {
         if #available(iOS 9.0, *) {
-            indexQueue.addOperationWithBlock({ () -> Void in
+            indexQueue.addOperation({ () -> Void in
 
                 guard jobsIndexBackgroundTaskID == UIBackgroundTaskInvalid else {
                     return
                 }
 
-                jobsIndexBackgroundTaskID = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({ () -> Void in
-                    UIApplication.sharedApplication().endBackgroundTask(jobsIndexBackgroundTaskID)
+                jobsIndexBackgroundTaskID = UIApplication.shared.beginBackgroundTask(expirationHandler: { () -> Void in
+                    UIApplication.shared.endBackgroundTask(jobsIndexBackgroundTaskID)
                     jobsIndexBackgroundTaskID = UIBackgroundTaskInvalid
                 })
 
@@ -211,14 +211,13 @@ class Job: Object {
 //                    }
 //                })
 
-
-                CSSearchableIndex.defaultSearchableIndex().indexSearchableItems(searchableItems, completionHandler: { (error: NSError?) -> Void in
+                CSSearchableIndex.default().indexSearchableItems(searchableItems, completionHandler: { (error: Swift.Error?) -> Void in
                     if let error = error {
                         print(error)
                     }
                 })
 
-                UIApplication.sharedApplication().endBackgroundTask(jobsIndexBackgroundTaskID)
+                UIApplication.shared.endBackgroundTask(jobsIndexBackgroundTaskID)
                 jobsIndexBackgroundTaskID = UIBackgroundTaskInvalid
             })
         }
@@ -237,19 +236,19 @@ class Meetup: Object {
         meetup.longitude = (record["geoLocation"] as? CLLocation)?.coordinate.longitude ?? 0.0
         meetup.location = record["location"] as? String ?? ""
         meetup.locationName = record["locationName"] as? String ?? ""
-        meetup.time = record["time"] as? NSDate
+        meetup.time = record["time"] as? Date
         meetup.nextEvent = record["nextEvent"] as? Bool ?? false
 
-        meetup.duration = record.objectForKey("duration") as? NSNumber ?? 0
-        meetup.rsvp_limit = record.objectForKey("rsvp_limit") as? NSNumber ?? 0
-        meetup.yes_rsvp_count = record.objectForKey("yes_rsvp_count") as? NSNumber ?? 0
-        meetup.meetupUrl = record.objectForKey("meetup_url") as? String
+        meetup.duration = record.object(forKey: "duration") as? NSNumber ?? 0
+        meetup.rsvp_limit = record.object(forKey: "rsvp_limit") as? NSNumber ?? 0
+        meetup.yes_rsvp_count = record.object(forKey: "yes_rsvp_count") as? NSNumber ?? 0
+        meetup.meetupUrl = record.object(forKey: "meetup_url") as? String
         
         if let logoAsset = record["logo"] as? CKAsset {
-            meetup.logo = NSData(contentsOfURL: logoAsset.fileURL)
+            meetup.logo = try? Data(contentsOf: logoAsset.fileURL)
         }
         if let logoAsset = record["smallLogo"] as? CKAsset {
-            meetup.smallLogo = NSData(contentsOfURL: logoAsset.fileURL)
+            meetup.smallLogo = try? Data(contentsOf: logoAsset.fileURL)
         }
         
         return meetup
@@ -268,11 +267,11 @@ class Meetup: Object {
     dynamic var meetup_id: String?
     dynamic var name: String?
     dynamic var rsvp_limit: NSNumber = 0
-    dynamic var time: NSDate?
+    dynamic var time: Date?
     dynamic var yes_rsvp_count: NSNumber = 0
-    dynamic var logo: NSData?
+    dynamic var logo: Data?
     dynamic var nextEvent: Bool = false
-    dynamic var smallLogo: NSData?
+    dynamic var smallLogo: Data?
     dynamic var location: String?
     dynamic var meetupUrl: String?
     
@@ -281,7 +280,7 @@ class Meetup: Object {
     }
 
     lazy var logoImage: UIImage = {
-        if let logo = self.logo, image = UIImage(data:logo) {
+        if let logo = self.logo, let image = UIImage(data:logo) {
             return image
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
@@ -289,7 +288,7 @@ class Meetup: Object {
     }()
     
     lazy var smallLogoImage: UIImage = {
-        if let logo = self.smallLogo, image = UIImage(data:logo) {
+        if let logo = self.smallLogo, let image = UIImage(data:logo) {
             return image
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
@@ -301,9 +300,9 @@ class Meetup: Object {
         get {
             let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeImage as String)
             attributeSet.title = name
-            if let data = meetup_description?.dataUsingEncoding(NSUTF8StringEncoding) {
+            if let data = meetup_description?.data(using: String.Encoding.utf8) {
                 do {
-                    let meetupDescriptionString = try NSAttributedString(data: data, options:[NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding], documentAttributes:nil)
+                    let meetupDescriptionString = try NSAttributedString(data: data, options:[NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8], documentAttributes:nil)
 
                     attributeSet.contentDescription = meetupDescriptionString.string
                 } catch {
@@ -327,16 +326,16 @@ class Meetup: Object {
         }
     }
 
-    class func index(meetups: [Meetup]) {
+    class func index(_ meetups: [Meetup]) {
         if #available(iOS 9.0, *) {
-            indexQueue.addOperationWithBlock({ () -> Void in
+            indexQueue.addOperation({ () -> Void in
 
                 guard meetupsIndexBackgroundTaskID == UIBackgroundTaskInvalid else {
                     return
                 }
 
-                meetupsIndexBackgroundTaskID = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({ () -> Void in
-                    UIApplication.sharedApplication().endBackgroundTask(jobsIndexBackgroundTaskID)
+                meetupsIndexBackgroundTaskID = UIApplication.shared.beginBackgroundTask(expirationHandler: { () -> Void in
+                    UIApplication.shared.endBackgroundTask(jobsIndexBackgroundTaskID)
                     meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
                 })
 
@@ -352,13 +351,13 @@ class Meetup: Object {
 //                    }
 //                })
 
-                CSSearchableIndex.defaultSearchableIndex().indexSearchableItems(searchableItems, completionHandler: { (error: NSError?) -> Void in
+                CSSearchableIndex.default().indexSearchableItems(searchableItems, completionHandler: { (error: Swift.Error?) -> Void in
                     if let error = error {
                         print(error)
                     }
                 })
 
-                UIApplication.sharedApplication().endBackgroundTask(jobsIndexBackgroundTaskID)
+                UIApplication.shared.endBackgroundTask(jobsIndexBackgroundTaskID)
                 meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
             })
         }
