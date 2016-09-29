@@ -11,7 +11,7 @@ class MeetupDataSource: DetailDataSource {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 7
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -29,6 +29,8 @@ class MeetupDataSource: DetailDataSource {
         case 4:
             return titleCellWithDate(meetup.time, forTableView: tableView)
         case 5:
+            return buttonCell(urlString: meetup.meetupUrl, title: "Change your RSVP", forTableView: tableView)
+        case 6:
             return webViewCellWithHTML(meetup.meetup_description, forTableView: tableView)
         default:
             fatalError("This should not happen.")

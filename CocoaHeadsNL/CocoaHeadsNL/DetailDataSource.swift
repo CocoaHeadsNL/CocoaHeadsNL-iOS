@@ -60,4 +60,11 @@ class DetailDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
         cell.html = html
         return cell
     }
+    
+    func buttonCell(urlString: String?, title: String, forTableView tableView: UITableView) -> ButtonCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "buttonCell") as! ButtonCell
+        cell.title = title
+        cell.urlString = urlString
+        return cell
+    }
 }
