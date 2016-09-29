@@ -119,7 +119,7 @@ class JobsViewController: UICollectionViewController {
                 }
 
             } else {
-                self.navigationController?.popToRootViewController(animated: false)
+                _ = self.navigationController?.popToRootViewController(animated: false)
                 searchedObjectId = recordName
             }
 
@@ -248,7 +248,7 @@ class JobsViewController: UICollectionViewController {
                         return job.recordName
                     })
                     let predicate = NSPredicate(format: "NOT recordName IN %@", jobRecordNames)
-                    let obsoleteJobs = self?.realm.objects(Job).filter(predicate)
+                    let obsoleteJobs = self?.realm.objects(Job.self).filter(predicate)
                     self?.realm.beginWrite()
                     self?.realm.add(jobs, update: true)
                     if let obsoleteJobs = obsoleteJobs {

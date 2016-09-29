@@ -253,7 +253,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                 }
 
             } else {
-                self.navigationController?.popToRootViewController(animated: false)
+                _ = self.navigationController?.popToRootViewController(animated: false)
                 searchedObjectId = recordName
             }
 
