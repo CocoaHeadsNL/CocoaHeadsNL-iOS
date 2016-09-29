@@ -9,29 +9,38 @@
 import UIKit
 
 class ButtonCell: UITableViewCell {
+    
     @IBOutlet weak var titleButton: UIButton!
     @IBAction func buttonPressed(_ sender: AnyObject) {
-        guard let urlString = urlString else {
-            //TODO show warning
-            return
-        }
-
-        guard let url = URL(string: urlString) else {
-            //TODO show warning
-            return
-        }
-        
-        let appUrlString = "meetup:/\(url.path)"
-
-        let appUrl = URL(string: appUrlString)
-        
-        if appUrl != nil && UIApplication.shared.canOpenURL(appUrl!) {
-            UIApplication.shared.openURL(appUrl!)
-        } else if UIApplication.shared.canOpenURL(url) {
+        if let url = selectURL() {
             UIApplication.shared.openURL(url)
         }
     }
     
+    private func selectURL() -> URL? {
+        guard let urlString = urlString else {
+            //TODO show warning
+            return nil
+        }
+        
+        guard let url = URL(string: urlString) else {
+            //TODO show warning
+            return nil
+        }
+        
+        let appUrlString = "meetup:/\(url.path)"
+        
+        let appUrl = URL(string: appUrlString)
+        
+        if appUrl != nil && UIApplication.shared.canOpenURL(appUrl!) {
+            return appUrl
+        } else if UIApplication.shared.canOpenURL(url) {
+            return url
+        } else {
+            return nil
+        }
+    }
+
     var title: String? {
         didSet {
             self.titleButton.setTitle(title, for: .normal)
