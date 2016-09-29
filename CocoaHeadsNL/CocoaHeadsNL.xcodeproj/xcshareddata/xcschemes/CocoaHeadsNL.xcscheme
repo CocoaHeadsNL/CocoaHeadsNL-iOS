@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -56,7 +56,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4A53950B1CEA3F0D00710B5B"
+               BlueprintIdentifier = "4AEDD51F1CF635E50039AAE5"
                BuildableName = "CocoaHeadsNLUITests.xctest"
                BlueprintName = "CocoaHeadsNLUITests"
                ReferencedContainer = "container:CocoaHeadsNL.xcodeproj">
