@@ -12,14 +12,14 @@ Our email: [foundation@cocoaheads.nl](mailto:foundation@cocoaheads.nl)
 
 ## Before running the app
 
-Please run `pod install` in the directory containing the Podfile.~~
+Please run `pod install` in the directory containing the Podfile.
 
 ## Project structure
 
 CocoaHeadsNL contains two important components:
 
 - The iOS app implementation
-- CloudKtSync code
+- CloudKitSync code
 
 Everything cloud is in the folder **CocoaHeadsNL/CloudKitSync/**. All other files and directories are related to the iOS app.
 
@@ -29,7 +29,7 @@ Minimal deployment target of the app is iOS 8.1.
 
 Please note that we consider all ownership of contributions made to this project to automatically transfer to Stichting CocoaHeadsNL. If you do not agree to this, do not contribute.
 
-Also note, any contributions we receive should be allowed to be transfered to Stichting CocoaHeadsNL. If you make contributions and at a later stage ownership of said contributions are not lawfully transfered to our possesion, you as a contributor are considered liable for this.
+Also note, any contributions we receive should be allowed to be transferred to Stichting CocoaHeadsNL. If you make contributions and at a later stage ownership of said contributions are not lawfully transfered to our possesion, you as a contributor are considered liable for this.
 
 The above statement may sound harsh, but basically if you write original code on your own or legally alloted time and use open source components with compatible licenses: You are perfectly fine.
 
