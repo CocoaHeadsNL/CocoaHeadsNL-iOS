@@ -11,4 +11,4 @@ before_install:
   - cd CocoaHeadsNL
   - pod install
 script:
-  - xctool -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+  - xcodebuild -workspace CocoaHeadsNL.xcworkspace -scheme CocoaHeadsNL -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
