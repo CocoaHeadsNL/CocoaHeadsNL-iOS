@@ -135,7 +135,7 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
 
     @available(iOS 9.0, *)
     override var previewActionItems : [UIPreviewActionItem] {
-        let shareAction = UIPreviewAction(title: "Share", style: .default) { (previewAction, viewController) in
+        let shareAction = UIPreviewAction(title: NSLocalizedString("Share", comment: ""), style: .default) { (previewAction, viewController) in
 
             if let meetup = self.dataSource.object as? Meetup, let meetupId = meetup.meetup_id {
                 let string: String = "http://www.meetup.com/CocoaHeadsNL/events/\(meetupId)/"
@@ -150,7 +150,7 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
             }
         }
 
-        let rsvpAction = UIPreviewAction(title: "RSVP", style: .default) { (previewAction, viewController) in
+        let rsvpAction = UIPreviewAction(title: NSLocalizedString("RSVP", comment: ""), style: .default) { (previewAction, viewController) in
 
              if let meetup = self.dataSource.object as? Meetup, let meetupId = meetup.meetup_id {
                 if let URL = URL(string: "http://www.meetup.com/CocoaHeadsNL/events/\(meetupId)/") {

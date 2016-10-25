@@ -23,8 +23,8 @@ class ContributorTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let backItem = UIBarButtonItem(title: "About", style: .plain, target: nil, action: nil)
+        
+        let backItem = UIBarButtonItem(title: NSLocalizedString("About", comment: ""), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
@@ -98,7 +98,7 @@ class ContributorTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Contributors to this app"
+        return NSLocalizedString("Contributors to this app", comment: "")
     }
 
     //MARK: - UITableViewDelegate
@@ -177,8 +177,11 @@ class ContributorTableViewController: UITableViewController {
                     try! self?.realm.commitWrite()
 
                 } else {
-                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of contributors; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    let title = NSLocalizedString("Fetch failed", comment: "")
+                    let message = "There was a problem fetching the list of contributors; please try again.\n" + error!.localizedDescription
+                    let okButtonTitle = NSLocalizedString("OK", comment: "")
+                    let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: okButtonTitle, style: .default, handler: nil))
                     self?.present(ac, animated: true, completion: nil)
                 }
             }

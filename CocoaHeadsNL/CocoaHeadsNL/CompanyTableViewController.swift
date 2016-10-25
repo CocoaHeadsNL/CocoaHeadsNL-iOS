@@ -38,7 +38,7 @@ class CompanyTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let backItem = UIBarButtonItem(title: "Companies", style: .plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: NSLocalizedString("Companies", comment: ""), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
@@ -83,7 +83,7 @@ class CompanyTableViewController: UITableViewController {
 //        if let _ = userInfo["location"]?.coordinate.latitude, _ = userInfo["location"]?.coordinate.longitude {
 //            self.sortingLabel?.text = "Companies sorted by distance"
 //        } else {
-            self.sortingLabel?.text = "Companies sorted by name"
+        self.sortingLabel?.text = NSLocalizedString("Companies sorted by name", comment: "")
 //        }
     }
 
@@ -115,7 +115,7 @@ class CompanyTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Companies sorted by place"
+        return NSLocalizedString("Companies sorted by place", comment: "")
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -171,7 +171,7 @@ class CompanyTableViewController: UITableViewController {
 
         let info = CKNotificationInfo()
 
-        info.alertBody = "A new company has been added!"
+        info.alertBody = NSLocalizedString("A new company has been added!", comment: "")
         info.shouldBadge = true
 
         subscription.notificationInfo = info

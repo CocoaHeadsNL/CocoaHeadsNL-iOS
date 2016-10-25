@@ -36,7 +36,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         let nib = UINib(nibName: "MeetupCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: MeetupCell.Identifier)
 
-        let backItem = UIBarButtonItem(title: "Events", style: .plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: NSLocalizedString("Events", comment: ""), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
@@ -181,7 +181,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         let info = CKNotificationInfo()
 
-        info.alertBody = "New meetup has been added!"
+        info.alertBody = NSLocalizedString("New meetup has been added!", comment: "")
         info.shouldBadge = true
 
         subscription.notificationInfo = info
@@ -345,10 +345,11 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
             DispatchQueue.main.async {
                 guard error == nil else {
-                    let ac = UIAlertController(
-                        title: "Fetch failed",
-                        message: "There was a problem fetching the list of meetups; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    let title = NSLocalizedString("Fetch failed", comment: "")
+                    let message = "There was a problem fetching the list of meetups; please try again.\n" + error!.localizedDescription
+                    let okButtonTitle = NSLocalizedString("OK", comment: "")
+                    let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: okButtonTitle, style: .default, handler: nil))
                     self?.present(ac, animated: true, completion: nil)
                     return
                 }

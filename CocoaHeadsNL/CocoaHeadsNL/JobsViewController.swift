@@ -26,7 +26,7 @@ class JobsViewController: UICollectionViewController {
         let nib = UINib(nibName: "JobsCell", bundle: nil)
         self.collectionView?.register(nib, forCellWithReuseIdentifier: "jobsCell")
 
-        let backItem = UIBarButtonItem(title: "Jobs", style: .plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: NSLocalizedString("Jobs", comment: ""), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
@@ -152,7 +152,7 @@ class JobsViewController: UICollectionViewController {
 
         let info = CKNotificationInfo()
 
-        info.alertBody = "A new job has been added!"
+        info.alertBody = NSLocalizedString("A new job has been added!", comment: "")
         info.shouldBadge = true
 
         subscription.notificationInfo = info
@@ -238,9 +238,11 @@ class JobsViewController: UICollectionViewController {
             DispatchQueue.main.async {
 
                 if error != nil {
-
-                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of jobs; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    let title = NSLocalizedString("Fetch failed", comment: "")
+                    let message = "There was a problem fetching the list of jobs; please try again.\n" + error!.localizedDescription
+                    let okButtonTitle = NSLocalizedString("OK", comment: "")
+                    let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: okButtonTitle, style: .default, handler: nil))
                     self?.present(ac, animated: true, completion: nil)
 
                 } else {

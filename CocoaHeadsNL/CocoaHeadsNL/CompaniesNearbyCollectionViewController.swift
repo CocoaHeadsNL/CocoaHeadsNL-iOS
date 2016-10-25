@@ -167,8 +167,11 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
 
                     self?.activityIndicator.stopAnimating()
                 } else {
-                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of companies; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    let title = NSLocalizedString("Fetch failed", comment: "")
+                    let message = "There was a problem fetching the list of companies; please try again.\n" + error!.localizedDescription
+                    let okButtonTitle = NSLocalizedString("OK", comment: "")
+                    let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: okButtonTitle, style: .default, handler: nil))
                     self?.present(ac, animated: true, completion: nil)
                 }
             }
