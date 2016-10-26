@@ -18,6 +18,44 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     let realm = try! Realm()
 
     var meetupsArray = try! Realm().objects(Meetup.self).sorted(byProperty: "time", ascending: false)
+    var meetupsByYear: [String: [Meetup]] {
+        get {
+            // I am assuming ordering stays correct due to FIFO behavior.
+            return meetupsArray.reduce([String: [Meetup]]()) { (previousResult, meetup) -> [String: [Meetup]] in
+                guard let meetupTime = meetup.time else {
+                    return previousResult
+                }
+
+                var newResult = previousResult
+
+                let year = Calendar.current.component(.year, from: meetupTime)
+                let yearString = "\(year)"
+
+                if var meetupsForYear = newResult[yearString] {
+                    meetupsForYear.append(meetup)
+                    newResult[yearString] = meetupsForYear
+                } else {
+                    newResult[yearString] = [meetup]
+                }
+                return newResult
+            }
+        }
+    }
+    
+    private var sectionTitles: [String] {
+        get {
+            return meetupsByYear.keys.sorted().reversed()
+        }
+    }
+    
+    private func meetups(forSection section: Int) -> [Meetup] {
+        return meetupsByYear[sectionTitles[section]]!
+    }
+    
+    private func meetup(for indexPath: IndexPath) -> Meetup {
+        return meetups(forSection: indexPath.section)[indexPath.row]
+    }
+    
     var searchedObjectId: String? = nil
     var notificationToken: NotificationToken?
 
@@ -66,17 +104,20 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                 // Results are now populated and can be accessed without blocking the UI
                 self.tableView.reloadData()
                 break
-            case .update(_, let deletions, let insertions, let modifications):
-                // Query results have changed, so apply them to the TableView
-                self.tableView.beginUpdates()
-                self.tableView.insertRows(at: insertions.map { (NSIndexPath(row: $0, section: 0) as IndexPath) },
-                                          with: .automatic)
-                self.tableView.deleteRows(at: deletions.map { (NSIndexPath(row: $0, section: 0) as IndexPath) },
-                                          with: .automatic)
-                self.tableView.reloadRows(at: modifications.map { (NSIndexPath(row: $0, section: 0) as IndexPath) },
-                                          with: .automatic)
-                self.tableView.endUpdates()
+            case .update(_, _, _, _):
+//            case .update(_, let deletions, let insertions, let modifications):
+                self.tableView.reloadData()
                 break
+//                // Query results have changed, so apply them to the TableView
+//                self.tableView.beginUpdates()
+//                self.tableView.insertRows(at: insertions.map { (NSIndexPath(row: $0, section: 0) as IndexPath) },
+//                                          with: .automatic)
+//                self.tableView.deleteRows(at: deletions.map { (NSIndexPath(row: $0, section: 0) as IndexPath) },
+//                                          with: .automatic)
+//                self.tableView.reloadRows(at: modifications.map { (NSIndexPath(row: $0, section: 0) as IndexPath) },
+//                                          with: .automatic)
+//                self.tableView.endUpdates()
+//                break
             case .error(let err):
                 // An error occurred while opening the Realm file on the background worker thread
                 fatalError("\(err)")
@@ -203,7 +244,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         if #available(iOS 9.0, *) {
 
-            let meetup = self.meetupsArray[indexPath.row]
+            let meetup = self.meetup(for: indexPath)
             detailVC.dataSource = MeetupDataSource(object: meetup )
             detailVC.presentingVC  = self
 
@@ -277,7 +318,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                                                contentId: selectedObject.meetup_id!,
                                                customAttributes: nil)
             } else if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
-                let meetup = self.meetupsArray[indexPath.row]
+                let meetup = self.meetup(for: indexPath)
                 let detailViewController = segue.destination as! DetailViewController
                 detailViewController.dataSource = MeetupDataSource(object: meetup)
                 Answers.logContentView(withName: "Show Meetup details",
@@ -289,18 +330,25 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     }
 
     //MARK: - UITableViewDataSource
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return meetupsByYear.keys.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionTitles[section]
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return self.meetupsArray.count
+        return meetups(forSection: section).count
+//        return meetupsByYearSection[section].1.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: MeetupCell.Identifier, for: indexPath) as! MeetupCell
 
-        let meetup = self.meetupsArray[indexPath.row]
-        cell.configureCellForMeetup(meetup, row: indexPath.row)
+        let meetup = self.meetup(for: indexPath)
+        cell.configureCellForMeetup(meetup)
 
         return cell
 
