@@ -334,8 +334,14 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         return meetupsByYear.keys.count
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionTitles[section]
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel(frame: .zero)
+        label.text = sectionTitles[section]
+        label.textAlignment = .center
+        label.textColor = UIColor(white: 0.5, alpha: 0.8)
+        label.sizeToFit()
+        label.backgroundColor = UIColor(white: 0.95, alpha: 0.5)
+        return label
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
