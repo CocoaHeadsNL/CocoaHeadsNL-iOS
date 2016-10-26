@@ -40,7 +40,7 @@ class MeetupCell: UITableViewCell {
         monthLabel.text = ""
     }
 
-    func configureCellForMeetup(_ meetup: Meetup, row: Int) {
+    func configureCellForMeetup(_ meetup: Meetup) {
         titleLabel.text = meetup.name
 
         if let date = meetup.time {
