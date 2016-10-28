@@ -21,7 +21,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     var meetupsByYear: [String: [Meetup]] {
         get {
             // I am assuming ordering stays correct due to FIFO behavior.
-            return meetupsArray.reduce([String: [Meetup]]()) { (previousResult, meetup) -> [String: [Meetup]] in
+            var meetupsByYear = meetupsArray.reduce([String: [Meetup]]()) { (previousResult, meetup) -> [String: [Meetup]] in
                 guard let meetupTime = meetup.time else {
                     return previousResult
                 }
@@ -29,8 +29,14 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                 var newResult = previousResult
 
                 let year = Calendar.current.component(.year, from: meetupTime)
-                let yearString = "\(year)"
-
+                let yearString: String
+                
+                if meetupTime.timeIntervalSince(Date()) > 0 {
+                    yearString = NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")
+                } else {
+                    yearString = "\(year)"
+                }
+                
                 if var meetupsForYear = newResult[yearString] {
                     meetupsForYear.append(meetup)
                     newResult[yearString] = meetupsForYear
@@ -39,6 +45,13 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                 }
                 return newResult
             }
+            
+            // Inverse the sorting of upcoming meetups.
+            if let upcomingMeetups = meetupsByYear[NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")] {
+                meetupsByYear[NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")] = upcomingMeetups.reversed()
+            }
+            
+            return meetupsByYear
         }
     }
     
@@ -334,8 +347,14 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         return meetupsByYear.keys.count
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionTitles[section]
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel(frame: .zero)
+        label.text = sectionTitles[section]
+        label.textAlignment = .center
+        label.textColor = UIColor(white: 0.5, alpha: 0.8)
+        label.sizeToFit()
+        label.backgroundColor = UIColor(white: 0.95, alpha: 0.5)
+        return label
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
