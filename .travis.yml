@@ -7,7 +7,7 @@ before_install:
   - brew update
   - brew outdated xctool || brew upgrade xctool
   - gem install --no-rdoc --no-ri cocoapods
-#  - pod repo update --silent
+  - pod repo update --silent
   - cd CocoaHeadsNL
   - pod install
 script:
