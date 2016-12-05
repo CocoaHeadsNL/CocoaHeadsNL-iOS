@@ -236,28 +236,26 @@ class JobsViewController: UICollectionViewController {
 
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
             DispatchQueue.main.async {
-
-                if error != nil {
-
+                guard error == nil else {
                     let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of jobs; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     self?.present(ac, animated: true, completion: nil)
-
-                } else {
-                    let jobRecordNames = jobs.flatMap({ (job) -> String? in
-                        return job.recordName
-                    })
-                    let predicate = NSPredicate(format: "NOT recordName IN %@", jobRecordNames)
-                    let obsoleteJobs = self?.realm.objects(Job.self).filter(predicate)
-                    self?.realm.beginWrite()
-                    self?.realm.add(jobs, update: true)
-                    if let obsoleteJobs = obsoleteJobs {
-                        self?.realm.delete(obsoleteJobs)
-                    }
-                    try! self?.realm.commitWrite()
-
-                    self?.activityIndicator.stopAnimating()
+                    return
                 }
+
+                let jobRecordNames = jobs.flatMap({ (job) -> String? in
+                    return job.recordName
+                })
+                let predicate = NSPredicate(format: "NOT recordName IN %@", jobRecordNames)
+                let obsoleteJobs = self?.realm.objects(Job.self).filter(predicate)
+                self?.realm.beginWrite()
+                self?.realm.add(jobs, update: true)
+                if let obsoleteJobs = obsoleteJobs {
+                    self?.realm.delete(obsoleteJobs)
+                }
+                try! self?.realm.commitWrite()
+
+                self?.activityIndicator.stopAnimating()
             }
         }
 

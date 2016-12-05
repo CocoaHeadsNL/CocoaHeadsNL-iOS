@@ -420,8 +420,14 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                     return
                 }
                 
+                let meetupNames = meetups.flatMap({ $0.recordName })
+                let predicate = NSPredicate(format: "NOT recordName IN %@", meetupNames)
+                let obsoleteMeetups = self?.realm.objects(Meetup.self).filter(predicate)
                 self?.realm.beginWrite()
                 self?.realm.add(meetups, update: true)
+                if let obsoleteMeetups = obsoleteMeetups {
+                    self?.realm.delete(obsoleteMeetups)
+                }
                 try! self?.realm.commitWrite()
                 
                 self?.activityIndicatorView.stopAnimating()
