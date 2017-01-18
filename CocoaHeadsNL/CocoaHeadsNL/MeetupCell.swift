@@ -47,7 +47,7 @@ class MeetupCell: UITableViewCell {
             dateFormatter.dateStyle = .none
             dateFormatter.timeStyle = .short
             let timeText = dateFormatter.string(from: date as Date)
-            timeLabel.text = String(format: "%@ %@", meetup.location ?? NSLocalizedString("Location unknown", comment: ""), timeText)
+            timeLabel.text = String(format: "%@ %@", meetup.location ?? NSLocalizedString("Location unknown"), timeText)
 
             dateFormatter.dateFormat = "dd"
             dayLabel.text = dateFormatter.string(from: date as Date)
@@ -62,11 +62,11 @@ class MeetupCell: UITableViewCell {
 
                 if meetup.yes_rsvp_count.int32Value > 0{
 
-                    rsvpLabel.text = "\(meetup.yes_rsvp_count.int32Value) " + NSLocalizedString("CocoaHeads going", comment: "")
+                    rsvpLabel.text = "\(meetup.yes_rsvp_count.int32Value) " + NSLocalizedString("CocoaHeads going")
 
                     if meetup.rsvp_limit.int32Value > 0 {
                         let text = rsvpLabel.text! + "\n\(meetup.rsvp_limit.int32Value - meetup.yes_rsvp_count.int32Value) "
-                        rsvpLabel.text = text + NSLocalizedString("seats available", comment: "")
+                        rsvpLabel.text = text + NSLocalizedString("seats available")
                     }
                 } else {
                     rsvpLabel.text = ""
@@ -75,7 +75,7 @@ class MeetupCell: UITableViewCell {
                 dayLabel.textColor = UIColor(white: 0, alpha: 0.65)
                 calendarView.backgroundColor = UIColorWithRGB(169, green: 166, blue: 166)
 
-                rsvpLabel.text = "\(meetup.yes_rsvp_count.int32Value)" + NSLocalizedString("CocoaHeads had a blast", comment: "")
+                rsvpLabel.text = "\(meetup.yes_rsvp_count.int32Value)" + NSLocalizedString("CocoaHeads had a blast")
             }
         }
 

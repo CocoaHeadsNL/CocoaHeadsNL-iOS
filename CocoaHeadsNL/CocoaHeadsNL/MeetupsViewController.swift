@@ -87,7 +87,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         let nib = UINib(nibName: "MeetupCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: MeetupCell.Identifier)
 
-        let backItem = UIBarButtonItem(title: NSLocalizedString("Events", comment: ""), style: .plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: NSLocalizedString("Events"), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
@@ -235,7 +235,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         let info = CKNotificationInfo()
 
-        info.alertBody = NSLocalizedString("New meetup has been added!", comment: "")
+        info.alertBody = NSLocalizedString("New meetup has been added!")
         info.shouldBadge = true
 
         subscription.notificationInfo = info
@@ -412,17 +412,19 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
             DispatchQueue.main.async {
                 guard error == nil else {
-                    let title = NSLocalizedString("Fetch failed", comment: "")
-                    let message = "There was a problem fetching the list of meetups; please try again.\n" + error!.localizedDescription
-                    let okButtonTitle = NSLocalizedString("OK", comment: "")
-                    let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: okButtonTitle, style: .default, handler: nil))
+                    let ac = UIAlertController.fetchErrorDialog(whileFetching: NSLocalizedString("meetups"), error: error!)
                     self?.present(ac, animated: true, completion: nil)
                     return
                 }
                 
+                let meetupNames = meetups.flatMap({ $0.recordName })
+                let predicate = NSPredicate(format: "NOT recordName IN %@", meetupNames)
+                let obsoleteMeetups = self?.realm.objects(Meetup.self).filter(predicate)
                 self?.realm.beginWrite()
                 self?.realm.add(meetups, update: true)
+                if let obsoleteMeetups = obsoleteMeetups {
+                    self?.realm.delete(obsoleteMeetups)
+                }
                 try! self?.realm.commitWrite()
                 
                 self?.activityIndicatorView.stopAnimating()

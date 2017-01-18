@@ -160,20 +160,24 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
 
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
             DispatchQueue.main.async {
-                if error == nil {
-                    self?.realm.beginWrite()
-                    self?.realm.add(companies, update: true)
-                    try! self?.realm.commitWrite()
-
-                    self?.activityIndicator.stopAnimating()
-                } else {
-                    let title = NSLocalizedString("Fetch failed", comment: "")
-                    let message = "There was a problem fetching the list of companies; please try again.\n" + error!.localizedDescription
-                    let okButtonTitle = NSLocalizedString("OK", comment: "")
-                    let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: okButtonTitle, style: .default, handler: nil))
+                guard error == nil else {
+                    let ac = UIAlertController.fetchErrorDialog(whileFetching: "companies", error: error!)
                     self?.present(ac, animated: true, completion: nil)
+                    return
                 }
+
+                let companyRecordNames = companies.flatMap({ $0.recordName })
+                let predicate = NSPredicate(format: "NOT recordName IN %@", companyRecordNames)
+                let obsoleteCompanies = self?.realm.objects(Company.self).filter(predicate)
+
+                self?.realm.beginWrite()
+                self?.realm.add(companies, update: true)
+                if let obsoleteCompanies = obsoleteCompanies {
+                    self?.realm.delete(obsoleteCompanies)
+                }
+                try! self?.realm.commitWrite()
+
+                self?.activityIndicator.stopAnimating()
             }
         }
 

@@ -26,7 +26,7 @@ class JobsViewController: UICollectionViewController {
         let nib = UINib(nibName: "JobsCell", bundle: nil)
         self.collectionView?.register(nib, forCellWithReuseIdentifier: "jobsCell")
 
-        let backItem = UIBarButtonItem(title: NSLocalizedString("Jobs", comment: ""), style: .plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: NSLocalizedString("Jobs"), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
@@ -152,7 +152,7 @@ class JobsViewController: UICollectionViewController {
 
         let info = CKNotificationInfo()
 
-        info.alertBody = NSLocalizedString("A new job has been added!", comment: "")
+        info.alertBody = NSLocalizedString("A new job has been added!")
         info.shouldBadge = true
 
         subscription.notificationInfo = info
@@ -236,30 +236,25 @@ class JobsViewController: UICollectionViewController {
 
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
             DispatchQueue.main.async {
-
-                if error != nil {
-                    let title = NSLocalizedString("Fetch failed", comment: "")
-                    let message = "There was a problem fetching the list of jobs; please try again.\n" + error!.localizedDescription
-                    let okButtonTitle = NSLocalizedString("OK", comment: "")
-                    let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: okButtonTitle, style: .default, handler: nil))
+                guard error == nil else {
+                    let ac = UIAlertController.fetchErrorDialog(whileFetching: "jobs", error: error!)
                     self?.present(ac, animated: true, completion: nil)
-
-                } else {
-                    let jobRecordNames = jobs.flatMap({ (job) -> String? in
-                        return job.recordName
-                    })
-                    let predicate = NSPredicate(format: "NOT recordName IN %@", jobRecordNames)
-                    let obsoleteJobs = self?.realm.objects(Job.self).filter(predicate)
-                    self?.realm.beginWrite()
-                    self?.realm.add(jobs, update: true)
-                    if let obsoleteJobs = obsoleteJobs {
-                        self?.realm.delete(obsoleteJobs)
-                    }
-                    try! self?.realm.commitWrite()
-
-                    self?.activityIndicator.stopAnimating()
+                    return
                 }
+
+                let jobRecordNames = jobs.flatMap({ (job) -> String? in
+                    return job.recordName
+                })
+                let predicate = NSPredicate(format: "NOT recordName IN %@", jobRecordNames)
+                let obsoleteJobs = self?.realm.objects(Job.self).filter(predicate)
+                self?.realm.beginWrite()
+                self?.realm.add(jobs, update: true)
+                if let obsoleteJobs = obsoleteJobs {
+                    self?.realm.delete(obsoleteJobs)
+                }
+                try! self?.realm.commitWrite()
+
+                self?.activityIndicator.stopAnimating()
             }
         }
 
