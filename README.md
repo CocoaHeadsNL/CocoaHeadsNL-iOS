@@ -19,11 +19,8 @@ Please run `pod install` in the directory containing the Podfile.
 CocoaHeadsNL contains two important components:
 
 - The iOS app implementation
-- CloudKitSync code
 
-Everything cloud is in the folder **CocoaHeadsNL/CloudKitSync/**. All other files and directories are related to the iOS app.
-
-Minimal deployment target of the app is iOS 8.1.
+Minimal deployment target of the app is iOS 10.0
 
 ## Contributions
 
