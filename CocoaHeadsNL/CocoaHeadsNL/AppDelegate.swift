@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let queryNotification = cloudKitNotification as? CKQueryNotification {
             //TODO handle the different notifications to show the correct items
             let recordID = queryNotification.recordID
-            print(recordID)
+            print(recordID as Any)
             //...
             self.presentMeetupsViewController()
         }
