@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Returns `NSLocalizedString(key)`
+/// Returns `NSLocalizedString(key, comment: "")`
 public func NSLocalizedString(_ key: String) -> String {
-    return NSLocalizedString(key)
+    return NSLocalizedString(key, comment: "")
 }
