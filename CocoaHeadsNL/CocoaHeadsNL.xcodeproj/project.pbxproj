@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2324F5131E2F5162006F7240 /* UIAlertController+FetchErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2324F5121E2F5162006F7240 /* UIAlertController+FetchErrors.swift */; };
 		239D41161B190FD000609105 /* CalendarTabImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239D41151B190FD000609105 /* CalendarTabImage.swift */; };
+		23F2D9A41E2F52A6003344DC /* NSLocalizedString+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */; };
 		4A1978C21AAD8681000E281F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A1978C11AAD8681000E281F /* Settings.bundle */; };
 		4A7EEAF11AC5440C001C2827 /* ModelObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */; };
 		4ABB70F71D9CED8B00CDE5B8 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */; };
@@ -62,7 +64,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2324F5121E2F5162006F7240 /* UIAlertController+FetchErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+FetchErrors.swift"; sourceTree = "<group>"; };
 		239D41151B190FD000609105 /* CalendarTabImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTabImage.swift; sourceTree = "<group>"; };
+		23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLocalizedString+Convenience.swift"; sourceTree = "<group>"; };
 		4A15A33C1BB82224008161BD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		4A1978C11AAD8681000E281F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelObjects.swift; sourceTree = "<group>"; };
@@ -188,6 +192,8 @@
 				7B6A744E1B162F8E00A10762 /* UIColor+Extensions.swift */,
 				7B6A744C1B149A6B00A10762 /* UIImage+Resize.swift */,
 				239D41151B190FD000609105 /* CalendarTabImage.swift */,
+				2324F5121E2F5162006F7240 /* UIAlertController+FetchErrors.swift */,
+				23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -399,7 +405,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Stichting CocoaheadsNL";
 				TargetAttributes = {
 					4AEDD51F1CF635E50039AAE5 = {
@@ -629,12 +635,14 @@
 				7B6A74681B186C4A00A10762 /* AffiliateCell.swift in Sources */,
 				F11E36281B1A570F000B61C0 /* CompanyTableViewController.swift in Sources */,
 				F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */,
+				2324F5131E2F5162006F7240 /* UIAlertController+FetchErrors.swift in Sources */,
 				7B6A74661B18666D00A10762 /* FetchAffiliateLinks.swift in Sources */,
 				7B6A745E1B183D7900A10762 /* MeetupDataSource.swift in Sources */,
 				7B6A745C1B182E9C00A10762 /* DetailDataSource.swift in Sources */,
 				7B6A74601B18406600A10762 /* JobDataSource.swift in Sources */,
 				F11455BF1AB4E8DB00546D22 /* SplitViewController.swift in Sources */,
 				F1108BAA1B1F618700C2164C /* LocatedCompaniesViewController.swift in Sources */,
+				23F2D9A41E2F52A6003344DC /* NSLocalizedString+Convenience.swift in Sources */,
 				7B6A74621B18424800A10762 /* CompanyDataSource.swift in Sources */,
 				F1CF120F1B8A0C0600EBCABC /* CoreLocationController.swift in Sources */,
 				7B6A745A1B179BC000A10762 /* WebViewCell.swift in Sources */,
@@ -846,6 +854,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F1DB2379E5772EF04B49E6E3 /* Pods-CocoaHeadsNL.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CocoaHeadsNL/CocoaHeadsNL.entitlements;
@@ -870,6 +879,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C9D96571D157E179851D4220 /* Pods-CocoaHeadsNL.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CocoaHeadsNL/CocoaHeadsNL.entitlements;

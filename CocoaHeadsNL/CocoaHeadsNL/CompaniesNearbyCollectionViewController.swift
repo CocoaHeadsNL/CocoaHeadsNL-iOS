@@ -161,8 +161,7 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
             DispatchQueue.main.async {
                 guard error == nil else {
-                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of companies; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    let ac = UIAlertController.fetchErrorDialog(whileFetching: "companies", error: error!)
                     self?.present(ac, animated: true, completion: nil)
                     return
                 }

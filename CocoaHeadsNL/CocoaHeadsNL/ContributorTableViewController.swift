@@ -23,8 +23,8 @@ class ContributorTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let backItem = UIBarButtonItem(title: "About", style: .plain, target: nil, action: nil)
+        
+        let backItem = UIBarButtonItem(title: NSLocalizedString("About"), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
@@ -98,7 +98,7 @@ class ContributorTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Contributors to this app"
+        return NSLocalizedString("Contributors to this app")
     }
 
     //MARK: - UITableViewDelegate
@@ -170,17 +170,14 @@ class ContributorTableViewController: UITableViewController {
 
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
             DispatchQueue.main.async {
-                if error == nil {
-
-                    self?.realm.beginWrite()
-                    self?.realm.add(cloudContributors, update: true)
-                    try! self?.realm.commitWrite()
-
-                } else {
-                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of contributors; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                guard error == nil else {
+                    let ac = UIAlertController.fetchErrorDialog(whileFetching: "contributors", error: error!)
                     self?.present(ac, animated: true, completion: nil)
+                    return
                 }
+                self?.realm.beginWrite()
+                self?.realm.add(cloudContributors, update: true)
+                try! self?.realm.commitWrite()
             }
         }
 
