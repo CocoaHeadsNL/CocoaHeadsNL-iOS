@@ -102,7 +102,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wsJ-wh-HFt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3316" y="-722"/>
+            <point key="canvasLocation" x="2668" y="-890"/>
         </scene>
         <!--About-->
         <scene sceneID="8a8-g1-nu0">
@@ -589,6 +589,6 @@
         <image name="JobsTabIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YXG-G2-hcg"/>
+        <segue reference="wMn-In-Tpk"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -74,19 +74,6 @@ class CompanyTableViewController: UITableViewController {
                                        customAttributes: nil)
     }
 
-    func locationAvailable(_ notification: Notification) -> Void {
-
-        let userInfo = (notification as NSNotification).userInfo as! Dictionary<String, CLLocation>
-
-        print("CoreLocationManager:  Location available \(userInfo)")
-
-//        if let _ = userInfo["location"]?.coordinate.latitude, _ = userInfo["location"]?.coordinate.longitude {
-//            self.sortingLabel?.text = "Companies sorted by distance"
-//        } else {
-        self.sortingLabel?.text = NSLocalizedString("Companies sorted by name")
-//        }
-    }
-
 
     //MARK: - Segues
 
