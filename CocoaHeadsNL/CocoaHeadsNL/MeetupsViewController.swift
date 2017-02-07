@@ -17,7 +17,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
     let realm = try! Realm()
 
-    var meetupsArray = try! Realm().objects(Meetup.self).sorted(byProperty: "time", ascending: false)
+    var meetupsArray = try! Realm().objects(Meetup.self).sorted(byKeyPath: "time", ascending: false)
     var meetupsByYear: [String: [Meetup]] {
         get {
             // I am assuming ordering stays correct due to FIFO behavior.
@@ -55,17 +55,17 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         }
     }
     
-    private var sectionTitles: [String] {
+    fileprivate var sectionTitles: [String] {
         get {
             return meetupsByYear.keys.sorted().reversed()
         }
     }
     
-    private func meetups(forSection section: Int) -> [Meetup] {
+    fileprivate func meetups(forSection section: Int) -> [Meetup] {
         return meetupsByYear[sectionTitles[section]]!
     }
     
-    private func meetup(for indexPath: IndexPath) -> Meetup {
+    fileprivate func meetup(for indexPath: IndexPath) -> Meetup {
         return meetups(forSection: indexPath.section)[indexPath.row]
     }
     

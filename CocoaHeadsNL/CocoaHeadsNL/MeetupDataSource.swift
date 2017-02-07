@@ -29,7 +29,7 @@ class MeetupDataSource: DetailDataSource {
         case 4:
             return titleCellWithDate(meetup.time, forTableView: tableView)
         case 5:
-            return buttonCell(urlString: meetup.meetupUrl, title: "Open Meetup", forTableView: tableView)
+            return buttonCell(meetup.meetupUrl, title: "Open Meetup", forTableView: tableView)
         case 6:
             return webViewCellWithHTML(meetup.meetup_description, forTableView: tableView)
         default:

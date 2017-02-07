@@ -15,7 +15,7 @@ import RealmSwift
 class JobsViewController: UICollectionViewController {
     let realm = try! Realm()
 
-    var jobsArray = try! Realm().objects(Job.self).sorted(byProperty: "date", ascending: false)
+    var jobsArray = try! Realm().objects(Job.self).sorted(byKeyPath: "date", ascending: false)
     var searchedObjectId: String? = nil
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var notificationToken: NotificationToken?

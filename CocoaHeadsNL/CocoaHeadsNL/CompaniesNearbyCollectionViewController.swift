@@ -16,7 +16,7 @@ class CompaniesNearbyCollectionViewController: UICollectionViewController {
     
     let realm = try! Realm()
 
-    var companiesArray = try! Realm().objects(Company.self).sorted(byProperty: "name")
+    var companiesArray = try! Realm().objects(Company.self).sorted(byKeyPath: "name")
 //    var coreLocationController: CoreLocationController?
 //    var geoPoint: CLLocation?
     var notificationToken: NotificationToken?
