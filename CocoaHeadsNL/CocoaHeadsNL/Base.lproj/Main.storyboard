@@ -32,39 +32,7 @@
             </objects>
             <point key="canvasLocation" x="882" y="-1784"/>
         </scene>
-        <!--CompanyTableViewController-->
-        <scene sceneID="G6l-Lo-9Y9">
-            <objects>
-                <tableViewController storyboardIdentifier="companyTableViewController" id="lzb-be-xbi" userLabel="CompanyTableViewController" customClass="CompanyTableViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="S2s-ps-EGo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="companyTableViewCell" id="xef-Jk-5Pe">
-                                <rect key="frame" x="0.0" y="22" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xef-Jk-5Pe" id="MuA-eJ-p9q">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="lzb-be-xbi" id="EN9-ay-uwn"/>
-                            <outlet property="delegate" destination="lzb-be-xbi" id="SAh-Ym-WSm"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Companies" id="JYl-1Y-jcB"/>
-                    <connections>
-                        <segue destination="FUV-sa-MJr" kind="show" identifier="ShowCompanies" id="hSq-B5-Sj3"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="A1a-07-rJ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1866" y="-890"/>
-        </scene>
-        <!--Located Companies View Controller-->
+        <!--Companies-->
         <scene sceneID="T1n-9Z-zVk">
             <objects>
                 <tableViewController storyboardIdentifier="locatedCompaniesViewController" id="FUV-sa-MJr" customClass="LocatedCompaniesViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
@@ -96,13 +64,14 @@
                             <outlet property="delegate" destination="FUV-sa-MJr" id="608-sP-tGV"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Companies" id="9WC-nM-kxe"/>
                     <connections>
                         <segue destination="3uJ-fO-52Q" kind="showDetail" identifier="ShowDetail" id="wMn-In-Tpk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wsJ-wh-HFt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2668" y="-890"/>
+            <point key="canvasLocation" x="1820" y="-903"/>
         </scene>
         <!--About-->
         <scene sceneID="8a8-g1-nu0">
@@ -502,7 +471,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="lzb-be-xbi" kind="relationship" relationship="rootViewController" id="vvP-gL-1td"/>
+                        <segue destination="FUV-sa-MJr" kind="relationship" relationship="rootViewController" id="JWP-MG-71h"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="muM-Cn-t1z" userLabel="First Responder" sceneMemberID="firstResponder"/>

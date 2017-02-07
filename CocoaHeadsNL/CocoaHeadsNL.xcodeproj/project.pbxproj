@@ -37,7 +37,6 @@
 		F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */; };
 		F11455BF1AB4E8DB00546D22 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */; };
 		F11455C11AB5024000546D22 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455C01AB5024000546D22 /* TabBarController.swift */; };
-		F11E36281B1A570F000B61C0 /* CompanyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E36271B1A570F000B61C0 /* CompanyTableViewController.swift */; };
 		F1379F6F1BC19F1900A20FDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F17A38761ABF3B62005CFF8A /* MapKit.framework */; };
 		F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D171AAB50BB00585D61 /* AppDelegate.swift */; };
 		F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D1D1AAB50BB00585D61 /* Main.storyboard */; };
@@ -97,7 +96,6 @@
 		F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		F11455C01AB5024000546D22 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		F11E36271B1A570F000B61C0 /* CompanyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CompanyTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F17A38761ABF3B62005CFF8A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F1A46D121AAB50BB00585D61 /* CocoaHeadsNL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaHeadsNL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A46D161AAB50BB00585D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -251,7 +249,6 @@
 		F11455A91AB3257700546D22 /* List of Sponsors */ = {
 			isa = PBXGroup;
 			children = (
-				F11E36271B1A570F000B61C0 /* CompanyTableViewController.swift */,
 				F1108BA91B1F618700C2164C /* LocatedCompaniesViewController.swift */,
 			);
 			name = "List of Sponsors";
@@ -615,7 +612,6 @@
 				4A7EEAF11AC5440C001C2827 /* ModelObjects.swift in Sources */,
 				7B6A74541B179B4E00A10762 /* LogoCell.swift in Sources */,
 				7B6A74681B186C4A00A10762 /* AffiliateCell.swift in Sources */,
-				F11E36281B1A570F000B61C0 /* CompanyTableViewController.swift in Sources */,
 				F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */,
 				2324F5131E2F5162006F7240 /* UIAlertController+FetchErrors.swift in Sources */,
 				7B6A74661B18666D00A10762 /* FetchAffiliateLinks.swift in Sources */,
