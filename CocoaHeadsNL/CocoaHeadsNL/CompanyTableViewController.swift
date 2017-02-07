@@ -43,8 +43,6 @@ class CompanyTableViewController: UITableViewController {
 
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(CompanyTableViewController.locationAvailable(_:)), name: NSNotification.Name(rawValue: "LOCATION_AVAILABLE"), object: nil)
-
         self.subscribe()
         
         // Set results notification block
