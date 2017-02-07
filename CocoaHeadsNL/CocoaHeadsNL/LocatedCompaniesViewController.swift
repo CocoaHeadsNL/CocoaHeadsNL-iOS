@@ -26,7 +26,7 @@ class LocatedCompaniesViewController: UITableViewController {
         }
     }
 
-    //var companiesArray = [Company]()
+    var sortedByPlace = [String: [Company]]()
     var notificationToken: NotificationToken?
     
     required init?(coder aDecoder: NSCoder) {
@@ -59,6 +59,8 @@ class LocatedCompaniesViewController: UITableViewController {
                 break
             }
         }
+        
+        self.sortCompaniesByPlace()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -69,6 +71,14 @@ class LocatedCompaniesViewController: UITableViewController {
                                contentId: "overview",
                                customAttributes: nil)
     }
+    
+    func sortCompaniesByPlace() {
+        
+        for place in placesArray {
+            let companiesForPlace = companiesArray.filter({ $0.place == place }) as [Company]
+            sortedByPlace.updateValue(companiesForPlace, forKey: place)
+        }
+    }
 
     //MARK: - Segues
 
@@ -76,7 +86,12 @@ class LocatedCompaniesViewController: UITableViewController {
         if segue.identifier == "ShowDetail" {
 
             if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
-                let company = companiesArray[(indexPath as NSIndexPath).row]
+                
+                let section = indexPath.section
+                let place = placesArray[section]
+                let companyArray = sortedByPlace[place]
+                
+                let company = (companyArray?[indexPath.row])!
                 let dataSource = CompanyDataSource(object: company)
                 dataSource.fetchAffiliateLinks()
 
@@ -91,24 +106,6 @@ class LocatedCompaniesViewController: UITableViewController {
             }
         }
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "ShowCompanies" {
-//            if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
-//                
-//                let detailViewController = segue.destination as? LocatedCompaniesViewController
-//                
-//                let place = placesArray[(indexPath as NSIndexPath).row]
-//                
-//                detailViewController?.companiesArray = companiesArray.filter({ $0.place == place })
-//                
-//                Answers.logContentView(withName: "Show company location",
-//                                       contentType: "Company",
-//                                       contentId: placesArray[(indexPath as NSIndexPath).row],
-//                                       customAttributes: nil)
-//            }
-//        }
-//    }
 
     //MARK: - UITableViewDelegate
 
@@ -121,18 +118,26 @@ class LocatedCompaniesViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return companiesArray.count
+        let place = placesArray[section]
+        if let arrayOfPlace = sortedByPlace[place] {
+        return arrayOfPlace.count
+        }
+        return 0
     }
 
     //MARK: - UITableViewDataSource
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "defaultCell", for: indexPath)
+        
+        let section = indexPath.section
+        let place = placesArray[section]
+        let companyArray = sortedByPlace[place]
+        
+        let company = companyArray?[indexPath.row]
 
-        let company = companiesArray[(indexPath as NSIndexPath).row]
-
-        cell.textLabel!.text = company.name
-        cell.imageView?.image =  company.smallLogoImage
+        cell.textLabel!.text = company?.name
+        cell.imageView?.image =  company?.smallLogoImage
         return cell
     }
 
