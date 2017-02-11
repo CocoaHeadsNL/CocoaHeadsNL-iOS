@@ -70,6 +70,7 @@ class LocatedCompaniesViewController: UITableViewController {
                                contentType: "Company",
                                contentId: "overview",
                                customAttributes: nil)
+        self.fetchCompanies()
     }
     
     func sortCompaniesByPlace() {
@@ -173,5 +174,44 @@ class LocatedCompaniesViewController: UITableViewController {
         publicDB.save(subscription, completionHandler: { record, error in })
     }
 
-
+    //MARK: - fetching Cloudkit
+    
+    func fetchCompanies() {
+        
+        let query = CKQuery(recordType: "Companies", predicate: NSPredicate(value: true))
+        let operation = CKQueryOperation(query: query)
+        operation.qualityOfService = .userInteractive
+        
+        var companies = [Company]()
+        
+        operation.recordFetchedBlock = { (record) in
+            let company = Company.company(forRecord: record)
+            
+            companies.append(company)
+        }
+        
+        operation.queryCompletionBlock = { [weak self] (cursor, error) in
+            DispatchQueue.main.async {
+                guard error == nil else {
+                    let ac = UIAlertController.fetchErrorDialog(whileFetching: "companies", error: error!)
+                    self?.present(ac, animated: true, completion: nil)
+                    return
+                }
+                
+                let companyRecordNames = companies.flatMap({ $0.recordName })
+                let predicate = NSPredicate(format: "NOT recordName IN %@", companyRecordNames)
+                let obsoleteCompanies = self?.realm.objects(Company.self).filter(predicate)
+                
+                self?.realm.beginWrite()
+                self?.realm.add(companies, update: true)
+                if let obsoleteCompanies = obsoleteCompanies {
+                    self?.realm.delete(obsoleteCompanies)
+                }
+                try! self?.realm.commitWrite()
+            }
+        }
+        
+        CKContainer.default().publicCloudDatabase.add(operation)
+        
+    }
 }
