@@ -45,6 +45,7 @@ class LocatedCompaniesViewController: UITableViewController {
         
         // Set results notification block
         self.notificationToken = companiesArray.addNotificationBlock { (changes: RealmCollectionChange) in
+            self.sortCompaniesByPlace()
             switch changes {
             case .initial:
                 // Results are now populated and can be accessed without blocking the UI
