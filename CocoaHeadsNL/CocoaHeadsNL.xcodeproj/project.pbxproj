@@ -13,6 +13,7 @@
 		4A1978C21AAD8681000E281F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A1978C11AAD8681000E281F /* Settings.bundle */; };
 		4A7EEAF11AC5440C001C2827 /* ModelObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */; };
 		4ABB70F71D9CED8B00CDE5B8 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */; };
+		4AE3AD281E8BF87E0051706C /* RequestReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE3AD271E8BF87E0051706C /* RequestReview.swift */; };
 		4AE72F941C5B44300027C5CA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE72F931C5B44300027C5CA /* CloudKit.framework */; };
 		4AEDD5231CF635E50039AAE5 /* CocoaHeadsNLUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEDD5221CF635E50039AAE5 /* CocoaHeadsNLUITests.swift */; };
 		4AEDD52B1CF636430039AAE5 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEDD52A1CF636430039AAE5 /* SnapshotHelper.swift */; };
@@ -67,6 +68,7 @@
 		4A1978C11AAD8681000E281F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelObjects.swift; sourceTree = "<group>"; };
 		4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
+		4AE3AD271E8BF87E0051706C /* RequestReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestReview.swift; sourceTree = "<group>"; };
 		4AE72F921C5B44080027C5CA /* CocoaHeadsNL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CocoaHeadsNL.entitlements; sourceTree = "<group>"; };
 		4AE72F931C5B44300027C5CA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4AEDD5201CF635E50039AAE5 /* CocoaHeadsNLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaHeadsNLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +188,7 @@
 				239D41151B190FD000609105 /* CalendarTabImage.swift */,
 				2324F5121E2F5162006F7240 /* UIAlertController+FetchErrors.swift */,
 				23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */,
+				4AE3AD271E8BF87E0051706C /* RequestReview.swift */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -615,6 +618,7 @@
 				F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */,
 				2324F5131E2F5162006F7240 /* UIAlertController+FetchErrors.swift in Sources */,
 				7B6A74661B18666D00A10762 /* FetchAffiliateLinks.swift in Sources */,
+				4AE3AD281E8BF87E0051706C /* RequestReview.swift in Sources */,
 				7B6A745E1B183D7900A10762 /* MeetupDataSource.swift in Sources */,
 				7B6A745C1B182E9C00A10762 /* DetailDataSource.swift in Sources */,
 				7B6A74601B18406600A10762 /* JobDataSource.swift in Sources */,

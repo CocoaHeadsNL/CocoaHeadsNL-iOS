@@ -14,6 +14,8 @@ import Crashlytics
 import RealmSwift
 
 class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDelegate {
+    
+    private var viewDidAppearCount = 0
 
     let realm = try! Realm()
 
@@ -176,6 +178,10 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                                        contentType: "Meetup",
                                        contentId: "overview",
                                        customAttributes: nil)
+        viewDidAppearCount = viewDidAppearCount + 1
+        if viewDidAppearCount > 2 {
+            RequestReview.requestReview()
+        }
     }
 
     func discover() {
