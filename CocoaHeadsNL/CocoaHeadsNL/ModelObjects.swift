@@ -201,7 +201,7 @@ class Job: Object {
 
                 var searchableItems = [CSSearchableItem]()
                 for job in jobs {
-                    let item = CSSearchableItem(uniqueIdentifier: "job:\(job.recordName)", domainIdentifier: "job", attributeSet: job.searchableAttributeSet)
+                    let item = CSSearchableItem(uniqueIdentifier: "job:\(String(describing: job.recordName))", domainIdentifier: "job", attributeSet: job.searchableAttributeSet)
                     searchableItems.append(item)
                 }
 
@@ -341,7 +341,7 @@ class Meetup: Object {
 
                 var searchableItems = [CSSearchableItem]()
                 for meetup in meetups {
-                    let item = CSSearchableItem(uniqueIdentifier: "meetup:\(meetup.recordName)", domainIdentifier: "meetup", attributeSet: meetup.searchableAttributeSet)
+                    let item = CSSearchableItem(uniqueIdentifier: "meetup:\(String(describing: meetup.recordName))", domainIdentifier: "meetup", attributeSet: meetup.searchableAttributeSet)
                     searchableItems.append(item)
                 }
 

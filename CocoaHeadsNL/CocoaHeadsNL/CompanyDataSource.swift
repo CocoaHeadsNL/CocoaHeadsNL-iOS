@@ -97,7 +97,7 @@ class CompanyDataSource: DetailDataSource {
 
                         Answers.logContentView(withName: "Show appstore",
                                                        contentType: "App",
-                                                       contentId: "\(affiliateLink.productCreator!) \(affiliateLink.productName)",
+                                                       contentId: "\(affiliateLink.productCreator!) \(String(describing: affiliateLink.productName))",
                                                        customAttributes: nil)
                 }
             }
