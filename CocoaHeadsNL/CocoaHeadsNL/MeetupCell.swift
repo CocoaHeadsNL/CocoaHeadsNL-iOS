@@ -75,7 +75,7 @@ class MeetupCell: UITableViewCell {
                 dayLabel.textColor = UIColor(white: 0, alpha: 0.65)
                 calendarView.backgroundColor = UIColorWithRGB(169, green: 166, blue: 166)
 
-                rsvpLabel.text = "\(meetup.yes_rsvp_count.int32Value)" + NSLocalizedString("CocoaHeads had a blast")
+                rsvpLabel.text = "\(meetup.yes_rsvp_count.int32Value) \(NSLocalizedString("CocoaHeads had a blast"))"
             }
         }
 
