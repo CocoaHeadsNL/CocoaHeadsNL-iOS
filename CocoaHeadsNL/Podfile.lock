@@ -2,11 +2,11 @@ PODS:
   - Crashlytics (3.8.4):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
-  - Realm (2.6.0):
-    - Realm/Headers (= 2.6.0)
-  - Realm/Headers (2.6.0)
-  - RealmSwift (2.6.0):
-    - Realm (= 2.6.0)
+  - Realm (2.7.0):
+    - Realm/Headers (= 2.7.0)
+  - Realm/Headers (2.7.0)
+  - RealmSwift (2.7.0):
+    - Realm (= 2.7.0)
 
 DEPENDENCIES:
   - Crashlytics
@@ -16,9 +16,9 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
-  Realm: 21bab65b8a43fe9f4327b3eec4458dd69bc63e3d
-  RealmSwift: ee7c93b21e115041fa03b08a89be5451b51826ae
+  Realm: 07e5d3a9e0e41d65fd5f9f05150ed6295d0f093b
+  RealmSwift: 6d06425d3900c86473c4f323bf6949b43fca22bc
 
 PODFILE CHECKSUM: 7017b1cd43eafd33b737ae5a017e5b79bb3bc2c7
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.2.0.rc.1

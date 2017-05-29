@@ -31,7 +31,7 @@ class MeetupDataSource: DetailDataSource {
         case 5:
             return buttonCell(meetup.meetupUrl, title: "Open Meetup", forTableView: tableView)
         case 6:
-            return webViewCellWithHTML(meetup.meetup_description, forTableView: tableView)
+            return dataCellWithHTML(meetup.meetup_description, forTableView: tableView)
         default:
             fatalError("This should not happen.")
         }

@@ -10,6 +10,7 @@
 		2324F5131E2F5162006F7240 /* UIAlertController+FetchErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2324F5121E2F5162006F7240 /* UIAlertController+FetchErrors.swift */; };
 		239D41161B190FD000609105 /* CalendarTabImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239D41151B190FD000609105 /* CalendarTabImage.swift */; };
 		23F2D9A41E2F52A6003344DC /* NSLocalizedString+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */; };
+		2EDD61561EDCCEBC0040409B /* NSAttributedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDD61551EDCCEBC0040409B /* NSAttributedStringExtension.swift */; };
 		4A1978C21AAD8681000E281F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A1978C11AAD8681000E281F /* Settings.bundle */; };
 		4A7EEAF11AC5440C001C2827 /* ModelObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */; };
 		4ABB70F71D9CED8B00CDE5B8 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */; };
@@ -25,7 +26,7 @@
 		7B6A74541B179B4E00A10762 /* LogoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74531B179B4E00A10762 /* LogoCell.swift */; };
 		7B6A74561B179B7D00A10762 /* MapViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74551B179B7D00A10762 /* MapViewCell.swift */; };
 		7B6A74581B179B9C00A10762 /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74571B179B9C00A10762 /* TitleCell.swift */; };
-		7B6A745A1B179BC000A10762 /* WebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74591B179BC000A10762 /* WebViewCell.swift */; };
+		7B6A745A1B179BC000A10762 /* HTMLDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74591B179BC000A10762 /* HTMLDataCell.swift */; };
 		7B6A745C1B182E9C00A10762 /* DetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A745B1B182E9C00A10762 /* DetailDataSource.swift */; };
 		7B6A745E1B183D7900A10762 /* MeetupDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A745D1B183D7900A10762 /* MeetupDataSource.swift */; };
 		7B6A74601B18406600A10762 /* JobDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A745F1B18406600A10762 /* JobDataSource.swift */; };
@@ -64,6 +65,7 @@
 		2324F5121E2F5162006F7240 /* UIAlertController+FetchErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+FetchErrors.swift"; sourceTree = "<group>"; };
 		239D41151B190FD000609105 /* CalendarTabImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTabImage.swift; sourceTree = "<group>"; };
 		23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLocalizedString+Convenience.swift"; sourceTree = "<group>"; };
+		2EDD61551EDCCEBC0040409B /* NSAttributedStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtension.swift; sourceTree = "<group>"; };
 		4A15A33C1BB82224008161BD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		4A1978C11AAD8681000E281F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelObjects.swift; sourceTree = "<group>"; };
@@ -84,7 +86,7 @@
 		7B6A74531B179B4E00A10762 /* LogoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoCell.swift; sourceTree = "<group>"; };
 		7B6A74551B179B7D00A10762 /* MapViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewCell.swift; sourceTree = "<group>"; };
 		7B6A74571B179B9C00A10762 /* TitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
-		7B6A74591B179BC000A10762 /* WebViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewCell.swift; sourceTree = "<group>"; };
+		7B6A74591B179BC000A10762 /* HTMLDataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLDataCell.swift; sourceTree = "<group>"; };
 		7B6A745B1B182E9C00A10762 /* DetailDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailDataSource.swift; sourceTree = "<group>"; };
 		7B6A745D1B183D7900A10762 /* MeetupDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetupDataSource.swift; sourceTree = "<group>"; };
 		7B6A745F1B18406600A10762 /* JobDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobDataSource.swift; sourceTree = "<group>"; };
@@ -136,6 +138,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2EDD61541EDCCE740040409B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7B6A744E1B162F8E00A10762 /* UIColor+Extensions.swift */,
+				7B6A744C1B149A6B00A10762 /* UIImage+Resize.swift */,
+				2324F5121E2F5162006F7240 /* UIAlertController+FetchErrors.swift */,
+				23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */,
+				2EDD61551EDCCEBC0040409B /* NSAttributedStringExtension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		431C3CFF1B8F675200B0908E /* List of Contributors */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,16 +192,13 @@
 		7B6A74501B176A2900A10762 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2EDD61541EDCCE740040409B /* Extensions */,
 				4AF8899A1AAD8EBC00D8DB2E /* CocoaHeadsNL-Bridging-Header.h */,
 				F1A46D171AAB50BB00585D61 /* AppDelegate.swift */,
 				F1CF120E1B8A0C0600EBCABC /* CoreLocationController.swift */,
 				F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */,
 				F11455C01AB5024000546D22 /* TabBarController.swift */,
-				7B6A744E1B162F8E00A10762 /* UIColor+Extensions.swift */,
-				7B6A744C1B149A6B00A10762 /* UIImage+Resize.swift */,
 				239D41151B190FD000609105 /* CalendarTabImage.swift */,
-				2324F5121E2F5162006F7240 /* UIAlertController+FetchErrors.swift */,
-				23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */,
 				4AE3AD271E8BF87E0051706C /* RequestReview.swift */,
 			);
 			name = "Other Sources";
@@ -233,7 +244,7 @@
 				F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */,
 				7B6A74551B179B7D00A10762 /* MapViewCell.swift */,
 				7B6A74571B179B9C00A10762 /* TitleCell.swift */,
-				7B6A74591B179BC000A10762 /* WebViewCell.swift */,
+				7B6A74591B179BC000A10762 /* HTMLDataCell.swift */,
 				4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */,
 			);
 			name = Cells;
@@ -547,7 +558,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B653106EA18082D4EC97BD03 /* [CP] Embed Pods Frameworks */ = {
@@ -616,6 +627,7 @@
 				7B6A74541B179B4E00A10762 /* LogoCell.swift in Sources */,
 				7B6A74681B186C4A00A10762 /* AffiliateCell.swift in Sources */,
 				F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */,
+				2EDD61561EDCCEBC0040409B /* NSAttributedStringExtension.swift in Sources */,
 				2324F5131E2F5162006F7240 /* UIAlertController+FetchErrors.swift in Sources */,
 				7B6A74661B18666D00A10762 /* FetchAffiliateLinks.swift in Sources */,
 				4AE3AD281E8BF87E0051706C /* RequestReview.swift in Sources */,
@@ -627,7 +639,7 @@
 				23F2D9A41E2F52A6003344DC /* NSLocalizedString+Convenience.swift in Sources */,
 				7B6A74621B18424800A10762 /* CompanyDataSource.swift in Sources */,
 				F1CF120F1B8A0C0600EBCABC /* CoreLocationController.swift in Sources */,
-				7B6A745A1B179BC000A10762 /* WebViewCell.swift in Sources */,
+				7B6A745A1B179BC000A10762 /* HTMLDataCell.swift in Sources */,
 				7B6A744D1B149A6B00A10762 /* UIImage+Resize.swift in Sources */,
 				F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */,
 				239D41161B190FD000609105 /* CalendarTabImage.swift in Sources */,
