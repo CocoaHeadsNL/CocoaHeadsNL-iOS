@@ -16,7 +16,7 @@ class HTMLDataCell: UITableViewCell {
     var html: String? {
         didSet {
             guard let html = html, html != oldValue else { return }
-            let inputText = "\(html)<style>body { font: -apple-system-body; font-size:17px; }</style>"
+            let inputText = "\(html)<style>body { font-family: '-apple-system-body','HelveticaNeue'; font-size:17px; }</style>"
             let attributedString = NSAttributedString(html: inputText)
 
             self.textView.attributedText = attributedString
