@@ -20,7 +20,7 @@ class JobDataSource: DetailDataSource {
         case 1:
             return titleCellWithText(job.title, forTableView: tableView)
         case 2:
-            return webViewCellWithHTML(job.content, forTableView: tableView)
+            return dataCellWithHTML(job.content, forTableView: tableView)
         default:
             fatalError("This should not happen.")
         }

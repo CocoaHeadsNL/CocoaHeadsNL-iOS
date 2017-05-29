@@ -55,8 +55,8 @@ class DetailDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 
-    func webViewCellWithHTML(_ html: String?, forTableView tableView: UITableView) -> WebViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "webViewCell") as! WebViewCell
+    func dataCellWithHTML(_ html: String?, forTableView tableView: UITableView) -> HTMLDataCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "htmlDataCell") as! HTMLDataCell
         cell.html = html
         return cell
     }
