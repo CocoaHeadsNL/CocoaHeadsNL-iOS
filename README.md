@@ -1,3 +1,5 @@
+[![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=5942da77ff1ed20001ec5926&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/5942da77ff1ed20001ec5926/build/latest?branch=master)
+
 # About this app
 
 **Why an app?** We're a community of mostly mobile developers... so could you imagine we wouldn't? 
