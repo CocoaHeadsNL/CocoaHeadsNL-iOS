@@ -148,7 +148,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
             // Fallback on earlier versions
         }
 
-        self.discover()
+  
         self.subscribe()
 
         let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
@@ -181,52 +181,6 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         viewDidAppearCount = viewDidAppearCount + 1
         if viewDidAppearCount > 2 {
             RequestReview.requestReview()
-        }
-    }
-
-    func discover() {
-
-        let container = CKContainer.default()
-
-        container.requestApplicationPermission(CKApplicationPermissions.userDiscoverability) { (status, error) in
-            guard error == nil else { return }
-
-            if status == CKApplicationPermissionStatus.granted {
-                // User allowed for searching on email
-                container.fetchUserRecordID { (recordID, error) in
-                    guard error == nil else { return }
-                    guard let recordID = recordID else { return }
-
-                    container.discoverUserInfo(withUserRecordID: recordID) { (info, fetchError) in
-                        // TODO check for deprecation and save to userRecord?
-                        if let error = fetchError {
-                            print("error dicovering user info: \(error)")
-                            return
-                        }
-
-                        guard let info = info else {
-                            print("error dicovering user info, info is nil for unknown reason")
-                            return
-                        }
-
-                        container.publicCloudDatabase.fetch(withRecordID: recordID, completionHandler: { (userRecord, error) in
-                            if let error = fetchError {
-                                print("error dicovering user record: \(error)")
-                                return
-                            }
-
-                            if let record = userRecord {
-                                record["firstName"] = info.firstName as CKRecordValue?
-                                record["lastName"] = info.lastName as CKRecordValue?
-
-                                container.publicCloudDatabase.save(record, completionHandler: { (record, error) in
-                                    //print(record)
-                                })
-                            }
-                        })
-                    }
-                }
-            }
         }
     }
 
