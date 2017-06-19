@@ -71,7 +71,7 @@
 		4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelObjects.swift; sourceTree = "<group>"; };
 		4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		4AE3AD271E8BF87E0051706C /* RequestReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestReview.swift; sourceTree = "<group>"; };
-		4AE72F921C5B44080027C5CA /* CocoaHeadsNL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CocoaHeadsNL.entitlements; sourceTree = "<group>"; };
+		4AE72F921C5B44080027C5CA /* CocoaHeadsNL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CocoaHeadsNL.entitlements; sourceTree = "<group>"; };
 		4AE72F931C5B44300027C5CA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4AEDD5201CF635E50039AAE5 /* CocoaHeadsNLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaHeadsNLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AEDD5221CF635E50039AAE5 /* CocoaHeadsNLUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaHeadsNLUITests.swift; sourceTree = "<group>"; };
@@ -138,36 +138,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2EDD61541EDCCE740040409B /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				7B6A744E1B162F8E00A10762 /* UIColor+Extensions.swift */,
-				7B6A744C1B149A6B00A10762 /* UIImage+Resize.swift */,
-				2324F5121E2F5162006F7240 /* UIAlertController+FetchErrors.swift */,
-				23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */,
-				2EDD61551EDCCEBC0040409B /* NSAttributedStringExtension.swift */,
-			);
-			name = Extensions;
-			sourceTree = "<group>";
-		};
-		431C3CFF1B8F675200B0908E /* List of Contributors */ = {
-			isa = PBXGroup;
-			children = (
-				F1DC2E121C665B4D006CC492 /* ContributorTableViewController.swift */,
-			);
-			name = "List of Contributors";
-			sourceTree = "<group>";
-		};
-		4A13831E1AC7F83D00E0D41E /* Viewing Details */ = {
-			isa = PBXGroup;
-			children = (
-				F11455B81AB4BA0600546D22 /* DetailViewController.swift */,
-				7B6A74631B18521900A10762 /* Data sources */,
-				7B6A74641B18522600A10762 /* Cells */,
-			);
-			name = "Viewing Details";
-			sourceTree = "<group>";
-		};
 		4AEDD5211CF635E50039AAE5 /* CocoaHeadsNLUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,93 +159,154 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7B6A74501B176A2900A10762 /* Other Sources */ = {
+		B2FCC42E1EF86FF90008FF4E /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				2EDD61541EDCCE740040409B /* Extensions */,
-				4AF8899A1AAD8EBC00D8DB2E /* CocoaHeadsNL-Bridging-Header.h */,
 				F1A46D171AAB50BB00585D61 /* AppDelegate.swift */,
-				F1CF120E1B8A0C0600EBCABC /* CoreLocationController.swift */,
-				F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */,
-				F11455C01AB5024000546D22 /* TabBarController.swift */,
-				239D41151B190FD000609105 /* CalendarTabImage.swift */,
-				4AE3AD271E8BF87E0051706C /* RequestReview.swift */,
+				B2FCC43A1EF873080008FF4E /* DataSources */,
+				B2FCC4351EF8714C0008FF4E /* Extensions */,
+				B2FCC4311EF8704B0008FF4E /* Models */,
+				B2FCC4341EF871360008FF4E /* Services */,
+				B2FCC4301EF870120008FF4E /* SupportingFiles */,
+				B2FCC43C1EF873B60008FF4E /* ViewControllers */,
 			);
-			name = "Other Sources";
+			path = Common;
 			sourceTree = "<group>";
 		};
-		7B6A74511B176A4000A10762 /* Resources */ = {
+		B2FCC42F1EF86FFE0008FF4E /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				B2FCC4391EF872DF0008FF4E /* DetailView */,
+				B2FCC4381EF872880008FF4E /* SponsorsList */,
+				B2FCC4371EF872820008FF4E /* MeetupsList */,
+				B2FCC4331EF871190008FF4E /* OpenJobPostings */,
+				B2FCC4321EF871060008FF4E /* Contributors */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		B2FCC4301EF870120008FF4E /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				4AE72F921C5B44080027C5CA /* CocoaHeadsNL.entitlements */,
+				4AF8899A1AAD8EBC00D8DB2E /* CocoaHeadsNL-Bridging-Header.h */,
 				F1A46D201AAB50BB00585D61 /* Images.xcassets */,
 				F1A46D161AAB50BB00585D61 /* Info.plist */,
 				F1A46D221AAB50BB00585D61 /* LaunchScreen.xib */,
 				F1A46D1D1AAB50BB00585D61 /* Main.storyboard */,
 				4A1978C11AAD8681000E281F /* Settings.bundle */,
 			);
-			name = Resources;
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
-		7B6A74521B176B1900A10762 /* Data Model */ = {
+		B2FCC4311EF8704B0008FF4E /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */,
 			);
-			name = "Data Model";
+			path = Models;
 			sourceTree = "<group>";
 		};
-		7B6A74631B18521900A10762 /* Data sources */ = {
+		B2FCC4321EF871060008FF4E /* Contributors */ = {
 			isa = PBXGroup;
 			children = (
-				7B6A745B1B182E9C00A10762 /* DetailDataSource.swift */,
-				7B6A74611B18424800A10762 /* CompanyDataSource.swift */,
-				7B6A74651B18666D00A10762 /* FetchAffiliateLinks.swift */,
-				7B6A745F1B18406600A10762 /* JobDataSource.swift */,
-				7B6A745D1B183D7900A10762 /* MeetupDataSource.swift */,
+				F1DC2E121C665B4D006CC492 /* ContributorTableViewController.swift */,
 			);
-			name = "Data sources";
+			path = Contributors;
 			sourceTree = "<group>";
 		};
-		7B6A74641B18522600A10762 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				7B6A74671B186C4A00A10762 /* AffiliateCell.swift */,
-				7B6A74531B179B4E00A10762 /* LogoCell.swift */,
-				F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */,
-				7B6A74551B179B7D00A10762 /* MapViewCell.swift */,
-				7B6A74571B179B9C00A10762 /* TitleCell.swift */,
-				7B6A74591B179BC000A10762 /* HTMLDataCell.swift */,
-				4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */,
-			);
-			name = Cells;
-			sourceTree = "<group>";
-		};
-		F11455A81AB3256C00546D22 /* Open Job Postings */ = {
+		B2FCC4331EF871190008FF4E /* OpenJobPostings */ = {
 			isa = PBXGroup;
 			children = (
 				F1BDEA731C920768004C7DAB /* JobsCell.swift */,
 				F1BDEA741C920768004C7DAB /* JobsCell.xib */,
 				F1A46D3C1AAB516300585D61 /* JobsViewController.swift */,
 			);
-			name = "Open Job Postings";
+			path = OpenJobPostings;
 			sourceTree = "<group>";
 		};
-		F11455A91AB3257700546D22 /* List of Sponsors */ = {
+		B2FCC4341EF871360008FF4E /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				F1108BA91B1F618700C2164C /* LocatedCompaniesViewController.swift */,
+				4AE3AD271E8BF87E0051706C /* RequestReview.swift */,
+				7B6A74651B18666D00A10762 /* FetchAffiliateLinks.swift */,
+				F1CF120E1B8A0C0600EBCABC /* CoreLocationController.swift */,
 			);
-			name = "List of Sponsors";
+			path = Services;
 			sourceTree = "<group>";
 		};
-		F11455BD1AB4E8C000546D22 /* List of Meetups */ = {
+		B2FCC4351EF8714C0008FF4E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				239D41151B190FD000609105 /* CalendarTabImage.swift */,
+				7B6A744E1B162F8E00A10762 /* UIColor+Extensions.swift */,
+				7B6A744C1B149A6B00A10762 /* UIImage+Resize.swift */,
+				2324F5121E2F5162006F7240 /* UIAlertController+FetchErrors.swift */,
+				23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */,
+				2EDD61551EDCCEBC0040409B /* NSAttributedStringExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B2FCC4371EF872820008FF4E /* MeetupsList */ = {
 			isa = PBXGroup;
 			children = (
 				7B6A74461B1452FD00A10762 /* MeetupCell.swift */,
 				7B6A744A1B1495FF00A10762 /* MeetupCell.xib */,
 				7B6A74471B1452FD00A10762 /* MeetupsViewController.swift */,
 			);
-			name = "List of Meetups";
+			path = MeetupsList;
+			sourceTree = "<group>";
+		};
+		B2FCC4381EF872880008FF4E /* SponsorsList */ = {
+			isa = PBXGroup;
+			children = (
+				F1108BA91B1F618700C2164C /* LocatedCompaniesViewController.swift */,
+			);
+			path = SponsorsList;
+			sourceTree = "<group>";
+		};
+		B2FCC4391EF872DF0008FF4E /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				B2FCC43B1EF8735D0008FF4E /* Cells */,
+				F11455B81AB4BA0600546D22 /* DetailViewController.swift */,
+			);
+			path = DetailView;
+			sourceTree = "<group>";
+		};
+		B2FCC43A1EF873080008FF4E /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				7B6A745B1B182E9C00A10762 /* DetailDataSource.swift */,
+				7B6A745D1B183D7900A10762 /* MeetupDataSource.swift */,
+				7B6A745F1B18406600A10762 /* JobDataSource.swift */,
+				7B6A74611B18424800A10762 /* CompanyDataSource.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
+		B2FCC43B1EF8735D0008FF4E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7B6A74531B179B4E00A10762 /* LogoCell.swift */,
+				F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */,
+				7B6A74551B179B7D00A10762 /* MapViewCell.swift */,
+				7B6A74571B179B9C00A10762 /* TitleCell.swift */,
+				7B6A74591B179BC000A10762 /* HTMLDataCell.swift */,
+				4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */,
+				7B6A74671B186C4A00A10762 /* AffiliateCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		B2FCC43C1EF873B60008FF4E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */,
+				F11455C01AB5024000546D22 /* TabBarController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		F1A46D091AAB50BB00585D61 = {
@@ -305,15 +336,8 @@
 		F1A46D141AAB50BB00585D61 /* CocoaHeadsNL */ = {
 			isa = PBXGroup;
 			children = (
-				4AE72F921C5B44080027C5CA /* CocoaHeadsNL.entitlements */,
-				7B6A74521B176B1900A10762 /* Data Model */,
-				F11455BD1AB4E8C000546D22 /* List of Meetups */,
-				F11455A81AB3256C00546D22 /* Open Job Postings */,
-				F11455A91AB3257700546D22 /* List of Sponsors */,
-				431C3CFF1B8F675200B0908E /* List of Contributors */,
-				4A13831E1AC7F83D00E0D41E /* Viewing Details */,
-				7B6A74501B176A2900A10762 /* Other Sources */,
-				7B6A74511B176A4000A10762 /* Resources */,
+				B2FCC42E1EF86FF90008FF4E /* Common */,
+				B2FCC42F1EF86FFE0008FF4E /* Modules */,
 			);
 			path = CocoaHeadsNL;
 			sourceTree = "<group>";
@@ -558,7 +582,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B653106EA18082D4EC97BD03 /* [CP] Embed Pods Frameworks */ = {
@@ -851,18 +875,18 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = CocoaHeadsNL/CocoaHeadsNL.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CocoaHeadsNL/Common/SupportingFiles/CocoaHeadsNL.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = D55PL7PU7S;
-				INFOPLIST_FILE = CocoaHeadsNL/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/CocoaHeadsNL/Common/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.cocoaheads.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CocoaHeadsNL;
 				PROVISIONING_PROFILE = "792ea821-1497-48d1-88a1-8d27af8b1a3a";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development nl.cocoaheads.app.CocoaHeadsNL";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/Common/SupportingFiles/CocoaHeadsNL-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -876,19 +900,19 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = CocoaHeadsNL/CocoaHeadsNL.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CocoaHeadsNL/Common/SupportingFiles/CocoaHeadsNL.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = D55PL7PU7S;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = CocoaHeadsNL/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/CocoaHeadsNL/Common/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.cocoaheads.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CocoaHeadsNL;
 				PROVISIONING_PROFILE = "fa2c071a-514c-4c70-b8fa-569d6f832d66";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore nl.cocoaheads.app.CocoaHeadsNL";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/Common/SupportingFiles/CocoaHeadsNL-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
