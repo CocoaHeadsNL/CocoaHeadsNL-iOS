@@ -52,7 +52,7 @@ extension XCTestCase {
             if (error != nil) {
                 let message = "Failed to find \(element) after \(waitSeconds) seconds."
                 self.recordFailure(withDescription: message,
-                                                  inFile: file, atLine: line, expected: true)
+                                                  inFile: file, atLine: Int(line), expected: true)
             }
         }
     }
@@ -65,7 +65,7 @@ extension XCTestCase {
             if (error != nil) {
                 let message = "Failed to find \(element) after \(waitSeconds) seconds."
                 self.recordFailure(withDescription: message,
-                                                  inFile: file, atLine: line, expected: true)
+                                                  inFile: file, atLine: Int(line), expected: true)
             }
         }
     }
@@ -78,7 +78,7 @@ extension XCTestCase {
             if (error != nil) {
                 let message = "Failed to find \(element) after \(waitSeconds) seconds."
                 self.recordFailure(withDescription: message,
-                                                  inFile: file, atLine: line, expected: true)
+                                                  inFile: file, atLine: Int(line), expected: true)
             }
         }
     }

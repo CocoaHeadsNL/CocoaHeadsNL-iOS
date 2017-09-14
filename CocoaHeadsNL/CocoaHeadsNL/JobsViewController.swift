@@ -91,7 +91,7 @@ class JobsViewController: UICollectionViewController {
                                        customAttributes: nil)
     }
 
-    func searchOccured(_ notification: Notification) -> Void {
+    @objc func searchOccured(_ notification: Notification) -> Void {
         guard let userInfo = (notification as NSNotification).userInfo as? Dictionary<String, String> else {
             return
         }

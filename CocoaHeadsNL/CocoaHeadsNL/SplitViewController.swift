@@ -27,7 +27,7 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
             }
         }
     }
-    func searchNotification(_ notification: Notification) -> Void {
+    @objc func searchNotification(_ notification: Notification) -> Void {
         guard let userInfo = (notification as NSNotification).userInfo as? Dictionary<String, String> else {
             return
         }

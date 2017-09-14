@@ -10,7 +10,7 @@ import UIKit
 import StoreKit
 
 extension UIResponder {
-    func reloadCell(_ cell: UITableViewCell) {
+    @objc func reloadCell(_ cell: UITableViewCell) {
         self.next?.reloadCell(cell)
     }
 }

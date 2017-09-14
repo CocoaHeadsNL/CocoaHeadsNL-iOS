@@ -14,8 +14,8 @@ extension NSAttributedString {
         guard let data = html.data(using: String.Encoding.utf16, allowLossyConversion: false) else {
             return nil
         }
-        
-        guard let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) else {
+
+        guard let attributedString = try? NSMutableAttributedString(data: data, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) else {
             return nil
         }
         
