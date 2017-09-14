@@ -32,7 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Error resetting badge: \(String(describing: error))")
                 return
             }
-            UIApplication.shared.applicationIconBadgeNumber = 0
+            DispatchQueue.main.async {
+                UIApplication.shared.applicationIconBadgeNumber = 0
+            }
         }
         CKContainer.default().add(badgeResetOperation)
     }
