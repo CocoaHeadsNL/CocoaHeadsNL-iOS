@@ -67,4 +67,12 @@ class DetailDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
         cell.urlString = urlString
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(88)
+    }
 }
