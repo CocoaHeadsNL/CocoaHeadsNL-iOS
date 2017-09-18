@@ -10,7 +10,6 @@ import UIKit
 
 class HTMLDataCell: UITableViewCell {
     
-    @IBOutlet weak var heighLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var textView: UITextView!
     
     var html: String? {
