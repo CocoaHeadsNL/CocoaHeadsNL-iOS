@@ -27,7 +27,8 @@ class ContributorTableViewController: UITableViewController {
         let backItem = UIBarButtonItem(title: NSLocalizedString("About"), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
-        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
+        let accessibilityLabel = NSLocalizedString("About CocoaHeadsNL")
+        self.navigationItem.setupForRootViewController(withTitle: accessibilityLabel)
 
         // Set results notification block
         self.notificationToken = contributors.addNotificationBlock { (changes: RealmCollectionChange) in

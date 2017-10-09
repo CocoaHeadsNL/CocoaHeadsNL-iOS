@@ -92,7 +92,8 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         let backItem = UIBarButtonItem(title: NSLocalizedString("Events"), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
-        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
+        let accessibilityLabel = NSLocalizedString("Upcoming and past events of CocoaHeadsNL")
+        self.navigationItem.setupForRootViewController(withTitle: accessibilityLabel)
 
         let calendarIcon = UIImage.calendarTabImageWithCurrentDate()
         self.navigationController?.tabBarItem.image = calendarIcon

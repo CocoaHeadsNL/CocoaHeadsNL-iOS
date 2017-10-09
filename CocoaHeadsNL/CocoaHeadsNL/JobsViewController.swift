@@ -29,7 +29,8 @@ class JobsViewController: UICollectionViewController {
         let backItem = UIBarButtonItem(title: NSLocalizedString("Jobs"), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
-        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
+        let accessibilityLabel = NSLocalizedString("Job openings at our sponsors")
+        self.navigationItem.setupForRootViewController(withTitle: accessibilityLabel)
 
         //Inspect paste board for userInfo
         if let pasteBoard = UIPasteboard(name: UIPasteboardName(rawValue: searchPasteboardName), create: false) {

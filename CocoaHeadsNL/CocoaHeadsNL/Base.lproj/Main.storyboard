@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="W81-50-NMJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="W81-50-NMJ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -49,7 +49,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Ah-TQ-Ly2">
-                                            <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
+                                            <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -71,7 +71,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wsJ-wh-HFt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1820" y="-903"/>
+            <point key="canvasLocation" x="2578" y="-994"/>
         </scene>
         <!--About-->
         <scene sceneID="8a8-g1-nu0">
@@ -79,7 +79,6 @@
                 <navigationController id="zvX-Qg-yY8" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="About" image="AboutTabIcon" id="nff-Ie-ldv"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0lF-kr-m7A">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -88,9 +87,9 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ITA-Ki-7Pi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1115" y="-128"/>
+            <point key="canvasLocation" x="1734" y="-179"/>
         </scene>
-        <!--About Cocoaheads-->
+        <!--About CocoaheadsNL-->
         <scene sceneID="cNP-lb-KJC">
             <objects>
                 <tableViewController storyboardIdentifier="contributorTableView" id="j8n-Qh-gjC" customClass="ContributorTableViewController" customModule="CocoaHeadsNL" customModuleProvider="target" sceneMemberID="viewController">
@@ -103,7 +102,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" text="A monthly meeting of iOS and Mac developers in the Netherlands and part of the international CocoaHeads.org." translatesAutoresizingMaskIntoConstraints="NO" id="4oQ-uh-yxZ">
-                                    <rect key="frame" x="8" y="173" width="359" height="70"/>
+                                    <rect key="frame" x="8" y="165" width="359" height="70"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="70" id="MwA-8W-D4h"/>
                                     </constraints>
@@ -111,7 +110,7 @@
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How does it work?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GkQ-gn-r7o">
-                                    <rect key="frame" x="8" y="251" width="359" height="20.5"/>
+                                    <rect key="frame" x="8" y="243" width="359" height="20.5"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20.5" id="TkN-Hg-Yfz"/>
                                     </constraints>
@@ -120,20 +119,20 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6qd-dU-PTV">
-                                    <rect key="frame" x="8" y="279" width="359" height="101"/>
+                                    <rect key="frame" x="8" y="271" width="359" height="109"/>
                                     <string key="text">Every month we organize a meeting at a different venue including food and drinks sponsored by companies. Depending on the size of the location we put together a nice agenda for developers.</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CocoaHeadsNLLogo" translatesAutoresizingMaskIntoConstraints="NO" id="QKf-Yh-4Am">
-                                    <rect key="frame" x="66.5" y="8" width="242" height="129"/>
+                                    <rect key="frame" x="66.5" y="0.0" width="242" height="129"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="QKf-Yh-4Am" secondAttribute="height" multiplier="242:129" id="L21-xu-F6S"/>
                                         <constraint firstAttribute="height" constant="129" id="Qk3-I5-V31"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is Cocoaheads?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8V-hl-9JZ">
-                                    <rect key="frame" x="8" y="145" width="359" height="20.5"/>
+                                    <rect key="frame" x="8" y="137" width="359" height="20.5"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20.5" id="qFe-Bi-3Gb"/>
                                     </constraints>
@@ -170,14 +169,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dPW-tb-iRq">
-                                            <rect key="frame" x="74" y="0.0" width="286" height="43.5"/>
+                                            <rect key="frame" x="75" y="0.0" width="285" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="CocoaHeadsNLLogo" id="JGt-LK-KrF">
-                                            <rect key="frame" x="15" y="0.0" width="44" height="43.5"/>
+                                            <rect key="frame" x="16" y="0.0" width="44" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
                                     </subviews>
@@ -189,11 +188,11 @@
                             <outlet property="delegate" destination="j8n-Qh-gjC" id="aGb-yb-vFj"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="About Cocoaheads" id="Uqy-IN-GUA"/>
+                    <navigationItem key="navigationItem" title="About CocoaheadsNL" id="Uqy-IN-GUA"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pCq-sS-kzA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1820" y="-118"/>
+            <point key="canvasLocation" x="2577" y="-178"/>
         </scene>
         <!--Events Navigation-->
         <scene sceneID="Rb4-4L-nsC">
@@ -202,7 +201,6 @@
                     <tabBarItem key="tabBarItem" title="Events" image="EventsTabIcon" id="acW-dT-cKf" userLabel="Main"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IH5-mr-j9S">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -239,7 +237,7 @@
                             <outlet property="delegate" destination="p5z-Di-RAg" id="DwR-uC-AUx"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="CocoaHeadsNL" id="tRg-uu-nNZ"/>
+                    <navigationItem key="navigationItem" title="Jobs" id="tRg-uu-nNZ"/>
                     <connections>
                         <outlet property="activityIndicator" destination="LMv-rh-AFu" id="dag-bc-clb"/>
                         <segue destination="3uJ-fO-52Q" kind="showDetail" identifier="ShowDetail" id="GJd-Rt-qyZ"/>
@@ -256,7 +254,6 @@
                     <tabBarItem key="tabBarItem" title="Jobs" image="JobsTabIcon" id="cPa-gy-q4n" userLabel="Jobs"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="R8G-Zh-YDJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -440,7 +437,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qv9-fQ-CHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4042" y="-1958"/>
+            <point key="canvasLocation" x="4486" y="-1784"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="3MA-kB-sYs">
@@ -462,7 +459,6 @@
                     <tabBarItem key="tabBarItem" title="Companies" image="CompaniesTabIcon" id="ava-8M-aE2" userLabel="Map"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fMs-aD-JD8">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -472,7 +468,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="muM-Cn-t1z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="882" y="-994"/>
+            <point key="canvasLocation" x="1734" y="-994"/>
         </scene>
         <!--Events-->
         <scene sceneID="FD2-9x-qwk">
@@ -487,7 +483,7 @@
                             <outlet property="delegate" destination="VPM-AS-eh9" id="pG0-36-WvV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="CocoaHeadsNL" id="CeC-88-egO"/>
+                    <navigationItem key="navigationItem" title="Events" id="CeC-88-egO"/>
                     <connections>
                         <segue destination="3uJ-fO-52Q" kind="showDetail" identifier="ShowDetail" id="YXG-G2-hcg"/>
                     </connections>
@@ -533,7 +529,7 @@
                 <navigationController storyboardIdentifier="normalNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="2rn-Ke-6oT" userLabel="Split-View Detail Navigation" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qrT-if-Njc">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -554,6 +550,6 @@
         <image name="JobsTabIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wMn-In-Tpk"/>
+        <segue reference="YXG-G2-hcg"/>
     </inferredMetricsTieBreakers>
 </document>
