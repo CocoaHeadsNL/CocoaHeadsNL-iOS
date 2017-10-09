@@ -10,6 +10,7 @@
 		2324F5131E2F5162006F7240 /* UIAlertController+FetchErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2324F5121E2F5162006F7240 /* UIAlertController+FetchErrors.swift */; };
 		239D41161B190FD000609105 /* CalendarTabImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239D41151B190FD000609105 /* CalendarTabImage.swift */; };
 		23F2D9A41E2F52A6003344DC /* NSLocalizedString+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */; };
+		23FE55D61F8BFA6A003011CA /* UINavigationItem+Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FE55D51F8BFA6A003011CA /* UINavigationItem+Banner.swift */; };
 		2EDD61561EDCCEBC0040409B /* NSAttributedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDD61551EDCCEBC0040409B /* NSAttributedStringExtension.swift */; };
 		4A1978C21AAD8681000E281F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A1978C11AAD8681000E281F /* Settings.bundle */; };
 		4A7EEAF11AC5440C001C2827 /* ModelObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */; };
@@ -65,6 +66,7 @@
 		2324F5121E2F5162006F7240 /* UIAlertController+FetchErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+FetchErrors.swift"; sourceTree = "<group>"; };
 		239D41151B190FD000609105 /* CalendarTabImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTabImage.swift; sourceTree = "<group>"; };
 		23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLocalizedString+Convenience.swift"; sourceTree = "<group>"; };
+		23FE55D51F8BFA6A003011CA /* UINavigationItem+Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+Banner.swift"; sourceTree = "<group>"; };
 		2EDD61551EDCCEBC0040409B /* NSAttributedStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtension.swift; sourceTree = "<group>"; };
 		4A15A33C1BB82224008161BD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		4A1978C11AAD8681000E281F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				2324F5121E2F5162006F7240 /* UIAlertController+FetchErrors.swift */,
 				23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */,
 				2EDD61551EDCCEBC0040409B /* NSAttributedStringExtension.swift */,
+				23FE55D51F8BFA6A003011CA /* UINavigationItem+Banner.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */,
 				239D41161B190FD000609105 /* CalendarTabImage.swift in Sources */,
 				F11455B91AB4BA0600546D22 /* DetailViewController.swift in Sources */,
+				23FE55D61F8BFA6A003011CA /* UINavigationItem+Banner.swift in Sources */,
 				7B6A744F1B162F8E00A10762 /* UIColor+Extensions.swift in Sources */,
 				7B6A74491B1452FD00A10762 /* MeetupsViewController.swift in Sources */,
 				F1A46D3D1AAB516300585D61 /* JobsViewController.swift in Sources */,

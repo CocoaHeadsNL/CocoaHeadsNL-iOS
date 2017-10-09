@@ -38,8 +38,9 @@ class LocatedCompaniesViewController: UITableViewController {
         
         let backItem = UIBarButtonItem(title: NSLocalizedString("Companies"), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
-        
-        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
+
+        let accessibilityLabel = NSLocalizedString("iOS and macOS development companies")
+        self.navigationItem.setupForRootViewController(withTitle: accessibilityLabel)
         
         self.subscribe()
         
