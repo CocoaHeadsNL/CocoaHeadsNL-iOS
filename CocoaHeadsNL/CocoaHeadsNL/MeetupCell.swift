@@ -54,6 +54,9 @@ class MeetupCell: UITableViewCell {
 
             dateFormatter.dateFormat = "MMM"
             monthLabel.text = dateFormatter.string(from: date as Date).uppercased()
+            dateFormatter.dateFormat = "MMMM"
+            monthLabel.accessibilityLabel = dateFormatter.string(from: date as Date)
+
 
             if date.timeIntervalSinceNow > 0 {
                 dayLabel.textColor = UIColor.black
