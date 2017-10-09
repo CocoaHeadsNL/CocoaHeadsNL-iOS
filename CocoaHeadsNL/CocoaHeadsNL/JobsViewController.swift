@@ -15,7 +15,7 @@ import RealmSwift
 class JobsViewController: UICollectionViewController {
     let realm = try! Realm()
 
-    var jobsArray = try! Realm().objects(Job.self).sorted(byProperty: "date", ascending: false)
+    var jobsArray = try! Realm().objects(Job.self).sorted(byKeyPath: "date", ascending: false)
     var searchedObjectId: String? = nil
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var notificationToken: NotificationToken?
@@ -26,7 +26,7 @@ class JobsViewController: UICollectionViewController {
         let nib = UINib(nibName: "JobsCell", bundle: nil)
         self.collectionView?.register(nib, forCellWithReuseIdentifier: "jobsCell")
 
-        let backItem = UIBarButtonItem(title: "Jobs", style: .plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: NSLocalizedString("Jobs"), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
@@ -91,7 +91,7 @@ class JobsViewController: UICollectionViewController {
                                        customAttributes: nil)
     }
 
-    func searchOccured(_ notification: Notification) -> Void {
+    @objc func searchOccured(_ notification: Notification) -> Void {
         guard let userInfo = (notification as NSNotification).userInfo as? Dictionary<String, String> else {
             return
         }
@@ -152,7 +152,7 @@ class JobsViewController: UICollectionViewController {
 
         let info = CKNotificationInfo()
 
-        info.alertBody = "A new job has been added!"
+        info.alertBody = NSLocalizedString("A new job has been added!")
         info.shouldBadge = true
 
         subscription.notificationInfo = info
@@ -237,8 +237,7 @@ class JobsViewController: UICollectionViewController {
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
             DispatchQueue.main.async {
                 guard error == nil else {
-                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of jobs; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    let ac = UIAlertController.fetchErrorDialog(whileFetching: "jobs", error: error!)
                     self?.present(ac, animated: true, completion: nil)
                     return
                 }

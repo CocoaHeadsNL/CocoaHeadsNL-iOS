@@ -55,16 +55,24 @@ class DetailDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 
-    func webViewCellWithHTML(_ html: String?, forTableView tableView: UITableView) -> WebViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "webViewCell") as! WebViewCell
+    func dataCellWithHTML(_ html: String?, forTableView tableView: UITableView) -> HTMLDataCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "htmlDataCell") as! HTMLDataCell
         cell.html = html
         return cell
     }
     
-    func buttonCell(urlString: String?, title: String, forTableView tableView: UITableView) -> ButtonCell {
+    func buttonCell(_ urlString: String?, title: String, forTableView tableView: UITableView) -> ButtonCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "buttonCell") as! ButtonCell
         cell.title = title
         cell.urlString = urlString
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(88)
     }
 }

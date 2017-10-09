@@ -14,10 +14,12 @@ import Crashlytics
 import RealmSwift
 
 class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDelegate {
+    
+    private var viewDidAppearCount = 0
 
     let realm = try! Realm()
 
-    var meetupsArray = try! Realm().objects(Meetup.self).sorted(byProperty: "time", ascending: false)
+    var meetupsArray = try! Realm().objects(Meetup.self).sorted(byKeyPath: "time", ascending: false)
     var meetupsByYear: [String: [Meetup]] {
         get {
             // I am assuming ordering stays correct due to FIFO behavior.
@@ -55,17 +57,17 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         }
     }
     
-    private var sectionTitles: [String] {
+    fileprivate var sectionTitles: [String] {
         get {
             return meetupsByYear.keys.sorted().reversed()
         }
     }
     
-    private func meetups(forSection section: Int) -> [Meetup] {
+    fileprivate func meetups(forSection section: Int) -> [Meetup] {
         return meetupsByYear[sectionTitles[section]]!
     }
     
-    private func meetup(for indexPath: IndexPath) -> Meetup {
+    fileprivate func meetup(for indexPath: IndexPath) -> Meetup {
         return meetups(forSection: indexPath.section)[indexPath.row]
     }
     
@@ -87,7 +89,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         let nib = UINib(nibName: "MeetupCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: MeetupCell.Identifier)
 
-        let backItem = UIBarButtonItem(title: "Events", style: .plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: NSLocalizedString("Events"), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Banner")!)
@@ -146,7 +148,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
             // Fallback on earlier versions
         }
 
-        self.discover()
+  
         self.subscribe()
 
         let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
@@ -176,51 +178,9 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                                        contentType: "Meetup",
                                        contentId: "overview",
                                        customAttributes: nil)
-    }
-
-    func discover() {
-
-        let container = CKContainer.default()
-
-        container.requestApplicationPermission(CKApplicationPermissions.userDiscoverability) { (status, error) in
-            guard error == nil else { return }
-
-            if status == CKApplicationPermissionStatus.granted {
-                // User allowed for searching on email
-                container.fetchUserRecordID { (recordID, error) in
-                    guard error == nil else { return }
-                    guard let recordID = recordID else { return }
-
-                    container.discoverUserInfo(withUserRecordID: recordID) { (info, fetchError) in
-                        // TODO check for deprecation and save to userRecord?
-                        if let error = fetchError {
-                            print("error dicovering user info: \(error)")
-                            return
-                        }
-
-                        guard let info = info else {
-                            print("error dicovering user info, info is nil for unknown reason")
-                            return
-                        }
-
-                        container.publicCloudDatabase.fetch(withRecordID: recordID, completionHandler: { (userRecord, error) in
-                            if let error = fetchError {
-                                print("error dicovering user record: \(error)")
-                                return
-                            }
-
-                            if let record = userRecord {
-                                record["firstName"] = info.firstName as CKRecordValue?
-                                record["lastName"] = info.lastName as CKRecordValue?
-
-                                container.publicCloudDatabase.save(record, completionHandler: { (record, error) in
-                                    //print(record)
-                                })
-                            }
-                        })
-                    }
-                }
-            }
+        viewDidAppearCount = viewDidAppearCount + 1
+        if viewDidAppearCount > 2 {
+            RequestReview.requestReview()
         }
     }
 
@@ -235,7 +195,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         let info = CKNotificationInfo()
 
-        info.alertBody = "New meetup has been added!"
+        info.alertBody = NSLocalizedString("New meetup has been added!")
         info.shouldBadge = true
 
         subscription.notificationInfo = info
@@ -279,7 +239,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
     //MARK: - Search
 
-    func searchOccured(_ notification: Notification) -> Void {
+    @objc func searchOccured(_ notification: Notification) -> Void {
         guard let userInfo = (notification as NSNotification).userInfo as? Dictionary<String, String> else {
             return
         }
@@ -412,10 +372,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
             DispatchQueue.main.async {
                 guard error == nil else {
-                    let ac = UIAlertController(
-                        title: "Fetch failed",
-                        message: "There was a problem fetching the list of meetups; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    let ac = UIAlertController.fetchErrorDialog(whileFetching: NSLocalizedString("meetups"), error: error!)
                     self?.present(ac, animated: true, completion: nil)
                     return
                 }

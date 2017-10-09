@@ -3,14 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2324F5131E2F5162006F7240 /* UIAlertController+FetchErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2324F5121E2F5162006F7240 /* UIAlertController+FetchErrors.swift */; };
 		239D41161B190FD000609105 /* CalendarTabImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239D41151B190FD000609105 /* CalendarTabImage.swift */; };
+		23F2D9A41E2F52A6003344DC /* NSLocalizedString+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */; };
+		2EDD61561EDCCEBC0040409B /* NSAttributedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDD61551EDCCEBC0040409B /* NSAttributedStringExtension.swift */; };
 		4A1978C21AAD8681000E281F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A1978C11AAD8681000E281F /* Settings.bundle */; };
 		4A7EEAF11AC5440C001C2827 /* ModelObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */; };
 		4ABB70F71D9CED8B00CDE5B8 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */; };
+		4AE3AD281E8BF87E0051706C /* RequestReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE3AD271E8BF87E0051706C /* RequestReview.swift */; };
 		4AE72F941C5B44300027C5CA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE72F931C5B44300027C5CA /* CloudKit.framework */; };
 		4AEDD5231CF635E50039AAE5 /* CocoaHeadsNLUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEDD5221CF635E50039AAE5 /* CocoaHeadsNLUITests.swift */; };
 		4AEDD52B1CF636430039AAE5 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEDD52A1CF636430039AAE5 /* SnapshotHelper.swift */; };
@@ -22,7 +26,7 @@
 		7B6A74541B179B4E00A10762 /* LogoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74531B179B4E00A10762 /* LogoCell.swift */; };
 		7B6A74561B179B7D00A10762 /* MapViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74551B179B7D00A10762 /* MapViewCell.swift */; };
 		7B6A74581B179B9C00A10762 /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74571B179B9C00A10762 /* TitleCell.swift */; };
-		7B6A745A1B179BC000A10762 /* WebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74591B179BC000A10762 /* WebViewCell.swift */; };
+		7B6A745A1B179BC000A10762 /* HTMLDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74591B179BC000A10762 /* HTMLDataCell.swift */; };
 		7B6A745C1B182E9C00A10762 /* DetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A745B1B182E9C00A10762 /* DetailDataSource.swift */; };
 		7B6A745E1B183D7900A10762 /* MeetupDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A745D1B183D7900A10762 /* MeetupDataSource.swift */; };
 		7B6A74601B18406600A10762 /* JobDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A745F1B18406600A10762 /* JobDataSource.swift */; };
@@ -35,16 +39,12 @@
 		F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */; };
 		F11455BF1AB4E8DB00546D22 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */; };
 		F11455C11AB5024000546D22 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455C01AB5024000546D22 /* TabBarController.swift */; };
-		F11E36281B1A570F000B61C0 /* CompanyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E36271B1A570F000B61C0 /* CompanyTableViewController.swift */; };
 		F1379F6F1BC19F1900A20FDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F17A38761ABF3B62005CFF8A /* MapKit.framework */; };
-		F14335AB1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14335AA1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift */; };
 		F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D171AAB50BB00585D61 /* AppDelegate.swift */; };
 		F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D1D1AAB50BB00585D61 /* Main.storyboard */; };
 		F1A46D211AAB50BB00585D61 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D201AAB50BB00585D61 /* Images.xcassets */; };
 		F1A46D241AAB50BB00585D61 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D221AAB50BB00585D61 /* LaunchScreen.xib */; };
 		F1A46D3D1AAB516300585D61 /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D3C1AAB516300585D61 /* JobsViewController.swift */; };
-		F1BDEA6D1C91F6D7004C7DAB /* CompaniesNearbyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BDEA6B1C91F6D7004C7DAB /* CompaniesNearbyCell.swift */; };
-		F1BDEA6E1C91F6D7004C7DAB /* CompaniesNearbyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1BDEA6C1C91F6D7004C7DAB /* CompaniesNearbyCell.xib */; };
 		F1BDEA751C920768004C7DAB /* JobsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BDEA731C920768004C7DAB /* JobsCell.swift */; };
 		F1BDEA761C920768004C7DAB /* JobsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1BDEA741C920768004C7DAB /* JobsCell.xib */; };
 		F1CF120F1B8A0C0600EBCABC /* CoreLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CF120E1B8A0C0600EBCABC /* CoreLocationController.swift */; };
@@ -62,11 +62,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2324F5121E2F5162006F7240 /* UIAlertController+FetchErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+FetchErrors.swift"; sourceTree = "<group>"; };
 		239D41151B190FD000609105 /* CalendarTabImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTabImage.swift; sourceTree = "<group>"; };
+		23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLocalizedString+Convenience.swift"; sourceTree = "<group>"; };
+		2EDD61551EDCCEBC0040409B /* NSAttributedStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtension.swift; sourceTree = "<group>"; };
 		4A15A33C1BB82224008161BD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		4A1978C11AAD8681000E281F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelObjects.swift; sourceTree = "<group>"; };
 		4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
+		4AE3AD271E8BF87E0051706C /* RequestReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestReview.swift; sourceTree = "<group>"; };
 		4AE72F921C5B44080027C5CA /* CocoaHeadsNL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CocoaHeadsNL.entitlements; sourceTree = "<group>"; };
 		4AE72F931C5B44300027C5CA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4AEDD5201CF635E50039AAE5 /* CocoaHeadsNLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaHeadsNLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,7 +86,7 @@
 		7B6A74531B179B4E00A10762 /* LogoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoCell.swift; sourceTree = "<group>"; };
 		7B6A74551B179B7D00A10762 /* MapViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewCell.swift; sourceTree = "<group>"; };
 		7B6A74571B179B9C00A10762 /* TitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
-		7B6A74591B179BC000A10762 /* WebViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewCell.swift; sourceTree = "<group>"; };
+		7B6A74591B179BC000A10762 /* HTMLDataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLDataCell.swift; sourceTree = "<group>"; };
 		7B6A745B1B182E9C00A10762 /* DetailDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailDataSource.swift; sourceTree = "<group>"; };
 		7B6A745D1B183D7900A10762 /* MeetupDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetupDataSource.swift; sourceTree = "<group>"; };
 		7B6A745F1B18406600A10762 /* JobDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobDataSource.swift; sourceTree = "<group>"; };
@@ -96,8 +100,6 @@
 		F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		F11455C01AB5024000546D22 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		F11E36271B1A570F000B61C0 /* CompanyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CompanyTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		F14335AA1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CompaniesNearbyCollectionViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F17A38761ABF3B62005CFF8A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F1A46D121AAB50BB00585D61 /* CocoaHeadsNL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaHeadsNL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A46D161AAB50BB00585D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -108,8 +110,6 @@
 		F1A46D2E1AAB50BB00585D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1A46D2F1AAB50BB00585D61 /* CocoaHeadsNLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaHeadsNLTests.swift; sourceTree = "<group>"; };
 		F1A46D3C1AAB516300585D61 /* JobsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = JobsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		F1BDEA6B1C91F6D7004C7DAB /* CompaniesNearbyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesNearbyCell.swift; sourceTree = "<group>"; };
-		F1BDEA6C1C91F6D7004C7DAB /* CompaniesNearbyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompaniesNearbyCell.xib; sourceTree = "<group>"; };
 		F1BDEA731C920768004C7DAB /* JobsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsCell.swift; sourceTree = "<group>"; };
 		F1BDEA741C920768004C7DAB /* JobsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobsCell.xib; sourceTree = "<group>"; };
 		F1CF120E1B8A0C0600EBCABC /* CoreLocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocationController.swift; sourceTree = "<group>"; };
@@ -138,6 +138,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2EDD61541EDCCE740040409B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7B6A744E1B162F8E00A10762 /* UIColor+Extensions.swift */,
+				7B6A744C1B149A6B00A10762 /* UIImage+Resize.swift */,
+				2324F5121E2F5162006F7240 /* UIAlertController+FetchErrors.swift */,
+				23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */,
+				2EDD61551EDCCEBC0040409B /* NSAttributedStringExtension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		431C3CFF1B8F675200B0908E /* List of Contributors */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,14 +192,14 @@
 		7B6A74501B176A2900A10762 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2EDD61541EDCCE740040409B /* Extensions */,
 				4AF8899A1AAD8EBC00D8DB2E /* CocoaHeadsNL-Bridging-Header.h */,
 				F1A46D171AAB50BB00585D61 /* AppDelegate.swift */,
 				F1CF120E1B8A0C0600EBCABC /* CoreLocationController.swift */,
 				F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */,
 				F11455C01AB5024000546D22 /* TabBarController.swift */,
-				7B6A744E1B162F8E00A10762 /* UIColor+Extensions.swift */,
-				7B6A744C1B149A6B00A10762 /* UIImage+Resize.swift */,
 				239D41151B190FD000609105 /* CalendarTabImage.swift */,
+				4AE3AD271E8BF87E0051706C /* RequestReview.swift */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -232,7 +244,7 @@
 				F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */,
 				7B6A74551B179B7D00A10762 /* MapViewCell.swift */,
 				7B6A74571B179B9C00A10762 /* TitleCell.swift */,
-				7B6A74591B179BC000A10762 /* WebViewCell.swift */,
+				7B6A74591B179BC000A10762 /* HTMLDataCell.swift */,
 				4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */,
 			);
 			name = Cells;
@@ -251,8 +263,6 @@
 		F11455A91AB3257700546D22 /* List of Sponsors */ = {
 			isa = PBXGroup;
 			children = (
-				F11E362B1B1A5817000B61C0 /* Companies Nearby */,
-				F11E36271B1A570F000B61C0 /* CompanyTableViewController.swift */,
 				F1108BA91B1F618700C2164C /* LocatedCompaniesViewController.swift */,
 			);
 			name = "List of Sponsors";
@@ -266,16 +276,6 @@
 				7B6A74471B1452FD00A10762 /* MeetupsViewController.swift */,
 			);
 			name = "List of Meetups";
-			sourceTree = "<group>";
-		};
-		F11E362B1B1A5817000B61C0 /* Companies Nearby */ = {
-			isa = PBXGroup;
-			children = (
-				F14335AA1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift */,
-				F1BDEA6B1C91F6D7004C7DAB /* CompaniesNearbyCell.swift */,
-				F1BDEA6C1C91F6D7004C7DAB /* CompaniesNearbyCell.xib */,
-			);
-			name = "Companies Nearby";
 			sourceTree = "<group>";
 		};
 		F1A46D091AAB50BB00585D61 = {
@@ -399,18 +399,18 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Stichting CocoaheadsNL";
 				TargetAttributes = {
 					4AEDD51F1CF635E50039AAE5 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 						TestTargetID = F1A46D111AAB50BB00585D61;
 					};
 					F1A46D111AAB50BB00585D61 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = D55PL7PU7S;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -432,7 +432,7 @@
 				};
 			};
 			buildConfigurationList = F1A46D0D1AAB50BB00585D61 /* Build configuration list for PBXProject "CocoaHeadsNL" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -467,7 +467,6 @@
 				F1BDEA761C920768004C7DAB /* JobsCell.xib in Resources */,
 				F1A46D241AAB50BB00585D61 /* LaunchScreen.xib in Resources */,
 				7B6A744B1B1495FF00A10762 /* MeetupCell.xib in Resources */,
-				F1BDEA6E1C91F6D7004C7DAB /* CompaniesNearbyCell.xib in Resources */,
 				F1A46D211AAB50BB00585D61 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,7 +501,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "git=$(sh /etc/profile; which git)\ngit_release_version=$(\"$git\" describe --tags --always --abbrev=0)\nnumber_of_commits=$(\"$git\" rev-list master | wc -l | tr -d ' ')\ntarget_plist=\"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\ndsym_plist=\"$DWARF_DSYM_FOLDER_PATH/$DWARF_DSYM_FILE_NAME/Contents/Info.plist\"\n\nfor plist in \"$target_plist\" \"$dsym_plist\"; do\nif [ -f \"$plist\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $number_of_commits\" \"$plist\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${git_release_version#*v}\" \"$plist\"\nfi\ndone\n\n\n";
+			shellScript = "git=$(sh /etc/profile; which git)\ngit_release_version=$(\"$git\" describe --tags --always --abbrev=0)\nnumber_of_commits=$(\"$git\" rev-list HEAD --count)\ntarget_plist=\"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\ndsym_plist=\"$DWARF_DSYM_FOLDER_PATH/$DWARF_DSYM_FILE_NAME/Contents/Info.plist\"\n\nfor plist in \"$target_plist\" \"$dsym_plist\"; do\nif [ -f \"$plist\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $number_of_commits\" \"$plist\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${git_release_version#*v}\" \"$plist\"\nfi\ndone\n\n\n";
 		};
 		487CB34F98164857DD1383B2 /* Warn for TODO and FIXME comments */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -553,13 +552,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CocoaHeadsNL-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B653106EA18082D4EC97BD03 /* [CP] Embed Pods Frameworks */ = {
@@ -568,9 +570,14 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CocoaHeadsNL/Pods-CocoaHeadsNL-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -627,21 +634,23 @@
 				4A7EEAF11AC5440C001C2827 /* ModelObjects.swift in Sources */,
 				7B6A74541B179B4E00A10762 /* LogoCell.swift in Sources */,
 				7B6A74681B186C4A00A10762 /* AffiliateCell.swift in Sources */,
-				F11E36281B1A570F000B61C0 /* CompanyTableViewController.swift in Sources */,
 				F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */,
+				2EDD61561EDCCEBC0040409B /* NSAttributedStringExtension.swift in Sources */,
+				2324F5131E2F5162006F7240 /* UIAlertController+FetchErrors.swift in Sources */,
 				7B6A74661B18666D00A10762 /* FetchAffiliateLinks.swift in Sources */,
+				4AE3AD281E8BF87E0051706C /* RequestReview.swift in Sources */,
 				7B6A745E1B183D7900A10762 /* MeetupDataSource.swift in Sources */,
 				7B6A745C1B182E9C00A10762 /* DetailDataSource.swift in Sources */,
 				7B6A74601B18406600A10762 /* JobDataSource.swift in Sources */,
 				F11455BF1AB4E8DB00546D22 /* SplitViewController.swift in Sources */,
 				F1108BAA1B1F618700C2164C /* LocatedCompaniesViewController.swift in Sources */,
+				23F2D9A41E2F52A6003344DC /* NSLocalizedString+Convenience.swift in Sources */,
 				7B6A74621B18424800A10762 /* CompanyDataSource.swift in Sources */,
 				F1CF120F1B8A0C0600EBCABC /* CoreLocationController.swift in Sources */,
-				7B6A745A1B179BC000A10762 /* WebViewCell.swift in Sources */,
+				7B6A745A1B179BC000A10762 /* HTMLDataCell.swift in Sources */,
 				7B6A744D1B149A6B00A10762 /* UIImage+Resize.swift in Sources */,
 				F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */,
 				239D41161B190FD000609105 /* CalendarTabImage.swift in Sources */,
-				F1BDEA6D1C91F6D7004C7DAB /* CompaniesNearbyCell.swift in Sources */,
 				F11455B91AB4BA0600546D22 /* DetailViewController.swift in Sources */,
 				7B6A744F1B162F8E00A10762 /* UIColor+Extensions.swift in Sources */,
 				7B6A74491B1452FD00A10762 /* MeetupsViewController.swift in Sources */,
@@ -651,7 +660,6 @@
 				F1DC2E131C665B4D006CC492 /* ContributorTableViewController.swift in Sources */,
 				7B6A74581B179B9C00A10762 /* TitleCell.swift in Sources */,
 				F1BDEA751C920768004C7DAB /* JobsCell.swift in Sources */,
-				F14335AB1AAF277C0007D009 /* CompaniesNearbyCollectionViewController.swift in Sources */,
 				F11455C11AB5024000546D22 /* TabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -699,7 +707,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNLUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "fa2c071a-514c-4c70-b8fa-569d6f832d66";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = CocoaHeadsNL;
 			};
 			name = Debug;
@@ -718,7 +727,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNLUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "fa2c071a-514c-4c70-b8fa-569d6f832d66";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = CocoaHeadsNL;
 			};
 			name = Release;
@@ -731,7 +741,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -742,6 +754,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -777,12 +791,13 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -794,7 +809,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -805,6 +822,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -833,11 +852,12 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -846,22 +866,24 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F1DB2379E5772EF04B49E6E3 /* Pods-CocoaHeadsNL.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CocoaHeadsNL/CocoaHeadsNL.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = D55PL7PU7S;
 				INFOPLIST_FILE = CocoaHeadsNL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.cocoaheads.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CocoaHeadsNL;
-				PROVISIONING_PROFILE = "fa2c071a-514c-4c70-b8fa-569d6f832d66";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore nl.cocoaheads.app.CocoaHeadsNL";
+				PROVISIONING_PROFILE = "792ea821-1497-48d1-88a1-8d27af8b1a3a";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development nl.cocoaheads.app.CocoaHeadsNL";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -870,20 +892,24 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C9D96571D157E179851D4220 /* Pods-CocoaHeadsNL.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CocoaHeadsNL/CocoaHeadsNL.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = D55PL7PU7S;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = CocoaHeadsNL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.cocoaheads.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CocoaHeadsNL;
-				PROVISIONING_PROFILE = "fa2c071a-514c-4c70-b8fa-569d6f832d66";
+				PROVISIONING_PROFILE = "ce736d37-7fb8-48cd-a89a-e46ea03f24bc";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development nl.cocoaheads.app.CocoaHeadsNL";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

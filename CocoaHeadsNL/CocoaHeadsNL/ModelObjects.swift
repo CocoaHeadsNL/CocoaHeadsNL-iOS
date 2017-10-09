@@ -65,19 +65,19 @@ class Company: Object {
         return "recordName"
     }
 
-    dynamic var recordName: String?
-    dynamic var name: String?
-    dynamic var place: String?
-    dynamic var streetAddress: String?
-    dynamic var website: String?
-    dynamic var zipCode: String?
-    dynamic var companyDescription: String?
-    dynamic var emailAddress: String?
-    dynamic var latitude: CLLocationDegrees = 0.0
-    dynamic var longitude: CLLocationDegrees = 0.0
-    dynamic var logo: Data?
-    dynamic var hasApps: Bool = false
-    dynamic var smallLogo: Data?
+    @objc dynamic var recordName: String?
+    @objc dynamic var name: String?
+    @objc dynamic var place: String?
+    @objc dynamic var streetAddress: String?
+    @objc dynamic var website: String?
+    @objc dynamic var zipCode: String?
+    @objc dynamic var companyDescription: String?
+    @objc dynamic var emailAddress: String?
+    @objc dynamic var latitude: CLLocationDegrees = 0.0
+    @objc dynamic var longitude: CLLocationDegrees = 0.0
+    @objc dynamic var logo: Data?
+    @objc dynamic var hasApps: Bool = false
+    @objc dynamic var smallLogo: Data?
     
     override static func ignoredProperties() -> [String] {
         return ["logoImage", "smallLogoImage"]
@@ -116,12 +116,12 @@ class Contributor: Object {
         return "recordName"
     }
 
-    dynamic var recordName: String?
-    dynamic var avatar_url: String?
-    dynamic var contributor_id: Int64 = 0
-    dynamic var commit_count: Int = 0
-    dynamic var name: String?
-    dynamic var url: String?
+    @objc dynamic var recordName: String?
+    @objc dynamic var avatar_url: String?
+    @objc dynamic var contributor_id: Int64 = 0
+    @objc dynamic var commit_count: Int = 0
+    @objc dynamic var name: String?
+    @objc dynamic var url: String?
 }
 
 class Job: Object {
@@ -145,13 +145,13 @@ class Job: Object {
         return "recordName"
     }
     
-    dynamic var recordName: String?
-    dynamic var content: String = ""
-    dynamic var date: Date?
-    dynamic var link: String = ""
-    dynamic var title: String = ""
-    dynamic var logoUrlString: String?
-    dynamic var logo: Data?
+    @objc dynamic var recordName: String?
+    @objc dynamic var content: String = ""
+    @objc dynamic var date: Date?
+    @objc dynamic var link: String = ""
+    @objc dynamic var title: String = ""
+    @objc dynamic var logoUrlString: String?
+    @objc dynamic var logo: Data?
 
     override static func ignoredProperties() -> [String] {
         return ["logoImage"]
@@ -172,7 +172,7 @@ class Job: Object {
             attributeSet.title = title
             if let data = content.data(using: String.Encoding.utf8) {
                 do {
-                    let jobDescriptionString = try NSAttributedString(data: data, options:[NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8], documentAttributes:nil)
+                    let jobDescriptionString = try NSAttributedString(data: data, options:[NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html, NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8], documentAttributes:nil)
 
                     attributeSet.contentDescription = jobDescriptionString.string
                 } catch {
@@ -201,7 +201,7 @@ class Job: Object {
 
                 var searchableItems = [CSSearchableItem]()
                 for job in jobs {
-                    let item = CSSearchableItem(uniqueIdentifier: "job:\(job.recordName)", domainIdentifier: "job", attributeSet: job.searchableAttributeSet)
+                    let item = CSSearchableItem(uniqueIdentifier: "job:\(String(describing: job.recordName))", domainIdentifier: "job", attributeSet: job.searchableAttributeSet)
                     searchableItems.append(item)
                 }
 
@@ -258,22 +258,22 @@ class Meetup: Object {
         return "recordName"
     }
 
-    dynamic var recordName: String?
-    dynamic var duration: NSNumber = 0
-    dynamic var latitude: CLLocationDegrees = 0.0
-    dynamic var longitude: CLLocationDegrees = 0.0
-    dynamic var locationName: String?
-    dynamic var meetup_description: String?
-    dynamic var meetup_id: String?
-    dynamic var name: String?
-    dynamic var rsvp_limit: NSNumber = 0
-    dynamic var time: Date?
-    dynamic var yes_rsvp_count: NSNumber = 0
-    dynamic var logo: Data?
-    dynamic var nextEvent: Bool = false
-    dynamic var smallLogo: Data?
-    dynamic var location: String?
-    dynamic var meetupUrl: String?
+    @objc dynamic var recordName: String?
+    @objc dynamic var duration: NSNumber = 0
+    @objc dynamic var latitude: CLLocationDegrees = 0.0
+    @objc dynamic var longitude: CLLocationDegrees = 0.0
+    @objc dynamic var locationName: String?
+    @objc dynamic var meetup_description: String?
+    @objc dynamic var meetup_id: String?
+    @objc dynamic var name: String?
+    @objc dynamic var rsvp_limit: NSNumber = 0
+    @objc dynamic var time: Date?
+    @objc dynamic var yes_rsvp_count: NSNumber = 0
+    @objc dynamic var logo: Data?
+    @objc dynamic var nextEvent: Bool = false
+    @objc dynamic var smallLogo: Data?
+    @objc dynamic var location: String?
+    @objc dynamic var meetupUrl: String?
     
     override static func ignoredProperties() -> [String] {
         return ["logoImage", "smallLogoImage", "searchableAttributeSet"]
@@ -302,7 +302,7 @@ class Meetup: Object {
             attributeSet.title = name
             if let data = meetup_description?.data(using: String.Encoding.utf8) {
                 do {
-                    let meetupDescriptionString = try NSAttributedString(data: data, options:[NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8], documentAttributes:nil)
+                    let meetupDescriptionString = try NSAttributedString(data: data, options:[NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html, NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8], documentAttributes:nil)
 
                     attributeSet.contentDescription = meetupDescriptionString.string
                 } catch {
@@ -341,7 +341,7 @@ class Meetup: Object {
 
                 var searchableItems = [CSSearchableItem]()
                 for meetup in meetups {
-                    let item = CSSearchableItem(uniqueIdentifier: "meetup:\(meetup.recordName)", domainIdentifier: "meetup", attributeSet: meetup.searchableAttributeSet)
+                    let item = CSSearchableItem(uniqueIdentifier: "meetup:\(String(describing: meetup.recordName))", domainIdentifier: "meetup", attributeSet: meetup.searchableAttributeSet)
                     searchableItems.append(item)
                 }
 

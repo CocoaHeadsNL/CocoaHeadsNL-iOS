@@ -29,10 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let badgeResetOperation = CKModifyBadgeOperation(badgeValue: 0)
         badgeResetOperation.modifyBadgeCompletionBlock = { (error) -> Void in
             guard error == nil else {
-                print("Error resetting badge: \(error)")
+                print("Error resetting badge: \(String(describing: error))")
                 return
             }
-            UIApplication.shared.applicationIconBadgeNumber = 0
+            DispatchQueue.main.async {
+                UIApplication.shared.applicationIconBadgeNumber = 0
+            }
         }
         CKContainer.default().add(badgeResetOperation)
     }
@@ -56,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let queryNotification = cloudKitNotification as? CKQueryNotification {
             //TODO handle the different notifications to show the correct items
             let recordID = queryNotification.recordID
-            print(recordID)
+            print(recordID as Any)
             //...
             self.presentMeetupsViewController()
         }

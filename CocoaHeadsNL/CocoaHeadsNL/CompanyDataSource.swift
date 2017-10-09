@@ -13,6 +13,15 @@ class CompanyDataSource: DetailDataSource {
     override var title: String? {
         return company.name
     }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 1:
+            return NSLocalizedString("Apps", comment: "Section title for app section in company details.")
+        default:
+            return nil
+        }
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         if company.hasApps {
@@ -88,7 +97,7 @@ class CompanyDataSource: DetailDataSource {
 
                         Answers.logContentView(withName: "Show appstore",
                                                        contentType: "App",
-                                                       contentId: "\(affiliateLink.productCreator!) \(affiliateLink.productName)",
+                                                       contentId: "\(affiliateLink.productCreator!) \(String(describing: affiliateLink.productName))",
                                                        customAttributes: nil)
                 }
             }
