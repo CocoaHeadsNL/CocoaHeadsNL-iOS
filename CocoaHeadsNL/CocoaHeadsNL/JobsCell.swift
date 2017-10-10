@@ -13,6 +13,7 @@ class JobsCell: UICollectionViewCell {
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var separator: UIView!
+    @IBOutlet weak var container: UIView!
 
     fileprivate var imageLoaded = false
 
@@ -20,6 +21,13 @@ class JobsCell: UICollectionViewCell {
         didSet {
             self.imageView.image = job?.logoImage
             self.textLabel.text = job?.title
+
+            if let title = job?.title {
+
+                let text = NSLocalizedString("%1$@ at %2$@")
+                let accessibilityLabel = String(format: text, title, "Random Company Name")
+                container.accessibilityLabel = accessibilityLabel
+            }
         }
     }
 
