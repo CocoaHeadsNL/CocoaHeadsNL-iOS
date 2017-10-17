@@ -24,8 +24,13 @@ class JobsCell: UICollectionViewCell {
 
             if let title = job?.title {
 
-                let text = NSLocalizedString("%1$@ at %2$@")
-                let accessibilityLabel = String(format: text, title, "Random Company Name")
+                let accessibilityLabel: String!
+                if let companyName = job?.companyName {
+                    let text = NSLocalizedString("%1$@ at %2$@")
+                    accessibilityLabel = String(format: text, title, companyName)
+                } else {
+                    accessibilityLabel = title
+                }
                 container.accessibilityLabel = accessibilityLabel
             }
         }
