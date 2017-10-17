@@ -14,9 +14,14 @@ import RealmSwift
 
 class ContributorTableViewController: UITableViewController {
 
-    let realm = try! Realm()
+    lazy var realm = {
+        try! Realm()
+    }()
 
-    var contributors = try! Realm().objects(Contributor.self).sorted(byKeyPath: "commit_count", ascending: false)
+    lazy var contributors = {
+        try! Realm().objects(Contributor.self).sorted(byKeyPath: "commit_count", ascending: false)
+    }()
+    
     var notificationToken: NotificationToken?
 
     //MARK: - View LifeCycle

@@ -138,6 +138,12 @@ class Job: Object {
         if let logoURLString = job.logoUrlString, let logoURL = URL(string: logoURLString), let data = try? Data(contentsOf: logoURL) {
             job.logo = data
         }
+
+        if let companyName = record["author"] as? String, companyName.characters.count > 0 {
+            job.companyName = companyName
+        } else {
+            job.companyName = nil
+        }
         return job
     }
 
@@ -152,6 +158,7 @@ class Job: Object {
     @objc dynamic var title: String = ""
     @objc dynamic var logoUrlString: String?
     @objc dynamic var logo: Data?
+    @objc dynamic var companyName: String?
 
     override static func ignoredProperties() -> [String] {
         return ["logoImage"]

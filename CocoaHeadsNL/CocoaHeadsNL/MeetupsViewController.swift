@@ -17,9 +17,14 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     
     private var viewDidAppearCount = 0
 
-    let realm = try! Realm()
+    lazy var realm = {
+        return try! Realm()
+    }()
 
-    var meetupsArray = try! Realm().objects(Meetup.self).sorted(byKeyPath: "time", ascending: false)
+    lazy var meetupsArray = {
+        return try! Realm().objects(Meetup.self).sorted(byKeyPath: "time", ascending: false)
+    }()
+    
     var meetupsByYear: [String: [Meetup]] {
         get {
             // I am assuming ordering stays correct due to FIFO behavior.
