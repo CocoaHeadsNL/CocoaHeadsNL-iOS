@@ -32,6 +32,7 @@ class JobsCell: UICollectionViewCell {
                     accessibilityLabel = title
                 }
                 container.accessibilityLabel = accessibilityLabel
+                container.accessibilityHint = NSLocalizedString("Double-tap for more details.")
             }
         }
     }
