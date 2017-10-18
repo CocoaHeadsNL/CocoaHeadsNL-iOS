@@ -14,9 +14,13 @@ import RealmSwift
 
 class LocatedCompaniesViewController: UITableViewController {
     
-    let realm = try! Realm()
+    lazy var realm = {
+        try! Realm()
+    }()
     
-    var companiesArray = try! Realm().objects(Company.self).sorted(byKeyPath: "name")
+    lazy var companiesArray = {
+        try! Realm().objects(Company.self).sorted(byKeyPath: "name")
+    }()
     
     var placesArray: [String] {
         get {

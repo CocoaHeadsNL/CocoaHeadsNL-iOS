@@ -13,11 +13,18 @@ import Crashlytics
 import RealmSwift
 
 class JobsViewController: UICollectionViewController {
-    let realm = try! Realm()
 
-    var jobsArray = try! Realm().objects(Job.self).sorted(byKeyPath: "date", ascending: false)
-    var searchedObjectId: String? = nil
+    lazy var realm = {
+        try! Realm()
+    }()
+
+    lazy var jobsArray = {
+        try! Realm().objects(Job.self).sorted(byKeyPath: "date", ascending: false)
+    }()
+
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
+    var searchedObjectId: String? = nil
     var notificationToken: NotificationToken?
 
     override func viewDidLoad() {
@@ -87,9 +94,9 @@ class JobsViewController: UICollectionViewController {
         }
 
         Answers.logContentView(withName: "Show jobs",
-                                       contentType: "Job",
-                                       contentId: "overview",
-                                       customAttributes: nil)
+                               contentType: "Job",
+                               contentId: "overview",
+                               customAttributes: nil)
     }
 
     @objc func searchOccured(_ notification: Notification) -> Void {
@@ -109,25 +116,20 @@ class JobsViewController: UICollectionViewController {
     }
 
     func displayObject(_ recordName: String) -> Void {
-       // if !loading {
-            if self.navigationController?.visibleViewController == self {
-                let jobs = self.jobsArray
+        // if !loading {
+        if self.navigationController?.visibleViewController == self {
+            let jobs = self.jobsArray
 
-                if let selectedObject = jobs.filter({ (job: Job) -> Bool in
-                    return job.recordName == recordName
-                }).first {
-                    performSegue(withIdentifier: "ShowDetail", sender: selectedObject)
-                }
-
-            } else {
-                _ = self.navigationController?.popToRootViewController(animated: false)
-                searchedObjectId = recordName
+            if let selectedObject = jobs.filter({ (job: Job) -> Bool in
+                return job.recordName == recordName
+            }).first {
+                performSegue(withIdentifier: "ShowDetail", sender: selectedObject)
             }
 
-//        } else {
-//            //cache object
-//            searchedObjectId = objectId
-//        }
+        } else {
+            _ = self.navigationController?.popToRootViewController(animated: false)
+            searchedObjectId = recordName
+        }
     }
 
     override func viewWillLayoutSubviews() {
