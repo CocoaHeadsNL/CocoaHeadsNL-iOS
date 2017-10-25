@@ -87,8 +87,8 @@ class ContributorTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
 
+        super.viewWillAppear(animated)
         self.fetchContributors()
     }
 
@@ -106,17 +106,19 @@ class ContributorTableViewController: UITableViewController {
 
         let contributor = self.contributors[indexPath.row]
 
-        cell.textLabel?.text = contributor.name
-        cell.detailTextLabel?.text = contributor.url
 
-        if let avatar_url = contributor.avatar_url, let url = URL(string: avatar_url) {
+        if let avatar_url = contributor.avatar_url, let url = URL(string: avatar_url), false {
             let task = fetchImageTask(url, forImageView: cell.imageView!)
             task.resume()
+        } else {
+            cell.imageView!.image = #imageLiteral(resourceName: "CocoaHeadsNLLogo")
         }
+        cell.textLabel?.text = contributor.name ?? NSLocalizedString("Anonymous")
 
+        cell.accessibilityTraits = cell.accessibilityTraits | UIAccessibilityTraitButton
+        cell.accessibilityHint = NSLocalizedString("Double-tap to open the Github profile page of \(contributor.name ?? NSLocalizedString("this contributor")) in Safari.")
 
         return cell
-
     }
 
 
