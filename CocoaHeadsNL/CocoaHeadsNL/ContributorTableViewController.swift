@@ -26,7 +26,14 @@ class ContributorTableViewController: UITableViewController {
 
     //MARK: - View LifeCycle
 
+    @IBOutlet weak var tableHeaderView: UIView!
+    @IBOutlet weak var whatIsLabel: UILabel!
+    @IBOutlet weak var whatIsExplanationLabel: UILabel!
+    @IBOutlet weak var howDoesItWorkLabel: UILabel!
+    @IBOutlet weak var howDoesItWorkExplanationLabel: UILabel!
+
     override func viewDidLoad() {
+
         super.viewDidLoad()
         
         let backItem = UIBarButtonItem(title: NSLocalizedString("About"), style: .plain, target: nil, action: nil)
@@ -59,6 +66,24 @@ class ContributorTableViewController: UITableViewController {
                 break
             }
         }
+
+        applyAccessibility()
+    }
+
+    private func applyAccessibility() {
+
+        let what = NSLocalizedString("What is Cocoaheads?")
+        let whatAnswer = NSLocalizedString("A monthly meeting of iOS and Mac developers in the Netherlands and part of the international CocoaHeads.org.")
+        let how = NSLocalizedString("How does it work?")
+        let howAnswer = NSLocalizedString("Every month we organize a meeting at a different venue including food and drinks sponsored by companies. Depending on the size of the location we put together a nice agenda for developers.")
+
+        whatIsLabel.text = what
+        whatIsExplanationLabel.text = whatAnswer
+        howDoesItWorkLabel.text = how
+        howDoesItWorkExplanationLabel.text = howAnswer
+
+        tableHeaderView.isAccessibilityElement = true
+        tableHeaderView.accessibilityLabel = [what, whatAnswer, how, howAnswer].joined(separator: " ")
     }
 
     override func viewWillAppear(_ animated: Bool) {
