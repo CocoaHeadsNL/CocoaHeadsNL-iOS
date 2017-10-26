@@ -101,63 +101,69 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" text="A monthly meeting of iOS and Mac developers in the Netherlands and part of the international CocoaHeads.org." translatesAutoresizingMaskIntoConstraints="NO" id="4oQ-uh-yxZ">
-                                    <rect key="frame" x="8" y="165" width="359" height="70"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="70" id="MwA-8W-D4h"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                </textView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How does it work?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GkQ-gn-r7o">
-                                    <rect key="frame" x="8" y="243" width="359" height="20.5"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="20.5" id="TkN-Hg-Yfz"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6qd-dU-PTV">
-                                    <rect key="frame" x="8" y="271" width="359" height="109"/>
-                                    <string key="text">Every month we organize a meeting at a different venue including food and drinks sponsored by companies. Depending on the size of the location we put together a nice agenda for developers.</string>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                </textView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CocoaHeadsNLLogo" translatesAutoresizingMaskIntoConstraints="NO" id="QKf-Yh-4Am">
-                                    <rect key="frame" x="66.5" y="0.0" width="242" height="129"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" secondItem="QKf-Yh-4Am" secondAttribute="height" multiplier="242:129" id="L21-xu-F6S"/>
-                                        <constraint firstAttribute="height" constant="129" id="Qk3-I5-V31"/>
-                                    </constraints>
-                                </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is Cocoaheads?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8V-hl-9JZ">
-                                    <rect key="frame" x="8" y="137" width="359" height="20.5"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="20.5" id="qFe-Bi-3Gb"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="1Fp-E4-vV8">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CocoaHeadsNLLogo" translatesAutoresizingMaskIntoConstraints="NO" id="1jg-jX-oGt">
+                                            <rect key="frame" x="16" y="16" width="343" height="120"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="120" id="TQL-XW-XzT"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="754" text="What is Cocoaheads?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4P-4I-WqO">
+                                            <rect key="frame" x="16" y="140" width="343" height="20.5"/>
+                                            <accessibility key="accessibilityConfiguration">
+                                                <bool key="isElement" value="NO"/>
+                                            </accessibility>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="751" ambiguous="YES" text="A monthly meeting of iOS and Mac developers in the Netherlands and part of the international CocoaHeads.org." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ild-Dv-8Fb">
+                                            <rect key="frame" x="16" y="164.5" width="343" height="187"/>
+                                            <accessibility key="accessibilityConfiguration">
+                                                <bool key="isElement" value="NO"/>
+                                            </accessibility>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="754" ambiguous="YES" text="How does it work?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4e-kb-skw">
+                                            <rect key="frame" x="16" y="355.5" width="343" height="20.5"/>
+                                            <accessibility key="accessibilityConfiguration">
+                                                <bool key="isElement" value="NO"/>
+                                            </accessibility>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FTl-fc-z5g">
+                                            <rect key="frame" x="16" y="380" width="343" height="0.0"/>
+                                            <accessibility key="accessibilityConfiguration">
+                                                <bool key="isElement" value="NO"/>
+                                            </accessibility>
+                                            <string key="text">Every month we organize a meeting at a different venue including food and drinks sponsored by companies. Depending on the size of the location we put together a nice agenda for developers.</string>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bdW-tc-qEf">
+                                            <rect key="frame" x="16" y="384" width="343" height="0.0"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </subviews>
+                                    <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
+                                </stackView>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <bool key="isElement" value="YES"/>
+                            </accessibility>
                             <constraints>
-                                <constraint firstItem="I8V-hl-9JZ" firstAttribute="top" secondItem="QKf-Yh-4Am" secondAttribute="bottom" constant="8" symbolic="YES" id="0JM-jq-prv"/>
-                                <constraint firstAttribute="trailing" secondItem="I8V-hl-9JZ" secondAttribute="trailing" constant="8" id="1yA-9B-16H"/>
-                                <constraint firstItem="QKf-Yh-4Am" firstAttribute="top" secondItem="NTs-qC-IKD" secondAttribute="topMargin" id="Br6-PO-ur3"/>
-                                <constraint firstItem="QKf-Yh-4Am" firstAttribute="centerX" secondItem="NTs-qC-IKD" secondAttribute="centerX" id="E1u-Xt-2vB"/>
-                                <constraint firstAttribute="trailing" secondItem="GkQ-gn-r7o" secondAttribute="trailing" constant="8" id="HsT-RN-ouf"/>
-                                <constraint firstItem="GkQ-gn-r7o" firstAttribute="top" secondItem="4oQ-uh-yxZ" secondAttribute="bottom" constant="8" id="NzD-lT-LtW"/>
-                                <constraint firstItem="4oQ-uh-yxZ" firstAttribute="leading" secondItem="NTs-qC-IKD" secondAttribute="leading" constant="8" id="SUl-jg-FKY"/>
-                                <constraint firstItem="4oQ-uh-yxZ" firstAttribute="top" secondItem="I8V-hl-9JZ" secondAttribute="bottom" constant="7.5" id="UCk-KA-YFZ"/>
-                                <constraint firstItem="I8V-hl-9JZ" firstAttribute="leading" secondItem="NTs-qC-IKD" secondAttribute="leading" constant="8" id="ZZR-Bs-b0D"/>
-                                <constraint firstItem="6qd-dU-PTV" firstAttribute="top" secondItem="GkQ-gn-r7o" secondAttribute="bottom" constant="7.5" id="coW-OG-ka8"/>
-                                <constraint firstAttribute="trailing" secondItem="4oQ-uh-yxZ" secondAttribute="trailing" constant="8" id="fBM-Hj-er4"/>
-                                <constraint firstAttribute="bottom" secondItem="6qd-dU-PTV" secondAttribute="bottom" constant="20" id="i1j-rm-FMW"/>
-                                <constraint firstItem="6qd-dU-PTV" firstAttribute="leading" secondItem="NTs-qC-IKD" secondAttribute="leading" constant="8" id="ieZ-vl-aYT"/>
-                                <constraint firstItem="GkQ-gn-r7o" firstAttribute="leading" secondItem="NTs-qC-IKD" secondAttribute="leading" constant="8" id="lRw-Qm-7qx"/>
-                                <constraint firstAttribute="trailing" secondItem="6qd-dU-PTV" secondAttribute="trailing" constant="8" id="uA6-Df-1KD"/>
+                                <constraint firstItem="1Fp-E4-vV8" firstAttribute="top" secondItem="NTs-qC-IKD" secondAttribute="top" id="Aur-rt-nFQ"/>
+                                <constraint firstAttribute="trailing" secondItem="1Fp-E4-vV8" secondAttribute="trailing" id="Fru-RH-TE0"/>
+                                <constraint firstItem="1Fp-E4-vV8" firstAttribute="leading" secondItem="NTs-qC-IKD" secondAttribute="leading" id="Xmc-Cg-szR"/>
+                                <constraint firstAttribute="bottom" secondItem="1Fp-E4-vV8" secondAttribute="bottom" id="w4h-xf-hN3"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -189,10 +195,17 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="About CocoaheadsNL" id="Uqy-IN-GUA"/>
+                    <connections>
+                        <outlet property="howDoesItWorkExplanationLabel" destination="FTl-fc-z5g" id="cVA-p1-LiT"/>
+                        <outlet property="howDoesItWorkLabel" destination="K4e-kb-skw" id="azv-dA-JQ0"/>
+                        <outlet property="tableHeaderView" destination="NTs-qC-IKD" id="iZK-Oo-Vgg"/>
+                        <outlet property="whatIsExplanationLabel" destination="Ild-Dv-8Fb" id="WxE-ZD-k4c"/>
+                        <outlet property="whatIsLabel" destination="y4P-4I-WqO" id="1Jy-hn-bUW"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pCq-sS-kzA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2577" y="-178"/>
+            <point key="canvasLocation" x="2576.8000000000002" y="-178.56071964017991"/>
         </scene>
         <!--Events Navigation-->
         <scene sceneID="Rb4-4L-nsC">
