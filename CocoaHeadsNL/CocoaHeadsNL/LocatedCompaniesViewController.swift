@@ -164,11 +164,7 @@ class LocatedCompaniesViewController: UITableViewController {
     func subscribe() {
         let publicDB = CKContainer.default().publicCloudDatabase
         
-        let subscription = CKSubscription(
-            recordType: "Companies",
-            predicate: NSPredicate(value: true),
-            options: .firesOnRecordCreation
-        )
+        let subscription = CKQuerySubscription(recordType: "Companies", predicate: NSPredicate(format: "TRUEPREDICATE"), options: .firesOnRecordCreation)
         
         let info = CKNotificationInfo()
         

@@ -147,11 +147,7 @@ class JobsViewController: UICollectionViewController {
     func subscribe() {
         let publicDB = CKContainer.default().publicCloudDatabase
 
-        let subscription = CKSubscription(
-            recordType: "Job",
-            predicate: NSPredicate(value: true),
-            options: .firesOnRecordCreation
-        )
+         let subscription = CKQuerySubscription(recordType: "Job", predicate: NSPredicate(format: "TRUEPREDICATE"), options: .firesOnRecordCreation)
 
         let info = CKNotificationInfo()
 
