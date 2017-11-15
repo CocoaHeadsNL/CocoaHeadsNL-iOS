@@ -9,6 +9,7 @@
 import UIKit
 import CoreSpotlight
 import CloudKit
+import UserNotifications
 
 import RealmSwift
 import Fabric
@@ -18,9 +19,26 @@ let searchNotificationName = "CocoaHeadsNLSpotLightSearchOccured"
 let searchPasteboardName = "CocoaHeadsNL-searchInfo-pasteboard"
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        Fabric.with([Crashlytics.self])
+
+        handleRealmMigration()
+
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { authorized, error in
+            if authorized {
+                DispatchQueue.main.async(execute: {
+                    UIApplication.shared.registerForRemoteNotifications()
+                })
+            }
+        })
+
+        return true
+    }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         if let pasteboard = UIPasteboard(name: UIPasteboardName(rawValue: "searchPasteboardName"), create: false) {
@@ -40,10 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CKContainer.default().add(badgeResetOperation)
     }
 
+    // MARK: Notifications
+
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//        let   tokenString = deviceToken.reduce("", {$0 + String(format: "%02X",    $1)})
-//        // kDeviceToken=tokenString
-//        print("deviceToken: \(tokenString)")
+
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -55,32 +73,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-
-        let cloudKitNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String : NSObject])
-        if cloudKitNotification.notificationType == .query,
-            let queryNotification = cloudKitNotification as? CKQueryNotification {
-            //TODO handle the different notifications to show the correct items
-            let recordID = queryNotification.recordID
-            print(recordID as Any)
-            //...
-            self.presentMeetupsViewController()
-        }
-
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        Fabric.with([Crashlytics.self])
-
-        handleRealmMigration()
-
-        let notificationTypes: UIUserNotificationType = [.alert, .badge, .sound]
-
-        let settings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
-        application.registerUserNotificationSettings(settings)
-        application.registerForRemoteNotifications()
-
-        return true
-    }
+     // MARK: UserActivity
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if #available(iOS 9.0, *) {
