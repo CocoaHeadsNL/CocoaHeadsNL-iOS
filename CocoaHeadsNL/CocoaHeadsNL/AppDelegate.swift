@@ -99,13 +99,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return false
     }
 
-    @available(iOS 9.0, *)
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
             handleShortCutItem(shortcutItem)
             completionHandler(true)
     }
 
-    @available(iOS 9.0, *)
     func handleShortCutItem(_ shortCutItem: UIApplicationShortcutItem) {
 
         switch shortCutItem.type {

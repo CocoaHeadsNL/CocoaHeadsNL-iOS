@@ -172,7 +172,6 @@ class Job: Object {
         }
     }()
 
-    @available(iOS 9.0, *)
     var searchableAttributeSet: CSSearchableItemAttributeSet {
         get {
             let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeImage as String)
@@ -302,7 +301,6 @@ class Meetup: Object {
         }
     }()
 
-    @available(iOS 9.0, *)
     var searchableAttributeSet: CSSearchableItemAttributeSet {
         get {
             let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeImage as String)
