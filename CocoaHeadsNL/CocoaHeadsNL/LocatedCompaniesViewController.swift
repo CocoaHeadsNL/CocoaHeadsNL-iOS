@@ -49,7 +49,7 @@ class LocatedCompaniesViewController: UITableViewController {
         self.subscribe()
         
         // Set results notification block
-        self.notificationToken = companiesArray.addNotificationBlock { (changes: RealmCollectionChange) in
+        self.notificationToken = companiesArray.observe { (changes: RealmCollectionChange) in
             self.sortCompaniesByPlace()
             switch changes {
             case .initial:

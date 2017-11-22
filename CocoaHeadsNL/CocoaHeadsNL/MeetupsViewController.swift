@@ -119,7 +119,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         NotificationCenter.default.addObserver(self, selector: #selector(MeetupsViewController.searchOccured(_:)), name: NSNotification.Name(rawValue: searchNotificationName), object: nil)
         
         // Set results notification block
-        self.notificationToken = meetupsArray.addNotificationBlock { (changes: RealmCollectionChange) in
+        self.notificationToken = meetupsArray.observe { (changes: RealmCollectionChange) in
             switch changes {
             case .initial:
                 // Results are now populated and can be accessed without blocking the UI

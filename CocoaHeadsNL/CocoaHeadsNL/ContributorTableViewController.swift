@@ -43,7 +43,7 @@ class ContributorTableViewController: UITableViewController {
         self.navigationItem.setupForRootViewController(withTitle: accessibilityLabel)
 
         // Set results notification block
-        self.notificationToken = contributors.addNotificationBlock { (changes: RealmCollectionChange) in
+        self.notificationToken = contributors.observe { (changes: RealmCollectionChange) in
             switch changes {
             case .initial:
                 // Results are now populated and can be accessed without blocking the UI
