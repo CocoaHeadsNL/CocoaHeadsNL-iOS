@@ -34,6 +34,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 DispatchQueue.main.async(execute: {
                     UIApplication.shared.registerForRemoteNotifications()
                 })
+            } else {
+                //Deleting al previous cloudkit subscriptions for a user.
+                let publicDB = CKContainer.default().publicCloudDatabase
+                publicDB.fetchAllSubscriptions(completionHandler: {subscriptions, error in
+
+                    if let subs = subscriptions {
+                        //Do Something
+                        for subscription in subs {
+                            publicDB.delete(withSubscriptionID: subscription.subscriptionID, completionHandler: {subscriptionId, error in
+                            })
+                        }
+                    }
+                })
             }
         })
 
@@ -60,9 +73,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     // MARK: Notifications
 
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-
-    }
+//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+//        Note that CloudKit does handle device tokens for you, so you don't need to implement the application(_:didRegisterForRemoteNotificationsWithDeviceToken:) method, unless you need that for another purpose.
+//    }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         if error._code == 3010 {
@@ -73,6 +86,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+
+        let cloudKitNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String : NSObject])
+        if cloudKitNotification.notificationType == .query,
+            let queryNotification = cloudKitNotification as? CKQueryNotification {
+            //TODO handle the different notifications to show the correct items
+            let recordID = queryNotification.recordID
+            print(recordID as Any)
+            //...
+            self.presentMeetupsViewController()
+        }
+
+
+
     }
 
      // MARK: UserActivity

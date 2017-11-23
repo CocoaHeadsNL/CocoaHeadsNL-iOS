@@ -139,7 +139,7 @@ class Job: Object {
             job.logo = data
         }
 
-        if let companyName = record["author"] as? String, companyName.characters.count > 0 {
+        if let companyName = record["author"] as? String, companyName.count > 0 {
             job.companyName = companyName
         } else {
             job.companyName = nil
