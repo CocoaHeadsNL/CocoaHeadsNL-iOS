@@ -200,6 +200,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         info.alertBody = NSLocalizedString("New meetup has been added!")
         info.shouldBadge = true
+        info.category = "MEETUP"
 
         subscription.notificationInfo = info
 

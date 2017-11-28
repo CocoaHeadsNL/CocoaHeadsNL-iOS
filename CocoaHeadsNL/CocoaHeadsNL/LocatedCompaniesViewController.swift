@@ -170,6 +170,7 @@ class LocatedCompaniesViewController: UITableViewController {
         
         info.alertBody = NSLocalizedString("A new company has been added!")
         info.shouldBadge = true
+        info.category = "COMPANY"
         
         subscription.notificationInfo = info
         

@@ -153,6 +153,7 @@ class JobsViewController: UICollectionViewController {
 
         info.alertBody = NSLocalizedString("A new job has been added!")
         info.shouldBadge = true
+        info.category = "JOB"
 
         subscription.notificationInfo = info
 

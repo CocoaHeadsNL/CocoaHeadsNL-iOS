@@ -27,29 +27,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         Fabric.with([Crashlytics.self])
 
         handleRealmMigration()
-
+        
         UNUserNotificationCenter.current().delegate = self
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { authorized, error in
-            if authorized {
-                DispatchQueue.main.async(execute: {
-                    UIApplication.shared.registerForRemoteNotifications()
-                })
-            } else {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+
+            guard error == nil else {
+                //Display Error.. Handle Error.. etc..
+                return
+            }
+
+            if granted {
+                //Do stuff here..
+                self.setCategories()
+                self.subscribe()
+                //Register for RemoteNotifications. Your Remote Notifications can display alerts now :)
+                DispatchQueue.main.async {
+                application.registerForRemoteNotifications()
+                    print("registered for notifications")
+                }
+            }
+            else {
+                //Handle user denying permissions..
+                
                 //Deleting al previous cloudkit subscriptions for a user.
                 let publicDB = CKContainer.default().publicCloudDatabase
+                
                 publicDB.fetchAllSubscriptions(completionHandler: {subscriptions, error in
-
+                    
                     if let subs = subscriptions {
-                        //Do Something
+                        //Removing the subscriptions in any other case than authorized
                         for subscription in subs {
                             publicDB.delete(withSubscriptionID: subscription.subscriptionID, completionHandler: {subscriptionId, error in
                             })
                         }
+                        print("removed subscriptions")
                     }
                 })
             }
-        })
+        }
+        
+        //if app was not running or in the background, didFinishLoading will receive the notification. Starting same behaviour here.
+        if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
 
+            let aps = notification["aps"] as! [String: AnyObject]
+            print("DidLaunch: \(aps)")
+            
+            if aps["category"] as? String == "GENERAL" {
+                print("general notification")
+                //refresh data in background?
+            } else if aps["category"] as? String == "MEETUP" {
+                self.presentMeetupsViewController()
+            } else if aps["category"] as? String == "JOB" {
+                self.presentJobsViewController()
+            } else if aps["category"] as? String == "COMPANY" {
+                self.presentCompaniesViewController()
+            }
+            
+        }
         return true
     }
 
@@ -70,6 +104,76 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         CKContainer.default().add(badgeResetOperation)
     }
+    
+     // MARK: Register categories and subscribtion
+    
+    func setCategories() {
+        
+        let handleSilentPush = UNNotificationAction(identifier: "HANDLE_SILENT",
+                                                    title: "Handle silently",
+                                                    options: UNNotificationActionOptions(rawValue: 0))
+        
+        
+        let generalCategory = UNNotificationCategory(identifier: "GENERAL",
+                                                     actions: [handleSilentPush],
+                                                     intentIdentifiers: [],
+                                                     options: .customDismissAction)
+        
+        // Create the custom actions for the category.
+        let openAction = UNNotificationAction(identifier: "OPEN_MEETUP",
+                                              title: "Open Meetup",
+                                              options: [.foreground])
+        
+        let meetupCategory = UNNotificationCategory(identifier: "MEETUP",
+                                                    actions: [openAction],
+                                                    intentIdentifiers: [],
+                                                    options: [.customDismissAction])
+        
+        let openJobAction = UNNotificationAction(identifier: "OPEN_JOB",
+                                                 title: "Open Job",
+                                                 options: [.foreground])
+        
+        let jobCategory = UNNotificationCategory(identifier: "JOB",
+                                                 actions: [openJobAction],
+                                                 intentIdentifiers: [],
+                                                 options: [.customDismissAction])
+        
+        let openCompanyAction = UNNotificationAction(identifier: "OPEN_COMPANY",
+                                                     title: "Open Company",
+                                                     options: [.foreground])
+        
+        let companyCategory = UNNotificationCategory(identifier: "COMPANY",
+                                                     actions: [openCompanyAction],
+                                                     intentIdentifiers: [],
+                                                     options: [.customDismissAction])
+        
+        // Register the notification categories.
+        let center = UNUserNotificationCenter.current()
+        center.setNotificationCategories([generalCategory, meetupCategory, jobCategory, companyCategory])
+    }
+    
+    func subscribe() {
+        let publicDB = CKContainer.default().publicCloudDatabase
+        
+        let subscription = CKQuerySubscription(recordType: "Test", predicate: NSPredicate(format: "TRUEPREDICATE"), options: .firesOnRecordCreation)
+
+        let info = CKNotificationInfo()
+        info.desiredKeys = ["title","subtitle","body"]
+        info.shouldBadge = true
+        info.shouldSendContentAvailable = true
+        info.category = "GENERAL"
+        
+        subscription.notificationInfo = info
+        
+        publicDB.save(subscription, completionHandler: { subscription, error in
+            if error == nil {
+                // Subscription saved successfully
+            } else {
+                // An error occurred
+                //print(error)
+            }
+        })
+    }
 
     // MARK: Notifications
 
@@ -84,21 +188,71 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print("application didFailToRegisterForRemoteNotificationsWithError: %@", error)
         }
     }
+  
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        //Only remoteNotifications (content-available) will trigger this and depending on state will change behaviour.
+        
+        switch application.applicationState {
+            
+        case .inactive:
+            print("Inactive")
+            //Show the view with the content of the push
+             print(userInfo)
+            completionHandler(.newData)
 
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        case .background:
+            print("Background")
+            //Refresh the local model
+            print(userInfo)
+            completionHandler(.newData)
+            
+        case .active:
+            print("Active")
+            //Show an in-app banner
+            print(userInfo)
+            completionHandler(.newData)
 
-        let cloudKitNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String : NSObject])
-        if cloudKitNotification.notificationType == .query,
-            let queryNotification = cloudKitNotification as? CKQueryNotification {
-            //TODO handle the different notifications to show the correct items
-            let recordID = queryNotification.recordID
-            print(recordID as Any)
-            //...
-            self.presentMeetupsViewController()
         }
-
-
-
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        let userInfo = notification.request.content.userInfo
+        
+        // For example, you might use the arrival of the notification to fetch new content or update your app’s interface.
+        
+        completionHandler(.alert)
+    }
+    
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        if response.actionIdentifier == UNNotificationDismissActionIdentifier {
+            // The user dismissed the notification without taking action
+        } else if response.actionIdentifier == "OPEN_MEETUP" {
+               self.presentMeetupsViewController()
+        } else if response.actionIdentifier == "OPEN_JOB" {
+            self.presentJobsViewController()
+        } else if response.actionIdentifier == "OPEN_COMPANY" {
+            self.presentCompaniesViewController()
+        } else if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
+            // The user launched the app
+        }
+        
+        let badgeResetOperation = CKModifyBadgeOperation(badgeValue: 0)
+        badgeResetOperation.modifyBadgeCompletionBlock = { (error) -> Void in
+            guard error == nil else {
+                print("Error resetting badge: \(String(describing: error))")
+                return
+            }
+            DispatchQueue.main.async {
+                UIApplication.shared.applicationIconBadgeNumber = 0
+            }
+        }
+        CKContainer.default().add(badgeResetOperation)
+        
+        completionHandler()
     }
 
      // MARK: UserActivity
@@ -143,6 +297,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
 
+    // MARK: Open ViewControllers
+    //Opening the right tab (could make this the correct item though)
+    
     func presentMeetupsViewController() {
         //print("should open selected tab"
 
