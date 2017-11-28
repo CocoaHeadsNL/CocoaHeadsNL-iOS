@@ -48,21 +48,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
             else {
                 //Handle user denying permissions..
+                DispatchQueue.main.async {
+                    application.unregisterForRemoteNotifications()
+                    print("unregistered for notifications")
+                }
                 
-                //Deleting al previous cloudkit subscriptions for a user.
-                let publicDB = CKContainer.default().publicCloudDatabase
-                
-                publicDB.fetchAllSubscriptions(completionHandler: {subscriptions, error in
-                    
-                    if let subs = subscriptions {
-                        //Removing the subscriptions in any other case than authorized
-                        for subscription in subs {
-                            publicDB.delete(withSubscriptionID: subscription.subscriptionID, completionHandler: {subscriptionId, error in
-                            })
-                        }
-                        print("removed subscriptions")
-                    }
-                })
+//                //Deleting al previous cloudkit subscriptions for a user.
+//                let publicDB = CKContainer.default().publicCloudDatabase
+//
+//                publicDB.fetchAllSubscriptions(completionHandler: {subscriptions, error in
+//
+//                    if let subs = subscriptions {
+//                        //Removing the subscriptions in any other case than authorized
+//                        for subscription in subs {
+//                            publicDB.delete(withSubscriptionID: subscription.subscriptionID, completionHandler: {subscriptionId, error in
+//                            })
+//                        }
+//                        print("removed subscriptions")
+//                    }
+//                })
             }
         }
         
