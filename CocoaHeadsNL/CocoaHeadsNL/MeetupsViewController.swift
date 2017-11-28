@@ -193,16 +193,14 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     func subscribe() {
         let publicDB = CKContainer.default().publicCloudDatabase
 
-        let subscription = CKSubscription(
-            recordType: "Meetup",
-            predicate: NSPredicate(value: true),
-            options: .firesOnRecordCreation
-        )
+        let subscription = CKQuerySubscription(recordType: "Meetup", predicate: NSPredicate(format: "TRUEPREDICATE"), options: .firesOnRecordCreation)
+
 
         let info = CKNotificationInfo()
 
         info.alertBody = NSLocalizedString("New meetup has been added!")
         info.shouldBadge = true
+        info.category = "MEETUP"
 
         subscription.notificationInfo = info
 

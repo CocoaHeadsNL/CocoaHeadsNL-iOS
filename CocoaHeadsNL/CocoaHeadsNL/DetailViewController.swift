@@ -125,7 +125,6 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
             self.dismiss(animated: true, completion: nil)
     }
 
-    @available(iOS 9.0, *)
     override var previewActionItems : [UIPreviewActionItem] {
         let shareAction = UIPreviewAction(title: NSLocalizedString("Share"), style: .default) { (previewAction, viewController) in
 
