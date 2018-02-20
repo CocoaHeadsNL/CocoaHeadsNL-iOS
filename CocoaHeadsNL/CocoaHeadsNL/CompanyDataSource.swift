@@ -82,7 +82,7 @@ class CompanyDataSource: DetailDataSource {
         }
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath as NSIndexPath).section == 1 {
 
             if let vc = presenter {
