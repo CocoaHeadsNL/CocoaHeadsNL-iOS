@@ -116,8 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let handleSilentPush = UNNotificationAction(identifier: "HANDLE_SILENT",
                                                     title: "Handle silently",
                                                     options: UNNotificationActionOptions(rawValue: 0))
-        
-        
+ 
         let generalCategory = UNNotificationCategory(identifier: "GENERAL",
                                                      actions: [handleSilentPush],
                                                      intentIdentifiers: [],
@@ -181,9 +180,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     // MARK: Notifications
 
-//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//        Note that CloudKit does handle device tokens for you, so you don't need to implement the application(_:didRegisterForRemoteNotificationsWithDeviceToken:) method, unless you need that for another purpose.
-//    }
+    //func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        //Note that CloudKit does handle device tokens for you, so you don't need to implement the application(_:didRegisterForRemoteNotificationsWithDeviceToken:) method, unless you need that for another purpose.
+    //}
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         if error._code == 3010 {
@@ -192,44 +191,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print("application didFailToRegisterForRemoteNotificationsWithError: %@", error)
         }
     }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+
+//        // For example, you might use the arrival of the notification to fetch new content or update your app’s interface.
+//        let userInfo = notification.request.content.userInfo
+//        print("WillPresent: \(userInfo)")
+
+        completionHandler([.alert, .badge, .sound])
+    }
   
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
-        //Only remoteNotifications (content-available) will trigger this and depending on state will change behaviour.
-        
+        //Only remoteNotifications (content-available) will trigger this and depending on type should change behaviour.
+        let ck = CKQueryNotification.init(fromRemoteNotificationDictionary: userInfo)
+        //print(ck)
+
         switch application.applicationState {
             
         case .inactive:
             print("Inactive")
             //Show the view with the content of the push
-             print(userInfo)
+            self.handleRemoteNotification(notification: ck)
             completionHandler(.newData)
 
         case .background:
             print("Background")
             //Refresh the local model
-            print(userInfo)
+            self.handleRemoteNotification(notification: ck)
             completionHandler(.newData)
             
         case .active:
             print("Active")
-            //Show an in-app banner
-            print(userInfo)
+            self.handleRemoteNotification(notification: ck)
             completionHandler(.newData)
-
         }
     }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
-        let userInfo = notification.request.content.userInfo
-        
-        // For example, you might use the arrival of the notification to fetch new content or update your app’s interface.
-        
-        completionHandler(.alert)
-    }
-    
-    
+
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
         if response.actionIdentifier == UNNotificationDismissActionIdentifier {
@@ -240,6 +238,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             self.presentJobsViewController()
         } else if response.actionIdentifier == "OPEN_COMPANY" {
             self.presentCompaniesViewController()
+        } else if response.actionIdentifier == "HANDLE_SILENT" {
+            print("handling silently")
         } else if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
             // The user launched the app
         }
@@ -257,6 +257,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         CKContainer.default().add(badgeResetOperation)
         
         completionHandler()
+    }
+    
+    func handleRemoteNotification(notification:CKQueryNotification? ) {
+        
+        let content = UNMutableNotificationContent()
+        
+        if let note = notification, let title =  note.recordFields?["title"] as? String, let body = note.recordFields?["body"] as? String {
+            content.title = title
+            content.body = body
+            content.sound = UNNotificationSound.default()
+            // Deliver the notification in one second.
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+            let request = UNNotificationRequest(identifier: "showNotification", content: content, trigger: trigger) // Schedule the notification.
+            let center = UNUserNotificationCenter.current()
+            center.add(request) { (error : Error?) in
+                if let theError = error {
+                    // Handle any errors
+                    print(theError)
+                }
+            }
+        }
     }
 
      // MARK: UserActivity
@@ -356,4 +377,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // will automatically perform the migration
         let _ = try! Realm()
     }
+}
+
+extension Notification.Name {
+    static let apiServerUnreachable = Notification.Name("apiServerUnreachable")
+    static let itemsLoaded = Notification.Name("itemsLoaded")
 }
