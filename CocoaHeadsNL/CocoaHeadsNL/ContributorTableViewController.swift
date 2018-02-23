@@ -147,7 +147,8 @@ class ContributorTableViewController: UITableViewController {
 
         if let urlString = urlString, let url = URL(string: urlString) {
             if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.openURL(url)
+                UIApplication.shared.open(url, options: [:], completionHandler: { (true) in
+                })
             }
         }
 

@@ -145,7 +145,8 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
 
              if let meetup = self.dataSource.object as? Meetup, let meetupId = meetup.meetup_id {
                 if let URL = URL(string: "http://www.meetup.com/CocoaHeadsNL/events/\(meetupId)/") {
-                    UIApplication.shared.openURL(URL)
+                    UIApplication.shared.open(URL, options: [:], completionHandler: { (true) in
+                    })
                 }
             }
         }

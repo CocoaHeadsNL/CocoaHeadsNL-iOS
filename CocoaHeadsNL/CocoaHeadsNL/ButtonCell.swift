@@ -13,7 +13,8 @@ class ButtonCell: UITableViewCell {
     @IBOutlet weak var titleButton: UIButton!
     @IBAction func buttonPressed(_ sender: AnyObject) {
         if let url = selectURL() {
-            UIApplication.shared.openURL(url)
+            UIApplication.shared.open(url, options: [:], completionHandler: { (true) in
+            })
         }
     }
     
