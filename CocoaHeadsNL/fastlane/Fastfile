@@ -81,6 +81,12 @@ platform :ios do
 
 end
 
+lane :refresh_dsyms do
+  download_dsyms # Download dSym files from iTC
+  upload_symbols_to_crashlytics(api_token: "3b3cf5545c3cc6e67f38400041cd8fd1d1227455") # upload them to Crashlytics
+  clean_build_artifacts # Delete the local dSYM files
+end
+
 
 # More information about multiple platforms in fastlane: 
 # https://github.com/KrauseFx/fastlane/blob/master/docs/Platforms.md
