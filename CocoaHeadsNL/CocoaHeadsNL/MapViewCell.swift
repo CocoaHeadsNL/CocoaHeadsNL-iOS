@@ -47,8 +47,8 @@ class MapViewCell: UITableViewCell, MKMapViewDelegate {
 
     }
 
-    fileprivate func openMapWithCoordinate(_ coordinate: CLLocationCoordinate2D) {
-        let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
+    func openMapWithCoordinate(_ coordinate: CLLocationCoordinate2D? = nil) {
+        let placemark = MKPlacemark(coordinate: coordinate ?? self.coordinate, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placemark)
 
         if let locationName = locationName {
