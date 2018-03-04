@@ -124,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         // Create the custom actions for the category.
         let openAction = UNNotificationAction(identifier: "OPEN_MEETUP",
-                                              title: "Open Meetup",
+                                              title: "Open Events",
                                               options: [.foreground])
         
         let meetupCategory = UNNotificationCategory(identifier: "MEETUP",
@@ -133,7 +133,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                     options: [.customDismissAction])
         
         let openJobAction = UNNotificationAction(identifier: "OPEN_JOB",
-                                                 title: "Open Job",
+                                                 title: "Open Jobs",
                                                  options: [.foreground])
         
         let jobCategory = UNNotificationCategory(identifier: "JOB",
@@ -142,7 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                  options: [.customDismissAction])
         
         let openCompanyAction = UNNotificationAction(identifier: "OPEN_COMPANY",
-                                                     title: "Open Company",
+                                                     title: "Open Companies",
                                                      options: [.foreground])
         
         let companyCategory = UNNotificationCategory(identifier: "COMPANY",
