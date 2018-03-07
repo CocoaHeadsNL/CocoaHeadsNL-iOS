@@ -14,8 +14,22 @@ class MeetupDataSource: DetailDataSource {
         return 7
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 1:
+            if let mapCell = tableView.cellForRow(at: indexPath) as? MapViewCell {
+                mapCell.openMapWithCoordinate()
+            }
+            tableView.deselectRow(at: indexPath, animated: true)
+        default:
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+
+
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch (indexPath as NSIndexPath).row {
+        switch indexPath.row {
         case 0:
             return logoCellWithFile(meetup.logoImage, forTableView: tableView)
         case 1:
