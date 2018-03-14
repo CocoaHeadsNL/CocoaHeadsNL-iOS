@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 //Do stuff here..
                 self.setCategories()
                 self.subscribe()
+                self.discover()
                 self.subscribeToItems()
                 //Register for RemoteNotifications. Your Remote Notifications can display alerts now :)
                 DispatchQueue.main.async {
@@ -92,6 +93,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         return true
     }
+    
+    func discover() {
+        
+        let container = CKContainer.default()
+        
+        container.requestApplicationPermission(CKApplicationPermissions.userDiscoverability) { (status, error) in
+            guard error == nil else { return }
+            
+            if status == CKApplicationPermissionStatus.granted {
+                // User allowed for searching on email
+                container.fetchUserRecordID { (recordID, error) in
+                    guard error == nil else { return }
+                    guard let recordID = recordID else { return }
+                    
+                    container.discoverUserIdentity(withUserRecordID: recordID, completionHandler: { (identity, fetchError) in
+                        // TODO check for deprecation and save to userRecord?
+                        if let error = fetchError {
+                            print("error dicovering user info: \(error)")
+                            return
+                        }
+                        
+                        guard let info = identity else {
+                            print("error dicovering user info, info is nil for unknown reason")
+                            return
+                        }
+                        
+                        container.publicCloudDatabase.fetch(withRecordID: recordID, completionHandler: { (userRecord, error) in
+                            if let error = fetchError {
+                                print("error dicovering user record: \(error)")
+                                return
+                            }
+                            
+                            if let record = userRecord {
+                                record["firstName"] = info.nameComponents?.givenName as CKRecordValue?
+                                record["lastName"] = info.nameComponents?.familyName as CKRecordValue?
+                                
+                                container.publicCloudDatabase.save(record, completionHandler: { (record, error) in
+                                    //print(record)
+                                })
+                            }
+                        })
+                    })
+                }
+            }
+        }
+    }
+
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         if let pasteboard = UIPasteboard(name: UIPasteboardName(rawValue: "searchPasteboardName"), create: false) {
