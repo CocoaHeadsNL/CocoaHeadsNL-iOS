@@ -52,23 +52,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 DispatchQueue.main.async {
                     application.unregisterForRemoteNotifications()
                     print("unregistered for notifications")
+                    
+                    //Deleting al previous cloudkit subscriptions for a user.
+                    let publicDB = CKContainer.default().publicCloudDatabase
+                    
+                    publicDB.fetchAllSubscriptions(completionHandler: {subscriptions, error in
+                        
+                        if let subs = subscriptions {
+                            //Removing the subscriptions in any other case than authorized
+                            for subscription in subs {
+                                publicDB.delete(withSubscriptionID: subscription.subscriptionID, completionHandler: {subscriptionId, error in
+                                })
+                            }
+                            print("removed subscriptions")
+                        }
+                    })
                 }
-                
-                //not using the deletion in production, but very handy during debugging.
-//                //Deleting al previous cloudkit subscriptions for a user.
-//                let publicDB = CKContainer.default().publicCloudDatabase
-//
-//                publicDB.fetchAllSubscriptions(completionHandler: {subscriptions, error in
-//
-//                    if let subs = subscriptions {
-//                        //Removing the subscriptions in any other case than authorized
-//                        for subscription in subs {
-//                            publicDB.delete(withSubscriptionID: subscription.subscriptionID, completionHandler: {subscriptionId, error in
-//                            })
-//                        }
-//                        print("removed subscriptions")
-//                    }
-//                })
             }
         }
         
@@ -295,23 +294,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 }
             } else {
                 
-                if let note = notification, let category = note.category, let title = note.recordFields?["title"] as? String, let subtitle = note.recordFields?["subtitle"] as? String, let body = note.recordFields?["body"] as? String {
-                    
-                    content.categoryIdentifier = category
-                    content.title = title
-                    content.subtitle = subtitle
-                    content.body = body
-                    content.sound = UNNotificationSound.default()
-                    
-                    let request = UNNotificationRequest(identifier: "showNotification", content: content, trigger: nil) // Schedule the notification.
-                    let center = UNUserNotificationCenter.current()
-                    center.add(request) { (error : Error?) in
-                        if let theError = error {
-                            // Handle any errors
-                            print(theError)
-                        }
-                    }
-                }
+//                if let note = notification, let category = note.category, let title = note.recordFields?["title"] as? String, let subtitle = note.recordFields?["subtitle"] as? String, let body = note.recordFields?["body"] as? String {
+//                    
+//                    content.categoryIdentifier = category
+//                    content.title = title
+//                    content.subtitle = subtitle
+//                    content.body = body
+//                    content.sound = UNNotificationSound.default()
+//                    
+//                    let request = UNNotificationRequest(identifier: "showNotification", content: content, trigger: nil) // Schedule the notification.
+//                    let center = UNUserNotificationCenter.current()
+//                    center.add(request) { (error : Error?) in
+//                        if let theError = error {
+//                            // Handle any errors
+//                            print(theError)
+//                        }
+//                    }
+//                }
             }
         }
     }
