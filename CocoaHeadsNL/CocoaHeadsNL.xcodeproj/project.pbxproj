@@ -16,7 +16,6 @@
 		4A7EEAF11AC5440C001C2827 /* ModelObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7EEAF01AC5440C001C2827 /* ModelObjects.swift */; };
 		4ABB70F71D9CED8B00CDE5B8 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */; };
 		4AE3AD281E8BF87E0051706C /* RequestReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE3AD271E8BF87E0051706C /* RequestReview.swift */; };
-		4AE72F941C5B44300027C5CA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE72F931C5B44300027C5CA /* CloudKit.framework */; };
 		4AEDD5231CF635E50039AAE5 /* CocoaHeadsNLUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEDD5221CF635E50039AAE5 /* CocoaHeadsNLUITests.swift */; };
 		4AEDD52B1CF636430039AAE5 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEDD52A1CF636430039AAE5 /* SnapshotHelper.swift */; };
 		7B6A74481B1452FD00A10762 /* MeetupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74461B1452FD00A10762 /* MeetupCell.swift */; };
@@ -35,12 +34,26 @@
 		7B6A74661B18666D00A10762 /* FetchAffiliateLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74651B18666D00A10762 /* FetchAffiliateLinks.swift */; };
 		7B6A74681B186C4A00A10762 /* AffiliateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74671B186C4A00A10762 /* AffiliateCell.swift */; };
 		A4E479A57FEB4D205DA0437F /* Pods_CocoaHeadsNL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEA121BE27F3866EAB04FC4 /* Pods_CocoaHeadsNL.framework */; };
+		F10B9CBD2055326A003FC1A6 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10B9CBC2055326A003FC1A6 /* NotificationService.swift */; };
+		F10B9CC12055326A003FC1A6 /* ItemServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F10B9CBA2055326A003FC1A6 /* ItemServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F10D58E82056FBAC00CE9199 /* CocoaHeadsNL500.png in Resources */ = {isa = PBXBuildFile; fileRef = F10D58E72056FBAB00CE9199 /* CocoaHeadsNL500.png */; };
+		F10D58EC205713DF00CE9199 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F10D58EB205713DF00CE9199 /* CloudKit.framework */; };
 		F1108BAA1B1F618700C2164C /* LocatedCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1108BA91B1F618700C2164C /* LocatedCompaniesViewController.swift */; };
 		F11455B91AB4BA0600546D22 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455B81AB4BA0600546D22 /* DetailViewController.swift */; };
 		F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */; };
 		F11455BF1AB4E8DB00546D22 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */; };
 		F11455C11AB5024000546D22 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11455C01AB5024000546D22 /* TabBarController.swift */; };
 		F1379F6F1BC19F1900A20FDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F17A38761ABF3B62005CFF8A /* MapKit.framework */; };
+		F145940F20540B26006A4002 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F145940E20540B26006A4002 /* UserNotifications.framework */; };
+		F145941120540B26006A4002 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F145941020540B26006A4002 /* UserNotificationsUI.framework */; };
+		F145941420540B26006A4002 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F145941320540B26006A4002 /* NotificationViewController.swift */; };
+		F145941720540B26006A4002 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F145941520540B26006A4002 /* MainInterface.storyboard */; };
+		F145941B20540B26006A4002 /* generalNotification.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F145940D20540B26006A4002 /* generalNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F145943420545C78006A4002 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F145940E20540B26006A4002 /* UserNotifications.framework */; };
+		F145943520545C78006A4002 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F145941020540B26006A4002 /* UserNotificationsUI.framework */; };
+		F145943820545C78006A4002 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F145943720545C78006A4002 /* NotificationViewController.swift */; };
+		F145943B20545C78006A4002 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F145943920545C78006A4002 /* MainInterface.storyboard */; };
+		F145943F20545C78006A4002 /* itemNotification.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F145943320545C78006A4002 /* itemNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D171AAB50BB00585D61 /* AppDelegate.swift */; };
 		F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D1D1AAB50BB00585D61 /* Main.storyboard */; };
 		F1A46D211AAB50BB00585D61 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D201AAB50BB00585D61 /* Images.xcassets */; };
@@ -60,7 +73,44 @@
 			remoteGlobalIDString = F1A46D111AAB50BB00585D61;
 			remoteInfo = CocoaHeadsNL;
 		};
+		F10B9CBF2055326A003FC1A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1A46D0A1AAB50BB00585D61 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F10B9CB92055326A003FC1A6;
+			remoteInfo = ItemServiceExtension;
+		};
+		F145941920540B26006A4002 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1A46D0A1AAB50BB00585D61 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F145940C20540B26006A4002;
+			remoteInfo = generalNotification;
+		};
+		F145943D20545C78006A4002 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1A46D0A1AAB50BB00585D61 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F145943220545C78006A4002;
+			remoteInfo = itemNotification;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F145941F20540B26006A4002 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F145941B20540B26006A4002 /* generalNotification.appex in Embed App Extensions */,
+				F145943F20545C78006A4002 /* itemNotification.appex in Embed App Extensions */,
+				F10B9CC12055326A003FC1A6 /* ItemServiceExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2324F5121E2F5162006F7240 /* UIAlertController+FetchErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+FetchErrors.swift"; sourceTree = "<group>"; };
@@ -74,7 +124,6 @@
 		4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		4AE3AD271E8BF87E0051706C /* RequestReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestReview.swift; sourceTree = "<group>"; };
 		4AE72F921C5B44080027C5CA /* CocoaHeadsNL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CocoaHeadsNL.entitlements; sourceTree = "<group>"; };
-		4AE72F931C5B44300027C5CA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4AEDD5201CF635E50039AAE5 /* CocoaHeadsNLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaHeadsNLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AEDD5221CF635E50039AAE5 /* CocoaHeadsNLUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaHeadsNLUITests.swift; sourceTree = "<group>"; };
 		4AEDD5241CF635E50039AAE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -97,11 +146,29 @@
 		7B6A74671B186C4A00A10762 /* AffiliateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffiliateCell.swift; sourceTree = "<group>"; };
 		C9D96571D157E179851D4220 /* Pods-CocoaHeadsNL.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocoaHeadsNL.release.xcconfig"; path = "Pods/Target Support Files/Pods-CocoaHeadsNL/Pods-CocoaHeadsNL.release.xcconfig"; sourceTree = "<group>"; };
 		DFEA121BE27F3866EAB04FC4 /* Pods_CocoaHeadsNL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CocoaHeadsNL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F10B9CBA2055326A003FC1A6 /* ItemServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ItemServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F10B9CBC2055326A003FC1A6 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		F10B9CBE2055326A003FC1A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F10D58E42056F59400CE9199 /* ItemServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ItemServiceExtension.entitlements; sourceTree = "<group>"; };
+		F10D58E62056F7AD00CE9199 /* itemNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = itemNotification.entitlements; sourceTree = "<group>"; };
+		F10D58E72056FBAB00CE9199 /* CocoaHeadsNL500.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CocoaHeadsNL500.png; sourceTree = "<group>"; };
+		F10D58EB205713DF00CE9199 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		F10D58ED2057255C00CE9199 /* generalNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = generalNotification.entitlements; sourceTree = "<group>"; };
 		F1108BA91B1F618700C2164C /* LocatedCompaniesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocatedCompaniesViewController.swift; sourceTree = "<group>"; };
 		F11455B81AB4BA0600546D22 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		F11455BE1AB4E8DB00546D22 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		F11455C01AB5024000546D22 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		F145940D20540B26006A4002 /* generalNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = generalNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F145940E20540B26006A4002 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		F145941020540B26006A4002 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		F145941320540B26006A4002 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		F145941620540B26006A4002 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		F145941820540B26006A4002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F145943320545C78006A4002 /* itemNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = itemNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F145943720545C78006A4002 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		F145943A20545C78006A4002 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		F145943C20545C78006A4002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F17A38761ABF3B62005CFF8A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F1A46D121AAB50BB00585D61 /* CocoaHeadsNL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaHeadsNL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A46D161AAB50BB00585D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -125,11 +192,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F10B9CB72055326A003FC1A6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F145940A20540B26006A4002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F145941120540B26006A4002 /* UserNotificationsUI.framework in Frameworks */,
+				F145940F20540B26006A4002 /* UserNotifications.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F145943020545C78006A4002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F145943520545C78006A4002 /* UserNotificationsUI.framework in Frameworks */,
+				F145943420545C78006A4002 /* UserNotifications.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F1A46D0F1AAB50BB00585D61 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AE72F941C5B44300027C5CA /* CloudKit.framework in Frameworks */,
+				F10D58EC205713DF00CE9199 /* CloudKit.framework in Frameworks */,
 				F1379F6F1BC19F1900A20FDB /* MapKit.framework in Frameworks */,
 				A4E479A57FEB4D205DA0437F /* Pods_CocoaHeadsNL.framework in Frameworks */,
 			);
@@ -182,10 +274,12 @@
 		5F94B32C0E46149D436AD3B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4AE72F931C5B44300027C5CA /* CloudKit.framework */,
+				F10D58EB205713DF00CE9199 /* CloudKit.framework */,
 				4A15A33C1BB82224008161BD /* MobileCoreServices.framework */,
 				F17A38761ABF3B62005CFF8A /* MapKit.framework */,
 				DFEA121BE27F3866EAB04FC4 /* Pods_CocoaHeadsNL.framework */,
+				F145940E20540B26006A4002 /* UserNotifications.framework */,
+				F145941020540B26006A4002 /* UserNotificationsUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -209,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				F1A46D201AAB50BB00585D61 /* Images.xcassets */,
+				F10D58E72056FBAB00CE9199 /* CocoaHeadsNL500.png */,
 				F1A46D161AAB50BB00585D61 /* Info.plist */,
 				F1A46D221AAB50BB00585D61 /* LaunchScreen.xib */,
 				F1A46D1D1AAB50BB00585D61 /* Main.storyboard */,
@@ -251,6 +346,16 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		F10B9CBB2055326A003FC1A6 /* ItemServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				F10D58E42056F59400CE9199 /* ItemServiceExtension.entitlements */,
+				F10B9CBC2055326A003FC1A6 /* NotificationService.swift */,
+				F10B9CBE2055326A003FC1A6 /* Info.plist */,
+			);
+			path = ItemServiceExtension;
+			sourceTree = "<group>";
+		};
 		F11455A81AB3256C00546D22 /* Open Job Postings */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,11 +384,36 @@
 			name = "List of Meetups";
 			sourceTree = "<group>";
 		};
+		F145941220540B26006A4002 /* generalNotification */ = {
+			isa = PBXGroup;
+			children = (
+				F10D58ED2057255C00CE9199 /* generalNotification.entitlements */,
+				F145941320540B26006A4002 /* NotificationViewController.swift */,
+				F145941520540B26006A4002 /* MainInterface.storyboard */,
+				F145941820540B26006A4002 /* Info.plist */,
+			);
+			path = generalNotification;
+			sourceTree = "<group>";
+		};
+		F145943620545C78006A4002 /* itemNotification */ = {
+			isa = PBXGroup;
+			children = (
+				F10D58E62056F7AD00CE9199 /* itemNotification.entitlements */,
+				F145943720545C78006A4002 /* NotificationViewController.swift */,
+				F145943920545C78006A4002 /* MainInterface.storyboard */,
+				F145943C20545C78006A4002 /* Info.plist */,
+			);
+			path = itemNotification;
+			sourceTree = "<group>";
+		};
 		F1A46D091AAB50BB00585D61 = {
 			isa = PBXGroup;
 			children = (
 				F1A46D141AAB50BB00585D61 /* CocoaHeadsNL */,
 				4AEDD5211CF635E50039AAE5 /* CocoaHeadsNLUITests */,
+				F145941220540B26006A4002 /* generalNotification */,
+				F145943620545C78006A4002 /* itemNotification */,
+				F10B9CBB2055326A003FC1A6 /* ItemServiceExtension */,
 				F1A46D131AAB50BB00585D61 /* Products */,
 				5F94B32C0E46149D436AD3B3 /* Frameworks */,
 				F5112C38CF68F5CE0FF0FC59 /* Pods */,
@@ -298,6 +428,9 @@
 			children = (
 				F1A46D121AAB50BB00585D61 /* CocoaHeadsNL.app */,
 				4AEDD5201CF635E50039AAE5 /* CocoaHeadsNLUITests.xctest */,
+				F145940D20540B26006A4002 /* generalNotification.appex */,
+				F145943320545C78006A4002 /* itemNotification.appex */,
+				F10B9CBA2055326A003FC1A6 /* ItemServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -348,6 +481,57 @@
 			productReference = 4AEDD5201CF635E50039AAE5 /* CocoaHeadsNLUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		F10B9CB92055326A003FC1A6 /* ItemServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F10B9CC22055326A003FC1A6 /* Build configuration list for PBXNativeTarget "ItemServiceExtension" */;
+			buildPhases = (
+				F10B9CB62055326A003FC1A6 /* Sources */,
+				F10B9CB72055326A003FC1A6 /* Frameworks */,
+				F10B9CB82055326A003FC1A6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ItemServiceExtension;
+			productName = ItemServiceExtension;
+			productReference = F10B9CBA2055326A003FC1A6 /* ItemServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		F145940C20540B26006A4002 /* generalNotification */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F145941E20540B26006A4002 /* Build configuration list for PBXNativeTarget "generalNotification" */;
+			buildPhases = (
+				F145940920540B26006A4002 /* Sources */,
+				F145940A20540B26006A4002 /* Frameworks */,
+				F145940B20540B26006A4002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = generalNotification;
+			productName = generalNotification;
+			productReference = F145940D20540B26006A4002 /* generalNotification.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		F145943220545C78006A4002 /* itemNotification */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F145944020545C78006A4002 /* Build configuration list for PBXNativeTarget "itemNotification" */;
+			buildPhases = (
+				F145942F20545C78006A4002 /* Sources */,
+				F145943020545C78006A4002 /* Frameworks */,
+				F145943120545C78006A4002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = itemNotification;
+			productName = itemNotification;
+			productReference = F145943320545C78006A4002 /* itemNotification.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		F1A46D111AAB50BB00585D61 /* CocoaHeadsNL */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F1A46D331AAB50BB00585D61 /* Build configuration list for PBXNativeTarget "CocoaHeadsNL" */;
@@ -364,10 +548,14 @@
 				F1A14694A32214BAF186CBBD /* [CP] Copy Pods Resources */,
 				5802679B3CED9D15DE11E3C3 /* 📦 Embed Pods Frameworks */,
 				33635DC6975F5859AF2D9316 /* 📦 Copy Pods Resources */,
+				F145941F20540B26006A4002 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F145941A20540B26006A4002 /* PBXTargetDependency */,
+				F145943E20545C78006A4002 /* PBXTargetDependency */,
+				F10B9CC02055326A003FC1A6 /* PBXTargetDependency */,
 			);
 			name = CocoaHeadsNL;
 			productName = CocoaHeadsNL;
@@ -381,7 +569,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Stichting CocoaheadsNL";
 				TargetAttributes = {
@@ -390,10 +578,43 @@
 						LastSwiftMigration = 0900;
 						TestTargetID = F1A46D111AAB50BB00585D61;
 					};
+					F10B9CB92055326A003FC1A6 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
+					};
+					F145940C20540B26006A4002 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+					F145943220545C78006A4002 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
+					};
 					F1A46D111AAB50BB00585D61 = {
 						CreatedOnToolsVersion = 6.1.1;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -429,6 +650,9 @@
 			targets = (
 				F1A46D111AAB50BB00585D61 /* CocoaHeadsNL */,
 				4AEDD51F1CF635E50039AAE5 /* CocoaHeadsNLUITests */,
+				F145940C20540B26006A4002 /* generalNotification */,
+				F145943220545C78006A4002 /* itemNotification */,
+				F10B9CB92055326A003FC1A6 /* ItemServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -438,6 +662,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F10B9CB82055326A003FC1A6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F145940B20540B26006A4002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F145941720540B26006A4002 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F145943120545C78006A4002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F145943B20545C78006A4002 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +698,7 @@
 				F1A46D241AAB50BB00585D61 /* LaunchScreen.xib in Resources */,
 				7B6A744B1B1495FF00A10762 /* MeetupCell.xib in Resources */,
 				F1A46D211AAB50BB00585D61 /* Images.xcassets in Resources */,
+				F10D58E82056FBAC00CE9199 /* CocoaHeadsNL500.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,6 +857,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F10B9CB62055326A003FC1A6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F10B9CBD2055326A003FC1A6 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F145940920540B26006A4002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F145941420540B26006A4002 /* NotificationViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F145942F20545C78006A4002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F145943820545C78006A4002 /* NotificationViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F1A46D0E1AAB50BB00585D61 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -656,9 +928,40 @@
 			target = F1A46D111AAB50BB00585D61 /* CocoaHeadsNL */;
 			targetProxy = 4AEDD5251CF635E50039AAE5 /* PBXContainerItemProxy */;
 		};
+		F10B9CC02055326A003FC1A6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F10B9CB92055326A003FC1A6 /* ItemServiceExtension */;
+			targetProxy = F10B9CBF2055326A003FC1A6 /* PBXContainerItemProxy */;
+		};
+		F145941A20540B26006A4002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F145940C20540B26006A4002 /* generalNotification */;
+			targetProxy = F145941920540B26006A4002 /* PBXContainerItemProxy */;
+		};
+		F145943E20545C78006A4002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F145943220545C78006A4002 /* itemNotification */;
+			targetProxy = F145943D20545C78006A4002 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		F145941520540B26006A4002 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F145941620540B26006A4002 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		F145943920545C78006A4002 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F145943A20545C78006A4002 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		F1A46D1D1AAB50BB00585D61 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -691,7 +994,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNLUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "fa2c071a-514c-4c70-b8fa-569d6f832d66";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				TEST_TARGET_NAME = CocoaHeadsNL;
 			};
 			name = Debug;
@@ -710,8 +1013,188 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNLUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "fa2c071a-514c-4c70-b8fa-569d6f832d66";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				TEST_TARGET_NAME = CocoaHeadsNL;
+			};
+			name = Release;
+		};
+		F10B9CC32055326A003FC1A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ItemServiceExtension/ItemServiceExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = D55PL7PU7S;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				INFOPLIST_FILE = ItemServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNL.ItemServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F10B9CC42055326A003FC1A6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ItemServiceExtension/ItemServiceExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = D55PL7PU7S;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				INFOPLIST_FILE = ItemServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNL.ItemServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F145941C20540B26006A4002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = generalNotification/generalNotification.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = D55PL7PU7S;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				INFOPLIST_FILE = generalNotification/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNL.generalNotification;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F145941D20540B26006A4002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = generalNotification/generalNotification.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = D55PL7PU7S;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				INFOPLIST_FILE = generalNotification/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNL.generalNotification;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F145944120545C78006A4002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = itemNotification/itemNotification.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = D55PL7PU7S;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				INFOPLIST_FILE = itemNotification/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNL.itemNotification;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F145944220545C78006A4002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = itemNotification/itemNotification.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = D55PL7PU7S;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				INFOPLIST_FILE = itemNotification/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNL.itemNotification;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -773,7 +1256,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				RUN_CLANG_STATIC_ANALYZER = YES;
@@ -834,7 +1317,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
@@ -848,20 +1331,21 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F1DB2379E5772EF04B49E6E3 /* Pods-CocoaHeadsNL.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CocoaHeadsNL/CocoaHeadsNL.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D55PL7PU7S;
 				INFOPLIST_FILE = CocoaHeadsNL/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNL;
 				PRODUCT_NAME = CocoaHeadsNL;
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development nl.cocoaheads.app.CocoaHeadsNL";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -874,21 +1358,22 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C9D96571D157E179851D4220 /* Pods-CocoaHeadsNL.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CocoaHeadsNL/CocoaHeadsNL.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D55PL7PU7S;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = CocoaHeadsNL/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNL;
 				PRODUCT_NAME = CocoaHeadsNL;
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore nl.cocoaheads.app.CocoaHeadsNL";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -904,6 +1389,33 @@
 			buildConfigurations = (
 				4AEDD5271CF635E50039AAE5 /* Debug */,
 				4AEDD5281CF635E50039AAE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F10B9CC22055326A003FC1A6 /* Build configuration list for PBXNativeTarget "ItemServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F10B9CC32055326A003FC1A6 /* Debug */,
+				F10B9CC42055326A003FC1A6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F145941E20540B26006A4002 /* Build configuration list for PBXNativeTarget "generalNotification" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F145941C20540B26006A4002 /* Debug */,
+				F145941D20540B26006A4002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F145944020545C78006A4002 /* Build configuration list for PBXNativeTarget "itemNotification" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F145944120545C78006A4002 /* Debug */,
+				F145944220545C78006A4002 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

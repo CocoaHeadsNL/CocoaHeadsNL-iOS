@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 //Do stuff here..
                 self.setCategories()
                 self.subscribe()
+                self.subscribeToItems()
                 //Register for RemoteNotifications. Your Remote Notifications can display alerts now :)
                 DispatchQueue.main.async {
                 application.registerForRemoteNotifications()
@@ -53,6 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     print("unregistered for notifications")
                 }
                 
+                //not using the deletion in production, but very handy during debugging.
 //                //Deleting al previous cloudkit subscriptions for a user.
 //                let publicDB = CKContainer.default().publicCloudDatabase
 //
@@ -76,9 +78,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let aps = notification["aps"] as! [String: AnyObject]
             print("DidLaunch: \(aps)")
             
-            if aps["category"] as? String == "GENERAL" {
+            if aps["category"] as? String == "nl.cocoaheads.app.CocoaHeadsNL.generalNotification" {
                 print("general notification")
-                //refresh data in background?
+            } else if aps["category"] as? String == "nl.cocoaheads.app.CocoaHeadsNL.itemNotification" {
+               print("item Notification")
             } else if aps["category"] as? String == "MEETUP" {
                 self.presentMeetupsViewController()
             } else if aps["category"] as? String == "JOB" {
@@ -113,12 +116,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func setCategories() {
         
-        let handleSilentPush = UNNotificationAction(identifier: "HANDLE_SILENT",
-                                                    title: "Handle silently",
-                                                    options: UNNotificationActionOptions(rawValue: 0))
- 
-        let generalCategory = UNNotificationCategory(identifier: "GENERAL",
-                                                     actions: [handleSilentPush],
+        let itemCategory = UNNotificationCategory(identifier: "nl.cocoaheads.app.CocoaHeadsNL.itemNotification",
+                                                     actions: [],
+                                                     intentIdentifiers: [],
+                                                     options: .customDismissAction)
+        
+        let generalCategory = UNNotificationCategory(identifier: "nl.cocoaheads.app.CocoaHeadsNL.generalNotification",
+                                                     actions: [],
                                                      intentIdentifiers: [],
                                                      options: .customDismissAction)
         
@@ -152,20 +156,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         // Register the notification categories.
         let center = UNUserNotificationCenter.current()
-        center.setNotificationCategories([generalCategory, meetupCategory, jobCategory, companyCategory])
+        center.setNotificationCategories([itemCategory, generalCategory, meetupCategory, jobCategory, companyCategory])
+    }
+    
+    func subscribeToItems() {
+         let publicDB = CKContainer.default().publicCloudDatabase
+        
+        let subscription = CKQuerySubscription(recordType: "Items", predicate: NSPredicate(format: "TRUEPREDICATE"), options: .firesOnRecordCreation)
+        
+        //if the subscription does not have a title, subtitle ,alertbody it wont get priority. IS received in the content service extension.
+        let info = CKNotificationInfo()
+        info.title = "A new item was posted"
+        info.subtitle = "by CocoaHeadsNL"
+        info.alertBody = "Want to know more?"
+        info.desiredKeys = ["title","name","imageUrl"]
+        info.shouldSendMutableContent = true
+        info.category = "nl.cocoaheads.app.CocoaHeadsNL.itemNotification"
+        
+        subscription.notificationInfo = info
+        
+        publicDB.save(subscription, completionHandler: { subscription, error in
+            if error == nil {
+                // Subscription saved successfully
+            } else {
+                // An error occurred
+                //print(error)
+            }
+        })
     }
     
     func subscribe() {
         let publicDB = CKContainer.default().publicCloudDatabase
         
         let subscription = CKQuerySubscription(recordType: "Test", predicate: NSPredicate(format: "TRUEPREDICATE"), options: .firesOnRecordCreation)
-
+        
+        //silent notification which gets handled by the generalNotification Extension. IS received in the app.
         let info = CKNotificationInfo()
         info.desiredKeys = ["title","subtitle","body"]
         info.shouldBadge = true
         info.shouldSendContentAvailable = true
-        info.category = "GENERAL"
-        
+        info.category = "nl.cocoaheads.app.CocoaHeadsNL.generalNotification"
+
         subscription.notificationInfo = info
         
         publicDB.save(subscription, completionHandler: { subscription, error in
@@ -192,20 +223,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-
-//        // For example, you might use the arrival of the notification to fetch new content or update your app’s interface.
-//        let userInfo = notification.request.content.userInfo
-//        print("WillPresent: \(userInfo)")
-
-        completionHandler([.alert, .badge, .sound])
+  func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+            //not using willPresent will prevent any Pushnotifications to show when the app is active.
+           completionHandler([.alert, .badge, .sound])
     }
+    
   
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         //Only remoteNotifications (content-available) will trigger this and depending on type should change behaviour.
+        // remoteNotifications (mutable-content) wont.
         let ck = CKQueryNotification.init(fromRemoteNotificationDictionary: userInfo)
-        //print(ck)
 
         switch application.applicationState {
             
@@ -227,6 +255,66 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             completionHandler(.newData)
         }
     }
+    
+    func handleRemoteNotification(notification:CKQueryNotification? ) {
+        
+        let content = UNMutableNotificationContent()
+        
+        if let category = notification?.category {
+            
+            if category == "nl.cocoaheads.app.CocoaHeadsNL.generalNotification" {
+                
+                if let note = notification, let category = note.category, let title = note.recordFields?["title"] as? String, let subtitle = note.recordFields?["subtitle"] as? String, let body = note.recordFields?["body"] as? String {
+                    
+                    content.categoryIdentifier = category
+                    content.title = title
+                    content.subtitle = subtitle
+                    content.body = body
+                    content.sound = UNNotificationSound.default()
+
+                    //for now using a local image file as attachment.
+                    if let path = Bundle.main.path(forResource: "CocoaHeadsNL500", ofType: "png") {
+                        let url = URL(fileURLWithPath: path)
+                        
+                        do {
+                            let attachment = try UNNotificationAttachment(identifier: "logo", url: url, options: nil)
+                            content.attachments = [attachment]
+                        } catch {
+                            print("The attachment was not loaded.")
+                        }
+                    }
+                    
+                    let request = UNNotificationRequest(identifier: "generalNotification", content: content, trigger: nil) // Schedule the notification.
+                    let center = UNUserNotificationCenter.current()
+                    center.add(request) { (error : Error?) in
+                        if let theError = error {
+                            // Handle any errors
+                            print(theError)
+                        }
+                    }
+                }
+            } else {
+                
+                if let note = notification, let category = note.category, let title = note.recordFields?["title"] as? String, let subtitle = note.recordFields?["subtitle"] as? String, let body = note.recordFields?["body"] as? String {
+                    
+                    content.categoryIdentifier = category
+                    content.title = title
+                    content.subtitle = subtitle
+                    content.body = body
+                    content.sound = UNNotificationSound.default()
+                    
+                    let request = UNNotificationRequest(identifier: "showNotification", content: content, trigger: nil) // Schedule the notification.
+                    let center = UNUserNotificationCenter.current()
+                    center.add(request) { (error : Error?) in
+                        if let theError = error {
+                            // Handle any errors
+                            print(theError)
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
@@ -238,12 +326,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             self.presentJobsViewController()
         } else if response.actionIdentifier == "OPEN_COMPANY" {
             self.presentCompaniesViewController()
-        } else if response.actionIdentifier == "HANDLE_SILENT" {
-            print("handling silently")
         } else if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
             // The user launched the app
         }
         
+        //Deprecated in ios11, still to find a replacement
         let badgeResetOperation = CKModifyBadgeOperation(badgeValue: 0)
         badgeResetOperation.modifyBadgeCompletionBlock = { (error) -> Void in
             guard error == nil else {
@@ -257,27 +344,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         CKContainer.default().add(badgeResetOperation)
         
         completionHandler()
-    }
-    
-    func handleRemoteNotification(notification:CKQueryNotification? ) {
-        
-        let content = UNMutableNotificationContent()
-        
-        if let note = notification, let title =  note.recordFields?["title"] as? String, let body = note.recordFields?["body"] as? String {
-            content.title = title
-            content.body = body
-            content.sound = UNNotificationSound.default()
-            // Deliver the notification in one second.
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-            let request = UNNotificationRequest(identifier: "showNotification", content: content, trigger: trigger) // Schedule the notification.
-            let center = UNUserNotificationCenter.current()
-            center.add(request) { (error : Error?) in
-                if let theError = error {
-                    // Handle any errors
-                    print(theError)
-                }
-            }
-        }
     }
 
      // MARK: UserActivity
