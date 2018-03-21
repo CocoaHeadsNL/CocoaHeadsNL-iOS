@@ -311,33 +311,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             
             if category == "nl.cocoaheads.app.CocoaHeadsNL.generalNotification" {
                 
-                if let note = notification, let category = note.category, let title = note.recordFields?["title"] as? String, let subtitle = note.recordFields?["subtitle"] as? String, let body = note.recordFields?["body"] as? String {
+                if let note = notification, let category = note.category, let title = note.recordFields?["title"] as? String, let imageUrl = note.recordFields?["subtitle"] as? String, let body = note.recordFields?["body"] as? String {
                     
                     content.categoryIdentifier = category
                     content.title = title
-                    content.subtitle = subtitle
+                    //content.subtitle = subtitle
                     content.body = body
                     content.sound = UNNotificationSound.default()
 
-                    //for now using a local image file as attachment.
-                    if let path = Bundle.main.path(forResource: "CocoaHeadsNL500", ofType: "png") {
-                        let url = URL(fileURLWithPath: path)
+                    if let fileUrl = URL(string: imageUrl) {
                         
-                        do {
-                            let attachment = try UNNotificationAttachment(identifier: "logo", url: url, options: nil)
-                            content.attachments = [attachment]
-                        } catch {
-                            print("The attachment was not loaded.")
-                        }
-                    }
-                    
-                    let request = UNNotificationRequest(identifier: "generalNotification", content: content, trigger: nil) // Schedule the notification.
-                    let center = UNUserNotificationCenter.current()
-                    center.add(request) { (error : Error?) in
-                        if let theError = error {
-                            // Handle any errors
-                            print(theError)
-                        }
+                        //let request = NSURLRequest(url: fileUrl)
+                        URLSession.shared.downloadTask(with: fileUrl, completionHandler: { (fileLocation, response, err) in
+
+                            //create attachment from file at url in folder
+                            if let location = fileLocation, err == nil {
+                                let tmpDirectory = NSTemporaryDirectory()
+                                let tmpFile = "file:".appending(tmpDirectory).appending(fileUrl.lastPathComponent)
+                                let tmpUrl = URL.init(string: tmpFile)!
+
+                                do {
+                                    try? FileManager.default.copyItem(at: location, to: tmpUrl)
+
+                                    if let attachment = try? UNNotificationAttachment(identifier: "", url: tmpUrl, options: nil) {
+                                        content.attachments = [attachment]
+                                        
+                                        //we're only showing the notification if the image is present currently
+                                        let request = UNNotificationRequest(identifier: "generalNotification", content: content, trigger: nil) // Schedule the notification.
+                                        let center = UNUserNotificationCenter.current()
+                                        center.add(request) { (error : Error?) in
+                                            if let theError = error {
+                                                // Handle any errors
+                                                print(theError)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }) .resume()
                     }
                 }
             } else {
@@ -392,7 +403,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         completionHandler()
     }
-
+    
      // MARK: UserActivity
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {

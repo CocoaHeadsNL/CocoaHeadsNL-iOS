@@ -13,6 +13,8 @@ import UserNotificationsUI
 class NotificationViewController: UIViewController, UNNotificationContentExtension {
 
     @IBOutlet var postImageView: UIImageView?
+    @IBOutlet var titleLabel: UILabel?
+    @IBOutlet var bodyLabel: UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +22,10 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     }
     
     func didReceive(_ notification: UNNotification) {
-
+        
+        self.titleLabel?.text = notification.request.content.title
+        self.bodyLabel?.text = notification.request.content.body
+    
         if let attachment = notification.request.content.attachments.first {
             if attachment.url.startAccessingSecurityScopedResource() {
                 if let data = NSData(contentsOfFile: attachment.url.path) as Data? {
@@ -28,6 +33,6 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
                     attachment.url.stopAccessingSecurityScopedResource()
                 }
             }
-        }
+        } 
     }
 }

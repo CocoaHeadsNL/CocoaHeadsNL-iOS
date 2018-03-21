@@ -18,15 +18,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UTg-O7-Hvc">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                <rect key="frame" x="16" y="20" width="288" height="224"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0VP-4s-arS">
+                                <rect key="frame" x="16" y="252" width="288" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2j2-Dx-tkW">
+                                <rect key="frame" x="16" y="281" width="288" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="UTg-O7-Hvc" firstAttribute="leading" secondItem="2BE-c3-nQJ" secondAttribute="leading" id="1Kr-eN-bVb"/>
-                            <constraint firstItem="2BE-c3-nQJ" firstAttribute="trailing" secondItem="UTg-O7-Hvc" secondAttribute="trailing" id="FUN-kR-Lt8"/>
-                            <constraint firstItem="2BE-c3-nQJ" firstAttribute="bottom" secondItem="UTg-O7-Hvc" secondAttribute="bottom" id="g1z-kX-hZb"/>
-                            <constraint firstItem="UTg-O7-Hvc" firstAttribute="top" secondItem="2BE-c3-nQJ" secondAttribute="top" id="tmr-7A-Gvv"/>
+                            <constraint firstItem="UTg-O7-Hvc" firstAttribute="leading" secondItem="2BE-c3-nQJ" secondAttribute="leading" constant="16" id="1Kr-eN-bVb"/>
+                            <constraint firstItem="2j2-Dx-tkW" firstAttribute="top" secondItem="0VP-4s-arS" secondAttribute="bottom" constant="8" id="5bq-eq-acI"/>
+                            <constraint firstItem="2BE-c3-nQJ" firstAttribute="trailing" secondItem="UTg-O7-Hvc" secondAttribute="trailing" constant="16" id="FUN-kR-Lt8"/>
+                            <constraint firstItem="2j2-Dx-tkW" firstAttribute="leading" secondItem="2BE-c3-nQJ" secondAttribute="leading" constant="16" id="HcR-5y-onA"/>
+                            <constraint firstItem="2BE-c3-nQJ" firstAttribute="trailing" secondItem="0VP-4s-arS" secondAttribute="trailing" constant="16" id="XtN-ZS-Th5"/>
+                            <constraint firstItem="2BE-c3-nQJ" firstAttribute="bottom" secondItem="2j2-Dx-tkW" secondAttribute="bottom" constant="18" id="b3k-Vx-46M"/>
+                            <constraint firstItem="0VP-4s-arS" firstAttribute="leading" secondItem="2BE-c3-nQJ" secondAttribute="leading" constant="16" id="ikk-9Y-FjC"/>
+                            <constraint firstItem="2BE-c3-nQJ" firstAttribute="trailing" secondItem="2j2-Dx-tkW" secondAttribute="trailing" constant="16" id="n8C-65-yUW"/>
+                            <constraint firstItem="0VP-4s-arS" firstAttribute="top" secondItem="UTg-O7-Hvc" secondAttribute="bottom" constant="8" id="sif-c4-9EQ"/>
+                            <constraint firstItem="UTg-O7-Hvc" firstAttribute="top" secondItem="2BE-c3-nQJ" secondAttribute="top" constant="20" id="tmr-7A-Gvv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2BE-c3-nQJ"/>
                     </view>
@@ -34,7 +52,9 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="320"/>
                     <connections>
+                        <outlet property="bodyLabel" destination="2j2-Dx-tkW" id="72U-ci-ZMV"/>
                         <outlet property="postImageView" destination="UTg-O7-Hvc" id="W79-WQ-ebJ"/>
+                        <outlet property="titleLabel" destination="0VP-4s-arS" id="h4c-HZ-MF4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
