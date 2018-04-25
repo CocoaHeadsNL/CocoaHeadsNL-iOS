@@ -57,9 +57,9 @@ class MeetupCell: UITableViewCell {
             dateFormatter.dateFormat = "MMMM"
             monthLabel.accessibilityLabel = dateFormatter.string(from: date as Date)
 
-            if date.timeIntervalSinceNow > 0 {
+            if meetup.isToday || meetup.isUpcoming {
                 dayLabel.textColor = UIColor.black
-                calendarView.backgroundColor = UIColorWithRGB(232, green: 88, blue: 80)
+                calendarView.backgroundColor = meetup.isToday ? UIColorWithRGB(127, green: 214, blue: 33) : UIColorWithRGB(232, green: 88, blue: 80)
 
 
                 if meetup.yes_rsvp_count.int32Value > 0{

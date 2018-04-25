@@ -37,8 +37,11 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
                 let year = Calendar.current.component(.year, from: meetupTime)
                 let yearString: String
-                
-                if meetupTime.timeIntervalSince(Date()) > 0 {
+
+                if meetup.isToday {
+                    yearString = NSLocalizedString("Today", comment: "Section title for todays meetup.")
+                }
+                else if meetup.isUpcoming {
                     yearString = NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")
                 } else {
                     yearString = "\(year)"
@@ -64,7 +67,19 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     
     fileprivate var sectionTitles: [String] {
         get {
-            return meetupsByYear.keys.sorted().reversed()
+            let sections = meetupsByYear.keys
+            let today = sections.filter { $0 == NSLocalizedString("Today", comment: "Section title for todays meetup.") }
+            let upcoming = sections.filter { $0 == NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.") }
+
+            let rest = sections
+                .filter { section in
+                    return section != NSLocalizedString("Today", comment: "Section title for todays meetup.")
+                        && section != NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")
+                }
+                .sorted()
+                .reversed()
+
+            return today + upcoming + rest
         }
     }
     

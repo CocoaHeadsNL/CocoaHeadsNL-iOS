@@ -302,6 +302,19 @@ class Meetup: Object {
         }
     }()
 
+    var isToday: Bool {
+        guard let time = time else { return false }
+
+        let today = dateOnlyFormatter.string(from: Date())
+        return dateOnlyFormatter.string(from: time) == today
+    }
+
+    var isUpcoming: Bool {
+        guard let time = time else { return false }
+
+        return time.timeIntervalSinceNow > 0
+    }
+
     @available(iOS 9.0, *)
     var searchableAttributeSet: CSSearchableItemAttributeSet {
         get {
@@ -370,3 +383,15 @@ class Meetup: Object {
         }
     }
 }
+
+private let dateOnlyFormatter: DateFormatter = {
+    let amsterdam = TimeZone(identifier: "Europe/Amsterdam")!
+    let nl_NL = Locale(identifier: "nl-NL")
+
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    dateFormatter.locale = nl_NL
+    dateFormatter.timeZone = amsterdam
+
+    return dateFormatter
+}()
