@@ -13,6 +13,13 @@ DEPENDENCIES:
   - Fabric
   - RealmSwift
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Crashlytics
+    - Fabric
+    - Realm
+    - RealmSwift
+
 SPEC CHECKSUMS:
   Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
   Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
@@ -21,4 +28,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: b5bc18f3f9eedcde7e7cf17427a6cfcf49739478
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0
