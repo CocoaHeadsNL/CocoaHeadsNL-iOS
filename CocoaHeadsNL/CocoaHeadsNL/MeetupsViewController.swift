@@ -396,7 +396,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                     return
                 }
                 
-                let meetupNames = meetups.flatMap({ $0.recordName })
+                let meetupNames = meetups.compactMap ({ $0.recordName })
                 let predicate = NSPredicate(format: "NOT recordName IN %@", meetupNames)
                 let obsoleteMeetups = self?.realm.objects(Meetup.self).filter(predicate)
                 self?.realm.beginWrite()

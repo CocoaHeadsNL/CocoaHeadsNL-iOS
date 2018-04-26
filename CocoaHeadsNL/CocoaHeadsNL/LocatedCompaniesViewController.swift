@@ -25,7 +25,7 @@ class LocatedCompaniesViewController: UITableViewController {
     var placesArray: [String] {
         get {
             var places = Set<String>()
-            places.formUnion(companiesArray.flatMap { $0.place })
+            places.formUnion(companiesArray.compactMap { $0.place })
             return places.map{ $0 }.sorted()
         }
     }
@@ -201,7 +201,7 @@ class LocatedCompaniesViewController: UITableViewController {
                     return
                 }
                 
-                let companyRecordNames = companies.flatMap({ $0.recordName })
+                let companyRecordNames = companies.compactMap({ $0.recordName })
                 let predicate = NSPredicate(format: "NOT recordName IN %@", companyRecordNames)
                 let obsoleteCompanies = self?.realm.objects(Company.self).filter(predicate)
                 

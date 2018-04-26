@@ -242,7 +242,7 @@ class JobsViewController: UICollectionViewController {
                     return
                 }
 
-                let jobRecordNames = jobs.flatMap({ (job) -> String? in
+                let jobRecordNames = jobs.compactMap ({ (job) -> String? in
                     return job.recordName
                 })
                 let predicate = NSPredicate(format: "NOT recordName IN %@", jobRecordNames)
