@@ -373,7 +373,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                 do {
                                     try? FileManager.default.copyItem(at: location, to: tmpUrl)
                                     
-                                    if let attachment = try? UNNotificationAttachment(identifier: "", url: tmpUrl, options: nil) {
+                                    if let attachment = try? UNNotificationAttachment(identifier: "", url: tmpUrl, options: [UNNotificationAttachmentOptionsThumbnailHiddenKey: 1]) {
                                         content.attachments = [attachment]
                                         
                                         //we're only showing the notification if the image is present currently
@@ -387,6 +387,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                         }
                                     }
                                 }
+//                                self.fetchRecord(withRecordID: id, perRecordCompletion: { (fetchedRecord, error) in
+//
+//                                    guard error == nil else {
+//                                        return
+//                                    }
+//                                    if let record = fetchedRecord {
+//                                    let job = Job.job(forRecord: record)
+//                                        let realm = try! Realm()
+//
+//                                        try! realm.write {
+//                                            realm.add(job, update: true)
+//                                        }
+//                                    }
+//                                })
                             }
                         }) .resume()
                     }
