@@ -81,7 +81,6 @@ class JobsViewController: UICollectionViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         self.fetchJobs()
     }
 
@@ -150,11 +149,11 @@ class JobsViewController: UICollectionViewController {
          let subscription = CKQuerySubscription(recordType: "Job", predicate: NSPredicate(format: "TRUEPREDICATE"), options: .firesOnRecordCreation)
 
         let info = CKNotificationInfo()
-
-        info.alertBody = NSLocalizedString("A new job has been added!")
+        info.desiredKeys = ["title","author","logoUrl"]
         info.shouldBadge = true
-        info.category = "JOB"
-
+        info.shouldSendContentAvailable = true
+        info.category = "nl.cocoaheads.app.CocoaHeadsNL.jobNotification"
+        
         subscription.notificationInfo = info
 
         publicDB.save(subscription, completionHandler: { record, error in }) 

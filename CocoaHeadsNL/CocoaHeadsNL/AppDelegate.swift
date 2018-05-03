@@ -84,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                print("item Notification")
             } else if aps["category"] as? String == "MEETUP" {
                 self.presentMeetupsViewController()
-            } else if aps["category"] as? String == "JOB" {
+            } else if aps["category"] as? String == "nl.cocoaheads.app.CocoaHeadsNL.jobNotification" {
                 self.presentJobsViewController()
             } else if aps["category"] as? String == "COMPANY" {
                 self.presentCompaniesViewController()
@@ -187,7 +187,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                  title: "Open Jobs",
                                                  options: [.foreground])
         
-        let jobCategory = UNNotificationCategory(identifier: "JOB",
+        let jobCategory = UNNotificationCategory(identifier: "nl.cocoaheads.app.CocoaHeadsNL.jobNotification",
                                                  actions: [openJobAction],
                                                  intentIdentifiers: [],
                                                  options: [.customDismissAction])
@@ -306,7 +306,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func handleRemoteNotification(notification:CKQueryNotification? ) {
         
         let content = UNMutableNotificationContent()
-        
+    
         if let category = notification?.category {
             
             if category == "nl.cocoaheads.app.CocoaHeadsNL.generalNotification" {
@@ -351,16 +351,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         }) .resume()
                     }
                 }
+            } else if category == "nl.cocoaheads.app.CocoaHeadsNL.jobNotification" {
+                
+                if let note = notification, let category = note.category, let title = note.recordFields?["title"] as? String, let author = note.recordFields?["author"] as? String, let logoUrlString = note.recordFields?["logoUrl"] as? String {
+                    
+                    content.categoryIdentifier = category
+                    content.title = title
+                    content.subtitle = author
+                    content.sound = UNNotificationSound.default()
+                    
+                    if let fileUrl = URL(string: logoUrlString) {
+                        
+                        URLSession.shared.downloadTask(with: fileUrl, completionHandler: { (fileLocation, response, err) in
+                            
+                            //create attachment from file at url in folder
+                            if let location = fileLocation, err == nil {
+                                let tmpDirectory = NSTemporaryDirectory()
+                                let tmpFile = "file:".appending(tmpDirectory).appending(fileUrl.lastPathComponent)
+                                let tmpUrl = URL.init(string: tmpFile)!
+                                
+                                do {
+                                    try? FileManager.default.copyItem(at: location, to: tmpUrl)
+                                    
+                                    if let attachment = try? UNNotificationAttachment(identifier: "", url: tmpUrl, options: nil) {
+                                        content.attachments = [attachment]
+                                        
+                                        //we're only showing the notification if the image is present currently
+                                        let request = UNNotificationRequest(identifier: "generalNotification", content: content, trigger: nil) // Schedule the notification.
+                                        let center = UNUserNotificationCenter.current()
+                                        center.add(request) { (error : Error?) in
+                                            if let theError = error {
+                                                // Handle any errors
+                                                print(theError)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }) .resume()
+                    }
+                }
+                
             } else {
                 
 //                if let note = notification, let category = note.category, let title = note.recordFields?["title"] as? String, let subtitle = note.recordFields?["subtitle"] as? String, let body = note.recordFields?["body"] as? String {
-//                    
+//
 //                    content.categoryIdentifier = category
 //                    content.title = title
 //                    content.subtitle = subtitle
 //                    content.body = body
 //                    content.sound = UNNotificationSound.default()
-//                    
+//
 //                    let request = UNNotificationRequest(identifier: "showNotification", content: content, trigger: nil) // Schedule the notification.
 //                    let center = UNUserNotificationCenter.current()
 //                    center.add(request) { (error : Error?) in
@@ -402,6 +443,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         CKContainer.default().add(badgeResetOperation)
         
         completionHandler()
+    }
+    
+    func fetchRecord(withRecordID recordID: CKRecordID, perRecordCompletion: @escaping (CKRecord?, Error?) -> Void)
+    {
+
+        let publicDB = CKContainer.default().publicCloudDatabase
+        // CKRecordID contains the zone from which the records should be retrieved
+        let fetchRecordsOperation = CKFetchRecordsOperation(recordIDs: [recordID])
+        // recordFetched is a function that gets called for each record retrieved
+        fetchRecordsOperation.perRecordCompletionBlock = { (record: CKRecord?, recordID: CKRecordID?, error: Error?) -> Void in
+            // Continue if there are no errors
+            guard error == nil else {
+                perRecordCompletion(nil, error)
+                return
+            }
+            // Process the record fetched
+            perRecordCompletion(record, error)
+        }
+        publicDB.add(fetchRecordsOperation)
     }
     
      // MARK: UserActivity
