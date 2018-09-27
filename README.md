@@ -1,5 +1,7 @@
 [![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=5942da77ff1ed20001ec5926&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/5942da77ff1ed20001ec5926/build/latest?branch=master)
 
+[![Build status](https://build.appcenter.ms/v0.1/apps/b268db8e-5e09-40fb-9c8e-bd30aac6080a/branches/master/badge)](https://appcenter.ms)
+
 # About this app
 
 **Why an app?** We're a community of mostly mobile developers... so could you imagine we wouldn't? 
