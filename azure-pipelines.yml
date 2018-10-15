@@ -1,0 +1,23 @@
+# Xcode
+# Build, test, and archive an Xcode workspace on macOS.
+# Add steps that install certificates, test, sign, and distribute an app, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/xcode
+
+pool:
+  vmImage: 'macOS 10.13'
+
+steps:
+- task: CocoaPods@0
+  displayName: 'pod install using the CocoaPods task with defaults'
+  inputs:
+    forceRepoUpdate: true
+    workingDirectory: 'CocoaHeadsNL'
+
+- task: Xcode@5
+  inputs:
+    actions: 'build'
+    scheme: 'CocoaHeadsNL'
+    sdk: 'iphoneos'
+    configuration: 'Debug'
+#    xcodeVersion: '10'
+    xcWorkspacePath: 'CocoaHeadsNL/CocoaHeadsNL.xcworkspace'
