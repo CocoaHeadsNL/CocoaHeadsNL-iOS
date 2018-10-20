@@ -6,6 +6,10 @@
 pool:
   vmImage: 'macOS 10.13'
 
+trigger:
+- master
+- feature/*
+
 steps:
 - task: CocoaPods@0
   displayName: 'pod install using the CocoaPods task with defaults'
