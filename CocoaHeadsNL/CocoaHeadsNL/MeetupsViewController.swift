@@ -331,8 +331,9 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         label.text = sectionTitles[section]
         label.textAlignment = .center
         label.textColor = UIColor(white: 0.5, alpha: 0.8)
+        label.backgroundColor = UIColor(white: 0.95, alpha: 0.95)
         label.sizeToFit()
-        label.backgroundColor = UIColor(white: 0.95, alpha: 0.5)
+
         return label
     }
 
