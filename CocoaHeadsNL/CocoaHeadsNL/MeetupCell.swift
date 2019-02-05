@@ -18,7 +18,8 @@ class MeetupCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var dateContainer: UIView!
-    @IBOutlet weak var calendarView: UIView!
+    @IBOutlet weak var monthBackgroundView: UIView!
+    @IBOutlet weak var dayBackgroundView: UIView!
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var rsvpLabel: UILabel!
@@ -59,7 +60,7 @@ class MeetupCell: UITableViewCell {
 
             if meetup.isToday || meetup.isUpcoming {
                 dayLabel.textColor = UIColor.black
-                calendarView.backgroundColor = meetup.isToday ? UIColorWithRGB(127, green: 214, blue: 33) : UIColorWithRGB(232, green: 88, blue: 80)
+                monthBackgroundView.backgroundColor = meetup.isToday ? UIColorWithRGB(127, green: 214, blue: 33) : UIColorWithRGB(232, green: 88, blue: 80)
 
 
                 if meetup.yes_rsvp_count.int32Value > 0{
@@ -75,7 +76,7 @@ class MeetupCell: UITableViewCell {
                 }
             } else {
                 dayLabel.textColor = UIColor(white: 0, alpha: 0.65)
-                calendarView.backgroundColor = UIColorWithRGB(169, green: 166, blue: 166)
+                monthBackgroundView.backgroundColor = UIColorWithRGB(169, green: 166, blue: 166)
 
                 rsvpLabel.text = "\(meetup.yes_rsvp_count.int32Value) \(NSLocalizedString("CocoaHeads had a blast"))"
             }
@@ -86,11 +87,19 @@ class MeetupCell: UITableViewCell {
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-        monthLabel.textColor = highlighted ? UIColor.black : UIColor.white
+
+        if highlighted {
+            monthBackgroundView.backgroundColor = .gray
+            dayBackgroundView.backgroundColor = UIColor(white: 1, alpha: 0.4)
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        monthLabel.textColor = selected ? UIColor.black : UIColor.white
+
+        if selected {
+            monthBackgroundView.backgroundColor = .gray
+            dayBackgroundView.backgroundColor = UIColor(white: 1, alpha: 0.4)
+        }
     }
 }
