@@ -12,12 +12,12 @@ import UIKit
 class SplitViewController: UISplitViewController, UISplitViewControllerDelegate {
     override func viewDidLoad() {
         self.delegate = self
-        self.preferredDisplayMode = UISplitViewControllerDisplayMode.allVisible
+        self.preferredDisplayMode = UISplitViewController.DisplayMode.allVisible
 
         NotificationCenter.default.addObserver(self, selector: #selector(SplitViewController.searchNotification(_:)), name: NSNotification.Name(rawValue: searchNotificationName), object: nil)
 
         //Inspect paste board for userInfo
-        if let pasteBoard = UIPasteboard(name: UIPasteboardName(rawValue: searchPasteboardName), create: false) {
+        if let pasteBoard = UIPasteboard(name: UIPasteboard.Name(rawValue: searchPasteboardName), create: false) {
             let uniqueIdentifier = pasteBoard.string
             if let components = uniqueIdentifier?.components(separatedBy: ":") {
                 if components.count > 0 {
@@ -59,7 +59,7 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
     }
 
     func splitViewController(_ splitViewController: UISplitViewController, separateSecondaryFrom primaryViewController: UIViewController) -> UIViewController? {
-        if let tabBarController = primaryViewController as? UITabBarController, let navigationController = tabBarController.selectedViewController as? UINavigationController, navigationController.childViewControllers.count > 1 {
+        if let tabBarController = primaryViewController as? UITabBarController, let navigationController = tabBarController.selectedViewController as? UINavigationController, navigationController.children.count > 1 {
             guard let poppedControllers = navigationController.popToRootViewController(animated: false) else {
                 return nil
             }

@@ -143,7 +143,7 @@ class LocatedCompaniesViewController: UITableViewController {
 
         let subscription = CKQuerySubscription(recordType: "Companies", predicate: NSPredicate(format: "TRUEPREDICATE"), options: .firesOnRecordCreation)
 
-        let info = CKNotificationInfo()
+        let info = CKSubscription.NotificationInfo()
 
         info.alertBody = NSLocalizedString("A new company has been added!")
         info.shouldBadge = true

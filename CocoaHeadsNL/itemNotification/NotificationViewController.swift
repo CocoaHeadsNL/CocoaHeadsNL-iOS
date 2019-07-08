@@ -25,7 +25,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     func didReceive(_ notification: UNNotification) {
         
         if let userInfo = notification.request.content.userInfo as NSDictionary as? [String: Any] {
-            let ck = CKQueryNotification.init(fromRemoteNotificationDictionary: userInfo)
+            let ck = CKQueryNotification.init(fromRemoteNotificationDictionary: userInfo)!
             
             if let title = ck.recordFields?["title"] as? String,
                 let name = ck.recordFields?["name"] as? String {

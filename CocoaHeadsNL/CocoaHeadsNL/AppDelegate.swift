@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        if let pasteboard = UIPasteboard(name: UIPasteboardName(rawValue: "searchPasteboardName"), create: false) {
+        if let pasteboard = UIPasteboard(name: UIPasteboard.Name(rawValue: "searchPasteboardName"), create: false) {
             pasteboard.string = ""
         }
 
@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
 
-        let cloudKitNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String: NSObject])
+        let cloudKitNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String: NSObject])!
         if cloudKitNotification.notificationType == .query,
             let queryNotification = cloudKitNotification as? CKQueryNotification {
             //TODO: handle the different notifications to show the correct items
@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         Fabric.with([Crashlytics.self])
 
         let notificationTypes: UIUserNotificationType = [.alert, .badge, .sound]
@@ -77,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if #available(iOS 9.0, *) {
             if userActivity.activityType == CSSearchableItemActionType {
                 let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as! String
@@ -86,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let objectId = components[1]
                 if type == "job" || type == "meetup" {
                     //post uniqueIdentifier string to paste board
-                    let pasteboard = UIPasteboard(name: UIPasteboardName(rawValue: "searchPasteboardName"), create: true)
+                    let pasteboard = UIPasteboard(name: UIPasteboard.Name(rawValue: "searchPasteboardName"), create: true)
                     pasteboard?.string = uniqueIdentifier
 
                     //open tab, select based on uniqueId

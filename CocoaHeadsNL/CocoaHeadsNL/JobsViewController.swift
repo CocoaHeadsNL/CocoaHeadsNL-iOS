@@ -49,7 +49,7 @@ class JobsViewController: UICollectionViewController {
         self.navigationItem.setupForRootViewController(withTitle: accessibilityLabel)
 
         //Inspect paste board for userInfo
-        if let pasteBoard = UIPasteboard(name: UIPasteboardName(rawValue: searchPasteboardName), create: false) {
+        if let pasteBoard = UIPasteboard(name: UIPasteboard.Name(rawValue: searchPasteboardName), create: false) {
             let uniqueIdentifier = pasteBoard.string
             if let components = uniqueIdentifier?.components(separatedBy: ":") {
                 if components.count > 1 && components[0] == "job"{
@@ -135,7 +135,7 @@ class JobsViewController: UICollectionViewController {
 
          let subscription = CKQuerySubscription(recordType: "Job", predicate: NSPredicate(format: "TRUEPREDICATE"), options: .firesOnRecordCreation)
 
-        let info = CKNotificationInfo()
+        let info = CKSubscription.NotificationInfo()
         info.desiredKeys = ["title", "author", "logoUrl"]
         info.shouldBadge = true
         info.shouldSendContentAvailable = true

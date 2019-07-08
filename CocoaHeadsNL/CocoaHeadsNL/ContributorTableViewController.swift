@@ -98,14 +98,14 @@ class ContributorTableViewController: UITableViewController {
         }
         cell.textLabel?.text = contributor.name ?? NSLocalizedString("Anonymous")
 
-        cell.accessibilityTraits = cell.accessibilityTraits | UIAccessibilityTraitButton
+        cell.accessibilityTraits = UIAccessibilityTraits(rawValue: cell.accessibilityTraits.rawValue | UIAccessibilityTraits.button.rawValue)
         cell.accessibilityHint = NSLocalizedString("Double-tap to open the Github profile page of \(contributor.name ?? NSLocalizedString("this contributor")) in Safari.")
 
         return cell
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -129,7 +129,7 @@ class ContributorTableViewController: UITableViewController {
 
         if let urlString = urlString, let url = URL(string: urlString) {
             if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url, options: [:], completionHandler: { (_) in
+                UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: { (_) in
                 })
             }
         }
@@ -247,4 +247,9 @@ class ContributorFetchedResultsControllerDelegate: NSObject, FetchedResultsContr
             tableView.deleteSections(IndexSet(integer: index), with: .automatic)
         }
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

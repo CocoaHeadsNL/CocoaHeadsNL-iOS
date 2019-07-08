@@ -145,7 +145,7 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
 
             if let meetup = self.dataSource.object as? Meetup, let meetupId = meetup.meetupId {
                 if let URL = URL(string: "http://www.meetup.com/CocoaHeadsNL/events/\(meetupId)/") {
-                    UIApplication.shared.open(URL, options: [:], completionHandler: { (_) in
+                    UIApplication.shared.open(URL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: { (_) in
                     })
                 }
             }
@@ -153,4 +153,9 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
 
         return [rsvpAction, shareAction]
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

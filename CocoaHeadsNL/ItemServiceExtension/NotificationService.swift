@@ -22,7 +22,7 @@ class NotificationService: UNNotificationServiceExtension {
         if let bestAttemptContent = bestAttemptContent {
             
             if let userInfo = request.content.userInfo as NSDictionary as? [String: Any] {
-                let ck = CKQueryNotification.init(fromRemoteNotificationDictionary: userInfo)
+                let ck = CKQueryNotification.init(fromRemoteNotificationDictionary: userInfo)!
                 
                 if let title = ck.recordFields?["title"] as? String,
                     let name = ck.recordFields?["name"] as? String,

@@ -127,7 +127,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         self.navigationController?.tabBarItem.selectedImage = calendarIcon
 
         //Inspect paste board for userInfo
-        if let pasteBoard = UIPasteboard(name: UIPasteboardName(rawValue: searchPasteboardName), create: false) {
+        if let pasteBoard = UIPasteboard(name: UIPasteboard.Name(rawValue: searchPasteboardName), create: false) {
             let uniqueIdentifier = pasteBoard.string
             if let components = uniqueIdentifier?.components(separatedBy: ":") {
                 if components.count > 1 {
@@ -149,7 +149,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         self.subscribe()
 
-        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        let activityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
         tableView.backgroundView = activityIndicatorView
         self.activityIndicatorView = activityIndicatorView
     }
@@ -183,7 +183,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         let subscription = CKQuerySubscription(recordType: "Meetup", predicate: NSPredicate(format: "TRUEPREDICATE"), options: .firesOnRecordCreation)
 
-        let info = CKNotificationInfo()
+        let info = CKSubscription.NotificationInfo()
 
         info.alertBody = NSLocalizedString("New meetup has been added!")
         info.shouldBadge = true
@@ -325,7 +325,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {

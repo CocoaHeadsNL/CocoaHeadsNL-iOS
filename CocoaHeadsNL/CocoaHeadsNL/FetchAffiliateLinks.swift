@@ -7,8 +7,8 @@ class FetchAffiliateLinks {
     func fetchLinksForCompany(_ company: Company, completion: @escaping () -> Void) {
         if let recordName = company.recordName {
 
-            let recordID = CKRecordID(recordName: recordName)
-            let reference = CKReference(recordID: recordID, action: .none)
+            let recordID = CKRecord.ID(recordName: recordName)
+            let reference = CKRecord.Reference(recordID: recordID, action: .none)
             let pred = NSPredicate(format: "company == %@", reference)
             let refQuery = CKQuery(recordType: "AffiliateLinks", predicate: pred)
             let sort = NSSortDescriptor(key: "productName", ascending: false)

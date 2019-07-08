@@ -14,8 +14,8 @@ import CoreData
 
 let indexQueue = OperationQueue()
 
-var jobsIndexBackgroundTaskID = UIBackgroundTaskInvalid
-var meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
+var jobsIndexBackgroundTaskID = UIBackgroundTaskIdentifier.invalid
+var meetupsIndexBackgroundTaskID = UIBackgroundTaskIdentifier.invalid
 
 extension AffiliateLink {
 //    let recordID: CKRecordID
@@ -40,7 +40,7 @@ extension Company {
 
     static func company(forRecord record: CKRecord, on context: NSManagedObjectContext) -> Company {
         let newCompany = Company(context: context)
-        newCompany.recordName = (record.recordID as CKRecordID?)?.recordName
+        newCompany.recordName = (record.recordID as CKRecord.ID?)?.recordName
         newCompany.name = record["name"] as? String
         newCompany.place = record["place"] as? String
         newCompany.streetAddress = record["streetAddress"] as? String
@@ -52,10 +52,10 @@ extension Company {
         newCompany.longitude = (record["location"] as? CLLocation)?.coordinate.longitude ?? 0.0
 
         if let logoAsset = record["logo"] as? CKAsset {
-            newCompany.logo = try? NSData(contentsOf: logoAsset.fileURL)
+            newCompany.logo = try? NSData(contentsOf: logoAsset.fileURL!)
         }
         if let logoAsset = record["smallLogo"] as? CKAsset {
-            newCompany.smallLogo = try? NSData(contentsOf: logoAsset.fileURL)
+            newCompany.smallLogo = try? NSData(contentsOf: logoAsset.fileURL!)
         }
 
         return newCompany
@@ -137,7 +137,7 @@ extension Job {
                 }
             }
             attributeSet.creator = "CocoaHeadsNL"
-            attributeSet.thumbnailData = UIImagePNGRepresentation(logoImage)
+            attributeSet.thumbnailData = logoImage.pngData()
 
             return attributeSet
         }
@@ -147,13 +147,13 @@ extension Job {
         if #available(iOS 9.0, *) {
             indexQueue.addOperation({ () -> Void in
 
-                guard jobsIndexBackgroundTaskID == UIBackgroundTaskInvalid else {
+                guard jobsIndexBackgroundTaskID == UIBackgroundTaskIdentifier.invalid else {
                     return
                 }
 
                 jobsIndexBackgroundTaskID = UIApplication.shared.beginBackgroundTask(expirationHandler: { () -> Void in
-                    UIApplication.shared.endBackgroundTask(jobsIndexBackgroundTaskID)
-                    jobsIndexBackgroundTaskID = UIBackgroundTaskInvalid
+                    UIApplication.shared.endBackgroundTask(convertToUIBackgroundTaskIdentifier(jobsIndexBackgroundTaskID.rawValue))
+                    jobsIndexBackgroundTaskID = UIBackgroundTaskIdentifier.invalid
                 })
 
                 var searchableItems = [CSSearchableItem]()
@@ -174,8 +174,8 @@ extension Job {
                     }
                 })
 
-                UIApplication.shared.endBackgroundTask(jobsIndexBackgroundTaskID)
-                jobsIndexBackgroundTaskID = UIBackgroundTaskInvalid
+                UIApplication.shared.endBackgroundTask(convertToUIBackgroundTaskIdentifier(jobsIndexBackgroundTaskID.rawValue))
+                jobsIndexBackgroundTaskID = UIBackgroundTaskIdentifier.invalid
             })
         }
     }
@@ -185,7 +185,7 @@ extension Meetup {
 
     static func meetup(forRecord record: CKRecord, on context: NSManagedObjectContext) -> Meetup {
         let meetup = Meetup(context: context)
-        meetup.recordName = (record.recordID as CKRecordID?)?.recordName
+        meetup.recordName = (record.recordID as CKRecord.ID?)?.recordName
         meetup.name = record["name"] as? String ?? ""
         meetup.meetupId = record["meetup_id"] as? String
         meetup.meetupDescription = record["meetup_description"] as? String ?? ""
@@ -204,10 +204,10 @@ extension Meetup {
         meetup.meetupUrl = record.object(forKey: "meetup_url") as? String
 
         if let logoAsset = record["logo"] as? CKAsset {
-            meetup.logo = try? NSData(contentsOf: logoAsset.fileURL)
+            meetup.logo = try? NSData(contentsOf: logoAsset.fileURL!)
         }
         if let logoAsset = record["smallLogo"] as? CKAsset {
-            meetup.smallLogo = try? NSData(contentsOf: logoAsset.fileURL)
+            meetup.smallLogo = try? NSData(contentsOf: logoAsset.fileURL!)
         }
 
         return meetup
@@ -267,7 +267,7 @@ extension Meetup {
             }
 
             attributeSet.keywords = keywords
-            attributeSet.thumbnailData = UIImagePNGRepresentation(smallLogoImage)
+            attributeSet.thumbnailData = smallLogoImage.pngData()
 
             return attributeSet
         }
@@ -277,13 +277,13 @@ extension Meetup {
         if #available(iOS 9.0, *) {
             indexQueue.addOperation({ () -> Void in
 
-                guard meetupsIndexBackgroundTaskID == UIBackgroundTaskInvalid else {
+                guard meetupsIndexBackgroundTaskID == UIBackgroundTaskIdentifier.invalid else {
                     return
                 }
 
                 meetupsIndexBackgroundTaskID = UIApplication.shared.beginBackgroundTask(expirationHandler: { () -> Void in
-                    UIApplication.shared.endBackgroundTask(jobsIndexBackgroundTaskID)
-                    meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
+                    UIApplication.shared.endBackgroundTask(convertToUIBackgroundTaskIdentifier(jobsIndexBackgroundTaskID.rawValue))
+                    meetupsIndexBackgroundTaskID = UIBackgroundTaskIdentifier.invalid
                 })
 
                 var searchableItems = [CSSearchableItem]()
@@ -304,8 +304,8 @@ extension Meetup {
                     }
                 })
 
-                UIApplication.shared.endBackgroundTask(jobsIndexBackgroundTaskID)
-                meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
+                UIApplication.shared.endBackgroundTask(convertToUIBackgroundTaskIdentifier(jobsIndexBackgroundTaskID.rawValue))
+                meetupsIndexBackgroundTaskID = UIBackgroundTaskIdentifier.invalid
             })
         }
     }
@@ -322,3 +322,8 @@ private let dateOnlyFormatter: DateFormatter = {
 
     return dateFormatter
 }()
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIBackgroundTaskIdentifier(_ input: Int) -> UIBackgroundTaskIdentifier {
+	return UIBackgroundTaskIdentifier(rawValue: input)
+}

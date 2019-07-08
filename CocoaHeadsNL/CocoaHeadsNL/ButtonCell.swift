@@ -13,7 +13,7 @@ class ButtonCell: UITableViewCell {
     @IBOutlet weak var titleButton: UIButton!
     @IBAction func buttonPressed(_ sender: AnyObject) {
         if let url = selectURL() {
-            UIApplication.shared.open(url, options: [:], completionHandler: { (_) in
+            UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: { (_) in
             })
         }
     }
@@ -49,4 +49,9 @@ class ButtonCell: UITableViewCell {
     }
 
     var urlString: String?
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }
