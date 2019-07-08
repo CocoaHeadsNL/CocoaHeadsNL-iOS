@@ -30,7 +30,7 @@ class ContributorTableViewController: UITableViewController {
     }()
 
     lazy var contributors: [Contributor] = {
-        return try? Contributor.allInContext(CoreDataStack.shared.viewContext, sortDescriptors: [NSSortDescriptor(key: "commit_count", ascending: false)])
+        return try? Contributor.allInContext(CoreDataStack.shared.viewContext, sortDescriptors: [NSSortDescriptor(key: "commitCount", ascending: false)])
         }() ?? []
 
     //MARK: - View LifeCycle

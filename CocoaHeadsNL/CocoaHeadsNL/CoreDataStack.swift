@@ -14,13 +14,13 @@ final class CoreDataStack {
 
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Model")
-        container.viewContext.automaticallyMergesChangesFromParent = true
         container.loadPersistentStores { (_, error) in
             if let error = error {
                 print("Unable to Load Persistent Store")
                 print("\(error), \(error.localizedDescription)")
             }
         }
+        container.viewContext.automaticallyMergesChangesFromParent = true
 
         return container
     }()
