@@ -165,11 +165,12 @@ class ContributorTableViewController: UITableViewController {
         let operation = CKQueryOperation(query: query)
         operation.qualityOfService = .userInteractive
 
-        var cloudContributors = [Contributor]()
+        let context = CoreDataStack.shared.newBackgroundContext
 
         operation.recordFetchedBlock = { (record) in
-            let contributor = Contributor.contributor(forRecord: record, on: CoreDataStack.shared.viewContext)
-            cloudContributors.append(contributor)
+            context.perform {
+                _ = try? Contributor.contributor(forRecord: record, on: context)
+            }
         }
 
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
@@ -179,7 +180,9 @@ class ContributorTableViewController: UITableViewController {
                     self?.present(ac, animated: true, completion: nil)
                     return
                 }
-                CoreDataStack.shared.viewContext.saveContext()
+                context.perform {
+                    context.saveContextToStore()
+                }
             }
         }
 

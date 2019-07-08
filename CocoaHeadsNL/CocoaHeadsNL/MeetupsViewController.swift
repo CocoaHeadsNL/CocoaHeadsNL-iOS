@@ -31,12 +31,10 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         return MeetupFetchedResultsControllerDelegate(tableView: self.tableView)
     }()
 
-    var meetupsByYear: [String: [Meetup]] {
-        get {
-            return [:]
-            // TODO: fix meetups by year
-            // I am assuming ordering stays correct due to FIFO behavior.
-//            var meetupsByYear = meetupsArray.reduce([String: [Meetup]]()) { (previousResult, meetup) -> [String: [Meetup]] in
+//    var meetupsByYear: [String: [Meetup]] {
+//        get {
+//            // I am assuming ordering stays correct due to FIFO behavior.
+//            var meetupsByYear = fetchedResultsController.fetchedObjects?.reduce([String: [Meetup]]()) { (previousResult, meetup) -> [String: [Meetup]] in
 //                guard let meetupTime = meetup.time else {
 //                    return previousResult
 //                }
@@ -65,39 +63,39 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 //            }
 //
 //            // Inverse the sorting of upcoming meetups.
-//            if let upcomingMeetups = meetupsByYear[NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")] {
-//                meetupsByYear[NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")] = upcomingMeetups.reversed()
+//            if let upcomingMeetups = meetupsByYear?[NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")] {
+//                meetupsByYear?[NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")] = upcomingMeetups.reversed()
 //            }
 //
-//            return meetupsByYear
-        }
-    }
+//            return meetupsByYear ?? [:]
+//        }
+//    }
 
-    fileprivate var sectionTitles: [String] {
-        get {
-            let sections = meetupsByYear.keys
-            let today = sections.filter { $0 == NSLocalizedString("Today", comment: "Section title for todays meetup.") }
-            let upcoming = sections.filter { $0 == NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.") }
+//    fileprivate var sectionTitles: [String] {
+//        get {
+//            let sections = meetupsByYear.keys
+//            let today = sections.filter { $0 == NSLocalizedString("Today", comment: "Section title for todays meetup.") }
+//            let upcoming = sections.filter { $0 == NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.") }
+//
+//            let rest = sections
+//                .filter { section in
+//                    return section != NSLocalizedString("Today", comment: "Section title for todays meetup.")
+//                        && section != NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")
+//                }
+//                .sorted()
+//                .reversed()
+//
+//            return today + upcoming + rest
+//        }
+//    }
 
-            let rest = sections
-                .filter { section in
-                    return section != NSLocalizedString("Today", comment: "Section title for todays meetup.")
-                        && section != NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")
-                }
-                .sorted()
-                .reversed()
+//    fileprivate func meetups(forSection section: Int) -> [Meetup] {
+//        return meetupsByYear[sectionTitles[section]]!
+//    }
 
-            return today + upcoming + rest
-        }
-    }
-
-    fileprivate func meetups(forSection section: Int) -> [Meetup] {
-        return meetupsByYear[sectionTitles[section]]!
-    }
-
-    fileprivate func meetup(for indexPath: IndexPath) -> Meetup {
-        return meetups(forSection: indexPath.section)[indexPath.row]
-    }
+//    fileprivate func meetup(for indexPath: IndexPath) -> Meetup {
+//        return meetups(forSection: indexPath.section)[indexPath.row]
+//    }
 
     var searchedObjectId: String?
 
@@ -203,7 +201,13 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         if #available(iOS 9.0, *) {
 
-            let meetup = self.meetup(for: indexPath)
+            guard let sections = fetchedResultsController.sections else {
+                fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
+            }
+
+            let section = sections[indexPath.section]
+            let meetup = section.objects[indexPath.row]
+
             detailVC.dataSource = MeetupDataSource(object: meetup )
             detailVC.presentingVC  = self
 
@@ -272,7 +276,13 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                 detailViewController.dataSource = MeetupDataSource(object: selectedObject)
 
             } else if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
-                let meetup = self.meetup(for: indexPath)
+                guard let sections = fetchedResultsController.sections else {
+                    fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
+                }
+
+                let section = sections[indexPath.section]
+                let meetup = section.objects[indexPath.row]
+
                 let detailViewController = segue.destination as! DetailViewController
                 detailViewController.dataSource = MeetupDataSource(object: meetup)
             }
@@ -281,12 +291,18 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
     // MARK: - UITableViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return meetupsByYear.keys.count
+        return fetchedResultsController.sectionCount
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel(frame: .zero)
-        label.text = sectionTitles[section]
+        guard let sections = fetchedResultsController.sections else {
+            fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
+        }
+
+        let sectionInfo = sections[section]
+
+        label.text = sectionInfo.name
         label.textAlignment = .center
         label.textColor = UIColor(white: 0.5, alpha: 0.8)
         label.backgroundColor = UIColor(white: 0.95, alpha: 0.95)
@@ -296,15 +312,20 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return meetups(forSection: section).count
-//        return meetupsByYearSection[section].1.count
+        return fetchedResultsController.sections?[section].objects.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: MeetupCell.Identifier, for: indexPath) as! MeetupCell
 
-        let meetup = self.meetup(for: indexPath)
+        guard let sections = fetchedResultsController.sections else {
+            fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
+        }
+
+        let section = sections[indexPath.section]
+        let meetup = section.objects[indexPath.row]
+
         cell.configureCellForMeetup(meetup)
 
         return cell
@@ -340,11 +361,16 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         var meetups = [Meetup]()
 
+        let context = CoreDataStack.shared.newBackgroundContext
+
         operation.recordFetchedBlock = { (record) in
-            let meetup = Meetup.meetup(forRecord: record, on: CoreDataStack.shared.viewContext)
-            _ = meetup.smallLogoImage
-            _ = meetup.logoImage
-            meetups.append(meetup)
+            context.perform {
+                if let meetup = try? Meetup.meetup(forRecord: record, on: context) {
+                    _ = meetup.smallLogoImage
+                    _ = meetup.logoImage
+                    meetups.append(meetup)
+                }
+            }
         }
 
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
@@ -355,16 +381,15 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                     return
                 }
 
-                let meetupNames = meetups.compactMap ({ $0.recordName })
-                let predicate = NSPredicate(format: "NOT recordName IN %@", meetupNames)
-                // TODO: write meetups to CoreData
-//                let obsoleteMeetups = self?.realm.objects(Meetup.self).filter(predicate)
-//                self?.realm.beginWrite()
-//                self?.realm.add(meetups, update: true)
-//                if let obsoleteMeetups = obsoleteMeetups {
-//                    self?.realm.delete(obsoleteMeetups)
-//                }
-//                try! self?.realm.commitWrite()
+                context.performAndWait {
+                    do {
+                        try Meetup.removeAllInContext(context, except: meetups)
+                        context.saveContextToStore()
+                    } catch {
+                        // Do nothing
+                        print("Error while updating meetups: \(error)")
+                    }
+                }
 
                 self?.activityIndicatorView.stopAnimating()
                 self?.activityIndicatorView.hidesWhenStopped = true

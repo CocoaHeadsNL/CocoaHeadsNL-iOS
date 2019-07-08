@@ -28,4 +28,8 @@ final class CoreDataStack {
     var viewContext: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
+
+    var newBackgroundContext: NSManagedObjectContext {
+        return persistentContainer.newBackgroundContext()
+    }
 }

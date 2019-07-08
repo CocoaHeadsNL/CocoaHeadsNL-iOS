@@ -199,10 +199,15 @@ class JobsViewController: UICollectionViewController {
 
         var jobs = [Job]()
 
+        let context = CoreDataStack.shared.newBackgroundContext
+        
         operation.recordFetchedBlock = { (record) in
-            let job = Job.job(forRecord: record, on: CoreDataStack.shared.viewContext)
-            _ = job.logoImage
-            jobs.append(job)
+            context.perform {
+                if let job = try? Job.job(forRecord: record, on: context) {
+                    _ = job.logoImage
+                    jobs.append(job)
+                }
+            }
         }
 
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
@@ -213,18 +218,15 @@ class JobsViewController: UICollectionViewController {
                     return
                 }
 
-                let jobRecordNames = jobs.compactMap ({ (job) -> String? in
-                    return job.recordName
-                })
-                let predicate = NSPredicate(format: "NOT recordName IN %@", jobRecordNames)
-                // TODO: insert into CoreData
-//                let obsoleteJobs = self?.realm.objects(Job.self).filter(predicate)
-//                self?.realm.beginWrite()
-//                self?.realm.add(jobs, update: true)
-//                if let obsoleteJobs = obsoleteJobs {
-//                    self?.realm.delete(obsoleteJobs)
-//                }
-//                try! self?.realm.commitWrite()
+                context.performAndWait {
+                    do {
+                        try Job.removeAllInContext(context, except: jobs)
+                        context.saveContextToStore()
+                    } catch {
+                        // Do nothing
+                        print("Error while updating jobs: \(error)")
+                    }
+                }
 
                 self?.activityIndicator.stopAnimating()
             }
@@ -248,11 +250,9 @@ class JobFetchedResultsControllerDelegate: NSObject, FetchedResultsControllerDel
     }
 
     func fetchedResultsControllerWillChangeContent(_ controller: FetchedResultsController<Job>) {
-//        collectionView?.beginUp
     }
 
     func fetchedResultsControllerDidChangeContent(_ controller: FetchedResultsController<Job>) {
-//        collectionView?.endUpdates()
     }
 
     func fetchedResultsController(_ controller: FetchedResultsController<Job>, didChangeObject change: FetchedResultsObjectChange<Job>) {

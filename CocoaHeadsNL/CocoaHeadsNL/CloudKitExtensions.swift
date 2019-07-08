@@ -52,10 +52,10 @@ extension Company {
         newCompany.longitude = (record["location"] as? CLLocation)?.coordinate.longitude ?? 0.0
 
         if let logoAsset = record["logo"] as? CKAsset {
-            newCompany.logo = try? NSData(contentsOf: logoAsset.fileURL!)
+            newCompany.logo = NSData(contentsOf: logoAsset.fileURL!)
         }
         if let logoAsset = record["smallLogo"] as? CKAsset {
-            newCompany.smallLogo = try? NSData(contentsOf: logoAsset.fileURL!)
+            newCompany.smallLogo = NSData(contentsOf: logoAsset.fileURL!)
         }
 
         return newCompany
@@ -79,22 +79,33 @@ extension Company {
 }
 
 extension Contributor {
-    static func contributor(forRecord record: CKRecord, on context: NSManagedObjectContext) -> Contributor {
-        let contributor = Contributor(context: context)
+    static func contributor(forRecord record: CKRecord, on context: NSManagedObjectContext) throws -> Contributor? {
+        guard let contributorId = record["contributor_id"] as? Int64 else {
+            return nil
+        }
+
+        let contributor = try Contributor.findFirstInContext(context, predicate: NSPredicate(format: "contributorId == %i", contributorId)) ?? Contributor(context: context)
+
         contributor.recordName = record.recordID.recordName
         contributor.name = record["name"] as? String ?? ""
         contributor.url = record["url"] as? String ?? ""
         contributor.avatarUrl = record["avatar_url"] as? String ?? ""
         contributor.contributorId = record["contributor_id"] as? Int64 ?? 0
         contributor.commitCount = Int32(record["commit_count"] as? Int ?? 0)
+        
         return contributor
     }
 
 }
 
 extension Job {
-    static func job(forRecord record: CKRecord, on context: NSManagedObjectContext) -> Job {
-        let job = Job(context: context)
+    static func job(forRecord record: CKRecord, on context: NSManagedObjectContext) throws -> Job? {
+
+        guard let jobLink = record["link"] as? String else {
+            return nil
+        }
+
+        let job = try Job.findFirstInContext(context, predicate: NSPredicate(format: "link == %@", jobLink)) ?? Job(context: context)
 
         job.recordName = record.recordID.recordName
         job.content = record["content"] as? String ?? ""
@@ -183,8 +194,14 @@ extension Job {
 
 extension Meetup {
 
-    static func meetup(forRecord record: CKRecord, on context: NSManagedObjectContext) -> Meetup {
-        let meetup = Meetup(context: context)
+    static func meetup(forRecord record: CKRecord, on context: NSManagedObjectContext) throws -> Meetup? {
+
+        guard let meetupId = record["meetup_id"] as? String else {
+            return nil
+        }
+
+        let meetup = try Meetup.findFirstInContext(context, predicate: NSPredicate(format: "meetupId == %@", meetupId)) ?? Meetup(context: context)
+
         meetup.recordName = (record.recordID as CKRecord.ID?)?.recordName
         meetup.name = record["name"] as? String ?? ""
         meetup.meetupId = record["meetup_id"] as? String
@@ -204,10 +221,10 @@ extension Meetup {
         meetup.meetupUrl = record.object(forKey: "meetup_url") as? String
 
         if let logoAsset = record["logo"] as? CKAsset {
-            meetup.logo = try? NSData(contentsOf: logoAsset.fileURL!)
+            meetup.logo = NSData(contentsOf: logoAsset.fileURL!)
         }
         if let logoAsset = record["smallLogo"] as? CKAsset {
-            meetup.smallLogo = try? NSData(contentsOf: logoAsset.fileURL!)
+            meetup.smallLogo = NSData(contentsOf: logoAsset.fileURL!)
         }
 
         return meetup
