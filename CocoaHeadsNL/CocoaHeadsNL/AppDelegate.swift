@@ -53,10 +53,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
 
-        let cloudKitNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String : NSObject])
+        let cloudKitNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String: NSObject])
         if cloudKitNotification.notificationType == .query,
             let queryNotification = cloudKitNotification as? CKQueryNotification {
-            //TODO handle the different notifications to show the correct items
+            //TODO: handle the different notifications to show the correct items
             let recordID = queryNotification.recordID
             print(recordID as Any)
             //...
@@ -90,7 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     pasteboard?.string = uniqueIdentifier
 
                     //open tab, select based on uniqueId
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: searchNotificationName), object: self, userInfo: ["type" : type, "objectId": objectId])
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: searchNotificationName), object: self, userInfo: ["type": type, "objectId": objectId])
                     return true
                 }
             }

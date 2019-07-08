@@ -17,7 +17,6 @@ let indexQueue = OperationQueue()
 var jobsIndexBackgroundTaskID = UIBackgroundTaskInvalid
 var meetupsIndexBackgroundTaskID = UIBackgroundTaskInvalid
 
-
 extension AffiliateLink {
 //    let recordID: CKRecordID
 //    let affiliateId: String?
@@ -31,7 +30,7 @@ extension AffiliateLink {
                 newAffiliateLink.affiliateId = record["affiliateId"] as? String
                 newAffiliateLink.productName = record["productName"] as? String
                 newAffiliateLink.productCreator = record["productCreator"] as? String
-//TODO                newAffiliateLink.company = record["company"] as? CKReference
+        //TODO:                newAffiliateLink.company = record["company"] as? CKReference
 
         return newAffiliateLink
     }
@@ -63,7 +62,7 @@ extension Company {
     }
 
     var logoImage: UIImage {
-        if let logo = self.logo, let image = UIImage(data:logo as Data) {
+        if let logo = self.logo, let image = UIImage(data: logo as Data) {
             return image
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
@@ -71,7 +70,7 @@ extension Company {
     }
 
     var smallLogoImage: UIImage {
-        if let logo = self.smallLogo, let image = UIImage(data:logo as Data) {
+        if let logo = self.smallLogo, let image = UIImage(data: logo as Data) {
             return image
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
@@ -117,7 +116,7 @@ extension Job {
     }
 
     var logoImage: UIImage {
-        if let logo = self.logo, let image = UIImage(data:logo as Data) {
+        if let logo = self.logo, let image = UIImage(data: logo as Data) {
             return image
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
@@ -130,7 +129,7 @@ extension Job {
             attributeSet.title = title
             if let data = content?.data(using: String.Encoding.utf8) {
                 do {
-                    let jobDescriptionString = try NSAttributedString(data: data, options:[NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html, NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8], documentAttributes:nil)
+                    let jobDescriptionString = try NSAttributedString(data: data, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html, NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8], documentAttributes: nil)
 
                     attributeSet.contentDescription = jobDescriptionString.string
                 } catch {
@@ -199,9 +198,9 @@ extension Meetup {
 
         meetup.year = Int32(Calendar.current.component(.year, from: meetup.time ?? Date()))
 
-        meetup.duration = Int32(record.object(forKey: "duration") as? NSNumber ?? 0)
-        meetup.rsvpLimit = Int32(record.object(forKey: "rsvp_limit") as? NSNumber ?? 0)
-        meetup.yesRsvpCount = Int32(record.object(forKey: "yes_rsvp_count") as? NSNumber ?? 0)
+        meetup.duration = Int32(truncating: record.object(forKey: "duration") as? NSNumber ?? 0)
+        meetup.rsvpLimit = Int32(truncating: record.object(forKey: "rsvp_limit") as? NSNumber ?? 0)
+        meetup.yesRsvpCount = Int32(truncating: record.object(forKey: "yes_rsvp_count") as? NSNumber ?? 0)
         meetup.meetupUrl = record.object(forKey: "meetup_url") as? String
 
         if let logoAsset = record["logo"] as? CKAsset {
@@ -215,7 +214,7 @@ extension Meetup {
     }
 
     var logoImage: UIImage {
-        if let logo = self.logo, let image = UIImage(data:logo as Data) {
+        if let logo = self.logo, let image = UIImage(data: logo as Data) {
             return image
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
@@ -223,7 +222,7 @@ extension Meetup {
     }
 
     var smallLogoImage: UIImage {
-        if let logo = self.smallLogo, let image = UIImage(data:logo as Data) {
+        if let logo = self.smallLogo, let image = UIImage(data: logo as Data) {
             return image
         } else {
             return UIImage(named: "CocoaHeadsNLLogo")!
@@ -250,7 +249,7 @@ extension Meetup {
             attributeSet.title = name
             if let data = meetupDescription?.data(using: String.Encoding.utf8) {
                 do {
-                    let meetupDescriptionString = try NSAttributedString(data: data, options:[NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html, NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8], documentAttributes:nil)
+                    let meetupDescriptionString = try NSAttributedString(data: data, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html, NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8], documentAttributes: nil)
 
                     attributeSet.contentDescription = meetupDescriptionString.string
                 } catch {

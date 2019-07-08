@@ -33,7 +33,7 @@ class ContributorTableViewController: UITableViewController {
         return try? Contributor.allInContext(CoreDataStack.shared.viewContext, sortDescriptors: [NSSortDescriptor(key: "commitCount", ascending: false)])
         }() ?? []
 
-    //MARK: - View LifeCycle
+    // MARK: - View LifeCycle
 
     @IBOutlet weak var tableHeaderView: UIView!
     @IBOutlet weak var whatIsLabel: UILabel!
@@ -44,7 +44,7 @@ class ContributorTableViewController: UITableViewController {
     override func viewDidLoad() {
 
         super.viewDidLoad()
-        
+
         let backItem = UIBarButtonItem(title: NSLocalizedString("About"), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
@@ -76,7 +76,7 @@ class ContributorTableViewController: UITableViewController {
         self.fetchContributors()
     }
 
-    //MARK: - UITableViewDataSource
+    // MARK: - UITableViewDataSource
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
@@ -89,7 +89,6 @@ class ContributorTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contributorCell", for: indexPath)
 
         let contributor = self.contributors[indexPath.row]
-
 
         if let avatar_url = contributor.avatarUrl, let url = URL(string: avatar_url) {
             let task = fetchImageTask(url, forImageView: cell.imageView!)
@@ -105,7 +104,6 @@ class ContributorTableViewController: UITableViewController {
         return cell
     }
 
-
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
@@ -118,7 +116,7 @@ class ContributorTableViewController: UITableViewController {
         return NSLocalizedString("Contributors to this app")
     }
 
-    //MARK: - UITableViewDelegate
+    // MARK: - UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
@@ -131,7 +129,7 @@ class ContributorTableViewController: UITableViewController {
 
         if let urlString = urlString, let url = URL(string: urlString) {
             if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url, options: [:], completionHandler: { (true) in
+                UIApplication.shared.open(url, options: [:], completionHandler: { (_) in
                 })
             }
         }
@@ -148,14 +146,14 @@ class ContributorTableViewController: UITableViewController {
 
     func fetchImageTask(_ url: URL, forImageView imageView: UIImageView) -> URLSessionDataTask {
         let task = remoteSession.dataTask(with: URLRequest(url: url), completionHandler: {
-            (data, response, error) in
+            (data, _, _) in
             if let data = data {
                 let image = UIImage(data: data)
                 DispatchQueue.main.async {
                     imageView.image = image
                 }
             }
-        }) 
+        })
         return task
     }
 
@@ -168,8 +166,7 @@ class ContributorTableViewController: UITableViewController {
                                        customAttributes: nil)
     }
 
-
-    //MARK: - fetching Cloudkit
+    // MARK: - fetching Cloudkit
 
     func fetchContributors() {
 

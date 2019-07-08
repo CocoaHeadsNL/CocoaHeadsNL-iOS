@@ -17,7 +17,7 @@ class FetchAffiliateLinks {
             let operation = CKQueryOperation(query: refQuery)
 
             var affiliateLinks = [AffiliateLink]()
-            
+
             let context = CoreDataStack.shared.persistentContainer.newBackgroundContext()
             operation.recordFetchedBlock = { (record) in
                 let affLink = AffiliateLink.affiliateLink(forRecord: record, on: context)

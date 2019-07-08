@@ -27,7 +27,7 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
             }
         }
     }
-    @objc func searchNotification(_ notification: Notification) -> Void {
+    @objc func searchNotification(_ notification: Notification) {
         guard let userInfo = (notification as NSNotification).userInfo as? Dictionary<String, String> else {
             return
         }
@@ -49,7 +49,6 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
         }
     }
 
-
     // MARK: - UISplitViewControllerDelegate
 
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
@@ -60,7 +59,7 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
     }
 
     func splitViewController(_ splitViewController: UISplitViewController, separateSecondaryFrom primaryViewController: UIViewController) -> UIViewController? {
-        if let tabBarController = primaryViewController as? UITabBarController, let navigationController = tabBarController.selectedViewController as? UINavigationController , navigationController.childViewControllers.count > 1 {
+        if let tabBarController = primaryViewController as? UITabBarController, let navigationController = tabBarController.selectedViewController as? UINavigationController, navigationController.childViewControllers.count > 1 {
             guard let poppedControllers = navigationController.popToRootViewController(animated: false) else {
                 return nil
             }

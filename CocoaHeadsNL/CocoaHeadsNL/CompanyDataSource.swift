@@ -13,7 +13,7 @@ class CompanyDataSource: DetailDataSource {
     override var title: String? {
         return company.name
     }
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 1:
@@ -90,8 +90,7 @@ class CompanyDataSource: DetailDataSource {
                 let affiliateLink = self.fetchLinks.apps[(indexPath as NSIndexPath).row]
                 let affiliateToken = "1010l8D"
                     if let affiliateId = affiliateLink.affiliateId {
-                        let parameters = [SKStoreProductParameterITunesItemIdentifier :
-                            affiliateId, SKStoreProductParameterAffiliateToken : affiliateToken]
+                        let parameters = [SKStoreProductParameterITunesItemIdentifier: affiliateId, SKStoreProductParameterAffiliateToken: affiliateToken]
 
                         vc.showStoreView(parameters as [String : AnyObject], indexPath: indexPath)
 

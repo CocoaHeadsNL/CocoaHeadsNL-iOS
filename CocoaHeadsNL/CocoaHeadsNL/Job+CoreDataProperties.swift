@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension Job {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Job> {

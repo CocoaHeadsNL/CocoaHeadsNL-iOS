@@ -32,10 +32,9 @@ class JobsViewController: UICollectionViewController {
     return try? Job.allInContext(CoreDataStack.shared.viewContext, sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)])
     }() ?? []
 
-
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    var searchedObjectId: String? = nil
+    var searchedObjectId: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +85,7 @@ class JobsViewController: UICollectionViewController {
                                customAttributes: nil)
     }
 
-    @objc func searchOccured(_ notification: Notification) -> Void {
+    @objc func searchOccured(_ notification: Notification) {
         guard let userInfo = (notification as NSNotification).userInfo as? Dictionary<String, String> else {
             return
         }
@@ -102,7 +101,7 @@ class JobsViewController: UICollectionViewController {
         }
     }
 
-    func displayObject(_ recordName: String) -> Void {
+    func displayObject(_ recordName: String) {
         // if !loading {
         if self.navigationController?.visibleViewController == self {
             let jobs = self.jobsArray
@@ -137,18 +136,17 @@ class JobsViewController: UICollectionViewController {
          let subscription = CKQuerySubscription(recordType: "Job", predicate: NSPredicate(format: "TRUEPREDICATE"), options: .firesOnRecordCreation)
 
         let info = CKNotificationInfo()
-        info.desiredKeys = ["title","author","logoUrl"]
+        info.desiredKeys = ["title", "author", "logoUrl"]
         info.shouldBadge = true
         info.shouldSendContentAvailable = true
         info.category = "nl.cocoaheads.app.CocoaHeadsNL.jobNotification"
-        
+
         subscription.notificationInfo = info
 
-        publicDB.save(subscription, completionHandler: { record, error in }) 
+        publicDB.save(subscription, completionHandler: { _, _ in })
     }
 
-
-    //MARK: - UICollectionViewDataSource methods
+    // MARK: - UICollectionViewDataSource methods
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -172,13 +170,13 @@ class JobsViewController: UICollectionViewController {
 
     }
 
-    //MARK: - UICollectionViewDelegate methods
+    // MARK: - UICollectionViewDelegate methods
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "ShowDetail", sender: collectionView.cellForItem(at: indexPath))
     }
 
-    //MARK: - Segues
+    // MARK: - Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDetail" {
@@ -201,7 +199,7 @@ class JobsViewController: UICollectionViewController {
         }
     }
 
-    //MARK: - fetching Cloudkit
+    // MARK: - fetching Cloudkit
 
     func fetchJobs() {
 
@@ -217,7 +215,7 @@ class JobsViewController: UICollectionViewController {
 
         operation.recordFetchedBlock = { (record) in
             let job = Job.job(forRecord: record, on: CoreDataStack.shared.viewContext)
-            let _ = job.logoImage
+            _ = job.logoImage
             jobs.append(job)
         }
 

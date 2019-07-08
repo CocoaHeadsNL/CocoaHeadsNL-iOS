@@ -23,7 +23,7 @@ class CoreLocationController: NSObject, CLLocationManagerDelegate {
         self.locationManager.requestWhenInUseAuthorization()
     }
 
-    //MARK: - CLLocationManagerDelegate methods
+    // MARK: - CLLocationManagerDelegate methods
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         print("didChangeAuthorizationStatus")
@@ -59,7 +59,7 @@ class CoreLocationController: NSObject, CLLocationManagerDelegate {
 
         print("didUpdateLocations:  \(location.coordinate.latitude), \(location.coordinate.longitude)")
 
-        let userInfo = [ "location" : location]
+        let userInfo = [ "location": location]
 
         let notificationCenter = NotificationCenter.default
         notificationCenter.post(name: Notification.Name(rawValue: locationNotification), object: nil, userInfo: userInfo)

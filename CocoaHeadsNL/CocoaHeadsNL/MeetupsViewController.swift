@@ -14,7 +14,7 @@ import Crashlytics
 import CoreData
 
 class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDelegate {
-    
+
     private var viewDidAppearCount = 0
 
     private lazy var fetchedResultsController: FetchedResultsController<Meetup> = {
@@ -35,7 +35,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     var meetupsByYear: [String: [Meetup]] {
         get {
             return [:]
-            // TODO fix meetups by year
+            // TODO: fix meetups by year
             // I am assuming ordering stays correct due to FIFO behavior.
 //            var meetupsByYear = meetupsArray.reduce([String: [Meetup]]()) { (previousResult, meetup) -> [String: [Meetup]] in
 //                guard let meetupTime = meetup.time else {
@@ -73,7 +73,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 //            return meetupsByYear
         }
     }
-    
+
     fileprivate var sectionTitles: [String] {
         get {
             let sections = meetupsByYear.keys
@@ -91,16 +91,16 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
             return today + upcoming + rest
         }
     }
-    
+
     fileprivate func meetups(forSection section: Int) -> [Meetup] {
         return meetupsByYear[sectionTitles[section]]!
     }
-    
+
     fileprivate func meetup(for indexPath: IndexPath) -> Meetup {
         return meetups(forSection: indexPath.section)[indexPath.row]
     }
-    
-    var searchedObjectId: String? = nil
+
+    var searchedObjectId: String?
 
     weak var activityIndicatorView: UIActivityIndicatorView!
 
@@ -137,9 +137,8 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
             }
         }
 
-
         NotificationCenter.default.addObserver(self, selector: #selector(MeetupsViewController.searchOccured(_:)), name: NSNotification.Name(rawValue: searchNotificationName), object: nil)
-        
+
         if #available(iOS 9.0, *) {
             if traitCollection.forceTouchCapability == .available {
                 registerForPreviewing(with: self, sourceView: view)
@@ -148,7 +147,6 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
             // Fallback on earlier versions
         }
 
-  
         self.subscribe()
 
         let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
@@ -185,7 +183,6 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         let subscription = CKQuerySubscription(recordType: "Meetup", predicate: NSPredicate(format: "TRUEPREDICATE"), options: .firesOnRecordCreation)
 
-
         let info = CKNotificationInfo()
 
         info.alertBody = NSLocalizedString("New meetup has been added!")
@@ -194,10 +191,10 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         subscription.notificationInfo = info
 
-        publicDB.save(subscription, completionHandler: { record, error in }) 
+        publicDB.save(subscription, completionHandler: { _, _ in })
     }
 
-    //MARK: - 3D Touch
+    // MARK: - 3D Touch
 
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         //quick peek
@@ -230,10 +227,9 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         show(viewControllerToCommit, sender: self)
     }
 
+    // MARK: - Search
 
-    //MARK: - Search
-
-    @objc func searchOccured(_ notification: Notification) -> Void {
+    @objc func searchOccured(_ notification: Notification) {
         guard let userInfo = (notification as NSNotification).userInfo as? Dictionary<String, String> else {
             return
         }
@@ -249,10 +245,10 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         }
     }
 
-    func displayObject(_ recordName: String) -> Void {
+    func displayObject(_ recordName: String) {
         //if !loading {
             if self.navigationController?.visibleViewController == self {
-                //TODO fix object displaying
+                //TODO: fix object displaying
 //                let meetups = self.meetupsArray
 //
 //                if let selectedObject = meetups.filter({ (meetup: Meetup) -> Bool in
@@ -272,8 +268,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 //        }
     }
 
-
-    //MARK: - Segues
+    // MARK: - Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDetail" {
@@ -297,11 +292,11 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         }
     }
 
-    //MARK: - UITableViewDataSource
+    // MARK: - UITableViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
         return meetupsByYear.keys.count
     }
-    
+
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel(frame: .zero)
         label.text = sectionTitles[section]
@@ -337,14 +332,14 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         return CGFloat(88)
     }
 
-    //MARK: - UITableViewDelegate
+    // MARK: - UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "ShowDetail", sender: tableView.cellForRow(at: indexPath))
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    //MARK: - fetching Cloudkit
+    // MARK: - fetching Cloudkit
 
     func fetchMeetups() {
 
@@ -360,8 +355,8 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         operation.recordFetchedBlock = { (record) in
             let meetup = Meetup.meetup(forRecord: record, on: CoreDataStack.shared.viewContext)
-            let _ = meetup.smallLogoImage
-            let _ = meetup.logoImage
+            _ = meetup.smallLogoImage
+            _ = meetup.logoImage
             meetups.append(meetup)
         }
 
@@ -372,10 +367,10 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                     self?.present(ac, animated: true, completion: nil)
                     return
                 }
-                
+
                 let meetupNames = meetups.compactMap ({ $0.recordName })
                 let predicate = NSPredicate(format: "NOT recordName IN %@", meetupNames)
-                // TODO write meetups to CoreData
+                // TODO: write meetups to CoreData
 //                let obsoleteMeetups = self?.realm.objects(Meetup.self).filter(predicate)
 //                self?.realm.beginWrite()
 //                self?.realm.add(meetups, update: true)
@@ -392,7 +387,6 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         CKContainer.default().publicCloudDatabase.add(operation)
 
     }
-
 
 }
 

@@ -25,7 +25,6 @@ class MeetupDataSource: DetailDataSource {
             tableView.deselectRow(at: indexPath, animated: true)
         }
 
-
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,7 +40,7 @@ class MeetupDataSource: DetailDataSource {
             let text = String("Number of Cocoaheads: \(meetup.yesRsvpCount)")
             return titleCellWithText(text, forTableView: tableView)
         case 4:
-            return titleCellWithDate(meetup.time as! Date, forTableView: tableView)
+            return titleCellWithDate(meetup.time, forTableView: tableView)
         case 5:
             return buttonCell(meetup.meetupUrl, title: "Open Meetup", forTableView: tableView)
         case 6:

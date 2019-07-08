@@ -83,7 +83,7 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
                 urlComponents.scheme = "http"
             }
 
-            guard let checkedUrl = urlComponents.url , urlComponents.scheme == "http" || urlComponents.scheme == "https" else {
+            guard let checkedUrl = urlComponents.url, urlComponents.scheme == "http" || urlComponents.scheme == "https" else {
                 return
             }
 
@@ -106,13 +106,13 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
         tableView.endUpdates()
     }
 
-    func showStoreView(_ parameters: [String : AnyObject], indexPath: IndexPath) {
+    func showStoreView(_ parameters: [String: AnyObject], indexPath: IndexPath) {
 
         let storeViewController = SKStoreProductViewController()
         storeViewController.delegate = self
 
         storeViewController.loadProduct(withParameters: parameters,
-            completionBlock: {result, error in
+            completionBlock: {result, _ in
                 if result {
                     self.present(storeViewController,
                         animated: true, completion: nil)
@@ -125,8 +125,8 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
             self.dismiss(animated: true, completion: nil)
     }
 
-    override var previewActionItems : [UIPreviewActionItem] {
-        let shareAction = UIPreviewAction(title: NSLocalizedString("Share"), style: .default) { (previewAction, viewController) in
+    override var previewActionItems: [UIPreviewActionItem] {
+        let shareAction = UIPreviewAction(title: NSLocalizedString("Share"), style: .default) { (_, _) in
 
             if let meetup = self.dataSource.object as? Meetup, let meetupId = meetup.meetupId {
                 let string: String = "http://www.meetup.com/CocoaHeadsNL/events/\(meetupId)/"
@@ -141,11 +141,11 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
             }
         }
 
-        let rsvpAction = UIPreviewAction(title: NSLocalizedString("RSVP"), style: .default) { (previewAction, viewController) in
+        let rsvpAction = UIPreviewAction(title: NSLocalizedString("RSVP"), style: .default) { (_, _) in
 
             if let meetup = self.dataSource.object as? Meetup, let meetupId = meetup.meetupId {
                 if let URL = URL(string: "http://www.meetup.com/CocoaHeadsNL/events/\(meetupId)/") {
-                    UIApplication.shared.open(URL, options: [:], completionHandler: { (true) in
+                    UIApplication.shared.open(URL, options: [:], completionHandler: { (_) in
                     })
                 }
             }

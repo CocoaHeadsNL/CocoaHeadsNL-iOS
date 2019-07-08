@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension AffiliateLink {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<AffiliateLink> {

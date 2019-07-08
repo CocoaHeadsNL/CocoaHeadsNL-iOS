@@ -60,18 +60,18 @@ class DetailDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
         cell.html = html
         return cell
     }
-    
+
     func buttonCell(_ urlString: String?, title: String, forTableView tableView: UITableView) -> ButtonCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "buttonCell") as! ButtonCell
         cell.title = title
         cell.urlString = urlString
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
-    
+
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(88)
     }

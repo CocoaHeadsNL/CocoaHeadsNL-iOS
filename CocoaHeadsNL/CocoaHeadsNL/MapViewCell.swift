@@ -16,7 +16,7 @@ class MapViewCell: UITableViewCell, MKMapViewDelegate {
 
     var locationName: String? {
         didSet {
-            if let locationName = locationName , locationName != oldValue {
+            if let locationName = locationName, locationName != oldValue {
                 let annotation = MapAnnotation(coordinate: self.coordinate, title: NSLocalizedString("Here it is!"), subtitle: locationName)
                 littleMap.addAnnotation(annotation)
             }
@@ -55,7 +55,7 @@ class MapViewCell: UITableViewCell, MKMapViewDelegate {
             mapItem.name = locationName
         }
 
-        let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
         let currentLocationMapItem = MKMapItem.forCurrentLocation()
 
         MKMapItem.openMaps(with: [currentLocationMapItem, mapItem], launchOptions: launchOptions)

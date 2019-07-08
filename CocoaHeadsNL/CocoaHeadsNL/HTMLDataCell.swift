@@ -9,9 +9,9 @@
 import UIKit
 
 class HTMLDataCell: UITableViewCell {
-    
+
     @IBOutlet weak var textView: UITextView!
-    
+
     var html: String? {
         didSet {
             guard let html = html, html != oldValue else { return }
@@ -26,7 +26,7 @@ class HTMLDataCell: UITableViewCell {
 }
 
 extension HTMLDataCell: UITextViewDelegate {
-    
+
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         UIApplication.shared.open(URL, options: [:])
         return false

@@ -9,30 +9,30 @@
 import UIKit
 
 class ButtonCell: UITableViewCell {
-    
+
     @IBOutlet weak var titleButton: UIButton!
     @IBAction func buttonPressed(_ sender: AnyObject) {
         if let url = selectURL() {
-            UIApplication.shared.open(url, options: [:], completionHandler: { (true) in
+            UIApplication.shared.open(url, options: [:], completionHandler: { (_) in
             })
         }
     }
-    
+
     fileprivate func selectURL() -> URL? {
         guard let urlString = urlString else {
-            //TODO show warning
+            //TODO: show warning
             return nil
         }
-        
+
         guard let url = URL(string: urlString) else {
-            //TODO show warning
+            //TODO: show warning
             return nil
         }
-        
+
         let appUrlString = "meetup:/\(url.path)"
-        
+
         let appUrl = URL(string: appUrlString)
-        
+
         if appUrl != nil && UIApplication.shared.canOpenURL(appUrl!) {
             return appUrl
         } else if UIApplication.shared.canOpenURL(url) {
@@ -47,6 +47,6 @@ class ButtonCell: UITableViewCell {
             self.titleButton.setTitle(title, for: .normal)
         }
     }
-    
+
     var urlString: String?
 }

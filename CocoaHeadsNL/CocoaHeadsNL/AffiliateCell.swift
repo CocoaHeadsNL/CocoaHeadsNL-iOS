@@ -23,11 +23,11 @@ class AffiliateCell: UITableViewCell {
     fileprivate func fetchIconURL(_ affiliateId: String) {
         if let url = URL(string: "https://itunes.apple.com/lookup?id=\(affiliateId)") {
             let request = URLRequest(url: url)
-            let dataTask = URLSession.shared.dataTask(with: request, completionHandler: { [weak self] data, response, error in
+            let dataTask = URLSession.shared.dataTask(with: request, completionHandler: { [weak self] data, _, _ in
                 if let s = self, let data = data, let url = s.parseIconURL(data) {
                     s.loadIconWithURL(url)
                 }
-            }) 
+            })
             dataTask.resume()
         }
     }
@@ -40,7 +40,7 @@ class AffiliateCell: UITableViewCell {
             print("error \(error)")
             parsedObject = nil
         }
-        if let root = parsedObject as? [String: AnyObject], let results = root["results"] as? [AnyObject] , results.count > 0 {
+        if let root = parsedObject as? [String: AnyObject], let results = root["results"] as? [AnyObject], results.count > 0 {
             if let result = results[0] as? [String: AnyObject],
                 let iconUrlString = result["artworkUrl60"] as? String {
                     return URL(string: iconUrlString)
@@ -51,14 +51,14 @@ class AffiliateCell: UITableViewCell {
 
     fileprivate func loadIconWithURL(_ url: URL) {
         let request = URLRequest(url: url)
-        let dataTask = URLSession.shared.dataTask(with: request, completionHandler: { [weak self] data, response, error in
+        let dataTask = URLSession.shared.dataTask(with: request, completionHandler: { [weak self] data, _, _ in
             DispatchQueue.main.async {
                 if let s = self, let imageView = s.imageView, let data = data {
                     imageView.image = UIImage(data: data)
                     s.setNeedsLayout()
                 }
             }
-        }) 
+        })
         dataTask.resume()
     }
 }

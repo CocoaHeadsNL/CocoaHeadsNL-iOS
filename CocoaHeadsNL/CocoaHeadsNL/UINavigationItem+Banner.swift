@@ -2,7 +2,7 @@ import UIKit
 
 public extension UINavigationItem {
 
-    public func setupForRootViewController(withTitle title: String) {
+    func setupForRootViewController(withTitle title: String) {
 
         let imageView = UIImageView(image: UIImage(named: "Banner"))
         imageView.accessibilityTraits = imageView.accessibilityTraits & ~UIAccessibilityTraitImage

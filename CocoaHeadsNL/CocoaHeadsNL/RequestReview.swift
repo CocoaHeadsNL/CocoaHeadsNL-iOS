@@ -9,9 +9,9 @@
 import StoreKit
 
 public class RequestReview: NSObject {
-    
+
     static private let defaultKeyRatingLastRequestDate = "app_rating_last_request_date"
-    
+
     static public func requestReview() {
         if #available(iOS 10.3, *) {
             if let lastRequestDate = UserDefaults.standard.object(forKey: RequestReview.defaultKeyRatingLastRequestDate) as? Date {

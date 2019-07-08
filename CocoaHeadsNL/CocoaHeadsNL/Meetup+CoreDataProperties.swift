@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension Meetup {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Meetup> {

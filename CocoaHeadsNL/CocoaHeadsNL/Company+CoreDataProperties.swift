@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension Company {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Company> {

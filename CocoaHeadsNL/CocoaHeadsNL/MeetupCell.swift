@@ -62,8 +62,7 @@ class MeetupCell: UITableViewCell {
                 dayLabel.textColor = UIColor.black
                 monthBackgroundView.backgroundColor = meetup.isToday ? UIColorWithRGB(127, green: 214, blue: 33) : UIColorWithRGB(232, green: 88, blue: 80)
 
-
-                if meetup.yesRsvpCount > 0{
+                if meetup.yesRsvpCount > 0 {
 
                     rsvpLabel.text = "\(meetup.yesRsvpCount) " + NSLocalizedString("CocoaHeads going")
 
