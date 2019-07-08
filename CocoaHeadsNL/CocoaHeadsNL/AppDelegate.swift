@@ -9,9 +9,8 @@
 import UIKit
 import CoreSpotlight
 import CloudKit
-import UserNotifications
 
-import RealmSwift
+import CoreData
 import Fabric
 import Crashlytics
 
@@ -19,127 +18,8 @@ let searchNotificationName = "CocoaHeadsNLSpotLightSearchOccured"
 let searchPasteboardName = "CocoaHeadsNL-searchInfo-pasteboard"
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        Fabric.with([Crashlytics.self])
-
-        handleRealmMigration()
-        
-        UNUserNotificationCenter.current().delegate = self
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
-
-            guard error == nil else {
-                //Display Error.. Handle Error.. etc..
-                return
-            }
-
-            if granted {
-                //Do stuff here..
-                self.setCategories()
-                self.subscribe()
-                self.discover()
-                self.subscribeToItems()
-                //Register for RemoteNotifications. Your Remote Notifications can display alerts now :)
-                DispatchQueue.main.async {
-                application.registerForRemoteNotifications()
-                    print("registered for notifications")
-                }
-            }
-            else {
-                //Handle user denying permissions..
-                DispatchQueue.main.async {
-                    application.unregisterForRemoteNotifications()
-                    print("unregistered for notifications")
-                    
-                    //Deleting al previous cloudkit subscriptions for a user.
-                    let publicDB = CKContainer.default().publicCloudDatabase
-                    
-                    publicDB.fetchAllSubscriptions(completionHandler: {subscriptions, error in
-                        
-                        if let subs = subscriptions {
-                            //Removing the subscriptions in any other case than authorized
-                            for subscription in subs {
-                                publicDB.delete(withSubscriptionID: subscription.subscriptionID, completionHandler: {subscriptionId, error in
-                                })
-                            }
-                            print("removed subscriptions")
-                        }
-                    })
-                }
-            }
-        }
-        
-        //if app was not running or in the background, didFinishLoading will receive the notification. Starting same behaviour here.
-        if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
-
-            let aps = notification["aps"] as! [String: AnyObject]
-            print("DidLaunch: \(aps)")
-            
-            if aps["category"] as? String == "nl.cocoaheads.app.CocoaHeadsNL.generalNotification" {
-                print("general notification")
-            } else if aps["category"] as? String == "nl.cocoaheads.app.CocoaHeadsNL.itemNotification" {
-               print("item Notification")
-            } else if aps["category"] as? String == "MEETUP" {
-                self.presentMeetupsViewController()
-            } else if aps["category"] as? String == "nl.cocoaheads.app.CocoaHeadsNL.jobNotification" {
-                self.presentJobsViewController()
-            } else if aps["category"] as? String == "COMPANY" {
-                self.presentCompaniesViewController()
-            }
-            
-        }
-        return true
-    }
-    
-    func discover() {
-        
-        let container = CKContainer.default()
-        
-        container.requestApplicationPermission(CKApplicationPermissions.userDiscoverability) { (status, error) in
-            guard error == nil else { return }
-            
-            if status == CKApplicationPermissionStatus.granted {
-                // User allowed for searching on email
-                container.fetchUserRecordID { (recordID, error) in
-                    guard error == nil else { return }
-                    guard let recordID = recordID else { return }
-                    
-                    container.discoverUserIdentity(withUserRecordID: recordID, completionHandler: { (identity, fetchError) in
-                        // TODO check for deprecation and save to userRecord?
-                        if let error = fetchError {
-                            print("error dicovering user info: \(error)")
-                            return
-                        }
-                        
-                        guard let info = identity else {
-                            print("error dicovering user info, info is nil for unknown reason")
-                            return
-                        }
-                        
-                        container.publicCloudDatabase.fetch(withRecordID: recordID, completionHandler: { (userRecord, error) in
-                            if let error = fetchError {
-                                print("error dicovering user record: \(error)")
-                                return
-                            }
-                            
-                            if let record = userRecord {
-                                record["firstName"] = info.nameComponents?.givenName as CKRecordValue?
-                                record["lastName"] = info.nameComponents?.familyName as CKRecordValue?
-                                
-                                container.publicCloudDatabase.save(record, completionHandler: { (record, error) in
-                                    //print(record)
-                                })
-                            }
-                        })
-                    })
-                }
-            }
-        }
-    }
-
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         if let pasteboard = UIPasteboard(name: UIPasteboardName(rawValue: "searchPasteboardName"), create: false) {
@@ -158,109 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         CKContainer.default().add(badgeResetOperation)
     }
-    
-     // MARK: Register categories and subscribtion
-    
-    func setCategories() {
-        
-        let itemCategory = UNNotificationCategory(identifier: "nl.cocoaheads.app.CocoaHeadsNL.itemNotification",
-                                                     actions: [],
-                                                     intentIdentifiers: [],
-                                                     options: .customDismissAction)
-        
-        let generalCategory = UNNotificationCategory(identifier: "nl.cocoaheads.app.CocoaHeadsNL.generalNotification",
-                                                     actions: [],
-                                                     intentIdentifiers: [],
-                                                     options: .customDismissAction)
-        
-        // Create the custom actions for the category.
-        let openAction = UNNotificationAction(identifier: "OPEN_MEETUP",
-                                              title: "Open Events",
-                                              options: [.foreground])
-        
-        let meetupCategory = UNNotificationCategory(identifier: "MEETUP",
-                                                    actions: [openAction],
-                                                    intentIdentifiers: [],
-                                                    options: [.customDismissAction])
-        
-        let openJobAction = UNNotificationAction(identifier: "OPEN_JOB",
-                                                 title: "Open Jobs",
-                                                 options: [.foreground])
-        
-        let jobCategory = UNNotificationCategory(identifier: "nl.cocoaheads.app.CocoaHeadsNL.jobNotification",
-                                                 actions: [openJobAction],
-                                                 intentIdentifiers: [],
-                                                 options: [.customDismissAction])
-        
-        let openCompanyAction = UNNotificationAction(identifier: "OPEN_COMPANY",
-                                                     title: "Open Companies",
-                                                     options: [.foreground])
-        
-        let companyCategory = UNNotificationCategory(identifier: "COMPANY",
-                                                     actions: [openCompanyAction],
-                                                     intentIdentifiers: [],
-                                                     options: [.customDismissAction])
-        
-        // Register the notification categories.
-        let center = UNUserNotificationCenter.current()
-        center.setNotificationCategories([itemCategory, generalCategory, meetupCategory, jobCategory, companyCategory])
-    }
-    
-    func subscribeToItems() {
-         let publicDB = CKContainer.default().publicCloudDatabase
-        
-        let subscription = CKQuerySubscription(recordType: "Items", predicate: NSPredicate(format: "TRUEPREDICATE"), options: .firesOnRecordCreation)
-        
-        //if the subscription does not have a title, subtitle ,alertbody it wont get priority. IS received in the content service extension.
-        let info = CKNotificationInfo()
-        info.title = "A new item was posted"
-        info.subtitle = "by CocoaHeadsNL"
-        info.alertBody = "Want to know more?"
-        info.desiredKeys = ["title","name","imageUrl"]
-        info.shouldSendMutableContent = true
-        info.category = "nl.cocoaheads.app.CocoaHeadsNL.itemNotification"
-        
-        subscription.notificationInfo = info
-        
-        publicDB.save(subscription, completionHandler: { subscription, error in
-            if error == nil {
-                // Subscription saved successfully
-            } else {
-                // An error occurred
-                //print(error)
-            }
-        })
-    }
-    
-    func subscribe() {
-        let publicDB = CKContainer.default().publicCloudDatabase
-        
-        let subscription = CKQuerySubscription(recordType: "Test", predicate: NSPredicate(format: "TRUEPREDICATE"), options: .firesOnRecordCreation)
-        
-        //silent notification which gets handled by the generalNotification Extension. IS received in the app.
-        let info = CKNotificationInfo()
-        info.desiredKeys = ["title","subtitle","body"]
-        info.shouldBadge = true
-        info.shouldSendContentAvailable = true
-        info.category = "nl.cocoaheads.app.CocoaHeadsNL.generalNotification"
 
-        subscription.notificationInfo = info
-        
-        publicDB.save(subscription, completionHandler: { subscription, error in
-            if error == nil {
-                // Subscription saved successfully
-            } else {
-                // An error occurred
-                //print(error)
-            }
-        })
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+
     }
-
-    // MARK: Notifications
-
-    //func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        //Note that CloudKit does handle device tokens for you, so you don't need to implement the application(_:didRegisterForRemoteNotificationsWithDeviceToken:) method, unless you need that for another purpose.
-    //}
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         if error._code == 3010 {
@@ -269,216 +50,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print("application didFailToRegisterForRemoteNotificationsWithError: %@", error)
         }
     }
-    
-  func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-            //not using willPresent will prevent any Pushnotifications to show when the app is active.
-           completionHandler([.alert, .badge, .sound])
-    }
-    
-  
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        
-        //Only remoteNotifications (content-available) will trigger this and depending on type should change behaviour.
-        // remoteNotifications (mutable-content) wont.
-        let ck = CKQueryNotification.init(fromRemoteNotificationDictionary: userInfo)
 
-        switch application.applicationState {
-            
-        case .inactive:
-            print("Inactive")
-            //Show the view with the content of the push
-            self.handleRemoteNotification(notification: ck)
-            completionHandler(.newData)
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
 
-        case .background:
-            print("Background")
-            //Refresh the local model
-            self.handleRemoteNotification(notification: ck)
-            completionHandler(.newData)
-            
-        case .active:
-            print("Active")
-            self.handleRemoteNotification(notification: ck)
-            completionHandler(.newData)
+        let cloudKitNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String : NSObject])
+        if cloudKitNotification.notificationType == .query,
+            let queryNotification = cloudKitNotification as? CKQueryNotification {
+            //TODO handle the different notifications to show the correct items
+            let recordID = queryNotification.recordID
+            print(recordID as Any)
+            //...
+            self.presentMeetupsViewController()
         }
-    }
-    
-    func handleRemoteNotification(notification:CKQueryNotification? ) {
-        
-        let content = UNMutableNotificationContent()
-    
-        if let category = notification?.category {
-            
-            if category == "nl.cocoaheads.app.CocoaHeadsNL.generalNotification" {
-                
-                if let note = notification, let category = note.category, let title = note.recordFields?["title"] as? String, let imageUrl = note.recordFields?["subtitle"] as? String, let body = note.recordFields?["body"] as? String {
-                    
-                    content.categoryIdentifier = category
-                    content.title = title
-                    //content.subtitle = subtitle
-                    content.body = body
-                    content.sound = UNNotificationSound.default()
 
-                    if let fileUrl = URL(string: imageUrl) {
-                        
-                        //let request = NSURLRequest(url: fileUrl)
-                        URLSession.shared.downloadTask(with: fileUrl, completionHandler: { (fileLocation, response, err) in
-
-                            //create attachment from file at url in folder
-                            if let location = fileLocation, err == nil {
-                                let tmpDirectory = NSTemporaryDirectory()
-                                let tmpFile = "file:".appending(tmpDirectory).appending(fileUrl.lastPathComponent)
-                                let tmpUrl = URL.init(string: tmpFile)!
-
-                                do {
-                                    try? FileManager.default.copyItem(at: location, to: tmpUrl)
-
-                                    if let attachment = try? UNNotificationAttachment(identifier: "", url: tmpUrl, options: nil) {
-                                        content.attachments = [attachment]
-                                        
-                                        //we're only showing the notification if the image is present currently
-                                        let request = UNNotificationRequest(identifier: "generalNotification", content: content, trigger: nil) // Schedule the notification.
-                                        let center = UNUserNotificationCenter.current()
-                                        center.add(request) { (error : Error?) in
-                                            if let theError = error {
-                                                // Handle any errors
-                                                print(theError)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }) .resume()
-                    }
-                }
-            } else if category == "nl.cocoaheads.app.CocoaHeadsNL.jobNotification" {
-                
-                if let note = notification, let category = note.category, let title = note.recordFields?["title"] as? String, let author = note.recordFields?["author"] as? String, let logoUrlString = note.recordFields?["logoUrl"] as? String {
-                    
-                    content.categoryIdentifier = category
-                    content.title = title
-                    content.subtitle = author
-                    content.sound = UNNotificationSound.default()
-                    
-                    if let fileUrl = URL(string: logoUrlString) {
-                        
-                        URLSession.shared.downloadTask(with: fileUrl, completionHandler: { (fileLocation, response, err) in
-                            
-                            //create attachment from file at url in folder
-                            if let location = fileLocation, err == nil {
-                                let tmpDirectory = NSTemporaryDirectory()
-                                let tmpFile = "file:".appending(tmpDirectory).appending(fileUrl.lastPathComponent)
-                                let tmpUrl = URL.init(string: tmpFile)!
-                                
-                                do {
-                                    try? FileManager.default.copyItem(at: location, to: tmpUrl)
-                                    
-                                    if let attachment = try? UNNotificationAttachment(identifier: "", url: tmpUrl, options: [UNNotificationAttachmentOptionsThumbnailHiddenKey: 1]) {
-                                        content.attachments = [attachment]
-                                        
-                                        //we're only showing the notification if the image is present currently
-                                        let request = UNNotificationRequest(identifier: "generalNotification", content: content, trigger: nil) // Schedule the notification.
-                                        let center = UNUserNotificationCenter.current()
-                                        center.add(request) { (error : Error?) in
-                                            if let theError = error {
-                                                // Handle any errors
-                                                print(theError)
-                                            }
-                                        }
-                                    }
-                                }
-//                                self.fetchRecord(withRecordID: id, perRecordCompletion: { (fetchedRecord, error) in
-//
-//                                    guard error == nil else {
-//                                        return
-//                                    }
-//                                    if let record = fetchedRecord {
-//                                    let job = Job.job(forRecord: record)
-//                                        let realm = try! Realm()
-//
-//                                        try! realm.write {
-//                                            realm.add(job, update: true)
-//                                        }
-//                                    }
-//                                })
-                            }
-                        }) .resume()
-                    }
-                }
-                
-            } else {
-                
-//                if let note = notification, let category = note.category, let title = note.recordFields?["title"] as? String, let subtitle = note.recordFields?["subtitle"] as? String, let body = note.recordFields?["body"] as? String {
-//
-//                    content.categoryIdentifier = category
-//                    content.title = title
-//                    content.subtitle = subtitle
-//                    content.body = body
-//                    content.sound = UNNotificationSound.default()
-//
-//                    let request = UNNotificationRequest(identifier: "showNotification", content: content, trigger: nil) // Schedule the notification.
-//                    let center = UNUserNotificationCenter.current()
-//                    center.add(request) { (error : Error?) in
-//                        if let theError = error {
-//                            // Handle any errors
-//                            print(theError)
-//                        }
-//                    }
-//                }
-            }
-        }
     }
 
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        
-        if response.actionIdentifier == UNNotificationDismissActionIdentifier {
-            // The user dismissed the notification without taking action
-        } else if response.actionIdentifier == "OPEN_MEETUP" {
-               self.presentMeetupsViewController()
-        } else if response.actionIdentifier == "OPEN_JOB" {
-            self.presentJobsViewController()
-        } else if response.actionIdentifier == "OPEN_COMPANY" {
-            self.presentCompaniesViewController()
-        } else if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-            // The user launched the app
-        }
-        
-        //Deprecated in ios11, still to find a replacement
-        let badgeResetOperation = CKModifyBadgeOperation(badgeValue: 0)
-        badgeResetOperation.modifyBadgeCompletionBlock = { (error) -> Void in
-            guard error == nil else {
-                print("Error resetting badge: \(String(describing: error))")
-                return
-            }
-            DispatchQueue.main.async {
-                UIApplication.shared.applicationIconBadgeNumber = 0
-            }
-        }
-        CKContainer.default().add(badgeResetOperation)
-        
-        completionHandler()
-    }
-    
-    func fetchRecord(withRecordID recordID: CKRecordID, perRecordCompletion: @escaping (CKRecord?, Error?) -> Void)
-    {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        Fabric.with([Crashlytics.self])
 
-        let publicDB = CKContainer.default().publicCloudDatabase
-        // CKRecordID contains the zone from which the records should be retrieved
-        let fetchRecordsOperation = CKFetchRecordsOperation(recordIDs: [recordID])
-        // recordFetched is a function that gets called for each record retrieved
-        fetchRecordsOperation.perRecordCompletionBlock = { (record: CKRecord?, recordID: CKRecordID?, error: Error?) -> Void in
-            // Continue if there are no errors
-            guard error == nil else {
-                perRecordCompletion(nil, error)
-                return
-            }
-            // Process the record fetched
-            perRecordCompletion(record, error)
-        }
-        publicDB.add(fetchRecordsOperation)
+        let notificationTypes: UIUserNotificationType = [.alert, .badge, .sound]
+
+        let settings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
+
+        return true
     }
-    
-     // MARK: UserActivity
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if #available(iOS 9.0, *) {
@@ -502,11 +99,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return false
     }
 
+    @available(iOS 9.0, *)
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
             handleShortCutItem(shortcutItem)
             completionHandler(true)
     }
 
+    @available(iOS 9.0, *)
     func handleShortCutItem(_ shortCutItem: UIApplicationShortcutItem) {
 
         switch shortCutItem.type {
@@ -520,9 +119,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
 
-    // MARK: Open ViewControllers
-    //Opening the right tab (could make this the correct item though)
-    
     func presentMeetupsViewController() {
         //print("should open selected tab"
 
@@ -547,37 +143,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
 
     }
-
-    // MARK: Realm
-
-    func handleRealmMigration() {
-
-        let config = Realm.Configuration(
-            // Set the new schema version. This must be greater than the previously used
-            // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 1,
-
-            // Set the block which will be called automatically when opening a Realm with
-            // a schema version lower than the one set above
-            migrationBlock: { migration, oldSchemaVersion in
-                // We haven’t migrated anything yet, so oldSchemaVersion == 0
-                if (oldSchemaVersion < 1) {
-                    // Nothing to do!
-                    // Realm will automatically detect new properties and removed properties
-                    // And will update the schema on disk automatically
-                }
-        })
-
-        // Tell Realm to use this new configuration object for the default Realm
-        Realm.Configuration.defaultConfiguration = config
-
-        // Now that we've told Realm how to handle the schema change, opening the file
-        // will automatically perform the migration
-        let _ = try! Realm()
-    }
-}
-
-extension Notification.Name {
-    static let apiServerUnreachable = Notification.Name("apiServerUnreachable")
-    static let itemsLoaded = Notification.Name("itemsLoaded")
 }

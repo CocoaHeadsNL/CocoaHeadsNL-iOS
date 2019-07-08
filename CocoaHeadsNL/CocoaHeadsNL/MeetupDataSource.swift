@@ -38,14 +38,14 @@ class MeetupDataSource: DetailDataSource {
         case 2:
             return titleCellWithText(meetup.name, forTableView: tableView)
         case 3:
-            let text = String("Number of Cocoaheads: \(meetup.yes_rsvp_count)")
+            let text = String("Number of Cocoaheads: \(meetup.yesRsvpCount)")
             return titleCellWithText(text, forTableView: tableView)
         case 4:
-            return titleCellWithDate(meetup.time, forTableView: tableView)
+            return titleCellWithDate(meetup.time as! Date, forTableView: tableView)
         case 5:
             return buttonCell(meetup.meetupUrl, title: "Open Meetup", forTableView: tableView)
         case 6:
-            return dataCellWithHTML(meetup.meetup_description, forTableView: tableView)
+            return dataCellWithHTML(meetup.meetupDescription, forTableView: tableView)
         default:
             fatalError("This should not happen.")
         }

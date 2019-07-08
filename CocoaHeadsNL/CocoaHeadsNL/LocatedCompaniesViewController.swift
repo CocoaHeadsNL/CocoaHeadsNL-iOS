@@ -10,18 +10,14 @@ import Foundation
 import UIKit
 import CloudKit
 import Crashlytics
-import RealmSwift
+import CoreData
 
 class LocatedCompaniesViewController: UITableViewController {
-    
-    lazy var realm = {
-        try! Realm()
-    }()
-    
-    lazy var companiesArray = {
-        try! Realm().objects(Company.self).sorted(byKeyPath: "name")
-    }()
-    
+
+    lazy var companiesArray: [Company] = {
+        return try? Company.allInContext(CoreDataStack.shared.viewContext, sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)])
+    }() ?? []
+
     var placesArray: [String] {
         get {
             var places = Set<String>()
@@ -31,7 +27,6 @@ class LocatedCompaniesViewController: UITableViewController {
     }
 
     var sortedByPlace = [String: [Company]]()
-    var notificationToken: NotificationToken?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -47,25 +42,7 @@ class LocatedCompaniesViewController: UITableViewController {
         self.navigationItem.setupForRootViewController(withTitle: accessibilityLabel)
         
         self.subscribe()
-        
-        // Set results notification block
-        self.notificationToken = companiesArray.observe { (changes: RealmCollectionChange) in
-            self.sortCompaniesByPlace()
-            switch changes {
-            case .initial:
-                // Results are now populated and can be accessed without blocking the UI
-                self.tableView.reloadData()
-                break
-            case .update(_, _, _, _):
-                self.tableView.reloadData()
-                break
-            case .error(let err):
-                // An error occurred while opening the Realm file on the background worker thread
-                fatalError("\(err)")
-                break
-            }
-        }
-        
+
         self.sortCompaniesByPlace()
     }
     
@@ -188,7 +165,7 @@ class LocatedCompaniesViewController: UITableViewController {
         var companies = [Company]()
         
         operation.recordFetchedBlock = { (record) in
-            let company = Company.company(forRecord: record)
+            let company = Company.company(forRecord: record, on: CoreDataStack.shared.viewContext)
             
             companies.append(company)
         }
@@ -203,14 +180,15 @@ class LocatedCompaniesViewController: UITableViewController {
                 
                 let companyRecordNames = companies.compactMap({ $0.recordName })
                 let predicate = NSPredicate(format: "NOT recordName IN %@", companyRecordNames)
-                let obsoleteCompanies = self?.realm.objects(Company.self).filter(predicate)
-                
-                self?.realm.beginWrite()
-                self?.realm.add(companies, update: true)
-                if let obsoleteCompanies = obsoleteCompanies {
-                    self?.realm.delete(obsoleteCompanies)
-                }
-                try! self?.realm.commitWrite()
+                // TODO write items to CoreData
+//                let obsoleteCompanies = self?.realm.objects(Company.self).filter(predicate)
+//
+//                self?.realm.beginWrite()
+//                self?.realm.add(companies, update: true)
+//                if let obsoleteCompanies = obsoleteCompanies {
+//                    self?.realm.delete(obsoleteCompanies)
+//                }
+//                try! self?.realm.commitWrite()
             }
         }
         

@@ -10,19 +10,28 @@ import Foundation
 import UIKit
 import CloudKit
 import Crashlytics
-import RealmSwift
+import CoreData
 
 class ContributorTableViewController: UITableViewController {
 
-    lazy var realm = {
-        try! Realm()
+    private lazy var fetchedResultsController: FetchedResultsController<Contributor> = {
+        let fetchRequest = NSFetchRequest<Contributor>()
+        fetchRequest.entity = Contributor.entity()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "commitCount", ascending: false), NSSortDescriptor(key: "name", ascending: true)]
+        let frc = FetchedResultsController<Contributor>(fetchRequest: fetchRequest,
+                                                   managedObjectContext: CoreDataStack.shared.viewContext,
+                                                   sectionNameKeyPath: nil)
+        frc.setDelegate(self.frcDelegate)
+        return frc
     }()
 
-    lazy var contributors = {
-        try! Realm().objects(Contributor.self).sorted(byKeyPath: "commit_count", ascending: false)
+    private lazy var frcDelegate: ContributorFetchedResultsControllerDelegate = { // swiftlint:disable:this weak_delegate
+        return ContributorFetchedResultsControllerDelegate(tableView: self.tableView)
     }()
-    
-    var notificationToken: NotificationToken?
+
+    lazy var contributors: [Contributor] = {
+        return try? Contributor.allInContext(CoreDataStack.shared.viewContext, sortDescriptors: [NSSortDescriptor(key: "commit_count", ascending: false)])
+        }() ?? []
 
     //MARK: - View LifeCycle
 
@@ -41,31 +50,6 @@ class ContributorTableViewController: UITableViewController {
 
         let accessibilityLabel = NSLocalizedString("About CocoaHeadsNL")
         self.navigationItem.setupForRootViewController(withTitle: accessibilityLabel)
-
-        // Set results notification block
-        self.notificationToken = contributors.observe { (changes: RealmCollectionChange) in
-            switch changes {
-            case .initial:
-                // Results are now populated and can be accessed without blocking the UI
-                self.tableView.reloadData()
-                break
-            case .update(_, let deletions, let insertions, let modifications):
-                // Query results have changed, so apply them to the TableView
-                self.tableView.beginUpdates()
-                self.tableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) },
-                                          with: .automatic)
-                self.tableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) },
-                                          with: .automatic)
-                self.tableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) },
-                                          with: .automatic)
-                self.tableView.endUpdates()
-                break
-            case .error(let err):
-                // An error occurred while opening the Realm file on the background worker thread
-                fatalError("\(err)")
-                break
-            }
-        }
 
         applyAccessibility()
     }
@@ -107,7 +91,7 @@ class ContributorTableViewController: UITableViewController {
         let contributor = self.contributors[indexPath.row]
 
 
-        if let avatar_url = contributor.avatar_url, let url = URL(string: avatar_url) {
+        if let avatar_url = contributor.avatarUrl, let url = URL(string: avatar_url) {
             let task = fetchImageTask(url, forImageView: cell.imageView!)
             task.resume()
         } else {
@@ -198,7 +182,7 @@ class ContributorTableViewController: UITableViewController {
         var cloudContributors = [Contributor]()
 
         operation.recordFetchedBlock = { (record) in
-            let contributor = Contributor.contributor(forRecord: record)
+            let contributor = Contributor.contributor(forRecord: record, on: CoreDataStack.shared.viewContext)
             cloudContributors.append(contributor)
         }
 
@@ -209,15 +193,61 @@ class ContributorTableViewController: UITableViewController {
                     self?.present(ac, animated: true, completion: nil)
                     return
                 }
-                self?.realm.beginWrite()
-                self?.realm.add(cloudContributors, update: true)
-                try! self?.realm.commitWrite()
+                CoreDataStack.shared.viewContext.saveContext()
             }
         }
 
         CKContainer.default().publicCloudDatabase.add(operation)
 
     }
+}
 
+class ContributorFetchedResultsControllerDelegate: NSObject, FetchedResultsControllerDelegate {
 
+    private weak var tableView: UITableView?
+
+    // MARK: - Lifecycle
+    init(tableView: UITableView) {
+        self.tableView = tableView
+    }
+
+    func fetchedResultsControllerDidPerformFetch(_ controller: FetchedResultsController<Contributor>) {
+        tableView?.reloadData()
+    }
+
+    func fetchedResultsControllerWillChangeContent(_ controller: FetchedResultsController<Contributor>) {
+        tableView?.beginUpdates()
+    }
+
+    func fetchedResultsControllerDidChangeContent(_ controller: FetchedResultsController<Contributor>) {
+        tableView?.endUpdates()
+    }
+
+    func fetchedResultsController(_ controller: FetchedResultsController<Contributor>, didChangeObject change: FetchedResultsObjectChange<Contributor>) {
+        guard let tableView = tableView else { return }
+        switch change {
+        case let .insert(_, indexPath):
+            tableView.insertRows(at: [indexPath], with: .automatic)
+
+        case let .delete(_, indexPath):
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+
+        case let .move(_, fromIndexPath, toIndexPath):
+            tableView.moveRow(at: fromIndexPath, to: toIndexPath)
+
+        case let .update(_, indexPath):
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+    }
+
+    func fetchedResultsController(_ controller: FetchedResultsController<Contributor>, didChangeSection change: FetchedResultsSectionChange<Contributor>) {
+        guard let tableView = tableView else { return }
+        switch change {
+        case let .insert(_, index):
+            tableView.insertSections(IndexSet(integer: index), with: .automatic)
+
+        case let .delete(_, index):
+            tableView.deleteSections(IndexSet(integer: index), with: .automatic)
+        }
+    }
 }

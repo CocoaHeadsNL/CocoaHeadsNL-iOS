@@ -11,57 +11,66 @@ import UIKit
 import CoreSpotlight
 import CloudKit
 import Crashlytics
-import RealmSwift
+import CoreData
 
 class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDelegate {
     
     private var viewDidAppearCount = 0
 
-    lazy var realm = {
-        return try! Realm()
+    private lazy var fetchedResultsController: FetchedResultsController<Meetup> = {
+        let fetchRequest = NSFetchRequest<Meetup>()
+        fetchRequest.entity = Meetup.entity()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "year", ascending: false), NSSortDescriptor(key: "time", ascending: false)]
+        let frc = FetchedResultsController<Meetup>(fetchRequest: fetchRequest,
+                                                     managedObjectContext: CoreDataStack.shared.viewContext,
+                                                     sectionNameKeyPath: nil)
+        frc.setDelegate(self.frcDelegate)
+        return frc
     }()
 
-    lazy var meetupsArray = {
-        return try! Realm().objects(Meetup.self).sorted(byKeyPath: "time", ascending: false)
+    private lazy var frcDelegate: MeetupFetchedResultsControllerDelegate = { // swiftlint:disable:this weak_delegate
+        return MeetupFetchedResultsControllerDelegate(tableView: self.tableView)
     }()
-    
+
     var meetupsByYear: [String: [Meetup]] {
         get {
+            return [:]
+            // TODO fix meetups by year
             // I am assuming ordering stays correct due to FIFO behavior.
-            var meetupsByYear = meetupsArray.reduce([String: [Meetup]]()) { (previousResult, meetup) -> [String: [Meetup]] in
-                guard let meetupTime = meetup.time else {
-                    return previousResult
-                }
-
-                var newResult = previousResult
-
-                let year = Calendar.current.component(.year, from: meetupTime)
-                let yearString: String
-
-                if meetup.isToday {
-                    yearString = NSLocalizedString("Today", comment: "Section title for todays meetup.")
-                }
-                else if meetup.isUpcoming {
-                    yearString = NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")
-                } else {
-                    yearString = "\(year)"
-                }
-                
-                if var meetupsForYear = newResult[yearString] {
-                    meetupsForYear.append(meetup)
-                    newResult[yearString] = meetupsForYear
-                } else {
-                    newResult[yearString] = [meetup]
-                }
-                return newResult
-            }
-            
-            // Inverse the sorting of upcoming meetups.
-            if let upcomingMeetups = meetupsByYear[NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")] {
-                meetupsByYear[NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")] = upcomingMeetups.reversed()
-            }
-            
-            return meetupsByYear
+//            var meetupsByYear = meetupsArray.reduce([String: [Meetup]]()) { (previousResult, meetup) -> [String: [Meetup]] in
+//                guard let meetupTime = meetup.time else {
+//                    return previousResult
+//                }
+//
+//                var newResult = previousResult
+//
+//                let year = Calendar.current.component(.year, from: meetupTime)
+//                let yearString: String
+//
+//                if meetup.isToday {
+//                    yearString = NSLocalizedString("Today", comment: "Section title for todays meetup.")
+//                }
+//                else if meetup.isUpcoming {
+//                    yearString = NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")
+//                } else {
+//                    yearString = "\(year)"
+//                }
+//
+//                if var meetupsForYear = newResult[yearString] {
+//                    meetupsForYear.append(meetup)
+//                    newResult[yearString] = meetupsForYear
+//                } else {
+//                    newResult[yearString] = [meetup]
+//                }
+//                return newResult
+//            }
+//
+//            // Inverse the sorting of upcoming meetups.
+//            if let upcomingMeetups = meetupsByYear[NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")] {
+//                meetupsByYear[NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")] = upcomingMeetups.reversed()
+//            }
+//
+//            return meetupsByYear
         }
     }
     
@@ -92,8 +101,6 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     }
     
     var searchedObjectId: String? = nil
-    var notificationToken: NotificationToken?
-
 
     weak var activityIndicatorView: UIActivityIndicatorView!
 
@@ -133,34 +140,6 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         NotificationCenter.default.addObserver(self, selector: #selector(MeetupsViewController.searchOccured(_:)), name: NSNotification.Name(rawValue: searchNotificationName), object: nil)
         
-        // Set results notification block
-        self.notificationToken = meetupsArray.observe { (changes: RealmCollectionChange) in
-            switch changes {
-            case .initial:
-                // Results are now populated and can be accessed without blocking the UI
-                self.tableView.reloadData()
-                break
-            case .update(_, _, _, _):
-//            case .update(_, let deletions, let insertions, let modifications):
-                self.tableView.reloadData()
-                break
-//                // Query results have changed, so apply them to the TableView
-//                self.tableView.beginUpdates()
-//                self.tableView.insertRows(at: insertions.map { (NSIndexPath(row: $0, section: 0) as IndexPath) },
-//                                          with: .automatic)
-//                self.tableView.deleteRows(at: deletions.map { (NSIndexPath(row: $0, section: 0) as IndexPath) },
-//                                          with: .automatic)
-//                self.tableView.reloadRows(at: modifications.map { (NSIndexPath(row: $0, section: 0) as IndexPath) },
-//                                          with: .automatic)
-//                self.tableView.endUpdates()
-//                break
-            case .error(let err):
-                // An error occurred while opening the Realm file on the background worker thread
-                fatalError("\(err)")
-                break
-            }
-        }
-
         if #available(iOS 9.0, *) {
             if traitCollection.forceTouchCapability == .available {
                 registerForPreviewing(with: self, sourceView: view)
@@ -175,10 +154,6 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
         tableView.backgroundView = activityIndicatorView
         self.activityIndicatorView = activityIndicatorView
-
-        if meetupsArray.count == 0 {
-            activityIndicatorView.startAnimating()
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -277,13 +252,14 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     func displayObject(_ recordName: String) -> Void {
         //if !loading {
             if self.navigationController?.visibleViewController == self {
-                let meetups = self.meetupsArray
-
-                if let selectedObject = meetups.filter({ (meetup: Meetup) -> Bool in
-                    return meetup.recordName == recordName
-                }).first {
-                    performSegue(withIdentifier: "ShowDetail", sender: selectedObject)
-                }
+                //TODO fix object displaying
+//                let meetups = self.meetupsArray
+//
+//                if let selectedObject = meetups.filter({ (meetup: Meetup) -> Bool in
+//                    return meetup.recordName == recordName
+//                }).first {
+//                    performSegue(withIdentifier: "ShowDetail", sender: selectedObject)
+//                }
 
             } else {
                 _ = self.navigationController?.popToRootViewController(animated: false)
@@ -307,7 +283,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
                 Answers.logContentView(withName: "Show Meetup details",
                                                contentType: "Meetup",
-                                               contentId: selectedObject.meetup_id!,
+                                               contentId: selectedObject.meetupId!,
                                                customAttributes: nil)
             } else if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
                 let meetup = self.meetup(for: indexPath)
@@ -315,7 +291,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                 detailViewController.dataSource = MeetupDataSource(object: meetup)
                 Answers.logContentView(withName: "Show Meetup details",
                                                contentType: "Meetup",
-                                               contentId: meetup.meetup_id!,
+                                               contentId: meetup.meetupId!,
                                                customAttributes: nil)
             }
         }
@@ -383,7 +359,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         var meetups = [Meetup]()
 
         operation.recordFetchedBlock = { (record) in
-            let meetup = Meetup.meetup(forRecord: record)
+            let meetup = Meetup.meetup(forRecord: record, on: CoreDataStack.shared.viewContext)
             let _ = meetup.smallLogoImage
             let _ = meetup.logoImage
             meetups.append(meetup)
@@ -399,14 +375,15 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                 
                 let meetupNames = meetups.compactMap ({ $0.recordName })
                 let predicate = NSPredicate(format: "NOT recordName IN %@", meetupNames)
-                let obsoleteMeetups = self?.realm.objects(Meetup.self).filter(predicate)
-                self?.realm.beginWrite()
-                self?.realm.add(meetups, update: true)
-                if let obsoleteMeetups = obsoleteMeetups {
-                    self?.realm.delete(obsoleteMeetups)
-                }
-                try! self?.realm.commitWrite()
-                
+                // TODO write meetups to CoreData
+//                let obsoleteMeetups = self?.realm.objects(Meetup.self).filter(predicate)
+//                self?.realm.beginWrite()
+//                self?.realm.add(meetups, update: true)
+//                if let obsoleteMeetups = obsoleteMeetups {
+//                    self?.realm.delete(obsoleteMeetups)
+//                }
+//                try! self?.realm.commitWrite()
+
                 self?.activityIndicatorView.stopAnimating()
                 self?.activityIndicatorView.hidesWhenStopped = true
             }
@@ -417,4 +394,54 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     }
 
 
+}
+
+class MeetupFetchedResultsControllerDelegate: NSObject, FetchedResultsControllerDelegate {
+
+    private weak var tableView: UITableView?
+
+    // MARK: - Lifecycle
+    init(tableView: UITableView) {
+        self.tableView = tableView
+    }
+
+    func fetchedResultsControllerDidPerformFetch(_ controller: FetchedResultsController<Meetup>) {
+        tableView?.reloadData()
+    }
+
+    func fetchedResultsControllerWillChangeContent(_ controller: FetchedResultsController<Meetup>) {
+        tableView?.beginUpdates()
+    }
+
+    func fetchedResultsControllerDidChangeContent(_ controller: FetchedResultsController<Meetup>) {
+        tableView?.endUpdates()
+    }
+
+    func fetchedResultsController(_ controller: FetchedResultsController<Meetup>, didChangeObject change: FetchedResultsObjectChange<Meetup>) {
+        guard let tableView = tableView else { return }
+        switch change {
+        case let .insert(_, indexPath):
+            tableView.insertRows(at: [indexPath], with: .automatic)
+
+        case let .delete(_, indexPath):
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+
+        case let .move(_, fromIndexPath, toIndexPath):
+            tableView.moveRow(at: fromIndexPath, to: toIndexPath)
+
+        case let .update(_, indexPath):
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+    }
+
+    func fetchedResultsController(_ controller: FetchedResultsController<Meetup>, didChangeSection change: FetchedResultsSectionChange<Meetup>) {
+        guard let tableView = tableView else { return }
+        switch change {
+        case let .insert(_, index):
+            tableView.insertSections(IndexSet(integer: index), with: .automatic)
+
+        case let .delete(_, index):
+            tableView.deleteSections(IndexSet(integer: index), with: .automatic)
+        }
+    }
 }

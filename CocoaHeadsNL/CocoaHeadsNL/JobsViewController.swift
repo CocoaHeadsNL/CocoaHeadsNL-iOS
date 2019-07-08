@@ -10,22 +10,32 @@ import Foundation
 import UIKit
 import CloudKit
 import Crashlytics
-import RealmSwift
+import CoreData
 
 class JobsViewController: UICollectionViewController {
 
-    lazy var realm = {
-        try! Realm()
+    private lazy var fetchedResultsController: FetchedResultsController<Job> = {
+        let fetchRequest = NSFetchRequest<Job>()
+        fetchRequest.entity = Job.entity()
+        fetchRequest.sortDescriptors = []
+        let frc = FetchedResultsController<Job>(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.viewContext, sectionNameKeyPath: nil)
+        frc.setDelegate(self.frcDelegate)
+        return frc
     }()
 
-    lazy var jobsArray = {
-        try! Realm().objects(Job.self).sorted(byKeyPath: "date", ascending: false)
+    private lazy var frcDelegate: JobFetchedResultsControllerDelegate = {
+        // swiftlint:disable:this weak_delegate
+        return JobFetchedResultsControllerDelegate(collectionView: self.collectionView)
     }()
+
+    lazy var jobsArray: [Job] = {
+    return try? Job.allInContext(CoreDataStack.shared.viewContext, sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)])
+    }() ?? []
+
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     var searchedObjectId: String? = nil
-    var notificationToken: NotificationToken?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,28 +64,6 @@ class JobsViewController: UICollectionViewController {
         self.subscribe()
         if jobsArray.count == 0 {
             self.activityIndicator.startAnimating()
-        }
-    
-        // Set results notification block
-        self.notificationToken = jobsArray.observe { (changes: RealmCollectionChange) in
-            switch changes {
-            case .initial:
-                // Results are now populated and can be accessed without blocking the UI
-                self.collectionView?.reloadData()
-                break
-            case .update(_, let deletions, let insertions, let modifications):
-                // Query results have changed, so apply them to the TableView
-                self.collectionView?.performBatchUpdates({
-                    self.collectionView?.insertItems(at: insertions.map { (NSIndexPath(row: $0, section: 0) as IndexPath) })
-                    self.collectionView?.deleteItems(at: deletions.map { (NSIndexPath(row: $0, section: 0) as IndexPath) })
-                    self.collectionView?.reloadItems(at: modifications.map { (NSIndexPath(row: $0, section: 0) as IndexPath) })
-                    }, completion: nil)
-                break
-            case .error(let err):
-                // An error occurred while opening the Realm file on the background worker thread
-                fatalError("\(err)")
-                break
-            }
         }
     }
 
@@ -228,7 +216,7 @@ class JobsViewController: UICollectionViewController {
         var jobs = [Job]()
 
         operation.recordFetchedBlock = { (record) in
-            let job = Job.job(forRecord: record)
+            let job = Job.job(forRecord: record, on: CoreDataStack.shared.viewContext)
             let _ = job.logoImage
             jobs.append(job)
         }
@@ -245,13 +233,14 @@ class JobsViewController: UICollectionViewController {
                     return job.recordName
                 })
                 let predicate = NSPredicate(format: "NOT recordName IN %@", jobRecordNames)
-                let obsoleteJobs = self?.realm.objects(Job.self).filter(predicate)
-                self?.realm.beginWrite()
-                self?.realm.add(jobs, update: true)
-                if let obsoleteJobs = obsoleteJobs {
-                    self?.realm.delete(obsoleteJobs)
-                }
-                try! self?.realm.commitWrite()
+                // TODO: insert into CoreData
+//                let obsoleteJobs = self?.realm.objects(Job.self).filter(predicate)
+//                self?.realm.beginWrite()
+//                self?.realm.add(jobs, update: true)
+//                if let obsoleteJobs = obsoleteJobs {
+//                    self?.realm.delete(obsoleteJobs)
+//                }
+//                try! self?.realm.commitWrite()
 
                 self?.activityIndicator.stopAnimating()
             }
@@ -259,5 +248,54 @@ class JobsViewController: UICollectionViewController {
 
         CKContainer.default().publicCloudDatabase.add(operation)
 
+    }
+}
+
+class JobFetchedResultsControllerDelegate: NSObject, FetchedResultsControllerDelegate {
+    private weak var collectionView: UICollectionView?
+
+    // MARK: - Lifecycle
+    init(collectionView: UICollectionView?) {
+        self.collectionView = collectionView
+    }
+
+    func fetchedResultsControllerDidPerformFetch(_ controller: FetchedResultsController<Job>) {
+        collectionView?.reloadData()
+    }
+
+    func fetchedResultsControllerWillChangeContent(_ controller: FetchedResultsController<Job>) {
+//        collectionView?.beginUp
+    }
+
+    func fetchedResultsControllerDidChangeContent(_ controller: FetchedResultsController<Job>) {
+//        collectionView?.endUpdates()
+    }
+
+    func fetchedResultsController(_ controller: FetchedResultsController<Job>, didChangeObject change: FetchedResultsObjectChange<Job>) {
+        guard let collectionView = collectionView else { return }
+        switch change {
+        case let .insert(_, indexPath):
+            collectionView.insertItems(at: [indexPath])
+
+        case let .delete(_, indexPath):
+            collectionView.deleteItems(at: [indexPath])
+
+        case let .move(_, fromIndexPath, toIndexPath):
+            collectionView.moveItem(at: fromIndexPath, to: toIndexPath)
+
+        case let .update(_, indexPath):
+            collectionView.reloadItems(at: [indexPath])
+        }
+    }
+
+    func fetchedResultsController(_ controller: FetchedResultsController<Job>, didChangeSection change: FetchedResultsSectionChange<Job>) {
+        guard let collectionView = collectionView else { return }
+        switch change {
+        case let .insert(_, index):
+            collectionView.insertSections(IndexSet(integer: index))
+
+        case let .delete(_, index):
+            collectionView.deleteSections(IndexSet(integer: index))
+        }
     }
 }
