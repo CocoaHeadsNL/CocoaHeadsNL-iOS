@@ -14,9 +14,6 @@ In case you have any ideas, suggestions or additions, just get in contact so you
 
 Our email: [foundation@cocoaheads.nl](mailto:foundation@cocoaheads.nl)
 
-## Before running the app
-
-Please run `pod install` in the directory containing the Podfile.
 
 ## Project structure
 

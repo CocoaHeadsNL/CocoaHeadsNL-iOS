@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import CoreSpotlight
 import CloudKit
-import Crashlytics
 import CoreData
 
 class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDelegate {
@@ -168,10 +167,6 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
             displayObject(searchedObjectId)
         }
 
-        Answers.logContentView(withName: "Show meetups",
-                                       contentType: "Meetup",
-                                       contentId: "overview",
-                                       customAttributes: nil)
         viewDidAppearCount = viewDidAppearCount + 1
         if viewDidAppearCount > 2 {
             RequestReview.requestReview()
@@ -276,18 +271,10 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                 let detailViewController = segue.destination as! DetailViewController
                 detailViewController.dataSource = MeetupDataSource(object: selectedObject)
 
-                Answers.logContentView(withName: "Show Meetup details",
-                                               contentType: "Meetup",
-                                               contentId: selectedObject.meetupId!,
-                                               customAttributes: nil)
             } else if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
                 let meetup = self.meetup(for: indexPath)
                 let detailViewController = segue.destination as! DetailViewController
                 detailViewController.dataSource = MeetupDataSource(object: meetup)
-                Answers.logContentView(withName: "Show Meetup details",
-                                               contentType: "Meetup",
-                                               contentId: meetup.meetupId!,
-                                               customAttributes: nil)
             }
         }
     }

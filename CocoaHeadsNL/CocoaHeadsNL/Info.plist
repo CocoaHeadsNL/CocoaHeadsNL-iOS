@@ -24,20 +24,6 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>auto-generated</string>
-	<key>Fabric</key>
-	<dict>
-		<key>APIKey</key>
-		<string>3b3cf5545c3cc6e67f38400041cd8fd1d1227455</string>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-		</array>
-	</dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>

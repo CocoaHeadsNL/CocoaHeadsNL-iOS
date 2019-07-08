@@ -1,6 +1,5 @@
 import UIKit
 import MapKit
-import Crashlytics
 
 class MapViewCell: UITableViewCell, MKMapViewDelegate {
     @IBOutlet weak var littleMap: MKMapView!
@@ -39,12 +38,6 @@ class MapViewCell: UITableViewCell, MKMapViewDelegate {
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         self.openMapWithCoordinate(coordinate)
-
-        Answers.logContentView(withName: "Show map",
-                                       contentType: "Company",
-                                       contentId: "\(coordinate)",
-                                       customAttributes: nil)
-
     }
 
     func openMapWithCoordinate(_ coordinate: CLLocationCoordinate2D? = nil) {

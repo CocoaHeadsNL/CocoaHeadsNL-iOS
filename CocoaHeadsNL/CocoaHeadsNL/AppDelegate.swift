@@ -11,8 +11,6 @@ import CoreSpotlight
 import CloudKit
 
 import CoreData
-import Fabric
-import Crashlytics
 
 let searchNotificationName = "CocoaHeadsNLSpotLightSearchOccured"
 let searchPasteboardName = "CocoaHeadsNL-searchInfo-pasteboard"
@@ -66,7 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        Fabric.with([Crashlytics.self])
 
         let notificationTypes: UIUserNotificationType = [.alert, .badge, .sound]
 

@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import CloudKit
-import Crashlytics
 import CoreData
 
 class ContributorTableViewController: UITableViewController {
@@ -122,11 +121,6 @@ class ContributorTableViewController: UITableViewController {
 
         let urlString = contributors[indexPath.row].url
 
-        Answers.logContentView(withName: "Show contributer details",
-                                       contentType: "Contributer",
-                                       contentId: urlString,
-                                       customAttributes: nil)
-
         if let urlString = urlString, let url = URL(string: urlString) {
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: { (_) in
@@ -159,11 +153,6 @@ class ContributorTableViewController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        Answers.logContentView(withName: "Show contributers",
-                                       contentType: "Contributer",
-                                       contentId: "overview",
-                                       customAttributes: nil)
     }
 
     // MARK: - fetching Cloudkit
@@ -250,6 +239,6 @@ class ContributorFetchedResultsControllerDelegate: NSObject, FetchedResultsContr
 }
 
 // Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+private func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
 	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

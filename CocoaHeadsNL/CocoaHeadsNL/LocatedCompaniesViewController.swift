@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import CloudKit
-import Crashlytics
 import CoreData
 
 class LocatedCompaniesViewController: UITableViewController {
@@ -49,10 +48,6 @@ class LocatedCompaniesViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        Answers.logContentView(withName: "Show companies",
-                               contentType: "Company",
-                               contentId: "overview",
-                               customAttributes: nil)
         self.fetchCompanies()
     }
 
@@ -81,12 +76,6 @@ class LocatedCompaniesViewController: UITableViewController {
 
                 let detailViewController = segue.destination as! DetailViewController
                 detailViewController.dataSource = dataSource
-
-                Answers.logContentView(withName: "Show company details",
-                                               contentType: "Company",
-                                               contentId: company.name!,
-                                               customAttributes: nil)
-
             }
         }
     }
