@@ -12,6 +12,8 @@ import CloudKit
 
 import CoreData
 
+import UserNotifications
+
 let searchNotificationName = "CocoaHeadsNLSpotLightSearchOccured"
 let searchPasteboardName = "CocoaHeadsNL-searchInfo-pasteboard"
 
@@ -24,21 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             pasteboard.string = ""
         }
 
-        let badgeResetOperation = CKModifyBadgeOperation(badgeValue: 0)
-        badgeResetOperation.modifyBadgeCompletionBlock = { (error) -> Void in
-            guard error == nil else {
-                print("Error resetting badge: \(String(describing: error))")
-                return
-            }
-            DispatchQueue.main.async {
-                UIApplication.shared.applicationIconBadgeNumber = 0
-            }
-        }
-        CKContainer.default().add(badgeResetOperation)
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-
+        // TODO: Do we need this?
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -65,10 +57,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        let notificationTypes: UIUserNotificationType = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            if !granted {
+                print("Notifications not granted")
+            }
 
-        let settings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
-        application.registerUserNotificationSettings(settings)
+            if let error = error {
+                print("Error occured when requesting notification authorization. \(error)")
+            }
+        }
+        UNUserNotificationCenter.current().delegate = self
+
         application.registerForRemoteNotifications()
 
         return true
@@ -139,5 +138,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBar.selectedIndex = 2
         }
 
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
     }
 }

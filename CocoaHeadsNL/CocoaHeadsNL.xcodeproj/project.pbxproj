@@ -18,7 +18,6 @@
 		4ABA34A022D3D54C0094BBEA /* NSManagedObjectContext+SaveHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABA349C22D3D54C0094BBEA /* NSManagedObjectContext+SaveHelpers.swift */; };
 		4ABA34A122D3D54C0094BBEA /* NSManagedObject+FetchHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABA349D22D3D54C0094BBEA /* NSManagedObject+FetchHelpers.swift */; };
 		4ABA34A522D3D9DB0094BBEA /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABA34A422D3D9DB0094BBEA /* CoreDataStack.swift */; };
-		4ABA34A722D3F9950094BBEA /* Meetup+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABA34A622D3F9950094BBEA /* Meetup+CoreDataProperties.swift */; };
 		4ABB70F71D9CED8B00CDE5B8 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */; };
 		4AE3AD281E8BF87E0051706C /* RequestReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE3AD271E8BF87E0051706C /* RequestReview.swift */; };
 		4AE3D7D7203CB81000EF32C3 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4AE3D7D5203CB81000EF32C3 /* Model.xcdatamodeld */; };
@@ -659,7 +658,7 @@
 					F1A46D111AAB50BB00585D61 = {
 						CreatedOnToolsVersion = 6.1.1;
 						LastSwiftMigration = 1020;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -905,7 +904,6 @@
 				4AE3D7EB203CBBD000EF32C3 /* Job+CoreDataProperties.swift in Sources */,
 				4AE3D7E9203CBBD000EF32C3 /* AffiliateLink+CoreDataProperties.swift in Sources */,
 				4AE3D7E3203CBBD000EF32C3 /* Contributor+CoreDataProperties.swift in Sources */,
-				4ABA34A722D3F9950094BBEA /* Meetup+CoreDataProperties.swift in Sources */,
 				4ABA349E22D3D54C0094BBEA /* FetchedResultsController.swift in Sources */,
 				F1DC2E131C665B4D006CC492 /* ContributorTableViewController.swift in Sources */,
 				7B6A74581B179B9C00A10762 /* TitleCell.swift in Sources */,
@@ -1339,16 +1337,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CocoaHeadsNL/CocoaHeadsNL.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D55PL7PU7S;
 				INFOPLIST_FILE = CocoaHeadsNL/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNL;
 				PRODUCT_NAME = CocoaHeadsNL;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development nl.cocoaheads.app.CocoaHeadsNL";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1364,17 +1362,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CocoaHeadsNL/CocoaHeadsNL.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D55PL7PU7S;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = CocoaHeadsNL/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nl.cocoaheads.app.CocoaHeadsNL;
 				PRODUCT_NAME = CocoaHeadsNL;
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore nl.cocoaheads.app.CocoaHeadsNL";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "CocoaHeadsNL/CocoaHeadsNL-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

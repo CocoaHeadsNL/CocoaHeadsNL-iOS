@@ -20,12 +20,10 @@ class ButtonCell: UITableViewCell {
 
     fileprivate func selectURL() -> URL? {
         guard let urlString = urlString else {
-            //TODO: show warning
             return nil
         }
 
         guard let url = URL(string: urlString) else {
-            //TODO: show warning
             return nil
         }
 

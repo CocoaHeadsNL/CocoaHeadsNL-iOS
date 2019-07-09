@@ -26,39 +26,43 @@ extension AffiliateLink {
 
     static func affiliateLink(forRecord record: CKRecord, on context: NSManagedObjectContext) -> AffiliateLink {
         let newAffiliateLink = AffiliateLink(context: context)
-                newAffiliateLink.recordID = record.recordID
-                newAffiliateLink.affiliateId = record["affiliateId"] as? String
-                newAffiliateLink.productName = record["productName"] as? String
-                newAffiliateLink.productCreator = record["productCreator"] as? String
-        //TODO:                newAffiliateLink.company = record["company"] as? CKReference
-
+        newAffiliateLink.recordID = record.recordID
+        newAffiliateLink.affiliateId = record["affiliateId"] as? String
+        newAffiliateLink.productName = record["productName"] as? String
+        newAffiliateLink.productCreator = record["productCreator"] as? String
         return newAffiliateLink
     }
 }
 
 extension Company {
 
-    static func company(forRecord record: CKRecord, on context: NSManagedObjectContext) -> Company {
-        let newCompany = Company(context: context)
-        newCompany.recordName = (record.recordID as CKRecord.ID?)?.recordName
-        newCompany.name = record["name"] as? String
-        newCompany.place = record["place"] as? String
-        newCompany.streetAddress = record["streetAddress"] as? String
-        newCompany.website = record["website"] as? String
-        newCompany.zipCode = record["zipCode"] as? String
-        newCompany.companyDescription = record["companyDescription"] as? String
-        newCompany.emailAddress = record["emailAddress"] as? String
-        newCompany.latitude = (record["location"] as? CLLocation)?.coordinate.latitude ?? 0.0
-        newCompany.longitude = (record["location"] as? CLLocation)?.coordinate.longitude ?? 0.0
+    static func company(forRecord record: CKRecord, on context: NSManagedObjectContext) -> Company? {
+
+        guard let recordName = (record.recordID as CKRecord.ID?)?.recordName else {
+            return nil
+        }
+
+        let company = try? Company.findFirstInContext(context, predicate: NSPredicate(format: "recordName == %@", recordName)) ?? Company(context: context)
+
+        company?.recordName = recordName
+        company?.name = record["name"] as? String
+        company?.place = record["place"] as? String
+        company?.streetAddress = record["streetAddress"] as? String
+        company?.website = record["website"] as? String
+        company?.zipCode = record["zipCode"] as? String
+        company?.companyDescription = record["companyDescription"] as? String
+        company?.emailAddress = record["emailAddress"] as? String
+        company?.latitude = (record["location"] as? CLLocation)?.coordinate.latitude ?? 0.0
+        company?.longitude = (record["location"] as? CLLocation)?.coordinate.longitude ?? 0.0
 
         if let logoAsset = record["logo"] as? CKAsset {
-            newCompany.logo = NSData(contentsOf: logoAsset.fileURL!)
+            company?.logo = NSData(contentsOf: logoAsset.fileURL!)
         }
         if let logoAsset = record["smallLogo"] as? CKAsset {
-            newCompany.smallLogo = NSData(contentsOf: logoAsset.fileURL!)
+            company?.smallLogo = NSData(contentsOf: logoAsset.fileURL!)
         }
 
-        return newCompany
+        return company
     }
 
     var logoImage: UIImage {

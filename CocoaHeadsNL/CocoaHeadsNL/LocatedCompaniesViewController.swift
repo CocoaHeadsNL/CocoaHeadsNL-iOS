@@ -153,10 +153,12 @@ class LocatedCompaniesViewController: UITableViewController {
 
         var companies = [Company]()
 
-        operation.recordFetchedBlock = { (record) in
-            let company = Company.company(forRecord: record, on: CoreDataStack.shared.viewContext)
+        let context = CoreDataStack.shared.newBackgroundContext
 
-            companies.append(company)
+        operation.recordFetchedBlock = { (record) in
+            if let company = Company.company(forRecord: record, on: context) {
+                companies.append(company)
+            }
         }
 
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
@@ -167,17 +169,15 @@ class LocatedCompaniesViewController: UITableViewController {
                     return
                 }
 
-                let companyRecordNames = companies.compactMap({ $0.recordName })
-                let predicate = NSPredicate(format: "NOT recordName IN %@", companyRecordNames)
-                // TODO: write items to CoreData
-//                let obsoleteCompanies = self?.realm.objects(Company.self).filter(predicate)
-//
-//                self?.realm.beginWrite()
-//                self?.realm.add(companies, update: true)
-//                if let obsoleteCompanies = obsoleteCompanies {
-//                    self?.realm.delete(obsoleteCompanies)
-//                }
-//                try! self?.realm.commitWrite()
+                context.performAndWait {
+                    do {
+                        try Company.removeAllInContext(context, except: companies)
+                        context.saveContextToStore()
+                    } catch {
+                        //Do nothing
+                        print("Error while updating companies: \(error)")
+                    }
+                }
             }
         }
 

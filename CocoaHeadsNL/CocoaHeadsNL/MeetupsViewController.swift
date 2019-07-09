@@ -247,24 +247,14 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     func displayObject(_ recordName: String) {
         //if !loading {
             if self.navigationController?.visibleViewController == self {
-                //TODO: fix object displaying
-//                let meetups = self.meetupsArray
-//
-//                if let selectedObject = meetups.filter({ (meetup: Meetup) -> Bool in
-//                    return meetup.recordName == recordName
-//                }).first {
-//                    performSegue(withIdentifier: "ShowDetail", sender: selectedObject)
-//                }
-
+                let context = CoreDataStack.shared.viewContext
+                if let selectedObject = try? Meetup.findFirstInContext(context, predicate: NSPredicate(format: "recordName == %@", recordName)) {
+                    performSegue(withIdentifier: "ShowDetail", sender: selectedObject)
+                }
             } else {
                 _ = self.navigationController?.popToRootViewController(animated: false)
                 searchedObjectId = recordName
             }
-
-//        } else {
-//            //cache object
-//            searchedObjectId = objectId
-//        }
     }
 
     // MARK: - Segues
