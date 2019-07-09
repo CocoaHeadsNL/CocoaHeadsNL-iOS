@@ -259,33 +259,34 @@ class JobFetchedResultsControllerDelegate: NSObject, FetchedResultsControllerDel
     }
 
     func fetchedResultsControllerDidChangeContent(_ controller: FetchedResultsController<Job>) {
+        collectionView?.reloadData()
     }
 
     func fetchedResultsController(_ controller: FetchedResultsController<Job>, didChangeObject change: FetchedResultsObjectChange<Job>) {
-        guard let collectionView = collectionView else { return }
-        switch change {
-        case let .insert(_, indexPath):
-            collectionView.insertItems(at: [indexPath])
-
-        case let .delete(_, indexPath):
-            collectionView.deleteItems(at: [indexPath])
-
-        case let .move(_, fromIndexPath, toIndexPath):
-            collectionView.moveItem(at: fromIndexPath, to: toIndexPath)
-
-        case let .update(_, indexPath):
-            collectionView.reloadItems(at: [indexPath])
-        }
+//        guard let collectionView = collectionView else { return }
+//        switch change {
+//        case let .insert(_, indexPath):
+//            collectionView.insertItems(at: [indexPath])
+//
+//        case let .delete(_, indexPath):
+//            collectionView.deleteItems(at: [indexPath])
+//
+//        case let .move(_, fromIndexPath, toIndexPath):
+//            collectionView.moveItem(at: fromIndexPath, to: toIndexPath)
+//
+//        case let .update(_, indexPath):
+//            collectionView.reloadItems(at: [indexPath])
+//        }
     }
 
     func fetchedResultsController(_ controller: FetchedResultsController<Job>, didChangeSection change: FetchedResultsSectionChange<Job>) {
-        guard let collectionView = collectionView else { return }
-        switch change {
-        case let .insert(_, index):
-            collectionView.insertSections(IndexSet(integer: index))
-
-        case let .delete(_, index):
-            collectionView.deleteSections(IndexSet(integer: index))
-        }
+//        guard let collectionView = collectionView else { return }
+//        switch change {
+//        case let .insert(_, index):
+//            collectionView.insertSections(IndexSet(integer: index))
+//
+//        case let .delete(_, index):
+//            collectionView.deleteSections(IndexSet(integer: index))
+//        }
     }
 }
