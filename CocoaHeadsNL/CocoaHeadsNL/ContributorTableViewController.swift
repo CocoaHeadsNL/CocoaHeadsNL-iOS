@@ -28,10 +28,6 @@ class ContributorTableViewController: UITableViewController {
         return ContributorFetchedResultsControllerDelegate(tableView: self.tableView)
     }()
 
-    lazy var contributors: [Contributor] = {
-        return try? Contributor.allInContext(CoreDataStack.shared.viewContext, sortDescriptors: [NSSortDescriptor(key: "commitCount", ascending: false)])
-        }() ?? []
-
     // MARK: - View LifeCycle
 
     @IBOutlet weak var tableHeaderView: UIView!
@@ -79,16 +75,19 @@ class ContributorTableViewController: UITableViewController {
     // MARK: - UITableViewDataSource
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return self.contributors.count
-
+        return fetchedResultsController.sections?[section].objects.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "contributorCell", for: indexPath)
 
-        let contributor = self.contributors[indexPath.row]
+        guard let sections = fetchedResultsController.sections else {
+            fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
+        }
+
+        let section = sections[indexPath.section]
+        let contributor = section.objects[indexPath.row]
 
         if let avatar_url = contributor.avatarUrl, let url = URL(string: avatar_url) {
             let task = fetchImageTask(url, forImageView: cell.imageView!)
@@ -120,7 +119,12 @@ class ContributorTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let urlString = contributors[indexPath.row].url
+        guard let sections = fetchedResultsController.sections else {
+            fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
+        }
+
+        let section = sections[indexPath.section]
+        let urlString = section.objects[indexPath.row].url
 
         if let urlString = urlString, let url = URL(string: urlString) {
             if UIApplication.shared.canOpenURL(url) {

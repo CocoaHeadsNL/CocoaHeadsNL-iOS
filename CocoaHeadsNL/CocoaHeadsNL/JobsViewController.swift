@@ -27,10 +27,6 @@ class JobsViewController: UICollectionViewController {
         return JobFetchedResultsControllerDelegate(collectionView: self.collectionView)
     }()
 
-    lazy var jobsArray: [Job] = {
-    return try? Job.allInContext(CoreDataStack.shared.viewContext, sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)])
-    }() ?? []
-
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     var searchedObjectId: String?
@@ -60,7 +56,8 @@ class JobsViewController: UICollectionViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(JobsViewController.searchOccured(_:)), name: NSNotification.Name(rawValue: searchNotificationName), object: nil)
         self.subscribe()
-        if jobsArray.count == 0 {
+
+        if fetchedResultsController.count == 0 {
             self.activityIndicator.startAnimating()
         }
     }
@@ -100,14 +97,10 @@ class JobsViewController: UICollectionViewController {
     func displayObject(_ recordName: String) {
         // if !loading {
         if self.navigationController?.visibleViewController == self {
-            let jobs = self.jobsArray
-
-            if let selectedObject = jobs.filter({ (job: Job) -> Bool in
-                return job.recordName == recordName
-            }).first {
+            let context = CoreDataStack.shared.viewContext
+            if let selectedObject = try? Job.findFirstInContext(context, predicate: NSPredicate(format: "recordName == %@", recordName)) {
                 performSegue(withIdentifier: "ShowDetail", sender: selectedObject)
             }
-
         } else {
             _ = self.navigationController?.popToRootViewController(animated: false)
             searchedObjectId = recordName
@@ -149,14 +142,19 @@ class JobsViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return jobsArray.count
+        return fetchedResultsController.sections?[section].objects.count ?? 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "jobsCell", for: indexPath) as! JobsCell
 
-        let job = jobsArray[indexPath.item]
+        guard let sections = fetchedResultsController.sections else {
+            fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
+        }
+
+        let section = sections[indexPath.section]
+        let job = section.objects[indexPath.row]
         cell.job = job
 
         // Remove the vertical separator line for a cell on the right.
@@ -180,7 +178,13 @@ class JobsViewController: UICollectionViewController {
                 let detailViewController = segue.destination as! DetailViewController
                 detailViewController.dataSource = JobDataSource(object: selectedObject)
             } else if let indexPath = self.collectionView?.indexPath(for: sender as! UICollectionViewCell) {
-                let job = self.jobsArray[indexPath.row]
+                guard let sections = fetchedResultsController.sections else {
+                    fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
+                }
+
+                let section = sections[indexPath.section]
+                let job = section.objects[indexPath.row]
+
                 let detailViewController = segue.destination as! DetailViewController
                 detailViewController.dataSource = JobDataSource(object: job)
             }
