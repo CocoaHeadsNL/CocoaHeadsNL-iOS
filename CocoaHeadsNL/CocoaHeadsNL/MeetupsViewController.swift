@@ -22,7 +22,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "year", ascending: false), NSSortDescriptor(key: "time", ascending: false)]
         let frc = FetchedResultsController<Meetup>(fetchRequest: fetchRequest,
                                                      managedObjectContext: CoreDataStack.shared.viewContext,
-                                                     sectionNameKeyPath: nil)
+                                                     sectionNameKeyPath: "year")
         frc.setDelegate(self.frcDelegate)
         return frc
     }()
@@ -153,6 +153,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        try? fetchedResultsController.performFetch()
 
         self.fetchMeetups()
     }

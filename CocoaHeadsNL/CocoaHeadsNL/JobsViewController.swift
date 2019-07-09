@@ -67,6 +67,8 @@ class JobsViewController: UICollectionViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        try? fetchedResultsController.performFetch()
+
         self.fetchJobs()
     }
 

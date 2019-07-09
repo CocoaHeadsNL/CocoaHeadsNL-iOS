@@ -13,17 +13,21 @@ import CoreData
 
 class LocatedCompaniesViewController: UITableViewController {
 
-    lazy var companiesArray: [Company] = {
-        return try? Company.allInContext(CoreDataStack.shared.viewContext, sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)])
-    }() ?? []
+    private lazy var fetchedResultsController: FetchedResultsController<Company> = {
+        let fetchRequest = NSFetchRequest<Company>()
+        fetchRequest.entity = Company.entity()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "commitCount", ascending: false), NSSortDescriptor(key: "name", ascending: true)]
+        let frc = FetchedResultsController<Company>(fetchRequest: fetchRequest,
+                                                        managedObjectContext: CoreDataStack.shared.viewContext,
+                                                        sectionNameKeyPath: nil)
+        frc.setDelegate(self.frcDelegate)
+        return frc
+    }()
 
-    var placesArray: [String] {
-        get {
-            var places = Set<String>()
-            places.formUnion(companiesArray.compactMap { $0.place })
-            return places.map { $0 }.sorted()
-        }
-    }
+    private lazy var frcDelegate: CompanyFetchedResultsControllerDelegate = { // swiftlint:disable:this weak_delegate
+        return CompanyFetchedResultsControllerDelegate(tableView: self.tableView)
+    }()
+
 
     var sortedByPlace = [String: [Company]]()
 
@@ -41,22 +45,12 @@ class LocatedCompaniesViewController: UITableViewController {
         self.navigationItem.setupForRootViewController(withTitle: accessibilityLabel)
 
         self.subscribe()
-
-        self.sortCompaniesByPlace()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        try? fetchedResultsController.performFetch()
         self.fetchCompanies()
-    }
-
-    func sortCompaniesByPlace() {
-
-        for place in placesArray {
-            let companiesForPlace = companiesArray.filter({ $0.place == place }) as [Company]
-            sortedByPlace.updateValue(companiesForPlace, forKey: place)
-        }
     }
 
     // MARK: - Segues
@@ -66,11 +60,13 @@ class LocatedCompaniesViewController: UITableViewController {
 
             if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
 
-                let section = indexPath.section
-                let place = placesArray[section]
-                let companyArray = sortedByPlace[place]
+                guard let sections = fetchedResultsController.sections else {
+                    fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
+                }
 
-                let company = (companyArray?[indexPath.row])!
+                let section = sections[indexPath.section]
+                let company = section.objects[indexPath.row]
+
                 let dataSource = CompanyDataSource(object: company)
                 dataSource.fetchAffiliateLinks()
 
@@ -83,19 +79,24 @@ class LocatedCompaniesViewController: UITableViewController {
     // MARK: - UITableViewDelegate
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return placesArray.count
+        return fetchedResultsController.sectionCount
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString(placesArray[section])
+        guard let sections = fetchedResultsController.sections else {
+            fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
+        }
+
+        return NSLocalizedString(sections[section].name ?? "")
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let place = placesArray[section]
-        if let arrayOfPlace = sortedByPlace[place] {
-        return arrayOfPlace.count
+
+        guard let sections = fetchedResultsController.sections else {
+            fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
         }
-        return 0
+
+        return sections[section].objects.count
     }
 
     // MARK: - UITableViewDataSource
@@ -103,14 +104,15 @@ class LocatedCompaniesViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "defaultCell", for: indexPath)
 
-        let section = indexPath.section
-        let place = placesArray[section]
-        let companyArray = sortedByPlace[place]
+        guard let sections = fetchedResultsController.sections else {
+            fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
+        }
 
-        let company = companyArray?[indexPath.row]
+        let section = sections[indexPath.section]
+        let company = section.objects[indexPath.row]
 
-        cell.textLabel!.text = company?.name
-        cell.imageView?.image =  company?.smallLogoImage
+        cell.textLabel!.text = company.name
+        cell.imageView?.image =  company.smallLogoImage
         return cell
     }
 
@@ -185,3 +187,54 @@ class LocatedCompaniesViewController: UITableViewController {
 
     }
 }
+
+class CompanyFetchedResultsControllerDelegate: NSObject, FetchedResultsControllerDelegate {
+
+    private weak var tableView: UITableView?
+
+    // MARK: - Lifecycle
+    init(tableView: UITableView) {
+        self.tableView = tableView
+    }
+
+    func fetchedResultsControllerDidPerformFetch(_ controller: FetchedResultsController<Company>) {
+        tableView?.reloadData()
+    }
+
+    func fetchedResultsControllerWillChangeContent(_ controller: FetchedResultsController<Company>) {
+        tableView?.beginUpdates()
+    }
+
+    func fetchedResultsControllerDidChangeContent(_ controller: FetchedResultsController<Company>) {
+        tableView?.endUpdates()
+    }
+
+    func fetchedResultsController(_ controller: FetchedResultsController<Company>, didChangeObject change: FetchedResultsObjectChange<Company>) {
+        guard let tableView = tableView else { return }
+        switch change {
+        case let .insert(_, indexPath):
+            tableView.insertRows(at: [indexPath], with: .automatic)
+
+        case let .delete(_, indexPath):
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+
+        case let .move(_, fromIndexPath, toIndexPath):
+            tableView.moveRow(at: fromIndexPath, to: toIndexPath)
+
+        case let .update(_, indexPath):
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+    }
+
+    func fetchedResultsController(_ controller: FetchedResultsController<Company>, didChangeSection change: FetchedResultsSectionChange<Company>) {
+        guard let tableView = tableView else { return }
+        switch change {
+        case let .insert(_, index):
+            tableView.insertSections(IndexSet(integer: index), with: .automatic)
+
+        case let .delete(_, index):
+            tableView.deleteSections(IndexSet(integer: index), with: .automatic)
+        }
+    }
+}
+
