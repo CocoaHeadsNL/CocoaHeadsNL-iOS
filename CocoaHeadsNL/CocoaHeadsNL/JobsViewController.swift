@@ -138,7 +138,7 @@ class JobsViewController: UICollectionViewController {
     // MARK: - UICollectionViewDataSource methods
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return fetchedResultsController.sectionCount
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
