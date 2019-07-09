@@ -96,7 +96,7 @@ extension Contributor {
         contributor.avatarUrl = record["avatar_url"] as? String ?? ""
         contributor.contributorId = record["contributor_id"] as? Int64 ?? 0
         contributor.commitCount = Int32(record["commit_count"] as? Int ?? 0)
-        
+
         return contributor
     }
 

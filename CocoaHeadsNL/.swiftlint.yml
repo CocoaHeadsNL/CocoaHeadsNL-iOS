@@ -1,0 +1,129 @@
+included:
+    - CocoaHeadsNL
+
+excluded:
+    - Pods
+    - Frameworks
+    - bin
+    - Build-Phases
+    - Products
+
+opt_in_rules:
+# 0️⃣ - Geen meerwaarde
+# 1️⃣ - Minimale meerwaarde
+# 2️⃣ - Gemiddelde meerwaarde
+# 3️⃣ - Hoge meerwaarde
+# 4️⃣ - No-brainers
+# 🚗 - supports autocorrect
+# ⚠️ - Number of warnings
+
+# Stylistic Rules 💅🏻
+# - let_var_whitespace # 1️⃣ ⚠️ 434, Zorg ervoor dat in variable en een functie niet tegen elkaar aanstaan (protocols) style
+- operator_usage_whitespace # 1️⃣ 🚗 dubbele spaties, missende spaties
+- closure_end_indentation # 1️⃣ 🚗, { } closures
+- closure_parameter_position # 1️⃣, { text within closures  }
+# - collection_alignment # 1️⃣ ⚠️ 3, 3 regels code die niet netjes uitgelijnd zijn.
+# - conditional_returns_on_newline # 1️⃣ ⚠️ 2, # only for -if statements
+# - function_default_parameter_at_end # 1️⃣ ⚠️ 10, #in functies worden default parameters aan het einde gezet: func bla(foo: String, roo: Int = 200)
+# - multiline_arguments # 1️⃣ ⚠️ 49, Of alle argumenten van een functie in 1 regel of alle argumenten per regel en niet 3 argumenten op regel 1 en 4 argumenten op regel 2
+- multiline_parameters # 1️⃣, parameters of allemaal op 1 regel of per regel een parameter
+# - multiline_function_chains # 1️⃣ ⚠️ 129, chaining op meerdere regels, zorgt voor structuur
+# - multiline_parameters_brackets # 1️⃣ ⚠️ 10,
+- closure_spacing # 2️⃣ 🚗, spacing tussen clusures zorgt voor veel spatie irritatie
+
+# Hygienic Rules 🧻
+# - file_header # 0️⃣, ⚠️ 688 warnings
+# - closure_body_length # 1️⃣ ⚠️ 8, Teveel logica in een closure  () -- Emiel
+- explicit_init # 1️⃣ 🚗, Compleet overbodig om init aan te roepen voor bijvoorbeeld: UIColor.init(hexcode: "5288f5") ipv UIColor(hexcode: "5288f5"
+# - toggle_bool # 1️⃣ ⚠️ 2, someBool.toggle() over someBool = !someBool.
+- unused_import # 1️⃣ 🚗
+- unneeded_parentheses_in_closure_argument # 3️⃣ 🚗,
+- redundant_type_annotation # 1️⃣ 🚗, let storyBoard: UIStoryboard = UIStoryboard("")
+# - empty_string # 4️⃣ ⚠️ 9 performance verbetering wanneer we aString.isEmpty gebruiken ipv aString == ""
+# - first_where # 4️⃣ ⚠️ 5 performance verbetering Prefer using .first(where:) over .filter { }.first in collections.
+- last_where # 4️⃣ performance, zelfde als first_where
+# - sorted_first_last # 4️⃣ ⚠️ 5 performance, gebruik maken van min/max functies van array's ipv sorteren en vervolgens .first/.last
+
+# Convention Rules 🤝
+- modifier_order # 1️⃣ 🚗 ⚠️ 17, style, 'class private func' moet worden 'private class func'
+# - no_grouping_extension # 1️⃣ ⚠️ 477, style, persoonelijk vind ik het niet logisch dat een class geextend wordt om daarin code te groeperen (alleen intereresant voor class extensies zonder dat ze ook een protocol inmplementeren)
+# - legacy_random # 2️⃣ ⚠️ 1, random is vernieuwd
+# - fatal_error_message # 2️⃣ ⚠️ 72, Helpt de andere developers, kleine moeite https://medium.com/@abhimuralidharan/what-are-fatal-errors-and-when-to-use-them-53ad1a66c6d6
+# - convenience_type # 3️⃣ ⚠️ 60, structs, classes en enums die verkeerd gebruikt worden (classes die geen struct zijn) En dit heeft invloed op de performance waarom: https://stackoverflow.com/a/24232845/2826164
+- prohibited_super_call
+- override_in_extension
+- unused_optional_binding
+- yoda_condition
+
+# Code Smells Rules 💩
+# - force_unwrapping # 3️⃣ ⚠️ 147, force unwrapping can cause crashes (is nu ook al een ongeschreven regel)
+# - implicitly_unwrapped_optional # 3️⃣ ⚠️ 96, avoid force unwrap
+- redundant_nil_coalescing # 2️⃣ 🚗 ⚠️ 3, var myVar: Int? = nil; myVar ?? nil
+# - contains_over_first_not_nil # 2️⃣ ⚠️ 4, performance verbetering
+# - pattern_matching_keywords # 3️⃣ ⚠️ 8,  case let .foo(x, y): break  ipv  case .foo(↓let x, ↓let y): break
+
+# Bug Avoiding Rules 🐞
+- fallthrough # 2️⃣ switch falltrough zorgt voor onduidelijkheid, wordt gelukkig nergens gebruikt!  Kan Aan!
+- no_fallthrough_only
+# - lower_acl_than_parent # 2️⃣ ⚠️ 292, onduidelijkheid: accesss van functies en variabelen die meer toegangkelijkheid bieden hebben dan de klasse
+# - no_extension_access_modifier # 2️⃣ ⚠️ 25, extensions horen niet het toegangsniveau aan te passen bijv: (private extension String)
+# - private_action # 3️⃣ ⚠️ 47, voorkomt om deze actions via een andere manier aan te roepen
+# - private_outlet # 3️⃣ ⚠️ 153, voorkomt om deze outlets via een andere klasse aangepast kunnen worden
+# - strong_iboutlet # 3️⃣ ⚠️ 341, kan crashes voorkomen als de view die de outlet bevat verdwijnt https://cocoacasts.com/should-outlets-be-weak-or-strong
+# - overridden_super_call  # 3️⃣ ⚠️ 24, inpact onbekend, lijkt me goed om uit te zoeken
+# - file_name  # 4️⃣ 26 ⚠️, met honderden bestanden is het belangrijk dat de "Bestandsnaam.swift" overeen komt met de klassenaam "Bestandennaam"
+- empty_count # 4️⃣, performance verbetering wanneer we count > 0 vervangen met isEmpty
+
+disabled_rules:
+    - trailing_newline
+    - trailing_whitespace
+
+    # regels om aan te zetten:
+    - large_tuple # Aanzetten, gebruik een struct of een class (max 3)
+    - function_parameter_count # aanzetten, functies met meer dan 5 counts kunnen in de praktijk gewoon een struct of een class als parameter mee krijgen en dan daarnaar handelen
+
+
+type_name:
+    min_length: 3
+    max_length: 70
+
+# min_length op 3 met uitzondering voor Id
+identifier_name:
+    min_length: 1
+    max_length: 60
+    allowed_symbols: "_"
+
+file_length:
+  warning: 901
+  error: 900 # files boven de 900 regels zijn error's
+
+conditional_returns_on_newline:
+  if_only: true
+
+# Langste functie is 174 regels+ . het is belangrijk dat verantwoordelijkheid in functies wordt opgesplitst
+# 50 regels maximaal liever korter. Voor te lange functies is // swiftlint:disable:next function_body_length
+function_body_length:
+    warning: 50
+    error: 50
+
+large_tuple:
+  warning: 3
+
+# Geen idee of hier enige waarde aan gehecht wordt, regellengte (emiel says: 'no')
+# Xcode, Settings, Text Editing, indention tab, 'Check linewrapping' om lengte van regel irritatie te voorkomen.
+line_length:
+    warning: 301
+    error: 300
+    ignores_comments: true
+
+file_header:
+  required_pattern: |
+                  \/\/
+                  \/\/  .*?\.swift
+                  \/\/  EvenAppen
+                  \/\/
+                  \/\/  Created by .*? on \d{1,2}\/\d{1,2}\/\d{2}\.
+                  \/\/  Copyright © \d{4} Achmea\. All rights reserved\.
+                  \/\/
+
+reporter: "xcode"

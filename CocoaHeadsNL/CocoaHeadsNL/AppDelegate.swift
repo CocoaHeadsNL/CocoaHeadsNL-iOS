@@ -116,28 +116,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func presentMeetupsViewController() {
-        //print("should open selected tab"
-
-        let splitViewController = self.window?.rootViewController as! SplitViewController
-        if let tabBar = splitViewController.viewControllers[0] as? UITabBarController {
-        tabBar.selectedIndex = 0
+        if let splitViewController = self.window?.rootViewController as? SplitViewController {
+            if let tabBar = splitViewController.viewControllers[0] as? UITabBarController {
+                tabBar.selectedIndex = 0
+            }
         }
-
     }
 
     func presentJobsViewController() {
-        let splitViewController = self.window?.rootViewController as! SplitViewController
-        if let tabBar = splitViewController.viewControllers[0] as? UITabBarController {
-        tabBar.selectedIndex = 1
+        if let splitViewController = self.window?.rootViewController as? SplitViewController {
+            if let tabBar = splitViewController.viewControllers[0] as? UITabBarController {
+                tabBar.selectedIndex = 1
+            }
         }
     }
 
     func presentCompaniesViewController() {
-        let splitViewController = self.window?.rootViewController as! SplitViewController
-        if let tabBar = splitViewController.viewControllers[0] as? UITabBarController {
-        tabBar.selectedIndex = 2
+        if let splitViewController = self.window?.rootViewController as? SplitViewController {
+            if let tabBar = splitViewController.viewControllers[0] as? UITabBarController {
+                tabBar.selectedIndex = 2
+            }
         }
-
     }
 }
 

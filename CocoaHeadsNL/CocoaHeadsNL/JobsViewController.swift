@@ -200,7 +200,7 @@ class JobsViewController: UICollectionViewController {
         var jobs = [Job]()
 
         let context = CoreDataStack.shared.newBackgroundContext
-        
+
         operation.recordFetchedBlock = { (record) in
             context.perform {
                 if let job = try? Job.job(forRecord: record, on: context) {
