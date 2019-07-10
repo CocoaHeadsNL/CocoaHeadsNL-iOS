@@ -96,9 +96,7 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
-        if #available(iOS 9.0, *) {
-            self.userActivity?.resignCurrent()
-        }
+        self.userActivity?.resignCurrent()
     }
 
     override func reloadCell(_ cell: UITableViewCell) {

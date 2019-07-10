@@ -17,11 +17,9 @@ Our email: [foundation@cocoaheads.nl](mailto:foundation@cocoaheads.nl)
 
 ## Project structure
 
-CocoaHeadsNL contains two important components:
+CocoaHeadsNL consists of a single project.
 
-- The iOS app implementation
-
-Minimal deployment target of the app is iOS 10.0
+Minimal deployment target of the app is iOS 12.0
 
 ## Contributions
 

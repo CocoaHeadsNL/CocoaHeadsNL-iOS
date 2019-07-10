@@ -76,34 +76,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        if #available(iOS 9.0, *) {
-            if userActivity.activityType == CSSearchableItemActionType {
-                let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as! String
-                let components = uniqueIdentifier.components(separatedBy: ":")
-                let type = components[0]
-                let objectId = components[1]
-                if type == "job" || type == "meetup" {
-                    //post uniqueIdentifier string to paste board
-                    let pasteboard = UIPasteboard(name: UIPasteboard.Name(rawValue: "searchPasteboardName"), create: true)
-                    pasteboard?.string = uniqueIdentifier
+        if userActivity.activityType == CSSearchableItemActionType {
+            let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as! String
+            let components = uniqueIdentifier.components(separatedBy: ":")
+            let type = components[0]
+            let objectId = components[1]
+            if type == "job" || type == "meetup" {
+                //post uniqueIdentifier string to paste board
+                let pasteboard = UIPasteboard(name: UIPasteboard.Name(rawValue: "searchPasteboardName"), create: true)
+                pasteboard?.string = uniqueIdentifier
 
-                    //open tab, select based on uniqueId
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: searchNotificationName), object: self, userInfo: ["type": type, "objectId": objectId])
-                    return true
-                }
+                //open tab, select based on uniqueId
+                NotificationCenter.default.post(name: Notification.Name(rawValue: searchNotificationName), object: self, userInfo: ["type": type, "objectId": objectId])
+                return true
             }
         }
 
         return false
     }
 
-    @available(iOS 9.0, *)
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
             handleShortCutItem(shortcutItem)
             completionHandler(true)
     }
 
-    @available(iOS 9.0, *)
     func handleShortCutItem(_ shortCutItem: UIApplicationShortcutItem) {
 
         switch shortCutItem.type {

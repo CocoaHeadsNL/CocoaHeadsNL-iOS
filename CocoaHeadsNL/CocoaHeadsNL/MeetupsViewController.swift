@@ -136,12 +136,8 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         NotificationCenter.default.addObserver(self, selector: #selector(MeetupsViewController.searchOccured(_:)), name: NSNotification.Name(rawValue: searchNotificationName), object: nil)
 
-        if #available(iOS 9.0, *) {
-            if traitCollection.forceTouchCapability == .available {
-                registerForPreviewing(with: self, sourceView: view)
-            }
-        } else {
-            // Fallback on earlier versions
+        if traitCollection.forceTouchCapability == .available {
+            registerForPreviewing(with: self, sourceView: view)
         }
 
         self.subscribe()
@@ -200,26 +196,19 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         guard let detailVC = storyboard?.instantiateViewController(withIdentifier: vcId) as? DetailViewController
             else { return nil }
 
-        if #available(iOS 9.0, *) {
-
-            guard let sections = fetchedResultsController.sections else {
-                fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
-            }
-
-            let section = sections[indexPath.section]
-            let meetup = section.objects[indexPath.row]
-
-            detailVC.dataSource = MeetupDataSource(object: meetup )
-            detailVC.presentingVC  = self
-
-            previewingContext.sourceRect = cell.frame
-
-            return detailVC
-
-        } else {
-            // Fallback on earlier versions
-            return nil
+        guard let sections = fetchedResultsController.sections else {
+            fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
         }
+
+        let section = sections[indexPath.section]
+        let meetup = section.objects[indexPath.row]
+
+        detailVC.dataSource = MeetupDataSource(object: meetup )
+        detailVC.presentingVC  = self
+
+        previewingContext.sourceRect = cell.frame
+
+        return detailVC
     }
 
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {

@@ -159,40 +159,38 @@ extension Job {
     }
 
     class func index(_ jobs: [Job]) {
-        if #available(iOS 9.0, *) {
-            indexQueue.addOperation({ () -> Void in
+        indexQueue.addOperation({ () -> Void in
 
-                guard jobsIndexBackgroundTaskID == UIBackgroundTaskIdentifier.invalid else {
-                    return
-                }
+            guard jobsIndexBackgroundTaskID == UIBackgroundTaskIdentifier.invalid else {
+                return
+            }
 
-                jobsIndexBackgroundTaskID = UIApplication.shared.beginBackgroundTask(expirationHandler: { () -> Void in
-                    UIApplication.shared.endBackgroundTask(convertToUIBackgroundTaskIdentifier(jobsIndexBackgroundTaskID.rawValue))
-                    jobsIndexBackgroundTaskID = UIBackgroundTaskIdentifier.invalid
-                })
-
-                var searchableItems = [CSSearchableItem]()
-                for job in jobs {
-                    let item = CSSearchableItem(uniqueIdentifier: "job:\(String(describing: job.recordName))", domainIdentifier: "job", attributeSet: job.searchableAttributeSet)
-                    searchableItems.append(item)
-                }
-
-//                CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithDomainIdentifiers(["job"], completionHandler: { (error: NSError?) -> Void in
-//                    if let error = error {
-//                        print(error)
-//                    }
-//                })
-
-                CSSearchableIndex.default().indexSearchableItems(searchableItems, completionHandler: { (error: Swift.Error?) -> Void in
-                    if let error = error {
-                        print(error)
-                    }
-                })
-
+            jobsIndexBackgroundTaskID = UIApplication.shared.beginBackgroundTask(expirationHandler: { () -> Void in
                 UIApplication.shared.endBackgroundTask(convertToUIBackgroundTaskIdentifier(jobsIndexBackgroundTaskID.rawValue))
                 jobsIndexBackgroundTaskID = UIBackgroundTaskIdentifier.invalid
             })
-        }
+
+            var searchableItems = [CSSearchableItem]()
+            for job in jobs {
+                let item = CSSearchableItem(uniqueIdentifier: "job:\(String(describing: job.recordName))", domainIdentifier: "job", attributeSet: job.searchableAttributeSet)
+                searchableItems.append(item)
+            }
+
+            //                CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithDomainIdentifiers(["job"], completionHandler: { (error: NSError?) -> Void in
+            //                    if let error = error {
+            //                        print(error)
+            //                    }
+            //                })
+
+            CSSearchableIndex.default().indexSearchableItems(searchableItems, completionHandler: { (error: Swift.Error?) -> Void in
+                if let error = error {
+                    print(error)
+                }
+            })
+
+            UIApplication.shared.endBackgroundTask(convertToUIBackgroundTaskIdentifier(jobsIndexBackgroundTaskID.rawValue))
+            jobsIndexBackgroundTaskID = UIBackgroundTaskIdentifier.invalid
+        })
     }
 }
 
@@ -263,7 +261,6 @@ extension Meetup {
         return time.timeIntervalSinceNow > 0
     }
 
-    @available(iOS 9.0, *)
     var searchableAttributeSet: CSSearchableItemAttributeSet {
         get {
             let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeImage as String)
@@ -295,23 +292,22 @@ extension Meetup {
     }
 
     class func index(_ meetups: [Meetup]) {
-        if #available(iOS 9.0, *) {
-            indexQueue.addOperation({ () -> Void in
+        indexQueue.addOperation({ () -> Void in
 
-                guard meetupsIndexBackgroundTaskID == UIBackgroundTaskIdentifier.invalid else {
-                    return
-                }
+            guard meetupsIndexBackgroundTaskID == UIBackgroundTaskIdentifier.invalid else {
+                return
+            }
 
-                meetupsIndexBackgroundTaskID = UIApplication.shared.beginBackgroundTask(expirationHandler: { () -> Void in
-                    UIApplication.shared.endBackgroundTask(convertToUIBackgroundTaskIdentifier(jobsIndexBackgroundTaskID.rawValue))
-                    meetupsIndexBackgroundTaskID = UIBackgroundTaskIdentifier.invalid
-                })
+            meetupsIndexBackgroundTaskID = UIApplication.shared.beginBackgroundTask(expirationHandler: { () -> Void in
+                UIApplication.shared.endBackgroundTask(convertToUIBackgroundTaskIdentifier(jobsIndexBackgroundTaskID.rawValue))
+                meetupsIndexBackgroundTaskID = UIBackgroundTaskIdentifier.invalid
+            })
 
-                var searchableItems = [CSSearchableItem]()
-                for meetup in meetups {
-                    let item = CSSearchableItem(uniqueIdentifier: "meetup:\(String(describing: meetup.recordName))", domainIdentifier: "meetup", attributeSet: meetup.searchableAttributeSet)
-                    searchableItems.append(item)
-                }
+            var searchableItems = [CSSearchableItem]()
+            for meetup in meetups {
+                let item = CSSearchableItem(uniqueIdentifier: "meetup:\(String(describing: meetup.recordName))", domainIdentifier: "meetup", attributeSet: meetup.searchableAttributeSet)
+                searchableItems.append(item)
+            }
 
 //                CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithDomainIdentifiers(["meetup"], completionHandler: { (error: NSError?) -> Void in
 //                    if let error = error {
@@ -319,16 +315,15 @@ extension Meetup {
 //                    }
 //                })
 
-                CSSearchableIndex.default().indexSearchableItems(searchableItems, completionHandler: { (error: Swift.Error?) -> Void in
-                    if let error = error {
-                        print(error)
-                    }
-                })
-
-                UIApplication.shared.endBackgroundTask(convertToUIBackgroundTaskIdentifier(jobsIndexBackgroundTaskID.rawValue))
-                meetupsIndexBackgroundTaskID = UIBackgroundTaskIdentifier.invalid
+            CSSearchableIndex.default().indexSearchableItems(searchableItems, completionHandler: { (error: Swift.Error?) -> Void in
+                if let error = error {
+                    print(error)
+                }
             })
-        }
+
+            UIApplication.shared.endBackgroundTask(convertToUIBackgroundTaskIdentifier(jobsIndexBackgroundTaskID.rawValue))
+            meetupsIndexBackgroundTaskID = UIBackgroundTaskIdentifier.invalid
+        })
     }
 }
 
