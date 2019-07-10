@@ -35,4 +35,16 @@ extension Meetup {
     @NSManaged public var meetupUrl: String?
     @NSManaged public var year: Int32
 
+    @objc
+    var sectionName: String {
+        if isToday {
+            return NSLocalizedString("Today", comment: "Section title for todays meetup.")
+        }
+        if isUpcoming {
+            return NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")
+        }
+
+        return "\(year)"
+    }
+
 }

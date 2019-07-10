@@ -19,10 +19,10 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     private lazy var fetchedResultsController: FetchedResultsController<Meetup> = {
         let fetchRequest = NSFetchRequest<Meetup>()
         fetchRequest.entity = Meetup.entity()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "year", ascending: false), NSSortDescriptor(key: "time", ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "time", ascending: false), NSSortDescriptor(key: "time", ascending: false)]
         let frc = FetchedResultsController<Meetup>(fetchRequest: fetchRequest,
                                                      managedObjectContext: CoreDataStack.shared.viewContext,
-                                                     sectionNameKeyPath: "year")
+                                                     sectionNameKeyPath: "sectionName")
         frc.setDelegate(self.frcDelegate)
         return frc
     }()
@@ -30,72 +30,6 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     private lazy var frcDelegate: MeetupFetchedResultsControllerDelegate = { // swiftlint:disable:this weak_delegate
         return MeetupFetchedResultsControllerDelegate(tableView: self.tableView)
     }()
-
-//    var meetupsByYear: [String: [Meetup]] {
-//        get {
-//            // I am assuming ordering stays correct due to FIFO behavior.
-//            var meetupsByYear = fetchedResultsController.fetchedObjects?.reduce([String: [Meetup]]()) { (previousResult, meetup) -> [String: [Meetup]] in
-//                guard let meetupTime = meetup.time else {
-//                    return previousResult
-//                }
-//
-//                var newResult = previousResult
-//
-//                let year = Calendar.current.component(.year, from: meetupTime)
-//                let yearString: String
-//
-//                if meetup.isToday {
-//                    yearString = NSLocalizedString("Today", comment: "Section title for todays meetup.")
-//                }
-//                else if meetup.isUpcoming {
-//                    yearString = NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")
-//                } else {
-//                    yearString = "\(year)"
-//                }
-//
-//                if var meetupsForYear = newResult[yearString] {
-//                    meetupsForYear.append(meetup)
-//                    newResult[yearString] = meetupsForYear
-//                } else {
-//                    newResult[yearString] = [meetup]
-//                }
-//                return newResult
-//            }
-//
-//            // Inverse the sorting of upcoming meetups.
-//            if let upcomingMeetups = meetupsByYear?[NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")] {
-//                meetupsByYear?[NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")] = upcomingMeetups.reversed()
-//            }
-//
-//            return meetupsByYear ?? [:]
-//        }
-//    }
-
-//    fileprivate var sectionTitles: [String] {
-//        get {
-//            let sections = meetupsByYear.keys
-//            let today = sections.filter { $0 == NSLocalizedString("Today", comment: "Section title for todays meetup.") }
-//            let upcoming = sections.filter { $0 == NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.") }
-//
-//            let rest = sections
-//                .filter { section in
-//                    return section != NSLocalizedString("Today", comment: "Section title for todays meetup.")
-//                        && section != NSLocalizedString("Upcoming", comment: "Section title for upcoming meetups.")
-//                }
-//                .sorted()
-//                .reversed()
-//
-//            return today + upcoming + rest
-//        }
-//    }
-
-//    fileprivate func meetups(forSection section: Int) -> [Meetup] {
-//        return meetupsByYear[sectionTitles[section]]!
-//    }
-
-//    fileprivate func meetup(for indexPath: IndexPath) -> Meetup {
-//        return meetups(forSection: indexPath.section)[indexPath.row]
-//    }
 
     var searchedObjectId: String?
 
@@ -379,7 +313,6 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         }
 
         CKContainer.default().publicCloudDatabase.add(operation)
-
     }
 
 }
