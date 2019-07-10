@@ -16,7 +16,7 @@ class LocatedCompaniesViewController: UITableViewController {
     private lazy var fetchedResultsController: FetchedResultsController<Company> = {
         let fetchRequest = NSFetchRequest<Company>()
         fetchRequest.entity = Company.entity()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "place", ascending: false), NSSortDescriptor(key: "name", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "place", ascending: true), NSSortDescriptor(key: "name", ascending: true)]
         let frc = FetchedResultsController<Company>(fetchRequest: fetchRequest,
                                                         managedObjectContext: CoreDataStack.shared.viewContext,
                                                         sectionNameKeyPath: "place")
