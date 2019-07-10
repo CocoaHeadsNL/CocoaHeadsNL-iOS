@@ -217,23 +217,25 @@ class JobsViewController: UICollectionViewController {
         }
 
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
-            DispatchQueue.main.async {
-                guard error == nil else {
+            guard error == nil else {
+                DispatchQueue.main.async {
                     let ac = UIAlertController.fetchErrorDialog(whileFetching: "jobs", error: error!)
                     self?.present(ac, animated: true, completion: nil)
-                    return
                 }
+                return
+            }
 
-                context.performAndWait {
-                    do {
-                        try Job.removeAllInContext(context, except: jobs)
-                        context.saveContextToStore()
-                    } catch {
-                        // Do nothing
-                        print("Error while updating jobs: \(error)")
-                    }
+            context.perform {
+                do {
+                    try Job.removeAllInContext(context, except: jobs)
+                    context.saveContextToStore()
+                } catch {
+                    // Do nothing
+                    print("Error while updating jobs: \(error)")
                 }
+            }
 
+            DispatchQueue.main.async {
                 self?.activityIndicator.stopAnimating()
             }
         }

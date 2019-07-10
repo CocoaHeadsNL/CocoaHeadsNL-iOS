@@ -180,15 +180,15 @@ class ContributorTableViewController: UITableViewController {
         }
 
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
-            DispatchQueue.main.async {
-                guard error == nil else {
+            guard error == nil else {
+                DispatchQueue.main.async {
                     let ac = UIAlertController.fetchErrorDialog(whileFetching: "contributors", error: error!)
                     self?.present(ac, animated: true, completion: nil)
-                    return
                 }
-                context.perform {
-                    context.saveContextToStore()
-                }
+                return
+            }
+            context.perform {
+                context.saveContextToStore()
             }
         }
 

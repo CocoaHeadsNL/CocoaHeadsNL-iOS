@@ -290,22 +290,25 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         }
 
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
-            DispatchQueue.main.async {
-                guard error == nil else {
+            guard error == nil else {
+                DispatchQueue.main.async {
                     let ac = UIAlertController.fetchErrorDialog(whileFetching: NSLocalizedString("meetups"), error: error!)
                     self?.present(ac, animated: true, completion: nil)
-                    return
                 }
+                return
+            }
 
-                context.performAndWait {
-                    do {
-                        try Meetup.removeAllInContext(context, except: meetups)
-                        context.saveContextToStore()
-                    } catch {
-                        // Do nothing
-                        print("Error while updating meetups: \(error)")
-                    }
+            context.perform {
+                do {
+                    try Meetup.removeAllInContext(context, except: meetups)
+                    context.saveContextToStore()
+                } catch {
+                    // Do nothing
+                    print("Error while updating meetups: \(error)")
                 }
+            }
+
+            DispatchQueue.main.async {
 
                 self?.activityIndicatorView.stopAnimating()
                 self?.activityIndicatorView.hidesWhenStopped = true

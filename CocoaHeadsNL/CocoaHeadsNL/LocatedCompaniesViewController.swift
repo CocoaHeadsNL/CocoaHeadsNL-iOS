@@ -165,27 +165,26 @@ class LocatedCompaniesViewController: UITableViewController {
         }
 
         operation.queryCompletionBlock = { [weak self] (cursor, error) in
-            DispatchQueue.main.async {
-                guard error == nil else {
+            guard error == nil else {
+                DispatchQueue.main.async {
                     let ac = UIAlertController.fetchErrorDialog(whileFetching: "companies", error: error!)
                     self?.present(ac, animated: true, completion: nil)
-                    return
                 }
+                return
+            }
 
-                context.performAndWait {
-                    do {
-                        try Company.removeAllInContext(context, except: companies)
-                        context.saveContextToStore()
-                    } catch {
-                        //Do nothing
-                        print("Error while updating companies: \(error)")
-                    }
+            context.perform {
+                do {
+                    try Company.removeAllInContext(context, except: companies)
+                    context.saveContextToStore()
+                } catch {
+                    //Do nothing
+                    print("Error while updating companies: \(error)")
                 }
             }
         }
 
         CKContainer.default().publicCloudDatabase.add(operation)
-
     }
 }
 
