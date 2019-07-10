@@ -16,7 +16,7 @@ class JobsViewController: UICollectionViewController {
     private lazy var fetchedResultsController: FetchedResultsController<Job> = {
         let fetchRequest = NSFetchRequest<Job>()
         fetchRequest.entity = Job.entity()
-        fetchRequest.sortDescriptors = []
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         let frc = FetchedResultsController<Job>(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.viewContext, sectionNameKeyPath: nil)
         frc.setDelegate(self.frcDelegate)
         return frc
