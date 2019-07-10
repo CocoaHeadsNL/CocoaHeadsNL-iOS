@@ -139,7 +139,6 @@
 		4ABA349C22D3D54C0094BBEA /* NSManagedObjectContext+SaveHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+SaveHelpers.swift"; sourceTree = "<group>"; };
 		4ABA349D22D3D54C0094BBEA /* NSManagedObject+FetchHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+FetchHelpers.swift"; sourceTree = "<group>"; };
 		4ABA34A422D3D9DB0094BBEA /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		4ABA34A622D3F9950094BBEA /* Meetup+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Meetup+CoreDataProperties.swift"; path = "CocoaHeadsNL/Meetup+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		4AE3AD271E8BF87E0051706C /* RequestReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestReview.swift; sourceTree = "<group>"; };
 		4AE3D7D6203CB81000EF32C3 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -457,7 +456,6 @@
 		F1A46D091AAB50BB00585D61 = {
 			isa = PBXGroup;
 			children = (
-				4ABA34A622D3F9950094BBEA /* Meetup+CoreDataProperties.swift */,
 				F1A46D141AAB50BB00585D61 /* CocoaHeadsNL */,
 				4AEDD5211CF635E50039AAE5 /* CocoaHeadsNLUITests */,
 				F145941220540B26006A4002 /* generalNotification */,
