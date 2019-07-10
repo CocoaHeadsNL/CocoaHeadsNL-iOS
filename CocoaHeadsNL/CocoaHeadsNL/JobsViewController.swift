@@ -175,7 +175,7 @@ class JobsViewController: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDetail" {
             if let selectedObject = sender as? Job {
-                let detailViewController = segue.destination as! DetailViewController
+                let detailViewController = segue.destination as! DetailViewController // swiftlint:disable:this force_cast
                 detailViewController.dataSource = JobDataSource(object: selectedObject)
             } else if let indexPath = self.collectionView?.indexPath(for: sender as! UICollectionViewCell) {
                 guard let sections = fetchedResultsController.sections else {
@@ -185,8 +185,8 @@ class JobsViewController: UICollectionViewController {
                 let section = sections[indexPath.section]
                 let job = section.objects[indexPath.row]
 
-                let detailViewController = segue.destination as! DetailViewController
-                detailViewController.dataSource = JobDataSource(object: job)
+                let detailViewController = segue.destination as? DetailViewController
+                detailViewController?.dataSource = JobDataSource(object: job)
             }
         }
     }

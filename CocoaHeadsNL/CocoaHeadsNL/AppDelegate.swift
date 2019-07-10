@@ -77,7 +77,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if userActivity.activityType == CSSearchableItemActionType {
-            let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as! String
+            guard let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String else {
+                return false
+            }
             let components = uniqueIdentifier.components(separatedBy: ":")
             let type = components[0]
             let objectId = components[1]

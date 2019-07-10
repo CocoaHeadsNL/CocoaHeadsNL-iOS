@@ -2,7 +2,7 @@ import UIKit
 
 class JobDataSource: DetailDataSource {
     var job: Job {
-        return object as! Job
+        return object as! Job // swiftlint:disable:this force_cast
     }
 
     override var title: String? {

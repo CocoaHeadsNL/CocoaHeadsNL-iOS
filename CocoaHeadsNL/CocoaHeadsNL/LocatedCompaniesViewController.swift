@@ -28,7 +28,6 @@ class LocatedCompaniesViewController: UITableViewController {
         return CompanyFetchedResultsControllerDelegate(tableView: self.tableView)
     }()
 
-
     var sortedByPlace = [String: [Company]]()
 
     required init?(coder aDecoder: NSCoder) {
@@ -71,8 +70,8 @@ class LocatedCompaniesViewController: UITableViewController {
 
                 let dataSource = CompanyDataSource(object: company)
 
-                let detailViewController = segue.destination as! DetailViewController
-                detailViewController.dataSource = dataSource
+                let detailViewController = segue.destination as? DetailViewController
+                detailViewController?.dataSource = dataSource
             }
         }
     }
@@ -237,4 +236,3 @@ class CompanyFetchedResultsControllerDelegate: NSObject, FetchedResultsControlle
         }
     }
 }
-

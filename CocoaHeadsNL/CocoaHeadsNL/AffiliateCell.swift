@@ -40,7 +40,7 @@ class AffiliateCell: UITableViewCell {
             print("error \(error)")
             parsedObject = nil
         }
-        if let root = parsedObject as? [String: AnyObject], let results = root["results"] as? [AnyObject], results.count > 0 {
+        if let root = parsedObject as? [String: AnyObject], let results = root["results"] as? [AnyObject], !results.isEmpty {
             if let result = results[0] as? [String: AnyObject],
                 let iconUrlString = result["artworkUrl60"] as? String {
                     return URL(string: iconUrlString)

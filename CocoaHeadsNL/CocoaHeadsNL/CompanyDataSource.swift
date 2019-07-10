@@ -6,7 +6,7 @@ class CompanyDataSource: DetailDataSource {
     weak var presenter: DetailViewController?
 
     var company: Company {
-        return object as! Company
+        return object as! Company // swiftlint:disable:this force_cast
     }
 
     override var title: String? {

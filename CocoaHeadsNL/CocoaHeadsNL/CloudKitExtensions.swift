@@ -105,7 +105,7 @@ extension Job {
             job.logo = data as NSData
         }
 
-        if let companyName = record["author"] as? String, companyName.count > 0 {
+        if let companyName = record["author"] as? String, !companyName.isEmpty {
             job.companyName = companyName
         } else {
             job.companyName = nil
@@ -245,33 +245,31 @@ extension Meetup {
     }
 
     var searchableAttributeSet: CSSearchableItemAttributeSet {
-        get {
-            let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeImage as String)
-            attributeSet.title = name
-            if let data = meetupDescription?.data(using: String.Encoding.utf8) {
-                do {
-                    let meetupDescriptionString = try NSAttributedString(data: data, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html, NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8], documentAttributes: nil)
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeImage as String)
+        attributeSet.title = name
+        if let data = meetupDescription?.data(using: String.Encoding.utf8) {
+            do {
+                let meetupDescriptionString = try NSAttributedString(data: data, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html, NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8], documentAttributes: nil)
 
-                    attributeSet.contentDescription = meetupDescriptionString.string
-                } catch {
-                    print("Stuff went crazy!")
-                }
+                attributeSet.contentDescription = meetupDescriptionString.string
+            } catch {
+                print("Stuff went crazy!")
             }
-            attributeSet.creator = "CocoaHeadsNL"
-            var keywords = ["CocoaHeadsNL"]
-            if let locationName = locationName {
-               keywords.append(locationName)
-            }
-
-            if let location = location {
-                keywords.append(location)
-            }
-
-            attributeSet.keywords = keywords
-            attributeSet.thumbnailData = smallLogoImage.pngData()
-
-            return attributeSet
         }
+        attributeSet.creator = "CocoaHeadsNL"
+        var keywords = ["CocoaHeadsNL"]
+        if let locationName = locationName {
+           keywords.append(locationName)
+        }
+
+        if let location = location {
+            keywords.append(location)
+        }
+
+        attributeSet.keywords = keywords
+        attributeSet.thumbnailData = smallLogoImage.pngData()
+
+        return attributeSet
     }
 
     class func index(_ meetups: [Meetup]) {

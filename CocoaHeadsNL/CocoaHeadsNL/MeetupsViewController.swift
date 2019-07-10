@@ -98,7 +98,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
             displayObject(searchedObjectId)
         }
 
-        viewDidAppearCount = viewDidAppearCount + 1
+        viewDidAppearCount += 1
         if viewDidAppearCount > 2 {
             RequestReview.requestReview()
         }
@@ -188,8 +188,8 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDetail" {
             if let selectedObject = sender as? Meetup {
-                let detailViewController = segue.destination as! DetailViewController
-                detailViewController.dataSource = MeetupDataSource(object: selectedObject)
+                let detailViewController = segue.destination as? DetailViewController
+                detailViewController?.dataSource = MeetupDataSource(object: selectedObject)
 
             } else if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
                 guard let sections = fetchedResultsController.sections else {
@@ -199,8 +199,8 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                 let section = sections[indexPath.section]
                 let meetup = section.objects[indexPath.row]
 
-                let detailViewController = segue.destination as! DetailViewController
-                detailViewController.dataSource = MeetupDataSource(object: meetup)
+                let detailViewController = segue.destination as? DetailViewController
+                detailViewController?.dataSource = MeetupDataSource(object: meetup)
             }
         }
     }

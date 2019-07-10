@@ -20,7 +20,7 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
         if let pasteBoard = UIPasteboard(name: UIPasteboard.Name(rawValue: searchPasteboardName), create: false) {
             let uniqueIdentifier = pasteBoard.string
             if let components = uniqueIdentifier?.components(separatedBy: ":") {
-                if components.count > 0 {
+                if !components.isEmpty {
                     let type = components[0]
                     displayTabForType(type)
                 }

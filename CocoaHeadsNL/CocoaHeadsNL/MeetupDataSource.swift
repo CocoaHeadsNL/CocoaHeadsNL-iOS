@@ -3,7 +3,7 @@ import MapKit
 
 class MeetupDataSource: DetailDataSource {
     var meetup: Meetup {
-        return object as! Meetup
+        return object as! Meetup // swiftlint:disable:this force_cast
     }
 
     override var title: String? {
