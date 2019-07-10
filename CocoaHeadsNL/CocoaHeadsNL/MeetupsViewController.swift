@@ -109,6 +109,8 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.tableFooterView = UIView()
+
         //self.tableView.registerClass(MeetupCell.self, forCellReuseIdentifier: MeetupCell.Identifier)
         let nib = UINib(nibName: "MeetupCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: MeetupCell.Identifier)

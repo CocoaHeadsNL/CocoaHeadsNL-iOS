@@ -37,8 +37,9 @@ class ContributorTableViewController: UITableViewController {
     @IBOutlet weak var howDoesItWorkExplanationLabel: UILabel!
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
+
+        tableView.tableFooterView = UIView()
 
         let backItem = UIBarButtonItem(title: NSLocalizedString("About"), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem

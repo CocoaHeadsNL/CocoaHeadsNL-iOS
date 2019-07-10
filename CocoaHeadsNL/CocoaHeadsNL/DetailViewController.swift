@@ -27,6 +27,8 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.tableFooterView = UIView()
+
         //Can be used to hide masterViewController and increase size of detailView if wanted
         self.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         self.navigationItem.leftItemsSupplementBackButton = true

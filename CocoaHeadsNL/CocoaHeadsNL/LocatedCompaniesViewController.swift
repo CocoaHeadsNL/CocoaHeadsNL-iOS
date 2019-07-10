@@ -38,6 +38,8 @@ class LocatedCompaniesViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.tableFooterView = UIView()
+
         let backItem = UIBarButtonItem(title: NSLocalizedString("Companies"), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
 
