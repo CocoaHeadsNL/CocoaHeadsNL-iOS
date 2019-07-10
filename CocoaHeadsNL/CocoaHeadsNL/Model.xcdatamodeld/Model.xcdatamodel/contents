@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F203" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="AffiliateLink" representedClassName="AffiliateLink" syncable="YES">
-        <attribute name="affiliateId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="productCreator" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="productName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="recordID" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <relationship name="company" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Company" inverseName="affiliateLinks" inverseEntity="Company" syncable="YES"/>
-    </entity>
     <entity name="Company" representedClassName="Company" syncable="YES">
         <attribute name="companyDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="emailAddress" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,7 +14,6 @@
         <attribute name="streetAddress" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zipCode" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="affiliateLinks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AffiliateLink" inverseName="company" inverseEntity="AffiliateLink" syncable="YES"/>
     </entity>
     <entity name="Contributor" representedClassName="Contributor" syncable="YES">
         <attribute name="avatarUrl" optional="YES" attributeType="String" syncable="YES"/>
@@ -64,8 +56,7 @@
         <attribute name="yesRsvpCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AffiliateLink" positionX="-63" positionY="-18" width="128" height="120"/>
-        <element name="Company" positionX="-54" positionY="-9" width="128" height="255"/>
+        <element name="Company" positionX="-54" positionY="-9" width="128" height="240"/>
         <element name="Contributor" positionX="-36" positionY="9" width="128" height="150"/>
         <element name="Job" positionX="-18" positionY="27" width="128" height="180"/>
         <element name="Meetup" positionX="0" positionY="45" width="128" height="315"/>

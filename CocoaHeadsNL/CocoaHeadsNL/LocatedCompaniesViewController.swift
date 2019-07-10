@@ -68,7 +68,6 @@ class LocatedCompaniesViewController: UITableViewController {
                 let company = section.objects[indexPath.row]
 
                 let dataSource = CompanyDataSource(object: company)
-                dataSource.fetchAffiliateLinks()
 
                 let detailViewController = segue.destination as! DetailViewController
                 detailViewController.dataSource = dataSource

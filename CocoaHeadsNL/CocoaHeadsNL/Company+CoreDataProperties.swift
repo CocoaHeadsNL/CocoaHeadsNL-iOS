@@ -29,6 +29,5 @@ extension Company {
     @NSManaged public var longitude: Double
     @NSManaged public var logo: NSData?
     @NSManaged public var smallLogo: NSData?
-    @NSManaged public var affiliateLinks: Set<AffiliateLink>?
 
 }

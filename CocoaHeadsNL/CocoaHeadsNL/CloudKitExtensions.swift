@@ -17,23 +17,6 @@ let indexQueue = OperationQueue()
 var jobsIndexBackgroundTaskID = UIBackgroundTaskIdentifier.invalid
 var meetupsIndexBackgroundTaskID = UIBackgroundTaskIdentifier.invalid
 
-extension AffiliateLink {
-//    let recordID: CKRecordID
-//    let affiliateId: String?
-//    let productCreator: String?
-//    let productName: String?
-//    let company: CKReference?
-
-    static func affiliateLink(forRecord record: CKRecord, on context: NSManagedObjectContext) -> AffiliateLink {
-        let newAffiliateLink = AffiliateLink(context: context)
-        newAffiliateLink.recordID = record.recordID
-        newAffiliateLink.affiliateId = record["affiliateId"] as? String
-        newAffiliateLink.productName = record["productName"] as? String
-        newAffiliateLink.productCreator = record["productCreator"] as? String
-        return newAffiliateLink
-    }
-}
-
 extension Company {
 
     static func company(forRecord record: CKRecord, on context: NSManagedObjectContext) -> Company? {
