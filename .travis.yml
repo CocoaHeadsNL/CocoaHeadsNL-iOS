@@ -1,14 +1,6 @@
 language: objective-c
+xcode_project: CocoaHeadsNL/CocoaHeadsNL.xcodeproj
+xcode_scheme: CocoaHeadsNL
+xcode_destination: platform=iOS Simulator,OS=12.2,name=iPhone X
 sudo: false
-osx_image: xcode8
-cache: cocoapods
-podfile: CocoaHeadsNL/Podfile
-before_install:
-  - brew update
-  - brew outdated xctool || brew upgrade xctool
-  - gem install --no-rdoc --no-ri cocoapods
-  - pod repo update --silent
-  - cd CocoaHeadsNL
-  - pod install
-script:
-  - xcodebuild -workspace CocoaHeadsNL.xcworkspace -scheme CocoaHeadsNL -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+osx_image: xcode10.2

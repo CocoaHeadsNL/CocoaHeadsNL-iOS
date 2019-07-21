@@ -14,7 +14,6 @@ class CocoaHeadsNLUITests: XCTestCase {
         super.setUp()
 
         let app = XCUIApplication()
-        setupSnapshot(app)
         app.launch()
     }
 
@@ -27,18 +26,14 @@ class CocoaHeadsNLUITests: XCTestCase {
         let app = XCUIApplication()
 
         waitForHittable(app.tables.staticTexts["Amsterdam 18:00"], waitSeconds: 10)
-        snapshot("01Meetups")
 
         app.tables.cells.element(boundBy: 0).tap()
-        snapshot("02Meetup-details")
 
         app.tabBars.buttons["Jobs"].tap()
         waitForNotHittable(app.activityIndicators.element(boundBy: 0), waitSeconds: 10)
-        snapshot("03Jobs")
 
         app.tabBars.buttons["About"].tap()
         waitForNotHittable(app.activityIndicators.element(boundBy: 0), waitSeconds: 10)
-        snapshot("04About")
     }
 
 }
