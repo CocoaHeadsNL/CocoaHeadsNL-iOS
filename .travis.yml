@@ -3,4 +3,4 @@ xcode_project: CocoaHeadsNL/CocoaHeadsNL.xcodeproj
 xcode_scheme: CocoaHeadsNL
 xcode_destination: platform=iOS Simulator,OS=12.2,name=iPhone X
 sudo: false
-osx_image: xcode10.2
+osx_image: xcode11
