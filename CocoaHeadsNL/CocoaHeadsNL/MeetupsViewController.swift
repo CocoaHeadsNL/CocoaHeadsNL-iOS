@@ -78,7 +78,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         self.subscribe()
 
-        let activityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        let activityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
         tableView.backgroundView = activityIndicatorView
         self.activityIndicatorView = activityIndicatorView
     }

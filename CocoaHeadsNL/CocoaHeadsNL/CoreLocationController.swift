@@ -20,7 +20,7 @@ class CoreLocationController: NSObject, CLLocationManagerDelegate {
         self.locationManager.delegate = self
         self.locationManager.distanceFilter  = 5000
         self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.requestLocation()
     }
 
     // MARK: - CLLocationManagerDelegate methods
