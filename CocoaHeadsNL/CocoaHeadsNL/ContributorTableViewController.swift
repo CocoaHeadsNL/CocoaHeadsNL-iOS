@@ -35,6 +35,7 @@ class ContributorTableViewController: UITableViewController {
     @IBOutlet weak var whatIsExplanationLabel: UILabel!
     @IBOutlet weak var howDoesItWorkLabel: UILabel!
     @IBOutlet weak var howDoesItWorkExplanationLabel: UILabel!
+    @IBOutlet weak var versionLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,10 +58,16 @@ class ContributorTableViewController: UITableViewController {
         let how = NSLocalizedString("How does it work?")
         let howAnswer = NSLocalizedString("Every month we organize a meeting at a different venue including food and drinks sponsored by companies. Depending on the size of the location we put together a nice agenda for developers.")
 
+        let dictionary = Bundle.main.infoDictionary!
+        let version = dictionary["CFBundleShortVersionString"] as! String
+        let build = dictionary["CFBundleVersion"] as! String
+        let versionInfo = "\(version) (\(build))"
+
         whatIsLabel.text = what
         whatIsExplanationLabel.text = whatAnswer
         howDoesItWorkLabel.text = how
         howDoesItWorkExplanationLabel.text = howAnswer
+        versionLabel.text = versionInfo
 
         tableHeaderView.isAccessibilityElement = true
         tableHeaderView.accessibilityLabel = [what, whatAnswer, how, howAnswer].joined(separator: " ")
