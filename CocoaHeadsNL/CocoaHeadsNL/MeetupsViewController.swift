@@ -12,7 +12,7 @@ import CoreSpotlight
 import CloudKit
 import CoreData
 
-class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDelegate {
+class MeetupsViewController: UITableViewController {
 
     private var viewDidAppearCount = 0
 
@@ -72,10 +72,6 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         NotificationCenter.default.addObserver(self, selector: #selector(MeetupsViewController.searchOccured(_:)), name: NSNotification.Name(rawValue: searchNotificationName), object: nil)
 
-        if traitCollection.forceTouchCapability == .available {
-            registerForPreviewing(with: self, sourceView: view)
-        }
-
         self.subscribe()
 
         let activityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
@@ -118,38 +114,6 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         subscription.notificationInfo = info
 
         publicDB.save(subscription, completionHandler: { _, _ in })
-    }
-
-    // MARK: - 3D Touch
-
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        //quick peek
-        guard let indexPath = tableView.indexPathForRow(at: location), let cell = tableView.cellForRow(at: indexPath) as? MeetupCell
-            else { return nil }
-
-        let vcId = "detailViewController"
-
-        guard let detailVC = storyboard?.instantiateViewController(withIdentifier: vcId) as? DetailViewController
-            else { return nil }
-
-        guard let sections = fetchedResultsController.sections else {
-            fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
-        }
-
-        let section = sections[indexPath.section]
-        let meetup = section.objects[indexPath.row]
-
-        detailVC.dataSource = MeetupDataSource(object: meetup )
-        detailVC.presentingVC  = self
-
-        previewingContext.sourceRect = cell.frame
-
-        return detailVC
-    }
-
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        //push to detailView - pop forceTouch window
-        show(viewControllerToCommit, sender: self)
     }
 
     // MARK: - Search
