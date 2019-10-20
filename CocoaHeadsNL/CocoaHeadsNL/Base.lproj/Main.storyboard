@@ -101,7 +101,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="1Fp-E4-vV8">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CocoaHeadsNLLogo" translatesAutoresizingMaskIntoConstraints="NO" id="1jg-jX-oGt">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MeetupPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="1jg-jX-oGt">
                                             <rect key="frame" x="16" y="16" width="343" height="120"/>
                                             <color key="tintColor" cocoaTouchSystemColor="lightTextColor"/>
                                             <constraints>
@@ -563,6 +563,7 @@
         <image name="CompaniesTabIcon" width="30" height="30"/>
         <image name="EventsTabIcon" width="30" height="30"/>
         <image name="JobsTabIcon" width="30" height="30"/>
+        <image name="MeetupPlaceholder" width="72" height="72"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="GJd-Rt-qyZ"/>
