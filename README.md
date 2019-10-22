@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/CocoaHeadsNL/CocoaHeadsNL-iOS.svg?branch=ios-13)](https://travis-ci.org/CocoaHeadsNL/CocoaHeadsNL-iOS)
+[![Build status](https://build.appcenter.ms/v0.1/apps/b268db8e-5e09-40fb-9c8e-bd30aac6080a/branches/master/badge)](https://appcenter.ms)
 
 # About this app
 
