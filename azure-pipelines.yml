@@ -4,24 +4,18 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/xcode
 
 pool:
-  vmImage: 'macOS 10.13'
+  vmImage: 'macos-latest'
 
 trigger:
 - master
 - feature/*
 
 steps:
-- task: CocoaPods@0
-  displayName: 'pod install using the CocoaPods task with defaults'
-  inputs:
-    forceRepoUpdate: true
-    workingDirectory: 'CocoaHeadsNL'
-
 - task: Xcode@5
   inputs:
     actions: 'build'
     scheme: 'CocoaHeadsNL'
     sdk: 'iphoneos'
     configuration: 'Debug'
-#    xcodeVersion: '10'
+   xcodeVersion: '11'
     xcWorkspacePath: 'CocoaHeadsNL/CocoaHeadsNL.xcworkspace'
