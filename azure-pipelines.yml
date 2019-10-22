@@ -18,4 +18,3 @@ steps:
     sdk: 'iphoneos'
     configuration: 'Debug'
     xcodeVersion: '11'
-    xcWorkspacePath: 'CocoaHeadsNL/CocoaHeadsNL.xcworkspace'
