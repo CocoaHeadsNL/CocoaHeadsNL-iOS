@@ -111,6 +111,7 @@ class LocatedCompaniesViewController: UITableViewController {
         let section = sections[indexPath.section]
         let company = section.objects[indexPath.row]
 
+        cell.backgroundColor = .white
         cell.textLabel!.text = company.name
         cell.imageView?.image =  company.smallLogoImage
         return cell

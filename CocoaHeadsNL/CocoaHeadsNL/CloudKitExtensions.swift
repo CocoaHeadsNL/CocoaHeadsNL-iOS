@@ -227,7 +227,7 @@ extension Meetup {
         if let logo = self.smallLogo, let image = UIImage(data: logo as Data) {
             return image
         } else {
-            return UIImage(named: "CocoaHeadsNLLogo")!
+            return UIImage(named: "CocoaHeadsNLLogoOnlyLight")!
         }
     }
 
