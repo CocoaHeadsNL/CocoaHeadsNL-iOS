@@ -59,8 +59,8 @@ class MeetupCell: UITableViewCell {
             monthLabel.accessibilityLabel = dateFormatter.string(from: date as Date)
 
             if meetup.isToday || meetup.isUpcoming {
-                dayLabel.textColor = UIColor.black
-                monthBackgroundView.backgroundColor = meetup.isToday ? UIColorWithRGB(127, green: 214, blue: 33) : UIColorWithRGB(232, green: 88, blue: 80)
+                dayLabel.textColor = UIColor(named: "DayLabelColor")
+                monthBackgroundView.backgroundColor = meetup.isToday ? UIColor(named: "DayBackgroundViewColorToday") : UIColor(named: "DayBackgroundViewColor")
 
                 if meetup.yesRsvpCount > 0 {
 
@@ -74,8 +74,8 @@ class MeetupCell: UITableViewCell {
                     rsvpLabel.text = ""
                 }
             } else {
-                dayLabel.textColor = UIColor(white: 0, alpha: 0.65)
-                monthBackgroundView.backgroundColor = UIColorWithRGB(169, green: 166, blue: 166)
+                dayLabel.textColor = UIColor(named: "DayLabelColorHistory")
+                monthBackgroundView.backgroundColor = UIColor(named: "DayBackgroundViewColorHistory")
 
                 rsvpLabel.text = "\(meetup.yesRsvpCount) \(NSLocalizedString("CocoaHeads had a blast"))"
             }
