@@ -9,8 +9,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Run a multi-line script
-      run: |
-        sudo xcode-select -switch /Applications/Xcode_11.1.app
-        xcodebuild test -scheme CocoaHeadsNL -project CocoaHeadsNL/CocoaHeadsNL.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.1' | xcpretty
+    - name: Select Xcode
+      run: sudo xcode-select -switch /Applications/Xcode_11.1.app
+    - name: Run tests
+      run: xcodebuild test -scheme CocoaHeadsNL -project CocoaHeadsNL/CocoaHeadsNL.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.1'# | xcpretty
+
         
