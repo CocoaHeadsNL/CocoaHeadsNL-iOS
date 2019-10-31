@@ -12,7 +12,6 @@ jobs:
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_11.1.app
     - name: Run tests
-      run: xcodebuild test -scheme CocoaHeadsNL -project CocoaHeadsNL/CocoaHeadsNL.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.1'
-      # | xcpretty
+      run: xcodebuild test -scheme CocoaHeadsNL -project CocoaHeadsNL/CocoaHeadsNL.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.1' | xcpretty && exit ${PIPESTATUS[0]}
 
         
