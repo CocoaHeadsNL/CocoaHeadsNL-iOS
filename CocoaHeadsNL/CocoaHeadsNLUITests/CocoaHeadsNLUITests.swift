@@ -22,10 +22,6 @@ class CocoaHeadsNLUITests: XCTestCase {
         super.tearDown()
     }
 
-    func testFailure() {
-        XCTFail("Does a fail signal a build?")
-    }
-
     func testApp() {
         let app = XCUIApplication()
 
