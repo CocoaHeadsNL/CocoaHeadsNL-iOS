@@ -1,19 +1,44 @@
 name: CI
 
-on: [push]
-
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the master branch
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 jobs:
-  build:
+  SwiftLint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: GitHub Action for SwiftLint
+      uses: norio-nomura/action-swiftlint@3.0.1
 
+  Build:
     runs-on: macOS-latest
-
     steps:
     - uses: actions/checkout@v1
     - name: List available Xcode versions
       run: ls /Applications | grep Xcode
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_11.3.app && /usr/bin/xcodebuild -version
-    - name: Run tests
+    - name: Build archive
+      run: xcodebuild -sdk iphoneos -project CocoaHeadsNL/CocoaHeadsNL.xcodeproj -scheme CocoaHeadsNL -derivedDataPath DerivedData -archivePath DerivedData/Archive/CocoaHeadsNL CODE_SIGNING_ALLOWED=NO
+    # - name: Export Archive
+    #   run: xcodebuild -exportArchive -archivePath DerivedData/Archive/CocoaHeadsNL.xcarchive -exportOptionsPlist App-Store.plist -exportPath DerivedData/archive
+
+  Test:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: List available Xcode versions
+      run: ls /Applications | grep Xcode
+    - name: Select Xcode
+      run: sudo xcode-select -switch /Applications/Xcode_11.3.app && /usr/bin/xcodebuild -version
+    - name: Run unit tests
       run: xcodebuild test -scheme CocoaHeadsNL -project CocoaHeadsNL/CocoaHeadsNL.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.3' | xcpretty && exit ${PIPESTATUS[0]}
 
         

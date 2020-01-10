@@ -4,3 +4,5 @@ import CloudKit
 class LogoCell: UITableViewCell {
     @IBOutlet weak var logoImageView: UIImageView!
 }
+
+extension LogoCell: Identifiable {}

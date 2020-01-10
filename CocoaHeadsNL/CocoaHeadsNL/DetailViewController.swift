@@ -126,7 +126,7 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
     }
 
     override var previewActionItems: [UIPreviewActionItem] {
-        let shareAction = UIPreviewAction(title: NSLocalizedString("Share"), style: .default) { (_, _) in
+        let shareAction = UIPreviewAction(title: NSLocalizedString("Share"), style: .default) { _, _ in
 
             if let meetup = self.dataSource.object as? Meetup, let meetupId = meetup.meetupId {
                 let string: String = "http://www.meetup.com/CocoaHeadsNL/events/\(meetupId)/"
@@ -141,11 +141,11 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
             }
         }
 
-        let rsvpAction = UIPreviewAction(title: NSLocalizedString("RSVP"), style: .default) { (_, _) in
+        let rsvpAction = UIPreviewAction(title: NSLocalizedString("RSVP"), style: .default) { _, _ in
 
             if let meetup = self.dataSource.object as? Meetup, let meetupId = meetup.meetupId {
                 if let URL = URL(string: "http://www.meetup.com/CocoaHeadsNL/events/\(meetupId)/") {
-                    UIApplication.shared.open(URL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: { (_) in
+                    UIApplication.shared.open(URL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: { _ in
                     })
                 }
             }
@@ -157,5 +157,5 @@ class DetailViewController: UITableViewController, SKStoreProductViewControllerD
 
 // Helper function inserted by Swift 4.2 migrator.
 private func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value) })
 }

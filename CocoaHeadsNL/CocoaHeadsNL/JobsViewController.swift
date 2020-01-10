@@ -22,8 +22,7 @@ class JobsViewController: UICollectionViewController {
         return frc
     }()
 
-    private lazy var frcDelegate: JobFetchedResultsControllerDelegate = {
-        // swiftlint:disable:this weak_delegate
+    private lazy var frcDelegate: JobFetchedResultsControllerDelegate = { // swiftlint:disable:this weak_delegate
         return JobFetchedResultsControllerDelegate(collectionView: self.collectionView)
     }()
 
@@ -34,8 +33,7 @@ class JobsViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let nib = UINib(nibName: "JobsCell", bundle: nil)
-        self.collectionView?.register(nib, forCellWithReuseIdentifier: "jobsCell")
+        self.collectionView?.registerNib(type: JobsCell.self)
 
         let backItem = UIBarButtonItem(title: NSLocalizedString("Jobs"), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
@@ -57,7 +55,7 @@ class JobsViewController: UICollectionViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(JobsViewController.searchOccured(_:)), name: NSNotification.Name(rawValue: searchNotificationName), object: nil)
         self.subscribe()
 
-        if fetchedResultsController.count == 0 {
+        if fetchedResultsController.count == 0 { // swiftlint:disable:this empty_count
             self.activityIndicator.startAnimating()
         }
     }
@@ -79,7 +77,7 @@ class JobsViewController: UICollectionViewController {
     }
 
     @objc func searchOccured(_ notification: Notification) {
-        guard let userInfo = (notification as NSNotification).userInfo as? Dictionary<String, String> else {
+        guard let userInfo = (notification as NSNotification).userInfo as? [String: String] else {
             return
         }
 
@@ -112,7 +110,7 @@ class JobsViewController: UICollectionViewController {
 
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             let screenwidth = view.frame.width
-            layout.itemSize = CGSize(width: screenwidth/2, height: 120)
+            layout.itemSize = CGSize(width: screenwidth / 2, height: 120)
             layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             layout.minimumInteritemSpacing = 0
             layout.minimumLineSpacing = 0
@@ -147,7 +145,7 @@ class JobsViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "jobsCell", for: indexPath) as! JobsCell
+        let cell = collectionView.dequeueReusableCell(type: JobsCell.self, for: indexPath)
 
         guard let sections = fetchedResultsController.sections else {
             fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
@@ -177,7 +175,7 @@ class JobsViewController: UICollectionViewController {
             if let selectedObject = sender as? Job {
                 let detailViewController = segue.destination as! DetailViewController // swiftlint:disable:this force_cast
                 detailViewController.dataSource = JobDataSource(object: selectedObject)
-            } else if let indexPath = self.collectionView?.indexPath(for: sender as! UICollectionViewCell) {
+            } else if let sender = sender as? UICollectionViewCell, let indexPath = self.collectionView?.indexPath(for: sender) {
                 guard let sections = fetchedResultsController.sections else {
                     fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
                 }
@@ -207,7 +205,7 @@ class JobsViewController: UICollectionViewController {
 
         let context = CoreDataStack.shared.newBackgroundContext
 
-        operation.recordFetchedBlock = { (record) in
+        operation.recordFetchedBlock = { record in
             context.perform {
                 if let job = try? Job.job(forRecord: record, on: context) {
                     _ = job.logoImage
@@ -216,7 +214,7 @@ class JobsViewController: UICollectionViewController {
             }
         }
 
-        operation.queryCompletionBlock = { [weak self] (cursor, error) in
+        operation.queryCompletionBlock = { [weak self] cursor, error in
             guard error == nil else {
                 DispatchQueue.main.async {
                     let ac = UIAlertController.fetchErrorDialog(whileFetching: "jobs", error: error!)

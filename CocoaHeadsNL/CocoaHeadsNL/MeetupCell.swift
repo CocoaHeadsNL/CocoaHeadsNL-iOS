@@ -12,7 +12,6 @@ import UIKit
 private let dateFormatter = DateFormatter()
 
 class MeetupCell: UITableViewCell {
-    static let Identifier = "meetupCell"
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -81,7 +80,7 @@ class MeetupCell: UITableViewCell {
             }
         }
 
-        self.logoImageView.image =  meetup.smallLogoImage
+        self.logoImageView.image = meetup.smallLogoImage
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
@@ -102,3 +101,5 @@ class MeetupCell: UITableViewCell {
         }
     }
 }
+
+extension MeetupCell: Identifiable {}

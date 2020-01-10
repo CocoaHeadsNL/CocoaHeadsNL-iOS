@@ -11,14 +11,14 @@ import CoreLocation
 
 class CoreLocationController: NSObject, CLLocationManagerDelegate {
 
-    let locationManager: CLLocationManager = CLLocationManager()
+    let locationManager = CLLocationManager()
     let locationNotification = "LOCATION_AVAILABLE"
 
     override init() {
         super.init()
 
         self.locationManager.delegate = self
-        self.locationManager.distanceFilter  = 5000
+        self.locationManager.distanceFilter = 5000
         self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
         self.locationManager.requestWhenInUseAuthorization()
     }
@@ -31,25 +31,15 @@ class CoreLocationController: NSObject, CLLocationManagerDelegate {
         switch status {
         case .notDetermined:
             print(".NotDetermined")
-            break
-
         case .authorizedAlways:
             print(".Authorized")
-            break
-
         case .authorizedWhenInUse:
             print(".AuthorizedWhenInUse")
             self.locationManager.startUpdatingLocation()
-            break
-
         case .denied:
             print(".Denied")
-            break
-
         default:
             print("Unhandled authorization status")
-            break
-
         }
     }
 

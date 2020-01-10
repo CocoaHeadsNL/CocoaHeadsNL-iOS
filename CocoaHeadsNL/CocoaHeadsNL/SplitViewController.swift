@@ -28,7 +28,7 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
         }
     }
     @objc func searchNotification(_ notification: Notification) {
-        guard let userInfo = (notification as NSNotification).userInfo as? Dictionary<String, String> else {
+        guard let userInfo = (notification as NSNotification).userInfo as? [String: String] else {
             return
         }
 
@@ -52,7 +52,7 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
     // MARK: - UISplitViewControllerDelegate
 
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
-        if let primaryTab = primaryViewController as? UITabBarController, let _ = primaryTab.selectedViewController as? UINavigationController {
+        if let primaryTab = primaryViewController as? UITabBarController, primaryTab.selectedViewController is UINavigationController {
             return true
         }
         return false

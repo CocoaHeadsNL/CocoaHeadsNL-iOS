@@ -12,6 +12,8 @@
 		23F2D9A41E2F52A6003344DC /* NSLocalizedString+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */; };
 		23FE55D61F8BFA6A003011CA /* UINavigationItem+Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FE55D51F8BFA6A003011CA /* UINavigationItem+Banner.swift */; };
 		2EDD61561EDCCEBC0040409B /* NSAttributedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDD61551EDCCEBC0040409B /* NSAttributedStringExtension.swift */; };
+		4A3D7D3723C921CA001E1D50 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3D7D3623C921CA001E1D50 /* UITableView+Extensions.swift */; };
+		4A3D7D3923C92206001E1D50 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3D7D3823C92206001E1D50 /* Identifiable.swift */; };
 		4A7EEAF11AC5440C001C2827 /* CloudKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7EEAF01AC5440C001C2827 /* CloudKitExtensions.swift */; };
 		4ABA349E22D3D54C0094BBEA /* FetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABA349A22D3D54C0094BBEA /* FetchedResultsController.swift */; };
 		4ABA349F22D3D54C0094BBEA /* NSManagedObjectContext+AsyncHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABA349B22D3D54C0094BBEA /* NSManagedObjectContext+AsyncHelpers.swift */; };
@@ -43,7 +45,6 @@
 		7B6A745E1B183D7900A10762 /* MeetupDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A745D1B183D7900A10762 /* MeetupDataSource.swift */; };
 		7B6A74601B18406600A10762 /* JobDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A745F1B18406600A10762 /* JobDataSource.swift */; };
 		7B6A74621B18424800A10762 /* CompanyDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74611B18424800A10762 /* CompanyDataSource.swift */; };
-		7B6A74681B186C4A00A10762 /* AffiliateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A74671B186C4A00A10762 /* AffiliateCell.swift */; };
 		F10B9CBD2055326A003FC1A6 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10B9CBC2055326A003FC1A6 /* NotificationService.swift */; };
 		F10B9CC12055326A003FC1A6 /* ItemServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F10B9CBA2055326A003FC1A6 /* ItemServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F10D58E82056FBAC00CE9199 /* CocoaHeadsNL500.png in Resources */ = {isa = PBXBuildFile; fileRef = F10D58E72056FBAB00CE9199 /* CocoaHeadsNL500.png */; };
@@ -129,6 +130,8 @@
 		23FE55D51F8BFA6A003011CA /* UINavigationItem+Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+Banner.swift"; sourceTree = "<group>"; };
 		2EDD61551EDCCEBC0040409B /* NSAttributedStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtension.swift; sourceTree = "<group>"; };
 		4A15A33C1BB82224008161BD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		4A3D7D3623C921CA001E1D50 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
+		4A3D7D3823C92206001E1D50 /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		4A7EEAF01AC5440C001C2827 /* CloudKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitExtensions.swift; sourceTree = "<group>"; };
 		4ABA349A22D3D54C0094BBEA /* FetchedResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsController.swift; sourceTree = "<group>"; };
 		4ABA349B22D3D54C0094BBEA /* NSManagedObjectContext+AsyncHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+AsyncHelpers.swift"; sourceTree = "<group>"; };
@@ -164,7 +167,6 @@
 		7B6A745D1B183D7900A10762 /* MeetupDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetupDataSource.swift; sourceTree = "<group>"; };
 		7B6A745F1B18406600A10762 /* JobDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobDataSource.swift; sourceTree = "<group>"; };
 		7B6A74611B18424800A10762 /* CompanyDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyDataSource.swift; sourceTree = "<group>"; };
-		7B6A74671B186C4A00A10762 /* AffiliateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffiliateCell.swift; sourceTree = "<group>"; };
 		F10B9CBA2055326A003FC1A6 /* ItemServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ItemServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F10B9CBC2055326A003FC1A6 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		F10B9CBE2055326A003FC1A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -256,6 +258,8 @@
 				23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */,
 				2EDD61551EDCCEBC0040409B /* NSAttributedStringExtension.swift */,
 				23FE55D51F8BFA6A003011CA /* UINavigationItem+Banner.swift */,
+				4A3D7D3623C921CA001E1D50 /* UITableView+Extensions.swift */,
+				4A3D7D3823C92206001E1D50 /* Identifiable.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -370,7 +374,6 @@
 		7B6A74641B18522600A10762 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				7B6A74671B186C4A00A10762 /* AffiliateCell.swift */,
 				7B6A74531B179B4E00A10762 /* LogoCell.swift */,
 				F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */,
 				7B6A74551B179B7D00A10762 /* MapViewCell.swift */,
@@ -764,7 +767,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#if which swiftlint >/dev/null; then\n#swiftlint\n#fi\n";
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nfi\n";
 		};
 		4A2933E12059540200DD4CF0 /* Set version number */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -852,7 +855,6 @@
 				4A7EEAF11AC5440C001C2827 /* CloudKitExtensions.swift in Sources */,
 				4AE3D7E7203CBBD000EF32C3 /* Company+CoreDataProperties.swift in Sources */,
 				7B6A74541B179B4E00A10762 /* LogoCell.swift in Sources */,
-				7B6A74681B186C4A00A10762 /* AffiliateCell.swift in Sources */,
 				F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */,
 				4ABA34A522D3D9DB0094BBEA /* CoreDataStack.swift in Sources */,
 				2EDD61561EDCCEBC0040409B /* NSAttributedStringExtension.swift in Sources */,
@@ -874,6 +876,7 @@
 				F11455BB1AB4C8FB00546D22 /* MapAnnotation.swift in Sources */,
 				4AE3D7D7203CB81000EF32C3 /* Model.xcdatamodeld in Sources */,
 				239D41161B190FD000609105 /* CalendarTabImage.swift in Sources */,
+				4A3D7D3723C921CA001E1D50 /* UITableView+Extensions.swift in Sources */,
 				F11455B91AB4BA0600546D22 /* DetailViewController.swift in Sources */,
 				23FE55D61F8BFA6A003011CA /* UINavigationItem+Banner.swift in Sources */,
 				7B6A744F1B162F8E00A10762 /* UIColor+Extensions.swift in Sources */,
@@ -892,6 +895,7 @@
 				4AE3D7E4203CBBD000EF32C3 /* Meetup+CoreDataClass.swift in Sources */,
 				F1BDEA751C920768004C7DAB /* JobsCell.swift in Sources */,
 				F11455C11AB5024000546D22 /* TabBarController.swift in Sources */,
+				4A3D7D3923C92206001E1D50 /* Identifiable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

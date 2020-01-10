@@ -7,7 +7,7 @@ class MapViewCell: UITableViewCell, MKMapViewDelegate {
     var geoLocation: CLLocation? {
         didSet {
             if geoLocation != oldValue {
-                let mapRegion = MKCoordinateRegion(center: self.coordinate, span: MKCoordinateSpan.init(latitudeDelta: 0.01, longitudeDelta: 0.01))
+                let mapRegion = MKCoordinateRegion(center: self.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
                 littleMap.region = mapRegion
             }
         }
@@ -54,3 +54,5 @@ class MapViewCell: UITableViewCell, MKMapViewDelegate {
         MKMapItem.openMaps(with: [currentLocationMapItem, mapItem], launchOptions: launchOptions)
     }
 }
+
+extension MapViewCell: Identifiable {}

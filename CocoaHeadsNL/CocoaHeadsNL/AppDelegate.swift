@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
 
-        let cloudKitNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String: NSObject])!
+        guard let userInfo = userInfo as? [String: NSObject], let cloudKitNotification = CKNotification(fromRemoteNotificationDictionary: userInfo) else { return }
         if cloudKitNotification.notificationType == .query,
             let queryNotification = cloudKitNotification as? CKQueryNotification {
             //TODO: handle the different notifications to show the correct items
@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         _ = CoreDataStack.shared.persistentContainer
 
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
             if !granted {
                 print("Notifications not granted")
             }

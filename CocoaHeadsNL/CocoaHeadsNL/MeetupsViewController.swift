@@ -45,9 +45,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         tableView.tableFooterView = UIView()
 
-        //self.tableView.registerClass(MeetupCell.self, forCellReuseIdentifier: MeetupCell.Identifier)
-        let nib = UINib(nibName: "MeetupCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: MeetupCell.Identifier)
+        self.tableView.registerNib(type: MeetupCell.self)
 
         let backItem = UIBarButtonItem(title: NSLocalizedString("Events"), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
@@ -140,7 +138,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
         let meetup = section.objects[indexPath.row]
 
         detailVC.dataSource = MeetupDataSource(object: meetup )
-        detailVC.presentingVC  = self
+        detailVC.presentingVC = self
 
         previewingContext.sourceRect = cell.frame
 
@@ -155,7 +153,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
     // MARK: - Search
 
     @objc func searchOccured(_ notification: Notification) {
-        guard let userInfo = (notification as NSNotification).userInfo as? Dictionary<String, String> else {
+        guard let userInfo = (notification as NSNotification).userInfo as? [String: String] else {
             return
         }
 
@@ -191,7 +189,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
                 let detailViewController = segue.destination as? DetailViewController
                 detailViewController?.dataSource = MeetupDataSource(object: selectedObject)
 
-            } else if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
+            } else if let sender = sender as? UITableViewCell, let indexPath = self.tableView.indexPath(for: sender) {
                 guard let sections = fetchedResultsController.sections else {
                     fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
                 }
@@ -240,7 +238,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: MeetupCell.Identifier, for: indexPath) as! MeetupCell
+        let cell = tableView.dequeueReusableCell(type: MeetupCell.self, for: indexPath)
 
         guard let sections = fetchedResultsController.sections else {
             fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
@@ -286,7 +284,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
 
         let context = CoreDataStack.shared.newBackgroundContext
 
-        operation.recordFetchedBlock = { (record) in
+        operation.recordFetchedBlock = { record in
             context.perform {
                 if let meetup = try? Meetup.meetup(forRecord: record, on: context) {
                     _ = meetup.smallLogoImage
@@ -296,7 +294,7 @@ class MeetupsViewController: UITableViewController, UIViewControllerPreviewingDe
             }
         }
 
-        operation.queryCompletionBlock = { [weak self] (cursor, error) in
+        operation.queryCompletionBlock = { [weak self] cursor, error in
             guard error == nil else {
                 DispatchQueue.main.async {
                     let ac = UIAlertController.fetchErrorDialog(whileFetching: NSLocalizedString("meetups"), error: error!)

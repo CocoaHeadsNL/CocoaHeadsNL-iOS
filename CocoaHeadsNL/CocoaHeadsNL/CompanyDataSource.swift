@@ -33,13 +33,13 @@ class CompanyDataSource: DetailDataSource {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch (indexPath as NSIndexPath).row {
         case 0:
-            return logoCellWithFile(company.logoImage, forTableView: tableView)
+            return logoCellWithFile(company.logoImage, forTableView: tableView, forRowAt: indexPath)
         case 1:
-            return titleCellWithText(company.emailAddress, forTableView: tableView)
+            return titleCellWithText(company.emailAddress, forTableView: tableView, forRowAt: indexPath)
         case 2:
-            return titleCellWithText(company.streetAddress, forTableView: tableView)
+            return titleCellWithText(company.streetAddress, forTableView: tableView, forRowAt: indexPath)
         case 3:
-            return titleCellWithText(company.zipCode, forTableView: tableView)
+            return titleCellWithText(company.zipCode, forTableView: tableView, forRowAt: indexPath)
         default:
             fatalError("This should not happen.")
         }

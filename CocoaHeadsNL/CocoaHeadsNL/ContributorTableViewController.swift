@@ -58,16 +58,15 @@ class ContributorTableViewController: UITableViewController {
         let how = NSLocalizedString("How does it work?")
         let howAnswer = NSLocalizedString("Every month we organize a meeting at a different venue including food and drinks sponsored by companies. Depending on the size of the location we put together a nice agenda for developers.")
 
-        let dictionary = Bundle.main.infoDictionary!
-        let version = dictionary["CFBundleShortVersionString"] as! String
-        let build = dictionary["CFBundleVersion"] as! String
-        let versionInfo = "\(version) (\(build))"
+        if let dictionary = Bundle.main.infoDictionary, let version = dictionary["CFBundleShortVersionString"] as? String, let build = dictionary["CFBundleVersion"] as? String {
+            let versionInfo = "\(version) (\(build))"
+            versionLabel.text = versionInfo
+        }
 
         whatIsLabel.text = what
         whatIsExplanationLabel.text = whatAnswer
         howDoesItWorkLabel.text = how
         howDoesItWorkExplanationLabel.text = howAnswer
-        versionLabel.text = versionInfo
 
         tableHeaderView.isAccessibilityElement = true
         tableHeaderView.accessibilityLabel = [what, whatAnswer, how, howAnswer].joined(separator: " ")
@@ -97,7 +96,7 @@ class ContributorTableViewController: UITableViewController {
         let section = sections[indexPath.section]
         let contributor = section.objects[indexPath.row]
 
-        if let avatar_url = contributor.avatarUrl, let url = URL(string: avatar_url) {
+        if let avatarUrl = contributor.avatarUrl, let url = URL(string: avatarUrl) {
             let task = fetchImageTask(url, forImageView: cell.imageView!)
             task.resume()
         } else {
@@ -136,7 +135,7 @@ class ContributorTableViewController: UITableViewController {
 
         if let urlString = urlString, let url = URL(string: urlString) {
             if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: { (_) in
+                UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: { _ in
                 })
             }
         }
@@ -152,8 +151,7 @@ class ContributorTableViewController: UITableViewController {
     }()
 
     func fetchImageTask(_ url: URL, forImageView imageView: UIImageView) -> URLSessionDataTask {
-        let task = remoteSession.dataTask(with: URLRequest(url: url), completionHandler: {
-            (data, _, _) in
+        let task = remoteSession.dataTask(with: URLRequest(url: url), completionHandler: { data, _, _ in
             if let data = data {
                 let image = UIImage(data: data)
                 DispatchQueue.main.async {
@@ -180,13 +178,13 @@ class ContributorTableViewController: UITableViewController {
 
         let context = CoreDataStack.shared.newBackgroundContext
 
-        operation.recordFetchedBlock = { (record) in
+        operation.recordFetchedBlock = { record in
             context.perform {
                 _ = try? Contributor.contributor(forRecord: record, on: context)
             }
         }
 
-        operation.queryCompletionBlock = { [weak self] (cursor, error) in
+        operation.queryCompletionBlock = { [weak self] cursor, error in
             guard error == nil else {
                 DispatchQueue.main.async {
                     let ac = UIAlertController.fetchErrorDialog(whileFetching: "contributors", error: error!)
@@ -256,5 +254,5 @@ class ContributorFetchedResultsControllerDelegate: NSObject, FetchedResultsContr
 
 // Helper function inserted by Swift 4.2 migrator.
 private func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value) })
 }

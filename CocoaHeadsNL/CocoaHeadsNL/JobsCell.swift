@@ -60,3 +60,5 @@ class JobsCell: UICollectionViewCell {
         //self.imageView.image = nil
     }
 }
+
+extension JobsCell: Identifiable {}

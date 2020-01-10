@@ -32,3 +32,5 @@ extension HTMLDataCell: UITextViewDelegate {
         return false
     }
 }
+
+extension HTMLDataCell: Identifiable {}
