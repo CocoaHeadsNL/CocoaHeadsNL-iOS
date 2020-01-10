@@ -27,8 +27,8 @@ jobs:
       run: sudo xcode-select -switch /Applications/Xcode_11.3.app && /usr/bin/xcodebuild -version
     - name: Build archive
       run: xcodebuild -sdk iphoneos -project CocoaHeadsNL/CocoaHeadsNL.xcodeproj -scheme CocoaHeadsNL -derivedDataPath DerivedData -archivePath DerivedData/Archive/CocoaHeadsNL CODE_SIGNING_ALLOWED=NO
-    - name: Export Archive
-      run: xcodebuild -exportArchive -archivePath DerivedData/Archive/CocoaHeadsNL.xcarchive -exportPath DerivedData/archive
+    # - name: Export Archive
+    #   run: xcodebuild -exportArchive -archivePath DerivedData/Archive/CocoaHeadsNL.xcarchive -exportOptionsPlist App-Store.plist -exportPath DerivedData/archive
 
   Test:
     runs-on: macOS-latest
