@@ -14,7 +14,7 @@ extension NSManagedObjectContext {
      **/
     public func performAndWaitOrThrow<Return>(_ body: () throws -> Return) rethrows -> Return {
         #if swift(>=3.1)
-        return try withoutActuallyEscaping(body) { (work) in
+        return try withoutActuallyEscaping(body) { work in
             var result: Return!
             var error: Error?
 
@@ -38,8 +38,8 @@ extension NSManagedObjectContext {
             var error: Error?
 
             // performAndWait is marked @escaping as of iOS 10.0.
-            typealias Fn = (() -> Void) -> Void // swiftlint:disable:this nesting
-            let performAndWaitNoescape = unsafeBitCast(self.performAndWait, to: Fn.self)
+            typealias Fun = (() -> Void) -> Void // swiftlint:disable:this nesting
+            let performAndWaitNoescape = unsafeBitCast(self.performAndWait, to: Fun.self)
             performAndWaitNoescape {
                 do {
                     result = try work()

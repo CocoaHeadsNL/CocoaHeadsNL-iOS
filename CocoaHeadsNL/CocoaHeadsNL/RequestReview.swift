@@ -10,9 +10,9 @@ import StoreKit
 
 public class RequestReview: NSObject {
 
-    static private let defaultKeyRatingLastRequestDate = "app_rating_last_request_date"
+    private static let defaultKeyRatingLastRequestDate = "app_rating_last_request_date"
 
-    static public func requestReview() {
+    public static func requestReview() {
         if let lastRequestDate = UserDefaults.standard.object(forKey: RequestReview.defaultKeyRatingLastRequestDate) as? Date {
             if lastRequestDate.compare(Date()) == ComparisonResult.orderedAscending {
                 SKStoreReviewController.requestReview()

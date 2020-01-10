@@ -25,7 +25,7 @@ jobs:
       run: ls /Applications | grep Xcode
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_11.3.app && /usr/bin/xcodebuild -version
-    - name: Build app
+    - name: Build archive
       run: xcodebuild -sdk iphoneos -project CocoaHeadsNL/CocoaHeadsNL.xcodeproj -scheme CocoaHeadsNL -derivedDataPath DerivedData -archivePath DerivedData/Archive/CocoaHeadsNL CODE_SIGNING_ALLOWED=NO
     - name: Export Archive
       run: xcodebuild -exportArchive -archivePath DerivedData/Archive/CocoaHeadsNL.xcarchive -exportPath DerivedData/archive
@@ -38,7 +38,7 @@ jobs:
       run: ls /Applications | grep Xcode
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_11.3.app && /usr/bin/xcodebuild -version
-    - name: Build app
+    - name: Run unit tests
       run: xcodebuild test -scheme CocoaHeadsNL -project CocoaHeadsNL/CocoaHeadsNL.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.3' | xcpretty && exit ${PIPESTATUS[0]}
 
         

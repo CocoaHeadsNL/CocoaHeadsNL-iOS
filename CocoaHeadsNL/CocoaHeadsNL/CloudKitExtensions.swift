@@ -122,23 +122,21 @@ extension Job {
     }
 
     var searchableAttributeSet: CSSearchableItemAttributeSet {
-        get {
-            let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeImage as String)
-            attributeSet.title = title
-            if let data = content?.data(using: String.Encoding.utf8) {
-                do {
-                    let jobDescriptionString = try NSAttributedString(data: data, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html, NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8], documentAttributes: nil)
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeImage as String)
+        attributeSet.title = title
+        if let data = content?.data(using: String.Encoding.utf8) {
+            do {
+                let jobDescriptionString = try NSAttributedString(data: data, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html, NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8], documentAttributes: nil)
 
-                    attributeSet.contentDescription = jobDescriptionString.string
-                } catch {
-                    print("Stuff went crazy!")
-                }
+                attributeSet.contentDescription = jobDescriptionString.string
+            } catch {
+                print("Stuff went crazy!")
             }
-            attributeSet.creator = "CocoaHeadsNL"
-            attributeSet.thumbnailData = logoImage.pngData()
-
-            return attributeSet
         }
+        attributeSet.creator = "CocoaHeadsNL"
+        attributeSet.thumbnailData = logoImage.pngData()
+
+        return attributeSet
     }
 
     class func index(_ jobs: [Job]) {

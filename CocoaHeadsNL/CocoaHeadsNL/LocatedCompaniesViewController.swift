@@ -59,7 +59,7 @@ class LocatedCompaniesViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDetail" {
 
-            if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
+            if let sender = sender as? UITableViewCell, let indexPath = self.tableView.indexPath(for: sender) {
 
                 guard let sections = fetchedResultsController.sections else {
                     fatalError("FetchedResultsController \(fetchedResultsController) should have sections, but found nil")
@@ -113,7 +113,7 @@ class LocatedCompaniesViewController: UITableViewController {
 
         cell.backgroundColor = .white
         cell.textLabel!.text = company.name
-        cell.imageView?.image =  company.smallLogoImage
+        cell.imageView?.image = company.smallLogoImage
         return cell
     }
 
@@ -158,13 +158,13 @@ class LocatedCompaniesViewController: UITableViewController {
 
         let context = CoreDataStack.shared.newBackgroundContext
 
-        operation.recordFetchedBlock = { (record) in
+        operation.recordFetchedBlock = { record in
             if let company = Company.company(forRecord: record, on: context) {
                 companies.append(company)
             }
         }
 
-        operation.queryCompletionBlock = { [weak self] (cursor, error) in
+        operation.queryCompletionBlock = { [weak self] cursor, error in
             guard error == nil else {
                 DispatchQueue.main.async {
                     let ac = UIAlertController.fetchErrorDialog(whileFetching: "companies", error: error!)
