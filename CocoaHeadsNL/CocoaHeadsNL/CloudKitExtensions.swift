@@ -308,11 +308,11 @@ extension Meetup {
 
 private let dateOnlyFormatter: DateFormatter = {
     let amsterdam = TimeZone(identifier: "Europe/Amsterdam")!
-    let nl_NL = Locale(identifier: "nl-NL")
+    let dutchLocale = Locale(identifier: "nl-NL")
 
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
-    dateFormatter.locale = nl_NL
+    dateFormatter.locale = dutchLocale
     dateFormatter.timeZone = amsterdam
 
     return dateFormatter

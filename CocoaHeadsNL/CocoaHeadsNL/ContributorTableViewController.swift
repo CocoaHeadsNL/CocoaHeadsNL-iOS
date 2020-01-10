@@ -96,7 +96,7 @@ class ContributorTableViewController: UITableViewController {
         let section = sections[indexPath.section]
         let contributor = section.objects[indexPath.row]
 
-        if let avatar_url = contributor.avatarUrl, let url = URL(string: avatar_url) {
+        if let avatarUrl = contributor.avatarUrl, let url = URL(string: avatarUrl) {
             let task = fetchImageTask(url, forImageView: cell.imageView!)
             task.resume()
         } else {
