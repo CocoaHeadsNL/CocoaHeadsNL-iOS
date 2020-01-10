@@ -54,3 +54,5 @@ class MapViewCell: UITableViewCell, MKMapViewDelegate {
         MKMapItem.openMaps(with: [currentLocationMapItem, mapItem], launchOptions: launchOptions)
     }
 }
+
+extension MapViewCell: Identifiable {}

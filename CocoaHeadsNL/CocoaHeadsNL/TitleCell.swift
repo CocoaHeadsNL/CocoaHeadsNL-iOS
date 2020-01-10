@@ -36,3 +36,5 @@ class TitleCell: UITableViewCell {
         }
     }
 }
+
+extension TitleCell: Identifiable {}

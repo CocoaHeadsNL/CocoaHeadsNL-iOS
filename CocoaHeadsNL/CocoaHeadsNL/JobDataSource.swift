@@ -16,11 +16,11 @@ class JobDataSource: DetailDataSource {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch (indexPath as NSIndexPath).row {
         case 0:
-            return logoCellWithFile(job.logoImage, forTableView: tableView)
+            return logoCellWithFile(job.logoImage, forTableView: tableView, forRowAt: indexPath)
         case 1:
-            return titleCellWithText(job.title, forTableView: tableView)
+            return titleCellWithText(job.title, forTableView: tableView, forRowAt: indexPath)
         case 2:
-            return dataCellWithHTML(job.content, forTableView: tableView)
+            return dataCellWithHTML(job.content, forTableView: tableView, forRowAt: indexPath)
         default:
             fatalError("This should not happen.")
         }
