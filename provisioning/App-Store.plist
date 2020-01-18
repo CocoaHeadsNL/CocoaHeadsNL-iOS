@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>compileBitcode</key>
+	<true/>
+	<key>iCloudContainerEnvironment</key>
+	<string>Production</string>
+	<key>method</key>
+	<string>app-store</string>
+	<key>teamID</key>
+	<string>D55PL7PU7S</string>
+	<key>uploadBitcode</key>
+	<true/>
+	<key>uploadSymbols</key>
+	<true/>
+	<key>signingStyle</key>
+	<string>manual</string>
+	<key>signingCertificate</key>
+	<string>iPhone Distribution: Stichting CocoaheadsNL</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>nl.cocoaheads.app.CocoaHeadsNL.generalNotification</key>
+		<string>345ff0ae-bf30-40dc-a366-757cf3890da4</string>
+		<key>nl.cocoaheads.app.CocoaHeadsNL.itemNotification</key>
+		<string>b99721c7-af8e-4628-90c5-5cf512b1cbea</string>
+		<key>nl.cocoaheads.app.CocoaHeadsNL.ItemServiceExtension</key>
+		<string>3f97abc2-f7cd-4d40-a874-5571f26f755b</string>
+		<key>nl.cocoaheads.app.CocoaHeadsNL</key>
+		<string>7ba430b6-045a-4e2d-8ff6-09a2f9897152</string>
+	</dict>
+</dict>
+</plist>
