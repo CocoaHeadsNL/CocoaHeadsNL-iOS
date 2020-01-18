@@ -23,10 +23,11 @@ jobs:
       run: sudo xcode-select -switch /Applications/Xcode_11.3.app && /usr/bin/xcodebuild -version
     - name: Build archive
       run: xcodebuild -sdk iphoneos -project CocoaHeadsNL/CocoaHeadsNL.xcodeproj -configuration Release -scheme CocoaHeadsNL -derivedDataPath DerivedData -archivePath DerivedData/Archive/CocoaHeadsNL archive
-    - name: Dump file hierarchy
-      run: ls -R
     - name: Export Archive
       run: xcodebuild -exportArchive -archivePath DerivedData/Archive/CocoaHeadsNL.xcarchive -exportOptionsPlist provisioning/App-Store.plist -exportPath DerivedData/ipa
-    # - name: Deploy App to Apple
-      # run: xcrun altool --upload-app --type ios --file DerivedData/archive/CocoaHeadsNL.ipa --username $(appstore-connect-username) --password $(appstore-connect-password) --verbose
+    - name: Dump file hierarchy
+      run: ls -R
+    - name: Deploy App to Apple
+      run: xcrun altool --upload-app --type ios --file DerivedData/ipa/CocoaHeadsNL.ipa --username "${{ secrets.appstore_connect_username }}" --password "${{ secrets.appstore_connect_password }}" --verbose
+      
         
