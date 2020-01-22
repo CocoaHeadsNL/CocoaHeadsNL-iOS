@@ -139,6 +139,8 @@
 		4ABA349D22D3D54C0094BBEA /* NSManagedObject+FetchHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+FetchHelpers.swift"; sourceTree = "<group>"; };
 		4ABA34A422D3D9DB0094BBEA /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
+		4ADA36D023D8D24600ADD0B5 /* deploy.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = deploy.yml; sourceTree = "<group>"; };
+		4ADA36D123D8D24600ADD0B5 /* ci.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = ci.yml; sourceTree = "<group>"; };
 		4AE3AD271E8BF87E0051706C /* RequestReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestReview.swift; sourceTree = "<group>"; };
 		4AE3D7D6203CB81000EF32C3 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		4AE3D7D8203CBBD000EF32C3 /* Contributor+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contributor+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -294,6 +296,24 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
+		4ADA36CE23D8D24600ADD0B5 /* .github */ = {
+			isa = PBXGroup;
+			children = (
+				4ADA36CF23D8D24600ADD0B5 /* workflows */,
+			);
+			name = .github;
+			path = ../.github;
+			sourceTree = "<group>";
+		};
+		4ADA36CF23D8D24600ADD0B5 /* workflows */ = {
+			isa = PBXGroup;
+			children = (
+				4ADA36D023D8D24600ADD0B5 /* deploy.yml */,
+				4ADA36D123D8D24600ADD0B5 /* ci.yml */,
+			);
+			path = workflows;
+			sourceTree = "<group>";
+		};
 		4AEDD5211CF635E50039AAE5 /* CocoaHeadsNLUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,6 +467,7 @@
 		F1A46D091AAB50BB00585D61 = {
 			isa = PBXGroup;
 			children = (
+				4ADA36CE23D8D24600ADD0B5 /* .github */,
 				F1A46D141AAB50BB00585D61 /* CocoaHeadsNL */,
 				4AEDD5211CF635E50039AAE5 /* CocoaHeadsNLUITests */,
 				F145941220540B26006A4002 /* generalNotification */,
