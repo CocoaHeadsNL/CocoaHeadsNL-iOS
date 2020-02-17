@@ -120,7 +120,7 @@ class ContributorTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString("Contributors to this app with 10 or more commits")
+        return NSLocalizedString("Significant contributors to this app")
     }
 
     // MARK: - UITableViewDelegate
