@@ -43,8 +43,8 @@ extension XCTestCase {
         let existsPredicate = NSPredicate(format: "hittable == true")
         expectation(for: existsPredicate, evaluatedWith: element, handler: nil)
 
-        waitForExpectations(timeout: waitSeconds) { (error) -> Void in
-            if (error != nil) {
+        waitForExpectations(timeout: waitSeconds) { error -> Void in
+            if error != nil {
                 let message = "Failed to find \(element) after \(waitSeconds) seconds."
                 self.recordFailure(withDescription: message,
                                                   inFile: file, atLine: Int(line), expected: true)
@@ -56,8 +56,8 @@ extension XCTestCase {
         let existsPredicate = NSPredicate(format: "hittable == false")
         expectation(for: existsPredicate, evaluatedWith: element, handler: nil)
 
-        waitForExpectations(timeout: waitSeconds) { (error) -> Void in
-            if (error != nil) {
+        waitForExpectations(timeout: waitSeconds) { error -> Void in
+            if error != nil {
                 let message = "Failed to find \(element) after \(waitSeconds) seconds."
                 self.recordFailure(withDescription: message,
                                                   inFile: file, atLine: Int(line), expected: true)
@@ -69,8 +69,8 @@ extension XCTestCase {
         let existsPredicate = NSPredicate(format: "exists == true")
         expectation(for: existsPredicate, evaluatedWith: element, handler: nil)
 
-        waitForExpectations(timeout: waitSeconds) { (error) -> Void in
-            if (error != nil) {
+        waitForExpectations(timeout: waitSeconds) { error -> Void in
+            if error != nil {
                 let message = "Failed to find \(element) after \(waitSeconds) seconds."
                 self.recordFailure(withDescription: message,
                                                   inFile: file, atLine: Int(line), expected: true)

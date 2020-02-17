@@ -16,6 +16,7 @@ class ContributorTableViewController: UITableViewController {
     private lazy var fetchedResultsController: FetchedResultsController<Contributor> = {
         let fetchRequest = NSFetchRequest<Contributor>()
         fetchRequest.entity = Contributor.entity()
+        fetchRequest.predicate = NSPredicate(format: "commitCount > 10")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "commitCount", ascending: false), NSSortDescriptor(key: "name", ascending: true)]
         let frc = FetchedResultsController<Contributor>(fetchRequest: fetchRequest,
                                                    managedObjectContext: CoreDataStack.shared.viewContext,
@@ -119,7 +120,7 @@ class ContributorTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString("Contributors to this app")
+        return NSLocalizedString("Contributors to this app with 10 or more commits")
     }
 
     // MARK: - UITableViewDelegate
@@ -187,8 +188,8 @@ class ContributorTableViewController: UITableViewController {
         operation.queryCompletionBlock = { [weak self] cursor, error in
             guard error == nil else {
                 DispatchQueue.main.async {
-                    let ac = UIAlertController.fetchErrorDialog(whileFetching: "contributors", error: error!)
-                    self?.present(ac, animated: true, completion: nil)
+                    let alertController = UIAlertController.fetchErrorDialog(whileFetching: "contributors", error: error!)
+                    self?.present(alertController, animated: true, completion: nil)
                 }
                 return
             }
@@ -202,6 +203,7 @@ class ContributorTableViewController: UITableViewController {
     }
 }
 
+// swiftlint:disable:next type_name
 class ContributorFetchedResultsControllerDelegate: NSObject, FetchedResultsControllerDelegate {
 
     private weak var tableView: UITableView?
