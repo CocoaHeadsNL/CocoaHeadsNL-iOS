@@ -18,8 +18,8 @@ extension UIAlertController {
         let message = String(format: NSLocalizedString("There was a problem fetching the list of %@; please try again.\n%@"), fetching, error.localizedDescription)
         let okButtonTitle = NSLocalizedString("OK")
 
-        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: okButtonTitle, style: .default, handler: nil))
-        return ac
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: okButtonTitle, style: .default, handler: nil))
+        return alertController
     }
 }

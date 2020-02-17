@@ -188,8 +188,8 @@ class ContributorTableViewController: UITableViewController {
         operation.queryCompletionBlock = { [weak self] cursor, error in
             guard error == nil else {
                 DispatchQueue.main.async {
-                    let ac = UIAlertController.fetchErrorDialog(whileFetching: "contributors", error: error!)
-                    self?.present(ac, animated: true, completion: nil)
+                    let alertController = UIAlertController.fetchErrorDialog(whileFetching: "contributors", error: error!)
+                    self?.present(alertController, animated: true, completion: nil)
                 }
                 return
             }
@@ -203,6 +203,7 @@ class ContributorTableViewController: UITableViewController {
     }
 }
 
+// swiftlint:disable:next type_name
 class ContributorFetchedResultsControllerDelegate: NSObject, FetchedResultsControllerDelegate {
 
     private weak var tableView: UITableView?

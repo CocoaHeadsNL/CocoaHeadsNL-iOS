@@ -22,11 +22,11 @@ class NotificationService: UNNotificationServiceExtension {
         if let bestAttemptContent = bestAttemptContent {
             
             if let userInfo = request.content.userInfo as NSDictionary as? [String: Any] {
-                let ck = CKQueryNotification.init(fromRemoteNotificationDictionary: userInfo)!
+                let query = CKQueryNotification(fromRemoteNotificationDictionary: userInfo)!
                 
-                if let title = ck.recordFields?["title"] as? String,
-                    let name = ck.recordFields?["name"] as? String,
-                    let imageUrl = ck.recordFields?["imageUrl"] as? String {
+                if let title = query.recordFields?["title"] as? String,
+                    let name = query.recordFields?["name"] as? String,
+                    let imageUrl = query.recordFields?["imageUrl"] as? String {
                     
                     bestAttemptContent.title = title
                     bestAttemptContent.body = name
@@ -34,13 +34,13 @@ class NotificationService: UNNotificationServiceExtension {
                     if let fileUrl = URL(string: imageUrl) {
                         
                         //let request = NSURLRequest(url: fileUrl)
-                        URLSession.shared.downloadTask(with: fileUrl, completionHandler: { (fileLocation, response, err) in
+                        URLSession.shared.downloadTask(with: fileUrl, completionHandler: { fileLocation, _, err in
                             
                             //create attachment from file at url in folder
                             if let location = fileLocation, err == nil {
                                 let tmpDirectory = NSTemporaryDirectory()
                                 let tmpFile = "file:".appending(tmpDirectory).appending(fileUrl.lastPathComponent)
-                                let tmpUrl = URL.init(string: tmpFile)!
+                                let tmpUrl = URL(string: tmpFile)!
                                 
                                 do {
                                     try? FileManager.default.copyItem(at: location, to: tmpUrl)
