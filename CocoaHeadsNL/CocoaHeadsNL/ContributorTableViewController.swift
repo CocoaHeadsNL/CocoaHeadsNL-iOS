@@ -16,7 +16,7 @@ class ContributorTableViewController: UITableViewController {
     private lazy var fetchedResultsController: FetchedResultsController<Contributor> = {
         let fetchRequest = NSFetchRequest<Contributor>()
         fetchRequest.entity = Contributor.entity()
-        fetchRequest.predicate = NSPredicate(format: "commitCount > 10")
+        fetchRequest.predicate = NSPredicate(format: "commitCount > 3")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "commitCount", ascending: false), NSSortDescriptor(key: "name", ascending: true)]
         let frc = FetchedResultsController<Contributor>(fetchRequest: fetchRequest,
                                                    managedObjectContext: CoreDataStack.shared.viewContext,
