@@ -238,7 +238,7 @@ class ContributorFetchedResultsControllerDelegate: NSObject, FetchedResultsContr
             tableView.moveRow(at: fromIndexPath, to: toIndexPath)
 
         case let .update(_, indexPath):
-            tableView.reloadRows(at: [indexPath], with: .automatic)
+            tableView.reloadRows(at: [indexPath], with: .none)
         }
     }
 
