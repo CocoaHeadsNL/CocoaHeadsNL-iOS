@@ -37,7 +37,10 @@ class LocatedCompaniesViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.tableFooterView = UIView()
+        self.view.backgroundColor = .white
+        let footerView = UIView()
+        footerView.backgroundColor = .white
+        tableView.tableFooterView = footerView
 
         let backItem = UIBarButtonItem(title: NSLocalizedString("Companies"), style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
