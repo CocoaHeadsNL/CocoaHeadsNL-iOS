@@ -20,7 +20,7 @@ jobs:
       env:
         PROVISIONING_PASSWORD: ${{ secrets.provisioning_password }}
     - name: Select Xcode
-      run: sudo xcode-select -switch /Applications/Xcode_11.3.app && /usr/bin/xcodebuild -version
+      run: sudo xcode-select -switch /Applications/Xcode_11.4.app && /usr/bin/xcodebuild -version
     - name: Build archive
       run: xcodebuild -sdk iphoneos -project CocoaHeadsNL/CocoaHeadsNL.xcodeproj -configuration Release -scheme CocoaHeadsNL -derivedDataPath DerivedData -archivePath DerivedData/Archive/CocoaHeadsNL archive
     - name: Export Archive
@@ -29,5 +29,3 @@ jobs:
       run: ls -R
     - name: Deploy App to Apple
       run: xcrun altool --upload-app --type ios --file DerivedData/ipa/CocoaHeadsNL.ipa --username "${{ secrets.appstore_connect_username }}" --password "${{ secrets.appstore_connect_password }}" --verbose
-      
-        
