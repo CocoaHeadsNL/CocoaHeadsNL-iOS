@@ -21,6 +21,7 @@
 		4ABA34A122D3D54C0094BBEA /* NSManagedObject+FetchHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABA349D22D3D54C0094BBEA /* NSManagedObject+FetchHelpers.swift */; };
 		4ABA34A522D3D9DB0094BBEA /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABA34A422D3D9DB0094BBEA /* CoreDataStack.swift */; };
 		4ABB70F71D9CED8B00CDE5B8 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */; };
+		4ACE49F0242FE7DA008BF842 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ACE49EF242FE7DA008BF842 /* Launch Screen.storyboard */; };
 		4AE3AD281E8BF87E0051706C /* RequestReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE3AD271E8BF87E0051706C /* RequestReview.swift */; };
 		4AE3D7D7203CB81000EF32C3 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4AE3D7D5203CB81000EF32C3 /* Model.xcdatamodeld */; };
 		4AE3D7E2203CBBD000EF32C3 /* Contributor+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE3D7D8203CBBD000EF32C3 /* Contributor+CoreDataClass.swift */; };
@@ -68,7 +69,6 @@
 		F1A46D181AAB50BB00585D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D171AAB50BB00585D61 /* AppDelegate.swift */; };
 		F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D1D1AAB50BB00585D61 /* Main.storyboard */; };
 		F1A46D211AAB50BB00585D61 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D201AAB50BB00585D61 /* Images.xcassets */; };
-		F1A46D241AAB50BB00585D61 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1A46D221AAB50BB00585D61 /* LaunchScreen.xib */; };
 		F1A46D3D1AAB516300585D61 /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A46D3C1AAB516300585D61 /* JobsViewController.swift */; };
 		F1BDEA751C920768004C7DAB /* JobsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BDEA731C920768004C7DAB /* JobsCell.swift */; };
 		F1BDEA761C920768004C7DAB /* JobsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1BDEA741C920768004C7DAB /* JobsCell.xib */; };
@@ -139,6 +139,7 @@
 		4ABA349D22D3D54C0094BBEA /* NSManagedObject+FetchHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+FetchHelpers.swift"; sourceTree = "<group>"; };
 		4ABA34A422D3D9DB0094BBEA /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		4ABB70F61D9CED8B00CDE5B8 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
+		4ACE49EF242FE7DA008BF842 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		4ADA36D023D8D24600ADD0B5 /* deploy.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = deploy.yml; sourceTree = "<group>"; };
 		4ADA36D123D8D24600ADD0B5 /* ci.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = ci.yml; sourceTree = "<group>"; };
 		4AE3AD271E8BF87E0051706C /* RequestReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestReview.swift; sourceTree = "<group>"; };
@@ -198,7 +199,6 @@
 		F1A46D171AAB50BB00585D61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1A46D1E1AAB50BB00585D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F1A46D201AAB50BB00585D61 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		F1A46D231AAB50BB00585D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		F1A46D3C1AAB516300585D61 /* JobsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = JobsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F1BDEA731C920768004C7DAB /* JobsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsCell.swift; sourceTree = "<group>"; };
 		F1BDEA741C920768004C7DAB /* JobsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobsCell.xib; sourceTree = "<group>"; };
@@ -357,8 +357,8 @@
 				F1A46D201AAB50BB00585D61 /* Images.xcassets */,
 				F10D58E72056FBAB00CE9199 /* CocoaHeadsNL500.png */,
 				F1A46D161AAB50BB00585D61 /* Info.plist */,
-				F1A46D221AAB50BB00585D61 /* LaunchScreen.xib */,
 				F1A46D1D1AAB50BB00585D61 /* Main.storyboard */,
+				4ACE49EF242FE7DA008BF842 /* Launch Screen.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -752,10 +752,10 @@
 			files = (
 				F1A46D1F1AAB50BB00585D61 /* Main.storyboard in Resources */,
 				F1BDEA761C920768004C7DAB /* JobsCell.xib in Resources */,
-				F1A46D241AAB50BB00585D61 /* LaunchScreen.xib in Resources */,
 				7B6A744B1B1495FF00A10762 /* MeetupCell.xib in Resources */,
 				F1A46D211AAB50BB00585D61 /* Images.xcassets in Resources */,
 				F10D58E82056FBAC00CE9199 /* CocoaHeadsNL500.png in Resources */,
+				4ACE49F0242FE7DA008BF842 /* Launch Screen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -968,14 +968,6 @@
 				F1A46D1E1AAB50BB00585D61 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		F1A46D221AAB50BB00585D61 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F1A46D231AAB50BB00585D61 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
