@@ -32,8 +32,12 @@ class MeetupDataSource: DetailDataSource {
         case 0:
             return logoCellWithFile(meetup.logoImage, forTableView: tableView, forRowAt: indexPath)
         case 1:
-            let geoLocation = CLLocation(latitude: meetup.latitude, longitude: meetup.longitude)
-            return mapViewCellWithLocation(geoLocation, name: meetup.locationName, forTableView: tableView, forRowAt: indexPath)
+            if meetup.latitude == 0.0 && meetup.longitude == 0.0 {
+                return onlineCell(forRowAt: indexPath)
+            } else {
+                let geoLocation = CLLocation(latitude: meetup.latitude, longitude: meetup.longitude)
+                return mapViewCellWithLocation(geoLocation, name: meetup.locationName, forTableView: tableView, forRowAt: indexPath)
+            }
         case 2:
             return titleCellWithText(meetup.name, forTableView: tableView, forRowAt: indexPath)
         case 3:

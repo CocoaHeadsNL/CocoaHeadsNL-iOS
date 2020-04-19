@@ -203,7 +203,6 @@ class ContributorTableViewController: UITableViewController {
     }
 }
 
-// swiftlint:disable:next type_name
 class ContributorFetchedResultsControllerDelegate: NSObject, FetchedResultsControllerDelegate {
 
     private weak var tableView: UITableView?

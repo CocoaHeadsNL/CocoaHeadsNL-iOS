@@ -47,7 +47,11 @@ class MeetupCell: UITableViewCell {
             dateFormatter.dateStyle = .none
             dateFormatter.timeStyle = .short
             let timeText = dateFormatter.string(from: date as Date)
-            timeLabel.text = String(format: "%@ %@", meetup.location ?? NSLocalizedString("Location unknown"), timeText)
+            if meetup.latitude == 0.0 && meetup.longitude == 0.0 {
+                timeLabel.text = timeText
+            } else {
+                timeLabel.text = String(format: "%@ %@", meetup.location ?? NSLocalizedString("Location unknown"), timeText)
+            }
 
             dateFormatter.dateFormat = "dd"
             dayLabel.text = dateFormatter.string(from: date as Date)

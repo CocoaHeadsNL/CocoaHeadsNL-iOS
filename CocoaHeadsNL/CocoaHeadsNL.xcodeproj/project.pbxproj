@@ -12,6 +12,7 @@
 		23F2D9A41E2F52A6003344DC /* NSLocalizedString+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F2D9A31E2F52A6003344DC /* NSLocalizedString+Convenience.swift */; };
 		23FE55D61F8BFA6A003011CA /* UINavigationItem+Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FE55D51F8BFA6A003011CA /* UINavigationItem+Banner.swift */; };
 		2EDD61561EDCCEBC0040409B /* NSAttributedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDD61551EDCCEBC0040409B /* NSAttributedStringExtension.swift */; };
+		4A395961244CE48E00461957 /* OnlineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A395960244CE48E00461957 /* OnlineCell.swift */; };
 		4A3D7D3723C921CA001E1D50 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3D7D3623C921CA001E1D50 /* UITableView+Extensions.swift */; };
 		4A3D7D3923C92206001E1D50 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3D7D3823C92206001E1D50 /* Identifiable.swift */; };
 		4A7EEAF11AC5440C001C2827 /* CloudKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7EEAF01AC5440C001C2827 /* CloudKitExtensions.swift */; };
@@ -130,6 +131,7 @@
 		23FE55D51F8BFA6A003011CA /* UINavigationItem+Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+Banner.swift"; sourceTree = "<group>"; };
 		2EDD61551EDCCEBC0040409B /* NSAttributedStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtension.swift; sourceTree = "<group>"; };
 		4A15A33C1BB82224008161BD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		4A395960244CE48E00461957 /* OnlineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineCell.swift; sourceTree = "<group>"; };
 		4A3D7D3623C921CA001E1D50 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		4A3D7D3823C92206001E1D50 /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		4A7EEAF01AC5440C001C2827 /* CloudKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitExtensions.swift; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 			isa = PBXGroup;
 			children = (
 				7B6A74531B179B4E00A10762 /* LogoCell.swift */,
+				4A395960244CE48E00461957 /* OnlineCell.swift */,
 				F11455BA1AB4C8FB00546D22 /* MapAnnotation.swift */,
 				7B6A74551B179B7D00A10762 /* MapViewCell.swift */,
 				7B6A74571B179B9C00A10762 /* TitleCell.swift */,
@@ -890,6 +893,7 @@
 				23F2D9A41E2F52A6003344DC /* NSLocalizedString+Convenience.swift in Sources */,
 				4AE3D7E5203CBBD000EF32C3 /* Meetup+CoreDataProperties.swift in Sources */,
 				7B6A74621B18424800A10762 /* CompanyDataSource.swift in Sources */,
+				4A395961244CE48E00461957 /* OnlineCell.swift in Sources */,
 				F1CF120F1B8A0C0600EBCABC /* CoreLocationController.swift in Sources */,
 				7B6A745A1B179BC000A10762 /* HTMLDataCell.swift in Sources */,
 				7B6A744D1B149A6B00A10762 /* UIImage+Resize.swift in Sources */,

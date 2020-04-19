@@ -36,6 +36,11 @@ class DetailDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 
+    func onlineCell(forRowAt indexPath: IndexPath) -> OnlineCell {
+        let cell = tableView.dequeueReusableCell(type: OnlineCell.self, for: indexPath)
+        return cell
+    }
+
     func mapViewCellWithLocation(_ location: CLLocation?, name: String?, forTableView tableView: UITableView, forRowAt indexPath: IndexPath) -> MapViewCell {
         let cell = tableView.dequeueReusableCell(type: MapViewCell.self, for: indexPath)
         cell.geoLocation = location

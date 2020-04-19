@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="W81-50-NMJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="W81-50-NMJ">
     <device id="retina4_7" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -441,6 +441,37 @@
                                     <outlet property="titleButton" destination="hhb-0w-38u" id="APW-oF-Mlo"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OnlineCell" rowHeight="50" id="EDI-Lb-b8Q" customClass="OnlineCell" customModule="CocoaHeadsNL" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="450" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EDI-Lb-b8Q" id="Z9K-Nc-qqG">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gT6-Bp-bkQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Ude-zs-za9"/>
+                                                <constraint firstAttribute="height" constant="50" id="VYm-pu-459"/>
+                                            </constraints>
+                                            <state key="normal" title="Online event"/>
+                                            <connections>
+                                                <action selector="buttonPressed:" destination="EDI-Lb-b8Q" eventType="touchUpInside" id="IQw-po-eGF"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="gT6-Bp-bkQ" secondAttribute="trailing" id="fS7-p4-3h6"/>
+                                        <constraint firstItem="gT6-Bp-bkQ" firstAttribute="top" secondItem="Z9K-Nc-qqG" secondAttribute="top" id="mis-nB-tFk"/>
+                                        <constraint firstAttribute="bottom" secondItem="gT6-Bp-bkQ" secondAttribute="bottom" id="qnB-z0-4Bx"/>
+                                        <constraint firstItem="gT6-Bp-bkQ" firstAttribute="leading" secondItem="Z9K-Nc-qqG" secondAttribute="leading" id="wrc-1E-oEH"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="onlineButton" destination="gT6-Bp-bkQ" id="6Z5-Bf-hch"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <sections/>
                         <connections>
@@ -559,6 +590,9 @@
             <point key="canvasLocation" x="1734" y="-3329"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="wMn-In-Tpk"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="AboutTabIcon" width="30" height="30"/>
         <image name="CocoaHeadsNLLogo" width="300" height="300"/>
@@ -566,7 +600,4 @@
         <image name="EventsTabIcon" width="30" height="30"/>
         <image name="JobsTabIcon" width="30" height="30"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="wMn-In-Tpk"/>
-    </inferredMetricsTieBreakers>
 </document>
