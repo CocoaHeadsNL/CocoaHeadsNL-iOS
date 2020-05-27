@@ -21,7 +21,7 @@ Minimal deployment target of the app is iOS 12.0
 
 ## Contributions
 
-Please note that we consider all ownership of contributions made to this project to automatically transfer to Stichting CocoaHeadsNL. If you do not agree to this, do not contribute.
+Please note that we consider all ownership of contributions made to this project to automatically transfer to Stichting CocoaHeadsNL. If you do not agree to this, do not contribute. When we conclude that you have an interest in contributing to this project, we will ask you to confirm transfer of ownership of you contributions in writing.
 
 Also note, any contributions we receive should be allowed to be transferred to Stichting CocoaHeadsNL. If you make contributions and at a later stage ownership of said contributions are not lawfully transfered to our possesion, you as a contributor are considered liable for this.
 
