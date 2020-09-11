@@ -17,17 +17,17 @@
 	<key>signingStyle</key>
 	<string>manual</string>
 	<key>signingCertificate</key>
-	<string>iPhone Distribution: Stichting CocoaheadsNL</string>
+	<string>Apple Distribution: Stichting CocoaheadsNL</string>
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>nl.cocoaheads.app.CocoaHeadsNL.generalNotification</key>
-		<string>345ff0ae-bf30-40dc-a366-757cf3890da4</string>
+		<string>f310cafd-4976-454e-9a54-bd5e5f6ce2c9</string>
 		<key>nl.cocoaheads.app.CocoaHeadsNL.itemNotification</key>
-		<string>b99721c7-af8e-4628-90c5-5cf512b1cbea</string>
+		<string>c5853b6d-9a45-41a4-90bd-e12344b6b613</string>
 		<key>nl.cocoaheads.app.CocoaHeadsNL.ItemServiceExtension</key>
-		<string>3f97abc2-f7cd-4d40-a874-5571f26f755b</string>
+		<string>b2a2ec45-f1f8-47b3-9200-09c808d989b2</string>
 		<key>nl.cocoaheads.app.CocoaHeadsNL</key>
-		<string>7ba430b6-045a-4e2d-8ff6-09a2f9897152</string>
+		<string>aa30914f-ee07-4e07-98f3-35f34ce04337</string>
 	</dict>
 </dict>
 </plist>
