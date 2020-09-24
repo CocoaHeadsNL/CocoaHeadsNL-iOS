@@ -20,7 +20,7 @@ jobs:
       env:
         PROVISIONING_PASSWORD: ${{ secrets.provisioning_password }}
     - name: Select Xcode
-      run: sudo xcode-select -switch /Applications/Xcode_11.7.app && /usr/bin/xcodebuild -version
+      run: sudo xcode-select -switch /Applications/Xcode_12.app && /usr/bin/xcodebuild -version
     - name: Build archive
       run: xcodebuild -sdk iphoneos -project CocoaHeadsNL/CocoaHeadsNL.xcodeproj -configuration Release -scheme CocoaHeadsNL -derivedDataPath DerivedData -archivePath DerivedData/Archive/CocoaHeadsNL archive
     - name: Export Archive
