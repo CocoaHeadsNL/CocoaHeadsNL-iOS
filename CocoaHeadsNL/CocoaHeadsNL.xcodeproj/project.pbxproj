@@ -135,6 +135,7 @@
 		4A3D7D3623C921CA001E1D50 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		4A3D7D3823C92206001E1D50 /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		4A7EEAF01AC5440C001C2827 /* CloudKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitExtensions.swift; sourceTree = "<group>"; };
+		4A967582251CDDB8000D71CA /* provisioning */ = {isa = PBXFileReference; lastKnownFileType = folder; name = provisioning; path = ../provisioning; sourceTree = "<group>"; };
 		4ABA349A22D3D54C0094BBEA /* FetchedResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsController.swift; sourceTree = "<group>"; };
 		4ABA349B22D3D54C0094BBEA /* NSManagedObjectContext+AsyncHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+AsyncHelpers.swift"; sourceTree = "<group>"; };
 		4ABA349C22D3D54C0094BBEA /* NSManagedObjectContext+SaveHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+SaveHelpers.swift"; sourceTree = "<group>"; };
@@ -470,6 +471,7 @@
 		F1A46D091AAB50BB00585D61 = {
 			isa = PBXGroup;
 			children = (
+				4A967582251CDDB8000D71CA /* provisioning */,
 				4ADA36CE23D8D24600ADD0B5 /* .github */,
 				F1A46D141AAB50BB00585D61 /* CocoaHeadsNL */,
 				4AEDD5211CF635E50039AAE5 /* CocoaHeadsNLUITests */,
