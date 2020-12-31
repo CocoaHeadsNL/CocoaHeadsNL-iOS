@@ -45,9 +45,10 @@ extension XCTestCase {
 
         waitForExpectations(timeout: waitSeconds) { error -> Void in
             if error != nil {
-                let message = "Failed to find \(element) after \(waitSeconds) seconds."
-                self.recordFailure(withDescription: message,
-                                                  inFile: file, atLine: Int(line), expected: true)
+                //let message = "Failed to find \(element) after \(waitSeconds) seconds."
+                //self.recordFailure(withDescription: message, inFile: file, atLine: Int(line), expected: true)
+                let issue = XCTIssue(type: .assertionFailure, compactDescription: "Failed to find \(element) after \(waitSeconds) seconds.")
+                self.record(issue)
             }
         }
     }
@@ -58,9 +59,10 @@ extension XCTestCase {
 
         waitForExpectations(timeout: waitSeconds) { error -> Void in
             if error != nil {
-                let message = "Failed to find \(element) after \(waitSeconds) seconds."
-                self.recordFailure(withDescription: message,
-                                                  inFile: file, atLine: Int(line), expected: true)
+                //let message = "Failed to find \(element) after \(waitSeconds) seconds."
+                //self.recordFailure(withDescription: message, inFile: file, atLine: Int(line), expected: true)
+                let issue = XCTIssue(type: .assertionFailure, compactDescription: "Failed to find \(element) after \(waitSeconds) seconds.")
+                self.record(issue)
             }
         }
     }
@@ -71,9 +73,10 @@ extension XCTestCase {
 
         waitForExpectations(timeout: waitSeconds) { error -> Void in
             if error != nil {
-                let message = "Failed to find \(element) after \(waitSeconds) seconds."
-                self.recordFailure(withDescription: message,
-                                                  inFile: file, atLine: Int(line), expected: true)
+                //let message = "Failed to find \(element) after \(waitSeconds) seconds."
+                //self.recordFailure(withDescription: message, inFile: file, atLine: Int(line), expected: true)
+                let issue = XCTIssue(type: .assertionFailure, compactDescription: "Failed to find \(element) after \(waitSeconds) seconds.")
+                self.record(issue)
             }
         }
     }
