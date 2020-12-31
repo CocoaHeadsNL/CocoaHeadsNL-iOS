@@ -25,7 +25,7 @@ class CocoaHeadsNLUITests: XCTestCase {
     func testApp() {
         let app = XCUIApplication()
 
-        waitForHittable(app.tables.staticTexts["WWDC 2018"], waitSeconds: 10)
+        waitForHittable(app.tables.staticTexts["CocoaHeads rules"], waitSeconds: 10)
 
         app.tables.cells.element(boundBy: 0).tap()
 
