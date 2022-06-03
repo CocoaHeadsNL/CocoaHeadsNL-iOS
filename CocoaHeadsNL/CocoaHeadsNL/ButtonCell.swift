@@ -18,6 +18,9 @@ class ButtonCell: UITableViewCell {
         }
     }
 
+	
+	
+	
     fileprivate func selectURL() -> URL? {
         guard let urlString = urlString else {
             return nil
